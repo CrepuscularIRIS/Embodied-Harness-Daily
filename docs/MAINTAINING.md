@@ -1,6 +1,6 @@
 # 维护规范（给维护 Agent 和人）
 
-> 操作流程见 [PIPELINE.md](PIPELINE.md)；分工与提示词见 [agents/](agents/ROLES.md)（收集：Grok，判定与打分：Dots）；
+> 操作流程见 [PIPELINE.md](PIPELINE.md)；分工与提示词见 [agents/](agents/ROLES.md)（收集：Grok；判定与打分：本地双盲席位 session）；
 > 批量判定的步骤见 [agents/JUDGE_BATCH.md](agents/JUDGE_BATCH.md)。本页只放硬规则。
 
 本仓库（EH Radar）公开。**一个看起来很自信的错误，比漏收一篇论文的代价大。**
@@ -11,7 +11,7 @@
 |---|---|---|
 | **CI**（GitHub Actions，确定性） | 跑 `test_check_cards.py`、`check_cards.py`，编译检查 `research/*.py` | 任何判断 |
 | **收集 Agent**（Grok） | 找候选论文、写 `inbox/`、跑入库脚本、写 `research/queue/` | 分档、打分、改评判标准 |
-| **打分 Agent**（Dots） | 按 [EVIDENCE.md](EVIDENCE.md) 分 A/B/C 档；归模式并逐项判定；算分、生成榜单；写诊断卡 | 公开发言；运行被收录仓库的代码；改评判标准 |
+| **本地打分 session**（双盲席位 gpt-6.1-sol + claude-sonnet-5-5，仲裁 claude-opus-5-5） | 按 [EVIDENCE.md](EVIDENCE.md) 分 A/B/C 档；双席盲评 + 仲裁逐项判定；算分、生成榜单；写诊断卡 | 公开发言；运行被收录仓库的代码；改评判标准 |
 | **人** | 每周抽查 commit；抽查判定的引用；审批模式卡修订；对外沟通 | — |
 
 ## 每次处理队列

@@ -8,7 +8,7 @@ steps are scripts. Judgment steps are LLM work, and a script validates their out
 Grok bot ──▶ inbox/YYYY-MM-DD.jsonl
                  │
                  ▼  (D) research/ingest.py         dedup, arXiv metadata → corpus.jsonl, full text, HF code links
-            research/queue/YYYY-MM-DD-HHMM.txt  ──▶ Dots
+            research/queue/YYYY-MM-DD-HHMM.txt  ──▶ 本地打分 session（双盲席位 + 仲裁）
                  │
                  ▼  (L) 1 screen        research/SCREEN_RUBRIC.md            → research/screen.jsonl         tier A/B/C
                  ▼  (D) 2 full text     research/fetch_fulltext.py           → research/fulltext/<id>.txt    (A/B, local only)
@@ -27,11 +27,12 @@ Grok bot ──▶ inbox/YYYY-MM-DD.jsonl
 |---|---|---|---|---|
 | 0 | Collect candidates | Grok bot | arXiv / HF Papers / GitHub / X / lab blogs / source-list updates → `inbox/YYYY-MM-DD.jsonl` | `inbox/README.md` format |
 | 1 | Ingest + queue | Grok bot (script) | inbox → `corpus.jsonl`, `fulltext/<id>.txt`, `hf_meta.jsonl`, `queue/<stamp>.txt` | prints the remaining LLM steps |
-| 2 | Screen | Dots | title + abstract → `screen.jsonl` row (tier, kind, platforms, components, confidence) | `python3 research/check_screen.py <file> <ids>` |
-| 3 | Assign | Dots | full text + `research/patterns/taxonomy_view.json` + 1–3 closest `patterns/sub/*.md` → `assign_<B>.jsonl` (`sub_pattern`, `fit: good\|weak`) | sub id exists; `merge_assign.py` |
-| 4 | Judge | Dots | full text + `conditions.json[<main>]` + main/sub cards + `EVIDENCE_SCHEMA.md` + `anti-patterns.md` → `judgments/<B>.jsonl` | `PYTHONPATH=research python3 research/score.py check <file> <ids>` (quotes verified against the full text) |
-| 5 | Score | Dots (script) | judgments → `scores.jsonl` | `score.py build` reports 0 skipped |
-| 6 | Board | Dots (script) | scores → `papers/README.md`, README block | — |
+| 2 | Screen | 打分 session | title + abstract → `screen.jsonl` row (tier, kind, platforms, components, confidence) | `python3 research/check_screen.py <file> <ids>` |
+| 3 | Assign | 打分 session | full text + `research/patterns/taxonomy_view.json` + 1–3 closest `patterns/sub/*.md` → `assign_<B>.jsonl` (`sub_pattern`, `fit: good\|weak`) | sub id exists; `merge_assign.py` |
+| 4 | Judge ×2（盲） | 两席位（`judge.py --seat`：gpt-6.1-sol、claude-sonnet-5-5） | full text + spec + conditions + anti-patterns → `passes/<B>.{sol,son55}.jsonl` | each record passes `score.py check` before being kept |
+| 4b | Merge + arbitrate | script + 仲裁席（claude-opus-5-5） | `merge_judgments.py`：一致保留、分歧 unclear+FLAG → `judge.py --arb` → `<B>.jsonl` 最终单条记录 | `--apply-arb` re-checks the batch; `score.py check <B>.jsonl <ids>` = 0 problems |
+| 5 | Score | script | final judgments → `scores.jsonl` | `score.py build` reports 0 skipped |
+| 6 | Board | 打分 session (script) | scores → `papers/README.md`, README block | — |
 | 7 | Diagnosis card (optional, top new A papers) | Dots | `cards/_TEMPLATE.md` | `python3 check_cards.py` |
 
 Tier C stops after step 2. A paper whose full text has no HTML rendering gets `FULLTEXT: none`: every evidence
