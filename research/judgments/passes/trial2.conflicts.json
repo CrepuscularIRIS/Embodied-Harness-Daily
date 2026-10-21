@@ -1,0 +1,889 @@
+{
+ "batch": "trial2",
+ "conflicts": [
+  {
+   "arxiv": "2603.22435",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "We further introduce CaP-RL, showing reinforcement learning with verifiable rewards improves success rates and transfers from sim2real with minimal gap."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "These 7 tasks are an intentionally controlled core for ablating abstraction, iteration, and grounding under matched conditions"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "evidence.validator_check",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "untested",
+    "quote": "it explicitly describes differences between the previous and current image observations and whether the coding agent has completed the task."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "evidence.code",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "announced",
+    "quote": "We present CaP-X, an open-access framework for systematically studying Code-as-Policy agents in robot manipulation."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "evidence_level",
+   "sol": {
+    "value": "online",
+    "quote": "Each task is evaluated with 100 trials per tier, where each tier specifies the available primitives, interaction mode, and feedback/grounding signal."
+   },
+   "son55": {
+    "value": "transfer",
+    "quote": "we further extend this analysis to diverse long-horizon settings using tasks from LIBERO-PRO"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "success.S5",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "failure.F6",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.22435",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Each task is evaluated with 100 trials per tier, where each tier specifies the available primitives, interaction mode, and feedback/grounding signal."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Success rates (%) over seven tasks, 15 trials per task."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "success.S2",
+   "sol": {
+    "value": "yes",
+    "quote": "Using the shared harness and simulation data engine, we collect 2,268 physically validated interaction trajectories, including 714 perturbation branches."
+   },
+   "son55": {
+    "value": "no",
+    "quote": "we collect 2,268 physically validated interaction trajectories, including 714 perturbation branches."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "success.S4",
+   "sol": {
+    "value": "yes",
+    "quote": "The teacher and compact agent use a shared manipulation harness that defines their observations, available tools, and execution feedback. This common interface allows teacher interaction histories to serve directly as supervision for the compact agent’s subsequent decisions."
+   },
+   "son55": {
+    "value": "no",
+    "quote": "The teacher and compact agent use a shared manipulation harness that defines their observations, available tools, and execution feedback."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP13.value",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Branched trajectories undergo the same outcome verification and quality control; only successful recoveries are retained."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP17.value",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we save checkpoints containing the interaction history h_{t} and corresponding simulator state."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP18.value",
+   "sol": {
+    "value": "yes",
+    "quote": "The model generates trajectories \\tau through the same manipulation harness, and the simulator provides a sparse task-level reward R(\\tau) based on task success."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "partial",
+    "quote": "For R2R-CE, we use the commonly used rand100 val-unseen sample introduced by Open-Nav ( Qiao et al., 2025 ) ."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we use the commonly used rand100 val-unseen sample introduced by Open-Nav"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "Serving and context-handling settings differ across harnesses ( section F.7 ), so this is a comparison of complete systems rather than an isolated test of harness complexity."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "evidence.validator_check",
+   "sol": {
+    "value": "untested",
+    "quote": "Our model-assisted failure analysis has not been independently checked by humans, and target visibility alone does not confirm a successful approach."
+   },
+   "son55": {
+    "value": "na",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": "An ORB-SLAM3 ( Campos et al., 2021 ) backend processes RGB-D observations to estimate pose and build a map."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S4",
+   "sol": {
+    "value": "yes",
+    "quote": "step(actions) executes a bounded sequence of primitive actions: FORWARD , LEFT , RIGHT , and STOP , which ends the episode."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S5",
+   "sol": {
+    "value": "unclear",
+    "quote": "In Hybrid , waypoint tools are available alongside primitive actions, allowing the agent to choose either."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Waypoints boost weaker models; stronger models benefit more when waypoints are optional rather than imposed."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S8",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "These four stronger models achieve higher SR with Hybrid than with waypoint-only control."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": "An ORB-SLAM3 ( Campos et al., 2021 ) backend processes RGB-D observations to estimate pose and build a map."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "on real-robot using PiPER-X 6-DoF research arm for two tasks with 20 trials each."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "evidence.cost_reported",
+   "sol": {
+    "value": "partial",
+    "quote": "On SafeLIBERO, an episode is allowed at most 900 environment steps; a successful run takes about 400 steps on average, and about 700 on Libero-10, whose tasks comprise two sub-goals."
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "success.S1",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Before any motion is issued, it is checked against the obstacle box outside the language model"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "failure.F3",
+   "sol": {
+    "value": "yes",
+    "quote": "Sec. 4.3 evaluates the harnesses as a whole; here we ablate the two components of the safety harness, route planning ( Sec. 3.2 ) and contact execution ( Sec. 3.3 ), to quantify the contribution of each."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP2.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Sec. 4.3 evaluates the harnesses as a whole; here we ablate the two components of the safety harness, route planning ( Sec. 3.2 ) and contact execution ( Sec. 3.3 ), to quantify the contribution of each."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We evaluate SafeHarness on all 32 SafeLIBERO tasks with 10 seeds per task"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP5.value",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "an episode is allowed at most 900 environment steps; a successful run takes about 400 steps on average"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP6.value",
+   "sol": {
+    "value": "yes",
+    "quote": "The verifier evaluates a single condition, namely whether the route intersects the obstacle, and it does so on an approximately measured scene. Other physical constraints that arise during execution fall outside its scope, and a route that passes verification may still fail against them."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP10.value",
+   "sol": {
+    "value": "yes",
+    "quote": "On Libero-10 this loop runs twice per episode, once per sub-goal, and the second leg re-uses the obstacle box measured for the first."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "yes",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "success.S2",
+   "sol": {
+    "value": "no",
+    "quote": "After localization, the teacher corrects the structured response of every step in the faulty suffix."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "After localization, the teacher corrects the structured response of every step in the faulty suffix."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": ""
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "failure.F6",
+   "sol": {
+    "value": "no",
+    "quote": "The underlying browser state s_{t}\\in\\mathcal{S} contains the full document object model (DOM), session, and site state, and is never observed directly."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "where Online-Mind2Web’s numbers are low for all methods"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "anti.AP5.value",
+   "sol": {
+    "value": "yes",
+    "quote": "The edit itself is a two-stage teacher intervention: where did the student fail? ( P3 ), and how should the teacher correct it? ( P4 )."
+   },
+   "son55": {
+    "value": "no",
+    "quote": ""
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2610.19834",
+   "field": "anti.AP21.value",
+   "sol": {
+    "value": "no",
+    "quote": ""
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "On the TimeWarp benchmark, WebKD students gain about 5.5-10.7 pp over behavior cloning, outcome-reward RL, and teacher editing baselines."
+   },
+   "must_arb": true
+  }
+ ]
+}

@@ -132,6 +132,9 @@ def main(argv: list[str]) -> int:
             for item in d["items"]:
                 if item.get("quote") and squash(item["quote"]) not in hay:
                     sys.exit(f"{d['arxiv']} {item['field']}: arb quote not in full text")
+                if item["field"].startswith("anti.") and item["field"].endswith(".value") \
+                        and item["value"] not in ("yes", "no"):
+                    sys.exit(f"{d['arxiv']} {item['field']}: arb value {item['value']!r} not allowed (yes/no)")
                 set_field(rec, item["field"], item["value"], item.get("quote"))
             by_aid[d["arxiv"]] = True
         unresolved = sorted({c["arxiv"] for c in conflicted if c["must_arb"]} - set(by_aid))

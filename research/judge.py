@@ -31,14 +31,14 @@ def call(model: str, proto: str, prompt: str) -> str:
     if proto == "openai":
         req = urllib.request.Request(
             f"{BASE}/v1/chat/completions",
-            data=json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 6000}).encode(),
+            data=json.dumps({"model": model, "messages": [{"role": "user", "content": prompt}], "max_tokens": 16000}).encode(),
             headers={"Content-Type": "application/json",
                      "Authorization": f"Bearer {os.environ.get('LITELLM_MASTER_KEY') or os.environ.get('OPENAI_API_KEY', '')}"},
         )
     else:
         req = urllib.request.Request(
             f"{BASE}/v1/messages",
-            data=json.dumps({"model": model, "max_tokens": 6000, "messages": [{"role": "user", "content": prompt}]}).encode(),
+            data=json.dumps({"model": model, "max_tokens": 16000, "messages": [{"role": "user", "content": prompt}]}).encode(),
             headers={"Content-Type": "application/json", "x-api-key": os.environ.get("ANTHROPIC_API_KEY", ""),
                      "anthropic-version": "2023-06-01"},
         )
@@ -53,7 +53,10 @@ def parse_json(text: str) -> dict:
     t = text.strip()
     if t.startswith("```"):
         t = t.split("```")[1].removeprefix("json").strip()
-    return json.loads(t)
+    try:
+        return json.loads(t)
+    except json.JSONDecodeError:  # preamble / trailing commentary around the object
+        return json.loads(t[t.index("{"):t.rindex("}") + 1])
 
 
 def spec_text() -> str:
@@ -152,7 +155,7 @@ def arb_prompt(aid: str, conflicts: list[dict], fulltext: str) -> str:
     return f"""You are the arbiter for EH Radar. Two blind judge seats disagreed on the fields listed below
 for paper {aid}. Read the paper text and decide each field: the value the text actually supports, with ONE
 contiguous verbatim quote (<=45 words) copied EXACTLY from the text. If the text supports neither seat, choose
-"unclear" (not allowed for ap1.value: pick yes or no). Quote or unclear — never a guess.
+"unclear" — EXCEPT for anti.AP*.value, where only "yes" or "no" is allowed. Quote or unclear — never a guess.
 
 Disputed fields:
 {fields}

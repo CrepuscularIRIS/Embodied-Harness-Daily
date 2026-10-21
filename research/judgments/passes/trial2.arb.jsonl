@@ -1,0 +1,370 @@
+{
+ "batch": "trial2",
+ "decisions": [
+  {
+   "arxiv": "2603.22435",
+   "items": [
+    {
+     "field": "evidence.held_out_env",
+     "value": "partial",
+     "quote": "We further introduce CaP-RL, showing reinforcement learning with verifiable rewards improves success rates and transfers from sim2real with minimal gap."
+    },
+    {
+     "field": "evidence.budget_matched",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "evidence.validator_check",
+     "value": "untested",
+     "quote": "In subsequent turns, it explicitly describes differences between the previous and current image observations and whether the coding agent has completed the task."
+    },
+    {
+     "field": "evidence.code",
+     "value": "announced",
+     "quote": "We present CaP-X, an open-access framework for systematically studying Code-as-Policy agents in robot manipulation."
+    },
+    {
+     "field": "evidence_level",
+     "value": "transfer",
+     "quote": "These findings allow us to derive CaP-Agent0, a training-free framework that recovers human-level reliability on several manipulation tasks in simulation and on real embodiments."
+    },
+    {
+     "field": "success.S3",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "success.S4",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "success.S5",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F4",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F5",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F6",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP3.value",
+     "value": "no",
+     "quote": null
+    }
+   ]
+  },
+  {
+   "arxiv": "2606.18363",
+   "items": [
+    {
+     "field": "evidence.variance",
+     "value": "no",
+     "quote": "Success rates (%) over 30 trials per task."
+    },
+    {
+     "field": "success.S2",
+     "value": "yes",
+     "quote": "Using the shared harness and simulation data engine, we collect 2,268 physically validated interaction trajectories, including 714 perturbation branches."
+    },
+    {
+     "field": "success.S4",
+     "value": "yes",
+     "quote": "The teacher and compact agent use a shared manipulation harness that defines their observations, available tools, and execution feedback. This common interface allows teacher interaction histories to serve directly as supervision for the compact agent’s subsequent decisions."
+    },
+    {
+     "field": "anti.AP13.value",
+     "value": "yes",
+     "quote": "Branched trajectories undergo the same outcome verification and quality control; only successful recoveries are retained."
+    },
+    {
+     "field": "anti.AP17.value",
+     "value": "no",
+     "quote": null
+    },
+    {
+     "field": "anti.AP18.value",
+     "value": "yes",
+     "quote": "The model generates trajectories \\tau through the same manipulation harness, and the simulator provides a sparse task-level reward R(\\tau) based on task success."
+    }
+   ]
+  },
+  {
+   "arxiv": "2607.26148",
+   "items": [
+    {
+     "field": "evidence.held_out_env",
+     "value": "yes",
+     "quote": "For R2R-CE, we use the commonly used rand100 val-unseen sample introduced by Open-Nav"
+    },
+    {
+     "field": "evidence.budget_matched",
+     "value": "partial",
+     "quote": "Serving and context-handling settings differ across harnesses ( section F.7 ), so this is a comparison of complete systems rather than an isolated test of harness complexity."
+    },
+    {
+     "field": "evidence.validator_check",
+     "value": "untested",
+     "quote": "Our model-assisted failure analysis has not been independently checked by humans, and target visibility alone does not confirm a successful approach."
+    },
+    {
+     "field": "success.S3",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "success.S4",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "success.S5",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "success.S8",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F3",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP2.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP3.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP5.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP6.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP8.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP12.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP13.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP14.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP15.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP16.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP17.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP18.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP19.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP20.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP21.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP22.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP23.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP24.mitigated",
+     "value": "unclear",
+     "quote": null
+    }
+   ]
+  },
+  {
+   "arxiv": "2609.20822",
+   "items": [
+    {
+     "field": "evidence.held_out_env",
+     "value": "partial",
+     "quote": "and on real-robot using PiPER-X 6-DoF research arm for two tasks with 20 trials each."
+    },
+    {
+     "field": "evidence.cost_reported",
+     "value": "partial",
+     "quote": "On SafeLIBERO, an episode is allowed at most 900 environment steps; a successful run takes about 400 steps on average, and about 700 on Libero-10, whose tasks comprise two sub-goals."
+    },
+    {
+     "field": "success.S1",
+     "value": "yes",
+     "quote": "Before any motion is issued, it is checked against the obstacle box outside the language model; the check covers the gripper and, when an object is held, the object as well."
+    },
+    {
+     "field": "failure.F2",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F3",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F5",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP2.value",
+     "value": "no",
+     "quote": "Sec. 4.3 evaluates the harnesses as a whole; here we ablate the two components of the safety harness, route planning ( Sec. 3.2 ) and contact execution ( Sec. 3.3 ), to quantify the contribution of each."
+    },
+    {
+     "field": "anti.AP3.value",
+     "value": "yes",
+     "quote": "We evaluate SafeHarness on all 32 SafeLIBERO tasks with 10 seeds per task"
+    },
+    {
+     "field": "anti.AP5.value",
+     "value": "yes",
+     "quote": "To keep comparisons controlled, the coding-agent loop and the LIBERO skill memory [ 28 ] follow the configuration of Harness VLA [ 52 ]"
+    },
+    {
+     "field": "anti.AP6.value",
+     "value": "yes",
+     "quote": "The verifier evaluates a single condition, namely whether the route intersects the obstacle, and it does so on an approximately measured scene. Other physical constraints that arise during execution fall outside its scope, and a route that passes verification may still fail against them."
+    },
+    {
+     "field": "anti.AP8.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP10.value",
+     "value": "yes",
+     "quote": "On Libero-10 this loop runs twice per episode, once per sub-goal, and the second leg re-uses the obstacle box measured for the first."
+    },
+    {
+     "field": "anti.AP11.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP23.mitigated",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "anti.AP24.mitigated",
+     "value": "unclear",
+     "quote": null
+    }
+   ]
+  },
+  {
+   "arxiv": "2610.19834",
+   "items": [
+    {
+     "field": "success.S1",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "success.S2",
+     "value": "yes",
+     "quote": "After localization, the teacher corrects the structured response of every step in the faulty suffix."
+    },
+    {
+     "field": "success.S3",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F3",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F4",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F5",
+     "value": "unclear",
+     "quote": null
+    },
+    {
+     "field": "failure.F6",
+     "value": "yes",
+     "quote": "WebKD’s gains hold on the live web, where Online-Mind2Web’s numbers are low for all methods (below 8%, Fig. 5 )."
+    },
+    {
+     "field": "anti.AP5.value",
+     "value": "yes",
+     "quote": "The edit itself is a two-stage teacher intervention: where did the student fail? ( P3 ), and how should the teacher correct it? ( P4 )."
+    },
+    {
+     "field": "anti.AP21.value",
+     "value": "no",
+     "quote": null
+    }
+   ]
+  }
+ ]
+}
