@@ -12,7 +12,7 @@ Its scope also covers training compact VLM / VLA students from harness or teache
 distillation, DAgger-style correction), RL inside the harness, harness self-optimisation in embodied settings, and
 evaluation methodology for these systems.
 
-Your two jobs: **find papers** and **keep the repository healthy**. A separate scorer agent (Dots) judges and scores
+Your two jobs: **find papers** and **keep the repository healthy**. The maintainers local scoring session (two blind models) judges and scores
 papers; you never score. Read `README.md`, `docs/PIPELINE.md`, `docs/MAINTAINING.md` and `docs/EVIDENCE.md` once before
 your first run.
 

@@ -33,7 +33,7 @@ Grok bot ──▶ inbox/YYYY-MM-DD.jsonl
 | 4b | Merge + arbitrate | script + 仲裁席（claude-opus-5-5） | `merge_judgments.py`：一致保留、分歧 unclear+FLAG → `judge.py --arb` → `<B>.jsonl` 最终单条记录 | `--apply-arb` re-checks the batch; `score.py check <B>.jsonl <ids>` = 0 problems |
 | 5 | Score | script | final judgments → `scores.jsonl` | `score.py build` reports 0 skipped |
 | 6 | Board | 打分 session (script) | scores → `papers/README.md`, README block | — |
-| 7 | Diagnosis card (optional, top new A papers) | Dots | `cards/_TEMPLATE.md` | `python3 check_cards.py` |
+| 7 | Diagnosis card (optional, top new A papers) | 打分 session | `cards/_TEMPLATE.md` | `python3 check_cards.py` |
 
 Tier C stops after step 2. A paper whose full text has no HTML rendering gets `FULLTEXT: none`: every evidence
 value, S and F is `unclear` and every anti-pattern `no` (see `JUDGE_BATCH.md`).
