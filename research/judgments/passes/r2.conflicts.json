@@ -1,0 +1,3957 @@
+{
+ "batch": "r2",
+ "conflicts": [
+  {
+   "arxiv": "2507.01378",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "yes",
+    "quote": "More importantly, RALLY preserves high scoring ability even as the swarm size increases to 9 , 10 , and 11 . This clear contrast underscores RALLY’s superior generalization to larger, unseen formations than CIHRL."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "This clear contrast underscores RALLY’s superior generalization to larger, unseen formations than CIHRL."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "RALLY attains the highest mean reward and the narrowest variance distribution, indicating minimal variance, fastest convergence, and consistent task completion across various episodes."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "evidence.cost_reported",
+   "sol": {
+    "value": "partial",
+    "quote": "Model AIT (s) MF (GB) RO (GB) Qwen2.5-7B 15.39 15 15.7"
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Table 3 reports the Average Inference Time (AIT), Memory Footprint (MF), and Runtime Overhead (RO) after running these models on an NVIDIA RTX 4090."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "It can be found that a Qwen2.5- 1.5 -B version strikes the balance by delivering robust decision quality with minimal inference overhead."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Fig. 6 presents the average rewards over 30 test episodes and demonstrates the impact of consensus mechanisms on task completion."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01378",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "evidence.cost_reported",
+   "sol": {
+    "value": "partial",
+    "quote": "the ViT achieved a mean inference latency of 0.3066 s—91.9% faster than GPT-4o (3.7960 s)"
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "the ViT achieved a mean inference latency of 0.3066 s—91.9% faster than GPT-4o (3.7960 s)"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "evidence.component_ablation",
+   "sol": {
+    "value": "no",
+    "quote": "Without WC or KC modules, base models—including GPT-4o, Qwen-Max, and DeepSeek-R1—did not exceed a mean score of 3."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "the full pipeline (CodeGenerator + CodeChecker, GPT-4o) achieved a 96.4% instruction-matching accuracy, outperforming a single-module baseline (92.4%)."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "evidence_level",
+   "sol": {
+    "value": "offline",
+    "quote": "Optical density (OD) measurements showed no significant difference between BioMARS and manual protocols across all three cell types (Fig. 5 d), indicating that automated processing maintained normal cellular proliferation."
+   },
+   "son55": {
+    "value": "online",
+    "quote": "The system autonomously conducts cell passaging and culture tasks, matching or exceeding manual performance in viability, consistency, and morphological integrity."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "the full pipeline (CodeGenerator + CodeChecker, GPT-4o) achieved a 96.4% instruction-matching accuracy, outperforming a single-module baseline (92.4%)."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "failure.F1",
+   "sol": {
+    "value": "yes",
+    "quote": "Following Boiko et al. [ 20 ] , model outputs were scored on a 5-point scale: 5 for fully detailed and accurate procedures; 4 for biologically sound steps with minor omissions;"
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "System performance was evaluated using a 70-query benchmark (Appendix 6.1 ) comprising 10 procedural categories across seven cell lines"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP2.value",
+   "sol": {
+    "value": "yes",
+    "quote": "the full pipeline (CodeGenerator + CodeChecker, GPT-4o) achieved a 96.4% instruction-matching accuracy, outperforming a single-module baseline (92.4%)."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP23.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Following Boiko et al. [ 20 ] , model outputs were scored on a 5-point scale: 5 for fully detailed and accurate procedures; 4 for biologically sound steps with minor omissions;"
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2507.01485",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Each program undergoes ten independent trials to account for stochasticity in robot control, physics simulation, and sensory input."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "evidence.strong_baselines",
+   "sol": {
+    "value": "yes",
+    "quote": "Our approach integrates DeepSeek-V3 for program synthesis and moonshot-v1-32k-vision-preview for multimodal observation and diagnosis. We consider three hierarchical configurations."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "Code as Policies: One-shot generation with no feedback. This baseline reflects a static mapping from instruction to program. • CodeAct: Symbolic feedback and trace-driven repair."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "partial",
+    "quote": "For each configuration, the code-generation agent synthesizes 10 candidate programs per task, each executed 10 times."
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "evidence.code",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Our code is open-sourced at RoboTwin-Platform ."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP1.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Performance differences between RoboTwin 1.0 and Bi2Code are not directly comparable in Table 3 , as they rely on distinct motion planning backends."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP11.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Once an initial program is synthesized, it is executed within a simulated robotic environment to validate its operational correctness."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2508.02629",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.01106",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "yes",
+    "quote": "TDW-MAT operates with H=3{,}000 steps and 10 sub-goals per task, while C-WAH uses H=150 steps with 3–5 sub-goals, both requiring agents to sequence and coordinate multiple sub-goals within a fixed planning horizon."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "TDW-MAT operates with H=3{,}000 steps and 10 sub-goals per task, while C-WAH uses H=150 steps with 3–5 sub-goals"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2509.24230",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "evidence.online_eval",
+   "sol": {
+    "value": "partial",
+    "quote": "For all comparisons reported in this report, we perform A/B/n testing on real robots."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "For all comparisons reported in this report, we perform A/B/n testing on real robots."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Task Generalization: ability to successfully execute a new task in a new environment."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "evidence.component_ablation",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We establish two ablation baselines: training with data from a single embodiment versus training with data from all embodiments, both excluding our Motion Transfer (MT) mechanism."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "evidence.validator_check",
+   "sol": {
+    "value": "tested",
+    "quote": "By carefully aligning the visual and physical parameters of simulated and real scenes, we are able to achieve a strong rank consistency between evaluations in simulation and on the real robot"
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "evidence_level",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "transfer",
+    "quote": "GR 1.5 can control robots with dramatically different form factors to complete a large variety of tasks out-of-the-box, without the need for post-training to specialize the model to a particular embodiment or task."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.03342",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "evidence.cost_reported",
+   "sol": {
+    "value": "partial",
+    "quote": "It also does not include VRM prompting time, due to its variability by model. Table 1 provides a study of the overhead of VRM calls."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Table 1 provides a study of the overhead of VRM calls."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "evidence.code",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "VLM system prompts and source code are included in Appendices."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "evidence_level",
+   "sol": {
+    "value": "offline",
+    "quote": "Success rate is the proportion of problems for which the method finds a successful task-and-motion plan."
+   },
+   "son55": {
+    "value": "online",
+    "quote": "Domains We evaluated VIZ-COAST on three TAMP domains, each involving robot arms manipulating objects in a simulated PyBullet environment"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "VIZ-COAST is the only method that achieves a 100% success rate. VLM-only is able to solve most problems with higher planning times, and all other baselines fail completely beyond 2 ingredients."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we assume access to a model of the robot and its environment, as well as a symbolic Planning Domain Definition Language (PDDL) ( McDermott et al. 1998 ) domain description."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "with 5 problems per number of blocks, for a total of 30 unique problems."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP22.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we assume access to a model of the robot and its environment, as well as a symbolic Planning Domain Definition Language (PDDL) ( McDermott et al. 1998 ) domain description."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP23.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Success rate is the proportion of problems for which the method finds a successful task-and-motion plan."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2510.25548",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we observe that removing any branch degrades performance, with the absence of Branch 1 causing the most significant drop."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we constructed a dataset of 800 indoor simple-scene images (Level 1), 800 indoor complex-scene images (Level 2), and 800 manga-style images (Level 3) generated via style transfer."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP6.value",
+   "sol": {
+    "value": "yes",
+    "quote": "The Planning Agent acts as a proposal generator, while the Evaluation Agent implements a multi-dimensional scoring function"
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.01594",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Each task is evaluated five times."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "evidence.strong_baselines",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Compared with prior LLM-based systems, CoMuRoS uniquely demonstrates runtime, event-driven replanning on physical robots"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "CoMuRoS architecture’s high-level planning capability was evaluated using a manually curated textual benchmark dataset for generalization across 22 scenarios"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2511.22354",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Removing the HP causes the GCR for such tasks to drop sharply from 0.62 to 0.22"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "While the current evaluation isolates the planning capabilities by operating on abstracted environmental states"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "yes",
+    "quote": "MACE-THOR comprises 42 tasks across 8 different indoor floor plans, covering various types of daily household tasks."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.11063",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  }
+ ]
+}
