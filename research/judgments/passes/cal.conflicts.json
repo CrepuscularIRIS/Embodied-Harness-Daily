@@ -1,0 +1,1084 @@
+{
+ "batch": "cal",
+ "conflicts": [
+  {
+   "arxiv": "2606.18363",
+   "field": "failure.F4",
+   "sol": {
+    "value": "yes",
+    "quote": "seen tasks, which share task types with training but differ in scene configurations;"
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Guava-4B achieves 90.8% success on unseen tasks, compared with 20.8% for Qwen3.5-4B and 93.8% for GPT-5.4"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We additionally apply GRPO to the SFT checkpoint on two long-horizon tasks"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP18.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "the simulator provides a sparse task-level reward"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2606.18363",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "task-specific tools and budgets are detailed in section F.9"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "evidence.validator_check",
+   "sol": {
+    "value": "untested",
+    "quote": "The analysis is model-assisted without independent human verification ( appendices B and A.2 )."
+   },
+   "son55": {
+    "value": "na",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Tools expose these estimates, trajectories, and path previews, alongside panoramic observations and location markers."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "step(actions) executes a bounded sequence of primitive actions"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "success.S7",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Both are served over the Model Context Protocol (MCP)"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "failure.F6",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "failure.F10",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP5.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP6.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP10.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2607.26148",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "since these skills were acquired in obstacle-free scenes, replaying them near the target leads to collisions"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We evaluate SafeHarness on all 32 SafeLIBERO tasks with 10 seeds per task"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "evidence.cost_reported",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "a successful run takes about 400 steps on average, and about 700 on Libero-10"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "success.S5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "When a component is removed, the corresponding phase is left to the agent itself"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "failure.F6",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP1.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP2.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP3.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP4.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP5.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "a successful run takes about 400 steps on average, and about 700 on Libero-10"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP6.value",
+   "sol": {
+    "value": "yes",
+    "quote": "A route released for execution carries, however, only a limited guarantee. The verifier evaluates a single condition, namely whether the route intersects the obstacle, and it does so on an approximately measured scene."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP7.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP8.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP9.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP10.value",
+   "sol": {
+    "value": "yes",
+    "quote": "On Libero-10 this loop runs twice per episode, once per sub-goal, and the second leg re-uses the obstacle box measured for the first."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP11.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP12.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP13.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP14.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP15.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP16.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP17.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP18.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP19.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP20.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP21.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP22.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP23.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2609.20822",
+   "field": "anti.AP24.mitigated",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  }
+ ]
+}
