@@ -57,7 +57,7 @@ Never re-launch work that is still running.
 - [ ] 7 **Calibration**: build `research/calibration/gold.jsonl` from reference judgments spanning several patterns and
   bands; blind re-judge of 3 gold papers by a fresh agent via `research/calibrate.py`.
 - [ ] 8 **Docs and prompts** finalised against the built cards and board: README counts (`{{N_MAIN}}`, `{{N_SUB}}`,
-  `{{N_AP}}` placeholders), `docs/`, `docs/agents/` (Grok collect → ingest → maintenance; Dots Step 0 calibration,
+  `{{N_AP}}` placeholders), `docs/`, `docs/agents/` (Grok collect → ingest → maintenance; scoring session calibration,
   catch-up / steady phases, triage → assign + judge → score → board; Reel posters), CI. A first draft for this field
   is written; it still names no counts.
 - [ ] 9 **Publish**: public repo `CrepuscularIRIS/embodied-harness-radar`.
