@@ -1,0 +1,1253 @@
+{
+ "batch": "r3",
+ "conflicts": [
+  {
+   "arxiv": "2501.04268",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "We report the average success rate on 25 episodes for each task."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We finally collect 115k runtime code data with task descriptions and environmental observations using Video2Code for supervised fine-tuning."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "failure.F6",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Each task is evaluated with 25 episodes scored either 0 or 100 for failure or success in task execution."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2501.04268",
+   "field": "anti.AP9.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Execution errors maintain a consistent proportional relationship with successful cases, which result from API limitations rather than inaccuracies in the policy code."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "partial",
+    "quote": "We therefore study the performance–efficiency trade-off by varying the number of sampled candidates K and the number of verification trials P on the R2R Val Unseen Subset while keeping other settings unchanged."
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "To assess the robustness of DV-VLN beyond R2R, we further evaluate it on the RxR English subset and REVERIE, keeping the training recipe and inference hyperparameters identical to those used on R2R."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "we also adopt a compact Val Unseen Subset for R2R, randomly sampling 90 instruction–trajectory pairs from 8 scans in Val Unseen"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "evidence.strong_baselines",
+   "sol": {
+    "value": "yes",
+    "quote": "The row “–” corresponds to the backbone navigator with deterministic decoding (no sampling and no verification). “Sampling (Vote)” enables sampling decoding and selects the final action by majority vote over the sampled actions, but still without any verification."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "enables sampling decoding and selects the final action by majority vote over the sampled actions, but still without any verification"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "evidence.cost_reported",
+   "sol": {
+    "value": "yes",
+    "quote": "Training is carried out on 4×V100 GPUs with batch size 8, taking roughly 10 hours in total. Inference is run on a single V100 GPU."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "Training is carried out on 4×V100 GPUs with batch size 8, taking roughly 10 hours in total."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "evidence.validator_check",
+   "sol": {
+    "value": "untested",
+    "quote": "For each candidate, DV-VLN performs True–False Verification (TFV) and Masked-Entity Verification (MEV) multiple times (here P=4), and computes a verification score by summing the number of successful verifications across both types."
+   },
+   "son55": {
+    "value": "na",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Introducing only MEV yields a similar but slightly stronger effect: NE further drops to 5.26 m, OSR becomes 61%, and SR/SPL increase to 44%/42%"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.18492",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "The temperature was fixed at 0.0 for all models to ensure consistency and reproducibility across runs."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "evidence.strong_baselines",
+   "sol": {
+    "value": "yes",
+    "quote": "We design the evaluation process to compare performance across three dimensions: (1) task executor mode ( tap vs cap ); (2) LLMs; and (3) paraphrase categories."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "We design the evaluation process to compare performance across three dimensions: (1) task executor mode ( tap vs cap ); (2) LLMs; and (3) paraphrase categories."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "partial",
+    "quote": "However, it increases the number of LLM calls and relies on the model’s ability to reliably perform tool calling."
+   },
+   "son55": {
+    "value": "no",
+    "quote": "These interactive steps continue until the original user task is fulfilled, or it reaches the maximum number of steps."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "These actions can be executed through two complementary modes: tap and cap ."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We selected the following ten LLMs to evaluate both CaP and TaP modes"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "success.S5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "representing a 0.9% improvement over CaP, while latency increased from 33.44s to 82.60s"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "The temperature was fixed at 0.0 for all models to ensure consistency and reproducibility across runs."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "failure.F4",
+   "sol": {
+    "value": "yes",
+    "quote": "In cap mode, actions are executed by directly running executable control code, while in tap mode, actions are executed via tool calling capabilities of llm ."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Qualitative inspection indicates that small-scale models often face difficulties handling multiple consecutive nested calls, particularly in pick-and-place operations"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "failure.F6",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "The temperature was fixed at 0.0 for all models to ensure consistency and reproducibility across runs."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "anti.AP5.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "However, it increases the number of LLM calls and relies on the model’s ability to reliably perform tool calling."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "anti.AP9.value",
+   "sol": {
+    "value": "yes",
+    "quote": "Robot movements are considered successful as long as the parameters follow the correct format (e.g., a dictionary specifying position and orientation)."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2601.19510",
+   "field": "anti.AP11.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Third, while our experiments validate the framework in simulation, integrating real robots and perception components would offer a clearer understanding of its practical performance."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "partial",
+    "quote": "For quantitative evaluation, we fix the scene parameters and select four representative scenarios to evaluate all methods."
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "evidence.strong_baselines",
+   "sol": {
+    "value": "yes",
+    "quote": "For LLM use, we use gpt-4-0125-preview to align with the setting in COHERENT."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "We adopt its evaluation metrics and use the reported results as our baseline."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "yes",
+    "quote": "To control evaluation cost and runtime, a task is considered successful only if it is completed within twice the corresponding ground-truth step count."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "a task is considered successful only if it is completed within twice the corresponding ground-truth step count"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "evidence.validator_check",
+   "sol": {
+    "value": "untested",
+    "quote": "The agent executor LLM verifies the feasibility of its command and issues the corresponding action only when the command is deemed executable."
+   },
+   "son55": {
+    "value": "na",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.06967",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.21198",
+   "field": "evidence.strong_baselines",
+   "sol": {
+    "value": "yes",
+    "quote": "The initialization-only variant achieves only 10.4% average success rate against 33.7% for the full model."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "Our framework achieves large gains over reflective language, RL and world-model baselines, with zero-shot generalization to photorealistic HM3D environments"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.21198",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.21198",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "These hindsight assessments provide self-supervised signals at deployment time, enabling two forms of test-time training"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.21198",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.21670",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "partial",
+    "quote": "The full method requires 173 seconds on average. Removing the hierarchy ( –H ) shortens runtime to 140 seconds."
+   },
+   "son55": {
+    "value": "no",
+    "quote": "The maximum number of prompt-optimization iterations is set to K_{\\max}=5 ."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2602.21670",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "The system switched between motion generation models and VLA prompts according to the required action and completed the task from start to finish"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "partial",
+    "quote": "Cost is at most K calls per turn, and the cascade stops early once R_{k}=\\emptyset"
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "evidence_level",
+   "sol": {
+    "value": "offline",
+    "quote": "Applying this to the rates of Table IV over the tree of Fig. 4 gives an estimated end-to-end success of \\approx 0.34"
+   },
+   "son55": {
+    "value": "online",
+    "quote": "Table IV reports success rates over 10 trials per action."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "failure.F1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Planning is also offline: the BT is fixed before execution, so unanticipated situations are handled only by structures already in the tree"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Condition-node misjudgement Not evaluated separately"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we trained both \\pi_{0.5} [ 17 ] and Diffusion Policy [ 2 ] , and assigned the model with the highest success rate to the corresponding BT node"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "anti.AP2.value",
+   "sol": {
+    "value": "yes",
+    "quote": "We first compare BTs generated with and without the proxy-response mechanism in terms of structural and semantic similarity."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.01113",
+   "field": "anti.AP4.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "we trained both \\pi_{0.5} [ 17 ] and Diffusion Policy [ 2 ] , and assigned the model with the highest success rate to the corresponding BT node"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.02669",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Tab. I presents the quantitative results compared with the baselines on all 50 tasks in IMR-Bench."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.02669",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.02669",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.02669",
+   "field": "failure.F5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Tab. I presents the quantitative results compared with the baselines on all 50 tasks in IMR-Bench."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.02669",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Tab. I presents the quantitative results compared with the baselines on all 50 tasks in IMR-Bench."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Table 3 : Peak success rate and LLM-call count."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "yes",
+    "quote": "The Codex agent was unable to solve any of the three tasks within the same iteration budget, failing to produce a working controller even for the simplest Lift task."
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "The Codex agent was unable to solve any of the three tasks within the same iteration budget"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "v0–v6 Controller tuning (vision error 5–8 cm) 0% v7–v8 Back-projection y-flip fix 33%"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "success.S3",
+   "sol": {
+    "value": "yes",
+    "quote": "All generated code is compiled and validated in an isolated namespace before execution. Any code that fails to compile, lacks the required interface, or raises exceptions at instantiation falls back to the previous working controller."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "failure.F2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "The central claim of this paper is not a performance number."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "failure.F4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "All experiments run on robosuite v1.5.1 under MuJoCo 3.2.3 with a UR5e arm and OSC_POSE Cartesian delta controller."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "anti.AP3.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "We validate this across three robosuite manipulation tasks and report promising results"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "anti.AP5.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "Table 3 summarises peak performance and iteration counts across all three tasks"
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "anti.AP11.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "All experiments run on robosuite v1.5.1 under MuJoCo 3.2.3 with a UR5e arm and OSC_POSE Cartesian delta controller."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.04466",
+   "field": "anti.AP24.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "The central claim of this paper is not a performance number."
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "evidence.held_out_env",
+   "sol": {
+    "value": "partial",
+    "quote": "Specifically, we train models using data collected from one to five iterations, where each iteration adds 50 additional data samples. We then compare their performance to evaluate how iterative rollout affects policy success rates."
+   },
+   "son55": {
+    "value": "unclear",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "evidence.variance",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": "Success Rate 36/50 38/50 43/50 39/50"
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "evidence.budget_matched",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "partial",
+    "quote": "Given the same amount of collected data, we measure the proportion of human effort required by each method."
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S1",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S2",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S4",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S5",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S6",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S7",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "success.S8",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "failure.F3",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "failure.F6",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "failure.F9",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "failure.F10",
+   "sol": {
+    "value": "unclear",
+    "quote": null
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": false
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "anti.AP5.value",
+   "sol": {
+    "value": "yes",
+    "quote": "it also faces several limitations, including the potential latency introduced by cloud-based large models and the assumption of practical inverse reset behaviors for constructing reusable environment states."
+   },
+   "son55": {
+    "value": "no",
+    "quote": null
+   },
+   "must_arb": true
+  },
+  {
+   "arxiv": "2603.11558",
+   "field": "anti.AP17.value",
+   "sol": {
+    "value": "no",
+    "quote": null
+   },
+   "son55": {
+    "value": "yes",
+    "quote": "the assumption of practical inverse reset behaviors for constructing reusable environment states"
+   },
+   "must_arb": true
+  }
+ ]
+}
