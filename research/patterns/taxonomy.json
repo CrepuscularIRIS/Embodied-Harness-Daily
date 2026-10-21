@@ -10,7 +10,9 @@
     "K104",
     "K108",
     "K109",
-    "K110"
+    "K110",
+    "R04",
+    "R07"
    ]
   },
   {
@@ -121,6 +123,41 @@
     "K803",
     "K804",
     "K805"
+   ]
+  },
+  {
+   "id": "llm_symbolic_solver_planning",
+   "title": "Let a Solver Plan from an LLM-Written Formal Model",
+   "subs": [
+    "R01"
+   ]
+  },
+  {
+   "id": "trained_vlm_vla_hierarchy",
+   "title": "Train the High-Level VLM That Commands a Low-Level Policy",
+   "subs": [
+    "R02"
+   ]
+  },
+  {
+   "id": "multi_robot_llm_coordination",
+   "title": "Allocate and Repair Multi-Robot Plans with LLM Agents",
+   "subs": [
+    "R03"
+   ]
+  },
+  {
+   "id": "code_policy_trial_revision",
+   "title": "Write the Policy as Code and Rewrite It from Trial Diagnostics",
+   "subs": [
+    "R05"
+   ]
+  },
+  {
+   "id": "sample_verify_select",
+   "title": "Sample Candidate Actions and Let a Verifier Choose",
+   "subs": [
+    "R06"
    ]
   }
  ],
@@ -430,6 +467,48 @@
    "status": "case",
    "main": "harness_effect_evaluation",
    "domain": "embodied-agent-harness"
+  },
+  "R01": {
+   "title": "Have the LLM write a formal planning model and let a classical solver compute, check or prune the plan",
+   "status": "candidate_pattern",
+   "main": "llm_symbolic_solver_planning",
+   "domain": "board-induced"
+  },
+  "R02": {
+   "title": "Fine-tune the high-level VLM that issues language or motion commands to a trained low-level policy",
+   "status": "candidate_pattern",
+   "main": "trained_vlm_vla_hierarchy",
+   "domain": "board-induced"
+  },
+  "R03": {
+   "title": "Let LLM agents allocate subtasks across robots and repair the allocation from feasibility, conflict or event feedback",
+   "status": "candidate_pattern",
+   "main": "multi_robot_llm_coordination",
+   "domain": "board-induced"
+  },
+  "R04": {
+   "title": "Expose the robot software stack to the model as protocol-level tools (ROS connectors, MCP servers, policy start/switch calls)",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "board-induced"
+  },
+  "R05": {
+   "title": "Write the controller as code and rewrite it between trials from execution diagnostics",
+   "status": "candidate_pattern",
+   "main": "code_policy_trial_revision",
+   "domain": "board-induced"
+  },
+  "R06": {
+   "title": "Sample several candidate actions and execute the one a verifier scores highest",
+   "status": "candidate_pattern",
+   "main": "sample_verify_select",
+   "domain": "board-induced"
+  },
+  "R07": {
+   "title": "Harness turns geometry into a short candidate list or written advice; the model only chooses",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "board-induced"
   }
  }
 }

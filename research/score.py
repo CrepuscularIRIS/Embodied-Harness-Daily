@@ -26,7 +26,7 @@ EV_POINTS = {
 }
 LEVEL_POINTS = {"transfer": 10, "online": 6, "offline": 2, "unclear": 0}
 AP_PENALTY, AP_CAP = 5, 10
-AP_INFO_ONLY = {"AP1", "AP2", "AP3", "AP4", "AP5"}  # judged and reported, but already priced by evidence items: no penalty
+AP_INFO_ONLY = {"AP1", "AP2", "AP3", "AP4", "AP5", "AP23"}  # judged and reported, but already priced by evidence items: no penalty
 CODE_POINTS = {"yes": 10, "announced": 3}
 assert sum(max(v.values()) for v in EV_POINTS.values()) == 50
 AP_FILE = Path("patterns/anti-patterns.md")

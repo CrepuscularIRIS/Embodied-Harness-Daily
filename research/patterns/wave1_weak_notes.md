@@ -1,8 +1,11 @@
 # Wave-1 weak fits — induction notes (partial, 2026-10-21)
 
-Status: **incomplete working notes**, not cards. The induction run (board sub-patterns R01..) was stopped by the
-maintainer before it wrote any card. Only one reading group (10 of the 60 weak papers) finished; its notes are below.
-The other 50 weak papers have only their `fit_note` in `research/patterns/assignments.jsonl`.
+Status: **induction complete (2026-10-21)**. All 60 weak papers were read in full text (group 5 below; groups 1–5 in
+`wave1_notes/g1.md`–`g5.md`) and re-clustered into the board-induced sub-patterns
+[R01](../../patterns/sub/R01.md)–[R07](../../patterns/sub/R07.md); per-paper outcomes are in `reassign_wave1.jsonl` and the
+build-log entry in `research/PIPELINE.md`. The cluster table below is the pre-reading draft and is kept for reference:
+clusters a, b, c, d, e, f and h became R01, R02, R03, R04, R05, R06 and R07 (with members moved after reading); g split
+into two singletons.
 
 ## Candidate clusters (from the 60 fit notes; verify against full text before writing R cards)
 

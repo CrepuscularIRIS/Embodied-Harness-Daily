@@ -1,4 +1,45 @@
 {
+ "code_policy_trial_revision": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Rewriting compared with one-shot code on the same tasks",
+    "detail": "One-shot code 47.4% -> execution feedback 60.4% -> plus visual diagnosis 63.9%, and 62.1 -> 66.7 -> 71.3 on a second benchmark (2508.02629#board)."
+   },
+   {
+    "id": "S2",
+    "name": "Rewrite history reported with the fix that mattered",
+    "detail": "A stacking controller goes 0% -> 33% after a back-projection sign fix -> 91% at version 20; two other tasks reach 100% in 3 and 2 rewrites, with 20/20 repeats (2603.04466#board)."
+   },
+   {
+    "id": "S3",
+    "name": "Program checked before deployment and compared with code-generation baselines",
+    "detail": "Constraint review, static checks and simulation precede automatic deployment: 81% mean over 10 tasks x 100 trials; 74% vs 37-40% for three code-generation baselines (2503.23875#board)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "No held-out instances",
+    "detail": "The controller is rewritten on the instances it is scored on, with unstated trial counts behind the headline (2603.04466#board)."
+   },
+   {
+    "id": "F2",
+    "name": "Classical controller or any baseline missing",
+    "detail": "One study has no baseline at all; in another hand-tuned flocking and assignment controllers score higher on average than the generated code (2603.04466#board, 2503.23875#board)."
+   },
+   {
+    "id": "F3",
+    "name": "Convergence compared across different setups",
+    "detail": "The headline iteration reduction (2.42 -> 1.76) compares two benchmarks run with different planners (2508.02629#board)."
+   },
+   {
+    "id": "F4",
+    "name": "Perception emulated and no real-world rewriting",
+    "detail": "Positions come from an indoor positioning system; no member rewrites code on a real robot from real failures (2503.23875#board, 2508.02629#board)."
+   }
+  ]
+ },
  "external_verification_control": {
   "S": [
    {
@@ -360,6 +401,108 @@
    }
   ]
  },
+ "llm_symbolic_solver_planning": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Solver step ablated against LLM-only planning",
+    "detail": "The combinatorial step is removed or replaced by direct LLM output with the model fixed: LLM-ordered operations instead of the scheduling graph drop complex multi-robot SR 0.68 -> 0.00; a single LLM writing one large PDDL problem instead of a hierarchy of small ones drops SR 0.84 -> 0.25 (2603.02669#board, 2602.21670#board)."
+   },
+   {
+    "id": "S2",
+    "name": "Solver failures fed back for repair, and the repair toggled",
+    "detail": "Planner failures, inconsistencies or refinement failures return to the LLM and the repair channel is ablated: SR 0.84 vs 0.47 without failure-driven prompt optimisation; failure-revised SMT constraints are the only method at 100% success on a cooking TAMP domain (2602.21670#board, 2510.25548#board)."
+   },
+   {
+    "id": "S3",
+    "name": "Checkers separate and backbones varied",
+    "detail": "LLM-written and rule-based checkers are removed one at a time and the method is run on more than one backbone: GPT-4o 52.3 vs 42.7 / 41.3 without either checker; 63.9 vs 28.8 (Claude) and 46.0 vs 26.9 (Mistral) (2503.01700#board)."
+   },
+   {
+    "id": "S4",
+    "name": "Compared with LLM-planning and LLM+PDDL baselines on the same tasks",
+    "detail": "Aggregate SR 12% -> 55% over the strongest LLM+PDDL baseline; TCR 78% vs 53% and 39% for two PDDL baselines, with planning time reported (62.27 s vs 12.83 s) (2601.11063#board, 2603.08814#board)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Hand-written domain and abstracted or fully observed state",
+    "detail": "The planner receives ground-truth PDDL domains, abstracted symbolic states, full observability or the whole state as text, and plans open loop without replanning on execution failure (2601.11063#board, 2602.21670#board, 2503.01700#board, 2603.08814#board)."
+   },
+   {
+    "id": "F2",
+    "name": "Human or LLM validation carries the pipeline unmeasured",
+    "detail": "A human confirms validation and hand-fixes knowledge bases that do not plan, with no end-to-end success without that repair; an LLM validation gate accepts all three deliberately invalid specifications with a weaker model (2502.19135#board)."
+   },
+   {
+    "id": "F3",
+    "name": "Planning cost unpriced or partly excluded",
+    "detail": "173 s vs 32 s per task with the repair loop; reported planning time excludes VLM prompting (2602.21670#board, 2510.25548#board)."
+   },
+   {
+    "id": "F4",
+    "name": "Settings tuned on the evaluation problems",
+    "detail": "Re-prompt thresholds are picked per domain by fewest failures and prompts are optimised on the tasks they are scored on (2510.25548#board, 2602.21670#board)."
+   },
+   {
+    "id": "F5",
+    "name": "Small own benchmarks and single runs",
+    "detail": "42-50 tasks or 30 problems per domain, one run, and in one case an ablation row identical to the baseline row on all six numbers (2601.11063#board, 2603.08814#board, 2603.02669#board)."
+   }
+  ]
+ },
+ "multi_robot_llm_coordination": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Feasibility or conflict feedback ablated",
+    "detail": "Removing executor feedback drops SR 1.000 -> 0.200 on the authors' assembly benchmark, where the full system needs 8.8 steps vs 15.8 for the best baseline (2602.06967#board)."
+   },
+   {
+    "id": "S2",
+    "name": "Coordination cost reported next to success",
+    "detail": "Tokens and wall-clock per task are compared at similar success: 29.64K vs 70.18K tokens at transport rate 78.54 vs 77.50, and 22.22K tokens / 78.62 s vs 72.51K / 411.25 s on a second benchmark (2509.24230#board)."
+   },
+   {
+    "id": "S3",
+    "name": "Replanning triggered by filtered events and checked on hardware with counts",
+    "detail": "9/10 recovery runs, 8/8 coordinated transport and 5/5 human-assisted runs, with irrelevant events filtered (2511.22354#board)."
+   },
+   {
+    "id": "S4",
+    "name": "Role structure varied",
+    "detail": "One, two, three and four roles are compared and the method is run at several swarm sizes (9-11) (2507.01378#board)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Plans judged as text without baselines",
+    "detail": "Correctness is judged by an expert on text plans, replanning is scored only when the initial plan was correct, and no baseline numbers are given (2511.22354#board)."
+   },
+   {
+    "id": "F2",
+    "name": "Validator and allocator not separated",
+    "detail": "The precondition/conflict validator is never ablated alone, constraint violations and hallucinated actions persist, and success stays below a reflection baseline (79.17 vs 87.00) (2509.24230#board)."
+   },
+   {
+    "id": "F3",
+    "name": "Thin, own-benchmark evidence",
+    "detail": "Mean rewards over 30 episodes appear only in figures on the authors' own task; 4 scenarios x 5 runs with one LLM (2507.01378#board, 2602.06967#board)."
+   },
+   {
+    "id": "F4",
+    "name": "Coordination latency",
+    "detail": "About 15 s per LLM call for the tuned 7B model; the frontier-API baseline is confounded by API latency (2507.01378#board)."
+   },
+   {
+    "id": "F5",
+    "name": "Ground-truth shared state",
+    "detail": "The central planner reads simulator ground-truth object and agent states (2509.24230#board)."
+   }
+  ]
+ },
  "observe_act_interface": {
   "S": [
    {
@@ -391,6 +534,16 @@
     "id": "S6",
     "name": "Image-to-text conversion compared with raw images",
     "detail": "A separate VLM's text (visual differencing or grounded descriptions) is compared against raw RGB in the same loop: text differencing beats raw image interleaving, which degrades relative to text-only feedback; bounding-box and contact-grounded descriptions reach 47.90% / 52.36% vs 38.84% image-only long-horizon success (2603.22435#s1, 2606.10267#s2)."
+   },
+   {
+    "id": "S7",
+    "name": "Protocol-exposed tools compared with a narrow explicit tool on the same action",
+    "detail": "The robot stack is exposed through a generic protocol and the exposure itself is tested: explicit tools complete 60/60 simple moves and 30/30 multi-part removals while open MCP service discovery fails 13/30 removals (11 false successes) at 3x the API cost; running a VLA behind the middleware keeps LIBERO success (99.2 vs 98.6 Spatial) (2603.18520#board, 2512.10394#board)."
+   },
+   {
+    "id": "S8",
+    "name": "Harness-made candidates or advice ablated with the model fixed",
+    "detail": "The harness reduces maps to a few candidates or gated prompt advice and the channel is removed one at a time: SR 53.50 vs 10.41 without exploitation advice; R2R-CE SR 29 / SPL 22.46 vs 19 / 16.10 for a prior zero-shot navigator; a move-back candidate gives real-robot SR 36 vs 24 (2505.08765#board, 2503.10069#board)."
    }
   ],
   "F": [
@@ -428,6 +581,21 @@
     "id": "F7",
     "name": "Latency and contamination unaccounted",
     "detail": "3-19 s per call and high inference cost; benchmark contamination of proprietary models cannot be verified; mostly single runs on 100-episode subsets (2607.26148#s1, 2609.29861#s1)."
+   },
+   {
+    "id": "F8",
+    "name": "Agent-level success not measured behind a tool protocol",
+    "detail": "Middleware and framework papers validate the protocol layer with a VLA benchmark or qualitative cases and never measure the agent's task success; LLM agents sharing mission state drift out of sync (2512.10394#board, 2505.07532#board)."
+   },
+   {
+    "id": "F9",
+    "name": "Open tool discovery with self-declared completion",
+    "detail": "With many generic services exposed the agent picks wrong calls and declares the task done without the needed actions (11 of 13 failures were false successes) (2603.18520#board)."
+   },
+   {
+    "id": "F10",
+    "name": "Harness heuristic credited to the model",
+    "detail": "Removing the VLM's frontier ranking costs 0.562 -> 0.540 SR while removing the second agent costs 0.562 -> 0.386, multi-agent results are set against single-agent baselines, and the advice threshold is tuned on the evaluation tasks (2603.18210#board, 2505.08765#board)."
    }
   ]
  },
@@ -670,6 +838,52 @@
    }
   ]
  },
+ "sample_verify_select": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Verified policy compared with the same policy unverified, in closed loop",
+    "detail": "+9 points on a simulated benchmark, 60% vs 35% on real out-of-distribution tasks, 56.5 vs 49.8 on a long-horizon suite, with the verifier's data scaled (37.5 -> 46.3) (2506.17811#board)."
+   },
+   {
+    "id": "S2",
+    "name": "Sampling separated from verification",
+    "detail": "No sampling SR 39, sampling with a vote 40, full verification 52 on the same subset; gains flatten beyond 4 candidates (2601.18492#board)."
+   },
+   {
+    "id": "S3",
+    "name": "Each reflection channel removed",
+    "detail": "33.65% with both reflection channels vs 10.40% with both removed and 11.20% for a self-refinement baseline (2602.21198#board)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Verifier trained or argued on a proxy",
+    "detail": "The reward model ranks by distance to the demonstration action, and the scaling argument assumes an oracle verifier (2506.17811#board)."
+   },
+   {
+    "id": "F2",
+    "name": "Per-step latency of N candidates",
+    "detail": "16 candidates take 650 ms and the robot runs at about 1.5 Hz; the K x P verification cost is not timed (2506.17811#board, 2601.18492#board)."
+   },
+   {
+    "id": "F3",
+    "name": "Small ablation sets and trial counts",
+    "detail": "A 90-pair subset from 8 scans without variance; 10 real trials per task (2601.18492#board, 2506.17811#board)."
+   },
+   {
+    "id": "F4",
+    "name": "Privileged frontier supervision",
+    "detail": "Task specifications are generated by a frontier model and SFT data are privileged, on the authors' own benchmarks (2602.21198#board)."
+   },
+   {
+    "id": "F5",
+    "name": "Far below trained specialists",
+    "detail": "SR 52 vs 81 for a fully supervised navigator; +0.41 SR on a second benchmark (2601.18492#board)."
+   }
+  ]
+ },
  "teacher_seeded_sparse_rl": {
   "S": [
    {
@@ -723,6 +937,42 @@
     "id": "F6",
     "name": "Coverage effect not isolated; stop timing remains",
     "detail": "Coverage and difficulty co-vary, real closed-loop transfer failed (2609.21650#s2); late termination increases and stop timing remains the main residual failure (2610.21450#s2)."
+   }
+  ]
+ },
+ "trained_vlm_vla_hierarchy": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Trained high level compared with a prompted frontier high level over the same low level",
+    "detail": "The same decomposition with a frontier VLM that is not fine-tuned, and a flat VLA, score lower than the fine-tuned high level; removing the synthetic prompt data also loses (2502.19417#board)."
+   },
+   {
+    "id": "S2",
+    "name": "Correction trained as a separate module and ablated against co-training",
+    "detail": "A separate motion-correction MLLM gives 57.8% mean success over 9 tasks x 50 trials vs 46.9% (prediction only) and 51.3% (one model co-trained on the same correction data) (2504.14588#board)."
+   },
+   {
+    "id": "S3",
+    "name": "Low-level competence checked with an oracle high level",
+    "detail": "With expert-human high-level commands the low-level policy executes nearly flawlessly, so remaining failures are located in the high level (2502.19417#board)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Plan quality scored offline",
+    "detail": "Planning, pointing and affordance accuracy on in-distribution synthetic data stand in for end-to-end success; real deployment is shown as demonstrations (2505.03673#board)."
+   },
+   {
+    "id": "F2",
+    "name": "Real-robot evidence thin",
+    "detail": "The real-world check of the correction loop is one drawer task with 20 corrections, after training on thousands of human interventions and annotations (2504.14588#board)."
+   },
+   {
+    "id": "F3",
+    "name": "Baselines differ in more than the training of the high level",
+    "detail": "The frontier high-level baseline is not fine-tuned on the robot data; one model-family comparison is not like-for-like, and over 90% of development evaluation episodes ran in simulation (2502.19417#board, 2510.03342#board)."
    }
   ]
  }

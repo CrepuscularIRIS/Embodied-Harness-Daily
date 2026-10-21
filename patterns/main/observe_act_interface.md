@@ -1,5 +1,5 @@
 # Design the Frozen Model's Observation and Action Interface
-_id: `observe_act_interface` · sub-patterns: K101, K102, K103, K104, K108, K109, K110 · 6 candidate_pattern · 1 case · domain: `embodied-agent-harness/v1` · outcome labels: none in this build_
+_id: `observe_act_interface` · sub-patterns: K101, K102, K103, K104, K108, K109, K110, R04, R07 · 8 candidate_pattern · 1 case · domain: `embodied-agent-harness/v1` + `board-induced` (R04, R07; 2026-10-21) · outcome labels: none in this build_
 
 **Definition.** Treat the schema between a frozen frontier model and the environment as the design object: a non-advancing observe tool plus bounded primitive steps with recovery and stopping left to the model (K101), dense geometry kept inside tools and returned as numeric receipts on request (K102), a model-proposed visual target that the harness back-projects, checks for feasibility and executes or sends back (K103), a fixed semantic action vocabulary mapped to a deterministic or frozen executor (K104), extra tools offered as optional calls beside primitives (K108), and a separate VLM that turns images into text for the planner (K109). As a cross-domain case it holds compact LM-oriented commands that replace a raw shell (K110).
 
@@ -17,6 +17,8 @@ _id: `observe_act_interface` · sub-patterns: K101, K102, K103, K104, K108, K109
 | [K108](../sub/K108.md) | candidate_pattern | Offer extra tools as optional calls beside primitive actions and let the model choose | add perception/navigation or MCP tools as optional calls next to the primitive interface rather than replacing it, and let the model decide… |
 | [K109](../sub/K109.md) | candidate_pattern | Insert a separate VLM that turns images into text for the planner | convert camera images into text (scene description, before/after differences, completion judgement) with a separate frozen VLM and feed… |
 | [K110](../sub/K110.md) | case | Replace raw shell interaction with compact LM-oriented commands (agent-computer interface) | replace low-level shell interaction with a small set of LM-oriented commands with summarized, windowed returns, tuned by trajectory… |
+| [R04](../sub/R04.md) | candidate_pattern | Expose the robot software stack to the model as protocol-level tools (ROS connectors, MCP servers, policy start/switch calls) | wrap ROS topics/services/actions, planners, perception, VLA backends and skill policies as typed tools behind a generic agent protocol…
+| [R07](../sub/R07.md) | candidate_pattern | Harness turns geometry into a short candidate list or written advice; the model only chooses | keep depth, occupancy, semantic and uncertainty maps in the harness, reduce them to a few candidates or prompt advice, let the frozen…
 
 ## Success conditions
 _Derived from the member cards' When-it-works lines and the readings' reported effects; each is phrased as a property checkable in a paper's text._
@@ -26,6 +28,8 @@ _Derived from the member cards' When-it-works lines and the readings' reported e
 - **Semantic vocabulary follows embodiment conventions over a reliable executor.** Model output is restricted to semantic units or entity calls that an interpreter or frozen point-goal navigator executes; units follow motion conventions (arbitrary symbols succeed 1/20), and a scene-graph entity interface reaches 39.7% SR / 19.7% SPL on 3000 HM3D-OVON val_unseen episodes (2609.10522#s1, 2606.27871#s1).
 - **Extra tools are optional and checked per backbone.** Tools are added beside primitives rather than replacing them, harness parse/coordinate/feedback correctness is verified before comparison, and effects are reported per model: optional hybrid tools raise the strongest model 82.3 -> 85.7 SR at 0.59x calls, while imposed waypoints lift weak models (5 -> 43 SR) and move strong ones by <=2 points (2607.26148#s2, 2608.03327#s1).
 - **Image-to-text conversion compared with raw images.** A separate VLM's text (visual differencing or grounded descriptions) is compared against raw RGB in the same loop: text differencing beats raw image interleaving, which degrades relative to text-only feedback; bounding-box and contact-grounded descriptions reach 47.90% / 52.36% vs 38.84% image-only long-horizon success (2603.22435#s1, 2606.10267#s2).
+- **Protocol-exposed tools compared with a narrow explicit tool on the same action.** The robot stack is exposed through a generic protocol and the exposure itself is tested: explicit tools complete 60/60 simple moves and 30/30 multi-part removals while open MCP service discovery fails 13/30 removals (11 false successes) at 3x the API cost; running a VLA behind the middleware keeps LIBERO success (99.2 vs 98.6 Spatial) (2603.18520#board, 2512.10394#board).
+- **Harness-made candidates or advice ablated with the model fixed.** The harness reduces maps to a few candidates or gated prompt advice and the channel is removed one at a time: SR 53.50 vs 10.41 without exploitation advice; R2R-CE SR 29 / SPL 22.46 vs 19 / 16.10 for a prior zero-shot navigator; a move-back candidate gives real-robot SR 36 vs 24 (2505.08765#board, 2503.10069#board).
 
 ## Failure modes
 _Derived from the member cards' When-it-fails lines; each names a design or evidence property whose presence signals the failure._
@@ -36,6 +40,9 @@ _Derived from the member cards' When-it-fails lines; each names a design or evid
 - **Tool value depends on the backbone.** The same tool helps weak and not strong models; injecting MCP tools gives +4.0 pp for a thinking checkpoint and -5.9 pp for an instruct one, and the two checkpoints differ in more than reasoning (2607.26148#s2, 2608.03327#s1).
 - **Gain carried by the converter or a privileged channel.** No VLM-backbone ablation separates the converter's own capability, and wall time roughly doubles (cube stack 60.8 s -> 113.6 s); the best description variant relies on simulator-privileged contact information unavailable on the real robot (2603.22435#s1, 2606.10267#s2).
 - **Latency and contamination unaccounted.** 3-19 s per call and high inference cost; benchmark contamination of proprietary models cannot be verified; mostly single runs on 100-episode subsets (2607.26148#s1, 2609.29861#s1).
+- **Agent-level success not measured behind a tool protocol.** Middleware and framework papers validate the protocol layer with a VLA benchmark or qualitative cases and never measure the agent's task success; LLM agents sharing mission state drift out of sync (2512.10394#board, 2505.07532#board).
+- **Open tool discovery with self-declared completion.** With many generic services exposed the agent picks wrong calls and declares the task done without the needed actions (11 of 13 failures were false successes) (2603.18520#board).
+- **Harness heuristic credited to the model.** Removing the VLM's frontier ranking costs 0.562 -> 0.540 SR while removing the second agent costs 0.562 -> 0.386, multi-agent results are set against single-agent baselines, and the advice threshold is tuned on the evaluation tasks (2603.18210#board, 2505.08765#board).
 
 ## Accepted vs rejected gap
 pending — no outcome labels in this build
@@ -57,4 +64,4 @@ _From `profile/expectations.json`; ids are stable across the domain._
 - "The frontier model can look after itself." With only RGB on request and requested-motion returns, the residual failures are stopping, stuck batches and missing body awareness (2609.29861#s1, 2607.26148#s1).
 
 ## Related anti-patterns
-[AP1](../anti-patterns.md#ap1), [AP2](../anti-patterns.md#ap2), [AP3](../anti-patterns.md#ap3), [AP5](../anti-patterns.md#ap5), [AP7](../anti-patterns.md#ap7), [AP8](../anti-patterns.md#ap8), [AP10](../anti-patterns.md#ap10), [AP11](../anti-patterns.md#ap11), [AP14](../anti-patterns.md#ap14)
+[AP1](../anti-patterns.md#ap1), [AP2](../anti-patterns.md#ap2), [AP3](../anti-patterns.md#ap3), [AP4](../anti-patterns.md#ap4), [AP5](../anti-patterns.md#ap5), [AP7](../anti-patterns.md#ap7), [AP8](../anti-patterns.md#ap8), [AP10](../anti-patterns.md#ap10), [AP11](../anti-patterns.md#ap11), [AP14](../anti-patterns.md#ap14), [AP23](../anti-patterns.md#ap23)

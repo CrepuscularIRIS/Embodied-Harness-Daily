@@ -17,6 +17,24 @@ Never re-launch work that is still running.
   Open Scientist domain `embodied-agent-harness` v1 corpus (`refs/lists/open-scientist-embodied-harness/papers.md`:
   the domain's papers minus those it triaged off-topic) → `research/corpus.jsonl`. Snapshot commits and generated
   files: `refs/lists/SOURCES.md`.
+- [x] **Wave-1 board-pattern induction (2026-10-21)**: the 105 papers assigned so far (trial + batches b00–b09) left
+  **60 weak fits**, all read in full text (`research/patterns/wave1_weak_notes.md`, `research/patterns/wave1_notes/`) and
+  re-clustered by mechanism → sub-patterns **R01–R07** (source `board-induced`, each with ≥3 full-text members,
+  citations `arXiv#board`). R04 and R07 join the existing main `observe_act_interface` (2 success conditions and 3
+  failure modes appended after S6/F7; existing ids unchanged); R01, R02, R03, R05 and R06 each open a new main
+  (`llm_symbolic_solver_planning`, `trained_vlm_vla_hierarchy`, `multi_robot_llm_coordination`,
+  `code_policy_trial_revision`, `sample_verify_select`). The other 11 mains are unchanged. Result: **17 main patterns /
+  58 sub-patterns**. Anti-patterns: the 30 R When-it-fails lines go 23 under AP1–AP21 and 7 into new **AP22–AP24**;
+  AP23 (plan text / offline scores instead of closed-loop success) duplicates `online_eval` and is added to
+  `AP_INFO_ONLY`. Re-assignments: `research/patterns/reassign_wave1.jsonl` (60 rows: 28 to R subs + 9 to a better K sub
+  with fit `good`, 23 stay weak; 1 R member, abstract-only, stays weak). **28** papers change main →
+  `research/judgments/ids_r01.txt` (re-judge as batch `r01` after writing `assign_r01.jsonl` from the reassign file).
+  Consequence: because AP22–AP24 exist and `observe_act_interface` has new S/F ids, every b00–b09 record now fails the
+  strict id check of `score.py check` until it is re-judged. Screening doubts (left weak, `screen.jsonl` untouched):
+  2602.23592 (KV-cache serving), 2511.01594 (static image, nothing executed), 2512.14442 (static affordance
+  prediction), 2602.13591 and 2503.08302 (system descriptions without an evaluated agent), 2505.07236 (2D image-crop
+  replay), 2504.21716 (dialogue-history QA, offline). `research/check_patterns.py` still fails for the inherited
+  reason (no `research/patterns/contrast.json`).
 - [x] 2 **Standards adapted** to the field: `research/EVIDENCE_SCHEMA.md` (9 items, from the domain's 22 reviewer
   expectations in `.forge/domains/embodied-agent-harness-v1/profile/expectations.json`), `research/SCORE_SPEC.md`,
   `research/SCREEN_RUBRIC.md` (platform and component enums, also enforced by `research/check_screen.py` and
