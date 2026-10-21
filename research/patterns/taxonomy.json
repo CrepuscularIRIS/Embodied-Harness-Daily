@@ -1,0 +1,435 @@
+{
+ "main": [
+  {
+   "id": "observe_act_interface",
+   "title": "Design the Frozen Model's Observation and Action Interface",
+   "subs": [
+    "K101",
+    "K102",
+    "K103",
+    "K104",
+    "K108",
+    "K109",
+    "K110"
+   ]
+  },
+  {
+   "id": "planner_composes_code_and_policies",
+   "title": "Let a Frontier Planner Compose Code, Learned Tools and Frozen VLAs",
+   "subs": [
+    "K105",
+    "K106",
+    "K107"
+   ]
+  },
+  {
+   "id": "external_verification_control",
+   "title": "Gate, Monitor and Diagnose Actions Outside the Model",
+   "subs": [
+    "K201",
+    "K202",
+    "K203",
+    "K204"
+   ]
+  },
+  {
+   "id": "harness_memory_skill_reuse",
+   "title": "Build Context, Notes and Skills with the Weights Frozen",
+   "subs": [
+    "K301",
+    "K302",
+    "K303",
+    "K304"
+   ]
+  },
+  {
+   "id": "harness_self_optimization",
+   "title": "Revise the Harness Itself from Execution Traces",
+   "subs": [
+    "K401",
+    "K402",
+    "K403"
+   ]
+  },
+  {
+   "id": "offline_harness_distillation",
+   "title": "Distil Success-Filtered Teacher Harness Trajectories into a Compact Student",
+   "subs": [
+    "K501",
+    "K502",
+    "K504"
+   ]
+  },
+  {
+   "id": "privileged_teacher_supervision",
+   "title": "Generate Supervision with a Privileged Teacher the Student Cannot See",
+   "subs": [
+    "K503",
+    "K505",
+    "K506"
+   ]
+  },
+  {
+   "id": "learner_state_teacher_correction",
+   "title": "Correct, Review or Relabel at Learner-Induced States",
+   "subs": [
+    "K601",
+    "K602",
+    "K603",
+    "K604",
+    "K611"
+   ]
+  },
+  {
+   "id": "on_policy_distillation_objectives",
+   "title": "Distil On-Policy with Logit, Privileged-Self, Agreement or Harness-Contrast Signals",
+   "subs": [
+    "K605",
+    "K606",
+    "K607",
+    "K608",
+    "K609",
+    "K610"
+   ]
+  },
+  {
+   "id": "harness_native_rl",
+   "title": "Train the Policy Through, or Aligned with, the Deployment Harness",
+   "subs": [
+    "K701",
+    "K702",
+    "K703",
+    "K706"
+   ]
+  },
+  {
+   "id": "teacher_seeded_sparse_rl",
+   "title": "Make Sparse-Success Embodied RL Learnable",
+   "subs": [
+    "K704",
+    "K705",
+    "K707",
+    "K708"
+   ]
+  },
+  {
+   "id": "harness_effect_evaluation",
+   "title": "Separate the Harness Effect from the Model Effect",
+   "subs": [
+    "K801",
+    "K802",
+    "K803",
+    "K804",
+    "K805"
+   ]
+  }
+ ],
+ "sub": {
+  "K101": {
+   "title": "Let a frozen frontier MLLM steer primitive actions through a minimal observe/step tool pair",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K102": {
+   "title": "Keep dense geometry inside harness tools and return numeric receipts to the model on request",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K103": {
+   "title": "Model proposes a visual target; harness back-projects, checks feasibility and executes or asks to reselect",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K104": {
+   "title": "Restrict the model to a discrete semantic action vocabulary executed by a deterministic or frozen low-level executor",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K108": {
+   "title": "Offer extra tools as optional calls beside primitive actions and let the model choose",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K109": {
+   "title": "Insert a separate VLM that turns images into text for the planner",
+   "status": "candidate_pattern",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K110": {
+   "title": "Replace raw shell interaction with compact LM-oriented commands (agent-computer interface)",
+   "status": "case",
+   "main": "observe_act_interface",
+   "domain": "embodied-agent-harness"
+  },
+  "K105": {
+   "title": "Have the frozen planner write code cells that compose perception, geometry and motion primitives",
+   "status": "candidate_pattern",
+   "main": "planner_composes_code_and_policies",
+   "domain": "embodied-agent-harness"
+  },
+  "K106": {
+   "title": "Train a compact policy to be invoked by a planner through a typed call",
+   "status": "candidate_pattern",
+   "main": "planner_composes_code_and_policies",
+   "domain": "embodied-agent-harness"
+  },
+  "K107": {
+   "title": "Wrap a frozen VLA as a planner-controlled primitive and inspect before committing",
+   "status": "candidate_pattern",
+   "main": "planner_composes_code_and_policies",
+   "domain": "embodied-agent-harness"
+  },
+  "K201": {
+   "title": "Treat each model proposal as a request and gate it with an external checker before execution",
+   "status": "candidate_pattern",
+   "main": "external_verification_control",
+   "domain": "embodied-agent-harness"
+  },
+  "K202": {
+   "title": "Run the executor until a completion or stagnation monitor fires, then hand control back to the planner",
+   "status": "candidate_pattern",
+   "main": "external_verification_control",
+   "domain": "embodied-agent-harness"
+  },
+  "K203": {
+   "title": "After a scored attempt, let the agent write and run a diagnostic program before resetting",
+   "status": "case",
+   "main": "external_verification_control",
+   "domain": "embodied-agent-harness"
+  },
+  "K204": {
+   "title": "Give the coding-agent solver checkpoint/backtrack and parameter-search tools over full simulator state",
+   "status": "case",
+   "main": "external_verification_control",
+   "domain": "embodied-agent-harness"
+  },
+  "K301": {
+   "title": "Rebuild each call's context from a bounded within-episode selection with retrieval for the rest",
+   "status": "candidate_pattern",
+   "main": "harness_memory_skill_reuse",
+   "domain": "embodied-agent-harness"
+  },
+  "K302": {
+   "title": "Summarize repeated-task experience into notes injected into later episodes",
+   "status": "candidate_pattern",
+   "main": "harness_memory_skill_reuse",
+   "domain": "embodied-agent-harness"
+  },
+  "K303": {
+   "title": "Mine, consolidate and review a reusable skill library from successful executions or demonstrations",
+   "status": "candidate_pattern",
+   "main": "harness_memory_skill_reuse",
+   "domain": "embodied-agent-harness"
+  },
+  "K304": {
+   "title": "Compile a successful harness trajectory into a planner-free replay card",
+   "status": "case",
+   "main": "harness_memory_skill_reuse",
+   "domain": "embodied-agent-harness"
+  },
+  "K401": {
+   "title": "With the model frozen, let an optimizer agent revise the harness from raw traces and keep improvements",
+   "status": "candidate_pattern",
+   "main": "harness_self_optimization",
+   "domain": "embodied-agent-harness"
+  },
+  "K402": {
+   "title": "Teacher revises a text playbook from comparing its own and a light agent's runs; accept when the light agent matches the teacher",
+   "status": "case",
+   "main": "harness_self_optimization",
+   "domain": "embodied-agent-harness"
+  },
+  "K403": {
+   "title": "Alternate RL on the student with harness revisions accepted only when they help the current checkpoint",
+   "status": "candidate_pattern",
+   "main": "harness_self_optimization",
+   "domain": "embodied-agent-harness"
+  },
+  "K501": {
+   "title": "SFT a compact VLM on success-filtered frontier-teacher turns so it pilots the identical harness",
+   "status": "candidate_pattern",
+   "main": "offline_harness_distillation",
+   "domain": "embodied-agent-harness"
+  },
+  "K502": {
+   "title": "Train the student on teacher data while the student's interface lacks part of the teacher's harness",
+   "status": "candidate_pattern",
+   "main": "offline_harness_distillation",
+   "domain": "embodied-agent-harness"
+  },
+  "K504": {
+   "title": "Branch successful teacher runs from saved simulator checkpoints to add recovery and diversity, keeping only verified branches",
+   "status": "candidate_pattern",
+   "main": "offline_harness_distillation",
+   "domain": "embodied-agent-harness"
+  },
+  "K503": {
+   "title": "Use a frontier LLM with privileged simulator state to iterate a program teacher until it succeeds",
+   "status": "candidate_pattern",
+   "main": "privileged_teacher_supervision",
+   "domain": "embodied-agent-harness"
+  },
+  "K505": {
+   "title": "A privileged rule teacher acts step by step in the student's skill vocabulary, with templated state reasoning",
+   "status": "case",
+   "main": "privileged_teacher_supervision",
+   "domain": "embodied-agent-harness"
+  },
+  "K506": {
+   "title": "Instead of cloning a privileged expert, estimate its missing state inputs and run it frozen",
+   "status": "case",
+   "main": "privileged_teacher_supervision",
+   "domain": "embodied-agent-harness"
+  },
+  "K601": {
+   "title": "Repair the student's failed episode from its earliest harmful step and admit only validated corrections",
+   "status": "candidate_pattern",
+   "main": "learner_state_teacher_correction",
+   "domain": "embodied-agent-harness"
+  },
+  "K602": {
+   "title": "A frontier harnessing agent reviews every student proposal and replaces unsound ones with corrections valid in the minimal harness",
+   "status": "case",
+   "main": "learner_state_teacher_correction",
+   "domain": "embodied-agent-harness"
+  },
+  "K603": {
+   "title": "Query the teacher only at learner states flagged by a gate",
+   "status": "candidate_pattern",
+   "main": "learner_state_teacher_correction",
+   "domain": "embodied-agent-harness"
+  },
+  "K604": {
+   "title": "Relabel learner-visited states with a privileged expert, when dynamics allow",
+   "status": "candidate_pattern",
+   "main": "learner_state_teacher_correction",
+   "domain": "embodied-agent-harness"
+  },
+  "K611": {
+   "title": "Start student RL from states produced by teacher-student interaction",
+   "status": "candidate_pattern",
+   "main": "learner_state_teacher_correction",
+   "domain": "embodied-agent-harness"
+  },
+  "K605": {
+   "title": "On-policy distillation from a white-box teacher's token logits at student-visited states",
+   "status": "case",
+   "main": "on_policy_distillation_objectives",
+   "domain": "embodied-agent-harness"
+  },
+  "K606": {
+   "title": "Score the student's own tokens with a privileged-context copy of itself and add the divergence to RL",
+   "status": "candidate_pattern",
+   "main": "on_policy_distillation_objectives",
+   "domain": "embodied-agent-harness"
+  },
+  "K607": {
+   "title": "Train one model jointly under privileged and deployment-context views, deploying only the plain view",
+   "status": "candidate_pattern",
+   "main": "on_policy_distillation_objectives",
+   "domain": "embodied-agent-harness"
+  },
+  "K608": {
+   "title": "Sample target actions from a model copy given privileged context, then verify or match",
+   "status": "candidate_pattern",
+   "main": "on_policy_distillation_objectives",
+   "domain": "embodied-agent-harness"
+  },
+  "K609": {
+   "title": "Reward student candidates by semantic agreement with black-box teacher actions at the same state",
+   "status": "case",
+   "main": "on_policy_distillation_objectives",
+   "domain": "embodied-agent-harness"
+  },
+  "K610": {
+   "title": "Prefer the teacher's harness-conditioned action over its harness-stripped action at student states",
+   "status": "case",
+   "main": "on_policy_distillation_objectives",
+   "domain": "embodied-agent-harness"
+  },
+  "K701": {
+   "title": "Train the policy through an unmodified harness by capturing its model calls at an API proxy",
+   "status": "candidate_pattern",
+   "main": "harness_native_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K702": {
+   "title": "Assemble captured harness calls into training rows by prefix rules and keep credit at rollout level",
+   "status": "candidate_pattern",
+   "main": "harness_native_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K703": {
+   "title": "Curate a trainable task band and harden the sandbox against reward leakage",
+   "status": "candidate_pattern",
+   "main": "harness_native_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K706": {
+   "title": "Train the policy under the same context-construction rules it will be deployed with",
+   "status": "candidate_pattern",
+   "main": "harness_native_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K704": {
+   "title": "RL a small coder/planner model directly inside an embodied code harness on sparse success",
+   "status": "candidate_pattern",
+   "main": "teacher_seeded_sparse_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K705": {
+   "title": "Fork the simulator at each decision step, score completions with a privileged dense reward, continue from the best",
+   "status": "case",
+   "main": "teacher_seeded_sparse_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K707": {
+   "title": "Inject teacher-written skill hints into RL rollouts only, removed at evaluation",
+   "status": "case",
+   "main": "teacher_seeded_sparse_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K708": {
+   "title": "Initialize from teacher-derived data so every task has nonzero success before sparse-reward RL",
+   "status": "candidate_pattern",
+   "main": "teacher_seeded_sparse_rl",
+   "domain": "embodied-agent-harness"
+  },
+  "K801": {
+   "title": "Cross frozen models with harnesses on fixed tasks and report harness variance with paired statistics",
+   "status": "candidate_pattern",
+   "main": "harness_effect_evaluation",
+   "domain": "embodied-agent-harness"
+  },
+  "K802": {
+   "title": "Hold the model fixed and toggle one harness component or layer at a time",
+   "status": "candidate_pattern",
+   "main": "harness_effect_evaluation",
+   "domain": "embodied-agent-harness"
+  },
+  "K803": {
+   "title": "Swap the model under a fixed embodied harness and the harness under a fixed model on the same episodes",
+   "status": "candidate_pattern",
+   "main": "harness_effect_evaluation",
+   "domain": "embodied-agent-harness"
+  },
+  "K804": {
+   "title": "Decompose outcomes into failure categories, endpoints and per-task repeat patterns",
+   "status": "candidate_pattern",
+   "main": "harness_effect_evaluation",
+   "domain": "embodied-agent-harness"
+  },
+  "K805": {
+   "title": "Re-price runs from raw per-turn usage and reconcile against billed spend",
+   "status": "case",
+   "main": "harness_effect_evaluation",
+   "domain": "embodied-agent-harness"
+  }
+ }
+}

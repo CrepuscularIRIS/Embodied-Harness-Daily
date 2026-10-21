@@ -1,0 +1,5 @@
+{"arxiv": "2606.18363", "sub_pattern": "K501", "fit": "good", "fit_note": "GPT-5.4 teacher success-filtered turns SFT Qwen3.5-4B piloting identical harness; perturbation branches (K504) secondary"}
+{"arxiv": "2607.26148", "sub_pattern": "K101", "fit": "good", "fit_note": "Frozen frontier MLLMs drive VLN/ObjectNav/EQA through observe() plus bounded step() primitives"}
+{"arxiv": "2603.22435", "sub_pattern": "K105", "fit": "weak", "fit_note": "CaP-Gym is a code-cell harness, but main contribution is benchmark across abstraction/feedback tiers plus VDM"}
+{"arxiv": "2609.20822", "sub_pattern": "K201", "fit": "good", "fit_note": "Route waypoints checked against grounded obstacle boxes outside the model before execution, replan on reject"}
+{"arxiv": "2610.19834", "sub_pattern": "K601", "fit": "good", "fit_note": "Black-box teacher localizes first error in failed student web episode and rewrites suffix in student style"}

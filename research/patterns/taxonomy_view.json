@@ -1,0 +1,308 @@
+[
+ {
+  "sub": "K101",
+  "main": "observe_act_interface",
+  "title": "Let a frozen frontier MLLM steer primitive actions through a minimal observe/step tool pair",
+  "operation": "expose the environment as a non-advancing observe tool plus a bounded-batch step tool and leave looking, commitment size, recovery and stopping to the model"
+ },
+ {
+  "sub": "K102",
+  "main": "observe_act_interface",
+  "title": "Keep dense geometry inside harness tools and return numeric receipts to the model on request",
+  "operation": "hold depth, point clouds, calibration and maps inside tools and let the model query pixels, regions or map entries, receiving compact numeric receipts before it commits motion"
+ },
+ {
+  "sub": "K103",
+  "main": "observe_act_interface",
+  "title": "Model proposes a visual target; harness back-projects, checks feasibility and executes or asks to reselect",
+  "operation": "let the model pick a pixel or editable target pose, have the harness back-project/solve IK and plan, check feasibility, and return execute or reselect/revise feedback"
+ },
+ {
+  "sub": "K104",
+  "main": "observe_act_interface",
+  "title": "Restrict the model to a discrete semantic action vocabulary executed by a deterministic or frozen low-level executor",
+  "operation": "restrict model output to a fixed vocabulary of semantic actions and map each one deterministically to a lower-level executor"
+ },
+ {
+  "sub": "K108",
+  "main": "observe_act_interface",
+  "title": "Offer extra tools as optional calls beside primitive actions and let the model choose",
+  "operation": "add perception/navigation or MCP tools as optional calls next to the primitive interface rather than replacing it, and let the model decide when to call them"
+ },
+ {
+  "sub": "K109",
+  "main": "observe_act_interface",
+  "title": "Insert a separate VLM that turns images into text for the planner",
+  "operation": "convert camera images into text (scene description, before/after differences, completion judgement) with a separate frozen VLM and feed that to the planner"
+ },
+ {
+  "sub": "K110",
+  "main": "observe_act_interface",
+  "title": "Replace raw shell interaction with compact LM-oriented commands (agent-computer interface)",
+  "operation": "replace low-level shell interaction with a small set of LM-oriented commands with summarized, windowed returns, tuned by trajectory inspection"
+ },
+ {
+  "sub": "K105",
+  "main": "planner_composes_code_and_policies",
+  "title": "Have the frozen planner write code cells that compose perception, geometry and motion primitives",
+  "operation": "let the frozen frontier model write and run code that composes primitives, computes geometry, branches and retries locally, and returns only requested observations"
+ },
+ {
+  "sub": "K106",
+  "main": "planner_composes_code_and_policies",
+  "title": "Train a compact policy to be invoked by a planner through a typed call",
+  "operation": "train a compact policy whose input is a typed planner call (tool family + local instruction, or a JSON command) and expose it as a callable tool for multi-step motion"
+ },
+ {
+  "sub": "K107",
+  "main": "planner_composes_code_and_policies",
+  "title": "Wrap a frozen VLA as a planner-controlled primitive and inspect before committing",
+  "operation": "wrap a frozen VLA as a primitive the planner stages, bounds, inspects and retries, or whose inputs/outputs it edits before approving"
+ },
+ {
+  "sub": "K201",
+  "main": "external_verification_control",
+  "title": "Treat each model proposal as a request and gate it with an external checker before execution",
+  "operation": "check each proposed edit, navigation target, STOP or route outside the model with a cheap checker and either dispatch it or reject it with structured feedback"
+ },
+ {
+  "sub": "K202",
+  "main": "external_verification_control",
+  "title": "Run the executor until a completion or stagnation monitor fires, then hand control back to the planner",
+  "operation": "keep the low-level executor on the current subgoal until a success detector or progress-threshold/stagnation rule fires, then let the planner advance or replan"
+ },
+ {
+  "sub": "K203",
+  "main": "external_verification_control",
+  "title": "After a scored attempt, let the agent write and run a diagnostic program before resetting",
+  "operation": "after each attempt, have the coding agent synthesize a separate View/Probe program to gather evidence on unresolved outcomes, then decide FINISH or REGENERATE"
+ },
+ {
+  "sub": "K204",
+  "main": "external_verification_control",
+  "title": "Give the coding-agent solver checkpoint/backtrack and parameter-search tools over full simulator state",
+  "operation": "add a checkpoint tree over simulator states, CMA-ES parameter search, parallel program sweeps and an assessment log to the agent's native harness"
+ },
+ {
+  "sub": "K301",
+  "main": "harness_memory_skill_reuse",
+  "title": "Rebuild each call's context from a bounded within-episode selection with retrieval for the rest",
+  "operation": "rebuild each model call from a short window of recent records/images plus a compact map or graph, and give access to older history only by retrieval"
+ },
+ {
+  "sub": "K302",
+  "main": "harness_memory_skill_reuse",
+  "title": "Summarize repeated-task experience into notes injected into later episodes",
+  "operation": "run the system on a task, have a model summarize what worked and failed into notes or parameterized traces, and inject them into later episodes' planner context"
+ },
+ {
+  "sub": "K303",
+  "main": "harness_memory_skill_reuse",
+  "title": "Mine, consolidate and review a reusable skill library from successful executions or demonstrations",
+  "operation": "extract reusable skills from successes or demos, have a frontier model consolidate/edit/review them, and expose the frozen library at run time"
+ },
+ {
+  "sub": "K304",
+  "main": "harness_memory_skill_reuse",
+  "title": "Compile a successful harness trajectory into a planner-free replay card",
+  "operation": "compile each successful trajectory into a card with anchor-relative waypoints and VLA prompts, re-localize anchors at deployment, and replay without online planning"
+ },
+ {
+  "sub": "K401",
+  "main": "harness_self_optimization",
+  "title": "With the model frozen, let an optimizer agent revise the harness from raw traces and keep improvements",
+  "operation": "let a coding-agent optimizer read prior harness code and raw execution traces, propose harness edits, evaluate them on a search set, and keep improvements"
+ },
+ {
+  "sub": "K402",
+  "main": "harness_self_optimization",
+  "title": "Teacher revises a text playbook from comparing its own and a light agent's runs; accept when the light agent matches the teacher",
+  "operation": "initialize a playbook from teacher rollouts, have the teacher compare teacher vs light-recipient executions and propose revisions, and accept the first revision whose recipient success reaches the teacher's"
+ },
+ {
+  "sub": "K403",
+  "main": "harness_self_optimization",
+  "title": "Alternate RL on the student with harness revisions accepted only when they help the current checkpoint",
+  "operation": "alternate blocks of RL on the student (harness frozen) with harness revisions proposed from those trajectories, accepting a revision only if it improves outcomes under the fixed current checkpoint"
+ },
+ {
+  "sub": "K501",
+  "main": "offline_harness_distillation",
+  "title": "SFT a compact VLM on success-filtered frontier-teacher turns so it pilots the identical harness",
+  "operation": "log the frontier teacher's per-turn reasoning and tool call while it runs the harness, keep successful episodes, and SFT a compact VLM on next-response prediction from the identical context"
+ },
+ {
+  "sub": "K502",
+  "main": "offline_harness_distillation",
+  "title": "Train the student on teacher data while the student's interface lacks part of the teacher's harness",
+  "operation": "train the student on teacher data while dropping harness components from the student's context, either by giving it a minimal context or by deleting and rewriting teacher turns that depend on removed components"
+ },
+ {
+  "sub": "K504",
+  "main": "offline_harness_distillation",
+  "title": "Branch successful teacher runs from saved simulator checkpoints to add recovery and diversity, keeping only verified branches",
+  "operation": "save simulator checkpoints along a successful teacher run, branch from them with injected failures or varied scene/strategy/phase/noise, and keep only branches that pass verification"
+ },
+ {
+  "sub": "K503",
+  "main": "privileged_teacher_supervision",
+  "title": "Use a frontier LLM with privileged simulator state to iterate a program teacher until it succeeds",
+  "operation": "have a frontier LLM or coding agent with full simulator state write or revise a solver program from failure logs until it succeeds, and keep its successes as demonstrations for a vision-only student"
+ },
+ {
+  "sub": "K505",
+  "main": "privileged_teacher_supervision",
+  "title": "A privileged rule teacher acts step by step in the student's skill vocabulary, with templated state reasoning",
+  "operation": "let a privileged rule teacher choose each next skill from the student's vocabulary after observing the result, annotate each step with templated state-estimation reasoning from sim ground truth, and train the student to output reasoning then action"
+ },
+ {
+  "sub": "K506",
+  "main": "privileged_teacher_supervision",
+  "title": "Instead of cloning a privileged expert, estimate its missing state inputs and run it frozen",
+  "operation": "train a perception module to predict the privileged expert's missing state inputs from cameras, feed them with proprioception to the frozen expert, and ramp from state-MSE to action-MSE through the expert's Jacobian"
+ },
+ {
+  "sub": "K601",
+  "main": "learner_state_teacher_correction",
+  "title": "Repair the student's failed episode from its earliest harmful step and admit only validated corrections",
+  "operation": "on a failed student rollout, have a black-box teacher locate the earliest harmful step, keep the prefix, replace from there, and admit the correction by an admission rule before SFT"
+ },
+ {
+  "sub": "K602",
+  "main": "learner_state_teacher_correction",
+  "title": "A frontier harnessing agent reviews every student proposal and replaces unsound ones with corrections valid in the minimal harness",
+  "operation": "intercept each student proposal before execution, pass or replace it with the smallest correction valid under the minimal target harness, and SFT the student on accepted responses for minimal-harness deployment"
+ },
+ {
+  "sub": "K603",
+  "main": "learner_state_teacher_correction",
+  "title": "Query the teacher only at learner states flagged by a gate",
+  "operation": "during learner rollouts, query the teacher only at states flagged by a gate and train on those teacher actions"
+ },
+ {
+  "sub": "K604",
+  "main": "learner_state_teacher_correction",
+  "title": "Relabel learner-visited states with a privileged expert, when dynamics allow",
+  "operation": "relabel learner-visited states with a privileged expert or geometric label generator and aggregate DAgger-style, choosing this over RL only when latent dynamics are near-deterministic"
+ },
+ {
+  "sub": "K611",
+  "main": "learner_state_teacher_correction",
+  "title": "Start student RL from states produced by teacher-student interaction",
+  "operation": "start the student's sparse-reward RL rollouts from intermediate states derived from teacher-student interaction instead of the task start"
+ },
+ {
+  "sub": "K605",
+  "main": "on_policy_distillation_objectives",
+  "title": "On-policy distillation from a white-box teacher's token logits at student-visited states",
+  "operation": "roll out the student, reward each sampled action token by the negative student-teacher log-ratio, and update by policy gradient, using reverse KL rather than forward KL or argmax relabels"
+ },
+ {
+  "sub": "K606",
+  "main": "on_policy_distillation_objectives",
+  "title": "Score the student's own tokens with a privileged-context copy of itself and add the divergence to RL",
+  "operation": "let the student sample without privileged info, score its tokens with the same weights conditioned on privileged context, and add a per-token divergence to GRPO, optionally gating which responses are distilled"
+ },
+ {
+  "sub": "K607",
+  "main": "on_policy_distillation_objectives",
+  "title": "Train one model jointly under privileged and deployment-context views, deploying only the plain view",
+  "operation": "train one model at once on privileged-context and deployment-context prompts and deploy only the plain view"
+ },
+ {
+  "sub": "K608",
+  "main": "on_policy_distillation_objectives",
+  "title": "Sample target actions from a model copy given privileged context, then verify or match",
+  "operation": "sample target actions from a copy of the model given privileged context and use them as student targets after verification or as an agreement reward"
+ },
+ {
+  "sub": "K609",
+  "main": "on_policy_distillation_objectives",
+  "title": "Reward student candidates by semantic agreement with black-box teacher actions at the same state",
+  "operation": "at each learner state, sample several teacher actions and student candidates, reward candidates by semantic match, optimize PPO-clipped, and advance the environment with the best candidate"
+ },
+ {
+  "sub": "K610",
+  "main": "on_policy_distillation_objectives",
+  "title": "Prefer the teacher's harness-conditioned action over its harness-stripped action at student states",
+  "operation": "at student-visited states, sample teacher actions with and without harness text, apply a pairwise preference for the harness-conditioned action, filter invalid positives by harness rules, and add response distillation"
+ },
+ {
+  "sub": "K701",
+  "main": "harness_native_rl",
+  "title": "Train the policy through an unmodified harness by capturing its model calls at an API proxy",
+  "operation": "redirect the harness's model endpoint to a recording proxy that captures exact contexts, tokens and logprobs, attach outcome reward, and train the open-weight policy for deployment in the same harness"
+ },
+ {
+  "sub": "K702",
+  "main": "harness_native_rl",
+  "title": "Assemble captured harness calls into training rows by prefix rules and keep credit at rollout level",
+  "operation": "partition captured calls into append-only prefix chains or exact-prefix merges, mask harness-inserted tokens, and compute group baselines and loss normalization over rollouts rather than samples"
+ },
+ {
+  "sub": "K703",
+  "main": "harness_native_rl",
+  "title": "Curate a trainable task band and harden the sandbox against reward leakage",
+  "operation": "withhold verifier-only state until grading, block egress and git history, mask infrastructure failures, and keep tasks of intermediate base-policy success"
+ },
+ {
+  "sub": "K706",
+  "main": "harness_native_rl",
+  "title": "Train the policy under the same context-construction rules it will be deployed with",
+  "operation": "train the policy under the context-construction rules (compression, summaries, prompt format) used at deployment rather than applying them only at inference"
+ },
+ {
+  "sub": "K704",
+  "main": "teacher_seeded_sparse_rl",
+  "title": "RL a small coder/planner model directly inside an embodied code harness on sparse success",
+  "operation": "train a small model with GRPO/PPO on verifiable simulator success inside the code-as-action harness, without teacher trajectories"
+ },
+ {
+  "sub": "K705",
+  "main": "teacher_seeded_sparse_rl",
+  "title": "Fork the simulator at each decision step, score completions with a privileged dense reward, continue from the best",
+  "operation": "sample a group of completions per decision step, roll each in a forked simulator branch, score with a dense privileged reward plus brevity term, update with GRPO and continue from the best branch"
+ },
+ {
+  "sub": "K707",
+  "main": "teacher_seeded_sparse_rl",
+  "title": "Inject teacher-written skill hints into RL rollouts only, removed at evaluation",
+  "operation": "have a frozen teacher contrast a success and a failure rollout to write a short screened skill, inject it during GRPO rollouts for assisted tasks, and remove it at evaluation"
+ },
+ {
+  "sub": "K708",
+  "main": "teacher_seeded_sparse_rl",
+  "title": "Initialize from teacher-derived data so every task has nonzero success before sparse-reward RL",
+  "operation": "initialize the student from teacher-derived data so target tasks have nonzero success, then run sparse or outcome-based RL"
+ },
+ {
+  "sub": "K801",
+  "main": "harness_effect_evaluation",
+  "title": "Cross frozen models with harnesses on fixed tasks and report harness variance with paired statistics",
+  "operation": "run a model-by-harness grid with everything else fixed and report harness variance, model variance, ranking reversals, paired bootstrap CIs and tokens per solved task"
+ },
+ {
+  "sub": "K802",
+  "main": "harness_effect_evaluation",
+  "title": "Hold the model fixed and toggle one harness component or layer at a time",
+  "operation": "hold the backbone (or distilled student) fixed and add, remove or swap one harness component or layer at a time"
+ },
+ {
+  "sub": "K803",
+  "main": "harness_effect_evaluation",
+  "title": "Swap the model under a fixed embodied harness and the harness under a fixed model on the same episodes",
+  "operation": "hold the harness fixed and swap the model, and hold the model fixed and swap the harness or loop director, on fixed embodied episodes"
+ },
+ {
+  "sub": "K804",
+  "main": "harness_effect_evaluation",
+  "title": "Decompose outcomes into failure categories, endpoints and per-task repeat patterns",
+  "operation": "classify failed runs by cause or terminal state and tasks by repeated-run outcome pattern, and report these with pass rate"
+ },
+ {
+  "sub": "K805",
+  "main": "harness_effect_evaluation",
+  "title": "Re-price runs from raw per-turn usage and reconcile against billed spend",
+  "operation": "re-price every run from raw per-turn usage with explicit cache terms, reconcile against the ledger and billed spend"
+ }
+]

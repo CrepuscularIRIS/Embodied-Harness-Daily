@@ -1,0 +1,10 @@
+{"arxiv": "2510.03342", "sub_pattern": "K106", "fit": "weak", "fit_note": "Orchestrator VLM calls a trained VLA by language instruction; contribution is the models, not a harness pattern."}
+{"arxiv": "2510.12693", "sub_pattern": "K708", "fit": "good", "fit_note": "SFT on teacher-augmented priors gives nonzero success before online PPO; direct RL from the base scores 0."}
+{"arxiv": "2510.20328", "sub_pattern": "K301", "fit": "good", "fit_note": "Short recent window plus clustered selected keyframes; but the high-level VLM is fine-tuned to pick keyframes, not frozen."}
+{"arxiv": "2510.21302", "sub_pattern": "K201", "fit": "good", "fit_note": "SMT verification and PDDL/LLM-confidence validation gate generated code before execution, with safe probes on rejection."}
+{"arxiv": "2510.25548", "sub_pattern": "K201", "fit": "weak", "fit_note": "VLM writes SMT constraints before planning and revises them from planner failures; it is not a per-proposal action gate."}
+{"arxiv": "2511.00917", "sub_pattern": "K105", "fit": "good", "fit_note": "A VLM coding agent composes perception, planning and control modules into a programmatic policy."}
+{"arxiv": "2511.01594", "sub_pattern": "K109", "fit": "weak", "fit_note": "Perception agent turns images into text for downstream agents, but the contribution is a four-agent assistive pipeline judged offline."}
+{"arxiv": "2511.19033", "sub_pattern": "K302", "fit": "good", "fit_note": "Trajectories are abstracted into experience notes and retrieved into the planner context in later episodes, with the MLLM frozen."}
+{"arxiv": "2511.22354", "sub_pattern": "K202", "fit": "weak", "fit_note": "Task-status and event monitors trigger LLM replanning, but the core is multi-robot task allocation and code-composing robot LLMs."}
+{"arxiv": "2512.02002", "sub_pattern": "K201", "fit": "good", "fit_note": "An LLM text simulator plus evaluator checks generated robot code before deployment and returns mismatch feedback."}

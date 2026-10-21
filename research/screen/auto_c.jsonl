@@ -1,0 +1,7 @@
+{"arxiv": "1906.05398", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category physics.app-ph outside cs/eess/stat.ML"}
+{"arxiv": "2304.05376", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category physics.chem-ph outside cs/eess/stat.ML"}
+{"arxiv": "2403.13851", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category q-bio.QM outside cs/eess/stat.ML"}
+{"arxiv": "2411.08063", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category physics.soc-ph outside cs/eess/stat.ML"}
+{"arxiv": "2412.01862", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category gr-qc outside cs/eess/stat.ML"}
+{"arxiv": "2502.03962", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category quant-ph outside cs/eess/stat.ML"}
+{"arxiv": "2607.04277", "tier": "C", "kind": "empirical", "platforms": [], "components": [], "confidence": "high", "reason": "auto: primary category physics.soc-ph outside cs/eess/stat.ML"}

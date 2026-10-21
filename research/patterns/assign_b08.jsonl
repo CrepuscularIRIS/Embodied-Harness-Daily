@@ -1,0 +1,10 @@
+{"arxiv": "2602.20323", "sub_pattern": "K302", "fit": "good", "fit_note": "Verified-principle notes distilled from interaction episodes and injected into later frozen-VLM planner prompts."}
+{"arxiv": "2602.21198", "sub_pattern": "K302", "fit": "weak", "fit_note": "Reflections steer candidate choice and test-time weight updates, not notes injected into later episodes; closest experience-reuse card."}
+{"arxiv": "2602.21670", "sub_pattern": "K201", "fit": "weak", "fit_note": "LLM-written PDDL is gated by a classical planner with failure feedback, but main contribution is hierarchy plus prompt optimization."}
+{"arxiv": "2602.23592", "sub_pattern": "K301", "fit": "weak", "fit_note": "KV-cache management for retrieved embodied memory; serving-efficiency contribution, not a context-selection design."}
+{"arxiv": "2603.01113", "sub_pattern": "K202", "fit": "weak", "fit_note": "Behavior-tree retries gated by VLM condition nodes; main contribution is MoA proxy answering for interactive planning."}
+{"arxiv": "2603.02623", "sub_pattern": "K303", "fit": "good", "fit_note": "Skill repository mined from annotated DROID videos, expanded on demand and retrieved to implement new skills for a planner."}
+{"arxiv": "2603.02669", "sub_pattern": "K105", "fit": "weak", "fit_note": "LLM builds a scheduling graph for a deterministic solver and writes programs over pre-implemented skills; main claim is the solver and process tree."}
+{"arxiv": "2603.04466", "sub_pattern": "K401", "fit": "weak", "fit_note": "Coding agent rewrites the controller code between trials from traces; policy code, not a harness around a fixed model, and no held-out search split."}
+{"arxiv": "2603.05185", "sub_pattern": "K202", "fit": "good", "fit_note": "A learned visual Critic keeps the VLA executing until completion, anomaly or stagnation fires, then wakes the VLM planner."}
+{"arxiv": "2602.19983", "sub_pattern": "K201", "fit": "weak", "fit_note": "VLM-inferred safety rules are grounded into a barrier and enforced by a CBF filter on a nominal controller; a safety filter rather than a proposal gate."}

@@ -1,0 +1,22 @@
+{
+    "arxiv_rss_base_url": "http://arxiv.org/rss/",
+    "arxiv_subjects": [
+        "cs.RO",
+        "cs.AI",
+        "cs.CL",
+        "cs.CV",
+        "cs.LG",
+        "cs.MA",
+        "cs.SE"
+    ],
+    "topics": [
+        "A-core: A method or system in which a frontier LLM / VLM (including a coding agent) controls an embodied system (robot arm, mobile manipulator, drone, humanoid, navigation agent) through a harness: action / observation interface, perception or control primitives as tools, code over robot primitives, frozen VLAs / skills / learned policies called as tools, memory, verification, execution control; or training a compact VLM / VLA student from harness or teacher trajectories (SFT, on-policy distillation, DAgger-style correction); or RL inside such a harness; or harness self-optimisation in an embodied setting. End-to-end VLA policies with no harness, agent loop or teacher-harness distillation are NOT this topic.",
+        "B-component: A direct contribution to harnessed embodied agents that is not itself a harness method: a benchmark, environment or gym; an evaluation-methodology, controlled-ablation or empirical study of embodied harnesses or harness distillation; a safety / security study of LLM-controlled robots; a success detector, dataset or tooling built for such systems. GUI / computer-use agents, non-embodied agent harnesses, and wire or test harnesses are NOT this topic."
+    ],
+    "llm_provider": "openai",
+    "llm_model": "gpt-5-mini",
+    "number_of_concurrent_tasks": 20,
+    "timeout_seconds": 40,
+    "relevance_threshold": 0.8,
+    "output_dir": "digests"
+}

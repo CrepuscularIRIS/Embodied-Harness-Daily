@@ -1,0 +1,58 @@
+{
+  "scope": "Embodied agent harnesses: frontier LLMs / VLMs (including coding agents) wrapped in a harness — interface and action calls, perception and control primitives as tools, frozen VLAs / skills / learned policies as tools, memory, verification and feedback, execution control — to control embodied systems (manipulation, navigation / VLN, aerial vehicles, humanoids, mobile manipulation) in simulation or the real world; training compact VLM / VLA students from harness or teacher trajectories (SFT, on-policy distillation, DAgger-style correction); RL inside the harness; harness self-optimisation in embodied settings; and evaluation methodology for these systems. Pure VLA policies with no harness or agent loop, GUI / computer-use agents, non-embodied harness self-improvement, and wire or test harnesses are out of scope.",
+
+  "arxiv_subjects": ["cs.RO", "cs.AI", "cs.CL", "cs.LG", "cs.CV", "cs.MA", "cs.SE"],
+
+  "core_phrases": [
+    "agent harness robot", "embodied agent harness", "robot harness", "harness for robot manipulation",
+    "VLM agent controls robot", "LLM agent for robot control", "coding agent robot", "embodied coding agent",
+    "code as policies", "code-as-policy agent", "robot-use agent", "tool-calling embodied agent",
+    "zero-shot vision-and-language navigation agent", "training-free VLN agent", "agentic navigation",
+    "LLM-controlled drone", "aerial embodied agent", "humanoid agent with LLM planner",
+    "VLA as tools", "frozen VLA steered by planner", "hierarchical VLA agent", "embodied agent scaffold",
+    "harness distillation", "distilling frontier VLM into compact agent", "embodied on-policy distillation"
+  ],
+
+  "component_phrases": [
+    "perception as tools", "depth query tool", "visual grounding tool for robot", "pointing-based action interface",
+    "robot primitives API", "skill library synthesis", "auto-synthesized skills", "learned policy as tool",
+    "tool-aligned VLA", "success detector", "completion check", "stop decision", "pre-execution verification",
+    "execution monitor", "failure recovery", "action rehearsal", "experience memory for embodied agents",
+    "replay card", "playbook", "harness optimization", "self-evolving embodied agent",
+    "teacher trajectories", "privileged teacher", "first-error correction", "DAgger for VLM", "on-policy distillation",
+    "RL in agent harness", "RL with verifiable rewards robot", "sim-to-real", "LIBERO-PRO", "R2R-CE", "ObjectNav",
+    "RoboTwin", "BEHAVIOR", "AirSim", "LLM robot safety"
+  ],
+
+  "exclude_signals": [
+    "VLA or visuomotor policy trained end-to-end with no harness, agent loop or teacher-harness distillation",
+    "GUI, browser or computer-use agent with no embodiment (see CUA Radar)",
+    "non-embodied harness or scaffold self-improvement, coding-agent RL without an embodiment (see HarnessRSI Daily)",
+    "wire harness, cable harness, test harness or other physical / software meanings of harness",
+    "general VLM benchmark without closed-loop interaction"
+  ],
+
+  "anchor_works": [
+    {"name": "Code as Policies", "arxiv": "2209.07753", "code": "https://github.com/google-research/google-research/tree/master/code_as_policies"},
+    {"name": "VoxPoser", "arxiv": "2307.05973", "code": "https://github.com/huangwl18/VoxPoser"},
+    {"name": "CodeAct", "arxiv": "2402.01030", "code": "https://github.com/xingyaoww/code-act"},
+    {"name": "SWE-agent", "arxiv": "2405.15793", "code": "https://github.com/SWE-agent/SWE-agent"},
+    {"name": "CaP-X", "arxiv": "2603.22435", "code": "https://github.com/capgym/cap-x"},
+    {"name": "AgentSpec", "arxiv": "2606.14674", "code": "https://github.com/chenjix/AgentSpec"},
+    {"name": "Guava", "arxiv": "2606.18363", "code": "https://github.com/hdacnw/guava-release"},
+    {"name": "Harness VLA", "arxiv": "2607.08448", "code": "https://github.com/RLinf/RPent"},
+    {"name": "MIP (Embodied Agents Take Control)", "arxiv": "2607.26148", "code": "https://github.com/jianzhou0420/MIP"},
+    {"name": "Show-Harness", "arxiv": "2609.10522", "code": "https://github.com/showlab/Show-Harness"},
+    {"name": "HarnessVLN", "arxiv": "2609.15195", "code": "https://github.com/AgibotGeneral/harnessvln"},
+    {"name": "AgenticNav", "arxiv": "2606.10577", "code": null},
+    {"name": "Meta-Harness", "arxiv": "2603.28052", "code": null},
+    {"name": "Robo-Harness K1", "arxiv": "2609.29389", "code": null},
+    {"name": "EMHO", "arxiv": "2610.08432", "code": null},
+    {"name": "Fly-by-Code", "arxiv": "2610.12549", "code": null}
+  ],
+
+  "precursor_names": [
+    "SayCan", "Inner Monologue", "Code as Policies", "ProgPrompt", "LLM-Planner", "VoxPoser", "Voyager",
+    "NavGPT", "MapGPT", "SmartWay", "Open-Nav", "CodeAct", "SWE-agent", "OpenVLA", "pi0 / pi0.5", "DAgger"
+  ]
+}

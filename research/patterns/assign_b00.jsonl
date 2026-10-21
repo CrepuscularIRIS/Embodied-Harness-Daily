@@ -1,0 +1,10 @@
+{"arxiv": "2501.04268", "sub_pattern": "K501", "fit": "weak", "fit_note": "SFT code-writing VLM on teacher-synthesised programs for a fixed API library; data not success-filtered, no harness teacher."}
+{"arxiv": "2502.16707", "sub_pattern": "K604", "fit": "good", "fit_note": "DAgger-style loop relabels VLM-visited states with a privileged oracle; reflection with imagined futures is added."}
+{"arxiv": "2502.19135", "sub_pattern": "K201", "fit": "weak", "fit_note": "LLM-generated Prolog KB gated by consistency checks and repair loop; symbolic planning, little closed-loop embodiment."}
+{"arxiv": "2502.19417", "sub_pattern": "K106", "fit": "weak", "fit_note": "Trained high-level VLM issues atomic language commands to a trained pi0 low-level VLA; neither side frozen."}
+{"arxiv": "2503.01700", "sub_pattern": "K105", "fit": "weak", "fit_note": "Frozen LLM writes solver and checker code in multi-round loop; no robot primitives, mostly plan-level checks."}
+{"arxiv": "2503.02465", "sub_pattern": "K103", "fit": "weak", "fit_note": "VLM/LLM picks image targets projected to world coordinates for NMPC; no feasibility feedback or reselect loop."}
+{"arxiv": "2503.04280", "sub_pattern": "K704", "fit": "weak", "fit_note": "GPT-4 writes dense reward and success code, then SAC trains skills in simulation; no harness or sparse-reward LLM RL."}
+{"arxiv": "2503.07885", "sub_pattern": "K201", "fit": "good", "fit_note": "Each LLM plan is checked against LTL safety specs and replaced by control synthesis before execution."}
+{"arxiv": "2503.08302", "sub_pattern": "K104", "fit": "weak", "fit_note": "LLM selects from a UAV action set plus waypoints; main contribution is onboard hardware, evidence is qualitative."}
+{"arxiv": "2503.10069", "sub_pattern": "K104", "fit": "weak", "fit_note": "MLLM picks among discrete waypoint/turn options with history and backtrack; trained waypoint predictor not covered."}

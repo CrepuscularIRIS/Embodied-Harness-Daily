@@ -1,0 +1,729 @@
+{
+ "external_verification_control": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "A cheap checker of action validity",
+    "detail": "Each edit is linted before it is applied, and removing the linter lowers SWE-bench Lite resolve rate 18.0% -> 15.0% (2405.15793#s2)."
+   },
+   {
+    "id": "S2",
+    "name": "Route checked against a grounded obstacle",
+    "detail": "Waypoint polylines are checked for clearance against a segmentation-grounded obstacle with phases cut at contact events; adding the route harness raises safe success 31.3 -> 60.6 and 18.8 -> 64.4 over 32 tasks for two models (2609.20822#s1)."
+   },
+   {
+    "id": "S3",
+    "name": "STOP gated on usable depth and reliable detection",
+    "detail": "STOP requests pass an identity, fresh-depth and completion check: +2.0 SR on R2R and HM3D-OVON subsets, and the OSR-SR gap narrows 22.0 -> 10.0 on HM3D-v2 (2609.15195#s3)."
+   },
+   {
+    "id": "S4",
+    "name": "Accurate completion monitor",
+    "detail": "A success detector ends executor runs: 57.39% long-horizon vs 52.36% with a fixed 8 s horizon and 43.50% with a VLM-predicted horizon, robust to 10% injected detection error (2606.10267#s1); executors that report invocation progress cut runtime VLM calls per episode from 109.5 to 1.988 (2605.13119#s2)."
+   },
+   {
+    "id": "S5",
+    "name": "Diagnostics run after scoring in a resettable simulator",
+    "detail": "Diagnostic programs run after scoring and before reset: final success 75% (45/60) vs 31.7%, completion-assessment precision 90.0% vs 43.2% (2610.12549#s1)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Checker is a weak proxy for success",
+    "detail": "The linter misses 52% of unresolved instances (wrong implementations); a STOP gate passes at fresh depth 1.20 m vs goal distance 2.15 m and the OSR-SR gap stays 19.0 on HM3D-OVON; a box-only verifier on an approximately measured scene misses unmodeled constraints (2405.15793#s2, 2609.15195#s3, 2609.20822#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Detector false positives and privileged detectors",
+    "detail": "False-positive rates of 30-50% sharply hurt, correlated false negatives can stall a command, and the simulation detector reads privileged state (2606.10267#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Gate contribution not isolated",
+    "detail": "Proposal validation alone is not ablated; teacher-side search tools are ablated only as a bundle, with an extra GPU and one run per task (2609.15195#s1, 2609.27308#s2)."
+   },
+   {
+    "id": "F4",
+    "name": "Added control tools lower success",
+    "detail": "Checkpoint and search tools raise one model's mean score 0.66 -> 0.70 while its success falls 50% -> 43% (2609.27308#s2)."
+   },
+   {
+    "id": "F5",
+    "name": "Planner gains depend on executor fidelity",
+    "detail": "A planner over a plain SFT VLA hurts on LIBERO-Long (-0.2/-11.8/-12.0); the real study is one robot and one camera (2605.13119#s2)."
+   },
+   {
+    "id": "F6",
+    "name": "Only valid with resets",
+    "detail": "Diagnostics need resettable simulation and do not apply to single-shot real episodes; Cabinet stays at 40% with 10 trials per task (2610.12549#s1)."
+   }
+  ]
+ },
+ "harness_effect_evaluation": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Model-by-harness grid with paired statistics",
+    "detail": "Harness variance 18.48 pp^2 vs model variance 2.37 pp^2 (7.80x), with 6 of 9 ranking comparisons reversing (2605.23950#s1); tokens per solved task vary ~40x across harnesses vs 1.0-1.3x across models (2607.22585#s1); a post-hoc interaction with label-permutation p=0.003 (BH q=0.013) (2609.11987#s1)."
+   },
+   {
+    "id": "S2",
+    "name": "One component toggled with typed interfaces fixed",
+    "detail": "Variants differ only in the chosen module: memory gains are mediated by the reasoner (8.54 -> 30.67 with ReAct) (2606.14674#s1); scenes, seeds and backbone are fixed across safety-harness layers (2609.20822#s3)."
+   },
+   {
+    "id": "S3",
+    "name": "Same-backbone reruns on fixed episodes",
+    "detail": "Baselines rerun with the same model on the same 100 episodes: harness gaps of +11/+6/+22 SR across three backbones (2606.10577#s4) and +14.0/+18.0 SR (2609.15195#s4)."
+   },
+   {
+    "id": "S4",
+    "name": "Repeated runs with endpoints and per-task patterns",
+    "detail": "Six runs per task: 62 tasks always succeed, 8 always fail, 30 are mixed (2609.29861#s2); no-action turns 2.0-2.16 vs 0.2-0.3 per task replicate across models (2607.22585#s2)."
+   },
+   {
+    "id": "S5",
+    "name": "Cost reconciled against billing",
+    "detail": "Re-pricing raw usage corrects cache share to 87-98% (vs 48% under a double-count defect) and matches billed spend within 2-4% for one provider (2609.11987#s3)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Differences within noise",
+    "detail": "50 tasks (1 task = 2 pp) leave most pass-rate differences within noise; intervals 11-17 pp wide leave moderate effects undetectable (2607.22585#s1, 2609.11987#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Cumulative harness layers",
+    "detail": "Compared harnesses are cumulative, so per-layer contributions are not isolated, and the 7.80x ratio is stated as not universal (2605.23950#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Single embodied runs without cost",
+    "detail": "Embodied swaps are single runs without variance; harness gain varies 6-22 SR with the backbone and no cost is reported (2609.15195#s4, 2606.10577#s4)."
+   },
+   {
+    "id": "F4",
+    "name": "Complete systems compared",
+    "detail": "Serving and context handling differ across harnesses, and workflow vs agent is confounded with the action interface (strong models drop 82.3 -> 65 in a fixed workflow) (2607.26148#s3); hierarchy components swing success ~95% -> ~0% even with a near-perfect VLA proxy (2606.10267#s4)."
+   },
+   {
+    "id": "F5",
+    "name": "Decomposition descriptive, not causal",
+    "detail": "Attribution is co-movement; the category-assignment procedure is unspecified; persistent failures are not tied to causes or interventions (2605.23950#s2, 2606.14674#s3, 2609.29861#s2)."
+   },
+   {
+    "id": "F6",
+    "name": "Ablations on the wrong model",
+    "detail": "Harness ablations are run on base models only, not on the distilled student (a 2B model reaches 2.2% in the same harness) (2606.18363#s1)."
+   },
+   {
+    "id": "F7",
+    "name": "Budget endings and missing usage",
+    "detail": "22 of 81 ceiling-cancelled runs had a passing patch (2609.11987#s2); 58 runs lack usage records and cache-write pricing is uncertain by ~2x (2609.11987#s3)."
+   }
+  ]
+ },
+ "harness_memory_skill_reuse": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Bounded window with pull-based recall",
+    "detail": "Context is a short window plus recall tools rather than accumulated history: removing the recall tool drops SR 76 -> 64, and accumulating all historical images lowers SR to 66 (SPL -12.45) (2606.10577#s3)."
+   },
+   {
+    "id": "S2",
+    "name": "Memory variants compared with model and episodes fixed",
+    "detail": "Event memory adds +7.0 SR on both R2R and HM3D-OVON with the model and 100 episodes fixed (2609.15195#s2)."
+   },
+   {
+    "id": "S3",
+    "name": "Notes used where tasks recur",
+    "detail": "Same tasks repeated across episodes or sharing subgoals with a reference seed: a summary of previous episodes raises long-horizon success 52.36% -> 60.00% (2606.10267#s3), and target-setting memory raises LIBERO-Pro Goal-S 31.0% -> 87.0% (2607.08448#s2)."
+   },
+   {
+    "id": "S4",
+    "name": "Skill library with the model fixed and demo scenes disjoint",
+    "detail": "LIBERO-Pro average 28.9% (no skills) -> 43.3% (seed) -> 75.6% (evolved) with the model fixed and demonstration scenes disjoint from evaluation (2609.29964#s2); a library mined from success-filtered programs improves average success (2603.22435#s2)."
+   },
+   {
+    "id": "S5",
+    "name": "Replay cards for fixed-structure tasks",
+    "detail": "Fixed subgoal order and directly localizable objects: planner-free replay reaches 72.63% (581/800) vs 62.50% for a planner without reasoning, with 56.17 s tool time (2607.08448#s3)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Memory mined from or selected on the evaluation tasks",
+    "detail": "The skill library is mined from evaluation-task rollouts in a single pass; the best replay card is selected on the reporting seeds; tasks without a successful source trace score 0 (2603.22435#s2, 2607.08448#s3)."
+   },
+   {
+    "id": "F2",
+    "name": "Novel or partially observable tasks untested",
+    "detail": "Experience notes are not shown for partially observable or novel tasks, and in-episode memory gives no benefit under full observability (2606.10267#s3)."
+   },
+   {
+    "id": "F3",
+    "name": "Cumulative, single-run memory ablations",
+    "detail": "The scene graph adds only +1 SR on ObjectNav in a cumulative single-run ablation; only the automatic context window is ablated, on 18 cases (2609.15195#s2, 2609.29389#s3)."
+   },
+   {
+    "id": "F4",
+    "name": "Stored content can mislead",
+    "detail": "Seed skills can hurt (Goal Pos. 30.0 -> 26.7); a task-progress record may carry a wrong judgement forward (2609.29964#s2, 2606.10577#s3)."
+   },
+   {
+    "id": "F5",
+    "name": "Bootstrapping needs privileged resets",
+    "detail": "Notes are bootstrapped with a RESET primitive, a generous budget and the benchmark success predicate; task vs global memory are not separated (2607.08448#s2)."
+   }
+  ]
+ },
+ "harness_native_rl": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Harness unchanged from training to deployment",
+    "detail": "Harness-native RL lifts one 4B model on SWE-bench Verified from 3.8 -> 26.4 under an unfamiliar harness and 34.2 -> 40.4 under another (2605.24220#s1); per-harness gains +6.4/+5.8/+9.4 (2608.17393#s3); with SFT initialization a robot planner goes 65.1% -> 71.0% (sign test p=0.001 on 121 vs 74 discordant episodes) (2610.28589#s2)."
+   },
+   {
+    "id": "S2",
+    "name": "Token-exact capture",
+    "detail": "Median Pearson between rollout and trainer logprobs is at least 0.998 per scaffold (2608.17393#s1); rollout-level advantage with exact-prefix merges reaches 38.2% vs 35.0% and 33.1% validation reward (2608.17528#s2)."
+   },
+   {
+    "id": "S3",
+    "name": "Rollout-level assembly",
+    "detail": "Prefix-chain assembly cuts trainer updates 1,185 -> 218 and wall-clock 189.5 -> 35.2 min (5.39x) over the same 3 steps (2605.24220#s2)."
+   },
+   {
+    "id": "S4",
+    "name": "Intermediate-difficulty pool and leakage defenses",
+    "detail": "Before defenses, git-history reads (4.6-20.5%) and test edits (2.4-19.4%) hack the reward; screened difficulty bands reach 0.670-0.671 validation while the unscreened pool (72.7% never solved) does not improve (2608.17393#s2)."
+   },
+   {
+    "id": "S5",
+    "name": "Training uses the deployment context rules",
+    "detail": "Training under the deployment compression rule reaches 37.8% vs 33.0% at 53% input cost (2608.03327#s3); the same prompt/history/schema at train and test adds 55.88% -> 71.76% cumulatively (2610.15572#s3); scaffolds stack on a summary-trained policy (8.27 vs 5.02 hourly profit) but not on plain GRPO (2606.14674#s2)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Little to gain when already aligned",
+    "detail": "Gain is +0.6 when the base model is already harness-aligned; evidence is SWE only (2605.24220#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Compaction and reserialization break prefix chains",
+    "detail": "Compacted or rewritten histories are dropped; template non-compositionality, retokenize drift and tool-call reserialization break prefixes, and only 36% of coding rollouts stay a single row (2608.17393#s1, 2608.17528#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Gains do not carry across harnesses",
+    "detail": "A model gains +3.4 under one harness and -0.4 under another; cross-harness transfer of a trained checkpoint is not reported (2608.17393#s3)."
+   },
+   {
+    "id": "F4",
+    "name": "Zero-variation groups grow",
+    "detail": "All-0/all-1 groups rise from 44.7% to 51.4% as the policy improves; binary reward cannot credit recovery; defenses cover only observed failures (2608.17393#s2)."
+   },
+   {
+    "id": "F5",
+    "name": "Embodied rollouts inherit teacher gaps at high cost",
+    "detail": "2,304 episodes of up to 7,200 s each; suites where the teacher rarely succeeds stay low after RL (2610.28589#s2)."
+   },
+   {
+    "id": "F6",
+    "name": "Alignment gains in-distribution only",
+    "detail": "Held-out accuracy under compression is unchanged and a pre-registered +15 pp bar was not met; scaffold-alignment differences may be within noise (2608.03327#s3, 2606.14674#s2)."
+   }
+  ]
+ },
+ "harness_self_optimization": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Raw traces given to the optimizer",
+    "detail": "The optimizer sees code, scores and raw traces: median/best accuracy 50.0/56.7 vs 34.6/41.3 with scores only (2603.28052#s2); full 76.7 vs 70.0 without traces and 63.3 with score only (2610.08432#s1)."
+   },
+   {
+    "id": "S2",
+    "name": "Search set separate from a reported held-out set",
+    "detail": "27B held-out navigation 66.0 -> 75.3 and manipulation 26.4 -> 39.4, above one-shot harness rewrites (75.3 vs 67.7/65.7) (2610.08432#s1); 48.6% vs 40.9 on online text classification with 11.4K vs 50.8K context tokens (2603.28052#s1)."
+   },
+   {
+    "id": "S3",
+    "name": "Revision accepted on the recipient's success",
+    "detail": "Playbook length and dev-rollout limits are held equal and evaluation uses held-out initial configurations: a teacher-refined playbook lifts the light agent 31.3% -> 66.7%, at $0.63 vs $3.43 per episode for the teacher (2609.33378#s2)."
+   },
+   {
+    "id": "S4",
+    "name": "Gated alternation compared with ungated and single-component baselines",
+    "detail": "A validation gate beats ungated alternation 45.26 vs 40.67 and 75.19 vs 68.25, rejecting 17 regressions among 44 proposals (2609.37105#s2); joint adaptation 45.26% vs RL-only 38.83% (2609.37105#s1); candidates compared under the same checkpoint give 44.9% vs 41.7% for a harness searched with the base policy fixed (2610.28069#s2)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Harness overfits the search split",
+    "detail": "The best search-set harness is not always best on held-out data, and held-out scores plateau or decline; on one benchmark the search set equals the test set (2610.08432#s1, 2603.28052#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Gains on recurring tasks with ground-truth feedback",
+    "detail": "Success 72% -> 98% (R2R) over ten passes on the same recurring 100-task subsets; EQA varies non-monotonically across passes (2609.39207#s3)."
+   },
+   {
+    "id": "F3",
+    "name": "Point-estimate gate on small validation sets",
+    "detail": "53-58 validation tasks reused across rounds; the acceptance rule is not a significance test; weight stages can reduce the validation score; one training run per condition (2609.37105#s2, 2609.37105#s1, 2610.28069#s2)."
+   },
+   {
+    "id": "F4",
+    "name": "Rollout bill",
+    "detail": "18,056 rollouts vs 16,928 for GRPO plus teacher calls; 184-rollout-per-side comparisons would be far costlier with embodied rollouts (2610.28069#s2)."
+   },
+   {
+    "id": "F5",
+    "name": "Unrefined or self-refined playbooks hurt",
+    "detail": "The initial playbook gives 31.3%, below no playbook (43.8%); self-refinement by the light agent gives 22.9%; the acceptance rule does not guarantee termination (2609.33378#s2)."
+   },
+   {
+    "id": "F6",
+    "name": "One harness for heterogeneous subtasks",
+    "detail": "A shared manipulation harness stays below separately optimized ones (held-out 33.8 vs 40.7) (2610.08432#s2)."
+   }
+  ]
+ },
+ "learner_state_teacher_correction": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Corrections validated before training",
+    "detail": "At the same data budget, first-error repair beats BC (46.1 vs 43.0) (2509.14257#s1); three verified patches give 46/50 vs 3/50 for success-filtered teacher demonstrations (2609.32416#s3); teacher edits rewritten in the student's style give 41.1% vs 17.5% for off-policy teacher takeover (2610.19834#s1)."
+   },
+   {
+    "id": "S2",
+    "name": "Capable reviewer at every step",
+    "detail": "Per-step review and replacement under the minimal harness averages 81.1% vs 78.1% (code-as-harness) and 68.6% (minimal harness) (2609.24974#s1); the distilled student's macro average rises 23.3 -> 44.3, above the base model under the evolved harness (41.7) (2609.24974#s3)."
+   },
+   {
+    "id": "S3",
+    "name": "Gate cuts teacher queries",
+    "detail": "The teacher is queried on 1.2-13.3% of training steps, 7.5x-86x fewer calls than full-query baselines, and not at deployment (2609.01567#s1)."
+   },
+   {
+    "id": "S4",
+    "name": "Relabel where dynamics are near-deterministic",
+    "detail": "Online distillation reaches the best return under deterministic dynamics while RL wins under higher motor noise (2510.03207#s1); relabeling with recovery raises full-chunk SR 16.45% -> 63.46% (seen) (2610.21450#s1)."
+   },
+   {
+    "id": "S5",
+    "name": "RL restarted from correction states",
+    "detail": "Compute-matched, RL from verified prefixes reaches 52.3 avg vs 48.4 without short-horizon starts (2509.14257#s2); resets to teacher-reached states give near-perfect success on three simulated tasks and 100% on 12 real drawer-search episodes (2505.09546#s2)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Teacher weak where the student fails",
+    "detail": "Weaker editor teachers give weaker students (33.3% and 26.9% vs 41.1%); weaker reviewers are net harmful (-12.0 pp while replacing 66% of steps); a random teacher degrades training (2610.19834#s1, 2609.24974#s1, 2609.01567#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Verification, review and reset cost",
+    "detail": ">=4,192 suffix rollouts for 19 admissions with snapshot restore; per-step review roughly doubles latency (237.2 s vs 100.1 s per trial) (2609.32416#s1, 2609.24974#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Seed variance and thin admissions",
+    "detail": "Trainer-seed variance is large (spill 50/33/33); a refinement with one thin admission regressed 76% -> 58%; pooling tasks causes interference (2609.32416#s2)."
+   },
+   {
+    "id": "F4",
+    "name": "Information-gathering regime excluded",
+    "detail": "The distill-vs-RL theory excludes active information gathering; early termination remains dominant after relabeling (21-37%) (2510.03207#s1, 2610.21450#s1)."
+   },
+   {
+    "id": "F5",
+    "name": "Gate signal confounded",
+    "detail": "Entropy conflates uncertainty with multimodality; early discriminator errors misclassify states and a too-strong discriminator increases aliasing (2609.01567#s1, 2505.09546#s1)."
+   },
+   {
+    "id": "F6",
+    "name": "Fully observable text domains only",
+    "detail": "The review ablation runs on one domain with a single seed; live-web success stays below 8%; text/tool sandboxes are fully observable (2609.24974#s3, 2610.19834#s1)."
+   }
+  ]
+ },
+ "observe_act_interface": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Interface elements swapped with the backbone fixed",
+    "detail": "One interface element is changed while the model stays fixed: replacing the target-plus-planner action tool with a waypoint predictor lowers R2R-CE SR/SPL 76/66.50 -> 66/57.73, and removing the depth tool gives SR 60 vs 76 (depth-image input instead: 69) (2606.10577#s1, 2606.10577#s2); compact LM-oriented commands beat shell-only interaction 18.0% vs 11.0% on SWE-bench Lite with one model (2405.15793#s1)."
+   },
+   {
+    "id": "S2",
+    "name": "Observation calls do not advance the world; actions report achieved motion",
+    "detail": "Observe and reasoning tools leave the simulator where it is, action tools return achieved motion and residual error, and turn and wall-clock caps are stated; a minimal observe/step interface reaches R2R-CE-100 SR 75.7 +/- 1.5 (medium) and 81.3 +/- 2.5 (ultra effort) over 3 runs each (2607.26148#s1, 2609.29861#s1, 2609.29389#s1)."
+   },
+   {
+    "id": "S3",
+    "name": "Geometry stays inside tools on calibrated metric depth",
+    "detail": "Depth, point clouds, calibration and maps are held by tools; the model gets receipts (depth statistics, measured points, plane fits, map boxes) or picks a target the tool back-projects; the depth is calibrated and metric. A perception-augmented interface lifts a paired 18-trial comparison 61.1% -> 88.9%, and map entries are verified by close-range perception (2606.10577#s2, 2609.29389#s1, 2610.12549#s3, 2609.29964#s1)."
+   },
+   {
+    "id": "S4",
+    "name": "Semantic vocabulary follows embodiment conventions over a reliable executor",
+    "detail": "Model output is restricted to semantic units or entity calls that an interpreter or frozen point-goal navigator executes; units follow motion conventions (arbitrary symbols succeed 1/20), and a scene-graph entity interface reaches 39.7% SR / 19.7% SPL on 3000 HM3D-OVON val_unseen episodes (2609.10522#s1, 2606.27871#s1)."
+   },
+   {
+    "id": "S5",
+    "name": "Extra tools are optional and checked per backbone",
+    "detail": "Tools are added beside primitives rather than replacing them, harness parse/coordinate/feedback correctness is verified before comparison, and effects are reported per model: optional hybrid tools raise the strongest model 82.3 -> 85.7 SR at 0.59x calls, while imposed waypoints lift weak models (5 -> 43 SR) and move strong ones by <=2 points (2607.26148#s2, 2608.03327#s1)."
+   },
+   {
+    "id": "S6",
+    "name": "Image-to-text conversion compared with raw images",
+    "detail": "A separate VLM's text (visual differencing or grounded descriptions) is compared against raw RGB in the same loop: text differencing beats raw image interleaving, which degrades relative to text-only feedback; bounding-box and contact-grounded descriptions reach 47.90% / 52.36% vs 38.84% image-only long-horizon success (2603.22435#s1, 2606.10267#s2)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Wrong stop and wrong target dominate what is left",
+    "detail": "Residual failures are wrong target/route and wrong stop (15/44 each in one 126-failure audit), runs that enter the goal radius but stop elsewhere, and 8/100 tasks failing in all six runs (2607.26148#s1, 2609.29861#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Requested rather than realized motion",
+    "detail": "Step returns report requested motion: forward batches stall with pixel-identical views and inconsistent recovery, and on a physical quadruped the agent under-rotates without realized-motion feedback and lacks body awareness (2609.29861#s1, 2607.26148#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Depth assumption untested",
+    "detail": "Tools assume calibrated metric depth and targets are restricted to visible pixels with valid depth; behaviour under non-metric or scene-dependent depth scaling is untested (2606.10577#s2, 2606.10577#s1)."
+   },
+   {
+    "id": "F4",
+    "name": "Interface bundle compared instead of components",
+    "detail": "A paired comparison changes perception, memory, motion and completion feedback together on 18 trials; no harness-component ablation for scene-graph entity calls; contact views, rehearsal and drag correction are not ablated separately (2609.29389#s1, 2606.27871#s1, 2609.29964#s1)."
+   },
+   {
+    "id": "F5",
+    "name": "Tool value depends on the backbone",
+    "detail": "The same tool helps weak and not strong models; injecting MCP tools gives +4.0 pp for a thinking checkpoint and -5.9 pp for an instruct one, and the two checkpoints differ in more than reasoning (2607.26148#s2, 2608.03327#s1)."
+   },
+   {
+    "id": "F6",
+    "name": "Gain carried by the converter or a privileged channel",
+    "detail": "No VLM-backbone ablation separates the converter's own capability, and wall time roughly doubles (cube stack 60.8 s -> 113.6 s); the best description variant relies on simulator-privileged contact information unavailable on the real robot (2603.22435#s1, 2606.10267#s2)."
+   },
+   {
+    "id": "F7",
+    "name": "Latency and contamination unaccounted",
+    "detail": "3-19 s per call and high inference cost; benchmark contamination of proprietary models cannot be verified; mostly single runs on 100-episode subsets (2607.26148#s1, 2609.29861#s1)."
+   }
+  ]
+ },
+ "offline_harness_distillation": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Student keeps the full harness, with the three-row comparison",
+    "detail": "Teacher, untrained student and distilled student are reported in the identical harness: a 4B student reaches 87.1% sim success (base 22.2%, teacher 90.4%) and 90.0% real (teacher 93.3%), with call latency 4.168 s -> 0.587 s (2606.18363#s3)."
+   },
+   {
+    "id": "S2",
+    "name": "Hundreds of success-filtered decisions",
+    "detail": "About 500 decision samples or about 110 episodes are used; the student rises 21% -> 43-47% SR and queries per episode fall 30.61 -> 9.41 (2606.27871#s2, 2609.29389#s2, 2609.29964#s3)."
+   },
+   {
+    "id": "S3",
+    "name": "Verified checkpoint branches compared at equal dataset size",
+    "detail": "With teacher success about 90%, perturbation branches at equal dataset size (2,268) raise overall success 79.3% -> 87.1% and unseen tasks 77.1% -> 90.8% (2606.18363#s2); verified branches lift a VLA 18% -> 69% mean success from 10 to 400 demos (2609.27308#s3)."
+   },
+   {
+    "id": "S4",
+    "name": "Removed components handled explicitly",
+    "detail": "Teacher turns that depend on a removed component are rewritten and filtered: 64.6% vs 55.2% for mask-only, SFT 18.1% -> 65.1% (2610.28589#s1); demonstrations share the student's semantic unit space (2609.10522#s3)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Student does not run standalone",
+    "detail": "Sub-agents remain frontier calls at evaluation; without the frontier planner the student gets 10% on reasoning-intensive tasks (2609.29964#s3, 2609.10522#s3)."
+   },
+   {
+    "id": "F2",
+    "name": "Only teacher-visited states supervised",
+    "detail": "Held-out-task accuracy stays at 13.9% with success-filtered teacher data; recovery supervision comes from teacher-visited perturbed states, not student-induced ones; privileged execution during collection leaves real-executor states uncovered, with no on-policy correction (2609.29389#s2, 2606.18363#s2, 2606.27871#s2)."
+   },
+   {
+    "id": "F3",
+    "name": "Teacher quality does not predict student quality",
+    "detail": "Mixing teachers hurt (41%), and the stronger teacher (56%) yields the weaker student (41% vs 43%) (2606.27871#s2)."
+   },
+   {
+    "id": "F4",
+    "name": "Evaluated on the training tasks",
+    "detail": "Evaluation uses the same tasks with new initial states or new seeds (2610.28589#s1, 2609.29964#s3)."
+   },
+   {
+    "id": "F5",
+    "name": "Branch data can hurt seen tasks",
+    "detail": "Some seen tasks drop with perturbation data (push basket 86.7 -> 66.7, shell game 70.0 -> 63.3) (2606.18363#s2)."
+   },
+   {
+    "id": "F6",
+    "name": "Small end-to-end coverage",
+    "detail": "Only six tasks reach VLA training, the pipeline is never run end to end, and real full-task success is 20% (2609.27308#s3)."
+   }
+  ]
+ },
+ "on_policy_distillation_objectives": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "White-box logits with reverse KL",
+    "detail": "LIBERO average 48.9% -> 87.4% (distill) and 93.4% (distill + GRPO) vs teacher 93.9% (2603.26666#s1); reverse KL improves steadily where forward KL drops >50% early and hard-CE plateaus lowest (2603.26666#s2)."
+   },
+   {
+    "id": "S2",
+    "name": "Information-rich privilege at moderate divergence",
+    "detail": "Privileged self-distillation reaches 37.5% vs RL 27.5% on TravelPlanner (2602.04942#s2); next-screenshot privilege adds +3.17 over an unprivileged teacher, with AndroidWorld 52.73 vs GRPO 47.13 over 3 seeds (2608.06065#s1)."
+   },
+   {
+    "id": "S3",
+    "name": "Joint, interleaved privileged and plain views",
+    "detail": "Joint T+I+R training gives 22.98% vs 20.58% task success, while a staged schedule collapses to 7.03% (2610.20261#s2); joint training reaches 44.1% vs 32.3% for SFT+RL (2602.04942#s1)."
+   },
+   {
+    "id": "S4",
+    "name": "Privileged-self targets verified by the harness",
+    "detail": "Verified privileged-self targets give 20.58% vs 15.61% (OPD), 7.72% (GSPO) and 2.06% (SFT on ground truth) (2610.20261#s1)."
+   },
+   {
+    "id": "S5",
+    "name": "Agreement reward with commit-best continuation",
+    "detail": "OOD average +5.1/+6.9 pp for a 4B student with two teachers (2610.19820#s1); replacing commit-best with random commit lowers pass^1 40.0 -> 37.5 (2610.19820#s2)."
+   },
+   {
+    "id": "S6",
+    "name": "Harness-contrast preference with a validity filter",
+    "detail": "ALFWorld unseen 63.4% vs 47.0% best OPD baseline, above the 8B teacher (2610.02858#s1); removing the validity filter lowers average SR 57.4 -> 50.8 (2610.02858#s2)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Teacher ceiling and teacher access",
+    "detail": "The distilled student stays below its teacher and the method needs logits, so black-box API teachers are excluded; agreement-trained students remain far below teachers (37.7 vs 71.2) (2603.26666#s1, 2610.19820#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Weak, uninterpretable or over-strong privilege",
+    "detail": "Reference action alone as privilege gives 58.62 vs SFT 59.05; negative privilege utility makes student-only training fail; excessive KL overrides utility and degrades OOD on a smaller model (2608.06065#s1, 2602.04942#s1, 2602.04942#s2)."
+   },
+   {
+    "id": "F3",
+    "name": "Schedules collapse",
+    "detail": "Teacher-only training collapses when KL nears zero and no single mixing weight is best; staged schedules degrade closed-loop success (2602.04942#s1, 2610.20261#s2)."
+   },
+   {
+    "id": "F4",
+    "name": "Agreement or validity is not correctness",
+    "detail": "Matcher false positives/negatives misassign reward and teacher errors become targets; valid-but-incorrect positives cannot be filtered (2610.19820#s1, 2610.02858#s2)."
+   },
+   {
+    "id": "F5",
+    "name": "Holding state makes visitation off-policy",
+    "detail": "Rolling several candidates from one held state introduces off-policy state visitation (2610.19820#s2)."
+   },
+   {
+    "id": "F6",
+    "name": "Small gains outside one text environment",
+    "detail": "WebShop SR 19.6 vs 19.0; untested on multimodal, embodied, long-horizon or partially observed physical tasks (2610.02858#s1, 2608.06065#s1)."
+   }
+  ]
+ },
+ "planner_composes_code_and_policies": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Code composition compared at a matched call budget",
+    "detail": "Same model, primitives, tasks and LLM-call budget: code cells raise success 63.1% -> 71.7%, and on jointly solved instances cut LLM calls 17.0 -> 8.7, input tokens 788k -> 276k and cost $1.63 -> $0.74 (2610.01939#s1)."
+   },
+   {
+    "id": "S2",
+    "name": "Minimal calibrated geometry library",
+    "detail": "A minimal geometric library with known calibration reaches 51.6% average SR on 2,100 episodes, 2.3x direct end-effector control by the same model, and 52.9% mean over 3 seeds (s.d. 0.35) with simulator depth (2610.01939#s2)."
+   },
+   {
+    "id": "S3",
+    "name": "Generated motion validated before execution",
+    "detail": "Generated motion passes MuJoCo/kinematic checks and a safety validation layer before execution, with replay-based repair (2609.39207#s1)."
+   },
+   {
+    "id": "S4",
+    "name": "Frozen VLA staged into its competent regime",
+    "detail": "The planner stages a frozen, in-distribution-competent VLA into a pre-contact state with a stop predicate: the same frozen VLA goes LIBERO-Pro 50.0% -> 72.1-92.63% depending on the planner while standard LIBERO is preserved (96.0 vs 95.3) (2607.08448#s1); candidates are inspected without advancing the environment (2609.33378#s1)."
+   },
+   {
+    "id": "S5",
+    "name": "Tool policy trained for the call it receives",
+    "detail": "Demonstrations are segmented into invocation windows with a data-derived tool taxonomy; tool-aligned post-training plus the interface reaches 95.6/97.2 vs 80.2/80.4 for the interface alone on LIBERO-Long (2605.13119#s1)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Contact without feedback",
+    "detail": "Button presses and tight fits stay unsolved where pretrained policies reach 83-96%; failures concentrate on contact relative to perception accuracy (2610.01939#s2)."
+   },
+   {
+    "id": "F2",
+    "name": "Mechanism not isolated and budget endings counted as failures",
+    "detail": "Composition, persistent state and selective feedback are not separated; 52 of 96 code-only successes are tool-calling budget exhaustion, and including failures the cost is about equal on one suite (2610.01939#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Planner backbone swings results with the harness fixed",
+    "detail": "LIBERO-Pro 72.1 vs 82.4 vs 92.63 across planners; Composite-Unseen stays at 13.8-15.0%; analytic primitives and the VLA call are not ablated separately (2607.08448#s1)."
+   },
+   {
+    "id": "F4",
+    "name": "Learned tool helps weak backends only",
+    "detail": "A learned navigation tool adds +11 pp SR for one backend, while the strongest backend drops on RxR (93 -> 86); it is trained for atomic behaviours, not global exploration (2609.39207#s2)."
+   },
+   {
+    "id": "F5",
+    "name": "Unguided access to a frozen policy",
+    "detail": "Tool access without a playbook gives 0/75 on the real robot; instruction and attention edits are unreliable on a task-specific fine-tuned VLA (2609.33378#s1)."
+   },
+   {
+    "id": "F6",
+    "name": "Tool coverage gaps",
+    "detail": "Invocation-aligned post-training first reduced the base VLA 93.4 -> 91.2; primitives absent from the data need new demonstrations; the progress target is a temporal proxy (2605.13119#s1)."
+   },
+   {
+    "id": "F7",
+    "name": "Real-world evidence qualitative",
+    "detail": "Real humanoid tasks take 10-20 minutes and are reported qualitatively (2609.39207#s1)."
+   }
+  ]
+ },
+ "privileged_teacher_supervision": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Privilege raises teacher coverage",
+    "detail": "LLM revision of the program teacher gives at least one success on all 57 LIBERO-PRO tasks, vs 12 of 57 with no success without revision (2609.21650#s1); full-state coding agents reach up to 82% success (2609.27308#s1)."
+   },
+   {
+    "id": "S2",
+    "name": "Supervision emitted in the student's action vocabulary",
+    "detail": "A rule teacher acting in the student's skills with templated reasoning: 69.6% at 28,480 examples vs 38.8% for 152,478 trajectory-relabeled examples, 71.76% full-task vs 21.90% (2610.15572#s1); spatial-reasoning labels add 65.88% -> 71.76% on the same data (2610.15572#s2)."
+   },
+   {
+    "id": "S3",
+    "name": "Estimate the expert's inputs instead of cloning its actions",
+    "detail": "At a matched 40k-step budget, estimators feeding a frozen expert beat pixel BC (PandaCube 99.0% vs 6.1%, AllegroCube 79.2% vs 0.7%) and transfer to a real arm at 76% (19/25) (2609.34018#s1); a linear state-to-action loss ramp raises TrayPlate 28.9% -> 64.1% (2609.34018#s2)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "Teacher hacks the scorer",
+    "detail": "Full-state coding agents hack the scorer (43% and 39% for two models), over-commit to failing decompositions and leave the hardest tasks unsolved (2609.27308#s1)."
+   },
+   {
+    "id": "F2",
+    "name": "Identifiability unchecked",
+    "detail": "No check whether templated privileged descriptions (e.g. out-of-view direction) are identifiable from student observations; replacing privileged inputs with learned perception is untested (2610.15572#s2, 2609.21650#s1)."
+   },
+   {
+    "id": "F3",
+    "name": "Teacher diversity bounds the student",
+    "detail": "Generalization is bounded by teacher data diversity; real robot 38% end to end; only short single-room navigation; no on-policy correction (2610.15572#s1)."
+   },
+   {
+    "id": "F4",
+    "name": "Loss schedule fragile",
+    "detail": "An abrupt switch or flat action weight collapses (<4% on tray tasks); action-only training converges in 1 of 3 seeds (2609.34018#s2)."
+   },
+   {
+    "id": "F5",
+    "name": "Advantage shrinks with more budget",
+    "detail": "With 3x budget a full-state flow clone closes much of the gap on reaching and tray tasks; most pixel-BC cells are single-seed (2609.34018#s1)."
+   },
+   {
+    "id": "F6",
+    "name": "Single-primitive scope",
+    "detail": "Multi-step tasks are unsupported and the enforced top-down grasp fits box-shaped objects (2609.21650#s1)."
+   }
+  ]
+ },
+ "teacher_seeded_sparse_rl": {
+  "S": [
+   {
+    "id": "S1",
+    "name": "Every task starts with nonzero success",
+    "detail": "Teacher-derived SFT covers 57/57 tasks; after PPO 97.8%/97.1% vs 41.9%/68.4% for matched direct PPO, and zero-success initializations end at 26.0% vs 91.7% (2609.21650#s2); a recovery-DAgger initialization adds +10.72 SR with RL (2610.21450#s2)."
+   },
+   {
+    "id": "S2",
+    "name": "Teacher-free RL with frozen components and one model size",
+    "detail": "RL inside the code harness raises unseen instances 18.8% -> 44.1% and cuts context overflows 19.2% -> 3.4% (2610.01939#s3); privileged perception during training avoids noisy rewards (Cube Lift 80%) (2603.22435#s4)."
+   },
+   {
+    "id": "S3",
+    "name": "Dense forked-branch reward after an SFT warm start",
+    "detail": "Forked stepwise GRPO keeps SR (49% vs 47%) while cutting tokens per query 72.1% and on-device latency 71.8% (2606.27871#s3)."
+   },
+   {
+    "id": "S4",
+    "name": "Rollout hints that do not reveal the answer",
+    "detail": "Mechanism skills injected only in rollouts give 38.3% vs GRPO 35.3% without hints at evaluation, and 46.5% vs 39.0% mixed-outcome groups (2610.28069#s1)."
+   }
+  ],
+  "F": [
+   {
+    "id": "F1",
+    "name": "BC initialization or zero-success start stalls",
+    "detail": "BC-initialized Flow-GRPO stays at 19-26% SR (2610.21450#s2); direct PPO leaves 17 of 27 zero-success tasks at 0% and drives 3 solved tasks to 0% (2609.21650#s2)."
+   },
+   {
+    "id": "F2",
+    "name": "Far below the teacher",
+    "detail": "The RL-trained small model stays at 45.9% vs 71.7% for the frontier model, with more give-ups (25.2%) (2610.01939#s3)."
+   },
+   {
+    "id": "F3",
+    "name": "No held-out evaluation",
+    "detail": "Training-set numbers only (success 2.7% -> 7.5%) (2609.27308#s4); three simple tasks trained per task, with S2 rewards noisy enough for credit-assignment ambiguity (2603.22435#s4)."
+   },
+   {
+    "id": "F4",
+    "name": "Near-answer hints hurt",
+    "detail": "Hints that approach the answer raise training success but lower no-hint evaluation (-2.6 pp vs GRPO) (2610.28069#s1)."
+   },
+   {
+    "id": "F5",
+    "name": "Per-step bandit credit and forking",
+    "detail": "Greedy best-branch continuation is per-step, not full-episode credit; it needs simulator forking and privileged distance-to-goal; text (41%) and table (36%) disagree (2606.27871#s3)."
+   },
+   {
+    "id": "F6",
+    "name": "Coverage effect not isolated; stop timing remains",
+    "detail": "Coverage and difficulty co-vary, real closed-loop transfer failed (2609.21650#s2); late termination increases and stop timing remains the main residual failure (2610.21450#s2)."
+   }
+  ]
+ }
+}
