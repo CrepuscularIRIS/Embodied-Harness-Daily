@@ -1,0 +1,728 @@
+{
+ "paper": {
+  "paper_key": "2503.02465",
+  "paper_id": "2503.02465",
+  "title": "UAV-VLRR: Vision-Language Informed NMPC for Rapid Response in UAV Search and Rescue",
+  "version": "2503.02465v2",
+  "claim_type": "system_method",
+  "central_claim": "UAV-VLRR：GPT-4o(LLM)+Molmo-7B(VLM) 从图像+文本指令解析目标/障碍物点，经相机高度+FoV 映射为世界坐标，交给带避障惩罚的点到点 NMPC 飞行；在两个实验室场景中平均比现成自动驾驶仪快 33.75%、比人类飞手快 54.6%，并宣称“优于搜救领域的传统方法”。",
+  "scope_note": "边缘收录：VLM/LLM 一次性解析图像→坐标→NMPC 执行，无重复查询的 agent 闭环，也无验证/回交；按“LLM/VLM+感知工具+控制器控制无人机”的宽口径保留为 reviewed，范围判断留总控。"
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "任务描述管线：图像+文本→目标点/障碍点→世界坐标",
+   "information": "输入单张航拍图+自然语言指令；已知相机高度与对角 FoV，假设近似平面；无深度、无重复观测",
+   "operation": "GPT-4o 抽取目标/障碍，Molmo-7B-D(4bit) 在图像中指点，归一化像素坐标按 FoV 公式缩放为世界坐标",
+   "output": "目标点列表与障碍点列表（笛卡尔坐标）",
+   "conditions": "图像畸变/低空拍摄会增大误差（作者自述）；静态障碍",
+   "feedback": "无（单次开环，无重询、无可行性回检）",
+   "selection_rule": "无选择/拒绝规则",
+   "persistence": "无（not_applicable：静态管线，无留存）",
+   "later_use": "not_applicable",
+   "claimed_effect": "Vicon 对比的检测误差 ≤约 25 cm（Table I/II）",
+   "failure_boundary": "误差随畸变上升；动态障碍未测；系统性收缩偏差见 E017",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E008",
+    "E009",
+    "E016",
+    "E017"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "飞行控制器：点到点 NMPC（13 状态四旋翼，RK4 多重打靶，CasADi）",
+   "information": "目标点+障碍点；无参考轨迹；最小动力学模型（无阻力补偿）",
+   "operation": "代价=状态误差+控制+障碍惩罚；直接求解到点最优控制，无外部轨迹生成/跟踪模块",
+   "output": "电机力指令；机载（OrangePi）实时求解",
+   "conditions": "障碍惩罚形式与半径、Q/R/N/T 数值文中未给出",
+   "feedback": "NMPC 内部状态反馈；与 VLM 侧无闭环",
+   "selection_rule": "无",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "更快完成任务（28/30 s vs 自动驾驶仪 40/48 s）",
+   "failure_boundary": "模型失配被认为可容忍；高速/外扰/动态障碍未测",
+   "evidence_ids": [
+    "E005",
+    "E006",
+    "E010",
+    "E012"
+   ]
+  }
+ ],
+ "retention_trace": {
+  "applicable": false,
+  "reason": "静态管线+控制器，不声称自我改进或留存收益；未编造 retained 闭环。"
+ },
+ "gap": {
+  "author_gap": "人工遥控/设点在灾场易受压力与认知过载影响；手工障碍图、LiDAR、启发式规划难适应变化环境；已有 NMPC 多用外部轨迹生成+跟踪且常离线运行。",
+  "checked_gap": "部分成立：人工操作慢可信但未量化；“NMPC 离线/依赖轨迹生成”由文献陈述支撑，但文中并未与同类 VLM+控制管线（UAV-VLA、UAV-CodeAgents、UAV-VLPA*）或其他机载 NMPC 做直接对比，无法判断本文填补了多少。",
+  "lineage_closest_adjacent": [
+   {
+    "name": "UAV-VLA（同组前作）",
+    "relation": "VLM 生成任务路径；本文接上敏捷 NMPC",
+    "version_note": "引用 [4]，本地未固定原文，仅依据本文陈述"
+   },
+   {
+    "name": "UAV-CodeAgents / UAV-VLPA*",
+    "relation": "推理步骤 / 全局路线优化（TSP+A*）",
+    "version_note": "引用 [10][11]，未比较"
+   },
+   {
+    "name": "ETH 系 NMPC / MPCC / 自适应 MPC",
+    "relation": "敏捷控制；多离板运行或仅仿真",
+    "version_note": "引用 [14]-[18]"
+   }
+  ],
+  "residue": "未回答：对比的“现成自动驾驶仪”是什么、同样接收 VLM 输出时为何慢；VLM 侧与控制侧的收益各占多少。",
+  "stakes": "灾害搜救中分钟级响应；但文中无任务成功率/碰撞率数据。",
+  "method_response": "VLM→坐标→点到点 NMPC 机载执行，宣称无需轨迹生成即容忍模型失配。",
+  "remaining_gap": "动态障碍、多机、自适应学习（作者列为未来工作）；开环单次感知；无失败重规划。",
+  "evidence_ids": [
+   "E015",
+   "E012",
+   "E011"
+  ],
+  "unresolved": [
+   "现成自动驾驶仪的具体配置；与其它 VLM+控制管线的同条件对比"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": {
+     "step1_boundary": "met：VLM/LLM 只做目标/障碍抽取，精确控制交给 NMPC",
+     "step2_typed_artifact": "met（弱）：交接物是目标/障碍坐标列表，可检查，但无 schema/校验",
+     "step3_close_loop": "unmet：无验证反馈回 VLM，无失败重查询",
+     "step4_ablate_loop": "unmet：无 VLM 侧或 NMPC 侧消融（仅与自动驾驶仪/人比较）",
+     "step5_cost": "unmet：服务器 VLM/LLM 延迟与调用成本未拆分"
+    },
+    "success_failure_checks": {
+     "S_boundary_at_seam": "partial",
+     "S_typed_artifact": "partial",
+     "S_load_bearing_ablation": "unmet",
+     "F_assembly_of_offshelf": "applies：GPT-4o+Molmo+NMPC 均为现成组件，未隔离出单一承重机制",
+     "F_single_narrow_benchmark": "applies：1 条指令、2 个场景",
+     "F_cost_unmeasured": "applies"
+    },
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E005",
+     "E007",
+     "E014"
+    ],
+    "reason": "实际操作是“学习模型抽取结构化坐标→交给精确求解器(NMPC)执行”，与 C25 前半（边界+中间产物）一致；但 C25 的承重环节——用求解器可验证输出闭环——缺失，且是现成部件拼装。与同父兄弟无区分需求（C25 为该父类唯一子卡）。"
+   }
+  ],
+  "reason": "识别依据全文方法/实验；弱匹配，不增分。",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "执行了分解+交接，未执行验证闭环/消融/成本核算",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E007"
+   ]
+  },
+  "resolves_problem": {
+   "value": false,
+   "reason": "未提供证据表明“人工设点慢/传统规划不适应”被关闭：无任务成功、无对 VLM 管线同类基线、n=1",
+   "evidence_ids": [
+    "E010",
+    "E012"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K103",
+    "version": "patterns 2026-10-21 (taxonomy hash daf38e579a46)",
+    "fit": "weak",
+    "condition_checks": {
+     "card_when_works_metric_depth_calibration": "partial：用相机高度+FoV 平面几何，无深度",
+     "card_when_works_local_planner_executes_validated_targets": "partial：NMPC 执行目标，但目标未做可行性校验/重选",
+     "card_fails_targets_visible_pixels_only": "applies：所有目标来自单张图像",
+     "main_S3_geometry_in_tools": "partial",
+     "main_F3_depth_assumption_untested": "applies",
+     "main_F8_agent_level_success_not_measured": "applies：无任务成功率"
+    },
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E005",
+     "E008"
+    ],
+    "reason": "K103 的“模型指目标、harness 反投影并执行”与此管线的指点→坐标映射→执行同构，但缺少可行性检查与重选反馈，也没有度量深度；仅弱匹配，不当作 K103 的有效实例。"
+   }
+  ],
+  "unassigned": [
+   "VLM 指点→FoV 平面映射→NMPC 的无轨迹点到点执行不作为新卡（单篇、无消融）"
+  ],
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K103"
+   },
+   "operation_correspondence": "RS：学习模型抽取结构化中间产物→精确求解器；领域：模型指目标→harness 反投影→执行。两者的共同操作是“指点→坐标→执行”。",
+   "necessary_conditions_and_differences": "RS 需要求解器可验证输出闭环——缺；领域卡需要度量深度与可行性反馈——缺。",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E19"
+   ],
+   "applies_when": "a claim that a harness transfers to a physical robot or aerial vehicle",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "真机飞行仅每场景每条件一次，无试验次数与成功率定义；碰撞仅定性。",
+   "evidence_ids": [
+    "E010",
+    "E013"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E04"
+   ],
+   "applies_when": "any success-rate comparison on a fixed subset",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无重复、无方差；平均 33.75%/54.6% 仅由两个单次时间平均得到。",
+   "evidence_ids": [
+    "E010",
+    "E001"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E05"
+   ],
+   "applies_when": "claim harness/interface is better or more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "未报告 VLM/LLM 服务器延迟、调用成本；计时含系统管线但未拆分。",
+   "evidence_ids": [
+    "E014",
+    "E011"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E01"
+   ],
+   "applies_when": "a claim that a harness (rather than the model) raises success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Exp1 vs Exp2 同用多模态输出、换控制器，隔离了控制器；但未比较 VLM 接口本身，自动驾驶仪未说明。",
+   "evidence_ids": [
+    "E012",
+    "E010"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E08"
+   ],
+   "applies_when": "a frontier-model benchmark/dev-overlap caveat",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "未披露提示词/场景是否在开发中使用。",
+   "evidence_ids": [
+    "E007"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E16"
+   ],
+   "applies_when": "embodied navigation success claim with completion check",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无到达判据/成功率定义，无失败分类。",
+   "evidence_ids": [
+    "E010"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-cost",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "report cost of the added structure",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "同 E05。",
+   "evidence_ids": [
+    "E014"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-ablate",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "ablations isolating the load-bearing step",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无 VLM/NMPC 侧消融；仅与自动驾驶仪和人类比较。",
+   "evidence_ids": [
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-generalize",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "generalization beyond a single narrow benchmark",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "1 条指令、2 个实验室场景。",
+   "evidence_ids": [
+    "E007"
+   ],
+   "score_item": "E.holdout"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "VLM/LLM 能将图文指令解析为与 Vicon 真值相符的目标/障碍坐标",
+   "setting": "实验室，2 场景，5+7 个物体，坐标误差 ≤23 cm/轴",
+   "baseline_control": "Vicon 真值",
+   "selection_vs_test": "无划分；单图",
+   "result_denominator": "Scene1 5 物体、Scene2 7 物体；多数 <25 cm，S2 Target3 欧氏≈25.1 cm 略超；无失败案例报告",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E016",
+    "E017"
+   ],
+   "counterevidence": [
+    "E009",
+    "E017"
+   ],
+   "allowed_conclusion": "在这两张图上检测误差大致在 25 cm 内，且存在系统性收缩偏差迹象；不外推到其它场景/高度。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "NMPC 比现成自动驾驶仪快 33.75%",
+   "setting": "同一多模态输出，Scene1/2 各一次飞行",
+   "baseline_control": "未说明型号的现成自动驾驶仪",
+   "selection_vs_test": "无",
+   "result_denominator": "n=1/条件：28 vs 40 s；30 vs 48 s",
+   "evidence_ids": [
+    "E001",
+    "E010",
+    "E012"
+   ],
+   "counterevidence": [
+    "E012"
+   ],
+   "allowed_conclusion": "两次单次飞行中 NMPC 更快；基线配置不明、无重复，不构成统计结论。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "比人类飞手快 54.6%，并优于“搜救领域传统方法”",
+   "setting": "人类仅见图片+机腹相机；计时起点不同",
+   "baseline_control": "人类飞手(人数未说明)",
+   "selection_vs_test": "无",
+   "result_denominator": "n=1/条件：57/72 s",
+   "evidence_ids": [
+    "E001",
+    "E002",
+    "E010",
+    "E011",
+    "E013"
+   ],
+   "counterevidence": [
+    "E011"
+   ],
+   "allowed_conclusion": "不支持“优于传统方法”；仅示意性对比，计时口径不对称。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "offline",
+  "evidence_level_reason": "真机飞行仅示范性单次计时，无试验次数/成功率定义（EVIDENCE：演示不计试验）；感知为静态 Vicon 对照。最接近 online 但不满足其判据。",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在两张实验室图像上，VLM/LLM 指点坐标与 Vicon 真值大体在约 25 cm 内；同一前端下自研点到点 NMPC 在各一次飞行中比某现成自动驾驶仪快约 30–38%。",
+  "not_supported": "“优于搜救领域传统方法”“比人类快 54.6%”的泛化；动态环境；成功率。",
+  "unresolved": [
+   "自动驾驶仪配置",
+   "重复飞行与方差",
+   "VLM 侧延迟占比"
+  ],
+  "reproduction_note": "全部为作者报告，非我们复现。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "问题（人工设点慢、传统规划不适应、NMPC 离板）有来源陈述，但最近邻（UAV-VLA/CodeAgents/VLPA*）只列举未比较，影响范围无量化，残余问题不完整。",
+   "evidence_ids": [
+    "E015",
+    "E012"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "VLM 抽取+点到点 NMPC 的分工合理，且“无轨迹跟踪约束故容忍模型失配”有机制解释；但平面 FoV 映射假设薄弱（已见系统性偏差迹象 E017），也无可区分预测或消融。",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E017"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "三处承重信息缺失：VLM/LLM 角色分工与提示词、NMPC 权重/障碍惩罚形式与半径（Penalty_Obs 未定义）、目标访问顺序与到达判据；自动驾驶仪基线未说明，难以重建。",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E012"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "感知有独立 Vicon 真值是亮点，但任务层只有单次时间，无成功判据/碰撞计数；计时起点不对称。",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E010",
+    "E011"
+   ],
+   "counterevidence_ids": [
+    "E009",
+    "E011"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "仅 NMPC vs 自动驾驶仪这一隔离控制器的比较；无 VLM/避障惩罚消融；人类对照条件不可比。",
+   "evidence_ids": [
+    "E010",
+    "E012",
+    "E011"
+   ],
+   "counterevidence_ids": [
+    "E011"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "单指令、2 个自建场景，无留出/泛化，却宣称“优于传统方法”。",
+   "evidence_ids": [
+    "E007",
+    "E002"
+   ],
+   "counterevidence_ids": [
+    "E002"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "not_reported",
+   "rating": 0,
+   "reason": "完整材料内无重复飞行、方差、失败分母；每格单次数值。",
+   "evidence_ids": [
+    "E010"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "IV Experimental Setup",
+    "V-B Table III",
+    "VI Conclusion"
+   ]
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "仅交代硬件（远程 4090 服务器、机载 OrangePi），无调用成本、延迟拆分或预算匹配。",
+   "evidence_ids": [
+    "E014",
+    "E006"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  }
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "完整正文（含全部表格）已读；无附录；图像内容未在文本中。"
+ },
+ "brief_reason": "VLM/LLM→坐标→点到点 NMPC 的简单管线；感知有 Vicon 对照，但任务结果仅 2 场景×单次计时，基线与计时口径不严，宣称过宽，E 项整体偏弱。",
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T17:30:00Z",
+  "notes": "session_id/receipt_ref not obtainable from inside the worker (null). Hashes computed by worker from files: rubric=SCORE_SPEC.md; rs=reference MANIFEST.tsv; domain=patterns taxonomy.json; conditions=conditions.json; expectations=.forge/domains/embodied-agent-harness-v1/profile/expectations.json. No other-seat/aggregate/archive/old-score files were read. Domain cards that cite this paper (arXiv#board/#s) are paper-derived and not treated as independent confirmation."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2503.02465v2",
+   "sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "sections_read": [
+    "Abstract",
+    "I-VII",
+    "Tables I-III (text)"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "figure image content (text extraction only)"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Abstract",
+   "quote": "faster on an average by 33.75% when compared with an off-the-shelf autopilot and 54.6% when compared with a human pilot",
+   "support_explanation": "作者核心数字主张",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "I Introduction (contributions) / VI Conclusion",
+   "quote": "We demonstrate that our framework outperforms other traditional approaches in the field of drone search and rescue.",
+   "support_explanation": "范围宽泛的作者结论",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-A",
+   "quote": "The quantized Molmo-7B-D BnB 4-bit model [ 20 ] is utilized as the VLM agent for image processing and goal object identification.",
+   "support_explanation": "VLM 角色：指点/识别目标与障碍物",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-A Eq.2-3",
+   "quote": "The horizontal and vertical real-world dimensions in meters are first calculated from the diagonal FoV and camera height using the following formulas",
+   "support_explanation": "像素到世界坐标仅用相机高度与 FoV 的平面几何（无深度）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-B",
+   "quote": "The NMPC finds the optimal trajectory and the set of control inputs designed for rapid control.",
+   "support_explanation": "点到点 NMPC，无外部轨迹生成",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "II-B",
+   "quote": "is able to be deployed on an onboard computer like an OrangePi in our case",
+   "support_explanation": "NMPC 机载部署",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "Fly around each of the center of the X on yellow objects. Avoid three legs of red tripod stands.",
+   "support_explanation": "仅一条指令、两个场景",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-A",
+   "quote": "an identification was considered accurate if the detected point was within a 25 cm radius of the actual object",
+   "support_explanation": "感知评测阈值，Vicon 真值",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Table II",
+   "quote": "Target 3 X 1.73 1.50 23 Y 1.70 1.60 10",
+   "support_explanation": "Scene2 Target3：逐轴误差 23/10 cm，欧氏距离≈25.1 cm，略超 25 cm 半径",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Table III",
+   "quote": "Time Taken for Scene 1 (s) 28 40 57 Time Taken for Scene 2 (s) 30 48 72",
+   "support_explanation": "全部任务时间结果：每格单次数值，无重复",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "For the UAV-VLRR framework, the timing started as soon as the code was launched, while for the human pilot, the timing started as soon as the image was shown.",
+   "support_explanation": "计时起点不对称（系统含服务器往返，人含阅图）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "Exp 2: The drone flies to the target points using an off-the-shelf autopilot.",
+   "support_explanation": "自动驾驶仪基线未指明型号/设置",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-B",
+   "quote": "the human pilot was more prone to crashing into the obstacles",
+   "support_explanation": "碰撞仅定性提及，无计数",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "The multimodal system ran on a remote server with an RTX 4090 GPU (24GB VRAM) and an Intel Core i9-13900K processor.",
+   "support_explanation": "VLM/LLM 在远程服务器运行；无延迟/费用拆分",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "VII Future Work",
+   "quote": "Another important direction is the integration of dynamic environmental factors, such as moving obstacles",
+   "support_explanation": "动态障碍未测，自述局限",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-A",
+   "quote": "It is worth noting that the image was not captured from a very high altitude, which may have resulted in some distortion or skewing.",
+   "support_explanation": "作者承认畸变导致感知误差",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Table I/II",
+   "quote": null,
+   "support_explanation": "Vicon 对比中，22 个坐标对多数朝图像中心收缩（如 S1 Obstacle2 X -0.85→-0.66、S2 Obstacle3 X -0.15→-0.03），呈系统性尺度偏差迹象，与“仅高度+FoV 平面映射”的假设一致；非全部（S1 Target2 Y 0.13→0.18 反向）",
+   "kind": "our_inference",
+   "derived_from": [
+    "E004",
+    "E009"
+   ]
+  }
+ ],
+ "score": {
+  "raw": 32.5,
+  "display": "32.5",
+  "lower": 32.5,
+  "upper": 32.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}

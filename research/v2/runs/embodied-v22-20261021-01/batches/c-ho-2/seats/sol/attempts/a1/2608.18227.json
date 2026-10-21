@@ -1,0 +1,689 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-2",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2608.18227",
+    "paper_id": "2608.18227",
+    "title": "Revisiting the \"Push-T\" Robot Manipulation Task with Agentic Robotics",
+    "version": "2608.18227v1",
+    "claim_type": "system_method",
+    "central_claim": "冻结Fable 5 coding agent通过仿真试验与代码重写，无示教生成Push-T/Alphabet程序控制器；优于200示教diffusion策略并自我改进至近100%，可跨仿真机械臂移植。"
+  },
+  "provenance": {
+    "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "63df41f73e20b110d2b3c2500b1501ff65203196736ccf009ab5b138f6bdb2d7",
+    "expectations_hash": "4ebe9616cdae7ea13ba04809a822f587d3b1d0bfd6f8614f49f189abd7530d14",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T17:17:25.420412+00:00",
+    "notes": "session_id及receipt_ref不可自取。domain_cards_hash为全部patterns/**/*.md的路径到SHA256映射的sort_keys紧凑JSON哈希；expectations_hash同法对内嵌期望的patterns/main/*.md计算。固定全文独立阅读，无网络、无论文代码运行、未读另一席及旧评分。总控已确认manifest旧invalidated a1为笔误，当前空a1为本批合法首attempt。"
+  },
+  "materials": [
+    {
+      "material_id": "2608.18227v1",
+      "url": "https://arxiv.org/html/2608.18227v1",
+      "sha256": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "sections_read": [
+        "Abstract",
+        "1-6 including Tables1-2 and Figures1-4",
+        "7.1 full benchmark appendix"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E01",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L12",
+      "quote": "the LLM does not operate inside the high-frequency control loop",
+      "support_explanation": "部署产物为代码，非每步LLM动作。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E02",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L15",
+      "quote": "actively runs candidate parameters through the simulation to fit the friction behavior",
+      "support_explanation": "仿真试验反馈用于程序与模型修订。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E03",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L15",
+      "quote": "color segmentation against a pre-defined render palette",
+      "support_explanation": "vision仍有render与已知形状特权。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E04",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L15",
+      "quote": "Diffusion_Policy_LeRobot 62.5% 223.7 6.38 87.4% Claude_state_controller 100.0% 120.1 3.72 96.8% Claude_vision_controller 97.2% 170.4 4.76 94.2%",
+      "support_explanation": "Table1数值与200seeds；97.2%不能由200个二元结果精确产生，需澄清分母。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E05",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L15",
+      "quote": "over 200 fixed evaluation seeds",
+      "support_explanation": "PushT分母固定；未说明search seed隔离。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E06",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L15",
+      "quote": "at least 95% target coverage",
+      "support_explanation": "gymPushT阈值95%，Alphabet90%，附录identical表述不精确。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E07",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L18",
+      "quote": "47.1% success rate",
+      "support_explanation": "初代程序性能，round2 73.1/round3 99.4；不同搜索预算。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E08",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L18",
+      "quote": "the test switching from “just B” to five curved letters",
+      "support_explanation": "practice曲线非同分布纵向，作者明确承认。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E09",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L18",
+      "quote": "98.3\\%\\rightarrow 99.4\\% (25 tries per letter, the strict final number)",
+      "support_explanation": "多次all-letter exam参与开发，不能当独立最终test。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E10",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L18",
+      "quote": "gym Dubins pushing + state 293.8 12.15 90.3% 97.2%",
+      "support_explanation": "refined classical adapter强baseline，MPC99.4。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E11",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L18",
+      "quote": "Franka MPC + vision 668.1 5.78 83.4% 89.8% UR5e MPC + vision 545.8 5.06 90.0% 98.5%",
+      "support_explanation": "两机械臂均simulation，非物理机器人。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E12",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L21",
+      "quote": "about 9.5 million output tokens",
+      "support_explanation": "开发总tokens，成本1500-2000USD。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E13",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L21",
+      "quote": "221 hours in Claude “auto mode” under human interactions",
+      "support_explanation": "人工干预与221h开发预算，非完全无人自治。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E14",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L27",
+      "quote": "full (letter polygon, pusher radius, inertia, friction, PD gains), shape (polygon and radius only), or blind (no geometry)",
+      "support_explanation": "task spec权限级存在，但table未逐行注明使用哪一级。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E15",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L27",
+      "quote": "seeds 0 – 24 ( 650 episodes total)",
+      "support_explanation": "最终Alphabet650/方法，未声明独立dev/test split。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E16",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L27",
+      "quote": "hysteresis (Schmitt-trigger) detector on the ground-truth pusher–block surface gap",
+      "support_explanation": "push count由sim真值独立计数。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E17",
+      "material_id": "2608.18227v1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.18227.txt:L24",
+      "quote": "this does not guarantee robustness to real-world perception errors",
+      "support_explanation": "作者明确限制sim-to-real。",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "whole procedural controller source",
+      "information": "coding agent读取环境源码/API、trial logs与friction实验；人提示vision/Alphabet/移植；state或palette+shape perception",
+      "operation": "write→simulate→diagnose→rewrite；heuristic升级MPC，逐难字母curriculum",
+      "output": "state machine/MPC/perception code",
+      "conditions": "廉价reset、准确已知几何与仿真，9.5M output tokens",
+      "feedback": "coverage/success、失败日志和源码诊断",
+      "selection_rule": "agent依据practice与all-letter exams修订；无固定accept/reject gate详表",
+      "selection_data": "B等难字母5次practice、26字母exam5/25次；seed隔离未声明",
+      "persistence": "v1/v2/v3与14个controller代码版本",
+      "later_use": "保留MPC用于最终650episodes、vision和Franka/UR5e port",
+      "claimed_effect": "47.1→73.1→99.4及PushT100%",
+      "failure_boundary": "自造环境、同exam反复选、渲染/几何依赖、仅sim迁移",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E07",
+        "E08",
+        "E09",
+        "E12",
+        "E13",
+        "E14",
+        "E15"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "runtime push actions and friction parameters",
+      "information": "state5维或RGB palette/template fit；known polygon task spec权限未逐行标",
+      "operation": "contact选择、approach/push/retreat；digital twin更新friction，receding horizon",
+      "output": "10Hz target pusher position",
+      "conditions": "固定palette/shape/physics，bounded arena",
+      "feedback": "每frame IoU pose与每push orientation变化",
+      "selection_rule": "MPC/error decrease，reachability/recovery启发式",
+      "selection_data": "当前episode反馈",
+      "persistence": "episode参数，非模型权重更新",
+      "later_use": "后续push纠正model mismatch",
+      "claimed_effect": "降低steps/pushes",
+      "failure_boundary": "遮挡与real sensor未测、有限720步reorientation失败",
+      "evidence_ids": [
+        "E02",
+        "E03",
+        "E14",
+        "E16",
+        "E17"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "PushT常用示教学习；能否coding agent自行写接触程序并扩至凹字母？",
+    "checked_gap": "具体凹几何/切换接触/边界问题；最近邻已有CRISP/contact optimization与Dubins pushing，不能声称此前没有procedural解。",
+    "lineage": [
+      {
+        "method": "Code-as-Policies / agentic robotics [7-9]",
+        "version": "v1 introduction references，原文未固定"
+      },
+      {
+        "method": "CRISP and Zhou–Hou–Mason Dubins pushing",
+        "version": "v1 Sec1/4，后者实际adapter baseline；原文未固定"
+      }
+    ],
+    "closest_adjacent": "classical model-based contact planning+agent-written adapter",
+    "residue": "通用coder能否以trial修订产出多形状可运行控制代码",
+    "stakes": "无200示教但仍大量开发交互与physics先验",
+    "method_response": "trial-driven program refinement+MPC+geometry vision",
+    "remaining_gap": "agent-vs-manual compute、feedback ablation、独立seed/shape holdout与真实迁移",
+    "evidence_ids": [
+      "E02",
+      "E04",
+      "E10",
+      "E12",
+      "E13",
+      "E14",
+      "E17"
+    ],
+    "unresolved": [
+      "原最近邻需双方统一固定材料；不联网补。"
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "outside_taxonomy": false,
+    "reason": "LLM写executable controller，仿真反馈在程序构造过程中改写；非只因有多个模块。",
+    "executes_pattern": true,
+    "resolves_problem": false,
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong",
+        "tactic_steps_checked": {
+          "1_boundary": "coder负责程序设计，geometry/MPC/interpreter负责精确运行",
+          "2_artifact": "可执行controller source",
+          "3_feedback": "trial coverage/failure反馈在14版构造过程改程序",
+          "4_ablation": "未有同budget no-feedback one-shot对照；版本与预算耦合",
+          "5_cost": "总tokens/USD/h有，sim独立test未落实"
+        },
+        "success_failure_checks": [
+          {
+            "condition": "machine checkable artifact",
+            "status": "met"
+          },
+          {
+            "condition": "feedback used during construction",
+            "status": "met"
+          },
+          {
+            "condition": "load-bearing isolated",
+            "status": "unmet"
+          },
+          {
+            "condition": "transfer beyond simulator conventions",
+            "status": "unknown"
+          }
+        ],
+        "evidence_ids": [
+          "E01",
+          "E02",
+          "E07",
+          "E08",
+          "E09",
+          "E12",
+          "E13"
+        ],
+        "reason": "C25操作链成立，solver并非真实接触sound oracle；不因此认可泛化。"
+      }
+    ]
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "code_policy_trial_revision",
+        "sub": "R05",
+        "version": "board-induced-2026-10-21",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "id": "trial-driven rewrite and runtime no model",
+            "status": "met",
+            "evidence_ids": [
+              "E01",
+              "E02",
+              "E07"
+            ]
+          },
+          {
+            "id": "rewrite history fixed instance comparisons",
+            "status": "partial",
+            "reason": "practice分布变化，exam反复参与选择",
+            "evidence_ids": [
+              "E08",
+              "E09"
+            ]
+          },
+          {
+            "id": "classical baseline",
+            "status": "met",
+            "evidence_ids": [
+              "E10"
+            ]
+          },
+          {
+            "id": "heldout independent",
+            "status": "unknown",
+            "evidence_ids": [
+              "E09",
+              "E15"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E01",
+          "E02",
+          "E07",
+          "E10"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "code_policy_trial_revision",
+        "sub": "R05"
+      },
+      "operation_correspondence": "executable程序由simulator coverage/failure闭环修改，部署无LLM",
+      "necessary_conditions_and_differences": "R05不是K105 episode内coding或K401模型仍留在harness；试验oracle仅sim语义，不保证真实部署",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E09",
+        "E17"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviewer comments",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "具体self-learning机制收益",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "只有随开发budget变化的版本曲线，无同模型同budget no-feedback/curriculum/vision单项toggle。",
+      "evidence_ids": [
+        "E07",
+        "E08",
+        "E09"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviewer comments",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "success比较",
+      "applicable": true,
+      "status": "partial",
+      "reason": "200/650固定seeds与sim count；无agent开发重复、paired CI且vision97.2%与200分母不整合。",
+      "evidence_ids": [
+        "E04",
+        "E05",
+        "E15",
+        "E16"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E17",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviewer comments",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "self-improvement泛化",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "all-letter exam复用，未锁独立seed/shape test；移植需生成新的仿真代码。",
+      "evidence_ids": [
+        "E08",
+        "E09",
+        "E11",
+        "E15"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E07",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviewer comments",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "胜过end-to-end VLA",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "本文特定PushT diffusion checkpoint比较，不将其泛化成通用tabletop VLA superiority；要求LIBERO非本窄task结论必要条件。",
+      "evidence_ids": [
+        "E04"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviewer comments",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "physical transfer",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "作者明确仅simulated embodiments，不把仿真当真机。",
+      "evidence_ids": [
+        "E11",
+        "E17"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "SOL-PUSH-COST-1",
+      "version": "paper-specific-v1",
+      "source_strength": "paper-stated metric, not reviewer consensus",
+      "source_refs": [
+        "2608.18227v1 Sec3-5"
+      ],
+      "applies_when": "无示教更高效率",
+      "applicable": true,
+      "status": "partial",
+      "reason": "执行steps计数与开发tokens/h分别有；不把46%执行step节约等价为开发预算公平或总成本更低。",
+      "evidence_ids": [
+        "E04",
+        "E12",
+        "E13"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "PushT100%且46%更少steps，无示教替代Diffusion",
+      "setting": "gym200seeds；state及vision",
+      "baseline_control": "released200-demo checkpoint62.5%，state100、vision97.2%；state与vision权限不同",
+      "selection_vs_test": "是否开发seed与200test分离未声明",
+      "result_denominator": "state200/200；vision97.2%不能精确对应200个二元trial，需明确实际分母",
+      "evidence_ids": [
+        "E03",
+        "E04",
+        "E05",
+        "E06",
+        "E12",
+        "E13"
+      ],
+      "counterevidence": [
+        "并非best所有diffusion checkpoint全面比较；开发与数据预算不匹配"
+      ],
+      "allowed_conclusion": "此checkpoint和仿真观察条件下描述性优势，不证明等信息等开发成本优越。"
+    },
+    {
+      "claim_id": "C2",
+      "text": "自主self-improvement近100%，跨embodiment",
+      "setting": "26字母650/setting；Franka/UR5e sim",
+      "baseline_control": "refinedDubins97.2% vsMPC99.4%；visiongym99.2/Franka89.8/UR98.5",
+      "selection_vs_test": "5/25exam进入14版开发，未给冻结独立test；human interactions221h",
+      "result_denominator": "25/letter650，state约646/650；无重复开发runs",
+      "evidence_ids": [
+        "E07",
+        "E08",
+        "E09",
+        "E10",
+        "E11",
+        "E13",
+        "E14",
+        "E15",
+        "E17"
+      ],
+      "counterevidence": [
+        "字母/环境也由agent生成、palette/template依赖、可见spec权限未逐row说明"
+      ],
+      "allowed_conclusion": "构建并反复优化了所测仿真controller；并非独立任务上的recursive retained improvement或真实机器人transfer。"
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "作者报告程序在PushT固定seeds与650Alphabetepisodes高成功，trial反馈促成MPC版本，且可port两机械臂仿真。无独立搜索外评估、同预算因果或真机；vision分母需核。未运行复现。",
+    "unresolved": [
+      "Table1vision97.2%/200分母",
+      "task spec visibility逐setting",
+      "development/test隔离与acceptance/rejection日志",
+      "human interventions与逐阶段成本"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "明确无示教程序解/多凹形状contact bottleneck，classical谱系与baseline存在；recent agent原文未固定。",
+      "evidence_ids": [
+        "E02",
+        "E10"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "代码trial修订、contact/MPC和vision参数adapt对准问题，信息权限和autonomy需更具体。",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E07",
+        "E13",
+        "E14"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 2,
+      "reason": "主流程可重建，但accept/reject、visibility级、冻结test及关键MPC实施参数不全；仅sim。",
+      "evidence_ids": [
+        "E08",
+        "E09",
+        "E14",
+        "E15",
+        "E17"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "独立coverage/push计数可检查，丰富sim结果；vision97.2%与200不一致且附录90与PushT95非identical。",
+        "evidence_ids": [
+          "E04",
+          "E05",
+          "E06",
+          "E15",
+          "E16"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "迭代版本、预算、prompt/human和机制一起变；classicaladapter提升也接近MPC，没有等预算feedback单项。",
+        "evidence_ids": [
+          "E07",
+          "E08",
+          "E09",
+          "E10",
+          "E13"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "多seed/字母/embodiment覆盖有，但反复all-letter exams、无独立search-test隔离或新shape。",
+        "evidence_ids": [
+          "E08",
+          "E09",
+          "E11",
+          "E15"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "200与650随机初始分母详细、push独立count；无agent-run repeats/CI，分母异常保留。",
+        "evidence_ids": [
+          "E04",
+          "E05",
+          "E15",
+          "E16"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "总9.5M输出、1500-2000USD/221h与部署steps明确；缺按stage/失败预算，baseline开发成本不齐。",
+        "evidence_ids": [
+          "E04",
+          "E12",
+          "E13"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "status": "reviewed",
+  "reason": "完整固定材料已读，按作者主张评估；所有结果均为作者报告，非复现。",
+  "score": {
+    "raw": 55.0,
+    "display": 55.0,
+    "lower": 55.0,
+    "upper": 55.0,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  }
+}

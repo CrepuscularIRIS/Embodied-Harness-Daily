@@ -1,0 +1,260 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-dev-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2606.00104",
+    "paper_id": "2606.00104",
+    "title": "PEACE: A Planner-Executor Agent with Constraint Enforcement for UAVs",
+    "version": "2606.00104v1",
+    "claim_type": "system_method",
+    "central_claim": "PEACE 用单次 LLM typed mission plan、确定性 ROS2/MAVLink executor、外部几何约束和有界重规划，在 PX4/Gazebo 中展示可审计、约束可控且减少 LLM 调用的 UAV agent。",
+    "claim_type_note": "基于现有中心主张的暂定类型；全文补齐后再核。多贡献论文不以资源/组件分数混成排名。"
+  },
+  "provenance": {
+    "input_hash": "814ece7e0086c985aa5634a0b9eb228b0a430642f680b410ee5c50e58bf60964",
+    "input_manifest_sha256": "ca1f61eec08572d68ddb47858f6877f7139da9592d4dec3151c04a4779988436",
+    "rubric_version": "v2.2 / draft_uncalibrated / calibration-dev",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "a6d204ba32f88ad229c4e8858f9d6030b718b0125f52fe3cc8473941977b22df",
+    "expectations_hash": "3c16a2dcce5db3544269596d6d8dfa1b511f97da55e8eb6c19fa6e493fffa263",
+    "model_type": "6.1 Sol (sonnet type，overlay=ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-6.1-sol)",
+    "actual_model": "sonnet",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T16:21:37.705873+00:00",
+    "notes": [
+      "沿用用户所配置路由；未重新配置或探测模型。",
+      "headless 会话无法从现有工具自取 session_id；亦无可引用 receipt，故均为 null。",
+      "未读取另一席、aggregate、旧分数、旧 Reel、录用/引用排名或其他批次产物。",
+      "domain_cards_hash 为 patterns/main、patterns/sub 全部 Markdown 加 taxonomy.json/conditions.json 的路径+SHA256清单规范 JSON 哈希；expectations_hash 为全部 main 卡（包含 reviewer expectations 原文）的同规则清单哈希。原 profile/expectations.json 不在本地研究目录，未将未见原件冒充已读来源。",
+      "只基于现有片段保存固定事实；B/C 完整评价被 A.1 材料完整性门阻塞，不作模式无适配或科学证据不足的结论。"
+    ]
+  },
+  "materials": [
+    {
+      "material_id": "2606.00104:fixed-text",
+      "url": "https://arxiv.org/html/2606.00104v1",
+      "version": "2606.00104v1",
+      "path": "research/fulltext/2606.00104.txt",
+      "sha256": "832e7d1fa6e8940200e7d5450e8d31b2848e25771151f013ca392f5c75da8010",
+      "sections_read": [
+        "Abstract",
+        "I Introduction",
+        "III Approach",
+        "IV Experiments",
+        "V Implications and Future Directions"
+      ],
+      "read_scope": "现有文件从首行至末行完整读取；FULLTEXT: html 标签不证明内容完整。",
+      "complete": false,
+      "missing_sections": [
+        "固定文件从 I Introduction 跳到 III Approach：Section II 缺失；参考文献表也缺失，TypeFly/FlockGPT 等最近邻 [14]–[17] 无可核定版本",
+        "Section IV-A 的 prompt 数据来源退化为 “rest can be obtained via .”；所引用完整 prompt 资源/链接未固定，无法核定输入包完整性",
+        "未发现显式附录引用，故不假称已知存在附录；请求总控提供含 Section II/参考文献及原始链接的完整固定论文材料以核对，不能把缺失内容当作未报告"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2606.00104:fixed-text",
+      "material_hash": "832e7d1fa6e8940200e7d5450e8d31b2848e25771151f013ca392f5c75da8010",
+      "locator": "research/fulltext/2606.00104.txt:L15; UTF-8解码字符偏移9090..9299",
+      "quote": "The aim is not a quantitative benchmark, but to characterize the agent’s behavior over a structured set of natural-language prompts and to surface the recurring failure modes that constrain the current design.",
+      "support_explanation": "仅固定作者所述主张/协议或其对缺失细节的引用；不构成我们复现，也不证明未包含材料中的内容。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2606.00104:fixed-text",
+      "material_hash": "832e7d1fa6e8940200e7d5450e8d31b2848e25771151f013ca392f5c75da8010",
+      "locator": "research/fulltext/2606.00104.txt:L9; UTF-8解码字符偏移3267..3718",
+      "quote": "A third family uses foundation models as high-level planners or code generators that emit scripts, structured plans, or action primitives for a classical controller to execute, ranging from DSL- generation systems such as TypeFly [ 14 ] and FlockGPT [ 15 ] to VLM-based mission planners [ 16 , 17 ] ; the resulting plans are human- readable and free of domain-specific training data, but their safety must be re-established for every emitted artifact.",
+      "support_explanation": "仅固定作者所述主张/协议或其对缺失细节的引用；不构成我们复现，也不证明未包含材料中的内容。",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S001",
+      "object": "UAV 的 mission plan—executor 接口与预执行 altitude/geofence gate",
+      "information": "planner 读取自然语言、时间戳 world model 与 robot-state history；2D detections 经同步 depth/intrinsics 投影到ENU；没有沿途避障的完整几何保证。",
+      "operation": "单 LLM pass 生成 reasoning+有序 typed tool calls，ROS2/MAVLink 顺序执行；每条 motion 先 clamp altitude/check geofence，失败返回 fresh snapshot 并 bounded replan。",
+      "output": "作者方法的操作产物；只保存正文可识别事实，完整性待补。",
+      "conditions": "静态/训练/运行边界以现有正文为准，关键缺失材料见 materials。",
+      "feedback": "正文描述的执行、观测、价值或工具失败反馈；未作独立真值核验。",
+      "selection_rule": "静态设计；工具失败才 replan，非 retained self-improvement；pre-execution gate 接受/修改/拒绝 motion。",
+      "selection_data": "训练/开发/选择/独立测试的完整构成尚待缺失部分核定。",
+      "persistence": "单任务 mission plan 和 mission logs；无跨任务选优留存机制，后续 distillation 仅 future work。",
+      "later_use": "任务内 executor 依序消费 plan；失败后重建快照；不声称后续任务复用改进。",
+      "claimed_effect": "PEACE 用单次 LLM typed mission plan、确定性 ROS2/MAVLink executor、外部几何约束和有界重规划，在 PX4/Gazebo 中展示可审计、约束可控且减少 LLM 调用的 UAV agent。",
+      "failure_boundary": "动态场景 open-loop 脆弱；不确定观测导致退化计划；composite failure 级联；geofence 与 altitude 不等于障碍物碰撞保证。",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "reading_status": "provisional_incomplete_material"
+    }
+  ],
+  "gap": {
+    "author_gap": "作者明确定位 tight-loop latency、typed-plan auditability 与 domain-training 依赖；最邻近 DSL/mission planner 的完整来源版本缺失。现有实验明确为定性 preliminary，而不是未读到数字就推定没有数字。",
+    "checked_gap": "仅核对到现有正文叙述；不声称完成最近邻原文核查或 novelty 检索。",
+    "lineage": [],
+    "closest_adjacent": [],
+    "residue": null,
+    "stakes": "具身执行、纠正/工具或教师数据闭环的可靠性与成本；尚未完整评价。",
+    "method_response": "单 LLM pass 生成 reasoning+有序 typed tool calls，ROS2/MAVLink 顺序执行；每条 motion 先 clamp altitude/check geofence，失败返回 fresh snapshot 并 bounded replan。",
+    "remaining_gap": "动态场景 open-loop 脆弱；不确定观测导致退化计划；composite failure 级联；geofence 与 altitude 不等于障碍物碰撞保证。",
+    "evidence_ids": [
+      "E001",
+      "E002"
+    ],
+    "unresolved": [
+      "固定文件从 I Introduction 跳到 III Approach：Section II 缺失；参考文献表也缺失，TypeFly/FlockGPT 等最近邻 [14]–[17] 无可核定版本",
+      "Section IV-A 的 prompt 数据来源退化为 “rest can be obtained via .”；所引用完整 prompt 资源/链接未固定，无法核定输入包完整性",
+      "未发现显式附录引用，故不假称已知存在附录；请求总控提供含 Section II/参考文献及原始链接的完整固定论文材料以核对，不能把缺失内容当作未报告"
+    ]
+  },
+  "rs_pattern": {
+    "primary": null,
+    "supporting": [],
+    "matches": [],
+    "outside_taxonomy": false,
+    "reason": "A.1 需要完整方法/实验/附录；按缺全文分支暂缓最终原卡识别，不将暂缓误记为 outside_taxonomy。",
+    "executes_pattern": null,
+    "resolves_problem": null
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [],
+    "unassigned": true,
+    "revision_proposals": [],
+    "reason": "材料完整性阻塞，未赋予领域卡；不据此修改既有卡或期望。"
+  },
+  "pattern_mapping": [],
+  "expectations": [],
+  "claims": [
+    {
+      "claim_id": "C001",
+      "text": "PEACE 用单次 LLM typed mission plan、确定性 ROS2/MAVLink executor、外部几何约束和有界重规划，在 PX4/Gazebo 中展示可审计、约束可控且减少 LLM 调用的 UAV agent。",
+      "setting": "作者固定版本现有正文；完整设置/附录未齐。",
+      "baseline/control": "尚未完成完整对照核查，不能把摘要/局部实验当完整证据矩阵。",
+      "selection_vs_test": "未决，等待完整固定输入包。",
+      "result/denominator": null,
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence": [],
+      "allowed_conclusion": "可确认作者提出该主张及相应正文机制；暂不判断中心主张是否充分获支持。"
+    }
+  ],
+  "assessment": {
+    "evidence_level": null,
+    "claim_support": "unresolved",
+    "strongest_supported_claim": "已读取部分包含作者报告的方法与实验；由于固定材料不全，不输出最终 evidence_level 或分数，亦不声称复现。",
+    "unresolved": [
+      "固定文件从 I Introduction 跳到 III Approach：Section II 缺失；参考文献表也缺失，TypeFly/FlockGPT 等最近邻 [14]–[17] 无可核定版本",
+      "Section IV-A 的 prompt 数据来源退化为 “rest can be obtained via .”；所引用完整 prompt 资源/链接未固定，无法核定输入包完整性",
+      "未发现显式附录引用，故不假称已知存在附录；请求总控提供含 Section II/参考文献及原始链接的完整固定论文材料以核对，不能把缺失内容当作未报告"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "M": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "X": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "causality": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "holdout": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "statistics": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "cost": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2606.00104.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": null,
+    "display": null,
+    "lower": 0.0,
+    "upper": 100.0,
+    "coverage": 0.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "needs_fulltext",
+  "reason": "固定文本不满足完整材料要求：固定文件从 I Introduction 跳到 III Approach：Section II 缺失；参考文献表也缺失，TypeFly/FlockGPT 等最近邻 [14]–[17] 无可核定版本；Section IV-A 的 prompt 数据来源退化为 “rest can be obtained via .”；所引用完整 prompt 资源/链接未固定，无法核定输入包完整性；未发现显式附录引用，故不假称已知存在附录；请求总控提供含 Section II/参考文献及原始链接的完整固定论文材料以核对，不能把缺失内容当作未报告",
+  "next_action": "请求总控补齐上述部分并重新固定两席共同输入包；本席不联网、不单独补证，也不在关闭后原地改写 a1。"
+}

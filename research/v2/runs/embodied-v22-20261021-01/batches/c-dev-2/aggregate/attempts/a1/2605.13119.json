@@ -1,0 +1,2148 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-2",
+ "attempt_id": "a1",
+ "seat": "aggregate_opus55",
+ "phase": "calibration",
+ "input_seat_hashes": {
+  "sol": "edd0c1aaa8c06ac2bb31ceab3a65138fd90734ae83660235dc34ce0031714a07",
+  "son55": "1519da48d9fd6526cc97b234d4cd602e6b9628cff3e330eaa403590d790ac462"
+ },
+ "input_seat_files": {
+  "sol": "research/v2/runs/embodied-v22-20261021-01/batches/c-dev-2/seats/sol/attempts/a1/2605.13119.json",
+  "son55": "research/v2/runs/embodied-v22-20261021-01/batches/c-dev-2/seats/son55/attempts/a1/2605.13119.json"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "provenance": {
+  "input_hash": "cef6819a0456f4a2a6c434ba14b8b42165da7242f014bf617492272f3181b9fc",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (calibration-dev; not frozen)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "pattern_protocol_hash": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "eeb8ba7127abcee445b8d46663e4aeef55882de69e2c4cf943254e91989ca258",
+  "domain_cards_hash_convention": "sha256 over sorted lines '<repo-relative path>\\t<sha256>\\n' for patterns/main/*.md, patterns/sub/*.md, research/patterns/taxonomy.json, research/patterns/conditions.json",
+  "expectations_hash": null,
+  "expectations_note": "profile/expectations.json absent from repo; expectations E01-E22 are the 'Reviewer expectations' sections embedded in patterns/main/*.md, bound via domain_cards_hash.",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Aggregate subagent cannot read its own session id / receipt; null per contract, no probing.",
+  "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+  "timestamp": "2026-10-21T18:30:00Z",
+  "independence_note": "Aggregate review with both seat inputs; core paper text read before opening seat totals. Not a third blind review or human gold."
+ },
+ "paper": {
+  "paper_key": "2605.13119",
+  "paper_id": "2605.13119",
+  "title": "Towards Long-horizon Embodied Agents with Tool-Aligned Vision-Language-Action Models",
+  "version": "2605.13119v2",
+  "claim_type": "system_method",
+  "central_claim": "VLAs-as-Tools: a high-level VLM agent invokes a family of specialized VLA tools through a typed tool-family interface with in-execution progress feedback and event-triggered replanning, and Tool-Aligned Post-Training (invocation-aligned units + per-family residual adapters) makes the VLAs faithful callable tools; this improves pi0.5 success by 8.9 points on average over five simulated benchmarks, Non-biased Rate by 15.0, and real Franka success from 16.7% to 58.3% under matched data and compute."
+ },
+ "materials": [
+  {
+   "material_id": "2605.13119:fulltext",
+   "aliases": [],
+   "url": "https://arxiv.org/html/2605.13119v2",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt",
+   "sections_read": [
+    "Abstract",
+    "1-6",
+    "Appendix A-G (all 48 lines)"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L6",
+   "quote": "Tool-Aligned Post-Training (TAPT)",
+   "support_explanation": "Original proposal trains tool executors to follow typed agent invocations, not merely a planner wrapped around frozen original VLA.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L18",
+   "quote": "tool-family residual adapters",
+   "support_explanation": "Distinct adapters route execution by callable family; shared VLA and local instructions form the executor interface.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L18",
+   "quote": "SFT Standalone 92.4 39.38 SFT Direct planner 80.4 30.00",
+   "support_explanation": "For pi05, adding a plain planner worsens both LIBERO-Long and RoboTwin; this is not a cost-free hierarchy benefit.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L18",
+   "quote": "97.2 ( \\uparrow 4.8) 62.50 ( \\uparrow 23.12)",
+   "support_explanation": "TAPT+typed interface improves pi05 over standalone; reported simulator success, not our execution.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L21",
+   "quote": "Simple 4/20 (20.0) 13/20 (65.0) Conditioned 1/20 (5.0) 13/20 (65.0) Long 5/20 (25.0) 9/20 (45.0) Avg. 10/60 (16.7) 35/60 (58.3)",
+   "support_explanation": "Per-task physical success counts with common initial configurations and hardware. Long task improvement is smaller.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L21",
+   "quote": "Both use 30 demonstrations per task, 30K training steps on eight A100s, one RTX 4090 at inference, and the same 20 marked initial configurations.",
+   "support_explanation": "Real comparator equalizes demos, optimizer steps, inference GPU and initial configurations, but not all planner monetary costs.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L21",
+   "quote": "92.0 92.4 ✓ 93.0 93.4 ✓ ✓ 94.2 91.2 ✓ ✓ ✓ 94.8 96.0 ✓ 80.2 80.4 ✓ ✓ ✓ ✓ 95.6 97.2",
+   "support_explanation": "Table4 is a cumulative training stack plus interface-only/full endpoints. It does not isolate all interactions or progress-monitor causality.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L30",
+   "quote": "we supervise a scalar progress signal using a normalized temporal proxy.",
+   "support_explanation": "Training target measures execution-window time, not independently calibrated semantic completion.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L30",
+   "quote": "completion threshold \\tau=0.90",
+   "support_explanation": "Progress triggers handoff, and stagnation triggers replanning; qualitative success/failure traces are not a detector confusion matrix.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L33",
+   "quote": "global video understanding, state-change-based segmentation, and definition-conditioned tool-family labeling.",
+   "support_explanation": "Offline training labels can use future/global video and robot-state transitions; do not assume deployment receives this privileged future context.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E011",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L39",
+   "quote": "We instantiate \\psi_{z,g} using simulator-state predicates.",
+   "support_explanation": "RL subtask rewards and boundary resets use simulator-state truth; deployment relies on learned progress, not these oracle predicates.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E012",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L36",
+   "quote": "after Stage 3, end-to-end fine-tuning retains 86.4% of prior skills, while ours retains 97.6% and achieves 95.0% final LIBERO-Long success",
+   "support_explanation": "Independent staged offline expansion tests retention with new family demonstrations; not autonomous self-improvement.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E013",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L42",
+   "quote": "Adapters add only 9% parameters and 7% inference time to OpenVLA-OFT",
+   "support_explanation": "Local adapter overhead measured relative to backbone; total agent cost not inferred from this alone.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E014",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L42",
+   "quote": "The call counts measure VLM requests during execution and exclude initial plan construction",
+   "support_explanation": "Measured reductions omit initial planning, so cannot be read as total agent call count.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E015",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L42",
+   "quote": "109.5/58.2/57.2 to 1.988/0.304/0.228 per episode.",
+   "support_explanation": "Event-triggered vs periodic monitoring reduces execution-time VLM queries for three executors; budget asymmetry and full wall time need audit.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E016",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L48",
+   "quote": "we use CALVIN_D and split episodes into 80% training and 20% testing.",
+   "support_explanation": "Within-D episode split is not standard cross-environment ABC-to-D transfer.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E017",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L48",
+   "quote": "all methods compared within the same benchmark use the same held-out tasks, initial-state files, rollout horizons, random seeds, and success predicates.",
+   "support_explanation": "Matched native environment success and many trials, but harness design/tuning disjointness is not established by test naming.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E018",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt:L45",
+   "quote": "We pre-sample and physically mark 20 randomized initial object configurations, and use the same configurations for both methods.",
+   "support_explanation": "Paired configurations and final-state task definitions support real deployment measurement; no run-to-run statistical inference is reported.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "On three real-world Franka tasks, it improves success rate from 16.7% to 58.3% under matched data and compute.",
+   "support_explanation": "真机主张：16.7%→58.3%，“matched data and compute”。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "Across five simulated benchmarks, VLAs-as-Tools improves the success rate of pi05 by 8.9 percentage points on average and enhances invocation fidelity by 15.0 points in Non-biased Rate.",
+   "support_explanation": "sim 主张：5 个基准平均 +8.9，LIBERO-IF Non-biased +15.0。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "We therefore propose VLAs-as-Tools, a strategy that distributes this burden across a high-level vision language model (VLM) agent for temporal reasoning and a family of specialized VLA tools",
+   "support_explanation": "中心策略：VLM 智能体+一族专用 VLA 工具。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "direct planner deployment changes performance by -0.2",
+   "support_explanation": "在普通 SFT VLA 上直接套规划器反而下降(−0.2/−11.8/−12.0)：作者自测的 gap 证据。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 1",
+   "quote": "SFT Direct planner 80.2 18.80",
+   "support_explanation": "Direct planner 行：80.2 (OFT LIBERO-Long)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 1",
+   "quote": "SFT Standalone 92.4 39.38",
+   "support_explanation": "π0.5 standalone 基线：LIBERO-Long 92.4，RoboTwin-SA 39.38。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 1",
+   "quote": "TAPT VLA tool-family interface 97.2",
+   "support_explanation": "π0.5 完整系统 97.2。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "The interface alone reaches only 80.2%/80.4%, showing that planner wrapping cannot make an unaligned executor reliable",
+   "support_explanation": "“仅接口”=80.2/80.4，与 Table 1 Direct planner 数值相同：该消融无法含进度反馈。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "Invocation-aligned SFT adds 1.0 point for both backbones.",
+   "support_explanation": "IA SFT 仅 +1.0，量级在 500 episode 噪声内。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "likely because the open-source post-training data is less matched to the high-quality training distribution of",
+   "support_explanation": "IA Post-train 使 π0.5 下降(93.4→91.2)，作者归因于数据不匹配(未检验)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "Tool-family residual adapters then raise OpenVLA-OFT to 94.8%",
+   "support_explanation": "适配器步的增益。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 4 caption",
+   "quote": "Core ablation of TAPT and the VLA tool-family interface on LIBERO-Long with OpenVLA-OFT and",
+   "support_explanation": "Table 4 为累积式组件表；非接口行的部署模式未说明。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "The VLA tool-family interface further adds +2.6 and +2.0 points over TAPT alone",
+   "support_explanation": "RL 下接口(规划+反馈)相对 TAPT 单独仅 +2.6/+2.0。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "Standard RL denotes full-task RL that optimizes the original long-horizon task success without IA units.",
+   "support_explanation": "RL 基线定义。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "success also increases from 76.0 to 78.8 with Invocation-aligned RL and further to 82.3 with full TAPT",
+   "support_explanation": "CALVIN 结果(散文)：76.0→82.3。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.1",
+   "quote": "For CALVIN, we use CALVIN_D with an 80%/20% train-test episode split",
+   "support_explanation": "CALVIN 使用自划分 80/20，非标准泛化协议。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.3",
+   "quote": "Table 2 shows that VLAs-as-Tools improves RoboMemArena full-task SR by 3.85 points",
+   "support_explanation": "RoboMemArena +3.85；RoboLab-120 +6.3；训练/适配数据未说明。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.4",
+   "quote": "Both use 30 demonstrations per task, 30K training steps on eight A100s, one RTX 4090 at inference, and the same 20 marked initial configurations.",
+   "support_explanation": "真机匹配：数据量、训练步数、推理硬件、初始配置。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. F",
+   "quote": "Thus, the comparison controls the real-robot data, training budget, and inference hardware.",
+   "support_explanation": "“matched”的实际含义：数据/训练预算/推理硬件，不含规划器推理成本。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 5",
+   "quote": "Avg. 10/60 (16.7) 35/60 (58.3)",
+   "support_explanation": "真机分母：每任务 20 trials，共 60。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.4",
+   "quote": "Success is judged by the final physical state",
+   "support_explanation": "真机判据：最终物理状态(任务专用准则，裁判者未说明)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.4",
+   "quote": "Conditioned provides the clearest evidence, improving from 5.0% to 65.0%",
+   "support_explanation": "作者设计的别名状态任务，基线无阶段信息。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 6",
+   "quote": "The real-world study covers one robot, one camera, and three tabletop tasks",
+   "support_explanation": "作者自承真机范围。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. G",
+   "quote": "each policy is evaluated over 50 trials per task from the held-out LIBERO-Long initial states",
+   "support_explanation": "LIBERO-Long 分母：10 任务×50 trials，留出初始状态。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. G",
+   "quote": "A task is included if its successful demonstrations do not require bimanual coordination and can be segmented into the tool-family invocation types used in our interface.",
+   "support_explanation": "RoboTwin-SA 任务筛选标准依赖方法自身的可分段性。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. A",
+   "quote": "Because supervision comes from temporal position within segmented windows, the prediction is a learned temporal completion proxy correlated with physical execution state",
+   "support_explanation": "进度头目标是线性时间代理，非语义完成度。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. A",
+   "quote": "A runtime monitor combines a completion threshold with consecutive-sample smoothing and lookback-based progress gains",
+   "support_explanation": "监控规则(τ=0.90 等)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. A",
+   "quote": "each 2 Hz VLA inference jointly predicts an action chunk and its aligned progress feedback",
+   "support_explanation": "2 Hz 联合预测动作块与进度。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. B",
+   "quote": "If local evidence conflicts with the global context or a family definition, the pipeline lowers confidence or sends the segment for manual review rather than forcing a label.",
+   "support_explanation": "自动标注管线有低置信/人工复核回退，但未报告标注准确率。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E030",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.1",
+   "quote": "an intermediate post-training stage on DROID-split",
+   "support_explanation": "IA Post-train 使用额外的 DROID 分段数据(基线无)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E031",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 4.1.1",
+   "quote": "yielding 11 families on DROID, 7 of which are used in each of LIBERO and RoboTwin",
+   "support_explanation": "工具族数据驱动：DROID 11 族，LIBERO/RoboTwin 各 7。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E032",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.2",
+   "quote": "the average runtime calls decrease from 109.5/58.2/57.2 to 1.988/0.304/0.228 per episode",
+   "support_explanation": "规划调用次数对比直接 VLM 监控。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E033",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.2",
+   "quote": "Table 14 compares progress-triggered replanning with direct VLM monitoring every five steps.",
+   "support_explanation": "Table 14 只比调用次数，未比成功率。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E034",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.2",
+   "quote": "replan success rate is the fraction of these intervened episodes that ultimately succeed",
+   "support_explanation": "重规划成功率定义。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E035",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. G",
+   "quote": "we construct 10 counterfactual tasks from LIBERO-10 layouts by modifying the requested goal while keeping the scene visually close to a familiar source task",
+   "support_explanation": "LIBERO-IF：10 个反事实任务，计划固定、仅换执行器。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E036",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 3",
+   "quote": "19.4 31.2 24.8 39.6",
+   "support_explanation": "无 TAPT 时 Faithful/Non-biased(OFT 19.4/31.2；π0.5 24.8/39.6)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E037",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.5",
+   "quote": "full TAPT improves Faithful/Non-biased Rate by +34.6/+16.2 points for OpenVLA-OFT",
+   "support_explanation": "完整 TAPT 提升 Faithful/Non-biased。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E038",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.1",
+   "quote": "Adapters add only 9% parameters and 7% inference time to OpenVLA-OFT",
+   "support_explanation": "适配器开销。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E039",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. D",
+   "quote": "In our experiments, this mismatch can make individually improved subtasks compose worse, sometimes reducing full-task success.",
+   "support_explanation": "RL 子任务的 reset-state 池刷新动机(无定量对照)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E040",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E",
+   "quote": "across four strong VLM planners, LIBERO-Long success varies by only 0.6 points",
+   "support_explanation": "规划器底座互换(固定工具族)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E041",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E",
+   "quote": "TAPT improves downstream sample efficiency, with the largest gain in the most data-limited OpenVLA-OFT 10-shot setting",
+   "support_explanation": "少样本适配增益。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E042",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. C.1",
+   "quote": "The modest gap indicates that performance is not overly sensitive to the exact taxonomy",
+   "support_explanation": "工具族粒度敏感性(96.6 vs 97.2)。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E043",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 6",
+   "quote": "primitives absent from pretraining and adaptation data still require new demonstrations",
+   "support_explanation": "覆盖局限。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E044",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "Code will be released.",
+   "support_explanation": "代码未发布；无我们的运行/静态检查。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E045",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract+Table 1/2+Sec 5.2 (our arithmetic)",
+   "quote": null,
+   "support_explanation": "复算 +8.9：LIBERO-Long +4.8(92.4→97.2)、RoboTwin-SA +23.12(39.38→62.50)、RoboMemArena +3.85、RoboLab-120 +6.3、CALVIN +6.3(76.0→82.3，若以 76.0 为 π0.5 基线)，均值=8.87。该均值混合 IL 与 RL 设置、不同基线定义，且三个基准的训练/适配数据未在文中说明。",
+   "kind": "our_inference",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:B01",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "materials/2605.13119.txt:L18; Table 1 OpenVLA rows",
+   "quote": "SFT Direct planner 77.0 13.80 OpenVLA TAPT VLA tool-family interface 82.4 ( \\uparrow 5.2) 5.00 ( \\uparrow 3.12)",
+   "support_explanation": "For OpenVLA on RoboTwin-SA the full system (5.00) is below the plain direct-planner baseline (13.80); the reported gain is only vs standalone (1.88).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:B02",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "materials/2605.13119.txt:L21; Sec 5.1",
+   "quote": "an intermediate post-training stage on DROID-split",
+   "support_explanation": "TAPT includes extra DROID-derived invocation-aligned post-training that standalone/direct-planner baselines do not receive.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:B03",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "materials/2605.13119.txt:L45; App. F Training protocol",
+   "quote": "are trained separately on the same 30 demonstrations for 30K steps",
+   "support_explanation": "Real-world matching is stated for task demos/steps/hardware; whether the DROID IA post-train stage precedes the real-world model is not stated.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:B04",
+   "material_id": "2605.13119:fulltext",
+   "material_hash": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "materials/2605.13119.txt:L48; App. G RoboLab-120",
+   "quote": "testing generalization beyond the training distribution",
+   "support_explanation": "Benchmark is described as a generalization test, but the paper does not state what data the evaluated policies were trained/adapted on for RoboMemArena/RoboLab-120.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "高层 VLM 智能体与 VLA 执行器之间的接口 I=(C,R)：调用消息 c=(g,z)(工具族标签+场景化子任务指令)与反馈 r(进度 p_t∈[0,1])",
+   "information": "智能体见观测、历史调用与反馈；VLA 工具只见机器人观测、调用(g,z)与短历史；进度头与动作块同一次 2 Hz 推理输出，无额外模型调用；规划器不看低层动作",
+   "operation": "智能体选工具族并给出局部指令→选定族的残差适配器执行有界窗口→监控按阈值(τ=0.90)+平滑+lookback 决定继续/推进/重规划",
+   "output": "有界轨迹+进度信号；事件触发重规划",
+   "conditions": "任务可表示为已注册工具族的组合；新原语须有演示；执行器需对调用忠实",
+   "feedback": "工具侧进度(时间代理)；智能体视觉观察核对物理目标",
+   "selection_rule": "进度阈值/停滞规则决定推进或重规划",
+   "selection_data": "not_applicable(无选择集，部署时规则)",
+   "persistence": "智能体侧状态 s_k 累积已完成调用；无跨任务持久化",
+   "later_use": "同任务后续步骤；真机 Conditioned 任务靠阶段记忆消歧别名状态",
+   "claimed_effect": "LIBERO-Long 92.4→97.2(π0.5)；真机 16.7→58.3；运行时规划调用 57→0.23/episode",
+   "failure_boundary": "直接套规划器于普通 SFT VLA 反而下降；新原语需演示；进度仅为时间代理；单机器人单相机",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E004",
+    "son55:E027",
+    "son55:E028",
+    "son55:E032",
+    "son55:E022"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "VLA 执行器的训练：调用对齐的训练单元+每族 LoRA 残差适配器+进度头(+可选 GRPO 子任务 RL)",
+   "information": "示教被自动标注管线(MLLM+状态变化线索+操作定义)切成有界窗口并标 (g,z,p*)；RL 起点来自演示边界或前序子任务成功状态，奖励为局部完成谓词；推理时 VLA 只见观测/指令/族标签",
+   "operation": "IA Post-train(DROID-split 1 epoch)→IA SFT(基准分段数据)；L=动作克隆+λ·进度回归(λ=0.1)；RL 用子任务谓词奖励并在一轮后用训练后策略刷新 reset 状态池；新族只训新适配器、冻结骨干",
+   "output": "可被规划器按 (g,z) 调用并返回进度的 VLA 工具族(参数增 9%)",
+   "conditions": "示教可按接触/夹爪状态分段；工具族分类法数据驱动(DROID 11 族，LIBERO/RoboTwin 各 7)",
+   "feedback": "模仿损失+进度回归；RL 局部谓词奖励",
+   "selection_rule": "RL：谓词成功=1；reset 池仅保留前序调用成功的边界状态",
+   "selection_data": "benchmark 演示/rollout；是否与评测任务重叠(同基准内)未说明",
+   "persistence": "适配器与进度头权重；刷新后的 reset 状态池",
+   "later_use": "推理时按族路由；增量新增族无需回放",
+   "claimed_effect": "IA SFT +1.0、适配器恢复/提升、完整 TAPT LIBERO-Long 97.2；LIBERO-IF Faithful +30–35、Non-biased +15–16；少样本最高 +11.5",
+   "failure_boundary": "IA Post-train 使 π0.5 下降 93.4→91.2；新原语需演示；标注准确率未报告",
+   "retention_trace": {
+    "before": "reset 池=初始策略/演示边界状态",
+    "candidate": "训练后的组合策略部署所得边界状态",
+    "selection": "仅保留前序调用成功的边界状态",
+    "persisted": "刷新后的 S0 池",
+    "later_tasks": "下一轮子任务 RL",
+    "measured_gain": "文中仅定性“恢复全任务增益”(Table 10)，无定量对照",
+    "trace_note": "非自我改进主张；此条仅为训练流程中的数据保留，未声称 retained improvement"
+   },
+   "evidence_ids": [
+    "son55:E030",
+    "son55:E031",
+    "son55:E029",
+    "son55:E026",
+    "son55:E039",
+    "son55:E038",
+    "son55:E043"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "LIBERO-IF 反事实指令忠实度诊断(静态评测)",
+   "information": "计划固定，仅换执行器变体；场景保持与源任务视觉相近",
+   "operation": "修改目标(对象/关系/停止点)→测 Faithful(完成新目标)与 Biased(仍完成源任务目标)",
+   "output": "Faithful/Non-biased 率",
+   "conditions": "仿真谓词作真值",
+   "feedback": "not_applicable",
+   "selection_rule": "not_applicable",
+   "selection_data": "not_applicable",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "完整 TAPT 使 Non-biased +15.0(π0.5)",
+   "failure_boundary": "仅 10 个任务；组件开关为累积式",
+   "static_note": "静态评测构造",
+   "evidence_ids": [
+    "son55:E035",
+    "son55:E036",
+    "son55:E037"
+   ]
+  },
+  {
+   "sig_id": "S4",
+   "object": "Staged offline addition of pull and push families",
+   "information": "New-operation demonstrations plus frozen shared backbone and earlier family adapters.",
+   "operation": "Train only newly added family adapter; keep old adapters fixed; evaluate preceding skills after each stage.",
+   "output": "Expanded callable skill registry",
+   "conditions": "New skill expressible with family adapter and same backbone; demonstrations needed.",
+   "feedback": "Held earlier-skill success and final LIBERO-Long success; not online autonomous acceptance.",
+   "selection_rule": "Predetermined family expansion/training, not a search-and-select self-optimization algorithm.",
+   "selection_data": "Training demos for newly added operations; test earlier families separately.",
+   "persistence": "Frozen prior adapters and new adapter weights.",
+   "later_use": "Stage3 retained-skill evaluation and final benchmark suite.",
+   "claimed_effect": "97.6% prior retention versus86.4% end-to-end;95% final suite.",
+   "failure_boundary": "One staged simulation experiment does not establish unlimited skill growth, new embodiments or autonomous discovery.",
+   "evidence_ids": [
+    "sol:E012"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "End-to-end VLAs execute well but plan poorly over long horizons; agent systems plan well over weak rigid skills; standalone VLAs are not reliably tool-usable (scene-prior bias, adaptation degrades semantics).",
+  "checked_gap": "Substantiated in-paper: plain planner wrapping hurts strong executors (-11.8/-12.0 LIBERO-Long); LIBERO-IF Non-biased 31-40% without TAPT.",
+  "lineage_closest_adjacent": {
+   "source_version": "2605.13119v2 Sec 1-2; originals not in fixed input",
+   "ancestors": [
+    "SayCan",
+    "Code as Policies",
+    "pi0.5 subtask prediction"
+   ],
+   "closest": [
+    "AtomicVLA",
+    "RoboClaw"
+   ]
+  },
+  "residue": "Align training unit, callable family semantics, executor objective and return signal so a planner can compose trained VLA skills.",
+  "stakes": "Local errors cascade in long-horizon execution; aliased states make stateless VLAs repeat the wrong stage.",
+  "method_response": "Typed (family, instruction) calls, per-family adapters, progress head, invocation-level IL/RL, event-triggered replanning.",
+  "remaining_gap": "Interface's marginal contribution beyond executor training, extra-supervision confound, monitor calibration, unseen primitives/embodiments, comparison with AtomicVLA/RoboClaw.",
+  "evidence_ids": [
+   "sol:E003",
+   "son55:E004",
+   "son55:E036",
+   "son55:E043"
+  ],
+  "unresolved": [
+   "Nearest-neighbour originals not supplied; no novelty verdict."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "heterogeneous_decomposition",
+   "controlled_diagnostic_design"
+  ],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "main strong; rs:C25 partial (learned executor and learned temporal progress instead of a sound solver/checker)",
+    "tactic_steps_checked": [
+     {
+      "step": 1,
+      "status": "met",
+      "note": "Responsibility boundary: VLM plans/tracks/recovers; VLA executes bounded local control.",
+      "evidence_ids": [
+       "son55:E003"
+      ]
+     },
+     {
+      "step": 2,
+      "status": "partial",
+      "note": "Typed family label + free-text local instruction; inspectable, not machine-checkable.",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "step": 3,
+      "status": "partial",
+      "note": "Loop closed by a learned temporal-progress proxy, not a verifier.",
+      "evidence_ids": [
+       "sol:E008",
+       "sol:E009"
+      ]
+     },
+     {
+      "step": 4,
+      "status": "unmet",
+      "note": "C25 demands isolating the structure's marginal contribution from extra data; DROID post-train not separated and interface effect small.",
+      "evidence_ids": [
+       "agg:B02",
+       "son55:E013"
+      ]
+     },
+     {
+      "step": 5,
+      "status": "partial",
+      "note": "Adapter and runtime call costs reported; planner cost not.",
+      "evidence_ids": [
+       "sol:E013",
+       "sol:E014"
+      ]
+     }
+    ],
+    "success_failure_checks": [
+     {
+      "id": "failure: gains unattributable vs extra training data",
+      "status": "unmet",
+      "evidence_ids": [
+       "agg:B02"
+      ]
+     },
+     {
+      "id": "success: fair comparison with end-to-end baseline",
+      "status": "partial",
+      "evidence_ids": [
+       "sol:E003",
+       "agg:B01"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E001",
+     "sol:E002",
+     "sol:E008"
+    ],
+    "reason": "Both seats chose decompose_and_delegate with C25 at partial fit; C25 is the singleton under this parent and its step 4 failure mode is exactly this paper's main evidential weakness."
+   },
+   {
+    "main_id": "heterogeneous_decomposition",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": "partition parameters by discriminating property (contact/motion family)",
+      "status": "met",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "step": "tailored treatment per partition (separate LoRA, frozen prior adapters)",
+      "status": "met",
+      "evidence_ids": [
+       "sol:E012"
+      ]
+     },
+     {
+      "step": "rs:C04 compression of high-impact minority",
+      "status": "not_applicable",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     }
+    ],
+    "success_failure_checks": [
+     {
+      "id": "uniform vs differentiated comparison",
+      "status": "met",
+      "note": "End-to-end sequential FT vs family LoRA (Table 8); coarse vs current taxonomy (Table 7).",
+      "evidence_ids": [
+       "sol:E012",
+       "son55:E042"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E002",
+     "sol:E012"
+    ],
+    "reason": "Per-family adapter routing is a distinct operation the paper's retention and Table 4 claims depend on; C04 is compression-specific, so sub null."
+   },
+   {
+    "main_id": "controlled_diagnostic_design",
+    "sub_id": "rs:C02",
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": "name confound (scene/visual prior vs invoked instruction)",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E035"
+      ]
+     },
+     {
+      "step": "instances hold scene fixed, vary invoked goal; plan fixed",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E035"
+      ]
+     },
+     {
+      "step": "oracle independent of evaluand (sim predicates)",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E035"
+      ]
+     },
+     {
+      "step": "report apparent vs de-confounded gap (Faithful vs Biased)",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E036",
+       "son55:E037"
+      ]
+     },
+     {
+      "step": "scope/scale beyond controlled regime",
+      "status": "partial",
+      "note": "10 self-built tasks; components enabled cumulatively.",
+      "evidence_ids": [
+       "son55:E035"
+      ]
+     }
+    ],
+    "success_failure_checks": [],
+    "evidence_ids": [
+     "son55:E035",
+     "son55:E036",
+     "son55:E037"
+    ],
+    "reason": "LIBERO-IF backs a headline claim (+15.0 Non-biased) and is a distinct confound-isolating instrument."
+   }
+  ],
+  "rejected": [
+   {
+    "main_id": "self_supervised_signal_engineering",
+    "reason": "Progress targets are a fixed temporal heuristic and labels come from an external MLLM with manual review; no signal derived from the model's own outputs (definition not met). Proposed by son55, not adopted."
+   }
+  ],
+  "reason": "Typed delegation to aligned learned tools is primary; family-specific adapters and the counterfactual fidelity instrument are separate operations.",
+  "executes_pattern": true,
+  "resolves_problem": false,
+  "resolves_problem_reason": "System-level gains on tested Franka suites, but the delegation structure's own contribution is not isolated and unseen primitives/embodiments are untested."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "S*: met = success condition satisfied by this paper's evidence. F*: met = paper guards against / does not exhibit the failure mode; unmet = failure mode present; partial; unknown; not_applicable (with reason). Normalized by aggregate because the two seats used opposite conventions for F-checks.",
+  "matches": [
+   {
+    "main": "planner_composes_code_and_policies",
+    "sub": "K106",
+    "role": "primary_operation",
+    "version": "domain_cards_hash (see provenance)",
+    "fit": "good",
+    "condition_checks": [
+     {
+      "id": "S5",
+      "status": "met",
+      "reason": "Executor post-trained on the call it receives.",
+      "evidence_ids": [
+       "sol:E001",
+       "son55:E031"
+      ]
+     },
+     {
+      "id": "S1",
+      "status": "not_applicable",
+      "reason": "No code composition.",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "id": "S2",
+      "status": "not_applicable",
+      "reason": "No geometry library.",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "id": "S3",
+      "status": "not_applicable",
+      "reason": "No generated motion validation.",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "id": "S4",
+      "status": "not_applicable",
+      "reason": "Executor is trained, not a frozen VLA staged.",
+      "evidence_ids": [
+       "sol:E001"
+      ]
+     },
+     {
+      "id": "F1",
+      "status": "not_applicable",
+      "reason": "Contact handled by closed-loop VLA.",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "id": "F2",
+      "status": "unmet",
+      "reason": "Interface mechanism not isolated; cumulative stack; extra DROID supervision.",
+      "evidence_ids": [
+       "sol:E007",
+       "agg:B02"
+      ]
+     },
+     {
+      "id": "F3",
+      "status": "met",
+      "reason": "Four planners with tool family fixed vary by 0.6 points.",
+      "evidence_ids": [
+       "son55:E040"
+      ]
+     },
+     {
+      "id": "F4",
+      "status": "met",
+      "reason": "Gains over standalone for strong pi0.5 too, not weak backends only.",
+      "evidence_ids": [
+       "sol:E004"
+      ]
+     },
+     {
+      "id": "F5",
+      "status": "not_applicable",
+      "reason": "No frozen policy accessed unguided.",
+      "evidence_ids": [
+       "sol:E001"
+      ]
+     },
+     {
+      "id": "F6",
+      "status": "unmet",
+      "reason": "Coverage gaps present: new primitives need demos; RoboTwin-SA restricted to segmentable tasks; IA post-train hurts pi0.5.",
+      "evidence_ids": [
+       "son55:E043",
+       "son55:E025",
+       "son55:E010"
+      ]
+     },
+     {
+      "id": "F7",
+      "status": "met",
+      "reason": "Real evidence counted (20 trials/task).",
+      "evidence_ids": [
+       "sol:E005"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E001",
+     "sol:E002",
+     "son55:E031"
+    ]
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K202",
+    "role": "primary_operation",
+    "version": "domain_cards_hash (see provenance)",
+    "fit": "good; executor-reported progress",
+    "condition_checks": [
+     {
+      "id": "S4",
+      "status": "partial",
+      "reason": "Progress monitor drives handback; accuracy not measured.",
+      "evidence_ids": [
+       "sol:E008",
+       "sol:E009"
+      ]
+     },
+     {
+      "id": "F1",
+      "status": "partial",
+      "reason": "Monitor is an author-acknowledged temporal proxy; task success itself is scored by native predicates, so the weak proxy affects control, not measurement.",
+      "evidence_ids": [
+       "son55:E026",
+       "sol:E017"
+      ]
+     },
+     {
+      "id": "F3",
+      "status": "unmet",
+      "reason": "Progress/handback contribution to success not isolated (Table 14 calls only).",
+      "evidence_ids": [
+       "son55:E033",
+       "sol:E007"
+      ]
+     },
+     {
+      "id": "F5",
+      "status": "unmet",
+      "reason": "Planner gains depend on executor fidelity (direct planner -11.8/-12.0; OpenVLA RoboTwin full < direct).",
+      "evidence_ids": [
+       "sol:E003",
+       "agg:B01"
+      ]
+     },
+     {
+      "id": "S1",
+      "status": "not_applicable",
+      "reason": "No pre-execution validity checker.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "S2",
+      "status": "not_applicable",
+      "reason": "No obstacle route check.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "S3",
+      "status": "not_applicable",
+      "reason": "No STOP depth gate.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "S5",
+      "status": "not_applicable",
+      "reason": "No post-scoring diagnostics.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "F2",
+      "status": "not_applicable",
+      "reason": "No privileged detector at deployment (sim predicates used only for RL training rewards).",
+      "evidence_ids": [
+       "sol:E011"
+      ]
+     },
+     {
+      "id": "F6",
+      "status": "not_applicable",
+      "reason": "No reset-dependent validity claim.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E008",
+     "sol:E009",
+     "son55:E032"
+    ]
+   },
+   {
+    "main": "harness_effect_evaluation",
+    "sub": "K803",
+    "role": "evaluation_practice (secondary; not the contributed operation)",
+    "version": "domain_cards_hash (see provenance)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "id": "S3",
+      "status": "met",
+      "reason": "Same initial states/seeds/horizons for all methods; planner swap with tools fixed; executor swap with plan fixed.",
+      "evidence_ids": [
+       "sol:E017",
+       "son55:E040",
+       "son55:E035"
+      ]
+     },
+     {
+      "id": "F1",
+      "status": "unmet",
+      "reason": "Multiple <=1-2 point differences without variance.",
+      "evidence_ids": [
+       "son55:E009",
+       "son55:E013"
+      ]
+     },
+     {
+      "id": "F3",
+      "status": "partial",
+      "reason": "Single runs; cost partially reported.",
+      "evidence_ids": [
+       "son55:E024",
+       "son55:E038"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E017",
+     "son55:E040"
+    ]
+   }
+  ],
+  "unassigned": [
+   "Invocation-level GRPO with refreshed boundary reset pools (single paper).",
+   "Data-driven tool-family taxonomy + automatic labeling pipeline."
+  ],
+  "revision_proposals": [
+   {
+    "id": "RP-TA-1",
+    "status": "pending_unchecked",
+    "proposal": "K106 S5/F6 and K202 rely heavily on this paper as source; keep their condition strength at 'author report' until a second independent full text supports them. No card edited."
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K106"
+   },
+   "operation_correspondence": "Planner constructs structured intermediate call; aligned specialized learned executor acts on it; progress returns control.",
+   "necessary_conditions_and_differences": "Physical tool reliability must be learned and measured; schema validity is not semantic correctness or sound formal verification.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E008",
+    "sol:E009",
+    "sol:E011"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K202"
+   },
+   "operation_correspondence": "External progress monitor changes dispatch/replan rather than merely appending text advice.",
+   "necessary_conditions_and_differences": "C25 solver-feedback interpretation is only partial because learned temporal confidence can be wrong and no calibration study is provided.",
+   "evidence_ids": [
+    "sol:E008",
+    "sol:E009",
+    "sol:E014"
+   ]
+  },
+  {
+   "rs_main": "heterogeneous_decomposition",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K106"
+   },
+   "operation_correspondence": "Distinct physical tool families route to separately learned residual adapters rather than one undifferentiated VLA response.",
+   "necessary_conditions_and_differences": "Partition is by invocation function, not C04 compression of a high-impact minority. Retention assumes shared backbone and old adapters fixed; new physical primitives still need data.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E012"
+   ]
+  },
+  {
+   "rs_main": "controlled_diagnostic_design",
+   "rs_sub": "rs:C02",
+   "domain": {
+    "namespace": "embodied",
+    "main": "harness_effect_evaluation",
+    "sub": "K803"
+   },
+   "operation_correspondence": "RS：固定一个混杂并变化隐含轴 ↔ 领域：固定计划换执行器(同 episode)",
+   "necessary_conditions": "真值独立于被评系统",
+   "differences": "领域卡在 K803 偏重模型×harness 互换；本文为执行器互换",
+   "evidence_ids": [
+    "son55:E035",
+    "son55:E037"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "harness raises success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Standalone and direct-planner alternatives on the same episodes; no rerun of a published agentic harness (AtomicVLA/RoboClaw).",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E017"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "specific component causes gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Table 4 cumulative; 'interface alone' row is the direct-planner configuration.",
+   "evidence_ids": [
+    "sol:E007",
+    "son55:E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "helps in general",
+   "applicable": true,
+   "status": "met",
+   "reason": "Three VLA backbones and four planner VLMs.",
+   "evidence_ids": [
+    "sol:E004",
+    "son55:E040"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "success-rate comparisons",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No variance/CI/paired tests.",
+   "evidence_ids": [
+    "sol:E017",
+    "son55:E024"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "more practical",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Adapter overhead and runtime calls; no planner USD/latency, initial plan excluded.",
+   "evidence_ids": [
+    "sol:E013",
+    "sol:E014"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E07",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "agentic manipulation harness beats end-to-end VLAs",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Compared with pi0.5/OpenVLA/OFT incl. RoboTwin; no LIBERO-PRO perturbations or agentic baselines.",
+   "evidence_ids": [
+    "sol:E004",
+    "son55:E006"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E08",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#reviewer-expectations"
+   ],
+   "applies_when": "frontier-model harness benchmark claim",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Full text searched: no disclosure of DROID/benchmark overlap or development-task use.",
+   "evidence_ids": [
+    "agg:B02",
+    "agg:B04"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#reviewer-expectations"
+   ],
+   "applies_when": "success claim with completion check",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Intervention frequency and replan success per backbone partially characterize stuck/no-progress endpoints; no false-completion audit.",
+   "evidence_ids": [
+    "sol:E015",
+    "son55:E034"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "real-robot claim",
+   "applicable": true,
+   "status": "met",
+   "reason": "Per-task 20-trial counts with physical final-state criteria.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E018"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "fair budgets",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Demos/steps/hardware/initial configs matched; planner inference and DROID post-train outside the matching.",
+   "evidence_ids": [
+    "sol:E006",
+    "agg:B03"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "CL1",
+   "text": "五个仿真基准对 π0.5 平均 +8.9 点。",
+   "setting": "LIBERO-Long、RoboTwin-SA、CALVIN(自划分)、RoboMemArena、RoboLab-120",
+   "baseline_control": "同骨干 standalone SFT/标准 RL/标准 π0.5",
+   "selection_vs_test": "LIBERO-Long 留出初始状态；CALVIN 80/20；其余训练数据未说明",
+   "result_denominator": "500/160/—/260/600 episodes，无方差",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E045",
+    "son55:E006",
+    "son55:E007",
+    "son55:E017",
+    "son55:E024"
+   ],
+   "counterevidence": [
+    "son55:E016",
+    "son55:E025",
+    "son55:E030",
+    "agg:B01",
+    "agg:B02"
+   ],
+   "allowed_conclusion": "在所列基准上、对作者定义的同骨干基线，整体系统（规划器+TAPT+适配器+接口）平均更优；均值混合 IL/RL，且增益来自捆绑，未能分离接口。"
+  },
+  {
+   "claim_id": "CL2",
+   "text": "调用忠实度：Non-biased +15.0(π0.5)，Faithful +30–35。",
+   "setting": "LIBERO-IF 10 个反事实任务",
+   "baseline_control": "无 TAPT 组件的执行器，计划固定",
+   "selection_vs_test": "场景与 LIBERO-10 训练布局相近(刻意)",
+   "result_denominator": "任务数 10，rollout 数未给",
+   "evidence_ids": [
+    "son55:E035",
+    "son55:E036",
+    "son55:E037"
+   ],
+   "counterevidence": [
+    "son55:E035"
+   ],
+   "allowed_conclusion": "TAPT 组件逐步叠加提高了对反事实调用的忠实度；任务少、自建、累积式。"
+  },
+  {
+   "claim_id": "CL3",
+   "text": "真机成功率 16.7%→58.3%(matched data and compute)。",
+   "setting": "Franka Research 3，三任务，每任务 20 trials，相同初始配置",
+   "baseline_control": "微调 π0.5，同 30 示教/30K 步/硬件",
+   "selection_vs_test": "同分布初始配置",
+   "result_denominator": "10/60 vs 35/60",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E018",
+    "son55:E020",
+    "son55:E021",
+    "son55:E019"
+   ],
+   "counterevidence": [
+    "son55:E019",
+    "son55:E022",
+    "son55:E023"
+   ],
+   "allowed_conclusion": "在作者设计的三项桌面任务上同数据/步数对比有显著差；其中 Conditioned 任务为别名状态设计；规划器推理成本不计入“matched compute”。"
+  },
+  {
+   "claim_id": "CL4",
+   "text": "TAPT 与接口互补：接口单独 80.2/80.4，TAPT+接口 95.6/97.2。",
+   "setting": "LIBERO-Long，OFT/π0.5",
+   "baseline_control": "累积式组件表",
+   "selection_vs_test": "同留出初始状态",
+   "result_denominator": "500 episodes",
+   "evidence_ids": [
+    "son55:E008",
+    "son55:E011",
+    "son55:E013",
+    "son55:E012"
+   ],
+   "counterevidence": [
+    "son55:E013",
+    "son55:E012",
+    "son55:E009"
+   ],
+   "allowed_conclusion": "执行器对齐是主要来源；接口边际增益小(+0.8/+1.2 IL，+2.6/+2.0 RL)，“互补”的统计强度未证。"
+  },
+  {
+   "claim_id": "CL5",
+   "text": "事件触发重规划将运行时规划调用从 57–110 降至 0.2–2/episode。",
+   "setting": "LIBERO-Long",
+   "baseline_control": "每 5 步直接 VLM 监控",
+   "selection_vs_test": "同",
+   "result_denominator": "调用均值，未报成功率对比",
+   "evidence_ids": [
+    "son55:E032",
+    "son55:E033",
+    "son55:E034"
+   ],
+   "counterevidence": [
+    "son55:E033"
+   ],
+   "allowed_conclusion": "调用次数显著减少；与直接监控相比的成功率与延迟未报。"
+  },
+  {
+   "claim_id": "CL6",
+   "text": "Progress-triggered invocation improves planner efficiency and family adapters preserve old skills.",
+   "setting": "Runtime query ablation and separate staged offline expansion study",
+   "baseline/control": "Periodic VLM monitoring every5 steps; end-to-end continued training versus family-only expansion",
+   "selection_vs_test": "Runtime thresholds fixed; predetermined new-family training with prior-skill later evaluation. No autonomous retained harness search.",
+   "result/denominator": "pi05 execution calls57.2→0.228 excluding initial plan;97.6% vs86.4% prior-skill retention after stage3.",
+   "evidence_ids": [
+    "sol:E008",
+    "sol:E009",
+    "sol:E012",
+    "sol:E013",
+    "sol:E014",
+    "sol:E015"
+   ],
+   "counterevidence": [
+    "sol:E008",
+    "sol:E014"
+   ],
+   "allowed_conclusion": "Reduced execution monitoring calls and scoped offline skill retention, not full dollar efficiency or guaranteed completion detection."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Both seats: native-predicate closed-loop simulation and counted real trials; training covers the evaluated task families, single Franka embodiment, no unseen-embodiment or sim-to-real evidence.",
+  "claim_support": "scoped",
+  "author_claim_kept": "VLAs-as-Tools improves long-horizon embodied tasks and makes VLAs faithful callable tools, +8.9 sim average and 16.7% -> 58.3% real under matched data and compute.",
+  "strongest_supported_claim": "On the tested Franka manipulation suites and three self-built real tasks, the bundle of planner + TAPT-trained per-family VLA tools + progress interface beats same-backbone standalone SFT (e.g., pi0.5 LIBERO-Long 92.4 -> 97.2; real 10/60 -> 35/60, paired starts), mainly through executor-side invocation-aligned training; the interface's marginal effect is small and untested statistically, extra DROID supervision is not separated, and for OpenVLA on RoboTwin-SA the full system trails the plain direct planner.",
+  "cannot_conclude": [
+   "That the typed interface/progress feedback, rather than extra invocation-aligned supervision, causes the gains.",
+   "That 'matched compute' covers planner inference and DROID post-training.",
+   "Generalization to unseen primitives or embodiments."
+  ],
+  "unresolved": [],
+  "author_report_only": true
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Concrete, in-paper quantified residual: wrapping a standard SFT VLA with a planner lowers LIBERO-Long by 11.8/12.0 (OFT/pi0.5), and VLAs follow scene priors on counterfactual invocations (Non-biased 31-40% without TAPT). Lineage (SayCan, Code as Policies, pi0.5 subtask tokens, AtomicVLA, RoboClaw) is named; distinction from AtomicVLA/RoboClaw is textual only, no experimental comparison.",
+   "evidence_ids": [
+    "sol:E003",
+    "son55:E004",
+    "son55:E036"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Invocation-aligned training units, per-family LoRA routing and a progress head target the specific mismatch between planner calls and VLA training units, with testable predictions (plain wrapping hurts; alignment restores). Below 4: progress supervision is a linear temporal proxy (authors: not calibrated semantic completion), and the reset-pool refresh and adapter 'semantic preservation' rationales have little direct test beyond LIBERO-IF.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E002",
+    "son55:E031",
+    "son55:E037"
+   ],
+   "counterevidence_ids": [
+    "sol:E008",
+    "son55:E026"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Formalization, message sets, monitor rule (tau=0.90, smoothing, lookback), labeling pipeline with Table 6 definitions and manual-review fallback, joint loss (lambda=0.1), GRPO subtask rewards with Table 9 predicates, reset-pool refresh and staged family expansion are reconstructable. Gaps: main-experiment planner VLM/prompt not stated, LoRA rank absent, deployment mode of Table 4 non-interface rows undefined, code not released.",
+   "evidence_ids": [
+    "son55:E027",
+    "son55:E029",
+    "sol:E011",
+    "sol:E012"
+   ],
+   "counterevidence_ids": [
+    "son55:E012",
+    "son55:E044"
+   ],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3 (controller diff was a key-structure artifact). Native benchmark predicates and counted real-world final-state outcomes on 20 pre-marked shared initial configurations; LIBERO-IF uses dual faithful/biased metrics. Below 4: self-built LIBERO-IF and CALVIN 80/20 split, real-world judge/blinding unstated, no calibration audit of the progress monitor.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E017",
+    "sol:E018",
+    "son55:E035"
+   ],
+   "counterevidence_ids": [
+    "sol:E008",
+    "son55:E016"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "sol value adopted (son55 3). Many same-backbone contrasts exist (standalone vs direct planner vs full; RL variants; planner swap; LIBERO-IF fixed plan), but the attribution the central claim needs is not isolated: (1) TAPT adds DROID-derived post-training and automatic-label supervision that baselines lack (agg:B02), and this is never separated from 'tool alignment' on RoboTwin or real-world; (2) the interface's own contribution over TAPT is +0.8/+1.2 (IL) and +2.6/+2.0 (RL) without variance, and the Table 4 'interface alone' row equals the Table 1 direct-planner numbers, i.e. an unaligned SFT executor without progress feedback (son55:E008); (3) Table 14 compares call counts only, not success; (4) the full system underperforms the direct planner for OpenVLA on RoboTwin-SA (agg:B01). Key alternative explanations remain open = anchor 2.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E006",
+    "son55:E040",
+    "son55:E013"
+   ],
+   "counterevidence_ids": [
+    "agg:B01",
+    "agg:B02",
+    "son55:E008",
+    "sol:E007",
+    "son55:E033"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Both seats 2. Held-out LIBERO initial states and shared seeds across methods; RoboTwin-SA restricted to 8 tasks selected by segmentability with the method's own pipeline; CALVIN within-D 80/20; RoboMemArena/RoboLab training data unstated (agg:B04); single Franka embodiment; no development-overlap disclosure.",
+   "evidence_ids": [
+    "sol:E017",
+    "son55:E024"
+   ],
+   "counterevidence_ids": [
+    "son55:E025",
+    "sol:E016",
+    "agg:B04"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "sol value adopted (son55 2). Denominators are clear (500/160/260/600 episodes; 20 trials/task real), but no seed variance, CI, repeated training run or paired test anywhere, while several sub-noise differences are narrated as effects (IA SFT +1.0; interface +0.8/+1.2; planner swap 0.6; taxonomy 96.6 vs 97.2). No failure breakdown by endpoint beyond intervention/replan rates. Only the large real-world difference (10/60 vs 35/60, paired starts) is robust by inspection. This is below the PhysMem-level 2 (which reports SD bands for real curves).",
+   "evidence_ids": [
+    "son55:E024",
+    "son55:E020",
+    "son55:E034"
+   ],
+   "counterevidence_ids": [
+    "son55:E009",
+    "son55:E013",
+    "son55:E040"
+   ],
+   "search_scope": [
+    "Sections 5.1-5.8 and Appendices A-G searched for CIs, std, repeated runs, paired tests."
+   ]
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Both seats 2. Adapter overhead (+9% params, +7% inference for OFT; pi0.5 1.34x latency) and runtime planner calls (57.2 -> 0.228/episode) reported; planner VLM cost/latency/USD, excluded initial planning call, DROID post-training and labeling compute are not in the 'matched compute' accounting (agg:B03).",
+   "evidence_ids": [
+    "sol:E013",
+    "sol:E015"
+   ],
+   "counterevidence_ids": [
+    "sol:E014",
+    "son55:E019",
+    "agg:B03"
+   ],
+   "search_scope": []
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete v2 text read; all eight items resolved.",
+ "resolutions": [
+  {
+   "field_path": "ratings.E.causality",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Read Sec 5.1-5.6, Table 1/4, App. E-F: extra DROID post-training not separated (agg:B02); interface-only row is the direct planner on an unaligned executor (son55:E008); interface margin +0.8/+1.2 IL; Table 14 compares calls not success; OpenVLA RoboTwin full < direct planner (agg:B01). Strong alternatives untested -> 2, not 3.",
+   "evidence_ids": [
+    "agg:B01",
+    "agg:B02",
+    "son55:E008",
+    "son55:E013",
+    "son55:E033"
+   ],
+   "score_impact": "-2.5 vs son55"
+  },
+  {
+   "field_path": "ratings.E.statistics",
+   "sol_value": 1,
+   "son55_value": 2,
+   "decision": "sol",
+   "final_value": 1,
+   "reason": "No uncertainty quantification anywhere; sub-noise differences narrated as effects; failure breakdown limited to intervention rates. Denominators alone are the only positive -> 1 (cross-paper consistency: PhysMem, with real-run SD bands, gets 2).",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E024",
+    "son55:E034"
+   ],
+   "score_impact": "-1.25 vs son55"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 3,
+   "son55_value": 3,
+   "decision": "same_supported_fact",
+   "final_value": 3,
+   "reason": "Controller diff (son55=null) was a key-structure artifact (flat vs nested E).",
+   "evidence_ids": [
+    "sol:E017",
+    "son55:E024"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.E.holdout",
+   "sol_value": 2,
+   "son55_value": 2,
+   "decision": "same_supported_fact",
+   "final_value": 2,
+   "reason": "Same structure artifact; same grounds.",
+   "evidence_ids": [
+    "sol:E016",
+    "son55:E025"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 2,
+   "son55_value": 2,
+   "decision": "same_supported_fact",
+   "final_value": 2,
+   "reason": "Same structure artifact; same grounds.",
+   "evidence_ids": [
+    "sol:E014",
+    "son55:E019"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern (sub_ids/supporting)",
+   "sol_value": {
+    "primary": [
+     "decompose_and_delegate",
+     "rs:C25"
+    ],
+    "supporting": [
+     [
+      "heterogeneous_decomposition",
+      null
+     ]
+    ]
+   },
+   "son55_value": {
+    "primary": [
+     "decompose_and_delegate",
+     "C25"
+    ],
+    "supporting": [
+     [
+      "controlled_diagnostic_design",
+      "C02"
+     ],
+     [
+      "self_supervised_signal_engineering",
+      null
+     ]
+    ]
+   },
+   "decision": "revised",
+   "final_value": {
+    "primary": [
+     "decompose_and_delegate",
+     "rs:C25"
+    ],
+    "supporting": [
+     [
+      "heterogeneous_decomposition",
+      null
+     ],
+     [
+      "controlled_diagnostic_design",
+      "rs:C02"
+     ]
+    ]
+   },
+   "reason": "Primary/C25 agree (bare 'C25' normalized to namespaced 'rs:C25'). Read heterogeneous_decomposition, controlled_diagnostic_design/C02 and self_supervised_signal_engineering definitions: per-family LoRA routing is a real differentiated-treatment operation (sol); LIBERO-IF is a confound-isolating instrument backing a headline number (son55); the progress/label pipeline does not derive signal from the model's own outputs, so self_supervised_signal_engineering is rejected. Parents verified against PARENTS.tsv (C25->decompose_and_delegate, C02->controlled_diagnostic_design).",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E012",
+    "son55:E035",
+    "son55:E026",
+    "son55:E029"
+   ],
+   "score_impact": "none (card matches do not score)"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "K106",
+    "K202"
+   ],
+   "son55_value": [
+    "K106",
+    "K202",
+    "K803"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "K106",
+    "K202",
+    "K803 (evaluation_practice)"
+   ],
+   "reason": "Same-episode planner and executor swaps are performed; K803 recorded as evaluation practice, consistent with K802 handling in this batch.",
+   "evidence_ids": [
+    "son55:E040",
+    "son55:E035"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern condition_checks (K106 F2/F3/F6/F7, K202 F1/F3/F5)",
+   "sol_value": "F-status used as 'failure present=met' in places",
+   "son55_value": "F-status used as 'failure present=unmet'",
+   "decision": "revised",
+   "final_value": "normalized per condition_status_semantics",
+   "reason": "Opposite seat conventions; each check re-judged from text.",
+   "evidence_ids": [
+    "sol:E007",
+    "son55:E026",
+    "agg:B01"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E16].status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "Table 14 intervention frequency and replan success rates are partial endpoint information; no false-completion audit.",
+   "evidence_ids": [
+    "sol:E015",
+    "son55:E034"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E19].score_item / E07.score_item",
+   "sol_value": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "son55_value": [
+    "E.holdout",
+    "E.measurement"
+   ],
+   "decision": "sol",
+   "final_value": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "reason": "E19 concerns validity of real-trial counting (measurement); E07 concerns perturbation/baseline coverage (holdout/scope).",
+   "evidence_ids": [
+    "sol:E005"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E08]",
+   "sol_value": null,
+   "son55_value": "unknown",
+   "decision": "revised",
+   "final_value": "unmet",
+   "reason": "Completed full-text search finds no overlap disclosure; unmet rather than unknown.",
+   "evidence_ids": [
+    "agg:B02",
+    "agg:B04"
+   ],
+   "score_impact": "none (E.holdout stays 2)"
+  },
+  {
+   "field_path": "rs_pattern.executes_pattern/resolves_problem",
+   "sol_value": [
+    true,
+    false
+   ],
+   "son55_value": [
+    "partial",
+    "partial"
+   ],
+   "decision": "sol",
+   "final_value": [
+    true,
+    false
+   ],
+   "reason": "Typed delegation is executed; problem closure not shown given unisolated structure contribution.",
+   "evidence_ids": [
+    "son55:E013",
+    "agg:B02"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "score",
+   "sol_value": {
+    "raw": 66.25
+   },
+   "son55_value": {
+    "raw": 70.0
+   },
+   "decision": "sol",
+   "final_value": {
+    "raw": 66.25,
+    "display": 66.3
+   },
+   "reason": "Deterministic recomputation from final ratings G3 M3 X3 Em3 Ec2 Eh2 Es1 Ek2.",
+   "evidence_ids": [],
+   "score_impact": "final 66.25"
+  },
+  {
+   "field_path": "assessment.evidence_level / claim_support",
+   "sol_value": [
+    "online",
+    "scoped"
+   ],
+   "son55_value": [
+    "online",
+    "scoped"
+   ],
+   "decision": "same_supported_fact",
+   "final_value": [
+    "online",
+    "scoped"
+   ],
+   "reason": "Verified independently: no unseen-embodiment or sim-to-real evidence; component attribution limits the claim.",
+   "evidence_ids": [
+    "sol:E005",
+    "son55:E023"
+   ],
+   "score_impact": "none"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SE-TA-1",
+   "field_path": "claims[CL1].counterevidence / ratings.E.causality.counterevidence_ids",
+   "error": "Both seats omitted that for OpenVLA on RoboTwin-SA the full system (5.00) is below the direct-planner baseline (13.80); both reported only the gain vs standalone.",
+   "correction": "Added agg:B01 as counterevidence; claim scoped to 'not uniform across executors'.",
+   "evidence_ids": [
+    "agg:B01"
+   ],
+   "score_impact": "none on ratings (E.causality already 2); strengthens scoping."
+  }
+ ],
+ "requests": [],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All rating and pattern disagreements resolved from the fixed text; no scoring unknowns.",
+ "score": {
+  "raw": 66.25,
+  "display": 66.3,
+  "lower": 66.25,
+  "upper": 66.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4",
+  "display_rounding": "Decimal ROUND_HALF_UP to 0.1; raw unrounded value is the selection value",
+  "status_vector": {
+   "G": "resolved",
+   "M": "resolved",
+   "X": "resolved",
+   "E.measurement": "resolved",
+   "E.causality": "resolved",
+   "E.holdout": "resolved",
+   "E.statistics": "resolved",
+   "E.cost": "resolved"
+  }
+ },
+ "final_record_hash": "cc35a827a4d3d9206c76f30c05b80464a893f123f00c0a98acf92680e47e8a5e"
+}

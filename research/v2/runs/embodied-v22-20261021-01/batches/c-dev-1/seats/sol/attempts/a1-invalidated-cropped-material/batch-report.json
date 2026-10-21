@@ -1,0 +1,492 @@
+{
+  "schema_version": "radar-review-v2.2-batch-report",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-dev-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "assigned": 6,
+  "reviewed": 0,
+  "examined": 6,
+  "needs_fulltext": 6,
+  "needs_evidence": 0,
+  "outside_taxonomy": 0,
+  "outside_taxonomy_rate": null,
+  "outside_taxonomy_rate_note": "没有完成模式识别的完整材料记录，不能以未评记录为分母报告0%适配失败率。",
+  "schema_errors": [],
+  "model_type": "6.1 Sol (sonnet type，overlay=ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-6.1-sol)",
+  "actual_model": "sonnet",
+  "session_id": null,
+  "receipt_ref": null,
+  "provenance_notes": "现有 headless 运行未提供可自取 session/receipt；未探测。",
+  "input_hash": "814ece7e0086c985aa5634a0b9eb228b0a430642f680b410ee5c50e58bf60964",
+  "input_manifest_sha256": "ca1f61eec08572d68ddb47858f6877f7139da9592d4dec3151c04a4779988436",
+  "contamination": false,
+  "papers": [
+    {
+      "paper_key": "2602.20323",
+      "claim_type": "system_method",
+      "claim_support": "unresolved",
+      "evidence_level": null,
+      "raw_score": null,
+      "status": "needs_fulltext",
+      "summary": "固定文本不满足完整材料要求：II Related Work 未包含；最近邻的完整版本与参考文献表未包含；Introduction/Contributions 在 [...] 处显式截断；Appendix A：实现、阈值、记忆及检索细节；Appendix B：完整消融；Appendix E：仿真协议；Appendix F（包括 F-E 原则清单与 F-F 迁移细节）：任务、评分、留出与原则构建材料",
+      "output_sha256": "8a2ace42eec9d395480a61430830fc13df69c813c57b14fc92f4471fa3a9951c"
+    },
+    {
+      "paper_key": "2606.12299",
+      "claim_type": "system_method",
+      "claim_support": "unresolved",
+      "evidence_level": null,
+      "raw_score": null,
+      "status": "needs_fulltext",
+      "summary": "固定文本不满足完整材料要求：Section 3 在 “Mechanically, this boils [...]” 显式截断；conformal 规则、Eq.7 及其保证条件未完整保留；Appendix 6.2：数据、提示词、训练超参数、校准与理论细节；Appendix 6.4、Table 10、Table 11：完整任务/扰动清单、全部结果、实验协议；参考文献表缺失",
+      "output_sha256": "2a0a3080badad64b3fe0db960c047801d2bae6954c26b48c63333f44a9e3bdbe"
+    },
+    {
+      "paper_key": "2606.12372",
+      "claim_type": "system_method",
+      "claim_support": "unresolved",
+      "evidence_level": null,
+      "raw_score": null,
+      "status": "needs_fulltext",
+      "summary": "固定文本不满足完整材料要求：Section 2（相关工作）及参考文献未包含；Appendix：proxy value 的 TD/progress/CQL 训练、目标定义和校准；memory 构建与阈值选择；Appendix：任务初始化、训练预算、基线实现、干预协议及完整统计设置",
+      "output_sha256": "8e2418f695b80faa0ae44b8d52577cec5111a544cc3b7b8a1e9762372c253405"
+    },
+    {
+      "paper_key": "2605.13119",
+      "claim_type": "system_method",
+      "claim_support": "unresolved",
+      "evidence_level": null,
+      "raw_score": null,
+      "status": "needs_fulltext",
+      "summary": "固定文本不满足完整材料要求：Section 2（相关工作）与参考文献未包含；Section 4.2.3 在 “interface [...]” 附近显式截断；完整 post-training objective 不在材料中；正文 Tables 1/2 未保留完整表体（只有后文解释与部分汇总）；Appendix A–G：progress head/monitor、标注与 segmentation、family taxonomy/扩展、RL、成本、真机判据及评测协议；Tables 12–14",
+      "output_sha256": "17872870f0ec5bca1e0b6590cb4f887d8e15344bdea21739452d720d3b5ba8c1"
+    },
+    {
+      "paper_key": "2609.27308",
+      "claim_type": "system_method",
+      "claim_support": "unresolved",
+      "evidence_level": null,
+      "raw_score": null,
+      "status": "needs_fulltext",
+      "summary": "固定文本不满足完整材料要求：Section 3.3 在 “parallel simulatio [...]” 显式截断，工具实验设置与结果未完整保留；完整 Section 4（EmbodiedSWE-Gen 数据引擎、VLA 训练、留出与 sim-to-real 实验）缺失，正文直接从 Section 3 跳至 Section 5；Appendix A–H：相关工作、任务 catalog、分任务/模型结果、run counts、评分/作弊审计、数据生成、真机协议、agentic RL 与轨迹实例；参考文献缺失",
+      "output_sha256": "fbc5e1221a9810e2457c786be5e6423989df1e2905cdd902354acdbbe10562dd"
+    },
+    {
+      "paper_key": "2606.00104",
+      "claim_type": "system_method",
+      "claim_support": "unresolved",
+      "evidence_level": null,
+      "raw_score": null,
+      "status": "needs_fulltext",
+      "summary": "固定文本不满足完整材料要求：固定文件从 I Introduction 跳到 III Approach：Section II 缺失；参考文献表也缺失，TypeFly/FlockGPT 等最近邻 [14]–[17] 无可核定版本；Section IV-A 的 prompt 数据来源退化为 “rest can be obtained via .”；所引用完整 prompt 资源/链接未固定，无法核定输入包完整性；未发现显式附录引用，故不假称已知存在附录；请求总控提供含 Section II/参考文献及原始链接的完整固定论文材料以核对，不能把缺失内容当作未报告",
+      "output_sha256": "5dae40234754650f0c29af5ff3298bfd928b1cfb62a14c8f9cf2c0ed30a6ee9e"
+    }
+  ],
+  "blockers": [
+    "六篇材料 SHA256 均与 inputs_manifest.json 一致，但这只证明固定字节一致，不证明全文完整。",
+    "前五篇有显式截断和/或被正文引用但未包含的关键附录；EmbodiedSWE 另缺完整 Section 4。",
+    "PEACE 未发现显式附录引用；但 Section II 和参考文献、实验 prompt 来源链接不在固定文本中，故不能确认完整材料，亦不能把它们当作未报告。",
+    "请总控补齐共同固定输入包后再派新 attempt；本次没有科学评分，不触发 Reel。"
+  ],
+  "checks": {
+    "manifest_coverage": "6/6 精确 paper_key、ID、version；无多余记录",
+    "material_sha256": "6/6 sha256sum 及 Python SHA256 与固定清单一致",
+    "json_parse": "全部临时文件解析后原子替换",
+    "evidence_quotes": "全部12条短连续引文在对应固定材料中逐字存在；locator含行与字符偏移",
+    "rs_parent_ids": "未判模式，primary/sub为空；PARENTS.tsv 已读，不存在非法父子关系",
+    "domain_namespace": "6/6 embodied",
+    "unknown_score": "48/48 rating=unknown/null；六篇 raw/display=null；L/U=0/100；coverage=0",
+    "limits": "结构和引文存在检查不等于科学语义或复现验证；B/C 被完整性门阻塞。"
+  },
+  "hash_method": "清单条目按路径排序；每项 path/sha256；UTF-8 ensure_ascii=false sort_keys=true separators=(comma,colon) JSON 后 SHA256。",
+  "asset_hashes": {
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "a6d204ba32f88ad229c4e8858f9d6030b718b0125f52fe3cc8473941977b22df",
+    "expectations_hash": "3c16a2dcce5db3544269596d6d8dfa1b511f97da55e8eb6c19fa6e493fffa263"
+  },
+  "asset_inventories": {
+    "domain_cards": [
+      {
+        "path": "patterns/main/code_policy_trial_revision.md",
+        "sha256": "d8cc10b3ce4253c99249e920795ce41e3f4737e978c43720f59f3dd1ad2ce944"
+      },
+      {
+        "path": "patterns/main/external_verification_control.md",
+        "sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121"
+      },
+      {
+        "path": "patterns/main/harness_effect_evaluation.md",
+        "sha256": "1dc7f8cc788f69c9fb61f4624ce73d6a233ecf3efc8514761b0bbe31bbe5638c"
+      },
+      {
+        "path": "patterns/main/harness_memory_skill_reuse.md",
+        "sha256": "0e8b68f52d7861b3c4493d0432260c83707f46e9968c22e615ef506a1597351f"
+      },
+      {
+        "path": "patterns/main/harness_native_rl.md",
+        "sha256": "02dc7bac20d22fedc025df1152760ae48243f49cc8244e0505837c22330e1f8b"
+      },
+      {
+        "path": "patterns/main/harness_self_optimization.md",
+        "sha256": "6c12ff6fe74fe58b2da20b698b95b556a8ff626b38403abbb03686210b136f14"
+      },
+      {
+        "path": "patterns/main/learner_state_teacher_correction.md",
+        "sha256": "b891739b85d9c159f1cfbf4b395625b800c2f9712b29b602cb7764ed7e344d13"
+      },
+      {
+        "path": "patterns/main/llm_symbolic_solver_planning.md",
+        "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405"
+      },
+      {
+        "path": "patterns/main/multi_robot_llm_coordination.md",
+        "sha256": "ce9425dd38f7e565a53c44d48316957c901a4abde65a1ad77152cfc051fc94b2"
+      },
+      {
+        "path": "patterns/main/observe_act_interface.md",
+        "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7"
+      },
+      {
+        "path": "patterns/main/offline_harness_distillation.md",
+        "sha256": "180cd3e535c4e03e8e6a2abe3fd4ed8ddaf9feb46da73757ec180ef23a5d5548"
+      },
+      {
+        "path": "patterns/main/on_policy_distillation_objectives.md",
+        "sha256": "82567db7601d99e6f8d2448834566260a2b9f9701e844069e07fe0c2532538e3"
+      },
+      {
+        "path": "patterns/main/planner_composes_code_and_policies.md",
+        "sha256": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825"
+      },
+      {
+        "path": "patterns/main/privileged_teacher_supervision.md",
+        "sha256": "31333da3258671248955b2d056e3e9eed4aac144281d10d97b053ad47e8578fb"
+      },
+      {
+        "path": "patterns/main/sample_verify_select.md",
+        "sha256": "9f4d67266c387cad359def79821129d6e6c12eb4b120b6a506e3e77c7db0146a"
+      },
+      {
+        "path": "patterns/main/teacher_seeded_sparse_rl.md",
+        "sha256": "060a351e0f35faad082b62b80d1773ee4a053c42a392ca72747f630e5fb751fe"
+      },
+      {
+        "path": "patterns/main/trained_vlm_vla_hierarchy.md",
+        "sha256": "18ddae0a289b7cc69c4a56f4121022769914c2a068dee560fb22bf26c21de03a"
+      },
+      {
+        "path": "patterns/sub/K101.md",
+        "sha256": "447635bd76dd620522b1ca11af57f8e07ad021fbad843feebff08d37f560f3be"
+      },
+      {
+        "path": "patterns/sub/K102.md",
+        "sha256": "d3178eba0bae7826878f7b2c6a2327eaa6fc63f13697cdd1ba4200c203f6e130"
+      },
+      {
+        "path": "patterns/sub/K103.md",
+        "sha256": "8a479ca0f90db9ba27e4bdae8c764a1811724a3b2fb17cc081f7c61e50afb2a6"
+      },
+      {
+        "path": "patterns/sub/K104.md",
+        "sha256": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50"
+      },
+      {
+        "path": "patterns/sub/K105.md",
+        "sha256": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b"
+      },
+      {
+        "path": "patterns/sub/K106.md",
+        "sha256": "73fa92ae4e4a8e4a3a33a5b58bf5a64c25f64e3f2319ac0829a55008f8ef314d"
+      },
+      {
+        "path": "patterns/sub/K107.md",
+        "sha256": "583ec7ddc7ea91b89468e755cd01edd0fbeaba9b9e09b6404c908c527e70582a"
+      },
+      {
+        "path": "patterns/sub/K108.md",
+        "sha256": "61b2f256c22c109592ebf41905af539207d21f3f3cd142b2091cdc00395abbc5"
+      },
+      {
+        "path": "patterns/sub/K109.md",
+        "sha256": "dea4052b3e5c60709cd0ddbef317afc34cdd68b54f5b72757c13cd2d3828274d"
+      },
+      {
+        "path": "patterns/sub/K110.md",
+        "sha256": "c789a5935ea85c89bbb81ffea288e863a4fbee34b6cf62ee6925c70678e2460d"
+      },
+      {
+        "path": "patterns/sub/K201.md",
+        "sha256": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6"
+      },
+      {
+        "path": "patterns/sub/K202.md",
+        "sha256": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d"
+      },
+      {
+        "path": "patterns/sub/K203.md",
+        "sha256": "2fc2e74f5e98078c4ad782ea9be51808533d7c6c2f89164bbe110492bc4a1cc4"
+      },
+      {
+        "path": "patterns/sub/K204.md",
+        "sha256": "5186f67b5dec715f235bbf6421e52ee33e791ebd190f74d9a9ae9e859d358ea6"
+      },
+      {
+        "path": "patterns/sub/K301.md",
+        "sha256": "b06ea2025a11cfbbc9ca15c4bae026ba74db1a420e9f51a5635aef850d147f1c"
+      },
+      {
+        "path": "patterns/sub/K302.md",
+        "sha256": "5fb989929a9c43c58a033640187f14c9ccabb0d6f28941313cdaaf94411b41d3"
+      },
+      {
+        "path": "patterns/sub/K303.md",
+        "sha256": "a9a6717e9131a1f795998f520bf9308cdee21d9f856730764f0c98aef19a44c4"
+      },
+      {
+        "path": "patterns/sub/K304.md",
+        "sha256": "6c353d77e41b49936b8253af31823691da05d573660646e3a312b2da9218abe5"
+      },
+      {
+        "path": "patterns/sub/K401.md",
+        "sha256": "127bd61545116a9a463e89e4628e0e8d8c17d868bad6a0cbd618c89a1dcb4e3f"
+      },
+      {
+        "path": "patterns/sub/K402.md",
+        "sha256": "b16b917909a4c8e2a169ee1c07a8cccc5967bec96d4b5b5da2d290744117ed5a"
+      },
+      {
+        "path": "patterns/sub/K403.md",
+        "sha256": "eaed77cacb8a52234d8ced0a767743162012dca31a631b3001bcc7535d60e54b"
+      },
+      {
+        "path": "patterns/sub/K501.md",
+        "sha256": "effb9280d42a40cefd3db0cc2d5c6c3c886042f06d62ae9288152e9d9b54e2f4"
+      },
+      {
+        "path": "patterns/sub/K502.md",
+        "sha256": "b6ccf6c8d2db86fea350391976cbd6698eb0b98f7b984a944105f2cf8fa4df8d"
+      },
+      {
+        "path": "patterns/sub/K503.md",
+        "sha256": "e93762696afc6cd005702e69e7a1d7969d8936425e8a152fbbcb491cd4aeb39f"
+      },
+      {
+        "path": "patterns/sub/K504.md",
+        "sha256": "71d5816530a57671ab0e692a7e068945ad240b7fc6ec4e25c45d8929ac4ad45f"
+      },
+      {
+        "path": "patterns/sub/K505.md",
+        "sha256": "2ec6e7055d84a61d30aa597b80daaf0fd179f6ec15370885a91f6cd64093d1ec"
+      },
+      {
+        "path": "patterns/sub/K506.md",
+        "sha256": "32bb5f3e2d83c523ebe896bf5dc400d927fa857e0abc63694e40b86350fdc78d"
+      },
+      {
+        "path": "patterns/sub/K601.md",
+        "sha256": "388fe8d318d90419d2c2b24dc0e1a66a85719416b235dcea81e74725fba8457b"
+      },
+      {
+        "path": "patterns/sub/K602.md",
+        "sha256": "c6a1254315830602b9441fdacdd7b7bbd99a1839ee408a411b36f0999453490b"
+      },
+      {
+        "path": "patterns/sub/K603.md",
+        "sha256": "42c195ec3336cd7f30d68b3bc919eca78afdb44c01672d25e6aa299d76973f50"
+      },
+      {
+        "path": "patterns/sub/K604.md",
+        "sha256": "6a84b86ff4b610a042237fc4c9aff8d4033843d4d7449b579cf6fe29f2c728f5"
+      },
+      {
+        "path": "patterns/sub/K605.md",
+        "sha256": "7d4f1664584f56c62b3485f60d70f76fcfcf3eb67e05ef03a3cbdd2525d135bf"
+      },
+      {
+        "path": "patterns/sub/K606.md",
+        "sha256": "5fbc05e6827949ffd151f07466554a312c9eba30f5057419cfb4b63bcb745240"
+      },
+      {
+        "path": "patterns/sub/K607.md",
+        "sha256": "bcf69e97777feb9dadc62122cdae18e969866f9ec3f93867df0f38d441e17474"
+      },
+      {
+        "path": "patterns/sub/K608.md",
+        "sha256": "5a76f5a637a14a70ac43fe30bd83274288194fb6f33945787d5c842bd4316528"
+      },
+      {
+        "path": "patterns/sub/K609.md",
+        "sha256": "662a227567b0c118af11ed3481484dbd162fd5950732ba3639d2c02b69b37188"
+      },
+      {
+        "path": "patterns/sub/K610.md",
+        "sha256": "31ba88b36d071d7a74bcbb7532e0118ac7d1cc19990d5636d47b1101e1c617eb"
+      },
+      {
+        "path": "patterns/sub/K611.md",
+        "sha256": "1072fddcc44123201efc2b98dfd8a7fda03ee6e45255c0267867bffe914c8959"
+      },
+      {
+        "path": "patterns/sub/K701.md",
+        "sha256": "49d628c2bae8aebe3c4f4c6523f79ff09ee3343582c2efd62c960ec2407fa41b"
+      },
+      {
+        "path": "patterns/sub/K702.md",
+        "sha256": "4e575f0cf33dfc7d4cc3f5bcd18eb14dffbba1b97cabb99ad6fa3d40a5aa0bcc"
+      },
+      {
+        "path": "patterns/sub/K703.md",
+        "sha256": "61471ba0d044cd90dd3e4634bdba22e648523c4183c2ceb6729ce349ee4a214b"
+      },
+      {
+        "path": "patterns/sub/K704.md",
+        "sha256": "e15829978031c298bddad9736a3ac58525c8e5d062bba1442bd89f132ea93d05"
+      },
+      {
+        "path": "patterns/sub/K705.md",
+        "sha256": "959c421a979bd86c3ae5f8754c19ce74a960ca4e7acd2af33fb01466259d6cb1"
+      },
+      {
+        "path": "patterns/sub/K706.md",
+        "sha256": "568bea7129de7afb4f100cfc6154a002564c63ab3a7002a483bc008565046881"
+      },
+      {
+        "path": "patterns/sub/K707.md",
+        "sha256": "c7190de6338c5ae15b75a7d1574554199d01b0b4b4a75ca4194b701057649429"
+      },
+      {
+        "path": "patterns/sub/K708.md",
+        "sha256": "c63ee101eedec0807053977f3dfaff2cfc791c784c40caadea54cb999431c2fd"
+      },
+      {
+        "path": "patterns/sub/K801.md",
+        "sha256": "0abda722b425ba2edd68bcb8aca1e6927deb66f8c3ed3e87b10794ce4bbdcf9e"
+      },
+      {
+        "path": "patterns/sub/K802.md",
+        "sha256": "6cf9adc1ae1040463badfd0b7fc64e2daff317c0f9aec7ea956461137a553749"
+      },
+      {
+        "path": "patterns/sub/K803.md",
+        "sha256": "b00e117e35037eb94f6217f4d872040aa018d0e581863e2cbfd1b86c9906048e"
+      },
+      {
+        "path": "patterns/sub/K804.md",
+        "sha256": "87bb46efac090c0058794c04bf9695437ee514077f731a31848d7874aa4c0c0f"
+      },
+      {
+        "path": "patterns/sub/K805.md",
+        "sha256": "81171dae95ec3dcd33edb97561cf9e36291f855a4cb15f8d4554ff3592d6a144"
+      },
+      {
+        "path": "patterns/sub/R01.md",
+        "sha256": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+      },
+      {
+        "path": "patterns/sub/R02.md",
+        "sha256": "1967a5b6365de65753aa43d2877c0f5b7cdb55a5dfd420ed9fdef78c7650d88e"
+      },
+      {
+        "path": "patterns/sub/R03.md",
+        "sha256": "dba602bb2da3d61fc69df90b6d106e270d066b0494cbc032f79a143da7928851"
+      },
+      {
+        "path": "patterns/sub/R04.md",
+        "sha256": "2cb295561bb649fcb88b5a1b8e606de87fb53f376c38a197a8e66095fc573f10"
+      },
+      {
+        "path": "patterns/sub/R05.md",
+        "sha256": "6809e3bb366487805e8d0586a28a22bcaf9c7205cf133d2930fe996437033aeb"
+      },
+      {
+        "path": "patterns/sub/R06.md",
+        "sha256": "0be8f7368f922d7bbc254aeccd2d5ff780264b19ba3f46bb3cd21bfa5e3f6346"
+      },
+      {
+        "path": "patterns/sub/R07.md",
+        "sha256": "51f596dd08d1a9848b32364b8f4a501eb61c223589cca678fa03529c1d63327c"
+      },
+      {
+        "path": "research/patterns/conditions.json",
+        "sha256": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+      },
+      {
+        "path": "research/patterns/taxonomy.json",
+        "sha256": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e"
+      }
+    ],
+    "expectations_sources": [
+      {
+        "path": "patterns/main/code_policy_trial_revision.md",
+        "sha256": "d8cc10b3ce4253c99249e920795ce41e3f4737e978c43720f59f3dd1ad2ce944"
+      },
+      {
+        "path": "patterns/main/external_verification_control.md",
+        "sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121"
+      },
+      {
+        "path": "patterns/main/harness_effect_evaluation.md",
+        "sha256": "1dc7f8cc788f69c9fb61f4624ce73d6a233ecf3efc8514761b0bbe31bbe5638c"
+      },
+      {
+        "path": "patterns/main/harness_memory_skill_reuse.md",
+        "sha256": "0e8b68f52d7861b3c4493d0432260c83707f46e9968c22e615ef506a1597351f"
+      },
+      {
+        "path": "patterns/main/harness_native_rl.md",
+        "sha256": "02dc7bac20d22fedc025df1152760ae48243f49cc8244e0505837c22330e1f8b"
+      },
+      {
+        "path": "patterns/main/harness_self_optimization.md",
+        "sha256": "6c12ff6fe74fe58b2da20b698b95b556a8ff626b38403abbb03686210b136f14"
+      },
+      {
+        "path": "patterns/main/learner_state_teacher_correction.md",
+        "sha256": "b891739b85d9c159f1cfbf4b395625b800c2f9712b29b602cb7764ed7e344d13"
+      },
+      {
+        "path": "patterns/main/llm_symbolic_solver_planning.md",
+        "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405"
+      },
+      {
+        "path": "patterns/main/multi_robot_llm_coordination.md",
+        "sha256": "ce9425dd38f7e565a53c44d48316957c901a4abde65a1ad77152cfc051fc94b2"
+      },
+      {
+        "path": "patterns/main/observe_act_interface.md",
+        "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7"
+      },
+      {
+        "path": "patterns/main/offline_harness_distillation.md",
+        "sha256": "180cd3e535c4e03e8e6a2abe3fd4ed8ddaf9feb46da73757ec180ef23a5d5548"
+      },
+      {
+        "path": "patterns/main/on_policy_distillation_objectives.md",
+        "sha256": "82567db7601d99e6f8d2448834566260a2b9f9701e844069e07fe0c2532538e3"
+      },
+      {
+        "path": "patterns/main/planner_composes_code_and_policies.md",
+        "sha256": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825"
+      },
+      {
+        "path": "patterns/main/privileged_teacher_supervision.md",
+        "sha256": "31333da3258671248955b2d056e3e9eed4aac144281d10d97b053ad47e8578fb"
+      },
+      {
+        "path": "patterns/main/sample_verify_select.md",
+        "sha256": "9f4d67266c387cad359def79821129d6e6c12eb4b120b6a506e3e77c7db0146a"
+      },
+      {
+        "path": "patterns/main/teacher_seeded_sparse_rl.md",
+        "sha256": "060a351e0f35faad082b62b80d1773ee4a053c42a392ca72747f630e5fb751fe"
+      },
+      {
+        "path": "patterns/main/trained_vlm_vla_hierarchy.md",
+        "sha256": "18ddae0a289b7cc69c4a56f4121022769914c2a068dee560fb22bf26c21de03a"
+      }
+    ]
+  },
+  "timestamp": "2026-10-21T16:21:37.716030+00:00"
+}

@@ -1,0 +1,126 @@
+{
+ "batch_id": "c-dev-1",
+ "attempt": "a1",
+ "generated": "controller",
+ "papers": [
+  {
+   "paper_key": "2606.12299",
+   "n_diffs": 5,
+   "diffs": [
+    {
+     "field": "status",
+     "sol": "reviewed",
+     "son55": {
+      "status": "reviewed",
+      "reason": "完整全文与附录已读；八项均有证据；图像内容缺失记入 unresolved，不影响评分项判定。"
+     }
+    },
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      null,
+      "rs:C08"
+     ],
+     "son55": [
+      null,
+      "C08"
+     ]
+    },
+    {
+     "field": "rating.X",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.measurement",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 57.5,
+     "son55": 66.25,
+     "abs_diff": 8.75
+    }
+   ]
+  },
+  {
+   "paper_key": "2606.12372",
+   "n_diffs": 4,
+   "diffs": [
+    {
+     "field": "status",
+     "sol": "reviewed",
+     "son55": {
+      "status": "reviewed",
+      "reason": "完整全文与附录已读；八项均有证据；范围边界已在 paper.scope_note 与 revision_proposals 标注，供总控决定；按作者主张评分。"
+     }
+    },
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      null,
+      null
+     ],
+     "son55": [
+      null
+     ]
+    },
+    {
+     "field": "rating.M",
+     "sol": 3,
+     "son55": 2
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 53.75,
+     "son55": 48.75,
+     "abs_diff": 5.0
+    }
+   ]
+  },
+  {
+   "paper_key": "2609.27308",
+   "n_diffs": 5,
+   "diffs": [
+    {
+     "field": "claim_type",
+     "sol": "system_method",
+     "son55": "evaluation_resource"
+    },
+    {
+     "field": "status",
+     "sol": "reviewed",
+     "son55": {
+      "status": "reviewed",
+      "reason": "完整全文(HTML)与附录已读；八项均有证据；图像中的数值缺失记入 unresolved，不影响评分项判定。"
+     }
+    },
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      "rs:C08",
+      "rs:C25",
+      null
+     ],
+     "son55": [
+      "C08",
+      "C25",
+      "C02"
+     ]
+    },
+    {
+     "field": "rating.E.cost",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 63.75,
+     "son55": 65.0,
+     "abs_diff": 1.25
+    }
+   ]
+  }
+ ]
+}

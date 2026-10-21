@@ -1,0 +1,264 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-dev-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2602.20323",
+    "paper_id": "2602.20323",
+    "title": "PhysMem: Scaling Test-Time Memory for Embodied Physical Reasoning",
+    "version": "2602.20323v6",
+    "claim_type": "system_method",
+    "central_claim": "PhysMem 在不更新 VLM 参数的条件下，通过经验、假设、归因与验证后晋升的原则记忆改善具身物理推理和后续决策；作者还声称在新物理条件下有迁移及持续适应收益。",
+    "claim_type_note": "基于现有中心主张的暂定类型；全文补齐后再核。多贡献论文不以资源/组件分数混成排名。"
+  },
+  "provenance": {
+    "input_hash": "814ece7e0086c985aa5634a0b9eb228b0a430642f680b410ee5c50e58bf60964",
+    "input_manifest_sha256": "ca1f61eec08572d68ddb47858f6877f7139da9592d4dec3151c04a4779988436",
+    "rubric_version": "v2.2 / draft_uncalibrated / calibration-dev",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "a6d204ba32f88ad229c4e8858f9d6030b718b0125f52fe3cc8473941977b22df",
+    "expectations_hash": "3c16a2dcce5db3544269596d6d8dfa1b511f97da55e8eb6c19fa6e493fffa263",
+    "model_type": "6.1 Sol (sonnet type，overlay=ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-6.1-sol)",
+    "actual_model": "sonnet",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T16:21:37.657594+00:00",
+    "notes": [
+      "沿用用户所配置路由；未重新配置或探测模型。",
+      "headless 会话无法从现有工具自取 session_id；亦无可引用 receipt，故均为 null。",
+      "未读取另一席、aggregate、旧分数、旧 Reel、录用/引用排名或其他批次产物。",
+      "domain_cards_hash 为 patterns/main、patterns/sub 全部 Markdown 加 taxonomy.json/conditions.json 的路径+SHA256清单规范 JSON 哈希；expectations_hash 为全部 main 卡（包含 reviewer expectations 原文）的同规则清单哈希。原 profile/expectations.json 不在本地研究目录，未将未见原件冒充已读来源。",
+      "只基于现有片段保存固定事实；B/C 完整评价被 A.1 材料完整性门阻塞，不作模式无适配或科学证据不足的结论。"
+    ]
+  },
+  "materials": [
+    {
+      "material_id": "2602.20323:fixed-text",
+      "url": "https://arxiv.org/html/2602.20323v6",
+      "version": "2602.20323v6",
+      "path": "research/fulltext/2602.20323.txt",
+      "sha256": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+      "sections_read": [
+        "Abstract",
+        "I Introduction",
+        "III Method",
+        "IV Experimental Setup",
+        "V Experiments",
+        "VI Discussion & Limitation"
+      ],
+      "read_scope": "现有文件从首行至末行完整读取；FULLTEXT: html 标签不证明内容完整。",
+      "complete": false,
+      "missing_sections": [
+        "II Related Work 未包含；最近邻的完整版本与参考文献表未包含",
+        "Introduction/Contributions 在 [...] 处显式截断",
+        "Appendix A：实现、阈值、记忆及检索细节；Appendix B：完整消融",
+        "Appendix E：仿真协议；Appendix F（包括 F-E 原则清单与 F-F 迁移细节）：任务、评分、留出与原则构建材料"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2602.20323:fixed-text",
+      "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+      "locator": "research/fulltext/2602.20323.txt:L6; UTF-8解码字符偏移668..842",
+      "quote": "The system records experiences, generates candidate hypotheses, and verifies them through targeted interaction before promoting validated knowledge to guide future decisions.",
+      "support_explanation": "仅固定作者所述主张/协议或其对缺失细节的引用；不构成我们复现，也不证明未包含材料中的内容。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2602.20323:fixed-text",
+      "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+      "locator": "research/fulltext/2602.20323.txt:L12; UTF-8解码字符偏移15173..15220",
+      "quote": "Full implementation details are in Appendix A .",
+      "support_explanation": "仅固定作者所述主张/协议或其对缺失细节的引用；不构成我们复现，也不证明未包含材料中的内容。",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S001",
+      "object": "冻结 VLM planner 所读取的三层记忆与原则集",
+      "information": "视觉、任务、执行反馈、离散 symbolic state；真实任务低层控制与 planner 分离。附录缺失，反馈真值、归因计算和实现权限尚不能核定。",
+      "operation": "记录成败与 symbolic state；按惊讶度触发聚类并形成 typed hypotheses；按动作归因累积置信，满足阈值及至少三条支持后晋升，低置信且至少两条反例则拒绝；折叠来源经验。",
+      "output": "作者方法的操作产物；只保存正文可识别事实，完整性待补。",
+      "conditions": "静态/训练/运行边界以现有正文为准，关键缺失材料见 materials。",
+      "feedback": "正文描述的执行、观测、价值或工具失败反馈；未作独立真值核验。",
+      "selection_rule": "正文给出 conf>=tau_p（通常0.8）且支持>=3；conf<=tau_r 且反例>=2 时拒绝。验证独立性及完整参数需 Appendix A。",
+      "selection_data": "训练/开发/选择/独立测试的完整构成尚待缺失部分核定。",
+      "persistence": "原则进入 long-term store，重要性以0.995衰减；原始经验折叠。",
+      "later_use": "后续决策以 symbolic filtering、semantic ranking 取 top-k 原则及 active hypotheses 注入 prompt。",
+      "claimed_effect": "PhysMem 在不更新 VLM 参数的条件下，通过经验、假设、归因与验证后晋升的原则记忆改善具身物理推理和后续决策；作者还声称在新物理条件下有迁移及持续适应收益。",
+      "failure_boundary": "连续动力学难以用文本表示；条件漂移、原则冲突及真实重置依赖人工；尚未核完附录。",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "reading_status": "provisional_incomplete_material"
+    }
+  ],
+  "gap": {
+    "author_gap": "作者区分可陈述物理常识与具体场景接触动力学，并指出未验证的直接记忆检索会固化错误；最近邻机制采用 proxy，缺 Related Work/参考文献和附录不能完成谱系核查。",
+    "checked_gap": "仅核对到现有正文叙述；不声称完成最近邻原文核查或 novelty 检索。",
+    "lineage": [],
+    "closest_adjacent": [],
+    "residue": null,
+    "stakes": "具身执行、纠正/工具或教师数据闭环的可靠性与成本；尚未完整评价。",
+    "method_response": "记录成败与 symbolic state；按惊讶度触发聚类并形成 typed hypotheses；按动作归因累积置信，满足阈值及至少三条支持后晋升，低置信且至少两条反例则拒绝；折叠来源经验。",
+    "remaining_gap": "连续动力学难以用文本表示；条件漂移、原则冲突及真实重置依赖人工；尚未核完附录。",
+    "evidence_ids": [
+      "E001",
+      "E002"
+    ],
+    "unresolved": [
+      "II Related Work 未包含；最近邻的完整版本与参考文献表未包含",
+      "Introduction/Contributions 在 [...] 处显式截断",
+      "Appendix A：实现、阈值、记忆及检索细节；Appendix B：完整消融",
+      "Appendix E：仿真协议；Appendix F（包括 F-E 原则清单与 F-F 迁移细节）：任务、评分、留出与原则构建材料"
+    ]
+  },
+  "rs_pattern": {
+    "primary": null,
+    "supporting": [],
+    "matches": [],
+    "outside_taxonomy": false,
+    "reason": "A.1 需要完整方法/实验/附录；按缺全文分支暂缓最终原卡识别，不将暂缓误记为 outside_taxonomy。",
+    "executes_pattern": null,
+    "resolves_problem": null
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [],
+    "unassigned": true,
+    "revision_proposals": [],
+    "reason": "材料完整性阻塞，未赋予领域卡；不据此修改既有卡或期望。"
+  },
+  "pattern_mapping": [],
+  "expectations": [],
+  "claims": [
+    {
+      "claim_id": "C001",
+      "text": "PhysMem 在不更新 VLM 参数的条件下，通过经验、假设、归因与验证后晋升的原则记忆改善具身物理推理和后续决策；作者还声称在新物理条件下有迁移及持续适应收益。",
+      "setting": "作者固定版本现有正文；完整设置/附录未齐。",
+      "baseline/control": "尚未完成完整对照核查，不能把摘要/局部实验当完整证据矩阵。",
+      "selection_vs_test": "未决，等待完整固定输入包。",
+      "result/denominator": null,
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence": [],
+      "allowed_conclusion": "可确认作者提出该主张及相应正文机制；暂不判断中心主张是否充分获支持。"
+    }
+  ],
+  "assessment": {
+    "evidence_level": null,
+    "claim_support": "unresolved",
+    "strongest_supported_claim": "已读取部分包含作者报告的方法与实验；由于固定材料不全，不输出最终 evidence_level 或分数，亦不声称复现。",
+    "unresolved": [
+      "II Related Work 未包含；最近邻的完整版本与参考文献表未包含",
+      "Introduction/Contributions 在 [...] 处显式截断",
+      "Appendix A：实现、阈值、记忆及检索细节；Appendix B：完整消融",
+      "Appendix E：仿真协议；Appendix F（包括 F-E 原则清单与 F-F 迁移细节）：任务、评分、留出与原则构建材料"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "M": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "X": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "causality": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "holdout": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "statistics": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "cost": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2602.20323.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": null,
+    "display": null,
+    "lower": 0.0,
+    "upper": 100.0,
+    "coverage": 0.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "needs_fulltext",
+  "reason": "固定文本不满足完整材料要求：II Related Work 未包含；最近邻的完整版本与参考文献表未包含；Introduction/Contributions 在 [...] 处显式截断；Appendix A：实现、阈值、记忆及检索细节；Appendix B：完整消融；Appendix E：仿真协议；Appendix F（包括 F-E 原则清单与 F-F 迁移细节）：任务、评分、留出与原则构建材料",
+  "next_action": "请求总控补齐上述部分并重新固定两席共同输入包；本席不联网、不单独补证，也不在关闭后原地改写 a1。"
+}

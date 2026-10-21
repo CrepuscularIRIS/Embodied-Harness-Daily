@@ -1,0 +1,109 @@
+{
+  "schema_version": "radar-batch-report-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "assigned": 6,
+  "reviewed": 6,
+  "needs_fulltext": 0,
+  "needs_evidence": 0,
+  "out_of_scope": 0,
+  "outside_taxonomy": 2,
+  "schema_errors": [],
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "model_type": "sonnet",
+  "actual_model": "gpt-6.1-sol",
+  "session_id": null,
+  "receipt_ref": null,
+  "identity_note": "Dispatched sonnet overlay gpt-6.1-sol (6.1 Sol); no identity probe. No authoritative session/receipt metadata exposed to worker.",
+  "timestamp": "2026-10-21T17:38:09.775924+00:00",
+  "status": "completed_initial_seat_review",
+  "scope_note": "Calibration-holdout under v2.2 draft_uncalibrated; not aggregate/final/published scores. No other seat, aggregate, archive, prior score/Reel or other batch results read. No network, paper-code execution or git operations.",
+  "checks": [
+    "Exact six manifest IDs/titles/versions and fixed material SHA256",
+    "Full method/experiment/available appendix text reading recorded",
+    "Continuous quote match, exact line/hash binding and all recursive evidence references",
+    "Required paper/provenance/material/signature/claim/expectation/rating structures",
+    "RS original parent mapping and embodied domain mapping",
+    "Exact integer ratings, unknown/null constraints, not_reported scopes",
+    "Independent exact weighted arithmetic and one-decimal display; Python half-even tie formatting",
+    "Read-card and rubric hashes match fixed files"
+  ],
+  "rounding_note": "Raw values remain exact quarter increments; display uses deterministic Python one-decimal half-even formatting (51.25 ->51.2,71.25 ->71.2,56.25 ->56.2). No explicit tie policy specified by contract.",
+  "blocking_issues": [],
+  "warnings": [
+    "Adjacent original papers not independently fixed; novelty/SOTA claims limited to supplied local descriptions and rerun comparisons. Critical supplements must be shared and refixed for both seats.",
+    "Several physical percentages lack complete attempted-trial denominators; evidence-level distinctions documented per paper.",
+    "Structural checks do not prove citation semantics or scientific validity; Opus independent audit remains required.",
+    "Original-taxonomy coverage warning: outside_taxonomy exceeds30%; do not force-fit or change cards."
+  ],
+  "papers": [
+    {
+      "paper_key": "2503.02465",
+      "version": "2503.02465v2",
+      "claim_type": "system_method",
+      "claim_support": "scoped",
+      "evidence_level": "offline",
+      "score_raw": 51.25,
+      "status": "reviewed",
+      "one_line": "The authors demonstrate a physically executed static-arena pipeline with Vicon localization checks and shorter reported times on two layouts. Strict evidence-level rules require counted physical successes/trials for online or transfer; those denominators are absent.",
+      "record_sha256": "42a30069af7c2e67f7a2981f6afc186bc3a1191c76b99606b3da127361a53948"
+    },
+    {
+      "paper_key": "2610.15572",
+      "version": "2610.15572v1",
+      "claim_type": "component_training",
+      "claim_support": "scoped",
+      "evidence_level": "transfer",
+      "score_raw": 71.25,
+      "status": "reviewed",
+      "one_line": "Author-reported controlled teacher-variant gains in closed-loop OWMM and unchanged OWMM-policy success on counted AI2-THOR navigation episodes support training utility and limited cross-simulator transfer. Physical deployment's 38% lacks local textual trial totals; broad open-world robustness is not established.",
+      "record_sha256": "b022634782ada32aa37419c41725f47ac6631839a3221ed72bf251c3f6cafe85"
+    },
+    {
+      "paper_key": "2609.39915",
+      "version": "2609.39915v1",
+      "claim_type": "system_method",
+      "claim_support": "scoped",
+      "evidence_level": "transfer",
+      "score_raw": 67.5,
+      "status": "reviewed",
+      "one_line": "Author-reported matched-backbone VLN gains for the goal/verification bundle, memory token savings with explicit quality losses, and counted Go2 deployment support scoped sim-to-physical transfer. No independent reproduction, isolated verifier effect, calibrated checker reliability or universal efficiency dominance established.",
+      "record_sha256": "bb5a7c481f15197322f0e921abeca11265d85b95d97266e4f275a68f6a45fd72"
+    },
+    {
+      "paper_key": "2512.10394",
+      "version": "2512.10394v2",
+      "claim_type": "system_method",
+      "claim_support": "scoped",
+      "evidence_level": "online",
+      "score_raw": 60.0,
+      "status": "reviewed",
+      "one_line": "Author-reported counted LIBERO closed-loop results support compatible topology-preserving inference variations; qualitative simulation/FR3 cases demonstrate orchestration feasibility. They do not measure engineering savings, safe lifecycle reliability or end-to-end LLM-agent success, and uncounted hardware cases do not qualify as transfer.",
+      "record_sha256": "5784aa71f4d260b57cc95ae9742ccf1a152e1a5913ba1a897a1695d095b7ff15"
+    },
+    {
+      "paper_key": "2609.26360",
+      "version": "2609.26360v1",
+      "claim_type": "system_method",
+      "claim_support": "scoped",
+      "evidence_level": "online",
+      "score_raw": 63.75,
+      "status": "reviewed",
+      "one_line": "Authors report counted closed-loop simulation EQA improvements on filtered prior-available subsets across five backbones, with informative one-component and same-prior controls. Qualitative physical examples and offline replay do not establish counted transfer, calibrated stopping, full-benchmark SOTA or robustness to erroneous floorplans.",
+      "record_sha256": "105effd65a554d050cbc2ba696d22f7a9421086fc3269a62cc0615c045bf12cb"
+    },
+    {
+      "paper_key": "2503.10069",
+      "version": "2503.10069v2",
+      "claim_type": "system_method",
+      "claim_support": "scoped",
+      "evidence_level": "transfer",
+      "score_raw": 56.25,
+      "status": "reviewed",
+      "one_line": "Authors report useful fixed-navigator predictor/backtracking controls and counted Turtlebot4 transfer on25instructions, with a3success advantage for backtracking. This supports modest taskset-specific recovery gains and improved waypoint quality, not training-free entire system, blanket metric dominance, general dynamic safety or parity with strong supervised simulation methods.",
+      "record_sha256": "0ca876061ce68621019711843740219327e9a494b7f03b509155bc704e08a35a"
+    }
+  ]
+}

@@ -1,0 +1,57 @@
+{
+ "round_id": "c-ho-1-finalize-a2",
+ "batch_id": "c-ho-1",
+ "aggregate_attempt": "a2",
+ "ts": "2026-10-21T14:43:52",
+ "papers": {
+  "2503.02465": {
+   "status": "accepted_final",
+   "raw": 42.5,
+   "display": 42.5,
+   "resolutions": 10,
+   "unresolved": 0,
+   "seat_hashes": true
+  },
+  "2610.15572": {
+   "status": "accepted_final",
+   "raw": 68.75,
+   "display": 68.8,
+   "resolutions": 10,
+   "unresolved": 0,
+   "seat_hashes": true
+  },
+  "2609.39915": {
+   "status": "accepted_final",
+   "raw": 63.75,
+   "display": 63.8,
+   "resolutions": 10,
+   "unresolved": 0,
+   "seat_hashes": true
+  },
+  "2512.10394": {
+   "status": "accepted_final",
+   "raw": 53.75,
+   "display": 53.8,
+   "resolutions": 11,
+   "unresolved": 0,
+   "seat_hashes": true
+  },
+  "2609.26360": {
+   "status": "accepted_final",
+   "raw": 65.0,
+   "display": 65.0,
+   "resolutions": 9,
+   "unresolved": 0,
+   "seat_hashes": true
+  },
+  "2503.10069": {
+   "status": "accepted_final",
+   "raw": 58.75,
+   "display": 58.8,
+   "resolutions": 11,
+   "unresolved": 0,
+   "seat_hashes": true
+  }
+ },
+ "problems": []
+}

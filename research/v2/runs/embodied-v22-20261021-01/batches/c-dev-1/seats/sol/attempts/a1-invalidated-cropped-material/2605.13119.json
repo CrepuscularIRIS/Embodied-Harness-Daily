@@ -1,0 +1,264 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-dev-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2605.13119",
+    "paper_id": "2605.13119",
+    "title": "Towards Long-horizon Embodied Agents with Tool-Aligned Vision-Language-Action Models",
+    "version": "2605.13119v2",
+    "claim_type": "system_method",
+    "central_claim": "VLAs-as-Tools 以 typed tool-family invocation、执行中 progress feedback 和 TAPT 专门化把高层 VLM 与有界 VLA 工具耦合，改善长时程成功与 invocation fidelity。",
+    "claim_type_note": "基于现有中心主张的暂定类型；全文补齐后再核。多贡献论文不以资源/组件分数混成排名。"
+  },
+  "provenance": {
+    "input_hash": "814ece7e0086c985aa5634a0b9eb228b0a430642f680b410ee5c50e58bf60964",
+    "input_manifest_sha256": "ca1f61eec08572d68ddb47858f6877f7139da9592d4dec3151c04a4779988436",
+    "rubric_version": "v2.2 / draft_uncalibrated / calibration-dev",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "a6d204ba32f88ad229c4e8858f9d6030b718b0125f52fe3cc8473941977b22df",
+    "expectations_hash": "3c16a2dcce5db3544269596d6d8dfa1b511f97da55e8eb6c19fa6e493fffa263",
+    "model_type": "6.1 Sol (sonnet type，overlay=ANTHROPIC_DEFAULT_SONNET_MODEL=gpt-6.1-sol)",
+    "actual_model": "sonnet",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T16:21:37.689078+00:00",
+    "notes": [
+      "沿用用户所配置路由；未重新配置或探测模型。",
+      "headless 会话无法从现有工具自取 session_id；亦无可引用 receipt，故均为 null。",
+      "未读取另一席、aggregate、旧分数、旧 Reel、录用/引用排名或其他批次产物。",
+      "domain_cards_hash 为 patterns/main、patterns/sub 全部 Markdown 加 taxonomy.json/conditions.json 的路径+SHA256清单规范 JSON 哈希；expectations_hash 为全部 main 卡（包含 reviewer expectations 原文）的同规则清单哈希。原 profile/expectations.json 不在本地研究目录，未将未见原件冒充已读来源。",
+      "只基于现有片段保存固定事实；B/C 完整评价被 A.1 材料完整性门阻塞，不作模式无适配或科学证据不足的结论。"
+    ]
+  },
+  "materials": [
+    {
+      "material_id": "2605.13119:fixed-text",
+      "url": "https://arxiv.org/html/2605.13119v2",
+      "version": "2605.13119v2",
+      "path": "research/fulltext/2605.13119.txt",
+      "sha256": "dd3ef9ea350a89b0c67f0a88de654a9b388c6725410ced3ef65049ea0c466bd0",
+      "sections_read": [
+        "Abstract",
+        "1 Introduction",
+        "3 Formalizing VLAs as Callable Tools",
+        "4 Methods",
+        "5 Experiment",
+        "6 Conclusion"
+      ],
+      "read_scope": "现有文件从首行至末行完整读取；FULLTEXT: html 标签不证明内容完整。",
+      "complete": false,
+      "missing_sections": [
+        "Section 2（相关工作）与参考文献未包含",
+        "Section 4.2.3 在 “interface [...]” 附近显式截断；完整 post-training objective 不在材料中",
+        "正文 Tables 1/2 未保留完整表体（只有后文解释与部分汇总）",
+        "Appendix A–G：progress head/monitor、标注与 segmentation、family taxonomy/扩展、RL、成本、真机判据及评测协议；Tables 12–14"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2605.13119:fixed-text",
+      "material_hash": "dd3ef9ea350a89b0c67f0a88de654a9b388c6725410ced3ef65049ea0c466bd0",
+      "locator": "research/fulltext/2605.13119.txt:L18; UTF-8解码字符偏移27441..27734",
+      "quote": "The appendix further reports few-shot adaptation (up to +11.5 points; Table 12 ), planner robustness across four VLMs (Table 13 ), planning efficiency of progress-triggered replanning (Table 14 ), tool-family extensibility (Appendix C ), and adapter cost (only +9\\% parameters; Appendix E.1 ).",
+      "support_explanation": "仅固定作者所述主张/协议或其对缺失细节的引用；不构成我们复现，也不证明未包含材料中的内容。",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2605.13119:fixed-text",
+      "material_hash": "dd3ef9ea350a89b0c67f0a88de654a9b388c6725410ced3ef65049ea0c466bd0",
+      "locator": "research/fulltext/2605.13119.txt:L18; UTF-8解码字符偏移25215..25261",
+      "quote": "Detailed settings are provided in Appendix G .",
+      "support_explanation": "仅固定作者所述主张/协议或其对缺失细节的引用；不构成我们复现，也不证明未包含材料中的内容。",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S001",
+      "object": "VLA 工具族接口、invocation-aligned 训练单元与 family residual adapters",
+      "information": "planner 读取观测、过去调用及反馈；IL 使用 demonstration/action/progress 标注，RL 采用局部完成 predicate。附录缺失使 labeler、monitor 及部署信息界面未完全可重建。",
+      "operation": "VLM 发出 family g 与 scene-grounded instruction z，选择 residual path 执行有界动作；progress head 反馈，threshold monitor 决定继续/完成/replan；IL/RL 使用对应 invocation 单元。",
+      "output": "作者方法的操作产物；只保存正文可识别事实，完整性待补。",
+      "conditions": "静态/训练/运行边界以现有正文为准，关键缺失材料见 materials。",
+      "feedback": "正文描述的执行、观测、价值或工具失败反馈；未作独立真值核验。",
+      "selection_rule": "静态设计加训练；运行时按g选择工具并由progress threshold控制，不是在线 harness 自修改接受门。",
+      "selection_data": "训练/开发/选择/独立测试的完整构成尚待缺失部分核定。",
+      "persistence": "训练后的 shared backbone、family adapters、progress head；不是由运行中候选选优留存的新 harness。",
+      "later_use": "部署按 typed invocation 重复调用工具并利用反馈恢复；增加新 family 的具体保留旧技能实验在缺失附录。",
+      "claimed_effect": "VLAs-as-Tools 以 typed tool-family invocation、执行中 progress feedback 和 TAPT 专门化把高层 VLM 与有界 VLA 工具耦合，改善长时程成功与 invocation fidelity。",
+      "failure_boundary": "直接 planner+未对齐 SFT VLA 可降低成功；单机器人/相机，未见 primitive 仍需新示范。",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "reading_status": "provisional_incomplete_material"
+    }
+  ],
+  "gap": {
+    "author_gap": "作者把强物理执行/弱长时程规划与强规划/弱工具之间的互补缺口定位到 invocation fidelity 和反馈接口；正文已有 direct planner、TAPT 消融，但缺主表、目标函数及关键附录。",
+    "checked_gap": "仅核对到现有正文叙述；不声称完成最近邻原文核查或 novelty 检索。",
+    "lineage": [],
+    "closest_adjacent": [],
+    "residue": null,
+    "stakes": "具身执行、纠正/工具或教师数据闭环的可靠性与成本；尚未完整评价。",
+    "method_response": "VLM 发出 family g 与 scene-grounded instruction z，选择 residual path 执行有界动作；progress head 反馈，threshold monitor 决定继续/完成/replan；IL/RL 使用对应 invocation 单元。",
+    "remaining_gap": "直接 planner+未对齐 SFT VLA 可降低成功；单机器人/相机，未见 primitive 仍需新示范。",
+    "evidence_ids": [
+      "E001",
+      "E002"
+    ],
+    "unresolved": [
+      "Section 2（相关工作）与参考文献未包含",
+      "Section 4.2.3 在 “interface [...]” 附近显式截断；完整 post-training objective 不在材料中",
+      "正文 Tables 1/2 未保留完整表体（只有后文解释与部分汇总）",
+      "Appendix A–G：progress head/monitor、标注与 segmentation、family taxonomy/扩展、RL、成本、真机判据及评测协议；Tables 12–14"
+    ]
+  },
+  "rs_pattern": {
+    "primary": null,
+    "supporting": [],
+    "matches": [],
+    "outside_taxonomy": false,
+    "reason": "A.1 需要完整方法/实验/附录；按缺全文分支暂缓最终原卡识别，不将暂缓误记为 outside_taxonomy。",
+    "executes_pattern": null,
+    "resolves_problem": null
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [],
+    "unassigned": true,
+    "revision_proposals": [],
+    "reason": "材料完整性阻塞，未赋予领域卡；不据此修改既有卡或期望。"
+  },
+  "pattern_mapping": [],
+  "expectations": [],
+  "claims": [
+    {
+      "claim_id": "C001",
+      "text": "VLAs-as-Tools 以 typed tool-family invocation、执行中 progress feedback 和 TAPT 专门化把高层 VLM 与有界 VLA 工具耦合，改善长时程成功与 invocation fidelity。",
+      "setting": "作者固定版本现有正文；完整设置/附录未齐。",
+      "baseline/control": "尚未完成完整对照核查，不能把摘要/局部实验当完整证据矩阵。",
+      "selection_vs_test": "未决，等待完整固定输入包。",
+      "result/denominator": null,
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence": [],
+      "allowed_conclusion": "可确认作者提出该主张及相应正文机制；暂不判断中心主张是否充分获支持。"
+    }
+  ],
+  "assessment": {
+    "evidence_level": null,
+    "claim_support": "unresolved",
+    "strongest_supported_claim": "已读取部分包含作者报告的方法与实验；由于固定材料不全，不输出最终 evidence_level 或分数，亦不声称复现。",
+    "unresolved": [
+      "Section 2（相关工作）与参考文献未包含",
+      "Section 4.2.3 在 “interface [...]” 附近显式截断；完整 post-training objective 不在材料中",
+      "正文 Tables 1/2 未保留完整表体（只有后文解释与部分汇总）",
+      "Appendix A–G：progress head/monitor、标注与 segmentation、family taxonomy/扩展、RL、成本、真机判据及评测协议；Tables 12–14"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "M": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "X": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+      "evidence_ids": [],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "causality": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "holdout": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "statistics": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      },
+      "cost": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "固定材料不完整；按 JUDGE_BATCH A.1 / BATCH_CONTRACT 缺全文分支暂缓八项判断，不能将截断或缺失附录误记为 not_reported。",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "research/fulltext/2605.13119.txt：已完整读取现有文件全部行，核对所有节标题、截断标记和附录引用；未读或检索其他运行产物/网络。"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": null,
+    "display": null,
+    "lower": 0.0,
+    "upper": 100.0,
+    "coverage": 0.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "needs_fulltext",
+  "reason": "固定文本不满足完整材料要求：Section 2（相关工作）与参考文献未包含；Section 4.2.3 在 “interface [...]” 附近显式截断；完整 post-training objective 不在材料中；正文 Tables 1/2 未保留完整表体（只有后文解释与部分汇总）；Appendix A–G：progress head/monitor、标注与 segmentation、family taxonomy/扩展、RL、成本、真机判据及评测协议；Tables 12–14",
+  "next_action": "请求总控补齐上述部分并重新固定两席共同输入包；本席不联网、不单独补证，也不在关闭后原地改写 a1。"
+}

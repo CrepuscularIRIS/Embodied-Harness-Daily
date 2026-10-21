@@ -1,0 +1,1399 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a1",
+ "seat": "aggregate_opus55",
+ "phase": "calibration-holdout",
+ "input_seat_hashes": {
+  "sol": "5784aa71f4d260b57cc95ae9742ccf1a152e1a5913ba1a897a1695d095b7ff15",
+  "son55": "df810f601435599feb5b23948a9ec56fb39b41cc3bef0cc1d2163e829988b13e"
+ },
+ "input_seat_files": {
+  "sol": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/sol/attempts/a1/2512.10394.json",
+  "son55": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/son55/attempts/a1/2512.10394.json"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (calibration-holdout; weights not frozen; no tuning on holdout)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "pattern_protocol_hash": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "anchors_hash": "37f7080c6a414c927ab08f3dfb5be1dd784dbc2be41f1b21070532d9584701ed",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_cards_hash_convention": "sha256 of research/patterns/taxonomy.json (same convention as both c-ho-1 seats)",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Aggregate subagent cannot read its own session id / receipt; null per contract, no probing.",
+  "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+  "timestamp": "2026-10-21T20:30:00Z",
+  "independence_note": "Aggregate review with both seat inputs; fixed paper text read and an initial evidence judgment written before opening seat totals. Not a third blind review or human gold."
+ },
+ "aggregate_initial_judgment": "Read before opening seat totals. Claim: an MCP<->ROS2 middleware that derives typed agent tools from ROS message schemas, offers a direct path and a persistent perception-inference-control (PIC) path under explicit lifecycle tools, and confines VLA backend/runtime/acceleration changes to a fixed inference boundary, enabling modular orchestration and backend switching without rewiring. Evidence: Cases I-III are qualitative figures (multi-platform base control and single arm in simulation, one FR3 grasp sequence) with no counts and no LLM-agent task success; Case IV runs OpenVLA-OFT FastV pruning presets on LIBERO (500 episodes/suite) under the fixed topology and an OpenVLA latency figure whose values are not in the text. Nothing measures integration effort, reuse, or the middleware against hand-written wrappers or other MCP-ROS bridges. Expected: system_method infrastructure, online only via the VLA-in-middleware LIBERO runs, scoped support, weak E.measurement/E.causality.",
+ "paper": {
+  "paper_key": "2512.10394",
+  "paper_id": "2512.10394",
+  "title": "RoboNeuron: A Middle-Layer Infrastructure for Agent-Driven Orchestration in Embodied AI",
+  "version": "2512.10394v2",
+  "claim_type": "system_method",
+  "central_claim": "RoboNeuron derives MCP tools from ROS schemas, provides unified direct and persistent PIC execution, and localizes backend/runtime/acceleration changes within a stable inference boundary, enabling reusable modular robot orchestration without system rewiring.",
+  "scope_note": "In scope as harness interface infrastructure (agent tool layer); no agent-level closed-loop evaluation."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "aliases": [
+    "sol:M1",
+    "son55:M1"
+   ],
+   "url": "https://arxiv.org/html/2512.10394v2",
+   "sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2512.10394.txt",
+   "sections_read": [
+    "Abstract",
+    "I-V",
+    "Algorithms 1-2",
+    "Table I",
+    "Figure captions"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "figure image content incl. Fig. 6 latency values; no appendix exists"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E01",
+   "locator": "I contribution scope; fixed text line 9",
+   "quote": "RoboNeuron is a middleware infrastructure that bridges agent tool calling and robot middleware, rather than a planning algorithm or a replacement for existing robot control stacks.",
+   "support_explanation": "Evaluate software execution/interface claim, not invented planning superiority.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E02",
+   "locator": "III-B / Algorithm 1; fixed text line 15",
+   "quote": "The system parses ROS message definitions to resolve fields, including nested structures and arrays, and constructs a structured tool argument schema.",
+   "support_explanation": "Typed schema derivation is the actual bridge mechanism.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E03",
+   "locator": "III-A lifecycle; fixed text line 15",
+   "quote": "A dedicated stop tool manages process cleanup, utilizing a bounded wait period before resorting to a forced termination to maintain predictable system states.",
+   "support_explanation": "Explicit runtime lifecycle, not a validated physical safety guarantee.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E04",
+   "locator": "III-C action/control contract; fixed text line 15",
+   "quote": "Upon initialization, the controller parses a URDF (omitting visual and collision elements for efficiency) to build a kinematic chain, and it subscribes to both the action topic and joint-state feedback.",
+   "support_explanation": "Geometry is kinematic with state feedback; collision-aware planning cannot be inferred.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E05",
+   "locator": "III-E switching; fixed text line 15",
+   "quote": "the agent can restart the inference module with the new configuration while the perception and control modules continue to run, ensuring the overall system topology remains intact.",
+   "support_explanation": "Retained runtime topology, not retained learned improvement; restart rather than atomic seamless policy handover.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E06",
+   "locator": "IV-A denominator; fixed text line 18",
+   "quote": "Each suite contains 10 tasks, and each task is evaluated over 50 episodes.",
+   "support_explanation": "LIBERO four suites supply counted closed-loop evaluation (500 episodes per suite).",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E07",
+   "locator": "IV-C Table I; fixed text line 18",
+   "quote": "RoboNeuron + P50 99.2 ( \\uparrow 0.6 ) 98.4 ( \\uparrow 0.8 ) 96.8 ( \\downarrow 0.4 ) 94.4 ( \\downarrow 1.4 ) 1.17",
+   "support_explanation": "Moderate pruning has small mixed success changes and 1.17x inference speed, not universal improvement.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E08",
+   "locator": "IV-C Table I; fixed text line 18",
+   "quote": "RoboNeuron + P75 98.4 ( \\downarrow 0.2 ) 89.8 ( \\downarrow 7.8 ) 96.6 ( \\downarrow 0.6 ) 89.2 ( \\downarrow 6.6 ) 1.58",
+   "support_explanation": "Strong pruning reduces success materially; boundary preserves wiring, not behavior.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E09",
+   "locator": "IV-D limitations; fixed text line 18",
+   "quote": "The real-robot study emphasizes feasibility and runtime semantics rather than large-scale statistical performance.",
+   "support_explanation": "FR3 grasping lacks counted task reliability; qualitative hardware case is not transfer evidence under the strict rule.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E10",
+   "locator": "IV-A separate experiments; fixed text line 18",
+   "quote": "This design separates task-level comparison under a fixed serving setup from inference-level efficiency comparison under runtime-augmented configurations, while keeping the external observation/action contract unchanged.",
+   "support_explanation": "Do not combine two distinct VLA studies into a joint speed-and-success result.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E11",
+   "locator": "III-B scope; fixed text line 15",
+   "quote": "Our current implementation focuses on message-level exposure via topics, which addresses the low-latency primitives required for our evaluation.",
+   "support_explanation": "Broader ROS service/action coverage is not demonstrated.",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Abstract",
+   "quote": "demonstrating that it enables modular system orchestration under a unified interface while supporting backend transitions without system rewiring",
+   "support_explanation": "作者核心主张",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "agent ecosystems operate via tool calls, whereas robots expose capabilities through middleware interfaces and streaming I/O",
+   "support_explanation": "作者 gap",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "Converting these into agent-callable tools via manual wrappers increases maintenance costs and limits reuse across different projects.",
+   "support_explanation": "手写包装的维护成本（未量化）",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "RoboNeuron is a middleware infrastructure that bridges agent tool calling and robot middleware, rather than a planning algorithm or a replacement for existing robot control stacks.",
+   "support_explanation": "作者限定：基础设施而非规划算法",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-B",
+   "quote": "RoboNeuron employs schema-based derivation to generate tool signatures directly from ROS message and interface definitions.",
+   "support_explanation": "S1：从 ROS 消息生成工具签名",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-B",
+   "quote": "Our current implementation focuses on message-level exposure via topics",
+   "support_explanation": "覆盖范围：仅话题级消息",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-A",
+   "quote": "RoboNeuron does not embed a task planner of its own; instead, it is designed to be orchestrated by an external LLM agent through the same tool interface.",
+   "support_explanation": "LLM agent 在外部，未规定",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-C",
+   "quote": "produces an action under a fixed semantic contract: a 6-DoF end-effector delta in position and orientation together with a gripper command",
+   "support_explanation": "S3：固定动作契约",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-D",
+   "quote": "SGLang [ 27 ] as an alternative serving runtime, and FastV-based acceleration presets [ 28 ]",
+   "support_explanation": "后端/运行时/加速预设在推理边界内切换",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Algorithm 2",
+   "quote": "Agent monitors progress and may request termination through stop tools",
+   "support_explanation": "agent 监督闭环仅一行，未说明观测通道",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-B",
+   "quote": "The following case studies examine RoboNeuron’s core mechanisms rather than task-level leaderboard performance.",
+   "support_explanation": "Case I–III 为机制演示",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-B3",
+   "quote": "The emphasis of this case is not large-scale task statistics but runtime semantics",
+   "support_explanation": "真机 FR3 案例无统计",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-A",
+   "quote": "Each suite contains 10 tasks, and each task is evaluated over 50 episodes.",
+   "support_explanation": "LIBERO 分母：每套 500 episode",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-C",
+   "quote": "Here, the serving setup is fixed and only the FastV-based pruning preset [ 28 ] inside the inference module is varied.",
+   "support_explanation": "Case IV 唯一变量",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "OpenVLA-OFT 98.6 ( – ) 97.6 ( – ) 97.2 ( – ) 95.8 ( – ) 1.00",
+   "support_explanation": "基线行（来源未说明是否经中间件重跑）",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "RoboNeuron + P50 99.2",
+   "support_explanation": "P50 行 Spatial 99.2",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "RoboNeuron + P75 98.4 ( \\downarrow 0.2 ) 89.8 ( \\downarrow 7.8 )",
+   "support_explanation": "P75 在 Object 掉 7.8 点",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-D",
+   "quote": "At the same time, the evaluation remains focused on mechanism validation. The real-robot study emphasizes feasibility and runtime semantics rather than large-scale statistical performance.",
+   "support_explanation": "作者自述评测范围",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "II Related Work",
+   "quote": "These systems are useful for basic connectivity, but they mainly stop at protocol bridging and do not fully address scalable schema derivation, lifecycle-aware long-running execution, or reuse across different execution patterns.",
+   "support_explanation": "近邻（ROS2mcpserver/ROS2mcp）及其残余问题",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "which reduces the manual effort required to update interfaces",
+   "support_explanation": "“降低人工”主张，无度量",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Fig. 6 caption",
+   "quote": "RN denotes RoboNeuron overhead",
+   "support_explanation": "延迟图含中间件开销",
+   "kind": "author_report",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "全文",
+   "quote": null,
+   "support_explanation": "全文无具名 LLM agent、无提示词、无 agent 层任务成功率或试验次数；Case I–III 为定性图示，无人力/代码行数/集成时间度量；π0 虽列为已集成后端，却未报告任何 π0 数值，也无 OpenVLA→OFT→π0 的实际切换结果（Table I 仅 OFT 的剪枝预设变化；OpenVLA 仅有延迟图）",
+   "kind": "our_inference",
+   "derived_from": [
+    "son55:E007",
+    "son55:E011",
+    "son55:E012",
+    "son55:E018"
+   ],
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:D02",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-B3",
+   "quote": "The emphasis of this case is not large-scale task statistics but runtime semantics",
+   "support_explanation": "Hardware case is explicitly not a statistical evaluation.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D03",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-A",
+   "quote": "Each suite contains 10 tasks, and each task is evaluated over 50 episodes.",
+   "support_explanation": "LIBERO denominator: 10 tasks x 50 episodes per suite.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D04",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "RoboNeuron + P75 98.4 ( \\downarrow 0.2 ) 89.8 ( \\downarrow 7.8 )",
+   "support_explanation": "Aggressive pruning drops LIBERO-Object by 7.8 points.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D05",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-D",
+   "quote": "The real-robot study emphasizes feasibility and runtime semantics rather than large-scale statistical performance.",
+   "support_explanation": "Authors limit the real-robot study to feasibility.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D06",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-C",
+   "quote": "a 6-DoF end-effector delta in position and orientation together with a gripper command",
+   "support_explanation": "Single fixed action contract assumed for all VLA backends.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D07",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Fig. 6 caption",
+   "quote": "Fig. 6: Single-step VLA inference latency on RTX 4090 (ms; lower is better)",
+   "support_explanation": "Latency study exists; plotted values are not in the fixed text.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D08",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "II",
+   "quote": "These systems are useful for basic connectivity, but they mainly stop at protocol bridging and do not fully address scalable schema derivation",
+   "support_explanation": "Specific residue claimed against named bridging neighbours.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:D09",
+   "material_id": "M1",
+   "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-C",
+   "quote": "Here, the serving setup is fixed and only the FastV-based pruning preset [ 28 ] inside the inference module is varied.",
+   "support_explanation": "Table I varies only the FastV preset; it measures pruning, not the middleware.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "ROS capability to external agent tool",
+   "information": "Robot message schemas and configured topic endpoints; external frozen agent sees typed tools, not an embedded planner",
+   "operation": "Parse nested/array fields, build typed validation schema, recursively encode validated arguments and publish ROS messages",
+   "output": "Discoverable MCP tool, one-shot commands or timed sequences",
+   "conditions": "Correct topic/schema binding and robot-side command semantics; syntactic validation does not establish physical feasibility",
+   "feedback": "Tool/runtime state available to external agent; no independent task-success verifier implemented",
+   "selection_rule": "Static deterministic schema validation and configured endpoints",
+   "selection_data": "Not applicable: no learned optimization",
+   "persistence": "Registered tools and static implementation",
+   "later_use": "Reused invocations/robots through configured bindings, not retained autonomous learning",
+   "claimed_effect": "Less manual wrapper drift and integration work",
+   "failure_boundary": "Only topic/message exposure; no measured schema-evolution or maintenance-effort benchmark",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E02",
+    "sol:E11"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Persistent PIC execution and backend switching",
+   "information": "Camera images/instructions to selected frozen VLA; action delta plus gripper to controller; current joints and URDF to IK",
+   "operation": "Spawn isolated ROS2 processes, stream perception/inference/control; stop/restart inference under unchanged topics",
+   "output": "Joint commands, explicit bounded lifecycle and selectable runtime/pruning presets",
+   "conditions": "Backends obey fixed 6-DoF delta/gripper semantics; process termination and restart safe for robot state",
+   "feedback": "Joint feedback closes controller; external agent monitors progress; no newly trained state persists",
+   "selection_rule": "Agent/config selects backend/preset; no automatic performance-based accept/reject protocol",
+   "selection_data": "LIBERO evaluates choices but not an online selector",
+   "persistence": "Static modules/configurations and current running processes only",
+   "later_use": "Same communication topology after restart; no measured later-task learning",
+   "claimed_effect": "Topology-preserving orchestration and controlled backend comparison",
+   "failure_boundary": "URDF collision elements omitted; action semantic equivalence, reset/switch hazards and long-running reliability unquantified",
+   "evidence_ids": [
+    "sol:E03",
+    "sol:E04",
+    "sol:E05",
+    "sol:E08"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Agent tool APIs and robot middleware are mismatched; ad-hoc wrappers drift and must be redone when VLA backends or serving stacks change.",
+  "checked_gap": "A real engineering seam with named neighbours (ROS2mcpserver, ROS2mcp, RynnRCP, RoboOS) and a specific residue claim (schema derivation, lifecycle-aware execution, reuse across execution patterns). The cost of the bottleneck is not sourced or measured, and the neighbours' deficits are asserted, not checked.",
+  "lineage_closest_adjacent": {
+   "source_version": "2512.10394v2 Sec I-II; neighbour originals not in the fixed input",
+   "ancestors": [
+    "SayCan / Code as Policies / Inner Monologue (task-level LLM robotics)",
+    "ROS2, MoveIt, Nav2, behaviour trees (developer-facing middleware)"
+   ],
+   "closest": [
+    "ROS2mcpserver [23]",
+    "ROS2mcp [24]",
+    "RynnRCP [25]",
+    "RoboOS [26]"
+   ]
+  },
+  "residue": "Schema-derived typed tools, governed persistent PIC lifecycle, fixed-contract inference boundary.",
+  "stakes": "Integration and switching cost for agentic VLA deployment; reliability of long-running loops.",
+  "method_response": "Algorithm 1 schema derivation; dual-plane architecture; Algorithm 2 topology-preserving inference restart.",
+  "remaining_gap": "Agent-level task success, quantified engineering savings, cross-backend (OpenVLA/OFT/pi0) results in one topology, service/action interfaces, fault semantics.",
+  "evidence_ids": [
+   "sol:E01",
+   "agg:D08",
+   "son55:E019",
+   "sol:E09"
+  ],
+  "unresolved": []
+ },
+ "rs_pattern": {
+  "primary": null,
+  "supporting": [],
+  "outside_taxonomy": true,
+  "matches": [],
+  "candidate_checks": [
+   {
+    "main": "unify_into_shared_representation",
+    "sub": "rs:C18",
+    "reason": "Full cards read. The parent replaces bespoke per-modality pipelines with one uniform model over a shared representation/objective, and its success conditions concern representation compatibility and a uniform objective. RoboNeuron standardises a call surface: robot-side controllers and VLA backends stay separate; no model is trained or unified. C18's serializer step is the closest analogue but its load-bearing claim (a recipe transferring unchanged, validated by ablation against a naive baseline) has no counterpart. son55 itself rated the fit 'weak' with steps 4-5 unmet; per PATTERN_PROTOCOL a weak terminology-level fit is not assigned."
+   },
+   {
+    "main": "decompose_and_delegate",
+    "sub": "rs:C25",
+    "reason": "The middleware does not decompose a task; an external agent would. No solver-verdict loop."
+   }
+  ],
+  "reason": "No original 15-card operation fits runtime-interface infrastructure without stretching; outside_taxonomy recorded and the paper fully evaluated. Decided on the card definitions, not on the batch coverage ratio.",
+  "executes_pattern": false,
+  "resolves_problem": false,
+  "resolves_problem_reason": "Integration-cost and reuse benefits are not measured."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "S*/when-works: met = satisfied by this paper's evidence; F*/when-fails: applies = present.",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "R04",
+    "version": "embodied-agent-harness/v1 (taxonomy daf38e579a46)",
+    "fit": "strong (circular source)",
+    "circular_source": true,
+    "condition_checks": [
+     {
+      "id": "R04:protocol_level_tools_from_robot_stack",
+      "status": "met",
+      "reason": "Typed MCP tools derived from ROS message schemas, bound to publishers.",
+      "evidence_ids": [
+       "sol:E02",
+       "son55:E005"
+      ]
+     },
+     {
+      "id": "R04:policy_start_switch_calls",
+      "status": "met",
+      "reason": "PIC start/stop/restart tools; inference restart keeps topics.",
+      "evidence_ids": [
+       "sol:E03",
+       "sol:E05"
+      ]
+     },
+     {
+      "id": "R04:protocol_layer_costs_no_performance",
+      "status": "partial",
+      "reason": "P25/P50 close to baseline; whether the baseline row ran through the middleware is unstated; RN overhead values only in Fig. 6.",
+      "evidence_ids": [
+       "sol:E07",
+       "agg:D07"
+      ]
+     },
+     {
+      "id": "observe_act_interface:F8_agent_level_success_not_measured",
+      "status": "applies",
+      "reason": "No agent task success denominator.",
+      "evidence_ids": [
+       "agg:D02",
+       "agg:D05"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E02",
+     "sol:E03",
+     "sol:E05",
+     "son55:E005"
+    ],
+    "reason": "Operation matches R04 item by item, but R04 was induced from this paper (2512.10394#board); structure only, not a rating basis (anchors precedent 4)."
+   }
+  ],
+  "unassigned": [
+   "Fixed-contract inference boundary for VLA backend swapping - covered by R04's 'policy start/switch' clause."
+  ],
+  "revision_proposals": [
+   {
+    "type": "source_annotation",
+    "text": "Mark R04 conditions sourced from 2512.10394 as circular for its own evaluation.",
+    "status": "proposal_unchecked"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": null,
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "R04"
+   },
+   "operation_correspondence": "No original-card operation; domain operation is protocol-level exposure of the robot stack (schema-derived tools, governed policy lifecycle).",
+   "necessary_conditions_and_differences": "unify_into_shared_representation would require a shared representation consumed by one uniform model with an ablated naive baseline; absent.",
+   "evidence_ids": [
+    "sol:E02",
+    "sol:E03",
+    "son55:E005"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; paper-practice/limitation synthesis, not actual reviewer comments",
+   "source_refs": [
+    "patterns/sub/R04.md#When-it-fails",
+    "profile/expectations.json:E01"
+   ],
+   "applies_when": "Middleware contribution claimed to improve agent orchestration",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Same VLA harness in LIBERO shows feasibility; no same-agent alternate middleware task-success or developer-effort comparison.",
+   "evidence_ids": [
+    "sol:E06",
+    "sol:E09",
+    "son55:E019"
+   ],
+   "score_item": [
+    "E.causality",
+    "E.measurement"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 adopted (sol partial): no alternative harness/bridge (hand-written wrappers, ROS2mcp, no middleware) is compared on the same tasks."
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E02"
+   ],
+   "applies_when": "Individual integration choices credited",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Pruning variants held within fixed topology; baseline to RN+pruning confounds wrapper and preset. No schema/lifecycle removal test.",
+   "evidence_ids": [
+    "sol:E07",
+    "sol:E10",
+    "son55:E014"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E04"
+   ],
+   "applies_when": "Small reported success differences",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "500 episodes per suite, but no seed repeats/intervals or task-paired uncertainty for subpercentage gains.",
+   "evidence_ids": [
+    "sol:E06",
+    "sol:E07",
+    "son55:E013",
+    "son55:E015",
+    "son55:E016"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 adopted (sol partial): single run per suite, no variance or paired test."
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E05"
+   ],
+   "applies_when": "Efficiency and integration-cost claim",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Normalized inference speed and hardware provided; no end-to-end agent tokens/time/failure cost or measured engineering effort. Latency and task studies differ.",
+   "evidence_ids": [
+    "sol:E07",
+    "sol:E10",
+    "son55:E021",
+    "son55:E009"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E19",
+    "patterns/sub/R04.md#When-it-fails"
+   ],
+   "applies_when": "Physical deployment as reliability evidence",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "FR3 case intentionally feasibility-only without counted trials.",
+   "evidence_ids": [
+    "sol:E09",
+    "son55:E012",
+    "son55:E018"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E17",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E17"
+   ],
+   "applies_when": "Cross-episode mined memory or optimization",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No retained self-improvement claim; static infrastructure evaluated as such.",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E05"
+   ],
+   "score_item": [
+    "X"
+   ],
+   "seat_status": {
+    "sol": "not_applicable",
+    "son55": "absent"
+   },
+   "aggregate_reason": "sol adopted: no self-improvement/memory claim."
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E20"
+   ],
+   "applies_when": "depth-based tools state depth assumptions",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "中间件不做深度换算。",
+   "evidence_ids": [],
+   "score_item": null,
+   "seat_status": {
+    "sol": "absent",
+    "son55": "not_applicable"
+   },
+   "aggregate_reason": "son55 adopted: no depth-based tool or gate."
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E22"
+   ],
+   "applies_when": "matched interaction budget",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "无 agent 预算比较。",
+   "evidence_ids": [],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "not_applicable"
+   },
+   "aggregate_reason": "son55 adopted: no harness-vs-harness comparison is claimed."
+  },
+  {
+   "id": "rs:unify_into_shared_representation:RE-ablate",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/unify_into_shared_representation.md#Reviewer expectations"
+   ],
+   "applies_when": "isolate the unification mechanism from confounds / include skeptic baseline",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "无手写包装对照。",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E022"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Card not retained (outside_taxonomy); the underlying concern (no naive-baseline comparison) is carried by E01 = unmet."
+  },
+  {
+   "id": "rs:unify_into_shared_representation:RE-generality",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/unify_into_shared_representation.md#Reviewer expectations"
+   ],
+   "applies_when": "generality across backbones/domains",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "多后端被列举，仅 OFT/OpenVLA 有数据。",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E022"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Card not retained; backend generality is judged under E.holdout and claims C3."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Schema-derived unified MCP tools are reusable across platforms and arms (direct path).",
+   "setting": "Simulation Cases I-II",
+   "baseline_control": "none",
+   "selection_vs_test": "n/a",
+   "result_denominator": "qualitative figures, no counts",
+   "evidence_ids": [
+    "sol:E02",
+    "son55:E011"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Prototype demonstrates tool invocation; reduced manual effort and scalability are not measured."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Persistent PIC closed loops are managed by the agent through explicit lifecycle tools on real hardware.",
+   "setting": "FR3 grasp, Case III",
+   "baseline_control": "none",
+   "selection_vs_test": "n/a",
+   "result_denominator": "no trial count (agg:D02, agg:D05)",
+   "evidence_ids": [
+    "son55:E012",
+    "agg:D02",
+    "agg:D05"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Feasibility demonstration only."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Backend-side variants can be switched and compared without changing the topology.",
+   "setting": "LIBERO 4 suites x 500 episodes; OpenVLA-OFT + FastV presets (agg:D09)",
+   "baseline_control": "OpenVLA-OFT row (unclear whether run through the middleware)",
+   "selection_vs_test": "standard LIBERO protocol",
+   "result_denominator": "P25/P50 within about +-1.4 pt; P75 -7.8 (Object) / -6.6 (Long) at 1.58x speed (agg:D04)",
+   "evidence_ids": [
+    "sol:E07",
+    "sol:E08",
+    "agg:D03",
+    "agg:D04",
+    "agg:D09"
+   ],
+   "counterevidence": [
+    "agg:D04"
+   ],
+   "allowed_conclusion": "Pruning presets can be swapped inside the fixed boundary and measured; cross-backend switching (OpenVLA/OFT/pi0) under one topology is not shown with results; the measured differences are FastV's, not the middleware's."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Both seats online, confirmed with scope: LIBERO closed-loop, environment-checked success for VLA presets run through the inference boundary. Agent orchestration itself is only demonstrated (offline in character); the FR3 case is uncounted, so not transfer.",
+  "claim_support": "scoped",
+  "author_claim_kept": "RoboNeuron derives MCP tools from ROS schemas, provides unified direct and persistent PIC execution, and localizes backend/runtime/acceleration changes within a stable inference boundary, enabling reusable modular robot orchestration without system rewiring.",
+  "strongest_supported_claim": "A prototype exposes ROS topics as typed MCP tools and runs VLA pruning presets inside a fixed inference boundary; moderate presets keep LIBERO success near the reference while P75 loses up to 7.8 points.",
+  "cannot_conclude": [
+   "Reduced integration/maintenance cost",
+   "Agent-level task success",
+   "Cross-backend switching with results",
+   "Advantage over other MCP-ROS bridges or hand-written wrappers"
+  ],
+  "unresolved": [],
+  "author_report_only": true
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "sol adopted (son55 2). The gap is specific (schema drift, unmanaged long-running loops, backend re-integration), the neighbours are named with the precise capability each lacks (agg:D08), and the residue is bounded (topic-level only). Not 4: the bottleneck's cost is unsourced and the neighbours' deficits are asserted, not checked. son55's main objection (no side-by-side comparison) is an evidence question judged under E.causality.",
+   "evidence_ids": [
+    "sol:E01",
+    "agg:D08",
+    "son55:E019"
+   ],
+   "counterevidence_ids": [
+    "sol:E09"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "sol adopted (son55 2). Each mechanism answers its problem by construction (schema derivation -> no wrapper drift; fixed I/O contract -> swaps without rewiring) and makes a checkable prediction (topology unchanged across presets), contrary to son55's 'no distinguishable prediction'. Key assumption is weak: one 6-DoF delta + gripper contract (agg:D06) must fit every VLA backend; tool naming/descriptions for LLM selection not considered.",
+   "evidence_ids": [
+    "sol:E02",
+    "sol:E04",
+    "sol:E05",
+    "agg:D06"
+   ],
+   "counterevidence_ids": [
+    "agg:D06"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Algorithms 1-2, process isolation and stop semantics, URDF/IK controller and contract are reconstructable; how the agent observes PIC progress and fault handling are unspecified.",
+   "evidence_ids": [
+    "sol:E02",
+    "sol:E03",
+    "son55:E010"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "son55 adopted (sol 2). The only quantitative measurement (LIBERO) measures FastV preset trade-offs (agg:D09), not the claimed benefits (unified reuse, rewiring-free switching across backends, agent orchestration); Cases I-III are uncounted demonstrations (agg:D02); baseline-row provenance unclear.",
+    "evidence_ids": [
+     "sol:E06",
+     "sol:E07",
+     "agg:D02",
+     "agg:D09"
+    ],
+    "counterevidence_ids": [
+     "agg:D05"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "son55 adopted (sol 2). Case IV isolates the pruning preset, which is not the paper's claim; no control isolates the middleware (no hand-written wrapper, other bridge, or no-middleware run) and no agent-level contrast exists.",
+    "evidence_ids": [
+     "sol:E10",
+     "son55:E014",
+     "agg:D09"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both 1; confirmed. Standard LIBERO suites only; hardware is one uncounted FR3 demo; multi-platform only in simulation figures.",
+    "evidence_ids": [
+     "sol:E06",
+     "son55:E012"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both 1; confirmed. Denominators explicit (500/suite) but single runs; +-0.2-0.8 point differences are 1-4 episodes.",
+    "evidence_ids": [
+     "agg:D03",
+     "sol:E07"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed. Normalised pruning speedups disclosed with the success trade-off; an RN-overhead latency study exists (agg:D07) but its values are not in the fixed text and were not used; no integration-effort or agent call cost.",
+    "evidence_ids": [
+     "sol:E07",
+     "son55:E021",
+     "agg:D07"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete fixed text read (no appendix); all eight items resolved.",
+ "agreement_checks": [
+  "claim_type system_method (both): confirmed - authors claim an infrastructure system, not a benchmark/resource; anchors precedent 3 (type by self-stated central claim).",
+  "evidence_level online, claim_support scoped (both): confirmed.",
+  "X/E.holdout/E.statistics/E.cost agreed values re-checked; E.cost kept at 2 without using unseen Fig. 6 values.",
+  "Scope: in scope as harness interface (LLM agent orchestrates robot via MCP tools)."
+ ],
+ "resolutions": [
+  {
+   "field_path": "status",
+   "sol_value": "reviewed",
+   "son55_value": {
+    "value": "reviewed",
+    "reason": "完整正文（含 Algorithm 1/2、Table I）已读；图中数值（Fig.6）未在文本中；无附录。"
+   },
+   "decision": "same_supported_fact",
+   "final_value": "reviewed",
+   "reason": "Shape difference only (controller artifact).",
+   "evidence_ids": [],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "rs_pattern.primary",
+   "sol_value": null,
+   "son55_value": "unify_into_shared_representation",
+   "decision": "sol",
+   "final_value": null,
+   "reason": "See rs_pattern.candidate_checks: the parent's operation (one uniform model over a shared representation replacing per-modality pipelines) is not executed; son55's own fit was 'weak' with C18 steps 4-5 unmet. Coverage warning is diagnostic and did not influence this decision.",
+   "evidence_ids": [
+    "sol:E02",
+    "sol:E04",
+    "son55:E005"
+   ],
+   "score_impact": "none (pattern match is not scored)"
+  },
+  {
+   "field_path": "rs_pattern.outside_taxonomy",
+   "sol_value": true,
+   "son55_value": false,
+   "decision": "sol",
+   "final_value": true,
+   "reason": "Follows the primary resolution.",
+   "evidence_ids": [],
+   "score_impact": "none; counts toward batch outside_taxonomy ratio"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [],
+   "son55_value": [
+    null
+   ],
+   "decision": "sol",
+   "final_value": [],
+   "reason": "No match entries under outside_taxonomy.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.executes_pattern/resolves_problem",
+   "sol_value": [
+    false,
+    false
+   ],
+   "son55_value": [
+    "partial",
+    false
+   ],
+   "decision": "sol",
+   "final_value": [
+    false,
+    false
+   ],
+   "reason": "No retained card to execute.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches[R04].circular_source",
+   "sol_value": "not noted",
+   "son55_value": "noted (paper-derived)",
+   "decision": "son55",
+   "final_value": true,
+   "reason": "R04 cites 2512.10394#board; anchors precedent 4.",
+   "evidence_ids": [],
+   "score_impact": "none (no rating relied on R04 conditions)"
+  },
+  {
+   "field_path": "ratings.G",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "sol",
+   "final_value": 3,
+   "reason": "See ratings.G.reason.",
+   "evidence_ids": [
+    "agg:D08",
+    "son55:E019"
+   ],
+   "score_impact": "+3.75 vs son55"
+  },
+  {
+   "field_path": "ratings.M",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "sol",
+   "final_value": 3,
+   "reason": "See ratings.M.reason.",
+   "evidence_ids": [
+    "sol:E04",
+    "agg:D06"
+   ],
+   "score_impact": "+5 vs son55"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "See ratings.E.measurement.reason.",
+   "evidence_ids": [
+    "agg:D09",
+    "agg:D02"
+   ],
+   "score_impact": "-3.75 vs sol"
+  },
+  {
+   "field_path": "ratings.E.causality",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "See ratings.E.causality.reason.",
+   "evidence_ids": [
+    "sol:E10",
+    "agg:D09"
+   ],
+   "score_impact": "-2.5 vs sol"
+  },
+  {
+   "field_path": "claims",
+   "sol_value": "C1-C2",
+   "son55_value": "C1-C3",
+   "decision": "revised",
+   "final_value": "aggregate C1-C3",
+   "reason": "son55 split adopted; C3 clarifies that measured differences are FastV's.",
+   "evidence_ids": [
+    "agg:D09"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E01].status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "son55 adopted (sol partial): no alternative harness/bridge (hand-written wrappers, ROS2mcp, no middleware) is compared on the same tasks.",
+   "evidence_ids": [
+    "sol:E06",
+    "sol:E09",
+    "son55:E019"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E04].status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "son55 adopted (sol partial): single run per suite, no variance or paired test.",
+   "evidence_ids": [
+    "sol:E06",
+    "sol:E07",
+    "son55:E013",
+    "son55:E015",
+    "son55:E016"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E17].status",
+   "sol_value": "not_applicable",
+   "son55_value": "absent",
+   "decision": "sol",
+   "final_value": "not_applicable",
+   "reason": "sol adopted: no self-improvement/memory claim.",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E05"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E20].status",
+   "sol_value": "absent",
+   "son55_value": "not_applicable",
+   "decision": "son55",
+   "final_value": "not_applicable",
+   "reason": "son55 adopted: no depth-based tool or gate.",
+   "evidence_ids": [],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E22].status",
+   "sol_value": "absent",
+   "son55_value": "not_applicable",
+   "decision": "son55",
+   "final_value": "not_applicable",
+   "reason": "son55 adopted: no harness-vs-harness comparison is claimed.",
+   "evidence_ids": [],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:unify_into_shared_representation:RE-ablate].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "sol",
+   "final_value": "not_applicable",
+   "reason": "Card not retained (outside_taxonomy); the underlying concern (no naive-baseline comparison) is carried by E01 = unmet.",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E022"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:unify_into_shared_representation:RE-generality].status",
+   "sol_value": "absent",
+   "son55_value": "partial",
+   "decision": "sol",
+   "final_value": "not_applicable",
+   "reason": "Card not retained; backend generality is judged under E.holdout and claims C3.",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E022"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "score",
+   "sol_value": 60.0,
+   "son55_value": 45.0,
+   "decision": "revised",
+   "final_value": {
+    "raw": 53.75,
+    "display": 53.8
+   },
+   "reason": "Deterministic recomputation from the resolved eight ratings; seat totals are not averaged.",
+   "evidence_ids": [],
+   "score_impact": "final raw 53.75"
+  }
+ ],
+ "shared_error_corrections": [],
+ "requests": [
+  {
+   "blocking": false,
+   "to": "controller",
+   "request": "Fig. 6 latency values (including RoboNeuron overhead) are not in the fixed text. Adding them would only refine E.cost; both seats and the aggregate rated E.cost without them."
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All rating and pattern disagreements resolved from the fixed text; no scoring unknowns.",
+ "score": {
+  "raw": 53.75,
+  "display": 53.8,
+  "lower": 53.75,
+  "upper": 53.75,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4",
+  "display_rounding": "Decimal ROUND_HALF_UP to 0.1; raw unrounded value is the selection value",
+  "status_vector": {
+   "G": "resolved",
+   "M": "resolved",
+   "X": "resolved",
+   "E.measurement": "resolved",
+   "E.causality": "resolved",
+   "E.holdout": "resolved",
+   "E.statistics": "resolved",
+   "E.cost": "resolved"
+  }
+ },
+ "shared_error_review_note": "Checked for shared omissions (agent-level evaluation absence, baseline-row provenance, cross-backend results, unseen figure values, scope). son55 caught baseline provenance and missing cross-backend data, sol flagged unseen Fig. 6 values; no error common to both found.",
+ "final_record_hash": "d038ff6c9c5bf58c55683403f5631afa861deca3848f918d707ea74e41057f38"
+}

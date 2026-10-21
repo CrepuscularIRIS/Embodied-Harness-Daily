@@ -1,0 +1,1159 @@
+{
+ "paper": {
+  "central_claim": "A generate-then-verify framework for LLM-based vision-and-language navigation: a parameter-efficiently adapted LLaMA-2 backbone produces structured Prediction-View Match-Action chains-of-thought, and True-False and Masked-Entity verification channels re-rank sampled candidate actions, giving consistent gains over direct prediction and sampling-only baselines on R2R, RxR (English) and REVERIE, competitive among language-only agents and promising versus several cross-modal systems.",
+  "paper_key": "2601.18492",
+  "paper_id": "2601.18492",
+  "title": "DV-VLN: Dual Verification for Reliable LLM-Based Vision-and-Language Navigation",
+  "version": "2601.18492v1",
+  "claim_type": "system_method"
+ },
+ "scope_note": "In scope as an LLM-based VLN agent with an inference-time verification module; the model is a bias-tuned 7B LLM with a BLIP captioner, not a frontier model.",
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Per-step action decision of a textified LLM navigator (baseline: deterministic single-shot decoding, and sampling with majority vote).",
+   "information": "Instruction, action history, per-view BLIP caption + direction phrase; one in-context CoT example; no pixels, no maps, no ground-truth positions at test time.",
+   "operation": "Sample K CoT candidates (Prediction, View match, Action); for each, run TFV (P sampled true/false judgements) and MEV (mask R instruction entities, P samples each, count correct recoveries); score = TFV + MEV; execute argmax with tie-breaks (TFV, then decoding order); skip verification if all candidates agree.",
+   "output": "One discrete navigation action or stop.",
+   "conditions": "Discrete Matterport navigation graph (R2R, RxR-en, REVERIE); verifier is the same tuned LLaMA-2 family; K=4, P=4 recommended.",
+   "feedback": "Self-generated verification outcomes; no external verifier and no environment feedback within a step.",
+   "selection_rule": "Highest summed verification successes among sampled candidates.",
+   "persistence": "None across steps beyond the action history; no retained improvement.",
+   "later_use": "n/a: per-step inference-time method, no retained-improvement claim",
+   "claimed_effect": "Val Unseen subset SR 39 (deterministic) -> 40 (vote) -> 52 (full verification); R2R Val Unseen SR 52 / SPL 45.",
+   "failure_boundary": "Lossy vision-to-text, repeated-sampling overhead, far below trained cross-modal specialists (81 SR) and below some trainable language-only agents (67-74 SR).",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E006",
+    "E013",
+    "E014",
+    "E009"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "LLaMA-2-7B backbone adapted to emit the Prediction-View Match-Action chain.",
+   "information": "Expert trajectories; Prediction labels manufactured by an LLM extracting instruction entities and CLIP picking the entity best matching the ground-truth next observation (train-time privilege).",
+   "operation": "Multi-task pretraining on the three CoT steps, then imitation fine-tuning of the full CoT with bias tuning (1.6M parameters, 4 V100, about 10 hours).",
+   "output": "A navigator that follows the CoT format.",
+   "conditions": "Trained per benchmark with identical recipe; English only for RxR.",
+   "feedback": "Supervised labels only.",
+   "selection_rule": "n/a: supervised training with no selection loop",
+   "persistence": "Model weights (bias terms).",
+   "later_use": "Used at inference with S1.",
+   "claimed_effect": "Backbone enabling CoT format; no standalone ablation of the training recipe versus NavCoT's.",
+   "failure_boundary": "Training-recipe contribution is not separated from verification in the main table.",
+   "evidence_ids": [
+    "E007",
+    "E008",
+    "E011"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "LLM-based VLN agents decide in one forward pass over noisy textified views, with no mechanism to check or correct decisions; many rely on costly closed-source models and face a domain gap.",
+  "checked_gap": "Plausible; the example in Fig. 1 and the 48 OSR vs 39 SR gap of the backbone suggest correct options are often reachable, but the paper does not quantify how often a correct candidate is among samples or how often the verifier is right.",
+  "lineage": [
+   "NavGPT / DiscussNav / MapGPT (prompting LLM agents)",
+   "NavCoT (trainable navigational CoT)",
+   "NaviLLM / NavGPT-2 / EvolveNav (trained language-centric agents)",
+   "Self-Verification (TFV/CMV) for QA, self-consistency"
+  ],
+  "closest_adjacent": "NavCoT supplies the CoT/training scaffold; Self-Verification supplies the verification scheme; DV-VLN is described as extending the latter to VLN.",
+  "residue": "Candidate checking at inference for a trainable open LLM navigator.",
+  "stakes": "Error accumulation from single-shot wrong turns in unseen houses.",
+  "method_response": "Sample several CoT candidates and re-rank by repeated true/false and masked-entity checks.",
+  "remaining_gap": "No quantification of the verifier's reliability, verification overhead, or gains at matched compute; large gap to specialists and to stronger trained language-only agents.",
+  "evidence_ids": [
+   "E019",
+   "E020",
+   "E010",
+   "E026"
+  ],
+  "unresolved": [
+   "Priority over generic self-consistency/self-verification applied to the same navigator is argued, not tested at equal sample budgets."
+  ]
+ },
+ "rs_pattern": {
+  "primary": null,
+  "supporting": [],
+  "matches": [],
+  "outside_taxonomy": true,
+  "reason": "Central operation is inference-time sampling plus same-model self-verification re-ranking of discrete navigation actions, with a supervised CoT recipe. Candidates opened: decompose_and_delegate/C25 (requires a sound external solver or mechanically checkable oracle; the verifier here is the same tuned LLM and its correctness is never checked), self_supervised_signal_engineering/C26 (manufactured signals are used to train, but DV-VLN's verification signal is not trained on; the CLIP/LLM CoT labels are a secondary training detail), adapt_via_conditioning (no conditioning-schema contribution). None matches the claimed operation without forcing; no sub-card applies.",
+  "executes_pattern": {
+   "value": false,
+   "reason": "No original card executed; outside_taxonomy.",
+   "evidence_ids": []
+  },
+  "resolves_problem": {
+   "value": false,
+   "reason": "Not claimed; verification gains are shown but verifier accuracy is not.",
+   "evidence_ids": []
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "sample_verify_select",
+    "sub": "R06",
+    "version": "patterns/2026-10-21",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "item": "Verified policy compared with the same policy unverified, in closed loop",
+      "status": "met",
+      "note": "deterministic vs vote vs TFV/MEV on the same backbone, environment-judged SR (subset only)"
+     },
+     {
+      "item": "Sampling separated from verification",
+      "status": "met",
+      "note": "sampling+vote row isolates sampling"
+     },
+     {
+      "item": "Failure: verifier trained or argued on a proxy",
+      "status": "unknown",
+      "note": "verifier is the same navigator family; its accuracy against correctness is not measured"
+     },
+     {
+      "item": "Failure: per-step latency of N candidates unreported",
+      "status": "met_as_risk",
+      "note": "K x P x R calls not timed"
+     },
+     {
+      "item": "Failure: small ablation sets",
+      "status": "met_as_risk",
+      "note": "90 pairs, no variance"
+     },
+     {
+      "item": "Failure: far below trained specialists",
+      "status": "met_as_risk",
+      "note": "52 vs 81 SR"
+     }
+    ],
+    "evidence_ids": [
+     "E004",
+     "E013",
+     "E014",
+     "E012",
+     "E021",
+     "E026"
+    ]
+   },
+   {
+    "main": "observe_act_interface",
+    "sub": "K109",
+    "version": "patterns/2026-10-21",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "item": "Separate frozen VLM converts images to text for the planner",
+      "status": "met",
+      "note": "BLIP captions feed the LLM"
+     },
+     {
+      "item": "Failure: no VLM backbone ablation, gain not separated from converter",
+      "status": "met_as_risk",
+      "note": "no captioner ablation; authors name information loss as a limitation"
+     }
+    ],
+    "evidence_ids": [
+     "E002",
+     "E003",
+     "E021"
+    ]
+   }
+  ],
+  "unassigned": [],
+  "revision_proposals": [
+   "R06 cites this paper as a source; keep the R06 verification-compute and verifier-accuracy conditions open until a second independent paper reports them."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": null,
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "sample_verify_select",
+    "sub": "R06"
+   },
+   "operation_correspondence": "Sample N candidate actions from a (CoT) policy, score each with a verifier (repeated true/false and masked-entity checks by a same-family LLM), execute the best: this is the DV-VLN step.",
+   "necessary_conditions_and_differences": "R06 transfers when sampling is cheap relative to an action and the verifier ranks closer to task success than the policy's likelihood; here VLN actions are cheap but the verifier's ranking quality is only supported through the SR gain. No original card is mapped (outside_taxonomy), so no RS-to-domain mapping is claimed.",
+   "evidence_ids": [
+    "E004",
+    "E006",
+    "E013"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s3",
+    "paper_practice:2609.15195#s4",
+    "paper_practice:2606.10267#s4",
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s1",
+    "paper_practice:2605.23950#s1",
+    "paper_limitation:2609.10522#s1"
+   ],
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Compares the harness with deterministic and vote variants of the same backbone, but not with other harness organisations (reflection, map prompting) on the same model.",
+   "evidence_ids": [
+    "E013",
+    "E014"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s1",
+    "paper_practice:2606.14674#s1",
+    "paper_practice:2606.10577#s2",
+    "paper_practice:2606.10577#s3",
+    "paper_practice:2609.20822#s3",
+    "paper_practice:2405.15793#s1",
+    "paper_limitation:2609.15195#s2",
+    "paper_limitation:2603.22435#s3",
+    "paper_limitation:2609.29964#s1",
+    "paper_limitation:2610.01939"
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement",
+   "applicable": true,
+   "status": "met",
+   "reason": "Sampling, TFV, MEV and combinations are toggled on the same backbone (not a cumulative stack).",
+   "evidence_ids": [
+    "E013",
+    "E014"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s2",
+    "paper_practice:2609.39207#s2",
+    "paper_practice:2608.03327#s1",
+    "paper_practice:2606.18363#s1",
+    "paper_practice:2609.24974#s1",
+    "paper_practice:2610.12549#s2"
+   ],
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Only one 7B backbone is tested.",
+   "evidence_ids": [
+    "E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s1",
+    "paper_practice:2609.29861#s2",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2608.03327#s1",
+    "paper_limitation:2608.17393",
+    "paper_limitation:2610.28069",
+    "paper_limitation:2606.10577#s1",
+    "paper_limitation:2609.15195#s4"
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Single run; ablation on a 90-pair subset without variance; sampling is stochastic.",
+   "evidence_ids": [
+    "E012",
+    "E013"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s3",
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2609.29964#s1",
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2606.27871#s3",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2606.10577#s4"
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Only training cost is given; inference calls, tokens or latency for K x P x R verification are not reported.",
+   "evidence_ids": [
+    "E021",
+    "E023"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E06",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2609.15195#s1",
+    "paper_practice:2609.29861#s1",
+    "paper_practice:2609.39207#s1",
+    "paper_limitation:2609.29861",
+    "paper_limitation:2607.26148"
+   ],
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "R2R/RxR/REVERIE use the discrete Matterport navigation graph, not VLN-CE or ObjectNav; the subset-versus-full-split mixing concern is noted under E.statistics/E.holdout",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E07",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2603.22435#s3",
+    "paper_practice:2607.08448#s1",
+    "paper_practice:2609.29389#s1",
+    "paper_practice:2609.29964#s1",
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2609.21650#s2"
+   ],
+   "applies_when": "an empirical claim that an agentic manipulation harness or harness-distilled student beats end-to-end VLAs",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no manipulation",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_limitation:2607.26148",
+    "paper_limitation:2609.29861",
+    "paper_limitation:2609.29389",
+    "paper_limitation:2606.27871",
+    "paper_limitation:2603.28052"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "K and P are chosen on the same Val Unseen subset that is part of the reported split, and pretrained LLaMA-2/BLIP/CLIP exposure to Matterport-style text is not discussed.",
+   "evidence_ids": [
+    "E012",
+    "E016"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E09",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2606.27871#s2",
+    "paper_practice:2609.29389#s2",
+    "paper_practice:2609.29964#s3",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2610.01939#s3",
+    "paper_practice:2609.10522#s3"
+   ],
+   "applies_when": "a claim that a compact VLM/VLA student distilled from frontier-harness trajectories approaches or exceeds the teacher",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no frontier-harness teacher distillation",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E10",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2605.24220#s3",
+    "paper_practice:2606.27871#s2",
+    "paper_practice:2606.18363#s2",
+    "paper_practice:2609.24974#s3",
+    "paper_limitation:2610.28589",
+    "paper_limitation:2609.32416#s3"
+   ],
+   "applies_when": "any student trained on success-filtered teacher trajectories",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no success-filtered teacher trajectories",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E11",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2509.14257#s1",
+    "paper_practice:2610.19834#s1",
+    "paper_practice:2610.19820#s1",
+    "paper_practice:2610.02858#s1",
+    "paper_practice:2609.24974#s3",
+    "paper_practice:2609.32416#s3"
+   ],
+   "applies_when": "a claim that teacher corrections at learner-induced states (first-error repair, review, action-agreement, preference) beat offline distillation",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no teacher corrections",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E12",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2608.06065#s1",
+    "paper_practice:2602.04942#s1",
+    "paper_practice:2505.09546#s1",
+    "paper_practice:2510.03207#s1",
+    "paper_limitation:2610.15572#s2",
+    "paper_limitation:2610.28589#s1"
+   ],
+   "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no privileged teacher-student at deployment (the privileged next observation is used only to build training labels)",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E13",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.21650#s2",
+    "paper_practice:2610.21450#s2",
+    "paper_practice:2509.14257#s2",
+    "paper_practice:2608.17393#s2",
+    "paper_practice:2610.28069#s1"
+   ],
+   "applies_when": "a claim that SFT/teacher initialization plus RL beats RL alone, or that RL lifts a student beyond its SFT data",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no RL",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E14",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2605.24220#s1",
+    "paper_practice:2608.17393#s3",
+    "paper_practice:2606.14674#s2",
+    "paper_practice:2608.03327#s3",
+    "paper_practice:2610.28069#s2",
+    "paper_limitation:2608.17393"
+   ],
+   "applies_when": "a claim that RL in a training scaffold or harness improves the deployed agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no RL",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E15",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2608.17393#s2",
+    "paper_practice:2608.17528#s4",
+    "paper_practice:2609.27308#s1",
+    "paper_limitation:2605.24220#s2",
+    "paper_limitation:2602.04942"
+   ],
+   "applies_when": "a policy or coding agent trained or evaluated against an automatic success checker it could access or tamper with",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no learned success checker the policy could tamper with",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.29861#s2",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2610.12549#s1",
+    "paper_practice:2609.15195#s3",
+    "paper_practice:2610.21450#s1",
+    "paper_practice:2607.22585#s2"
+   ],
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check",
+   "applicable": true,
+   "status": "partial",
+   "reason": "OSR is reported next to SR, but false-stop versus never-reached cases and verifier error are not analysed beyond one qualitative case.",
+   "evidence_ids": [
+    "E013",
+    "E009"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E17",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.08432#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2609.39207#s3",
+    "paper_limitation:2603.22435#s2",
+    "paper_limitation:2607.08448#s3",
+    "paper_limitation:2609.37105#s2"
+   ],
+   "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no self-improving harness/skill library",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E18",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.37105#s2",
+    "paper_practice:2610.28069#s2",
+    "paper_practice:2609.32416#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2610.28069"
+   ],
+   "applies_when": "a method that iteratively accepts harness, playbook or teacher-patch revisions from noisy rollouts",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no iterative revision gate",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2609.10522#s1",
+    "paper_practice:2605.13119#s2",
+    "paper_practice:2609.20822#s3",
+    "paper_limitation:2607.08448",
+    "paper_limitation:2609.39207",
+    "paper_limitation:2607.26148"
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no physical robot",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s2",
+    "paper_practice:2606.10577#s1",
+    "paper_practice:2609.29389#s1",
+    "paper_practice:2609.15195#s3",
+    "paper_practice:2609.20822#s1"
+   ],
+   "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no depth tool",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E21",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.02858#s3",
+    "paper_practice:2609.24974#s3",
+    "paper_practice:2610.28069#s2",
+    "paper_practice:2609.10522#s3"
+   ],
+   "applies_when": "a claim that a distilled student internalizes harness information or works under a minimal interface",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no student",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2609.11987#s2",
+    "paper_practice:2609.34018#s1",
+    "paper_limitation:2607.22585",
+    "paper_limitation:2609.27308#s2"
+   ],
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "The vote baseline and the verification arm are not compared at equal numbers of LLM calls.",
+   "evidence_ids": [
+    "E005",
+    "E014"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Dual verification re-ranking lifts navigation success over deterministic decoding and sampling-with-vote.",
+   "setting": "R2R Val Unseen subset of 90 instruction-trajectory pairs from 8 scans; LLaMA-2-7B bias-tuned; K=4, P=4.",
+   "baseline": "Deterministic decoding; sampling + majority vote; TFV only; MEV only.",
+   "selection_vs_test": "Hyperparameters and ablations selected on the same subset that sits inside the reported Val Unseen split.",
+   "result": "SR 39 -> 40 -> 42 (TFV) / 44 (MEV) -> 52 (both); OSR 48 -> 65.",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E012",
+    "E016",
+    "E015"
+   ],
+   "counterevidence": [
+    "K=1 row gives SR 43 without a re-ranking choice, contradicting the 39-40 no-verification rows.",
+    "Number of LLM calls differs between arms."
+   ],
+   "allowed_conclusion": "On a 90-pair subset, verification-based re-ranking outperforms single decoding and a K-sample vote; attribution to verification over extra compute is not established."
+  },
+  {
+   "claim_id": "C2",
+   "text": "DV-VLN is competitive among language-only VLN agents.",
+   "setting": "R2R Val Unseen full split; RxR English; REVERIE.",
+   "baseline": "NavGPT, DiscussNav, MapGPT, MSNav, NavCoT, NavGPT-2, NaviLLM, EvolveNav.",
+   "selection_vs_test": "Val Unseen is the standard dev/test proxy; no test-server numbers.",
+   "result": "R2R SR 52/SPL 45 versus NavCoT 40/37 and prompting agents 34-46; versus NaviLLM 67, EvolveNav 71, NavGPT-2 74.",
+   "evidence_ids": [
+    "E009",
+    "E010",
+    "E011",
+    "E017"
+   ],
+   "counterevidence": [
+    "Three trainable language-centric agents score 67-74 SR."
+   ],
+   "allowed_conclusion": "Better than prompting LLM agents and NavCoT on R2R; not competitive with the stronger trained language-only agents it lists; +0.41 SR over NavGPT-2 on RxR is within noise."
+  },
+  {
+   "claim_id": "C3",
+   "text": "The method generalises to RxR (English) and REVERIE with the same recipe.",
+   "setting": "RxR-en Val Unseen and REVERIE Val Unseen; same training recipe and hyperparameters.",
+   "baseline": "NavCoT, NavGPT-2, NavGPT, HAMT.",
+   "selection_vs_test": "Per-benchmark training; not zero-shot transfer.",
+   "result": "RxR SR 29.16; REVERIE SR 29.8 vs NavGPT 19.2 and HAMT 23.8.",
+   "evidence_ids": [
+    "E017",
+    "E018",
+    "E024"
+   ],
+   "counterevidence": [
+    "Table IV lists TL 9.24 for both DV-VLN and HAMT while the text calls DV-VLN's path shorter."
+   ],
+   "allowed_conclusion": "Gains persist on two other instruction styles under per-benchmark training."
+  },
+  {
+   "claim_id": "C4",
+   "text": "The performance-efficiency trade-off is favourable and the method is a computation-efficient alternative.",
+   "setting": "K and P sweeps on the 90-pair subset.",
+   "baseline": "None.",
+   "selection_vs_test": "same subset",
+   "result": "Gains saturate by K=4,P=4; no latency, tokens or call counts.",
+   "evidence_ids": [
+    "E016",
+    "E021",
+    "E023"
+   ],
+   "counterevidence": [
+    "The authors state verification adds overhead; no time is reported."
+   ],
+   "allowed_conclusion": "Gains saturate with K and P; efficiency is not measured."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_note": "Environment-judged SR/SPL in the Matterport navigation graph; hyperparameters chosen on part of Val Unseen; per-benchmark training; no zero-shot transfer or real robot.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "On R2R Val Unseen, sampling several chains-of-thought from a bias-tuned LLaMA-2-7B navigator and re-ranking by TFV and MEV gives higher SR than deterministic decoding and a vote on a 90-pair subset (52 vs 39-40) and 52 SR / 45 SPL on the full split, better than NavCoT and prompting LLM agents but well below stronger trained agents; verification overhead and verifier accuracy are not measured.",
+  "unresolved": [
+   "Gain at matched LLM calls versus self-consistency.",
+   "Verifier reliability and the K=1 anomaly.",
+   "Contribution of the training recipe versus NavCoT's.",
+   "MEV's CLIP dependence as stated versus described.",
+   "Inference cost."
+  ]
+ },
+ "status": "reviewed",
+ "status_reason": "Full text read (tables, prose; figure images unavailable but their numbers appear in prose); original-card identification is outside_taxonomy, reasoned above.",
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Abstract",
+   "quote": "DV-VLN first performs parameter-efficient in-domain adaptation of an open-source LLaMA-2 backbone to produce a structured navigational chain-of-thought, and then verifies candidate actions with two complementary channels: True-False Verification (TFV) and Masked-Entity Verification (MEV).",
+   "support_explanation": "Central method statement: tuned LLaMA-2 CoT generator plus two verification channels.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec IV-A",
+   "quote": "DV-VLN first translates each view into a compact textual description before passing it to the LLM:",
+   "support_explanation": "Information: the LLM never sees pixels; panoramas are textified.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec IV-A",
+   "quote": "We use the image captioning model BLIP (denoted F_{v} ) to convert each RGB image into a visual caption:",
+   "support_explanation": "Vision-to-text interface is a BLIP captioner.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec IV-E",
+   "quote": "DV-VLN performs dual posterior verification on the action candidates produced by sampling decoding.",
+   "support_explanation": "Operation: sample K candidates, then verify each.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec IV-E",
+   "quote": "In practice, if the K sampled candidates are already consistent (all predict the same action), DV-VLN directly executes it and skips verification to save computation",
+   "support_explanation": "Verification is skipped when candidates agree, so cost depends on disagreement rate (not reported).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec IV-E",
+   "quote": "We query the verifier LLM with sampling decoding P times to obtain boolean outputs",
+   "support_explanation": "TFV uses repeated sampled judgements by the verifier LLM (same model family as the navigator).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec IV-C",
+   "quote": "For each timestep t , let B_{t}^{*} denote the ground-truth next observation image.",
+   "support_explanation": "Training labels for the Prediction step use the ground-truth next observation (train-time privilege).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-A",
+   "quote": "We finetune LLaMA-2-7B via bias tuning, resulting in about 1.6M trainable parameters.",
+   "support_explanation": "Training scale: 1.6M tunable parameters.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-B",
+   "quote": "While DV-VLN does not employ cross-modal pretraining or a dedicated visual encoder, it still attains 52% SR and 45% SPL on Val Unseen",
+   "support_explanation": "Main R2R Val Unseen result.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Table I",
+   "quote": "NaviLLM ‡ [ 39 ] 2024 - - - - - 12.81 3.51 - 67 59 EvolveNav* [ 57 ] 2025 - - - - - 12.07 3.15 - 71 63",
+   "support_explanation": "Trainable language-only baselines score 67-71 SR on Val Unseen, above DV-VLN's 52.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Table I",
+   "quote": "NavCoT [ 40 ] 2025 10.08 6.46 48 41 38 9.95 6.26 48 40 37 DV-VLN (ours) 2025 10.53 5.03 66 54 49 10.70 5.14 67 52 45",
+   "support_explanation": "Closest trainable CoT baseline NavCoT: Val Unseen SR 40 vs DV-VLN 52.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-A",
+   "quote": "compact Val Unseen Subset for R2R, randomly sampling 90 instruction–trajectory pairs from 8 scans in Val Unseen",
+   "support_explanation": "Ablations run on only 90 instruction-trajectory pairs.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-C",
+   "quote": "The full DV-VLN variant, Sampling + TFV + MEV, achieves the best performance across all metrics on this subset: NE 5.11 m, OSR 65%, SR 52%, SPL 47%.",
+   "support_explanation": "Ablation: full method SR 52 on the subset.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-C",
+   "quote": "simply turning on sampling and voting brings only marginal gains: NE decreases from 6.26 m to 6.01 m, SR increases slightly from 39% to 40%, and SPL from 37% to 38%.",
+   "support_explanation": "Ablation: deterministic 39 SR, sampling+vote 40 SR.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-E",
+   "quote": "When using a single candidate ( K=1 ), DV-VLN achieves 58 OSR / 43 SR / 39 SPL.",
+   "support_explanation": "K=1 gives 43 SR although with one candidate argmax re-ranking cannot change the action; this differs from the 39-40 SR of the no-verification rows and is unexplained.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-E",
+   "quote": "In practice, K=4 and P=4 offers a strong and stable operating point",
+   "support_explanation": "Operating point chosen from sweeps on the same 90-pair subset.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-D",
+   "quote": "DV-VLN attains 29.16% SR and 25.94% SPL, clearly outperforming the language-only baselines (e.g., +4.64 SR and +3.36 SPL over NavCoT, and +0.41 SR and +3.58 SPL over NavGPT-2).",
+   "support_explanation": "RxR English: +0.41 SR over NavGPT-2 is within noise.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-D",
+   "quote": "DV-VLN substantially outperforms both NavCoT and NavGPT, achieving 29.8% SR and 21.7% SPL on Val Unseen, compared with NavGPT’s 19.2% SR and 14.6% SPL.",
+   "support_explanation": "REVERIE Val Unseen result.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec I",
+   "quote": "action decisions are usually produced in a single forward pass, without any explicit mechanism to check or correct potentially wrong predictions.",
+   "support_explanation": "Author gap statement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec II-D",
+   "quote": "Inspired by this generate–then–verify paradigm, DV-VLN extends its application to the embodied navigation field.",
+   "support_explanation": "Technique is transplanted from Self-Verification [54] to VLN.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec VI",
+   "quote": "The vision-to-text pipeline may lose fine-grained visual cues, and dual verification adds inference overhead due to repeated sampling and checking.",
+   "support_explanation": "Authors' own limitations; overhead is not measured.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-A",
+   "quote": "Since our masked-entity verification relies on CLIP-style text–vision alignment which is pretrained on English data",
+   "support_explanation": "The stated reason for restricting RxR to English refers to CLIP alignment, although the described MEV is an LLM masked-entity recovery over text; description is inconsistent.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-A",
+   "quote": "Inference is run on a single V100 GPU.",
+   "support_explanation": "Only the hardware is given for inference; no latency or token count.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-D",
+   "quote": "obtaining a comparable SPL (21.7% vs. 22.4%) with a shorter trajectory length (9.24 vs. 9.24 TL, i.e., similar path cost)",
+   "support_explanation": "Table IV TL entries are identical (9.24 vs 9.24) while the text says 'shorter'; presentation inconsistency.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec III-A",
+   "quote": "A trajectory is successful if the final stop is within 3 m of the goal.",
+   "support_explanation": "Standard R2R environment-judged success.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "hash": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "locator": "Sec V-B",
+   "quote": "ScaleVLN achieves 81% SR and 70% SPL on Val Unseen",
+   "support_explanation": "Cross-modal upper bound far above DV-VLN.",
+   "kind": "author_report"
+  }
+ ],
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "A real, commonly named limitation (single-shot decisions) with nearest neighbours cited, but the residual is not quantified (verifier accuracy, how often a correct candidate is sampled) and the technique is an extension of Self-Verification.",
+   "evidence_ids": [
+    "E019",
+    "E020",
+    "E010"
+   ],
+   "counterevidence_ids": [
+    "E020"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "The mechanism is reasoned (global consistency vs entity-level recoverability) and distinguishes verification from voting, but relies on a 7B same-family verifier over lossy captions without evidence of verifier reliability, and the MEV/CLIP description is inconsistent.",
+   "evidence_ids": [
+    "E004",
+    "E006",
+    "E022",
+    "E013"
+   ],
+   "counterevidence_ids": [
+    "E022"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Selection rule, tie-breaking, skip rule, losses and training scale are given, but verifier prompts, sampling settings, R, and the failure boundary (verifier errors, overhead) are not specified.",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E006",
+    "E008"
+   ],
+   "counterevidence_ids": [
+    "E021"
+   ],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Standard environment-judged SR/SPL/NE/OSR on three benchmarks with a clear success criterion; side analyses show unexplained numbers (K=1 row, identical TL entries).",
+   "evidence_ids": [
+    "E025",
+    "E009",
+    "E010",
+    "E017",
+    "E018"
+   ],
+   "counterevidence_ids": [
+    "E015",
+    "E024"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Sampling, vote, TFV and MEV are separated on one backbone, but only on 90 pairs, not at matched LLM calls, and the training recipe and captioner are not ablated against NavCoT-style baselines.",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E012"
+   ],
+   "counterevidence_ids": [
+    "E015"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Val Unseen with RxR/REVERIE under the same recipe supports some breadth, but K/P and ablations use a subset of the reported split, there are no test-server results, and pretraining exposure is not discussed.",
+   "evidence_ids": [
+    "E009",
+    "E017",
+    "E018"
+   ],
+   "counterevidence_ids": [
+    "E012",
+    "E016"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "Single runs, a 90-pair ablation set with no variance despite stochastic sampling, +0.41 SR claims on RxR.",
+   "evidence_ids": [
+    "E012",
+    "E017"
+   ],
+   "counterevidence_ids": [
+    "E012"
+   ],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "Training cost (4 V100, about 10 h, 1.6M parameters) is stated, but inference calls/tokens/latency for K x P x R verification are not reported and no matched-budget comparison exists.",
+   "evidence_ids": [
+    "E008",
+    "E023",
+    "E021"
+   ],
+   "counterevidence_ids": [
+    "E021"
+   ],
+   "search_scope": []
+  }
+ },
+ "score": {
+  "raw": 51.25,
+  "display": "51.2",
+  "lower": 51.25,
+  "upper": 51.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-2",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "provenance": {
+  "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e|conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1|overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T17:20:14Z",
+  "notes": "session_id/receipt_ref null: the internal Subagent cannot read its own session id or a call receipt. Blind boundary kept: no other seat, aggregate, other batch, archive, old score/Reel or assignments.jsonl was read. Domain cards R05/R06 etc. cite some batch papers as board-induced sources; those card statements were not used as evidence, all judgements come from the pinned full text."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2601.18492v1",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2601.18492.txt",
+   "sha256": "f7212981fd50b8a4094957ac1856029d54cb868b159eeb62ca7eabe26ab44181",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Work (A-D)",
+    "III Preliminaries",
+    "IV Method (A-E)",
+    "Table I",
+    "V Experiments (A-F, Tables II-IV, Figs 3-4 as text)",
+    "VI Conclusion"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "Figure images (Figs 1-4) are not in the text material; Fig. 3 numbers are read from the prose"
+   ]
+  }
+ ]
+}

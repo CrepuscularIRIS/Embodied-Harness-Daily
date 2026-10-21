@@ -1,0 +1,1034 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-dev-2",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2606.00104",
+    "paper_id": "2606.00104",
+    "title": "PEACE: A Planner-Executor Agent with Constraint Enforcement for UAVs",
+    "version": "2606.00104v1",
+    "claim_type": "system_method",
+    "central_claim": "A single-pass LLM MissionPlan executed through typed ROS2/MAVLink tools, grounded by a modular metric-depth world model and independently filtered by altitude/geofence constraints with bounded failure replanning, improves explainability, constraint enforcement and LLM-call efficiency over tightly coupled UAV agents."
+  },
+  "provenance": {
+    "input_hash": "cef6819a0456f4a2a6c434ba14b8b42165da7242f014bf617492272f3181b9fc",
+    "rubric_version": "v2.2 draft_uncalibrated; calibration-dev, not frozen production score",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "eeb8ba7127abcee445b8d46663e4aeef55882de69e2c4cf943254e91989ca258",
+    "expectations_hash": "57cab82e0cb76011de9fdf73a54551d9f384b75e4a4fedd131483a475848e876",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T16:47:43.078566+00:00",
+    "notes": [
+      "Model identity is supplied by dispatch/runtime context; no model probing or reconfiguration performed. Session ID and receipt reference are not exposed to this worker.",
+      "Blind local review only; no other seat, aggregate, other batch, archive, old score, Reel, acceptance or citation-rank records read.",
+      "Hash convention: rubric and RS MANIFEST.tsv are raw SHA256; domain_cards_hash is SHA256 of sorted repo-relative-path TAB raw-file-sha256 LF for all main/sub cards plus taxonomy and conditions; expectations_hash binds concatenated main-card path and Reviewer expectations section text, ending before Cognitive barriers. These are worker-computed bindings, not claims that a production rubric is frozen.",
+      "Only author-reported experiments; no paper code executed and no network search. Nearest-neighbor original texts are not in this fixed input; lineage conclusions remain bounded to paper descriptions.",
+      "Domain cards do not declare a semantic version; domain version fields are content-addressed by the bound card-set digest. Expectation versions bind their actual main-card source bytes; source_strength common_practice does not imply actual reviewer testimony."
+    ],
+    "fixed_manifest_hashes": {
+      "score_spec": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+      "pattern_protocol": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+      "batch_contract": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+      "worksheet": "b0ca3ac92a458c934894aee62c88d6de8ab53901047326e0c8abdfd1a0d3219e",
+      "evidence": "612b7df7eec04add15b47c9316206fee7f572d824a03143fb82bdfcc5aab3ce2",
+      "evidence_schema": "b7dd7fa66ce5d3eb4a87e13f65fdb7d9ac69b9a268bb84474049274f9f65b8cb",
+      "rs_manifest": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "rs_parents": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+      "domain_taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "domain_conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "pattern_overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+    },
+    "source_asset_hashes": {
+      "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+      "patterns/sub/R04.md": "2cb295561bb649fcb88b5a1b8e606de87fb53f376c38a197a8e66095fc573f10",
+      "research/BATCH_CONTRACT.md": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+      "research/PATTERN_PROTOCOL.md": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+      "research/SCORE_SPEC.md": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+      "research/patterns/conditions.json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "research/patterns/taxonomy.json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "research/reference/researchstudio-15-31/MANIFEST.tsv": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "research/reference/researchstudio-15-31/PARENTS.tsv": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+      "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+      "research/reference/researchstudio-15-31/ideation-sub-patterns/C25.md": "ced46168bbcc6ab1aeaf9a242b47631d6076097bd8758c08560c3faa888da4ff"
+    }
+  },
+  "materials": [
+    {
+      "material_id": "2606.00104:fulltext",
+      "url": "https://arxiv.org/html/2606.00104v1",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sections_read": [
+        "Complete supplied released article: Abstract, Sections I-V and Acknowledgment, L1-L24"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L6",
+      "quote": "Results highlight improved explainability, constraint enforcement, and reduced LLM calls compared to tightly coupled LLM control.",
+      "support_explanation": "Original comparative claim retained, not replaced by weaker feasibility-only target.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L12",
+      "quote": "TypeFly generates flight plans in a domain-specific language (MiniSpec) to reduce LLM inference latency",
+      "support_explanation": "Closest lineage already amortizes planning; cannot accept blanket claim that fixed planning or reduced calls is new.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+      "quote": "a reasoning string followed by an ordered list of tool calls.",
+      "support_explanation": "Typed MissionPlan separates planner construction from deterministic executor dispatch.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+      "quote": "a bounded replan is issued.",
+      "support_explanation": "Executor re-invokes planner only after failure, not after every action; numerical cap not specified in release.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+      "quote": "using the synchronized depth image and camera intrinsics, and exposes an explicit depth-validity flag",
+      "support_explanation": "Perception assumes metric calibrated depth; invalid flag is an explicit information-boundary mechanism, not robustness proof.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+      "quote": "Each planner invocation reads a consistent snapshot from both services",
+      "support_explanation": "Grounding uses bounded timestamped state and world histories; snapshots can stale during nominal open-loop execution.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+      "quote": "Out-of-band altitude targets are clamped; geofence breaches abort the offending tool calls and surfaces a structured failure to the replanner.",
+      "support_explanation": "Specific gate actions and physical scope. Altitude/geofence alone do not certify obstacle collision avoidance or full trajectory safety.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+      "quote": "The aim is not a quantitative benchmark, but to characterize the agent’s behavior",
+      "support_explanation": "Explicit qualitative study; 108 prompts are not an empirical success denominator.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+      "quote": "takeoff and landing (12), relative motion (12), altitude and attitude control (12), waypoint navigation (13), geometric path following (13), object search and localization (12), open-vocabulary navigation (13), composite multi-step missions (13), and safety violation (8).",
+      "support_explanation": "Prompt inventory totals108 but enumerates nine categories despite prose saying eight; not completed execution counts.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+      "quote": "takeoff(5) followed by forward(3)",
+      "support_explanation": "Concrete nominal SITL trace, not per-task success rates or a baseline comparison.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+      "quote": "these are by design but propagate to the mission failure.",
+      "support_explanation": "Gate rejects can be correct yet task fails; mission success cannot be substituted with safety-filter activation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L21",
+      "quote": "the current open- loop planning assumption is brittle in such settings",
+      "support_explanation": "Authors acknowledge dynamic-scene limitation; feedback only on tool failure does not handle all scene changes.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L21",
+      "quote": "The first is a sim-to-real deployment on physical UAV hardware.",
+      "support_explanation": "Real transfer is future work, not evidence from this release.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "2606.00104:fulltext",
+      "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+      "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L21",
+      "quote": "the adoption of a planner–executor paradigm reduces LLM invocations to a single call",
+      "support_explanation": "Structural nominal call count; no measured call/latency/USD comparator and bounded replans can add calls.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "PX4/Gazebo UAV planner–executor control path, replacing per-action LLM reasoning with fixed MissionPlan",
+      "information": "Natural-language task, static tool/rule/schema prompt, timestamped bounded robot/world histories; world objects projected from 2D detections using synchronized metric depth and intrinsics in ENU; actual LLM ID and detailed schemas absent.",
+      "operation": "One planner invocation emits reasoning plus ordered calls; ROS2 executor binds to MAVLink and executes sequentially; fresh state snapshot and bounded replan on tool failure.",
+      "output": "Inspectable fixed tool sequence, per-step records and final state; no generated arbitrary executable policy.",
+      "conditions": "Known fixed tool vocabulary, accurate state/arming preconditions, sufficiently static scene and valid depth calibration.",
+      "feedback": "Typed execution failure, invalid depth/world detections and gate abort; no continuous model-level reconsideration in successful nominal tool sequence.",
+      "selection_rule": "Static deterministic schema and geometry validation, not optimized retained artifact selection.",
+      "selection_data": "Per-call requested motion and current flight state against configured limits; numerical caps not stated.",
+      "persistence": "Fixed tool/schema/context services and mission logs; no learned policy or persistent harness modification reported.",
+      "later_use": "Mission dispatch in qualitative SITL prompts; logs suggested for future distillation, which is not implemented evidence.",
+      "claimed_effect": "Explainable plans with fewer LLM calls and externally constrained flight.",
+      "failure_boundary": "Undetected tool/scene changes cascade; perception degeneracy and arming/offboard idempotency errors; exact model/limits/retry policy insufficiently specified.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E010",
+        "E012",
+        "E014"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Independent altitude and horizontal-geofence motion gate",
+      "information": "Requested target altitude, horizontal target and takeoff-centered geofence; geometric, not LLM confidence.",
+      "operation": "Clamp altitude out of band; abort geofence breach; return structured failure for bounded planner recovery.",
+      "output": "Only accepted/clamped target motion commands reach low-level controller.",
+      "conditions": "Geometry and frame conventions correct; point/target check scope, trajectory sweep and control tracking not demonstrated.",
+      "feedback": "Safety-validation abort distinct from task success.",
+      "selection_rule": "Configured altitude band and horizontal radius; numerical values not supplied.",
+      "selection_data": "Per-call command values, not training data or selected test outcomes.",
+      "persistence": "Static service unchanged across tasks.",
+      "later_use": "Applies to each emitted motion command; qualitative safety prompts described.",
+      "claimed_effect": "Constraints enforced independently of planner mistakes.",
+      "failure_boundary": "Does not establish obstacle avoidance, dynamics-aware continuous constraint satisfaction or regulatory compliance.",
+      "evidence_ids": [
+        "E007",
+        "E011"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Per-action LLM loops add latency/hallucinated motion; end-to-end policies lack auditable action spaces and require domain training.",
+    "checked_gap": "A fixed typed artifact and independent geometric gate are credible engineering responses; no direct comparative benchmark establishes the magnitude or universality of claimed failure reduction. TypeFly already targets planning latency.",
+    "lineage": [
+      {
+        "method": "TypeFly/MiniSpec, FlockGPT",
+        "source_version": "2606.00104v1 Section II-C; originals and exact cited versions not supplied",
+        "relation": "UAV DSL/target compilation already separates semantic planning from classical control."
+      },
+      {
+        "method": "Co-NavGPT and mission-planning agents",
+        "source_version": "Suppliedv1 SectionsI-II; originals absent",
+        "relation": "World-grounded high-level planning precedent; present paper chooses typed ROS2 bindings and local external gate."
+      }
+    ],
+    "closest_adjacent": [
+      "TypeFly/MiniSpec: explicit flight-plan compiler reducing inference latency (SectionII-C)",
+      "ReAct-style per-tool prompting: only narrative comparator, no controlled run"
+    ],
+    "residue": "Fixed inspectable tool schemas plus independently enforced elementary flight limits and failure-only replanning within the PX4/ROS2 stack.",
+    "stakes": "Safety-critical control needs auditable commands; open-loop plans trade latency for stale perception and missed recovery.",
+    "method_response": "Single typed plan amortizes reasoning; modular world model grounds object references; separate service can reject unsafe requested targets.",
+    "remaining_gap": "Quantitative success/safety/latency gains, matched reactive baseline, precise deployment configuration and dynamic scenes are not established.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E007",
+      "E008",
+      "E012",
+      "E014"
+    ],
+    "unresolved": [
+      "Original nearest-neighbor texts absent; cannot certify broad novelty.",
+      "No actual planner model ID, numeric geofence/altitude settings, retry budget or complete prompt/schema. These are confirmed omissions in the complete qualitative article, not inaccessible appendices."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong main; typed intermediate plus external check, with local rather than global guarantee",
+        "tactic_steps_checked": [
+          {
+            "id": "learned reasoning to structured intermediate",
+            "status": "met",
+            "reason": "LLM produces MissionPlan with ordered tool invocations.",
+            "evidence_ids": [
+              "E003"
+            ]
+          },
+          {
+            "id": "specialized deterministic execution",
+            "status": "met",
+            "reason": "ROS2/MAVLink dispatch outside language model.",
+            "evidence_ids": [
+              "E003",
+              "E004"
+            ]
+          },
+          {
+            "id": "machine-checkable constraints and feedback",
+            "status": "partial",
+            "reason": "Altitude/geofence validator returns failure; no full mission verifier, planner search or global feasibility proof.",
+            "evidence_ids": [
+              "E007"
+            ]
+          }
+        ],
+        "success/failure_checks": [
+          {
+            "id": "independent check correctness",
+            "status": "partial",
+            "reason": "Simple geometry check description can be reconstructed at high level, but thresholds and continuous-motion validation absent.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "id": "baseline and runtime overhead",
+            "status": "unmet",
+            "reason": "No quantitative matched reactive controller or end-to-end latency measurement.",
+            "evidence_ids": [
+              "E008",
+              "E014"
+            ]
+          },
+          {
+            "id": "semantic abstraction completeness",
+            "status": "partial",
+            "reason": "Typed actions inspectable but dynamic scenes and arming preconditions remain brittle.",
+            "evidence_ids": [
+              "E012"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E007"
+        ],
+        "reason": "C25 alignment is structured neural proposal, independent geometric checking and failure feedback, not an assertion that the mission is formally verified or optimal."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Planner emits a checkable typed artifact delegated to external control; no persistent-memory or policy-training contribution.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "external_verification_control",
+        "sub": "K201",
+        "version": "sha256:eeb8ba7127abcee445b8d46663e4aeef55882de69e2c4cf943254e91989ca258",
+        "fit": "strong command-level deterministic safety gate, not outcome certification",
+        "condition_checks": [
+          {
+            "id": "S1",
+            "status": "partial",
+            "reason": "External cheap target-validity check is described but thresholds, false accept/reject and task contribution not quantified.",
+            "evidence_ids": [
+              "E007",
+              "E008"
+            ]
+          },
+          {
+            "id": "F3",
+            "status": "met",
+            "reason": "Gate not toggled on same planner/tasks; safety and task gains unisolated.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "F4",
+            "status": "partial",
+            "reason": "Rejected commands correctly propagate to mission failure; no aggregate harm/help comparison.",
+            "evidence_ids": [
+              "E011"
+            ]
+          },
+          {
+            "id": "S2",
+            "status": "not_applicable",
+            "reason": "No obstacle-route collision checker, STOP or semantic-success detector, or reset-based diagnostic training.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "id": "S3",
+            "status": "not_applicable",
+            "reason": "No obstacle-route collision checker, STOP or semantic-success detector, or reset-based diagnostic training.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "id": "S4",
+            "status": "not_applicable",
+            "reason": "No obstacle-route collision checker, STOP or semantic-success detector, or reset-based diagnostic training.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "id": "S5",
+            "status": "not_applicable",
+            "reason": "No obstacle-route collision checker, STOP or semantic-success detector, or reset-based diagnostic training.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "id": "F1",
+            "status": "not_applicable",
+            "reason": "No quantitative success metric from learned judge or policy-fidelity ablation, and no reset-only learned improvement claim.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "F2",
+            "status": "not_applicable",
+            "reason": "No quantitative success metric from learned judge or policy-fidelity ablation, and no reset-only learned improvement claim.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "F5",
+            "status": "not_applicable",
+            "reason": "No quantitative success metric from learned judge or policy-fidelity ablation, and no reset-only learned improvement claim.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "F6",
+            "status": "not_applicable",
+            "reason": "No quantitative success metric from learned judge or policy-fidelity ablation, and no reset-only learned improvement claim.",
+            "evidence_ids": [
+              "E008"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E007",
+          "E008",
+          "E011"
+        ]
+      },
+      {
+        "main": "observe_act_interface",
+        "sub": "R04",
+        "version": "sha256:eeb8ba7127abcee445b8d46663e4aeef55882de69e2c4cf943254e91989ca258",
+        "fit": "typed existing robotics-stack exposure and world-state services",
+        "condition_checks": [
+          {
+            "id": "S3",
+            "status": "partial",
+            "reason": "Pinhole calibrated metric depth explicitly assumed; nonmetric/noisy-depth robustness untested.",
+            "evidence_ids": [
+              "E005"
+            ]
+          },
+          {
+            "id": "S7",
+            "status": "partial",
+            "reason": "Existing ROS2/MAVLink stack exposed through fixed schema, but comparator only described narratively.",
+            "evidence_ids": [
+              "E003",
+              "E008"
+            ]
+          },
+          {
+            "id": "F4",
+            "status": "met",
+            "reason": "Context, tool, planning, safety changes bundled without component isolation.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "F7",
+            "status": "met",
+            "reason": "Nominal call reduction is not measured end-to-end latency or contamination disclosure.",
+            "evidence_ids": [
+              "E008",
+              "E014"
+            ]
+          },
+          {
+            "id": "F8",
+            "status": "met",
+            "reason": "Protocol demonstrated qualitatively, not counted task success.",
+            "evidence_ids": [
+              "E008",
+              "E009",
+              "E010"
+            ]
+          },
+          {
+            "id": "S1",
+            "status": "unmet",
+            "reason": "No controlled fixed-model interface swap or per-backbone tool effect.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "S5",
+            "status": "unmet",
+            "reason": "No controlled fixed-model interface swap or per-backbone tool effect.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "S2",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "S4",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "S6",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "S8",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F1",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F2",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F3",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F5",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F6",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F9",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          },
+          {
+            "id": "F10",
+            "status": "not_applicable",
+            "reason": "No action-discretization, STOP metric, embodiment-vocabulary, RGB-vs-text, learned-advice, converter or teacher-attribution claim; metric depth is explicitly stated, so its untested noise robustness is addressed under S3/E20.",
+            "evidence_ids": [
+              "E005",
+              "E008"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E003",
+          "E005",
+          "E006",
+          "E008",
+          "E014"
+        ]
+      }
+    ],
+    "unassigned": [
+      "Not learned motion policy, autonomous skill growth or retained self-optimization; future trace distillation is not present evidence."
+    ],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "external_verification_control",
+        "sub": "K201"
+      },
+      "operation_correspondence": "Typed planner proposal passes through a separate deterministic command validator; gate rejects produce structured recovery feedback.",
+      "necessary_conditions_and_differences": "Checks cover altitude/geofence target bounds only; soundness of full trajectory, collision freedom and mission completion not implied.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E007"
+      ]
+    },
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "R04"
+      },
+      "operation_correspondence": "Structured tool artifact exposes an established robot execution stack instead of arbitrary generated code.",
+      "necessary_conditions_and_differences": "ROS2/MAVLink binding is a protocol integration, not new planner theory; semantic and state-machine failures persist.",
+      "evidence_ids": [
+        "E003",
+        "E006",
+        "E012"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "sha256:f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Improvement over reactive interface",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "No same-model same-prompt alternative harness execution; related work is not a comparator.",
+      "evidence_ids": [
+        "E002",
+        "E008"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E02",
+      "version": "sha256:1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "External safety gate causes gains",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "No gate on/off or world-model/planning isolation.",
+      "evidence_ids": [
+        "E007",
+        "E008"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E04",
+      "version": "sha256:1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Reliability and safety statements",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "No per-prompt execution denominators, repeated runs or uncertainty.",
+      "evidence_ids": [
+        "E008",
+        "E009",
+        "E010"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E05",
+      "version": "sha256:f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Reduced calls/latency",
+      "applicable": true,
+      "status": "partial",
+      "reason": "One-call nominal architecture stated; bounded replans can add calls. No measured tokens/wall-time/USD or reactive comparison.",
+      "evidence_ids": [
+        "E004",
+        "E014"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E08",
+      "version": "sha256:f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "General open-world interpretation",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "108 development prompts restricted to five visible object classes; no disjoint scene/evaluation cohort or development-overlap audit.",
+      "evidence_ids": [
+        "E008",
+        "E009"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E16",
+      "version": "sha256:1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Constraint enforcement and recovery",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Three qualitative failure classes and task-failing correct aborts described; no rate, false accept/reject or successful-recovery audit.",
+      "evidence_ids": [
+        "E007",
+        "E008",
+        "E011"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E20",
+      "version": "sha256:1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Metric 3D grounding",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Intrinsics, synchronized depth, ENU and validity flag specified; no calibration-error, metric-scale or nonmetric-depth perturbation tests.",
+      "evidence_ids": [
+        "E005"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "sha256:1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Comparable safety and efficiency",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "No matched interaction/LLM/time budget across alternative systems.",
+      "evidence_ids": [
+        "E008",
+        "E014"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Typed planner–executor with external gate is feasible and auditable for UAV tasks.",
+      "setting": "PX4 software-in-loop and Gazebo, structured prompt collection",
+      "baseline/control": "No quantitative alternate-agent run; one nominal two-step mission trace and qualitative categories",
+      "selection_vs_test": "108 compiled prompts; no held-out scene/task protocol or counted completion cohort",
+      "result/denominator": "108 is prompt inventory (12+12+12+13+13+12+13+13+8), not108 successes/trials; nine enumerated categories conflict with word eight. No SR.",
+      "evidence_ids": [
+        "E003",
+        "E008",
+        "E009",
+        "E010"
+      ],
+      "counterevidence": [
+        "E012"
+      ],
+      "allowed_conclusion": "Author-reported qualitative SITL feasibility of inspectable mission structure; not established online success-rate evidence."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Independent constraint service improves safety and bounded replanning recovers.",
+      "setting": "Target altitude/geofence checks before actuation",
+      "baseline/control": "No validator-off comparison, hazard ground-truth dataset or recovery-success counts",
+      "selection_vs_test": "Static geometric design, not learned selection; no independent hazard-test partition",
+      "result/denominator": "Altitude clamp and geofence abort described; no violation rate or recovery denominator",
+      "evidence_ids": [
+        "E004",
+        "E007",
+        "E011"
+      ],
+      "counterevidence": [
+        "Full collision/path safety, continuous tracking, dynamics and moving obstacles are outside tested scope.",
+        "E012"
+      ],
+      "allowed_conclusion": "Mechanism can enforce its specified command bounds if correctly implemented; broad safety or regulatory-compliance improvement unproved."
+    },
+    {
+      "claim_id": "C3",
+      "text": "Planner–executor reduces LLM calls and latency versus reactive LLM control.",
+      "setting": "Nominal single-plan execution with failure-only replans",
+      "baseline/control": "Narrative ReAct comparison only; no measured same-task reactive runs",
+      "selection_vs_test": "No cost test cohort",
+      "result/denominator": "Nominal one planner call; exact retry cap, measured actual calls, tokens, seconds, dollars absent.",
+      "evidence_ids": [
+        "E004",
+        "E008",
+        "E014"
+      ],
+      "counterevidence": [
+        "E002",
+        "E012"
+      ],
+      "allowed_conclusion": "Structural removal of per-tool LLM queries, not demonstrated end-to-end cost or failure reduction."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "offline",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "The article describes a plausible typed PX4 planner/executor and external command-bound gate with qualitative SITL examples. The original comparative safety/efficiency claim is not established. Offline labels qualitative demonstrations even though the described system interacts with a simulator;108 prompts are not a success denominator. No transfer: physical UAV work is future.",
+    "unresolved": [
+      "Quantified task success, constraints violated, false accept/reject and bounded-recovery rates.",
+      "Matched same-backbone reactive comparator, actual latency/tokens/USD and retry counts.",
+      "Exact model, tool schema, numeric safety bounds, depth error robustness and dynamic-scene behavior."
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 2,
+      "reason": "Latency/auditability bottlenecks are real engineering concerns, but gap from TypeFly-style plan compilation and other neighbors is only narrative.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Typed static schema, consistent snapshots, external geometric gate and structured failure feedback logically address inspectability and command-bound control. They trade away dynamic-scene reactivity.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007"
+      ],
+      "counterevidence_ids": [
+        "E012"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 2,
+      "reason": "Flow and clamp/abort semantics are reconstructable, but exact model, numeric constraints, retry cap and schemas are unreported; verifier covers requested motion, not whole safety.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E005",
+        "E007"
+      ],
+      "counterevidence_ids": [
+        "E012"
+      ],
+      "search_scope": [
+        "Complete supplied article Abstract, I Introduction, II Related Works, III-A..F Approach, IV-A..C Experiments and V Implications read (L1-L24); no appendix supplied or referenced for quantitative results.",
+        "Checked all numerical task/prompt counts, qualitative traces, comparator discussion, safety limits, replanning and efficiency statements."
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "One mission trace and qualitative failure descriptions show what was attempted; no per-task success or safety-error rates and prompt inventory has a category-label inconsistency.",
+        "evidence_ids": [
+          "E008",
+          "E009",
+          "E010",
+          "E011"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "not_reported",
+        "rating": 0,
+        "reason": "Complete article has no quantitative comparator or isolated gate/interface control; no causal improvement established.",
+        "evidence_ids": [
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Complete supplied article Abstract, I Introduction, II Related Works, III-A..F Approach, IV-A..C Experiments and V Implications read (L1-L24); no appendix supplied or referenced for quantitative results.",
+          "Checked all numerical task/prompt counts, qualitative traces, comparator discussion, safety limits, replanning and efficiency statements."
+        ]
+      },
+      "holdout": {
+        "status": "not_reported",
+        "rating": 0,
+        "reason": "No independent held-out scenes/tasks or construction-vs-test split reported; prompt collection is not transfer evidence.",
+        "evidence_ids": [
+          "E008",
+          "E009",
+          "E013"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Complete supplied article Abstract, I Introduction, II Related Works, III-A..F Approach, IV-A..C Experiments and V Implications read (L1-L24); no appendix supplied or referenced for quantitative results.",
+          "Checked all numerical task/prompt counts, qualitative traces, comparator discussion, safety limits, replanning and efficiency statements."
+        ]
+      },
+      "statistics": {
+        "status": "not_reported",
+        "rating": 0,
+        "reason": "No executed-trial success denominator, repeated runs, dispersion or uncertainty;108 prompts cannot substitute.",
+        "evidence_ids": [
+          "E008",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Complete supplied article Abstract, I Introduction, II Related Works, III-A..F Approach, IV-A..C Experiments and V Implications read (L1-L24); no appendix supplied or referenced for quantitative results.",
+          "Checked all numerical task/prompt counts, qualitative traces, comparator discussion, safety limits, replanning and efficiency statements."
+        ]
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Nominal one-call architecture and failure-only extra calls give a limited structural cost argument; no measured end-to-end overhead or matched alternative budget.",
+        "evidence_ids": [
+          "E004",
+          "E014"
+        ],
+        "counterevidence_ids": [
+          "E002",
+          "E008"
+        ],
+        "search_scope": [
+          "Complete supplied article Abstract, I Introduction, II Related Works, III-A..F Approach, IV-A..C Experiments and V Implications read (L1-L24); no appendix supplied or referenced for quantitative results.",
+          "Checked all numerical task/prompt counts, qualitative traces, comparator discussion, safety limits, replanning and efficiency statements."
+        ]
+      }
+    }
+  },
+  "status": "reviewed",
+  "reason": "Entire short released article read. Missing quantitative experiments are explicitly outside the stated preliminary study, so appropriate not_reported ratings apply instead of inventing unavailable fulltext or fabricated trials.",
+  "short_reason": "Inspectable UAV integration with a local external gate; quantitative safety, reliability and efficiency claims remain untested.",
+  "score": {
+    "raw": 37.5,
+    "display": 37.5,
+    "lower": 37.5,
+    "upper": 37.5,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  }
+}

@@ -1,0 +1,2432 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-1",
+ "attempt_id": "a1",
+ "seat": "opus55_aggregate",
+ "paper": {
+  "paper_key": "2606.12299",
+  "paper_id": "2606.12299",
+  "title": "Learning What to Say to Your VLA: Mostly Harmless Vision Language Action Model Steering",
+  "version": "2606.12299v2",
+  "claim_type": "component_training",
+  "central_claim": "A framework that interactively searches for language sequences that improve closed-loop VLA task performance, distills them into a test-time language feedback policy (LFP), and learns a conformalized improvement head that predicts when language steering will improve performance; on arbitrary frozen pre-trained VLAs it improves base VLA performance by 24.7% in simulation and 65.0% in hardware on seen environments, with harmlessness guarantees on visual and semantic perturbations with calibration samples, and produces recovery behaviors not observed with open-loop prompting.",
+  "scope_note": "在范围内(训练的 VLM 作为冻结 VLA 的上层、教师模型 GPT-5.4/Molmo2 参与离线搜索)；属 component_training，边界偏窄但可接受"
+ },
+ "provenance": {
+  "input_hash": "2e73fbac012f58e0a5ab3163a0af6249c7cab16960cc9cc3121e07c40c24182f",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "pattern_overview_hash": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T16:48:35Z",
+  "notes": "session_id/receipt_ref 无法自取，按指令填 null；盲评：未读取 seats/sol、aggregate、其他批次、archive 与旧分数；未读取输入包以外的论文全文(保证两席材料一致)。"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2606.12299v2",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.12299.txt",
+   "sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Steering Pre-trained VLA Policies via Natural Language",
+    "3 Learning Mostly Harmless LFPs",
+    "4 Experiments (4.1–4.5)",
+    "5 Limitations",
+    "6 Appendix 6.1–6.5 (含 Tables 4–16)"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "图像内容(Fig 1–14 像素)与图中提示模板(Fig 8–11)不在文本提取中"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Abstract",
+   "quote": "we propose a framework that interactively searches for language sequences that improve closed-loop VLA task performance, distills these sequences into a test-time language feedback policy (LFP), and learns an improvement head that predicts when language steering will improve performance",
+   "support_explanation": "作者的中心方法主张。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Abstract",
+   "quote": "our conformalized LFP improves base VLA performance by 24.7% in simulation and 65.0% in hardware",
+   "support_explanation": "摘要头条数字；经 Table 11/13 核算为相对提升(sim 51.2→63.8 为+24.6%相对、+12.6pp；硬件名义任务均值 50.0→82.5 为+65%相对、+32.5pp)，摘要未注明'相对'。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App Table 11",
+   "quote": "Train Env 51.2 60.6 53.1 55.0 63.9 63.8 ID Scene, OOD Distractor 46.7 50.7 45.7 47.3 55.0 54.2",
+   "support_explanation": "列顺序 VLA/VLA-SFT/Base/SFT/RFT/CP：训练环境与 ID 场景上 RFT/CP 明显优于 VLA。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App Table 11",
+   "quote": "OOD Scene, ID Distractor 92.4 88.2 92.4 89.1 92.5 95.0 OOD Scene, OOD Distractor 89.8 82.6 89.5 81.2 88.5 90.9",
+   "support_explanation": "留出视觉场景(基线已饱和 ~90%)上 RFT +0.1/-1.3pp，CP +2.6/+1.1pp。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App Table 13",
+   "quote": "CubeSort Nominal 56.7 80.0 93.3 90.0 VOOD 13.3 43.3 70.0 70.0 SOOD 6.7 26.7 60.0 63.3",
+   "support_explanation": "硬件 CubeSort：VLA/SFT/RFT/CP 名义、视觉OOD、语义OOD(每格30次)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App Table 13",
+   "quote": "Microwave Nominal 73.3 66.7 76.7 73.3 VOOD 46.7 16.7 50.0 50.0 SOOD 66.7 40.0 46.7 70.0",
+   "support_explanation": "Microwave 不可转向：未校准的 RFT 在语义扰动下低于 VLA(46.7 vs 66.7)，CP 恢复(70.0)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.2 Interactive Language Search",
+   "quote": "In simulation, we first run M=25 rollouts per language sequence, keep the top G=8 candidates, and evaluate them with M=75 additional rollouts. In hardware, we run initially for M=10 rollouts, then M=20 additional rollouts for top G=8 candidates.",
+   "support_explanation": "搜索阶段的环境交互预算(每个 task-env：sim 16×25+8×75=1000 次；硬件 16×10+8×20=320 次，按 N=16 候选计算)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.2",
+   "quote": "to obtain N=16 trajectory-level semantic perturbations",
+   "support_explanation": "每个种子序列生成 N=16 个轨迹级扰动。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.2 Q1",
+   "quote": "with only 10 rollouts already matches or exceeds",
+   "support_explanation": "样本复杂度主张：RFT 用10条成功 rollouts 持平 VLA-SFT 用50条。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.2 Q1",
+   "quote": "using one-fifth as much fine-tuning data",
+   "support_explanation": "样本效率口径仅计微调所用成功 rollouts。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.2 Q1",
+   "quote": "uses the same successful rollouts from the base VLA as our method, but also uses action labels",
+   "support_explanation": "VLA-SFT 基线只用成功的基座 rollouts，不含搜索阶段的额外交互。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3 / Sec 4.1",
+   "quote": "We calibrate the intervention threshold on held-out visual and semantic perturbation episodes where the empirical task-level improvement is negative.",
+   "support_explanation": "校准集取自与测试同类的留出视觉/语义扰动 episode。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 5 Limitations",
+   "quote": "Harmlessness is guaranteed when perturbations follow the calibration distribution.",
+   "support_explanation": "作者自述：无害性保证只在校准分布内。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Fig 2 caption",
+   "quote": "Note that absolute success is higher in deployment environments because LIBERO-10 is near-saturated for the base VLA.",
+   "support_explanation": "留出环境基线近饱和，增益空间有限。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.4 Result Breakdown",
+   "quote": "as tasks 16-22 are zero for all baselines",
+   "support_explanation": "Compose 的 13 个新组合中 16–22 号对所有方法均为0。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App Table 13",
+   "quote": "MarkerBowl Nominal 30.0 46.7 80.0",
+   "support_explanation": "硬件未见任务 MarkerBowl：VLA 30.0、SFT 46.7、RFT 80.0 (n=30)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App Table 13",
+   "quote": "ChipsCup Nominal 33.3 46.7 73.3",
+   "support_explanation": "硬件未见任务 ChipsCup：VLA 33.3、SFT 46.7、RFT 73.3 (n=30)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.4 Q3",
+   "quote": "Trajectory-level search also outperforms phrase-level search, suggesting that sequence-level perturbations make the search space more tractable",
+   "support_explanation": "搜索空间结构消融。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.4 Q3",
+   "quote": "Table 2 shows that trajectory-level closed-loop language feedback outperforms open-loop prompt search, indicating that language should adapt as the scene evolves.",
+   "support_explanation": "开环/闭环消融(表2：71.3 / 70.4 / 75.0)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.5 Ablation: Narration Data Size",
+   "quote": "SFT data size has minimal effect on final closed-loop performance; the main gains come from the RFT phase involving interaction with",
+   "support_explanation": "收益主要来自带交互的 RFT 阶段而非叙述 SFT。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.5 Q4",
+   "quote": "In simulation, we see a +8.1 pp increase in success rate, and in hardware we see a +36.7 pp increase",
+   "support_explanation": "第二个 VLA(MolmoAct2)的提升幅度。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.5 Q4",
+   "quote": "in simulation (Visual-Viewpoint; 50 trials per task, 10 tasks) and hardware (CubeSort; 30 trials)",
+   "support_explanation": "MolmoAct2 实验仅在训练环境 Visual-Viewpoint 与硬件 CubeSort 单任务。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.5 Inference Time",
+   "quote": "The frozen VLA replans at 14.7 Hz.",
+   "support_explanation": "基座重规划频率。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.5 Inference Time",
+   "quote": "language generation is the primary computational bottleneck",
+   "support_explanation": "加入 LFP 后降至 3.6Hz，主要开销来自自回归语言生成。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.2 Evaluation and Metrics",
+   "quote": "We do 50 rollouts per task and perturbation combination (200 total combinations) in simulation episodes and 30 in hardware.",
+   "support_explanation": "评测分母。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.1 Related Work",
+   "quote": "Prompt-optimization methods adapt language at test time [ 27 , 19 ] , but do not distill the optimized language into a reusable closed-loop policy.",
+   "support_explanation": "作者对最近邻(提示优化)的差异界定。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.1 Related Work",
+   "quote": "These methods typically rely on human feedback, demonstrations, or interventions to specify desired behavior.",
+   "support_explanation": "作者对分层 system 1/2 方法的差异界定。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3.1 Phase 3",
+   "quote": "Under standard exchangeability assumptions (i.e., that the calibration and test examples are drawn from the same distribution), we prove in Appendix 6.3 that we control the false positive rate",
+   "support_explanation": "保证成立的条件。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.2 Deployment-time Steering",
+   "quote": "In LIBERO, this is every 5 environment steps, and in DROID, this is every 8 environment steps.",
+   "support_explanation": "LFP 每个重规划步查询一次。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E030",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 5 Limitations",
+   "quote": "The language search space is still fundamentally a very large space to search over, and in this work we proposed a framework that searches locally around a fixed language sequence via paraphrasing.",
+   "support_explanation": "局限：局部、释义式搜索。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E031",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3.1 Phase 1",
+   "quote": "we ask a VLM to caption what the robot is doing in the frame in the context of the task description",
+   "support_explanation": "叙述先验由 VLM 对机器人视频打字幕得到，无动作标签。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E032",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3 Phase 2 / App 6.2",
+   "quote": "successful on-policy demonstrations from the selected language sequence per task",
+   "support_explanation": "RFT 数据：被选语言序列的成功 on-policy 演示。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E033",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 1 Introduction",
+   "quote": "so that, at deployment, the system language-steers only when predicted improvement is reliable; otherwise, it abstains and falls back to the original instruction",
+   "support_explanation": "改进头+保形预测的拒绝机制。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E034",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.4 Result Breakdown",
+   "quote": "conformalization is able to mitigate harmful interventions and helps overall performance by 1.1 pp",
+   "support_explanation": "Visual-Scene：RFT 比基线低 1.3pp，CP 转为 +1.1pp。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E035",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.4 Result Breakdown",
+   "quote": "Microwave is a less steerable task: uncalibrated steering hurts performance under semantic perturbation",
+   "support_explanation": "作者承认存在不可转向任务。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E036",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.3 Metrics",
+   "quote": "held-out test data of 10 episodes per condition, averaged over 5 randomized calibration/test splits",
+   "support_explanation": "仿真中的校准/测试划分：每条件10个测试 episode，5次随机划分。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E037",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.2 Conformalization",
+   "quote": "calibration samples for each perturbation combination",
+   "support_explanation": "校准样本数 N_cal=20/扰动组合。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E038",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.1 Language Policy Training",
+   "quote": "is initialized as the Qwen3-VL-4B-Instruct",
+   "support_explanation": "LFP 骨干。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E039",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Abstract",
+   "quote": "Crucially, our approach operates on arbitrary frozen pre-trained VLAs, requiring neither access to the original training distribution nor fine-tuning of the underlying model.",
+   "support_explanation": "'任意冻结 VLA' 主张；实验仅 π0.5(LIBERO/DROID) 与 MolmoAct2 两种。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E040",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.3 Result",
+   "quote": "adding refusal improves success to 74.96\\% , and conformalization further improves success to 75.96\\%",
+   "support_explanation": "拒绝/保形对成功率的效应(无拒绝 70.93%)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E041",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.3 Result",
+   "quote": "Hardware shows the same trend: FPR drops from 61.11\\% to 2.22\\% , increasing accuracy from 84.72\\% to 99.17\\%",
+   "support_explanation": "硬件混淆矩阵；文中未说明硬件的校准/测试划分。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E042",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.3 Result",
+   "quote": "In simulation, FPR drops from 38.92\\% to 9.31\\% at \\alpha=0.1 , matching the target error rate",
+   "support_explanation": "仿真 FPR 与目标 α 吻合。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E043",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.2 Evaluation and Metrics",
+   "quote": "We measure mean success rate (binary per rollout) with standard error across visual and semantic perturbations.",
+   "support_explanation": "指标与误差口径：逐 rollout 二元成功，SE 为跨 episode 汇总。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E044",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.1 Hardware Scenarios",
+   "quote": "For these unseen tasks, we evaluate zero-shot generalization of our LFP.",
+   "support_explanation": "ChipsCup/MarkerBowl 未参与 LFP 训练。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E045",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.2 Interactive Language Search",
+   "quote": "This forms an offline teacher-student pipeline: high-capacity models generate narrations and perturbations for search, which are then distilled into the lightweight closed-loop policy",
+   "support_explanation": "作者自述的教师-学生结构(Molmo2-8B 叙述 + GPT-5.4 扰动 → Qwen3-VL-4B)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E046",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.1 Setup",
+   "quote": "During evaluation, we run all models on both the LFP training environments and held-out visual environments",
+   "support_explanation": "评测同时含训练环境与留出视觉环境。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E047",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3.1 Phase 2",
+   "quote": "Practically, these perturbations vary object references, verbs, and compositional phrasing.",
+   "support_explanation": "候选生成是语言释义，局部空间。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E048",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Table 3",
+   "quote": "HW SR(%) 40.0\\pm 8.9 \\mathbf{76.7\\pm 7.7}",
+   "support_explanation": "MolmoAct2 硬件 CubeSort 40.0→76.7(n=30)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E049",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Table 2",
+   "quote": "OL 71.3\\pm 0.5 43.5 Phrase (CL) 70.4\\pm 0.5 45.9 Traj. (CL) \\mathbf{75.0\\pm 0.4} \\mathbf{43.4}",
+   "support_explanation": "搜索消融表(成功率与拒绝率)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E050",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3 Phase 3 / App Table 6",
+   "quote": "Feature Final hidden state",
+   "support_explanation": "改进头读取冻结 LFP 的最终隐状态，而非外部检查器。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E051",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.1 Hardware Scenarios",
+   "quote": "we design four tabletop tasks that include both steerable and un-steerable scenarios",
+   "support_explanation": "硬件训练任务含不可转向场景。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E052",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Fig 7 caption",
+   "quote": "After the robot initially places the green cube correctly, a human moves the cube back into the scene.",
+   "support_explanation": "恢复行为仅一个定性例子。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E053",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "App 6.2 Narrated Fine-tuning / Sec 4.1",
+   "quote": "consists of K=50 videos per task rolled out from the respective base VLA policies",
+   "support_explanation": "叙述数据来自基座 VLA 自身 rollouts(50/任务)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E054",
+   "material_id": "M1",
+   "material_sha256": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 3 Phase 3",
+   "quote": "We pass o_{0} as input to \\psi so that the improvement head can implicitly condition on context e via o_{0}",
+   "support_explanation": "改进头仅以初始观测 o_0 和任务指令为输入，决策为整局一次。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Abstract; decoded-character offset 1458",
+   "quote": "our conformalized LFP has strong harmlessness guarantees",
+   "support_explanation": "Original guarantee claim must remain visible.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§1; decoded-character offset 5212",
+   "quote": "interactive language steering induces better sample complexity than directly fine-tuning the VLA",
+   "support_explanation": "Original efficiency claim.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.2; decoded-character offset 42787",
+   "quote": "Given the most frequent decomposition, Molmo2-8B is then queried again to narrate the video.",
+   "support_explanation": "Generated language proposal prior.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.2; decoded-character offset 44828",
+   "quote": "In simulation, we first run M=25 rollouts per language sequence, keep the top G=8 candidates, and evaluate them with M=75 additional rollouts.",
+   "support_explanation": "16 candidates imply1000 candidate rollouts/task before selected training trajectories.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.2; decoded-character offset 44971",
+   "quote": "In hardware, we run initially for M=10 rollouts, then M=20 additional rollouts for top G=8 candidates.",
+   "support_explanation": "320 candidate robot rollouts/task.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.2; decoded-character offset 45074",
+   "quote": "For rejection fine-tuning, we use K^{\\prime}=50 successful on-policy demonstrations from the selected language sequence per task.",
+   "support_explanation": "Selected success data trains LFP via cross entropy, not DPO.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.3; decoded-character offset 46435",
+   "quote": "Y^{i}=0 denotes a harmful steering example",
+   "support_explanation": "Harm is empirical estimated improvement label.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.3 Eq8; decoded-character offset 46876",
+   "quote": "k=\\left\\lceil(m+1)(1-\\alpha)\\right\\rceil",
+   "support_explanation": "Finite-sample corrected index.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.3; decoded-character offset 47467",
+   "quote": "s=\\psi(X)\\geq\\hat{q}_{\\alpha}",
+   "support_explanation": "Inclusive tied-score threshold invalidates unrestricted proof as stated.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§5; decoded-character offset 39517",
+   "quote": "Harmlessness is guaranteed when perturbations follow the calibration distribution.",
+   "support_explanation": "Distribution scope explicit.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E011",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§4.2; decoded-character offset 26765",
+   "quote": "We do 50 rollouts per task and perturbation combination (200 total combinations) in simulation episodes and 30 in hardware.",
+   "support_explanation": "Closed-loop success counts.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E012",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§4.3; decoded-character offset 32333",
+   "quote": "FPR decreases from 38.92\\% to 9.31\\% in simulation and from 61.11\\% to 2.22\\% on hardware.",
+   "support_explanation": "Observed harmful-class FPR gains.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E013",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§4.3; decoded-character offset 32732",
+   "quote": "averaged over 5 randomized calibration/test splits",
+   "support_explanation": "Split repetition, not LFP training-seed repetition.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E014",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§4.4 Table2; decoded-character offset 36285",
+   "quote": "OL 71.3\\pm 0.5 43.5 Phrase (CL) 70.4\\pm 0.5 45.9 Traj. (CL)",
+   "support_explanation": "Static prompt and local-search controls.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E015",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.4 Table11; decoded-character offset 60000",
+   "quote": "Train Env 51.2 60.6 53.1 55.0 63.9 63.8",
+   "support_explanation": "Base51.2→CP63.8;12.6pp, about24.6% relative.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E016",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.4 Table12; decoded-character offset 60801",
+   "quote": "Tasks 16–22 have 0% SR (no method succeeds).",
+   "support_explanation": "7/13 novel composition failures.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E017",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.4 Table13; decoded-character offset 61356",
+   "quote": "SOOD 66.7 40.0 46.7 70.0",
+   "support_explanation": "Microwave semantic raw steering harms; calibration recovers.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E018",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§4.5; decoded-character offset 37852",
+   "quote": "Sim. SR(%) 32.5\\pm 1.0",
+   "support_explanation": "MolmoAct2 re-trained LFP40.6 vs32.5%; hardware76.7 vs40.0%.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E019",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.5 Table14; decoded-character offset 62897",
+   "quote": "68 — 68 14.7",
+   "support_explanation": "Base68ms/14.7Hz; with LFP274ms/3.6Hz.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E020",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.4 Table13; decoded-character offset 61471",
+   "quote": "MarkerBowl Nominal 30.0 46.7 80.0 — ChipsCup Nominal 33.3 46.7 73.3 —",
+   "support_explanation": "Two novel hardware tasks gains without calibrated variant.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E021",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.1; decoded-character offset 41470",
+   "quote": "Prompt-optimization methods adapt language at test time",
+   "support_explanation": "Author lineage; original neighbor texts not fixed locally.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E022",
+   "material_id": "2606.12299v2",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "§6.2; decoded-character offset 45652",
+   "quote": "we collect N_{\\mathrm{cal}}=20 calibration samples for each perturbation combination.",
+   "support_explanation": "Extra target-domain calibration interaction.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "material_id": "M1",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Appendix 6.3",
+   "quote": "the rank of s among these m+1 harmful-class scores is uniformly distributed up to ties",
+   "support_explanation": "The proof explicitly conditions on no ties; with a continuous MLP score ties have probability zero, so the tie issue is a minor caveat, not a flaw.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "material_id": "M1",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Table 6",
+   "quote": "Head MLP ( d\\rightarrow 64\\rightarrow 1 , ReLU, dropout=0.1)",
+   "support_explanation": "The improvement head is a learned head on the LFP's own final hidden state (continuous output); it is not an external training-free checker.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "material_id": "M1",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 6.2 Conformalization",
+   "quote": "In both simulation and hardware, we collect N_{\\mathrm{cal}}=20 calibration samples for each perturbation combination.",
+   "support_explanation": "Calibration samples come from the same perturbation combinations as the evaluation; harmlessness is scoped to the calibration distribution.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E004",
+   "material_id": "M1",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 4.2 Evaluation and Metrics",
+   "quote": "We do 50 rollouts per task and perturbation combination (200 total combinations) in simulation episodes and 30 in hardware.",
+   "support_explanation": "Explicit closed-loop denominators; sim success by LIBERO environment checks.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E005",
+   "material_id": "M1",
+   "material_hash": "88a86e8c154f4fdf60f4351677b0137a1d09f4472bfd72dcc9215b3e84b4a3c3",
+   "locator": "Sec 6.2 Interactive Language Search",
+   "quote": "In simulation, we first run M=25 rollouts per language sequence, keep the top G=8 candidates, and evaluate them with M=75 additional rollouts.",
+   "support_explanation": "Search interaction budget (~1000 rollouts per task-environment in sim) is not charged against VLA-SFT in the sample-efficiency comparison.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "语言反馈策略 LFP(Qwen3-VL-4B+LoRA)：每个重规划步向冻结 VLA(π0.5-LIBERO/DROID，MolmoAct2) 输出语言'动作'",
+   "information": "LFP 看腕/第三视角 RGB 与任务指令；训练侧：Molmo2-8B 叙述(无动作标签)、GPT-5.4 释义、仿真/真机二元任务成功；VLA 权重与训练数据不可见",
+   "operation": "叙述 SFT → 以种子序列做 N=16 轨迹级释义的局部搜索 → 用 Monte Carlo 估计相对基座指令的改进 Δ̂ → 取 argmax → 拒绝式微调(RFT)",
+   "output": "每步一条自然语言字符串，经冻结 VLA 变为动作块",
+   "conditions": "仅在 Visual-Viewpoint 训练环境搜索与训练；基座近饱和时无增益空间；VLA 不可转向则无益",
+   "feedback": "闭环 rollouts 的二元成功；与基座指令的差分",
+   "selection_rule": "最高 Δ̂ 的序列(sim: 16×25 + top8×75 rollouts)；RFT 仅用被选序列的成功演示",
+   "persistence": "LFP 的 LoRA 权重；改进头参数",
+   "later_use": "在训练环境、留出视觉环境、语义改写、新组合与新硬件任务上部署；也作用于 MolmoAct2",
+   "claimed_effect": "训练环境成功 51.2→63.9；比 VLA-SFT 更省微调数据且 OOD 不降；闭环优于开环",
+   "failure_boundary": "留出视觉场景增益≈0 或负(RFT -1.3pp)；Compose 中16–22号全0；Microwave 不可转向",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E007",
+    "son55:E008",
+    "son55:E011",
+    "son55:E020",
+    "son55:E031",
+    "son55:E032",
+    "son55:E053",
+    "son55:E047"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "是否使用 LFP 的门控：改进头 ψ + 类别条件保形阈值 q̂α",
+   "information": "输入初始观测 o_0 与任务指令(冻结 LFP 最终隐状态上接 MLP)；标签 Y=1[Δ̂≥0] 来自搜索/校准阶段的 rollouts；校准集=留出视觉/语义扰动 episode",
+   "operation": "回归 Δ̂ → 取'有害子集'分数的(1-α) 分位数作阈值 → ψ≥q̂α 才转向，否则整局回退到原指令",
+   "output": "steer / abstain(整局一次决策)",
+   "conditions": "可交换性；测试扰动与校准分布一致；α=0.10",
+   "feedback": "校准 episode 的经验改进符号",
+   "selection_rule": "阈值 q̂α(有限样本保形分位数)",
+   "persistence": "阈值与改进头",
+   "later_use": "部署时对每个 episode 先判是否转向",
+   "claimed_effect": "仿真 FPR 38.92→9.31%，硬件 61.11→2.22%；成功率 70.93→74.96(拒绝)→75.96(保形)",
+   "failure_boundary": "保证仅在校准分布内；硬件校准/测试划分未说明；标签 Δ̂ 来自有限 rollouts(含噪)",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E013",
+    "son55:E028",
+    "son55:E033",
+    "son55:E036",
+    "son55:E037",
+    "son55:E041",
+    "son55:E042",
+    "son55:E050",
+    "son55:E054"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "VLA 的语言→行为映射脆弱不直观；语义相近的指令行为差异大；有些能力无法单靠提示引出；开放词表使穷举不可行；转向在分布偏移下可能有害。",
+  "checked_gap": "成立且具体：论文自带 π^Base、叙述 SFT、开环重写器等实证展示朴素提示/零样本 VLM 不足，Microwave 与 Visual-Scene 展示转向有害；依据本文 App A.1 与实验，未在本地核验引用的外部工作。",
+  "lineage": "祖先：分层 system1/2 语言接口、提示优化 → 本文最近邻：测试时 steering(残差策略、外部奖励/验证器、潜空间 steering) → 本文：把语言作为通道，搜索→蒸馏→保形拒绝。",
+  "closest_adjacent": [
+   {
+    "name": "提示优化类测试时适配 [27,19]",
+    "source": "本文 App 6.1 (v2)",
+    "what_it_solved": "测试时调整语言",
+    "what_remains": "不蒸馏成可复用闭环策略",
+    "verified_locally": false
+   },
+   {
+    "name": "分层 system 1/2 方法 [30,31,4,13]",
+    "source": "本文 App 6.1 (v2)",
+    "what_it_solved": "高层语言模块驱动低层策略",
+    "what_remains": "依赖人类反馈/示范/干预",
+    "verified_locally": false
+   }
+  ],
+  "residue": "在分布偏移下何时不该转向，以及如何不微调 VLA 而获得更好行为",
+  "stakes": "部署可靠性与重训成本",
+  "method_response": "闭环搜索+蒸馏+保形拒绝",
+  "remaining_gap": "局部释义搜索；无害性仅在校准分布；延迟 3.6Hz；留出场景增益有限",
+  "evidence_ids": [
+   "son55:E026",
+   "son55:E027",
+   "son55:E030",
+   "son55:E013",
+   "son55:E024"
+  ],
+  "unresolved": [
+   "最近邻全文未固定",
+   "空检索不证明新颖"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "adapt_via_conditioning",
+  "supporting": [
+   "self_supervised_signal_engineering"
+  ],
+  "matches": [
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "父类签名：把新任务表达为条件输入、推理时不更新目标模型参数——成立：冻结 VLA 仅通过语言条件被改变，并与直接微调 VLA(VLA-SFT)作比较",
+     "C03 步骤1 单一规范条件格式承载全部任务族：不成立——条件由学习到的 LFP 逐步生成，非固定模板",
+     "C03 步骤3 上游阶段教冻结模型'读'条件：不成立——VLA 未被教；训练的是另一个生成条件的 VLM",
+     "C03 步骤4 以整类别留出评测：部分——仅视觉/语义扰动与2个近邻硬件任务",
+     "C03 步骤5 对最简单条件替代的对照：部分——有未经搜索的叙述 SFT 与离线 VLM、开环重写器，无最近邻检索/长上下文基线"
+    ],
+    "success_failure_checks": [
+     "成功条件：留出类别泛化——部分",
+     "失败'缺同预算简单条件基线'——部分发生(见 E.causality)",
+     "失败'声称零样本但评测落在训练分布'——LFP 训练环境上的主要增益属分布内"
+    ],
+    "evidence_ids": [
+     "son55:E001",
+     "son55:E011",
+     "son55:E019",
+     "son55:E020",
+     "son55:E039"
+    ],
+    "reason": "论文的核心比较(语言条件改变 vs 直接改 VLA 参数)落在该主卡的签名上；子卡 C03 的具体战术(规范格式+多任务上游训练冻结模型读格式)不适用，故 sub_id=null，区别：条件由独立训练的策略生成并与 VLA 解耦。"
+   },
+   {
+    "main_id": "self_supervised_signal_engineering",
+    "sub_id": "rs:C08",
+    "role": "supporting",
+    "fit": "strong",
+    "tactic_steps_checked": [
+     "1 瓶颈是监督而非学习器：成立——'该说什么'无标签，只有叙述先验+rollout 成功信号",
+     "2 可控生成器覆盖欠覆盖区域：执行——GPT-5.4 对叙述序列做 N=16 轨迹级释义(局部空间)",
+     "3 单一承重过滤器：执行——测得的闭环改进 Δ̂(相对基座指令)，而非 LLM 自评",
+     "4 在过滤集上重训并迭代、把学习者反馈回灌生成器：单轮 RFT，无迭代",
+     "5 弥合到真实目标并对照更廉价替代：执行——闭环成功、硬件、对照叙述SFT与VLA-SFT；搜索 vs 随机释义对照缺失"
+    ],
+    "success_failure_checks": [
+     "成功：过滤准则明确——Δ̂；迁移到真实目标——硬件",
+     "失败'只证代理性质'：未发生",
+     "失败'缺非生成廉价基线'：部分(无随机释义/测试时 best-of-N 基线)"
+    ],
+    "evidence_ids": [
+     "son55:E007",
+     "son55:E008",
+     "son55:E031",
+     "son55:E032",
+     "son55:E020"
+    ],
+    "reason": "生成(叙述+释义)-过滤(闭环改进)-重训(RFT)是 C08 的操作；与 C07(内部状态读数)和 C26(偏好/奖励)不同。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "保形拒绝门控无对应原子卡(见 domain_pattern.unassigned)；主卡/子卡选择见 matches。",
+  "executes_pattern": "是(adapt_via_conditioning 签名与 C08 主干均已执行；C03 战术不适用)",
+  "resolves_problem": "部分：训练环境与近邻硬件任务上成功率显著提升；留出已饱和视觉场景上基本无增益，无害性仅在校准分布内成立；'任意冻结 VLA'仅验证两种。"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "kind=success：该成功条件是否满足；kind=failure：status 表示论文证据是否已防范该失败(met=已防范/不成立，partial=部分，unmet=未防范或已观察到，unknown=无证据)",
+  "version_basis": "taxonomy_sha256=daf38e579a46 conditions_sha256=2ca1e76481d3",
+  "matches": [
+   {
+    "main": "trained_vlm_vla_hierarchy",
+    "sub": "R02",
+    "version": "domain-cards@daf38e579a46",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "id": "trained_vlm_vla_hierarchy:S1",
+      "kind": "success",
+      "status": "partial",
+      "evidence_ids": [
+       "son55:E003",
+       "son55:E011"
+      ],
+      "note": "有离线 VLM(π^Base 53.1) 与 SFT 对照于同一 VLA，但无'提示的前沿高层'对照"
+     },
+     {
+      "id": "trained_vlm_vla_hierarchy:S2",
+      "kind": "success",
+      "status": "partial",
+      "evidence_ids": [
+       "son55:E040",
+       "son55:E042"
+      ],
+      "note": "门控作为独立头，对无拒绝/未校准拒绝/保形拒绝做一次一变量消融，未与联合训练对比"
+     },
+     {
+      "id": "trained_vlm_vla_hierarchy:S3",
+      "kind": "success",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E051"
+      ],
+      "note": "未用 oracle 高层命令检验低层能力；部分任务本不可转向"
+     },
+     {
+      "id": "trained_vlm_vla_hierarchy:F1",
+      "kind": "failure",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E025"
+      ],
+      "note": "闭环成功而非离线计划得分"
+     },
+     {
+      "id": "trained_vlm_vla_hierarchy:F2",
+      "kind": "failure",
+      "status": "partial",
+      "evidence_ids": [
+       "son55:E005",
+       "son55:E025"
+      ],
+      "note": "硬件4任务×3条件×30次，但仅单机型"
+     },
+     {
+      "id": "trained_vlm_vla_hierarchy:F3",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E011",
+       "son55:E007"
+      ],
+      "note": "VLA-SFT 与 LFP 的差别不止在抽象层级，搜索预算亦不同"
+     }
+    ],
+    "evidence_ids": [
+     "son55:E001",
+     "son55:E029",
+     "son55:E032",
+     "son55:E038"
+    ],
+    "reason": "独立训练的高层 VLM(Qwen3-VL-4B)每步向冻结 VLA 发出语言命令；与 R02 的差异：低层 VLA 是冻结的第三方基座(R02 成员多为联合训练)，训练数据来自自身搜索/rollout 选择，而非人类标注技能或纠正。R02 来源卡未含本文，匹配非循环。"
+   }
+  ],
+  "unassigned": [
+   {
+    "operation": "类别条件保形拒绝门控：改进头预测'转向是否优于原指令'，ψ≥q̂α 才转向，否则整局回退",
+    "reason": "K201(逐提案外部检查器)和 K603(门控查询教师)均不吻合：这里的门由 LFP 自身隐状态上的学习头给出，单局一次决策，并带保形有限样本保证；单篇论文故不新建卡，仅列候选。",
+    "evidence_ids": [
+     "son55:E012",
+     "son55:E033",
+     "son55:E050",
+     "son55:E054"
+    ]
+   },
+   {
+    "operation": "以叙述视频(无动作标签)作搜索先验，再用闭环成功选择释义",
+    "reason": "归属 RS-C08 的数据生成-过滤，领域侧无对应子卡。",
+    "evidence_ids": [
+     "son55:E031",
+     "son55:E007"
+    ]
+   }
+  ],
+  "revision_proposals": [
+   {
+    "status": "unchecked_proposal",
+    "text": "R02 可补充对照成员'冻结第三方 VLA + 自搜索数据训练高层'，与'联合训练+人类标注'区分；单篇，不升格 candidate。"
+   },
+   {
+    "status": "unchecked_proposal",
+    "text": "候选新卡(case)：calibrated-abstention gate over a language-steering policy；需第二篇独立全文才能 candidate_pattern。"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain_namespace": "embodied",
+   "domain_main": "trained_vlm_vla_hierarchy",
+   "domain_sub": "R02",
+   "operation_correspondence": "RS 父类'用条件输入改变冻结模型而不重训'对应 R02 的'高层 VLM 发语言命令、低层 VLA 执行'；本文把语言作为唯一控制通道且 VLA 冻结。",
+   "necessary_conditions_differences": "R02 成员常联合训练两层且数据为人工标注；本文低层冻结、数据为自搜索。RS-C03 的规范格式+上游读格式训练不适用。",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E011",
+    "son55:E039"
+   ]
+  },
+  {
+   "rs_main": "self_supervised_signal_engineering",
+   "rs_sub": "rs:C08",
+   "domain_namespace": "embodied",
+   "domain_main": null,
+   "domain_sub": null,
+   "operation_correspondence": "C08 的生成-过滤-再训练在本文表现为'释义生成+闭环改进过滤+RFT'；领域侧没有等价子卡，列入 unassigned，不强配 R02。",
+   "necessary_conditions_differences": "C08 要求把学习者误差回灌生成器；本文单轮。",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E008",
+    "son55:E031",
+    "son55:E032"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.10577#s4",
+    "2607.26148#s3",
+    "2609.15195#s4",
+    "2606.10267#s4",
+    "2607.22585#s1",
+    "2609.11987#s1",
+    "2605.23950#s1",
+    "2609.10522#s1"
+   ],
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "比较了同基座下的另外两种循环组织(开环静态重写、短语级闭环)和不训练的 VLM、叙述 SFT，但没有与外部的测试时 steering 方法(验证器选择、残差/潜空间 steering、提示优化)在相同 episode 上对比。",
+   "evidence_ids": [
+    "son55:E018",
+    "son55:E019",
+    "son55:E049"
+   ],
+   "score_item": "E.causality",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2606.18363#s1",
+     "note": "one harness dimension varied at a time with GPT-5.4 and Qwen3.5-4B"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.14674#s1",
+     "note": "one module swapped at a time with typed interfaces"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.10577#s2",
+     "note": "w/o depth tool and depth-image replacement, backbone fixed"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.10577#s3"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.20822#s3",
+     "note": "harness layers added one at a time, scenes/seeds/backbone fixed"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2405.15793#s1",
+     "note": "per-component ACI ablations on SWE-bench Lite"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2609.15195#s2",
+     "note": "cumulative, order-dependent ablation on 100-episode subsets"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2603.22435#s3",
+     "note": "cumulative VDM -> +SL -> +1M -> +3M, not factorial"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2609.29964#s1",
+     "note": "no per-component ablation; gap bundles three components"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2610.01939",
+     "note": "does not isolate composition vs persistent state vs selective feedback (Sec 6)"
+    }
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement",
+   "applicable": true,
+   "status": "partial",
+   "reason": "No-refusal/raw/calibrated, OL/phrase/trajectory, narration-size controls. Filter and selection noise not isolated.",
+   "evidence_ids": [
+    "sol:E004",
+    "sol:E006",
+    "sol:E012",
+    "sol:E014"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E03",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.10577#s4",
+    "2607.26148#s2",
+    "2609.39207#s2",
+    "2608.03327#s1",
+    "2606.18363#s1",
+    "2609.24974#s1",
+    "2610.12549#s2"
+   ],
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student",
+   "applicable": true,
+   "status": "partial",
+   "reason": "在两种 VLA(π0.5 与 MolmoAct2)上报告，但 MolmoAct2 仅在训练环境及硬件 CubeSort 单任务，不是不同强度骨干上的完整对比。",
+   "evidence_ids": [
+    "son55:E021",
+    "son55:E022",
+    "son55:E048"
+   ],
+   "score_item": "E.causality",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E04",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2607.22585#s1",
+    "2609.11987#s1",
+    "2609.29861#s2",
+    "2610.28589#s2",
+    "2608.03327#s1",
+    "2608.17393",
+    "2610.28069",
+    "2606.10577#s1",
+    "2609.15195#s4"
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset",
+   "applicable": true,
+   "status": "partial",
+   "reason": "报告标准误，仿真50次/组合，硬件30次/条件；无重复训练种子、无成对检验或自助置信区间。",
+   "evidence_ids": [
+    "son55:E025",
+    "son55:E043"
+   ],
+   "score_item": "E.statistics",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E05",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2607.22585#s1",
+    "2609.11987#s3",
+    "2610.01939#s1",
+    "2609.29964#s1",
+    "2606.18363#s3",
+    "2606.27871#s3",
+    "2607.26148#s1",
+    "2609.33378#s2",
+    "2606.10577#s4"
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative",
+   "applicable": true,
+   "status": "partial",
+   "reason": "报告了推理延迟与单卡型号；没有 token/API/搜索 rollouts 成本或每解决任务的成本。",
+   "evidence_ids": [
+    "son55:E023",
+    "son55:E024"
+   ],
+   "score_item": "E.cost",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E06",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2606.10577#s4"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2607.26148#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.15195#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29861#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.39207#s1"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2609.29861",
+     "note": "comparisons with other methods use different splits and are contextual, not matched (Sec 3)"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2607.26148",
+     "note": "fixed 100-episode subsets; published systems use different settings"
+    }
+   ],
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No navigation.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E07",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2603.22435#s3"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2607.08448#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29389#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29964#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.01939#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.28589#s2"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.18363#s3"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.21650#s2"
+    }
+   ],
+   "applies_when": "an empirical claim that an agentic manipulation harness or harness-distilled student beats end-to-end VLAs",
+   "applicable": true,
+   "status": "partial",
+   "reason": "LIBERO-OOD, frozen-VLA/direct-SFT comparisons; not LIBERO-PRO or matched alternative steering agent.",
+   "evidence_ids": [
+    "sol:E011",
+    "sol:E014",
+    "sol:E015"
+   ],
+   "score_item": [
+    "G",
+    "E.causality"
+   ],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E08",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2607.26148",
+    "2609.29861",
+    "2609.29389",
+    "2606.27871",
+    "2603.28052"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution",
+   "applicable": true,
+   "status": "partial",
+   "reason": "说明 LIBERO-10 对基座近饱和、训练/留出环境划分；未讨论冻结 VLA 预训练或 VLM 数据对 LIBERO 的污染。",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E046"
+   ],
+   "score_item": "E.holdout",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E09",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2606.18363#s3",
+     "note": "GPT-5.4 teacher / Qwen3.5-4B base / Guava-4B in same harness"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.27871#s2",
+     "note": "teacher, zero-shot student, SFT student"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29389#s2",
+     "note": "OpenVLA, pi0.5, Qwen action-regression on same 107 episodes"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29964#s3"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.28589#s2",
+     "note": "27B teacher with/without memory, untrained 9B, SFT, RL"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.01939#s3"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.10522#s3",
+     "note": "pi0.5/GR00T fine-tuned on same demos"
+    }
+   ],
+   "applies_when": "a claim that a compact VLM/VLA student distilled from frontier-harness trajectories approaches or exceeds the teacher",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No compact student approaching a deployed frontier teacher policy claim. Narrator is not robot policy.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E10",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2605.24220#s3",
+    "2606.27871#s2",
+    "2606.18363#s2",
+    "2609.24974#s3",
+    "2610.28589",
+    "2609.32416#s3"
+   ],
+   "applies_when": "any student trained on success-filtered teacher trajectories",
+   "applicable": true,
+   "status": "partial",
+   "reason": "披露了搜索规模(N、M、G、K')与最终成功演示数；未报告候选中 Δ̂>0 的比例与被拒绝比例。",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E008",
+    "son55:E032"
+   ],
+   "score_item": "E.measurement",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E11",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2509.14257#s1",
+     "note": "BC under same data budget; BC+GRPO; OPD; teacher tokens per intervention"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.19834#s1",
+     "note": "BC, m-GRPO, off-policy teacher takeover, student edit"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.19820#s1",
+     "note": "KD and token-level OPD"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.02858#s1",
+     "note": "OPD baselines; doubling OPD/SOPD teacher budget"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.24974#s3",
+     "note": "direct SFT on teacher trajectories with/without evolved harness"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.32416#s3",
+     "note": "GRPO control and plain SFT"
+    }
+   ],
+   "applies_when": "a claim that teacher corrections at learner-induced states (first-error repair, review, action-agreement, preference) beat offline distillation",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "Offline sequence-search distillation, not online teacher correction/OPD superiority claim.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E12",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2608.06065#s1",
+     "note": "privilege variants: action-only 58.62 vs SFT 59.05; full 64.67"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2602.04942#s1",
+     "note": "PI types compared; negative PI utility case"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2505.09546#s1",
+     "note": "state aliasing under hidden context"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2510.03207#s1",
+     "note": "distillation misspecification under stochastic dynamics"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2610.15572#s2",
+     "note": "no check whether templated privileged descriptions are identifiable"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2610.28589#s1",
+     "note": "tool arguments from removed memory kept; student must memorize"
+    }
+   ],
+   "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Narration teacher sees future video, deployed LFP current images; future-channel content not isolated.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E006"
+   ],
+   "score_item": [
+    "M",
+    "E.causality"
+   ],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E13",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2609.21650#s2",
+     "note": "27/57 zero-success tasks; matched direct PPO rescues only 10"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.21450#s2",
+     "note": "BC-initialized Flow-GRPO stays at 19-26% SR"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2509.14257#s2",
+     "note": "compute-matched short-horizon RL"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2608.17393#s2",
+     "note": "task screening by policy-relative difficulty; unscreened pool does not improve"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.28069#s1",
+     "note": "share of mixed-outcome GRPO groups reported"
+    }
+   ],
+   "applies_when": "a claim that SFT/teacher initialization plus RL beats RL alone, or that RL lifts a student beyond its SFT data",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No student sparse-reward RL; rejection fine-tuning is likelihood training.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E14",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2605.24220#s1",
+     "note": "base under Codex/Claude Code/Qwen Code/Pi, gains 0.6-22.6"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2608.17393#s3",
+     "note": "base differs by harness; KAT-Coder +3.4 vs -0.4"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.14674#s2",
+     "note": "GRPO gains do not stack with post-hoc scaffolds"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2608.03327#s3",
+     "note": "inference-only compression -3.9 pp vs matched training"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.28069#s2",
+     "note": "swap evolved harness for base at eval loses up to 7.7 pp"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2608.17393",
+     "note": "cross-harness transfer (train A, deploy B) not reported"
+    }
+   ],
+   "applies_when": "a claim that RL in a training scaffold or harness improves the deployed agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No RL inside agent harness.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E15",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2608.17393#s2",
+     "note": "git-history and test-editing hack rates before defenses"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2608.17528#s4",
+     "note": "4 hacking routes found and blocked"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.27308#s1",
+     "note": "scorer hacking 43% Sol / 39% Terra; hack-adjusted scores"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2605.24220#s2",
+     "note": "per-request outcome broadcast led to reward hacking"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2602.04942",
+     "note": "tau-Bench modified due to reward hacking"
+    }
+   ],
+   "applies_when": "a policy or coding agent trained or evaluated against an automatic success checker it could access or tamper with",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No checker tamper or code-writing access; outcome reliability still judged in measurement.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29861#s2"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2607.26148#s1",
+     "note": "wrong target/route and wrong stop audit"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.12549#s1",
+     "note": "completion-assessment precision and false positives"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.15195#s3",
+     "note": "OSR-SR gap with stop validation"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.21450#s1",
+     "note": "no-stop / early-termination failures"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2607.22585#s2",
+     "note": "failure-category fingerprints per harness"
+    }
+   ],
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Harmful confusion matrix and per-task zeros; full endpoint and human-success audit absent.",
+   "evidence_ids": [
+    "sol:E012",
+    "sol:E016",
+    "sol:E017",
+    "sol:E020"
+   ],
+   "score_item": [
+    "E.measurement"
+   ],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E17",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2610.08432#s1",
+     "note": "separate search and held-out splits; overfitting reported"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.33378#s2",
+     "note": "held-out initial configurations with frozen playbook"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2609.39207#s3",
+     "note": "gains measured on the same recurring tasks with ground-truth feedback"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2603.22435#s2",
+     "note": "library mined from the evaluation-task rollouts"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2607.08448#s3",
+     "note": "retrospective best-card selection on reporting seeds"
+    },
+    {
+     "kind": "paper_limitation",
+     "ref": "2609.37105#s2",
+     "note": "repeated validation reuse can cause adaptive selection"
+    }
+   ],
+   "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Novel compositions and2 hardware tasks; visual/semantic target calibration is not untouched OOD.",
+   "evidence_ids": [
+    "sol:E016",
+    "sol:E020",
+    "sol:E022"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E18",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2609.37105#s2",
+    "2610.28069#s2",
+    "2609.32416#s1",
+    "2609.33378#s2",
+    "2610.28069"
+   ],
+   "applies_when": "a method that iteratively accepts harness, playbook or teacher-patch revisions from noisy rollouts",
+   "applicable": true,
+   "status": "partial",
+   "reason": "门控的接受规则(分位数阈值)、拒绝率(混淆矩阵)和与无拒绝对照均有；Δ̂-argmax 选择的接受/拒绝候选数未报告。",
+   "evidence_ids": [
+    "son55:E040",
+    "son55:E042",
+    "son55:E036"
+   ],
+   "score_item": "E.causality",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E19",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.18363#s3",
+    "2609.10522#s1",
+    "2605.13119#s2",
+    "2609.20822#s3",
+    "2607.08448",
+    "2609.39207",
+    "2607.26148"
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle",
+   "applicable": true,
+   "status": "met",
+   "reason": "硬件每任务/条件30次试验的完整表格(含未见任务)。",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E016",
+    "son55:E017",
+    "son55:E025"
+   ],
+   "score_item": "E.measurement",
+   "selected_from_seat": "son55"
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2606.10577#s2",
+     "note": "assumes metric depth; non-metric untested"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2606.10577#s1"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.29389#s1",
+     "note": "simulator provides calibrated metric depth"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.15195#s3",
+     "note": "stop gate needs usable depth"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.20822#s1",
+     "note": "verifier on approximately measured scene"
+    }
+   ],
+   "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No metric depth tool.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E21",
+   "version": "embodied-agent-harness-v1 fixed2026-10-21",
+   "source_strength": "common_practice; paper practice/limitations, not reviewer consensus",
+   "source_refs": [
+    {
+     "kind": "paper_practice",
+     "ref": "2610.02858#s3",
+     "note": "harness categories hidden at evaluation"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.24974#s3",
+     "note": "student deployed under minimal harness vs base+evolved harness"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2610.28069#s2",
+     "note": "evolved tools removed at deployment"
+    },
+    {
+     "kind": "paper_practice",
+     "ref": "2609.10522#s3",
+     "note": "FT without frontier planner fails reasoning tasks"
+    }
+   ],
+   "applies_when": "a claim that a distilled student internalizes harness information or works under a minimal interface",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No claim of internalizing removed harness components.",
+   "evidence_ids": [],
+   "score_item": [],
+   "selected_from_seat": "sol"
+  },
+  {
+   "id": "E22",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2610.01939#s1",
+    "2609.11987#s2",
+    "2609.34018#s1",
+    "2607.22585",
+    "2609.27308#s2"
+   ],
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "LFP 搜索阶段的交互预算(≈1000 sim rollouts/任务环境)未与 VLA-SFT 匹配，样本效率主张只计微调所用的成功 rollouts。",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E009",
+    "son55:E010",
+    "son55:E011"
+   ],
+   "score_item": "E.cost",
+   "selected_from_seat": "son55"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "LFP 提升冻结 VLA 的闭环成功(摘要:仿真+24.7%、硬件+65.0%)",
+   "setting": "π0.5-LIBERO(训练环境 Visual-Viewpoint，10任务×5语义扰动)；π0.5-DROID 硬件4任务",
+   "baseline_control": "同一冻结 VLA 原指令",
+   "selection_vs_test": "训练环境即搜索/训练环境(分布内)，新 rollouts 评测",
+   "result_denominator": "sim 训练环境 51.2→63.9(RFT)/63.8(CP)，+12.7pp(相对约+24.8%)；硬件4个名义任务均值(由表13计算) VLA 50.0 → RFT 85.8 / CP 82.5，CP 为+32.5pp(相对+65%)",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E003",
+    "son55:E005",
+    "son55:E025"
+   ],
+   "counterevidence": "摘要数字为相对提升未注明；训练环境属分布内",
+   "allowed_conclusion": "在训练环境与硬件名义任务上，成功率明显高于基座；增益是'相对'，且属分布内。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "语言转向比直接微调 VLA 泛化更好、更省数据",
+   "setting": "LIBERO-OOD 视觉×语义；Compose；VLA-SFT 对 10/30/50 成功 rollouts",
+   "baseline_control": "VLA-SFT(同样成功 rollouts+动作标签)；π^Base；π^SFT",
+   "selection_vs_test": "留出视觉环境，同一10个任务",
+   "result_denominator": "留出场景 92.4/89.8(VLA) vs RFT 92.5/88.5、CP 95.0/90.9；VLA-SFT 88.2/82.6；Compose 仅6/13任务非零",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E004",
+    "son55:E009",
+    "son55:E010",
+    "son55:E011",
+    "son55:E015",
+    "son55:E007",
+    "son55:E034"
+   ],
+   "counterevidence": "搜索交互预算未匹配；留出场景近饱和；Compose 16–22 全0",
+   "allowed_conclusion": "相比对成功 rollouts 做动作 SFT，LFP 在留出视觉场景上不降甚至略升；'更省数据'仅在忽略搜索 rollouts 的口径下成立。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "保形化改进头防止有害转向并保持 ID 性能",
+   "setting": "仿真 α∈{0.05..0.40} 扫描，α=0.10 混淆矩阵；硬件混淆矩阵",
+   "baseline_control": "无拒绝 π^NR；未校准阈值 π^RFT",
+   "selection_vs_test": "校准集为留出扰动 episode，测试用同类扰动的随机划分(sim 5 次)",
+   "result_denominator": "sim FPR 38.92→9.31%，成功率 70.93→74.96→75.96；硬件 FPR 61.11→2.22%",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E013",
+    "son55:E028",
+    "son55:E036",
+    "son55:E040",
+    "son55:E041",
+    "son55:E042",
+    "son55:E035"
+   ],
+   "counterevidence": "保证仅限校准分布；硬件划分未说明；标签含噪；决策为整局一次",
+   "allowed_conclusion": "在与校准同类的扰动上，保形阈值把'有害转向'的比率压到接近 α，并小幅提升成功率；不外推到未校准分布。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "闭环语言反馈优于开环重写，且引出恢复行为",
+   "setting": "仿真轨迹级闭环 vs 开环 vs 短语级",
+   "baseline_control": "开环静态重写；短语级闭环",
+   "selection_vs_test": "同留出扰动评测",
+   "result_denominator": "71.3 / 70.4 / 75.0 (SE≈0.4–0.5，汇总 episode)；恢复行为为单个定性例子",
+   "evidence_ids": [
+    "son55:E018",
+    "son55:E019",
+    "son55:E049",
+    "son55:E052"
+   ],
+   "counterevidence": "SE 为汇总 episode；无训练种子",
+   "allowed_conclusion": "在该仿真设置下闭环轨迹级搜索成功率高于开环/短语级约4–5pp；恢复行为仅有定性演示。"
+  },
+  {
+   "claim_id": "C5",
+   "text": "框架适用于不同预训练 VLA",
+   "setting": "MolmoAct2：仿真训练环境、硬件 CubeSort",
+   "baseline_control": "同一 MolmoAct2 原指令",
+   "selection_vs_test": "训练环境/训练任务",
+   "result_denominator": "sim 32.5→40.6，硬件 40.0→76.7 (n=30)",
+   "evidence_ids": [
+    "son55:E021",
+    "son55:E022",
+    "son55:E048",
+    "son55:E039"
+   ],
+   "counterevidence": "仅两种 VLA、均在训练环境/任务上",
+   "allowed_conclusion": "在第二个 VLA 的训练环境/训练任务上亦有提升；'任意冻结 VLA'未验证。"
+  },
+  {
+   "claim_id": "C6",
+   "text": "LFP 可零样本迁移到未见硬件任务",
+   "setting": "ChipsCup、MarkerBowl，π0.5-DROID",
+   "baseline_control": "VLA 原指令、叙述 SFT",
+   "selection_vs_test": "任务未参与训练(E044)",
+   "result_denominator": "MarkerBowl 30.0→80.0；ChipsCup 33.3→73.3 (n=30)",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E017",
+    "son55:E044"
+   ],
+   "counterevidence": "与训练任务相近；无保形结果(—)",
+   "allowed_conclusion": "在两个与训练任务相近的未见硬件任务上，LFP 显著提升成功率。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "transfer",
+  "evidence_level_reason": "依据 docs/EVIDENCE.md：硬件闭环试验给出每任务/条件次数(30)，且包含未参与叙述/搜索/训练的两个硬件任务(MarkerBowl、ChipsCup)的闭环成功提升；仿真另有留出视觉场景。限制：单一机型、近邻任务、留出仿真场景增益≈0。",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "以冻结 π0.5(LIBERO 仿真与 DROID Franka 硬件)为基座，一个 4B VLM 的语言反馈策略(叙述预训练+基座上闭环搜索选出的释义做 RFT)可显著提高训练环境及两个近邻未见硬件任务的成功率(sim 51.2→63.9；硬件未见任务+40~50pp，n=30)，在已饱和的留出仿真场景上增益≈0 到 +2.6pp；类别条件保形阈值在与校准同类的扰动上将有害转向比率压到≈α；相对 VLA-SFT 的样本效率优势未按交互预算匹配。",
+  "not_supported": [
+   "对任意冻结 VLA 的普适性",
+   "超出校准分布的无害性",
+   "语言转向优于权重微调的一般结论(搜索预算未匹配)",
+   "恢复行为的系统性证据"
+  ],
+  "retained_improver_online_transfer": "retained/improver：LFP 权重在选择集(训练环境)上学得并在后续留出 episode 上评测——部分满足 retained(选择与测试 episode 分开但同分布)；online=是；transfer=近邻硬件任务",
+  "unresolved": [
+   "硬件成功判定与校准/测试划分",
+   "LFP/改进头训练种子方差",
+   "搜索 vs 随机释义对照",
+   "最近邻(提示优化、测试时 steering)全文不在输入包",
+   "提示模板(图)原文"
+  ],
+  "aggregate_note": "sol's Appendix 6.3 'tie counterexample' reviewed: the proof states uniformity 'up to ties' (agg:E001) and the score is a continuous MLP output (agg:E002); ties have probability zero, so this is a minor caveat, not an open flaw. The material limits are exchangeability with the calibration distribution (agg:E003) and harm labels from noisy empirical improvement."
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "gap 具体：VLA 语言→行为映射脆弱且不直观，朴素提示/零样本 LM 常失败，部分行为不可由语言引出，开放词表使穷举搜索不可行，转向在分布偏移下可能有害。附录A.1把最近邻分三类并写出差异(提示优化未蒸馏、分层方法依赖人类反馈/示范、测试时 steering 方法)，局限段给出残余缺口(局部搜索、保证只在校准分布)。扣分：与提示优化/验证器类测试时 steering 未做同协议实验比较，这些最近邻全文不在输入包内。",
+   "evidence_ids": [
+    "son55:E026",
+    "son55:E027",
+    "son55:E030",
+    "son55:E039"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "机制可重建且有可区分预测：(i) 冻结 VLA 已含低层技能，语言是更高抽象的控制杆；(ii) 局部搜索+RFT 把搜索结果摊销为闭环策略；(iii) 预测'是否可改进'比预测'说什么'容易，故只对改进头做保形校准。预测可检：叙述SFT不够(已验证，E020)、闭环>开环(E019)、拒绝降低有害转向(E042)。假设薄弱点：改进头仅看初始状态而 LFP 逐步闭环；时间索引的搜索序列与闭环部署的训练-部署失配未讨论；语言是否利用 VLA 的伪相关未检验。",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E019",
+    "son55:E020",
+    "son55:E033",
+    "son55:E042",
+    "son55:E047"
+   ],
+   "counterevidence_ids": [
+    "son55:E054"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作链基本可重建：叙述→SFT→局部搜索(N、M、G 数值)→RFT→改进头(MLP、训练超参表)→保形阈值(公式与证明)→部署频率；基座、数据量(K=50 视频/任务、50 条成功演示)和算力给出。边界清楚(局限段、Microwave 不可转向)。扣分：提示模板在图中未随文本给出；硬件的成功判定、校准/测试划分与标签构造不明；搜索序列如何与闭环状态对齐一笔带过。",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E008",
+    "son55:E029",
+    "son55:E031",
+    "son55:E032",
+    "son55:E053",
+    "son55:E035"
+   ],
+   "counterevidence_ids": [
+    "son55:E041"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "仿真由 LIBERO 环境判定成功(逐 rollout 二元)，分母明确(50/组合 ×200 组合；硬件30/条件)，附按任务/扰动的完整表格；学习型门控有混淆矩阵(TPR/FPR/TNR/FNR/拒绝率)，并对照 rollout 经验标签。扣分：硬件成功判定与校准/测试划分未写；摘要的24.7%/65.0%为相对提升而未注明；'有害'标签来自10–20次 rollouts 的含噪 Δ̂；仿真混淆矩阵测试集每条件仅10 episode。",
+    "evidence_ids": [
+     "son55:E025",
+     "son55:E043",
+     "son55:E036",
+     "son55:E042",
+     "son55:E005",
+     "son55:E006"
+    ],
+    "counterevidence_ids": [
+     "son55:E002",
+     "son55:E041",
+     "son55:E037"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "有多项一次一变量消融：叙述SFT vs RFT vs CP、无拒绝/未校准拒绝/保形拒绝、开环/短语级/轨迹级、叙述数据量、第二个 VLA；还有 VLA-SFT 基线。缺口：LFP 对 VLA-SFT 的'样本效率'未匹配交互预算——搜索阶段约1000(sim)/320(硬件) rollouts/任务环境，而 VLA-SFT 只用10/30/50 条成功 rollouts；没有'随机释义无搜索'或'测试时 best-of-N 语言'对照来区分搜索 vs 释义；没有与其他测试时 steering(验证器/潜空间)的同基座对比；LFP 训练种子数未报告。",
+    "evidence_ids": [
+     "son55:E019",
+     "son55:E020",
+     "son55:E018",
+     "son55:E049",
+     "son55:E011"
+    ],
+    "counterevidence_ids": [
+     "son55:E007",
+     "son55:E009",
+     "son55:E010",
+     "son55:E011"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "有训练环境 vs 留出视觉环境/语义改写 vs 硬件未见任务(E044，n=30)三层划分，校准集与训练集不同。缺口：留出视觉环境基线已饱和，RFT 增益 ≈0 或为负，主要靠 CP 回补(+2.6/+1.1)；'OOD'为同10个任务的视觉/语义扰动，新组合(Compose)13个中仅6个非零、16–22号全0；校准与测试同属扰动家族；硬件未见任务与训练任务相近(MarkerBowl≈MarkerBlock)；MolmoAct2 仅训练环境。",
+    "evidence_ids": [
+     "son55:E003",
+     "son55:E004",
+     "son55:E016",
+     "son55:E017",
+     "son55:E044",
+     "son55:E046"
+    ],
+    "counterevidence_ids": [
+     "son55:E004",
+     "son55:E014",
+     "son55:E015",
+     "son55:E012",
+     "son55:E034"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "报告标准误、分母、拒绝率与混淆矩阵，模拟可靠性图(5次随机划分)，硬件逐条件30次。缺口：LFP/改进头训练种子未报告；SE 为跨扰动汇总 episode(非独立)；硬件主表无 SE/区间(仅 Table 3 给 SE)；仿真混淆矩阵测试 episode 少；保形保证的'有害'标签有噪声。",
+    "evidence_ids": [
+     "son55:E025",
+     "son55:E036",
+     "son55:E043"
+    ],
+    "counterevidence_ids": [
+     "son55:E036"
+    ],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "仅报告推理延迟(68ms→274ms，14.7→3.6Hz)与单卡 A6000 Ada。样本效率口径把搜索阶段的大量 rollouts 排除在外(≈1000/任务环境 vs VLA-SFT 的 10–50)；GPT-5.4/Molmo2 调用成本、训练时长、硬件 rollouts 成本均未报告；预算对照不公平。",
+    "evidence_ids": [
+     "son55:E023",
+     "son55:E024",
+     "son55:E007"
+    ],
+    "counterevidence_ids": [
+     "son55:E007",
+     "son55:E010",
+     "son55:E011"
+    ],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": 66.25,
+  "display": 66.2,
+  "lower": 66.25,
+  "upper": 66.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "phase": "calibration",
+ "base_seat_for_unchanged_fields": "son55",
+ "status": "reviewed",
+ "reason": "Full fixed text and appendices read by both seats and aggregator; all disagreements resolved; figure pixels/prompt-template figures not in text material (non-scoring).",
+ "initial_evidence_judgment": "Read in full before seat reasons. A Qwen3-VL-4B language feedback policy (LFP) steers frozen VLAs (pi0.5-LIBERO, pi0.5-DROID, MolmoAct2) by issuing language at each replan; trained by narration SFT (Molmo2 narrations of base-VLA videos), interactive search over GPT-5.4 paraphrases scored by closed-loop Monte Carlo improvement, and RFT; a regression improvement head on o_0, conformalized on harmful calibration episodes, decides once per episode whether to steer. In scope (frontier teacher offline, frozen VLA as executor, trained VLM high level). Evidence: LIBERO-OOD 50 rollouts x 200 combos (env-checked), Franka hardware 30 trials/condition, novel hardware tasks (30->80, 33->73), confusion matrices for the gate, OL/phrase/trajectory ablation, second VLA. Weaknesses: held-out sim scenes saturated (gains ~0 to +2.6 pp, mostly from CP), calibration drawn from the same perturbation combinations as test, search budget (~1000 rollouts/task-env) not charged against VLA-SFT in the sample-efficiency claim, no training-seed variance. Likely transfer (unseen hardware tasks), claim scoped.",
+ "aggregate_provenance": {
+  "aggregate_model": "claude-opus-5-5[1m]",
+  "model_type": "fable (overlay ANTHROPIC_DEFAULT_FABLE_MODEL)",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Session/receipt not exposed to internal subagent; no model probing performed.",
+  "timestamp": "2026-10-21T17:09:34.154334+00:00",
+  "anchoring_note": "Full text read and initial judgment formed before reading seat rating reasons; seat totals were already visible in conflicts.json/batch-report at start, so this is an aggregation review, not a blind third rating.",
+  "evidence_id_namespacing": "Seat evidence ids are namespaced 'sol:E###' / 'son55:E###'; aggregator additions are 'agg:E###'. Both seats' evidence is retained."
+ },
+ "input_seat_hashes": {
+  "sol": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/c-dev-1/seats/sol/attempts/a1/2606.12299.json",
+   "sha256": "d2f1d7e99d772f0eb57b4d8553f053f026d8416f51123a5fbd0ae0320ebad058"
+  },
+  "son55": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/c-dev-1/seats/son55/attempts/a1/2606.12299.json",
+   "sha256": "00976ad4ced15f57784327c9367b27a4d74c09eed388264ca6d6d758ddf47a17"
+  }
+ },
+ "resolutions": [
+  {
+   "field_path": "status",
+   "sol_value": "reviewed",
+   "son55_value": {
+    "status": "reviewed",
+    "reason": "完整全文与附录已读；八项均有证据；图像内容缺失记入 unresolved，不影响评分项判定。"
+   },
+   "decision": "same_supported_fact",
+   "final_value": "reviewed",
+   "reason": "Both seats reported status=reviewed; the diff is only string-vs-object shape. Final status reviewed.",
+   "evidence_ids": [],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    null,
+    "rs:C08"
+   ],
+   "son55_value": [
+    null,
+    "C08"
+   ],
+   "decision": "sol",
+   "final_value": [
+    null,
+    "rs:C08"
+   ],
+   "reason": "Same cards chosen by both seats (primary adapt_via_conditioning sub=null; supporting self_supervised_signal_engineering/C08). Original sub-pattern ids must carry the rs: namespace (PATTERN_PROTOCOL; BATCH_CONTRACT check 4); son55's bare 'C08' is a namespace error, corrected in rs_pattern and pattern_mapping.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.X",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "son55",
+   "final_value": 3,
+   "reason": "Operation chain, information visibility (GPT-5.4/Molmo2 offline only; LFP sees wrist+agent images; VLA frozen), selection rule (two-stage Monte Carlo argmax of improvement, agg:E005), persistence (LoRA weights), deployment rule (refusal decided once from o_0, steering every replan) and boundaries (non-steerable Microwave; calibration-distribution limit in Limitations) are reconstructable. sol's grounds for 2: the inclusive-threshold tie issue is explicitly bracketed in the proof and has probability zero for a continuous MLP score (agg:E001, agg:E002); the empirical-harm-label limitation is an evidence-scope issue already counted in E.holdout and claim_support=scoped. Remaining gaps (prompt templates only as figures, hardware calibration/test split) keep it below 4.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E002",
+    "agg:E005",
+    "son55:E007",
+    "son55:E029",
+    "son55:E031",
+    "sol:E009"
+   ],
+   "score_impact": "+5.0 vs sol"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "son55",
+   "final_value": 3,
+   "reason": "Sim success is environment-checked with explicit denominators (agg:E004); hardware has 30 trials per condition with per-task tables; the learned gate is audited against rollout outcomes via a confusion matrix, satisfying EVIDENCE rule 3 against simulator/real outcomes. Deductions: hardware success judge unstated; harm labels from 10-20 rollout estimates; abstract percentages are relative. sol's reasons (empirical improvement vs true risk; proof tie) bear on the guarantee's scope, which is penalized in E.holdout/claim_support, not double-counted here.",
+   "evidence_ids": [
+    "agg:E004",
+    "son55:E025",
+    "son55:E043",
+    "son55:E036",
+    "sol:E011",
+    "sol:E012"
+   ],
+   "score_impact": "+3.75 vs sol"
+  },
+  {
+   "field_path": "ratings.E.causality",
+   "sol_value": 2,
+   "son55_value": 2,
+   "decision": "same_supported_fact",
+   "final_value": 2,
+   "reason": "Controller diff showed son55=null because son55 stores flat key 'E.causality' while check_batch.py reads only nested ratings.E; actual son55 rating equals sol's. Both: one-at-a-time ablations exist; search budget vs VLA-SFT unmatched; no random-paraphrase control.",
+   "evidence_ids": [
+    "sol:E012",
+    "son55:E019"
+   ],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "ratings.E.holdout",
+   "sol_value": 2,
+   "son55_value": 2,
+   "decision": "same_supported_fact",
+   "final_value": 2,
+   "reason": "Controller diff showed son55=null because son55 stores flat key 'E.holdout' while check_batch.py reads only nested ratings.E; actual son55 rating equals sol's. Both: novel hardware tasks; saturated held-out sim scenes; calibration from the same perturbation family.",
+   "evidence_ids": [
+    "sol:E016",
+    "son55:E044"
+   ],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "ratings.E.statistics",
+   "sol_value": 2,
+   "son55_value": 2,
+   "decision": "same_supported_fact",
+   "final_value": 2,
+   "reason": "Controller diff showed son55=null because son55 stores flat key 'E.statistics' while check_batch.py reads only nested ratings.E; actual son55 rating equals sol's. Both: SE over pooled episodes, 5 calibration splits; no training-seed variance.",
+   "evidence_ids": [
+    "sol:E015",
+    "son55:E005"
+   ],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 1,
+   "son55_value": 1,
+   "decision": "same_supported_fact",
+   "final_value": 1,
+   "reason": "Controller diff showed son55=null because son55 stores flat key 'E.cost' while check_batch.py reads only nested ratings.E; actual son55 rating equals sol's. Both: latency reported but search interaction budget not charged to the sample-efficiency comparison.",
+   "evidence_ids": [
+    "sol:E014",
+    "son55:E011"
+   ],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "score.raw",
+   "sol_value": 57.5,
+   "son55_value": 66.25,
+   "decision": "son55",
+   "final_value": 66.25,
+   "reason": "Recomputed from resolved ratings G3 M3 X3 E 3/2/2/2/1 = 66.25; equals son55's arithmetic.",
+   "evidence_ids": [],
+   "score_impact": "final 66.25"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "trained_vlm_vla_hierarchy/R02",
+    "external_verification_control/K201 (partial functional analogue)"
+   ],
+   "son55_value": [
+    "trained_vlm_vla_hierarchy/R02",
+    "gate operation unassigned"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "R02 partial",
+    "conformal refusal gate: unassigned (case candidate)"
+   ],
+   "reason": "K201's defining operation is an external, training-free per-proposal checker outside the model; here the gate is a learned regression head on the LFP's own hidden state deciding once per episode (agg:E002). sol itself marked the card's core condition not_applicable. Keep as unassigned with son55's case-candidate proposal.",
+   "evidence_ids": [
+    "agg:E002",
+    "sol:E007",
+    "son55:E012"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E02]",
+   "sol_value": "partial",
+   "son55_value": "met",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "One-at-a-time toggles exist for refusal and search structure, but the search-selection effect is not isolated from extra RFT data/paraphrase diversity (no random-paraphrase control), so attribution to interactive search is partial.",
+   "evidence_ids": [
+    "sol:E004",
+    "sol:E006",
+    "son55:E019"
+   ],
+   "score_impact": "none (E.causality=2 agreed)"
+  },
+  {
+   "field_path": "expectations[E07]",
+   "sol_value": "partial",
+   "son55_value": "not_applicable",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "The paper claims language steering of a frozen VLA generalizes better than direct VLA fine-tuning (an end-to-end VLA); E07 applies. It uses LIBERO-OOD rather than LIBERO-PRO and no agentic steering baselines.",
+   "evidence_ids": [
+    "sol:E011",
+    "sol:E014"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E09]",
+   "sol_value": "not_applicable",
+   "son55_value": "partial",
+   "decision": "sol",
+   "final_value": "not_applicable",
+   "reason": "E09 applies to claims that a distilled student approaches its frontier harness teacher; GPT-5.4 only paraphrases offline and is not a policy in the same harness, and no such claim is made.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E12]",
+   "sol_value": "partial",
+   "son55_value": "not_applicable",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "The Molmo2 narrator sees whole videos (future frames) while the deployed LFP sees current images - a privileged channel in teacher supervision. Narration-size ablation shows little effect, but the future-information content is not isolated.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E006"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E06,E11,E13,E14,E15,E16,E17,E20,E21]",
+   "sol_value": "sol entries present",
+   "son55_value": null,
+   "decision": "sol",
+   "final_value": "sol statuses (N/A except E16 partial, E17 partial)",
+   "reason": "son55 omitted these ids. sol's statuses checked: E16 partial (confusion matrix and per-task tables, no failure-endpoint breakdown); E17 partial (novel compositions and 2 unseen hardware tasks; calibration not untouched OOD); others not applicable.",
+   "evidence_ids": [
+    "sol:E012",
+    "sol:E016",
+    "sol:E020"
+   ],
+   "score_impact": "none"
+  }
+ ],
+ "shared_error_corrections": [],
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_status": "accepted_final",
+ "final_record_hash": "a7332e6298148d153390f2856c29d610a1127e3a2f8fe5086164ae2c4e9e5b0e"
+}

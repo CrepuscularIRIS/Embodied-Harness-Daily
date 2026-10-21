@@ -1,0 +1,398 @@
+{
+ "schema_version": "radar-review-v2.2-aggregate-batch-report",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a2",
+ "phase": "calibration-holdout-round2",
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "model_type": "fable (overlay ANTHROPIC_DEFAULT_FABLE_MODEL)",
+ "session_id": null,
+ "receipt_ref": null,
+ "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+ "anchors_version": "v2 (E.measurement / E.statistics middle-band clauses applied)",
+ "timestamp": "2026-10-21T18:43:26.780691+00:00",
+ "read_boundary": "Read seats a2 (both), conflicts.json (a2), anchors.md, protocol docs, RS 15+31 overviews and relevant cards, domain overview/taxonomy, fixed materials. Did not read any a1 attempt, aggregate/a1, other calibration files, or other batches.",
+ "assigned": 6,
+ "accepted_final": 6,
+ "needs_revision": 0,
+ "needs_evidence": 0,
+ "needs_fulltext": 0,
+ "out_of_scope": 0,
+ "outside_taxonomy": 1,
+ "outside_taxonomy_rate": 0.167,
+ "coverage_warning": "1/6 outside_taxonomy (16.7%), below the 30% threshold",
+ "consistency_rules_applied": [
+  "rs:C25 assigned only when execution or verifier output feeds back to the learned component during the episode (2609.39915, 2609.26360, 2503.10069); withheld for one-shot or validation-only boundaries (2503.02465, 2512.10394).",
+  "Anchors v2 E.measurement: undefined criterion or all single trials -> <=2; partial denominators -> 2; criterion and denominator both absent -> 0-1 (2503.02465).",
+  "Anchors v2 E.statistics: single run without failure decomposition -> <=1; repeated evaluations without CI -> 2 (2610.15572 only).",
+  "evidence_level transfer requires counted closed-loop trials (or counted episodes) in a construction-unused simulator/embodiment/scene; 'representative' examples without a trial protocol do not count (2609.26360).",
+  "Circular-source domain cards (K505/K706 -> 2610.15572, R04 -> 2512.10394, R07 -> 2503.10069) recorded as structural references only and not cited for any rating."
+ ],
+ "papers": [
+  {
+   "paper_key": "2503.02465",
+   "version": "2503.02465v2",
+   "claim_type": "system_method",
+   "aggregate_status": "accepted_final",
+   "claim_support": "scoped",
+   "evidence_level": "offline",
+   "score": {
+    "raw": 42.5,
+    "display": 42.5,
+    "coverage": 1.0
+   },
+   "seat_raw": {
+    "sol": 51.25,
+    "son55": 38.75
+   },
+   "ratings": {
+    "G": 2,
+    "M": 2,
+    "X": 2,
+    "E.measurement": 1,
+    "E.causality": 2,
+    "E.holdout": 1,
+    "E.statistics": 1,
+    "E.cost": 2
+   },
+   "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "sub_ids": [
+     null
+    ],
+    "supporting": [],
+    "outside_taxonomy": false
+   },
+   "n_mechanical_diffs": 8,
+   "n_resolutions": 10,
+   "n_shared_error_corrections": 0,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: sol -> \"offline\"",
+    "status: same_supported_fact -> \"reviewed\"",
+    "rs_pattern.matches[0].sub_id: sol -> null",
+    "ratings.M: son55 -> 2",
+    "ratings.E.measurement: son55 -> 1",
+    "ratings.E.causality: sol -> 2",
+    "ratings.E.cost: sol -> 2",
+    "claims.C3 / assessment.strongest_supported_claim (son55): revised -> \"per-axis errors <=23 cm; radial error within 25 cm for 11/12 objects, Scene 2 Target 3 about 25.1 cm\"",
+    "expectations (set/answers): revised -> \"E19 unmet, E04 unmet, E16 unmet, E01 partial, E02 partial, E05 partial, E22 partial, E08 n/a, E20 n/a\"",
+    "score.raw: revised -> 42.5"
+   ],
+   "shared_error_summary": [],
+   "requests": [],
+   "final_record_hash": "6544de8f22781ccc225b43f729b2dc19300b3c2b665da4c63987f4fb790dd9b2",
+   "file_sha256": "98162dbfed3931433df1aad8170c7b4de34e4bcf96cac5116802b3a8bc1dc646"
+  },
+  {
+   "paper_key": "2610.15572",
+   "version": "2610.15572v1",
+   "claim_type": "component_training",
+   "aggregate_status": "accepted_final",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "score": {
+    "raw": 68.75,
+    "display": 68.8,
+    "coverage": 1.0
+   },
+   "seat_raw": {
+    "sol": 67.5,
+    "son55": 72.5
+   },
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 3,
+    "E.statistics": 2,
+    "E.cost": 2
+   },
+   "rs_pattern": {
+    "primary": null,
+    "sub_ids": [],
+    "supporting": [],
+    "outside_taxonomy": true
+   },
+   "n_mechanical_diffs": 8,
+   "n_resolutions": 10,
+   "n_shared_error_corrections": 1,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: son55 -> \"transfer\"",
+    "status: same_supported_fact -> \"reviewed\"",
+    "rs_pattern.primary: sol -> null",
+    "rs_pattern.outside_taxonomy: sol -> true",
+    "rs_pattern.sub_ids: sol -> []",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.cost: son55 -> 2",
+    "domain_pattern.matches: son55 -> [\"K505 (strong, circular source)\", \"K501 (partial; frontier-teacher condition unmet)\", \"K706 (partial; RL parent condition unmet; circular source)\"]",
+    "expectations (set/answers): revised -> \"E10 partial, E12 partial, E09 n/a, E02 unmet, E03 unmet, E04 partial, E08 partial, E16 partial, E19 unmet, E05 partial\"",
+    "score.raw: revised -> 68.75"
+   ],
+   "shared_error_summary": [
+    "Neither seat noticed that the Table 1 baseline percentages cannot be fractions of the 170 evaluation episodes (21.90% x 170 = 37.2), so the baselines were scored on a different denominator/protocol; the 21.90 -> 71.76 gap must not be used a"
+   ],
+   "requests": [],
+   "final_record_hash": "484e9d236f80c5417614eaba32486da19713c4880ca9a1a663a0cf5dc1b128fa",
+   "file_sha256": "d2937833bf6d3b4d128f9ad611de183d4c8b55a0f16d648ead96f8c39119c376"
+  },
+  {
+   "paper_key": "2609.39915",
+   "version": "2609.39915v1",
+   "claim_type": "system_method",
+   "aggregate_status": "accepted_final",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "score": {
+    "raw": 63.75,
+    "display": 63.8,
+    "coverage": 1.0
+   },
+   "seat_raw": {
+    "sol": 65.0,
+    "son55": 72.5
+   },
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 3
+   },
+   "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "sub_ids": [
+     "rs:C25",
+     null
+    ],
+    "supporting": [
+     "heterogeneous_decomposition"
+    ],
+    "outside_taxonomy": false
+   },
+   "n_mechanical_diffs": 8,
+   "n_resolutions": 10,
+   "n_shared_error_corrections": 0,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: son55 -> \"transfer\"",
+    "status: same_supported_fact -> \"reviewed\"",
+    "rs_pattern.primary: revised -> \"decompose_and_delegate (primary) + heterogeneous_decomposition (supporting)\"",
+    "rs_pattern.sub_ids: revised -> [\"rs:C25\", null]",
+    "ratings.X: sol -> 3",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.statistics: son55 -> 1",
+    "domain_pattern.matches: revised -> [\"K202 partial\", \"harness_memory_skill_reuse (sub null)\", \"K803 partial\"]",
+    "expectations (set/answers): son55 -> \"son55 set (E01 met, E02 partial, E03 met, E04 unmet, E05 partial, E06 partial, E08 unmet, E16 partial, E19 partial, E22 partial)\"",
+    "score.raw: revised -> 63.75"
+   ],
+   "shared_error_summary": [],
+   "requests": [],
+   "final_record_hash": "08a7c227050bc94165f71e30687e2e835001c70af40e6bd52cd640193f97a602",
+   "file_sha256": "4605812f80b3c4623d02547863b0677bc048c91a1e2d5dea6aeb7289a4027a60"
+  },
+  {
+   "paper_key": "2512.10394",
+   "version": "2512.10394v2",
+   "claim_type": "system_method",
+   "aggregate_status": "accepted_final",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "score": {
+    "raw": 53.75,
+    "display": 53.8,
+    "coverage": 1.0
+   },
+   "seat_raw": {
+    "sol": 61.25,
+    "son55": 52.5
+   },
+   "ratings": {
+    "G": 2,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 1,
+    "E.holdout": 1,
+    "E.statistics": 1,
+    "E.cost": 2
+   },
+   "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "sub_ids": [
+     null,
+     null
+    ],
+    "supporting": [
+     "heterogeneous_decomposition"
+    ],
+    "outside_taxonomy": false
+   },
+   "n_mechanical_diffs": 9,
+   "n_resolutions": 11,
+   "n_shared_error_corrections": 0,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "status: same_supported_fact -> \"reviewed\"",
+    "rs_pattern.primary: revised -> \"decompose_and_delegate (primary) + heterogeneous_decomposition (supporting)\"",
+    "rs_pattern.sub_ids: sol -> [null, null]",
+    "ratings.G: son55 -> 2",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.causality: son55 -> 1",
+    "ratings.E.holdout: sol -> 1",
+    "ratings.E.statistics: son55 -> 1",
+    "domain_pattern.matches: revised -> [\"R04 (circular, structural only)\", \"K107 partial\"]",
+    "expectations (set/answers): revised -> \"E19 unmet, E04 unmet, E02 unmet, E03 partial, E05 partial, E22 partial, E01 n/a, E08 n/a\"",
+    "score.raw: revised -> 53.75"
+   ],
+   "shared_error_summary": [],
+   "requests": [],
+   "final_record_hash": "bd5cd62099b39ff7959cf33be0b9e511957b82804fddf0a870bfe36825f5111a",
+   "file_sha256": "d5e0d3b2a67a47723f32b0d7c4da3e0de3f4acb1fec581682789c68aa51ac9e4"
+  },
+  {
+   "paper_key": "2609.26360",
+   "version": "2609.26360v1",
+   "claim_type": "system_method",
+   "aggregate_status": "accepted_final",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "score": {
+    "raw": 65.0,
+    "display": 65.0,
+    "coverage": 1.0
+   },
+   "seat_raw": {
+    "sol": 63.75,
+    "son55": 68.75
+   },
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 2
+   },
+   "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "sub_ids": [
+     "rs:C25",
+     "rs:C13"
+    ],
+    "supporting": [
+     "structural_prior_encoding"
+    ],
+    "outside_taxonomy": false
+   },
+   "n_mechanical_diffs": 6,
+   "n_resolutions": 9,
+   "n_shared_error_corrections": 1,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: sol -> \"online\"",
+    "status: same_supported_fact -> \"reviewed\"",
+    "rs_pattern.matches[0].sub_id (decompose_and_delegate): son55 -> \"rs:C25\"",
+    "rs_pattern.supporting (+ sub_id): son55 -> \"structural_prior_encoding / rs:C13\"",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.cost: son55 -> 2",
+    "domain_pattern.matches: son55 -> [\"K301 partial\", \"R07 partial\", \"K104 partial\"]",
+    "expectations (set/answers): revised -> \"E01 met, E02 met, E03 met, E04 unmet, E05 partial, E08 partial, E16 unmet, E19 partial, E20 partial, E22 partial, E06 n/a\"",
+    "score.raw: revised -> 65.0"
+   ],
+   "shared_error_summary": [
+    "True only for OpenEQA. On ExploreEQA the no-floorplan variant scores 53.5, below GraphEQA 54.4 and equal to ExploreEQA 53.5 (Gemini-3.5), so the ExploreEQA advantage of the full method rests entirely on the floorplan prior, which in simulat"
+   ],
+   "requests": [],
+   "final_record_hash": "4c16ab6837d06d46f13f92a2a68542de7e6fdbcbcffb84f26bddb63e8e7fd3ec",
+   "file_sha256": "bd81026b90501f212c1a83c077dea197d34cf600664f948a5ef4ad3aa777e887"
+  },
+  {
+   "paper_key": "2503.10069",
+   "version": "2503.10069v2",
+   "claim_type": "system_method",
+   "aggregate_status": "accepted_final",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "score": {
+    "raw": 58.75,
+    "display": 58.8,
+    "coverage": 1.0
+   },
+   "seat_raw": {
+    "sol": 56.25,
+    "son55": 67.5
+   },
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 2,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 3,
+    "E.statistics": 1,
+    "E.cost": 1
+   },
+   "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "sub_ids": [
+     "rs:C25"
+    ],
+    "supporting": [],
+    "outside_taxonomy": false
+   },
+   "n_mechanical_diffs": 8,
+   "n_resolutions": 11,
+   "n_shared_error_corrections": 0,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "status: same_supported_fact -> \"reviewed\"",
+    "rs_pattern.sub_ids / supporting: revised -> \"[rs:C25]; supporting none\"",
+    "ratings.X: sol -> 2",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.holdout: son55 -> 3",
+    "ratings.E.statistics: son55 -> 1",
+    "ratings.E.cost: son55 -> 1",
+    "Table V row mapping / NE 7.11 (both seats flagged): same_supported_fact -> \"Row mapping #1 original/original, #2 original predictor + backtrack, #3 enhanced predictor + original navigator, #4 both, fixed by three consistent prose references (agg:E001, SR 26 for #3); the prose NE 7.11 for #3 is treated as a prose error and table values are used. No rating depends on which NE is correct.\"",
+    "domain_pattern.matches: revised -> [\"R07 (circular, structural only)\", \"K802 partial\"]",
+    "expectations (set/answers): revised -> \"E01 partial, E02 partial, E03 unmet, E04 unmet, E05 unmet, E06 partial, E08 partial, E16 partial, E19 partial, E20 partial, E22 unmet\"",
+    "score.raw: revised -> 58.75"
+   ],
+   "shared_error_summary": [],
+   "requests": [
+    {
+     "type": "material_check",
+     "blocking": false,
+     "text": "Controller may verify Table V check-mark columns and the NE value for row #3 against the original arXiv PDF/HTML rendering of 2503.10069v2; current judgment uses the table values and the prose-derived row mapping, and no rating depends on the outcome."
+    }
+   ],
+   "final_record_hash": "0c9fad71a957ff012b067e74d45d80fbdb34d76faa85fd110b54a97580a5c768",
+   "file_sha256": "79385c2396cc3adf21afde8cc531b8e228e68f45862ccfad438864ad449885bc"
+  }
+ ],
+ "blockers": [],
+ "non_blocking_requests": [
+  "2503.10069: Controller may verify Table V check-mark columns and the NE value for row #3 against the original arXiv PDF/HTML rendering of 2503.10069v2; current judgment uses the table values and the prose-derived row mapping, and no rating depends on the outcome."
+ ],
+ "validation": {
+  "seat_identity_version_input_hash": "pass (both seats a2, same version, input_hash ba6454d9..., material sha256 verified for all 6)",
+  "seat_quote_match": "pass (all seat quotes found in fixed material after whitespace normalization; negative-fact null quotes skipped)",
+  "aggregate_quote_match": "pass (every agg:E quote asserted present in material)",
+  "evidence_reference_integrity": "pass (no dangling evidence ids)",
+  "rs_parent_and_prefix": "pass (PARENTS.tsv; rs: prefix; outside_taxonomy => primary null, no matches)",
+  "rating_status_ranges": "pass (all eight items resolved, integer 0-4, no unknown, no not_reported)",
+  "score_recomputed": "pass (independent recomputation equals stored raw for all 6)",
+  "final_record_hash": "pass (sha256 of sort_keys compact ensure_ascii=False JSON without final_record_hash, recomputed)",
+  "conflict_coverage": "pass (every conflicts.json diff field has a resolution entry)",
+  "input_seat_hashes": "pass (both seat file sha256 recorded and re-verified)",
+  "boundary": "Structure/arithmetic/quote checks plus aggregate re-reading of the fixed full text; not independent reproduction of any paper's results."
+ }
+}

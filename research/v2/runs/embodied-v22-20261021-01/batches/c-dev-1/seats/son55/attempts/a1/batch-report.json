@@ -1,0 +1,142 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-1",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "assigned": 3,
+ "reviewed": 3,
+ "needs_fulltext": 0,
+ "needs_evidence": 0,
+ "out_of_scope": 0,
+ "outside_taxonomy": 0,
+ "rs_sub_null": [
+  "2606.12299(primary)",
+  "2606.12372"
+ ],
+ "schema_errors": 0,
+ "schema_check_note": "本席自查脚本(非 v2 机器 validator)：引文逐字匹配材料(空白归一)、证据 ID 无悬空、原卡 ID 与 PARENTS.tsv 父类、领域主/子卡与 taxonomy.json、八项评分与 SCORE_SPEC 公式、unknown 无分；均通过。结构通过不证明语义。",
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_id": null,
+ "receipt_ref": null,
+ "session_note": "无法自取 session_id，已按指令填 null",
+ "input_hash": "2e73fbac012f58e0a5ab3163a0af6249c7cab16960cc9cc3121e07c40c24182f",
+ "material_hash_check": "3 份材料 sha256 与 inputs_manifest.json 一致",
+ "contamination": "none：未读取 seats/sol、aggregate、其他批次、archive、旧分数；仅读输入包与共享规则/卡片。材料目录文件名列表被列过(未读其他论文内容)。",
+ "flags": [
+  "2606.12372 范围边界(无前沿 LLM/VLM harness)，已按自身主张评分并在 scope_note 标注，建议总控/聚合席复核是否在范围内",
+  "2609.27308 claim_type 分类歧义(evaluation_resource vs component_training)；E 项已按整体中心主张评分",
+  "2609.27308 的领域卡 K204/K503/K504 来源含本文自身，卡匹配有循环性",
+  "三篇最近邻全文不在输入包，gap 的谱系依据论文自述与卡片摘要",
+  "图像/图表内容(含 2609.27308 Fig 5/8、2606.12299 提示模板)不在文本提取中"
+ ],
+ "papers": [
+  {
+   "paper_key": "2609.27308",
+   "title": "EmbodiedSWE: Coding Agents for Long Horizon Dexterous Robotics",
+   "version": "2609.27308v2",
+   "status": "reviewed",
+   "claim_type": "evaluation_resource",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "raw_score": 65.0,
+   "display": 65.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 3
+   },
+   "rs_primary": "self_supervised_signal_engineering",
+   "rs_supporting": [
+    "decompose_and_delegate",
+    "controlled_diagnostic_design"
+   ],
+   "rs_sub_ids": [
+    "C08",
+    "C25",
+    "C02"
+   ],
+   "domain_matches": [
+    "K503",
+    "K504",
+    "K204",
+    "K704"
+   ],
+   "file_sha256": "58818b998bc1269bac24fda912e85475d0b187f999a45125e27da50bbc737dfe",
+   "one_line": "evaluation_resource(混合：基准+solver+数据引擎)；claim_support=scoped；evidence_level=transfer(单任务真机n=10，全程2/10)；主要扣分：作弊审计自评、工具打包消融单次运行、规模曲线分布内且放宽判据、对照基线多样性设计性不对等。"
+  },
+  {
+   "paper_key": "2606.12299",
+   "title": "Learning What to Say to Your VLA: Mostly Harmless Vision Language Action Model Steering",
+   "version": "2606.12299v2",
+   "status": "reviewed",
+   "claim_type": "component_training",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "raw_score": 66.25,
+   "display": 66.2,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 1
+   },
+   "rs_primary": "adapt_via_conditioning",
+   "rs_supporting": [
+    "self_supervised_signal_engineering"
+   ],
+   "rs_sub_ids": [
+    null,
+    "C08"
+   ],
+   "domain_matches": [
+    "R02"
+   ],
+   "file_sha256": "00976ad4ced15f57784327c9367b27a4d74c09eed388264ca6d6d758ddf47a17",
+   "one_line": "component_training；claim_support=scoped；evidence_level=transfer(两未见硬件任务n=30，留出仿真场景增益≈0)；主要扣分：与 VLA-SFT 的样本效率比较未匹配搜索交互预算、无随机释义对照、保形保证仅限校准分布、无训练种子。"
+  },
+  {
+   "paper_key": "2606.12372",
+   "title": "UniIntervene: Agentic Intervention for Efficient Real-World Reinforcement Learning",
+   "version": "2606.12372v1",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "raw_score": 48.75,
+   "display": 48.8,
+   "ratings": {
+    "G": 3,
+    "M": 2,
+    "X": 2,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 1,
+    "E.statistics": 1,
+    "E.cost": 1
+   },
+   "rs_primary": "self_supervised_signal_engineering",
+   "rs_supporting": [],
+   "rs_sub_ids": [
+    null
+   ],
+   "domain_matches": [
+    "K202",
+    "K603"
+   ],
+   "file_sha256": "bd0bc3d1ff9d23bcc2a38f837531b37a8ee99adbca61c4a9d89df89d3ab48947",
+   "one_line": "system_method(范围边界)；claim_support=scoped；evidence_level=online；主要扣分：SR 差统计上不显著(z≈1.37,p≈0.24)、触发 F1 对 proxy value 派生标签(循环)、消融仅2/5任务、先前 rollouts 人工成本与训练预算未计。"
+  }
+ ],
+ "timestamp": "2026-10-21T16:53:51Z"
+}

@@ -1,0 +1,1189 @@
+{
+ "paper": {
+  "central_claim": "CORE lets a robot infer context-dependent safety constraints online from visual observations with a VLM, ground them into spatial safe sets and enforce them with control barrier functions, with probabilistic safety guarantees under perception uncertainty, without prior maps or safety specifications; it rivals an oracle with ground-truth context and clearly outperforms prior semantic-safety style methods that lack online contextual reasoning.",
+  "paper_key": "2602.19983",
+  "paper_id": "2602.19983",
+  "title": "Contextual Safety Reasoning and Grounding for Open-World Robots",
+  "version": "2602.19983v2",
+  "claim_type": "system_method"
+ },
+ "scope_note": "Borderline for the radar scope: a mid-size open VLM acts as a constraint-inference module in a safety filter wrapped around a classical waypoint controller; there is no LLM agent loop or tool-calling harness, but the work is a VLM-based safety/gating study for mobile robots (EVIDENCE B class safety studies). Scored on its own claim; scope decision left to the controller.",
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Safety-constraint channel in the robot's control loop: VLM output -> grounded safe set -> CBF filter on a nominal controller (baselines: Oracle constraints, No Context LLM rules written pre-deployment, Geometric obstacle avoidance).",
+   "information": "Forward RGB-D camera, odometry, control-affine dynamics, high-level guideline text; no map, no safety spec; VLM sees only the image plus a structured system prompt; no privileged world state in the VLM channel.",
+   "operation": "VLM emits JSON with justification, safety-relevant classes and unsafe/safe predicates (ON/NEAR/AROUND/BETWEEN); SAM3 segments classes; predicates become pixel sets, depth back-projects them to a 2D grid with safe/unsafe counts; thresholded probability gives a safe set and a signed-distance barrier h(x); a QP minimally modifies the nominal input subject to the CBF condition.",
+   "output": "Filtered control input u_safe; barrier updated online as new VLM outputs arrive.",
+   "conditions": "Control-affine dynamics, Assumption 1 (unsafe region detected before entry), 3-7 m depth window, 0.2 m grid, tau=0.5, alpha(x)=0.25x; VLM latency about 4.4 s.",
+   "feedback": "Only perception-derived; there is no feedback from the filter to the VLM and no verifier of predicate correctness.",
+   "selection_rule": "Accept/reject is by the QP constraint: any control input violating the barrier condition is projected; no candidate ranking of VLM outputs.",
+   "persistence": "Grid counts accumulate over time (barrier memory); nothing persists across tasks.",
+   "later_use": "n/a (no retained-improvement claim).",
+   "claimed_effect": "60 sim evaluations: CORE 95.0% vs Oracle 98.3%, No Context 55.0%, Geometric 50.0%; hardware 86.6% vs Geometric 50.0%.",
+   "failure_boundary": "Missed hazards at key timesteps (3.3% of sim), ghost obstacles from depth noise, conservative VLM specs; control-affine and static scenes only.",
+   "evidence_ids": [
+    "E001",
+    "E002",
+    "E003",
+    "E004",
+    "E008",
+    "E010",
+    "E019"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Perception-uncertainty certificate (Theorem 1) for the contextual CBF.",
+   "information": "A detection-probability function m(.) calibrated from VLM-prediction success on 100 images; speed limit and VLM latency non-dimensionalised into observations per distance R.",
+   "operation": "Bound expected inverse distance to the nearest undetected hazard via supermartingale/Ville inequality; search (c, l) for a certificate.",
+   "output": "Certificate delta=0.1 (90% of trajectories safely traversed), given the calibration.",
+   "conditions": "Bernoulli detections, bounded sensing radius, monotone detection function, gamma=0 context independence flagged as not conservative.",
+   "feedback": "n/a: analytical certificate, no feedback loop",
+   "selection_rule": "n/a: analytical certificate",
+   "persistence": "n/a: analytical certificate",
+   "later_use": "n/a: static design, no retained-improvement claim",
+   "claimed_effect": "Empirical 93% unsafe-task success consistent with the 90% certificate.",
+   "failure_boundary": "Average error rate only, no per-frame uncertainty; calibration set drawn from the same experimental setup.",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E015",
+    "E016",
+    "E027",
+    "E028"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Safety specifications require expert, a priori environment knowledge; language-specified semantic safety work still needs a user to give rules naming precise semantics, so the robot cannot reason about contextual safety itself.",
+  "checked_gap": "Specific and plausible for open-world deployment. The nearest neighbours (language-specified costmaps with HJ reachability, scene-graph/LTL planners, VLM traversability work) are cited, but none is run; the 'No Context' proxy is built by the authors.",
+  "lineage": [
+   "CBF / HJ reachability with fixed specifications",
+   "language-specified safety constraints grounded to costmaps (refs 10-12)",
+   "VLM contextual reasoning for traversability/trajectories (refs 43-47)"
+  ],
+  "closest_adjacent": "Language-instructed semantic safety filters (user supplies rules) and VLM-selected trajectories over imposed structure; both solve parts of grounding but need user rules or coarse structure.",
+  "residue": "Online inference of context rules from vision with continuous-control enforcement and an explicit treatment of detection failure.",
+  "stakes": "Geometric avoidance fails all contextually unsafe tasks (0% unsafe success); fixed rules prevent only 16.6%.",
+  "method_response": "VLM predicate generation with structured safety logic, open-vocabulary grounding and a CBF filter, plus a probabilistic certificate.",
+  "remaining_gap": "Guarantee depends on a calibration drawn from the same setup; non-affine/dynamic scenes; per-frame uncertainty; latency of 4.4 s; no comparison to the cited prior systems.",
+  "evidence_ids": [
+   "E022",
+   "E021",
+   "E007",
+   "E008",
+   "E016",
+   "E017"
+  ],
+  "unresolved": [
+   "Whether prior language-specified methods with equivalent rules would match CORE once rules are supplied."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "1 boundary: VLM does semantic extraction, segmentation/depth ground it, a QP/CBF solver owns exact enforcement (met)",
+     "2 typed machine-checkable artifact: predicate JSON with a fixed operator vocabulary (met)",
+     "3 loop closure with solver output: the filter consumes the artifact but returns nothing to the VLM and does not verify its correctness (partial)",
+     "4 ablation isolating the load-bearing step: reasoning-structure ablations only; grounding and CBF not ablated (partial)",
+     "5 cost: module latency and VLM memory reported; certificate is cost-aware (met)"
+    ],
+    "success_checks": [
+     "Learned model confined to extraction/structuring while a sound mechanism owns enforcement: met",
+     "Typed verifiable hand-off: met",
+     "Isolated load-bearing mechanism with collapse-on-ablation: partial (No Context removes online reasoning and collapses to Geometric on unsafe tasks)"
+    ],
+    "failure_checks": [
+     "Assembly of off-the-shelf parts (Gemma, SAM3, CBF): risk present, partly offset by the probabilistic certificate",
+     "Single narrow benchmark: authors' own 12 scenarios plus 6 hardware tasks",
+     "Cost unmeasured: no (latency reported)",
+     "Ablation confounds: partial"
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E007",
+     "E012",
+     "E018"
+    ],
+    "reason": "A learned VLM writes a structured artifact (predicates) that a mathematically sound enforcement mechanism (CBF QP) consumes, which is the C25 seam. It differs in that the artifact is not verified or fed back; the solver is a filter, not a checker of the VLM output."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "decompose_and_delegate/C25 fits the learned-extraction plus sound-solver seam; structural_prior_encoding was considered (CBF gives invariance by construction) but the barrier is built online from noisy perception rather than encoding a known problem invariant, so it is not assigned.",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "Decomposition and typed artifact executed; no feedback or verification of the artifact.",
+   "evidence_ids": [
+    "E003",
+    "E004"
+   ]
+  },
+  "resolves_problem": {
+   "value": false,
+   "reason": "Contextual safety is demonstrated on 12+6 scripted scenarios with 3.3-13% residual failures and a guarantee conditional on a same-setup calibration; the open-world claim is not closed.",
+   "evidence_ids": [
+    "E008",
+    "E010",
+    "E013",
+    "E014"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "external_verification_control",
+    "sub": "K201",
+    "version": "patterns/2026-10-21",
+    "fit": "weak",
+    "condition_checks": [
+     {
+      "item": "Checker sits outside the model and does not use the evaluation oracle",
+      "status": "partial",
+      "note": "the CBF filter is external, but the VLM proposes constraints rather than actions; the nominal controller is classical"
+     },
+     {
+      "item": "Failure: checker is a weak proxy for success",
+      "status": "met_as_risk",
+      "note": "ghost obstacles and missed hazards enter the barrier"
+     },
+     {
+      "item": "Failure: gate contribution not isolated",
+      "status": "met_as_risk",
+      "note": "no CBF/grounding ablation (Oracle vs CORE vs No Context only)"
+     }
+    ],
+    "evidence_ids": [
+     "E004",
+     "E008",
+     "E019",
+     "E020"
+    ]
+   }
+  ],
+  "unassigned": [
+   "VLM-inferred spatial predicates grounded into a barrier function that gates a classical controller (the VLM never proposes actions)"
+  ],
+  "revision_proposals": [
+   "Possible case-level sub-pattern under external_verification_control: 'VLM infers constraints, solver filter enforces them'; single paper, not eligible as candidate_pattern."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K201"
+   },
+   "operation_correspondence": "C25 hand-off artifact consumed by a sound solver corresponds to predicate set -> barrier -> QP that overrides the nominal action; K201's 'checker dispatches or rejects a proposal' corresponds to the QP projecting an unsafe control input.",
+   "necessary_conditions_and_differences": "K201 gates the model's own proposal; here the gated action comes from a classical controller and the VLM supplies the constraint, so the match is on the external-enforcement operation only.",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E010"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s3",
+    "paper_practice:2609.15195#s4",
+    "paper_practice:2606.10267#s4",
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s1",
+    "paper_practice:2605.23950#s1",
+    "paper_limitation:2609.10522#s1"
+   ],
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Compares CORE with Oracle, a No Context variant and a geometric filter under identical control synthesis, but not with an alternative harness/organisation such as the cited language-specified safety methods.",
+   "evidence_ids": [
+    "E007",
+    "E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s1",
+    "paper_practice:2606.14674#s1",
+    "paper_practice:2606.10577#s2",
+    "paper_practice:2606.10577#s3",
+    "paper_practice:2609.20822#s3",
+    "paper_practice:2405.15793#s1",
+    "paper_limitation:2609.15195#s2",
+    "paper_limitation:2603.22435#s3",
+    "paper_limitation:2609.29964#s1",
+    "paper_limitation:2610.01939"
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Safety-logic and CoT components are removed one at a time on the 100-image set; grounding, segmentation and CBF are not toggled although the abstract claims a grounding ablation.",
+   "evidence_ids": [
+    "E012",
+    "E020"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s2",
+    "paper_practice:2609.39207#s2",
+    "paper_practice:2608.03327#s1",
+    "paper_practice:2606.18363#s1",
+    "paper_practice:2609.24974#s1",
+    "paper_practice:2610.12549#s2"
+   ],
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Five VLMs of different size are compared on prediction accuracy, but the end-to-end filter effect is shown for one VLM only.",
+   "evidence_ids": [
+    "E011",
+    "E024"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s1",
+    "paper_practice:2609.29861#s2",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2608.03327#s1",
+    "paper_limitation:2608.17393",
+    "paper_limitation:2610.28069",
+    "paper_limitation:2606.10577#s1",
+    "paper_limitation:2609.15195#s4"
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Five repeats per task, 60 and 30 trials, no CIs, variance or paired statistics.",
+   "evidence_ids": [
+    "E006",
+    "E009"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s3",
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2609.29964#s1",
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2606.27871#s3",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2606.10577#s4"
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Per-module latency and VLM memory reported; no token counts, and baseline cost is not compared.",
+   "evidence_ids": [
+    "E018"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E06",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2609.15195#s1",
+    "paper_practice:2609.29861#s1",
+    "paper_practice:2609.39207#s1",
+    "paper_limitation:2609.29861",
+    "paper_limitation:2607.26148"
+   ],
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "mobile-robot safety, not VLN-CE/ObjectNav",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E07",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2603.22435#s3",
+    "paper_practice:2607.08448#s1",
+    "paper_practice:2609.29389#s1",
+    "paper_practice:2609.29964#s1",
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2609.21650#s2"
+   ],
+   "applies_when": "an empirical claim that an agentic manipulation harness or harness-distilled student beats end-to-end VLAs",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no manipulation claim",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_limitation:2607.26148",
+    "paper_limitation:2609.29861",
+    "paper_limitation:2609.29389",
+    "paper_limitation:2606.27871",
+    "paper_limitation:2603.28052"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "The same experimental setup supplies the 100 images used for VLM choice, ablations and certificate calibration; development overlap with evaluation tasks is not discussed.",
+   "evidence_ids": [
+    "E011",
+    "E013"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E09",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2606.27871#s2",
+    "paper_practice:2609.29389#s2",
+    "paper_practice:2609.29964#s3",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2610.01939#s3",
+    "paper_practice:2609.10522#s3"
+   ],
+   "applies_when": "a claim that a compact VLM/VLA student distilled from frontier-harness trajectories approaches or exceeds the teacher",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no student distillation",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E10",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2605.24220#s3",
+    "paper_practice:2606.27871#s2",
+    "paper_practice:2606.18363#s2",
+    "paper_practice:2609.24974#s3",
+    "paper_limitation:2610.28589",
+    "paper_limitation:2609.32416#s3"
+   ],
+   "applies_when": "any student trained on success-filtered teacher trajectories",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no teacher-trajectory student",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E11",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2509.14257#s1",
+    "paper_practice:2610.19834#s1",
+    "paper_practice:2610.19820#s1",
+    "paper_practice:2610.02858#s1",
+    "paper_practice:2609.24974#s3",
+    "paper_practice:2609.32416#s3"
+   ],
+   "applies_when": "a claim that teacher corrections at learner-induced states (first-error repair, review, action-agreement, preference) beat offline distillation",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no teacher corrections",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E12",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2608.06065#s1",
+    "paper_practice:2602.04942#s1",
+    "paper_practice:2505.09546#s1",
+    "paper_practice:2510.03207#s1",
+    "paper_limitation:2610.15572#s2",
+    "paper_limitation:2610.28589#s1"
+   ],
+   "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no privileged teacher",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E13",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.21650#s2",
+    "paper_practice:2610.21450#s2",
+    "paper_practice:2509.14257#s2",
+    "paper_practice:2608.17393#s2",
+    "paper_practice:2610.28069#s1"
+   ],
+   "applies_when": "a claim that SFT/teacher initialization plus RL beats RL alone, or that RL lifts a student beyond its SFT data",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no RL",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E14",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2605.24220#s1",
+    "paper_practice:2608.17393#s3",
+    "paper_practice:2606.14674#s2",
+    "paper_practice:2608.03327#s3",
+    "paper_practice:2610.28069#s2",
+    "paper_limitation:2608.17393"
+   ],
+   "applies_when": "a claim that RL in a training scaffold or harness improves the deployed agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no RL in harness",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E15",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2608.17393#s2",
+    "paper_practice:2608.17528#s4",
+    "paper_practice:2609.27308#s1",
+    "paper_limitation:2605.24220#s2",
+    "paper_limitation:2602.04942"
+   ],
+   "applies_when": "a policy or coding agent trained or evaluated against an automatic success checker it could access or tamper with",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no trained policy acting against the checker",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.29861#s2",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2610.12549#s1",
+    "paper_practice:2609.15195#s3",
+    "paper_practice:2610.21450#s1",
+    "paper_practice:2607.22585#s2"
+   ],
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check",
+   "applicable": true,
+   "status": "met",
+   "reason": "Failures are attributed to context reasoning, grounding and enforcement in both simulation and hardware.",
+   "evidence_ids": [
+    "E008",
+    "E010",
+    "E023"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E17",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.08432#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2609.39207#s3",
+    "paper_limitation:2603.22435#s2",
+    "paper_limitation:2607.08448#s3",
+    "paper_limitation:2609.37105#s2"
+   ],
+   "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no self-improving harness or skill library",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E18",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.37105#s2",
+    "paper_practice:2610.28069#s2",
+    "paper_practice:2609.32416#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2610.28069"
+   ],
+   "applies_when": "a method that iteratively accepts harness, playbook or teacher-patch revisions from noisy rollouts",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no iterative revisions accepted by a gate",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2609.10522#s1",
+    "paper_practice:2605.13119#s2",
+    "paper_practice:2609.20822#s3",
+    "paper_limitation:2607.08448",
+    "paper_limitation:2609.39207",
+    "paper_limitation:2607.26148"
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Trial counts are given (3 safe + 3 unsafe tasks x 5) but how hardware success was judged is not described and only a geometric baseline was run.",
+   "evidence_ids": [
+    "E009",
+    "E010"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s2",
+    "paper_practice:2606.10577#s1",
+    "paper_practice:2609.29389#s1",
+    "paper_practice:2609.15195#s3",
+    "paper_practice:2609.20822#s1"
+   ],
+   "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Noisy Spot depth is replaced by monocular depth with median scaling and measurements outside 3-7 m are discarded; metric accuracy and non-metric behaviour are not tested.",
+   "evidence_ids": [
+    "E019",
+    "E026"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E21",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.02858#s3",
+    "paper_practice:2609.24974#s3",
+    "paper_practice:2610.28069#s2",
+    "paper_practice:2609.10522#s3"
+   ],
+   "applies_when": "a claim that a distilled student internalizes harness information or works under a minimal interface",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no student",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2609.11987#s2",
+    "paper_practice:2609.34018#s1",
+    "paper_limitation:2607.22585",
+    "paper_limitation:2609.27308#s2"
+   ],
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed",
+   "applicable": true,
+   "status": "partial",
+   "reason": "All baselines share the same QP/CBF synthesis; VLM compute is only compared in the VLM-choice table.",
+   "evidence_ids": [
+    "E007",
+    "E018"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "CORE enforces contextually appropriate behaviour without prior environment knowledge and rivals an oracle in simulation.",
+   "setting": "Isaac Sim warehouse/hospital/outdoor; 4 tasks per environment (2 safe, 2 unsafe) x 5 repeats; Gemma 3 27B 4-bit VLM, SAM3, CBF.",
+   "baseline": "Oracle (ground-truth constraints), No Context (LLM rules written pre-deployment), Geometric obstacle avoidance; same control synthesis.",
+   "selection_vs_test": "VLM and prompt development data are not separated from the test scenarios; calibration images come from the same setup.",
+   "result": "60 evaluations: CORE 95.0% (safe 96.6%, unsafe 93.3%); Oracle 98.3%; No Context 55.0% (unsafe 16.6%); Geometric 50.0% (unsafe 0%).",
+   "evidence_ids": [
+    "E006",
+    "E008",
+    "E025",
+    "E011"
+   ],
+   "counterevidence": [
+    "Scenarios are scripted by the authors with adversarial goals; the No Context baseline is a proxy, not a prior system."
+   ],
+   "allowed_conclusion": "On the authors' 12 scripted scenario types CORE prevents most contextually unsafe plans where geometric and fixed-rule proxies do not; no claim about unseen scenario classes or actual prior methods."
+  },
+  {
+   "claim_id": "C2",
+   "text": "CORE transfers to hardware (86.6%).",
+   "setting": "Boston Dynamics Spot, lab with people, desks, hazard signs; 6 tasks x 5 repeats.",
+   "baseline": "Geometric filter only.",
+   "selection_vs_test": "Hardware scenes differ from the simulated environments; judging procedure for success is not described.",
+   "result": "26/30 (86.6%) vs 50.0%; failures mostly grounding (9.0%), context 3.9%.",
+   "evidence_ids": [
+    "E009",
+    "E010",
+    "E026"
+   ],
+   "counterevidence": [
+    "No Oracle or No Context run on hardware; same pipeline categories as simulation."
+   ],
+   "allowed_conclusion": "A single real-robot lab study with 30 trials shows the filter works in one lab; no variance or alternative baselines."
+  },
+  {
+   "claim_id": "C3",
+   "text": "The probabilistic guarantee (90% safe traversal) accounts for perception uncertainty and is validated empirically.",
+   "setting": "Theorem 1 with detection function calibrated from the Gemma 3 27B 100-image result.",
+   "baseline": "None.",
+   "selection_vs_test": "Calibration and test scenario family coincide.",
+   "result": "Certificate found at delta=0.1; simulated unsafe success about 93%.",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E015",
+    "E027",
+    "E028"
+   ],
+   "counterevidence": [
+    "gamma=0 independence assumption is called not conservative; average-rate model only; control-affine only."
+   ],
+   "allowed_conclusion": "A conditional certificate under an optimistic calibration, not a verified guarantee in new environments."
+  },
+  {
+   "claim_id": "C4",
+   "text": "Ablations underscore the importance of both VLM reasoning and spatial grounding.",
+   "setting": "VLM prediction accuracy on 100 images; No Context closed-loop baseline.",
+   "baseline": "Gemma sizes/Qwen/Llava; no-CoT and no-safety-logic prompts.",
+   "selection_vs_test": "Same 100 images for selection and report.",
+   "result": "No-CoT drops safe-region accuracy to 61.0%; safety-logic removal 90.0/80.0 vs 91.0/85.0.",
+   "evidence_ids": [
+    "E012",
+    "E020"
+   ],
+   "counterevidence": [
+    "No ablation of the grounding module is presented."
+   ],
+   "allowed_conclusion": "Reasoning structure matters for predicate accuracy; the grounding-importance claim is unsupported by the shown experiments."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "transfer",
+  "evidence_level_note": "Sim-to-real with counted real trials meets the EVIDENCE 'transfer' bar mechanically; development overlap of the lab scenarios and the way hardware success is judged are not disclosed, so this is the weakest transfer reading. Success is a physical/geometric outcome, not a learned judge.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "On 12 scripted simulated scenario types and 6 lab tasks, a VLM-predicate + segmentation + CBF filter prevents most contextually unsafe plans (sim 93.3% unsafe, hardware 86.6% overall) where geometric avoidance fails; the 90% certificate holds only given a calibration from the same setup.",
+  "unresolved": [
+   "Comparison with actual prior semantic-safety methods.",
+   "Contribution of grounding and CBF to the result.",
+   "Generalisation to scenario classes outside the prompt's five categories.",
+   "Hardware success criterion."
+  ]
+ },
+ "status": "reviewed",
+ "status_reason": "Full text including appendices and proof read; scope is borderline but the item is scored on its own claim.",
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Abstract",
+   "quote": "CORE uses a vision-language model (VLM) to continuously reason about context-dependent safety rules directly from visual observations, grounds these rules in the physical environment, and enforces the resulting spatially-defined safe sets via control barrier functions.",
+   "support_explanation": "Central claim: VLM reasoning + grounding + CBF enforcement with no prior map or specification.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec III",
+   "quote": "The robot is provided with high-level safety guidelines \\mathcal{G} (e.g., “follow pedestrian social norms”) but must infer and enforce context-specific safety constraints from visual observations I_{t} at runtime.",
+   "support_explanation": "Information: only generic guidelines and RGB-D; context-specific rules must be inferred online.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec IV-A",
+   "quote": "we structure the VLM’s output as a set of predicates , which pairs semantic class (e.g., wet_floor_sign , floor ) with a spatial operator",
+   "support_explanation": "The hand-off artifact between VLM and enforcement is a typed predicate set.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec IV-B",
+   "quote": "The grounding module first localizes each semantic class identified by the VLM using an open-vocabulary segmentation model [ 50 ] .",
+   "support_explanation": "Grounding by open-vocabulary segmentation plus depth back-projection into a 2D grid.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec IV-C",
+   "quote": "updates to h(x) cannot instantaneously classify the robot’s current position as unsafe",
+   "support_explanation": "Assumption 1 (safe initialization): unsafe regions must be detected before the robot enters them.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V",
+   "quote": "We evaluate four tasks per environment—two safe and two unsafe—and we repeat each task five times, yielding 60 evaluations.",
+   "support_explanation": "Simulation denominator: 3 environments x 4 tasks x 5 repeats = 60.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V baselines",
+   "quote": "No Context: This baseline removes the contextual reasoning ability of CORE via the following modification.",
+   "support_explanation": "The 'prior semantic safety' comparator is a re-implementation proxy (LLM-written rules before deployment), not an actual prior method.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Table I",
+   "quote": "CORE 95.0% 96.6% 93.3% 3.3% 1.7% 0.0% No Context 55.0% 93.3% 16.6% 43.3%",
+   "support_explanation": "Simulation results: CORE 95.0% total vs Oracle 98.3%, No Context 55.0%, Geometric 50.0%.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-D",
+   "quote": "We evaluate 3 safe and 3 unsafe tasks, each repeated 5 times, for a total of 30 tasks per method.",
+   "support_explanation": "Hardware denominator: 30 trials per method, Spot robot.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Table IV",
+   "quote": "CORE 86.6% 86.6% 86.6% 3.9% 9.0% 0.0% Geometric 50.0% 100% 0.0% 100.0% 0.0% 0.0%",
+   "support_explanation": "Hardware result: 86.6% vs Geometric 50.0%; the oracle and No Context were not run.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-B",
+   "quote": "We evaluate their ability to predict safe and unsafe predicates over a dataset of 100 images sampled from our experimental setup.",
+   "support_explanation": "VLM selection and ablation use 100 images drawn from the same experimental setup as the evaluation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-C",
+   "quote": "Removing the VLM’s CoT reasoning more severely degraded accuracy, reducing performance to 61.0% and 77.0%",
+   "support_explanation": "Structured-reasoning ablation (no CoT, no safety logic) on the 100-image set.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-E",
+   "quote": "The detection function is calibrated from the Gemma 3 27B results (see Tab. II ) within the VLM safety reasoning comparison",
+   "support_explanation": "The probabilistic guarantee is calibrated on the same 100-image evaluation of the chosen VLM.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-E",
+   "quote": "We then search for and find a certificate at \\delta=0.1 , giving a guarantee that 90% of trajectories will be safely traversed, subject to our calibration of the measurement function being safe.",
+   "support_explanation": "The guarantee is conditional on the calibration of the detection function.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "App B-D3",
+   "quote": "Here, we make the (not conservative) assumption that the lower bound holds independently of the context (i.e., \\gamma=0 )",
+   "support_explanation": "The authors flag the independence/gamma=0 assumption as not conservative.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec VI",
+   "quote": "Our perception uncertainty model assumes an average error rate but does not consider per-frame prediction uncertainty.",
+   "support_explanation": "Limitation of the guarantee model.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec VI",
+   "quote": "CORE further restricts itself to control affine systems.",
+   "support_explanation": "Scope limit: control-affine dynamics, static scenes.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Table A.I",
+   "quote": "Safety Reasoning 4.37 \\pm 0.45 Semantic Grounding 0.75 \\pm 1.14 Safety Enforcement 0.04 \\pm 0.15",
+   "support_explanation": "Measured per-module latency.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-A",
+   "quote": "We also observed grounding error where ghost obstacles due to depth projection noise would be added to the barrier and block the robot from completing safe tasks.",
+   "support_explanation": "Observed failure mode: depth noise creates ghost obstacles.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Abstract",
+   "quote": "Ablation studies validate our theoretical guarantees and underscore the importance of both VLM-based reasoning and spatial grounding for enforcing contextual safety in novel settings.",
+   "support_explanation": "Abstract claims an ablation on spatial grounding; the body presents VLM-choice and reasoning-structure ablations but no grounding ablation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec II-B",
+   "quote": "In contrast, CORE does not require context-specific safety constraints to be provided by a user a priori",
+   "support_explanation": "Authors' differentiation from language-specified safety work.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec I",
+   "quote": "they still require a user with knowledge of the operational environment to provide safety rules that reference precise semantics in that environment; the robot cannot reason about safety for itself.",
+   "support_explanation": "Author gap statement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-A",
+   "quote": "In the 3.3% of failures caused by incorrect context, the VLM failed to identify safety constraints at key timesteps.",
+   "support_explanation": "Failure analysis: reasoning misses at key times.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V implementation",
+   "quote": "We implement the Safety Reasoning Module with a 4 bit quantized Gemma 3 27B VLM.",
+   "support_explanation": "The VLM is an open mid-size model, not a frontier model.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V scenarios",
+   "quote": "we design unsafe tasks where the nominal controller guides the robot toward violating the contextual safety constraints via adversarially placed goals.",
+   "support_explanation": "Unsafe tasks are constructed by the authors so that the nominal controller drives into hazards.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-D",
+   "quote": "The increased failure rate as compared to simulation results (Tab. IV ) came primarily from grounding error.",
+   "support_explanation": "Hardware loses roughly 9 points mainly through grounding.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "Sec V-E",
+   "quote": "These results are empirically validated in Table I , in which CORE successfully identifies semantically unsafe regions and avoids them with empirical success of approximately 93%.",
+   "support_explanation": "The simulated unsafe-task rate (93.3%) is the validation of the 90% certificate; it uses the same scenario family as the calibration images.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "locator": "App B-D3",
+   "quote": "To choose a measurement function, we take a high-probability lower bound of the empirical unsafe detection calibration (nominally 85 %); this bound is found to be 75 %.",
+   "support_explanation": "Detection function lower bound is derived from the 100-image calibration.",
+   "kind": "author_report"
+  }
+ ],
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "A concrete limitation (rules need an expert or user) with nearest-neighbour families named; open questions are boundary-clear, but the neighbours are not run and the gap is partly a framing of 'a priori' rules.",
+   "evidence_ids": [
+    "E021",
+    "E022",
+    "E007"
+   ],
+   "counterevidence_ids": [
+    "E007"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "The decomposition (semantics from VLM, geometry from segmentation/depth, safety by CBF) is reconstructable and aimed at the stated gap; the certificate addresses detection failure, but its modelling (independent Bernoulli detections, gamma=0 flagged not conservative) is thin.",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E004",
+    "E014",
+    "E015"
+   ],
+   "counterevidence_ids": [
+    "E015",
+    "E016"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Operators, prompt, grounding thresholds, QP/CBF parameters, modules latency and an explicit safe-initialisation condition are given; limits (control-affine, 3-7 m depth, static scenes) stated; no feedback from enforcement to reasoning and conditions on depth quality are only partly tested.",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E017",
+    "E018"
+   ],
+   "counterevidence_ids": [
+    "E019"
+   ],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Closed-loop outcomes counted over 60 sim and 30 hardware trials with failures attributed to context, grounding or enforcement; ground-truth labels for the 100-image test and the hardware success criterion are not described.",
+   "evidence_ids": [
+    "E006",
+    "E008",
+    "E009",
+    "E010",
+    "E023"
+   ],
+   "counterevidence_ids": [
+    "E009"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Oracle/No Context/Geometric isolate online reasoning and structured prompting is ablated, but grounding and CBF are not, the proxy for prior work is authored by the paper, and VLM choice is shown only on predicate accuracy.",
+   "evidence_ids": [
+    "E007",
+    "E008",
+    "E012"
+   ],
+   "counterevidence_ids": [
+    "E020"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Hardware is a new lab and robot context, but VLM choice, prompt ablations and certificate calibration use 100 images from the evaluation setup and scenario families are authored by the paper.",
+   "evidence_ids": [
+    "E009",
+    "E011",
+    "E013"
+   ],
+   "counterevidence_ids": [
+    "E011",
+    "E013",
+    "E027"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "Five repeats per task, no CIs/variance; failure categories are reported but totals rest on 60 and 30 runs; small differences (95.0 vs 98.3) are descriptive.",
+   "evidence_ids": [
+    "E006",
+    "E009"
+   ],
+   "counterevidence_ids": [
+    "E006"
+   ],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Per-module latency, memory of every VLM and the accuracy/latency trade-off are reported, and the certificate uses real latency; no token counts and no comparison of baseline compute.",
+   "evidence_ids": [
+    "E018",
+    "E024"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  }
+ },
+ "score": {
+  "raw": 67.5,
+  "display": "67.5",
+  "lower": 67.5,
+  "upper": 67.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-2",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "provenance": {
+  "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e|conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1|overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T17:20:14Z",
+  "notes": "session_id/receipt_ref null: the internal Subagent cannot read its own session id or a call receipt. Blind boundary kept: no other seat, aggregate, other batch, archive, old score/Reel or assignments.jsonl was read. Domain cards R05/R06 etc. cite some batch papers as board-induced sources; those card statements were not used as evidence, all judgements come from the pinned full text."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2602.19983v2",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2602.19983.txt",
+   "sha256": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Work",
+    "III Problem formulation",
+    "IV Architecture (A-D)",
+    "V Experiments (A-E, Tables I-IV)",
+    "VI Limitations",
+    "VII Conclusion",
+    "Appendix A (operators, VLM prompt, proof of Thm 1)",
+    "Appendix B (implementation, tasks, analysis, certificate derivation, prompt listing)"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ]
+}

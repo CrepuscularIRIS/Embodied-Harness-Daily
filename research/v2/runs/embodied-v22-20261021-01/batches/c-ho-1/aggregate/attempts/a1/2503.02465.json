@@ -1,0 +1,1393 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a1",
+ "seat": "aggregate_opus55",
+ "phase": "calibration-holdout",
+ "input_seat_hashes": {
+  "sol": "42a30069af7c2e67f7a2981f6afc186bc3a1191c76b99606b3da127361a53948",
+  "son55": "12e1a8b6f3b3ec117b98f28a9b26ab32795aba0ff29b1c01689c03e6eec6034d"
+ },
+ "input_seat_files": {
+  "sol": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/sol/attempts/a1/2503.02465.json",
+  "son55": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/son55/attempts/a1/2503.02465.json"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (calibration-holdout; weights not frozen; no tuning on holdout)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "pattern_protocol_hash": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "anchors_hash": "37f7080c6a414c927ab08f3dfb5be1dd784dbc2be41f1b21070532d9584701ed",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_cards_hash_convention": "sha256 of research/patterns/taxonomy.json (same convention as both c-ho-1 seats)",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Aggregate subagent cannot read its own session id / receipt; null per contract, no probing.",
+  "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+  "timestamp": "2026-10-21T20:30:00Z",
+  "independence_note": "Aggregate review with both seat inputs; fixed paper text read and an initial evidence judgment written before opening seat totals. Not a third blind review or human gold."
+ },
+ "aggregate_initial_judgment": "Read before opening seat totals. Claim: GPT-4o + Molmo-7B extract target/obstacle pixels from one aerial image + text, map them to world coordinates with a planar camera-height/FoV formula, and an onboard point-to-point NMPC with an obstacle penalty flies the mission; 33.75% faster than an off-the-shelf autopilot and 54.6% faster than a human pilot. Evidence: two arena layouts, one instruction, one timed flight per condition (Table III), Vicon check of perception only (Tables I-II). Exp1 vs Exp2 share the multimodal targets, so they isolate the controller, but the autopilot is unidentified and n=1; the human arm has a different timing start. No success/arrival or collision criterion, no repeats, no holdout statement. In scope only on the broad reading (frontier LLM/VLM + perception + controller driving a UAV, open loop, no verification/hand-back). Expected: descriptive arena result, offline evidence level, weak E.",
+ "paper": {
+  "paper_key": "2503.02465",
+  "paper_id": "2503.02465",
+  "title": "UAV-VLRR: Vision-Language Informed NMPC for Rapid Response in UAV Search and Rescue",
+  "version": "2503.02465v2",
+  "claim_type": "system_method",
+  "central_claim": "Integrating vision-language mission interpretation with onboard point-to-point obstacle-avoiding NMPC enables faster and safe UAV search-and-rescue response, averaging 33.75% faster than an off-the-shelf autopilot and 54.6% faster than a human pilot.",
+  "scope_note": "In scope on the broad reading: a frontier LLM (GPT-4o) plus a VLM drive a UAV through perception and an NMPC controller. Open-loop one-shot pipeline without verification or hand-back; son55's edge-scope flag recorded, no out_of_scope precedent applies (frontier model present)."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "aliases": [
+    "sol:M1",
+    "son55:M1"
+   ],
+   "url": "https://arxiv.org/html/2503.02465v2",
+   "sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.02465.txt",
+   "sections_read": [
+    "Abstract",
+    "I-VII",
+    "Tables I-III (text)",
+    "Figure captions",
+    "Acknowledgements"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "figure image content (text extraction only); no appendix exists"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E01",
+   "locator": "III-A Vision-Language Integration; fixed text line 15",
+   "quote": "ChatGPT-4o serves as the LLM agent, responsible for extracting goal objects, specifically “target points” and “obstacles”.",
+   "support_explanation": "Frozen-model semantic extraction upstream of geometric control, not controller learning.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E02",
+   "locator": "III-A coordinate conversion; fixed text line 15",
+   "quote": "Specifically, the real-world coordinates are computed based on the camera’s height and field-of-view (FoV) parameters.",
+   "support_explanation": "Coordinates assume camera metadata and approximately planar aerial geometry, not calibrated per-pixel metric depth.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E03",
+   "locator": "III-B NMPC; fixed text line 15",
+   "quote": "The control problem is iteratively solved in real time onboard the drone using CasADi [ 21 ] .",
+   "support_explanation": "Numerical dynamics-constrained optimization owns low-level execution.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E04",
+   "locator": "IV Experimental Setup; fixed text line 18",
+   "quote": "There were two different scenarios in which all the three experiments were conducted:",
+   "support_explanation": "Only two arena layouts, each compared with autopilot and human; no independent deployment set described.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E05",
+   "locator": "IV timing protocol; fixed text line 18",
+   "quote": "For the UAV-VLRR framework, the timing started as soon as the code was launched, while for the human pilot, the timing started as soon as the image was shown.",
+   "support_explanation": "Mission-time endpoint has a start convention, but human and autonomous preparation are not fully matched.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E06",
+   "locator": "V-A Tables I-II validation; fixed text line 21",
+   "quote": "For this analysis, an identification was considered accurate if the detected point was within a 25 cm radius of the actual object.",
+   "support_explanation": "Object localization is checked against Vicon, but tolerance is not an audited mission-success verifier.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E07",
+   "locator": "V-B Table III; fixed text line 21",
+   "quote": "TABLE III : Flight Results Exp 1 Exp 2 Exp 3 Time Taken for Scene 1 (s) 28 40 57 Time Taken for Scene 2 (s) 30 48 72",
+   "support_explanation": "Supports descriptive mission-time arithmetic on two scenes, not a success-rate/general-safety estimate.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E08",
+   "locator": "VII Future Work; fixed text line 27",
+   "quote": "Another important direction is the integration of dynamic environmental factors, such as moving obstacles, to improve the system’s relevance and robustness in real-world conditions.",
+   "support_explanation": "Dynamic-disaster robustness remains future work, restricting general SAR claims.",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Abstract",
+   "quote": "faster on an average by 33.75% when compared with an off-the-shelf autopilot and 54.6% when compared with a human pilot",
+   "support_explanation": "作者核心数字主张",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "I Introduction (contributions) / VI Conclusion",
+   "quote": "We demonstrate that our framework outperforms other traditional approaches in the field of drone search and rescue.",
+   "support_explanation": "范围宽泛的作者结论",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-A",
+   "quote": "The quantized Molmo-7B-D BnB 4-bit model [ 20 ] is utilized as the VLM agent for image processing and goal object identification.",
+   "support_explanation": "VLM 角色：指点/识别目标与障碍物",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-A Eq.2-3",
+   "quote": "The horizontal and vertical real-world dimensions in meters are first calculated from the diagonal FoV and camera height using the following formulas",
+   "support_explanation": "像素到世界坐标仅用相机高度与 FoV 的平面几何（无深度）",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-B",
+   "quote": "The NMPC finds the optimal trajectory and the set of control inputs designed for rapid control.",
+   "support_explanation": "点到点 NMPC，无外部轨迹生成",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "II-B",
+   "quote": "is able to be deployed on an onboard computer like an OrangePi in our case",
+   "support_explanation": "NMPC 机载部署",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "Fly around each of the center of the X on yellow objects. Avoid three legs of red tripod stands.",
+   "support_explanation": "仅一条指令、两个场景",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-A",
+   "quote": "an identification was considered accurate if the detected point was within a 25 cm radius of the actual object",
+   "support_explanation": "感知评测阈值，Vicon 真值",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Table II",
+   "quote": "Target 3 X 1.73 1.50 23 Y 1.70 1.60 10",
+   "support_explanation": "Scene2 Target3：逐轴误差 23/10 cm，欧氏距离≈25.1 cm，略超 25 cm 半径",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Table III",
+   "quote": "Time Taken for Scene 1 (s) 28 40 57 Time Taken for Scene 2 (s) 30 48 72",
+   "support_explanation": "全部任务时间结果：每格单次数值，无重复",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "For the UAV-VLRR framework, the timing started as soon as the code was launched, while for the human pilot, the timing started as soon as the image was shown.",
+   "support_explanation": "计时起点不对称（系统含服务器往返，人含阅图）",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "Exp 2: The drone flies to the target points using an off-the-shelf autopilot.",
+   "support_explanation": "自动驾驶仪基线未指明型号/设置",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-B",
+   "quote": "the human pilot was more prone to crashing into the obstacles",
+   "support_explanation": "碰撞仅定性提及，无计数",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "The multimodal system ran on a remote server with an RTX 4090 GPU (24GB VRAM) and an Intel Core i9-13900K processor.",
+   "support_explanation": "VLM/LLM 在远程服务器运行；无延迟/费用拆分",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "VII Future Work",
+   "quote": "Another important direction is the integration of dynamic environmental factors, such as moving obstacles",
+   "support_explanation": "动态障碍未测，自述局限",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-A",
+   "quote": "It is worth noting that the image was not captured from a very high altitude, which may have resulted in some distortion or skewing.",
+   "support_explanation": "作者承认畸变导致感知误差",
+   "kind": "author_report",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Table I/II",
+   "quote": null,
+   "support_explanation": "Vicon 对比中，22 个坐标对多数朝图像中心收缩（如 S1 Obstacle2 X -0.85→-0.66、S2 Obstacle3 X -0.15→-0.03），呈系统性尺度偏差迹象，与“仅高度+FoV 平面映射”的假设一致；非全部（S1 Target2 Y 0.13→0.18 反向）",
+   "kind": "our_inference",
+   "derived_from": [
+    "son55:E004",
+    "son55:E009"
+   ],
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:A01",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-B",
+   "quote": "Experiment 1 was 30% faster than experiment 2 and 50.9% faster than experiment 3.",
+   "support_explanation": "The 33.75% headline is the mean of two single-run percentages (30.0 and 37.5).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A02",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "V-B",
+   "quote": "It can be deduced from the experiments that the multimodal setup (Experiments 1 and 2) outperformed the human pilots.",
+   "support_explanation": "Confirms Exp 2 (autopilot) used the multimodal targets, so Exp1 vs Exp2 isolates the controller.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A04",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "III-B Eq. 4",
+   "quote": "l(x,u)=\\lVert x_{u}-x_{r}\\rVert_{Q}^{2}+\\lVert u\\rVert_{R}^{2}+Penalty_{Obs}",
+   "support_explanation": "The obstacle term Penalty_Obs is named in the stage cost but never defined (form, radius, gain).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A05",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "IV",
+   "quote": "The goal of all experiments was to have the drone fly to the required points and avoid obstacles in the shortest time possible.",
+   "support_explanation": "Mission goal stated without any arrival/success or collision criterion for scoring the runs.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A03",
+   "material_id": "M1",
+   "material_hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "locator": "Tables I-II (computed)",
+   "quote": null,
+   "support_explanation": "Of 24 coordinate values (12 objects x 2 axes), 21 have smaller magnitude than Vicon, 1 equal, 2 larger: a systematic scale bias consistent with the planar height/FoV mapping.",
+   "kind": "our_inference",
+   "source_seat": "aggregate",
+   "derived_from": [
+    "sol:E06",
+    "son55:E004"
+   ]
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "SAR instruction/image to target and obstacle coordinates",
+   "information": "ChatGPT-4o and quantized Molmo-7B-D see image-text pair; camera height/FoV used by converter; no model weight update",
+   "operation": "Extract semantic targets/obstacles, localize image pixels, scale to world coordinates",
+   "output": "Target/obstacle coordinate lists consumed by NMPC",
+   "conditions": "Aerial geometry and camera metadata sufficiently accurate; objects visible",
+   "feedback": "Vicon used for experimental localization validation, not a learned correction signal",
+   "selection_rule": "not_applicable: static perception/control design; no learned candidate acceptance",
+   "selection_data": "not_applicable: no retained optimization",
+   "persistence": "Static implementation only",
+   "later_use": "Controller consumes coordinates within same mission; no across-task retained improvement claimed",
+   "claimed_effect": "Reduce manual mission specification and total completion time",
+   "failure_boundary": "Image skew and nonplanar scene distort coordinate conversion; moving obstacles untested",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E02",
+    "sol:E06",
+    "sol:E08"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Point-to-point quadrotor controller",
+   "information": "13-state dynamics, current robot state, target/obstacle coordinates and motor constraints",
+   "operation": "Repeated RK4/multiple-shooting NMPC with obstacle penalty on onboard computer",
+   "output": "Motor-force commands and physical flight",
+   "conditions": "Minimal dynamics and timely optimization suffice; obstacle representation adequate",
+   "feedback": "State-feedback control, not high-level semantic replanning",
+   "selection_rule": "Minimize weighted trajectory/control/obstacle objective subject to dynamics and bounds",
+   "selection_data": "Current horizon state; no search/test split",
+   "persistence": "No retained parameter/skill changes",
+   "later_use": "Next receding-horizon step only",
+   "claimed_effect": "Faster flight than autopilot",
+   "failure_boundary": "No probabilistic collision guarantee or failure-rate accounting",
+   "evidence_ids": [
+    "sol:E03",
+    "sol:E07",
+    "sol:E08"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Manual SAR flight/waypoint setting is slow under stress; prior NMPC work is often off-board or relies on an external trajectory generator; UAV-VLA plans from images but lacks agile execution.",
+  "checked_gap": "Partly substantiated. The integration seam (VLM coordinates -> onboard point-to-point NMPC) is concrete, but the bottleneck is asserted, not measured: no evidence that manual planning or autopilot tracking is the limiting factor, and the closest VLM-to-control neighbours (UAV-VLA, UAV-CodeAgents, UAV-VLPA*) are listed, not compared.",
+  "lineage_closest_adjacent": {
+   "source_version": "2503.02465v2 Sec I-II; neighbour originals not in the fixed input",
+   "ancestors": [
+    "UAV-VLA [4] (same group): VLM image-text mission planning",
+    "ETH NMPC/MPCC/adaptive MPC [14]-[17]: agile control, often off-board"
+   ],
+   "closest": [
+    "UAV-VLA [4]",
+    "UAV-CodeAgents [10]",
+    "UAV-VLPA* [11]"
+   ]
+  },
+  "residue": "Point-to-point NMPC that consumes only target/obstacle points onboard; contribution relative to UAV-VLA is the controller coupling.",
+  "stakes": "Response time in SAR; only marked objects in a 2-layout indoor arena are measured.",
+  "method_response": "One-shot VLM/LLM extraction -> planar coordinate mapping -> obstacle-penalised point-to-point NMPC onboard (CasADi).",
+  "remaining_gap": "Dynamic obstacles, non-planar geometry, counted reliability, perception-vs-controller attribution, identity of the autopilot baseline.",
+  "evidence_ids": [
+   "sol:E01",
+   "sol:E03",
+   "son55:E012",
+   "son55:E015",
+   "sol:E08"
+  ],
+  "unresolved": []
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "Parent signature: monolithic SAR flight split into semantic extraction (LLM/VLM) and dynamics-constrained execution (NMPC) via a coordinate list - executed.",
+     "rs:C25 read in full: its load-bearing move is closing the loop with the solver's verifiable output; here the NMPC never returns a verdict on the VLM coordinates, there is no re-query or repair, and no ablation of a feedback step. C25 'when to pick' ('I can name a checker that grades the intermediate object') fails, so sub_id=null (sol), not C25 (son55).",
+     "Delegation cost (server VLM/LLM latency, solver time) not reported."
+    ],
+    "success_failure_checks": [
+     "Boundary at a comparative-advantage seam: met at design level.",
+     "Typed, verifiable artifact: partial (coordinate list, no schema/validation).",
+     "Load-bearing ablation: unmet. Off-the-shelf assembly failure mode applies (GPT-4o + Molmo + NMPC). Single narrow benchmark failure mode applies (1 instruction, 2 layouts)."
+    ],
+    "evidence_ids": [
+     "sol:E01",
+     "sol:E02",
+     "sol:E03",
+     "son55:E003",
+     "son55:E005"
+    ],
+    "reason": "Real delegation of precise control to a numerical solver through a coordinate artifact; the C25 tactic is absent."
+   }
+  ],
+  "rejected": [
+   {
+    "main": "decompose_and_delegate",
+    "sub": "rs:C25",
+    "reason": "No solver-verdict loop back into the learned component (see tactic_steps_checked)."
+   }
+  ],
+  "reason": "Parent-level fit only; matching gives no score.",
+  "executes_pattern": true,
+  "executes_pattern_reason": "Parent signature executed; the C25 tactic (verification feedback, ablation, cost accounting) is not.",
+  "resolves_problem": false,
+  "resolves_problem_reason": "No success/arrival measure, n=1 flights, no same-front-end alternative; the manual-planning bottleneck is not shown closed."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "S*/when-works: met = condition satisfied by this paper's evidence; F*/when-fails: applies = the failure condition is present.",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K103",
+    "version": "embodied-agent-harness/v1 (taxonomy daf38e579a46)",
+    "fit": "weak",
+    "condition_checks": [
+     {
+      "id": "K103:model_proposes_visual_target",
+      "status": "met",
+      "reason": "Molmo points to targets/obstacles in the image.",
+      "evidence_ids": [
+       "son55:E003"
+      ]
+     },
+     {
+      "id": "K103:metric_backprojection",
+      "status": "partial",
+      "reason": "Planar height/FoV scaling instead of depth; 21 of 24 coordinates shrink toward the origin (agg:A03).",
+      "evidence_ids": [
+       "sol:E02",
+       "son55:E004",
+       "agg:A03"
+      ]
+     },
+     {
+      "id": "K103:feasibility_check_and_reselect",
+      "status": "unmet",
+      "reason": "No feasibility rejection or re-query path to the VLM.",
+      "evidence_ids": [
+       "sol:E03"
+      ]
+     },
+     {
+      "id": "observe_act_interface:F8_agent_level_success_not_measured",
+      "status": "applies",
+      "reason": "No task success/arrival rate.",
+      "evidence_ids": [
+       "son55:E010"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E01",
+     "sol:E02",
+     "son55:E003",
+     "son55:E004"
+    ],
+    "reason": "Same pointing -> coordinate -> execution operation, without the feasibility/reselect loop or metric depth; weak structural match, no independent evidence role. K103 does not cite this paper (no circularity)."
+   }
+  ],
+  "unassigned": [
+   "VLM pointing -> planar FoV mapping -> trajectory-free point-to-point NMPC: single paper, no ablation; no new card."
+  ],
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K103"
+   },
+   "operation_correspondence": "Learned model emits a coordinate artifact; a numeric controller realises it. Same operation at both layers: point -> coordinate -> execute.",
+   "necessary_conditions_and_differences": "RS C25 needs solver-verdict feedback (absent); K103 needs metric back-projection and feasibility/reselect (absent).",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E02",
+    "sol:E03"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; paper_practice/paper_limitation, not actual review",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations:E01"
+   ],
+   "applies_when": "Harness raises embodied success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Autopilot comparison shares semantic targets but does not compare alternative matched language harness.",
+   "evidence_ids": [
+    "sol:E04",
+    "sol:E07",
+    "son55:E012",
+    "son55:E010"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations:E02"
+   ],
+   "applies_when": "Specific component credited with gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "NMPC versus autopilot is useful; no same-controller with/without semantic planner experiment.",
+   "evidence_ids": [
+    "sol:E07"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "absent"
+   },
+   "aggregate_reason": "Accept sol: NMPC vs autopilot is a single-component swap with the front end fixed, but n=1 and the semantic side is never toggled."
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E04 (fixed domain source)"
+   ],
+   "applies_when": "Comparative performance on fixed scenes",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No repetitions, interval or dispersion around two timing rows.",
+   "evidence_ids": [
+    "sol:E04",
+    "sol:E07",
+    "son55:E010",
+    "son55:E001"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations:E05"
+   ],
+   "applies_when": "Practical/rapid-response claim",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Mission times and hardware are given, but no token/API, solver timing distribution or failed-run cost.",
+   "evidence_ids": [
+    "sol:E05",
+    "sol:E07",
+    "son55:E014",
+    "son55:E011"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "None of E05's items (calls, tokens, latency, USD per episode) are reported; hardware disclosure and an unsplit mission time do not meet it. son55 accepted."
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E19 (fixed domain source)"
+   ],
+   "applies_when": "Physical aerial-vehicle generalization",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Real trajectories/timing without explicit per-task trial totals and success fractions do not satisfy transfer/online evidence criterion.",
+   "evidence_ids": [
+    "sol:E04",
+    "sol:E07",
+    "son55:E010",
+    "son55:E013"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations:E20"
+   ],
+   "applies_when": "Depth-based metric target conversion",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "This converter uses camera height/FoV, not measured depth; analogous geometric calibration concern is evaluated directly in X.",
+   "evidence_ids": [
+    "sol:E02"
+   ],
+   "score_item": [
+    "X"
+   ],
+   "seat_status": {
+    "sol": "not_applicable",
+    "son55": "absent"
+   },
+   "aggregate_reason": "No depth readings are converted; the analogous planar height/FoV assumption is judged under M/X (agg:A03). sol accepted."
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E08"
+   ],
+   "applies_when": "a frontier-model benchmark/dev-overlap caveat",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "未披露提示词/场景是否在开发中使用。",
+   "evidence_ids": [
+    "son55:E007"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unknown"
+   },
+   "aggregate_reason": "The expectation asks the paper to disclose development overlap; nothing is disclosed, so the disclosure is unmet (son55's 'unknown' described whether overlap happened, not whether it was disclosed)."
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E16"
+   ],
+   "applies_when": "embodied navigation success claim with completion check",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无到达判据/成功率定义，无失败分类。",
+   "evidence_ids": [
+    "son55:E010"
+   ],
+   "score_item": [
+    "E.measurement"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "No arrival criterion, success rate or failure endpoints. son55 accepted."
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-cost",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "report cost of the added structure",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "同 E05。",
+   "evidence_ids": [
+    "son55:E014"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Accepted (son55): delegation latency/cost not reported."
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-ablate",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "ablations isolating the load-bearing step",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无 VLM/NMPC 侧消融；仅与自动驾驶仪和人类比较。",
+   "evidence_ids": [
+    "son55:E012"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Accepted (son55): no VLM-side or penalty ablation."
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-generalize",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "generalization beyond a single narrow benchmark",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "1 条指令、2 个实验室场景。",
+   "evidence_ids": [
+    "son55:E007"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Accepted (son55): one instruction, two layouts."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "VLM/LLM coordinates match Vicon within the 25 cm tolerance.",
+   "setting": "2 arena images, 5 + 7 objects",
+   "baseline_control": "Vicon ground truth",
+   "selection_vs_test": "no split; single image per scene",
+   "result_denominator": "24 coordinate values; per-axis errors <= 23 cm; S2 Target 3 Euclidean error ~25.1 cm (son55:E009); 21/24 values shrink in magnitude (agg:A03)",
+   "evidence_ids": [
+    "sol:E06",
+    "son55:E008",
+    "son55:E009",
+    "agg:A03"
+   ],
+   "counterevidence": [
+    "son55:E009",
+    "agg:A03"
+   ],
+   "allowed_conclusion": "On these two images localisation is roughly within 25 cm with a systematic scale bias consistent with the planar mapping; no generalisation."
+  },
+  {
+   "claim_id": "C2",
+   "text": "33.75% faster than an off-the-shelf autopilot.",
+   "setting": "Same multimodal targets; one flight per scene",
+   "baseline_control": "Unidentified autopilot (speed limits/settings unknown)",
+   "selection_vs_test": "none",
+   "result_denominator": "28 vs 40 s, 30 vs 48 s; n=1 per cell; mean of two percentages (agg:A01)",
+   "evidence_ids": [
+    "sol:E07",
+    "son55:E010",
+    "son55:E012",
+    "agg:A01",
+    "agg:A02"
+   ],
+   "counterevidence": [
+    "son55:E012"
+   ],
+   "allowed_conclusion": "In two single flights the NMPC finished sooner than an unspecified autopilot; not a statistical or configuration-matched result."
+  },
+  {
+   "claim_id": "C3",
+   "text": "54.6% faster than a human pilot; outperforms traditional SAR approaches.",
+   "setting": "Human sees the image plus belly camera; timing starts at image display",
+   "baseline_control": "One human pilot (count unstated)",
+   "selection_vs_test": "none",
+   "result_denominator": "57/72 s vs 28/30 s, n=1 per cell; crashes only qualitative",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E011",
+    "son55:E013",
+    "sol:E05"
+   ],
+   "counterevidence": [
+    "son55:E011"
+   ],
+   "allowed_conclusion": "Illustrative only; asymmetric timing; the 'outperforms traditional approaches' claim is unsupported."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "offline",
+  "evidence_level_reason": "Both seats offline, confirmed: physical flights are single timed demonstrations without trial counts or a success/arrival definition (EVIDENCE rule: demonstrations are not counted trials); perception is a static Vicon comparison.",
+  "claim_support": "scoped",
+  "author_claim_kept": "UAV-VLRR is faster on average by 33.75% than an off-the-shelf autopilot and 54.6% than a human pilot, outperforming traditional SAR approaches.",
+  "strongest_supported_claim": "On two indoor arena layouts, VLM/LLM coordinates fall roughly within 25 cm of Vicon truth, and with the same front end the NMPC completed each single flight sooner than an unspecified autopilot.",
+  "cannot_conclude": [
+   "General SAR or disaster-zone benefit",
+   "Superiority over traditional approaches or human pilots",
+   "Safety or collision reliability",
+   "Contribution of the VLM front end"
+  ],
+  "unresolved": [],
+  "author_report_only": true
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "son55 adopted (sol 3). The seam is concrete and lineage named, but the bottleneck is asserted rather than sourced or measured and the closest VLM-to-control neighbours are listed, not compared; sol's own caveats (weak closest-adjacent, weak disaster relevance) describe the 2 anchor.",
+   "evidence_ids": [
+    "sol:E01",
+    "son55:E012",
+    "son55:E015",
+    "sol:E08"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "son55 adopted (sol 3). Division of labour and the 'no tracking constraint tolerates model mismatch' rationale are a real mechanism, but the load-bearing planar height/FoV assumption is weak and the data already show its bias (21/24 coordinates shrink, agg:A03); no distinguishing prediction for the VLM side.",
+   "evidence_ids": [
+    "sol:E02",
+    "son55:E004",
+    "son55:E005",
+    "agg:A03"
+   ],
+   "counterevidence_ids": [
+    "agg:A03"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "son55 adopted (sol 2). Block-level steps and dynamics are given, but Penalty_Obs is never defined (agg:A04), Q/R/N/T, obstacle radius, target visiting order, arrival rule, LLM-VLM prompts and the autopilot identity are absent. Several load-bearing conditions missing puts it between 0 and 2; sol's 2 penalised absent features (feasibility feedback) rather than these gaps.",
+   "evidence_ids": [
+    "agg:A04",
+    "sol:E03",
+    "son55:E005",
+    "son55:E012"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "son55 adopted (sol 2). Perception has independent Vicon truth, but the mission layer is one time per cell with no arrival/success or collision count, and the timing start differs between arms (agg:A05 states the goal without a success criterion).",
+    "evidence_ids": [
+     "sol:E06",
+     "son55:E010",
+     "son55:E011",
+     "son55:E013",
+     "agg:A05"
+    ],
+    "counterevidence_ids": [
+     "son55:E009",
+     "son55:E011"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "son55 adopted (sol 2). The only controlled contrast (Exp1 vs Exp2, same targets per agg:A02) has an unidentified baseline whose speed limits could explain the gap, n=1; no VLM-side or penalty ablation; the human arm is not comparable.",
+    "evidence_ids": [
+     "agg:A02",
+     "son55:E012",
+     "son55:E011",
+     "sol:E07"
+    ],
+    "counterevidence_ids": [
+     "son55:E011"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "not_reported",
+    "rating": 0,
+    "reason": "sol adopted (son55 1). No development/test separation, contamination statement or unseen-scene evaluation is reported; two self-built layouts with one instruction are not holdout evidence, and the claim scope (SAR in complex environments) far exceeds them.",
+    "evidence_ids": [
+     "sol:E04",
+     "son55:E007",
+     "son55:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Entire fixed text: Abstract, I-VII, IV setup, V-A/V-B Tables I-III, VI conclusion, VII future work; no appendix exists"
+    ]
+   },
+   "statistics": {
+    "status": "not_reported",
+    "rating": 0,
+    "reason": "Both seats not_reported; confirmed. No repeats, variance or failure denominator; each cell is a single value.",
+    "evidence_ids": [
+     "son55:E010",
+     "sol:E07"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "IV Experimental Setup",
+     "V-B Table III",
+     "VI Conclusion",
+     "entire fixed text; no appendix"
+    ]
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "son55 adopted (sol 2). Only hardware is disclosed (remote RTX 4090 server, onboard OrangePi); server latency, call/token cost and onboard solve time are not split out of the mission time, and the human/system timing asymmetry is a budget-fairness defect.",
+    "evidence_ids": [
+     "son55:E014",
+     "son55:E006",
+     "sol:E05"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete fixed text read; all eight items resolved.",
+ "agreement_checks": [
+  "claim_type system_method (both): confirmed - the paper claims a system and its mission-time effect.",
+  "evidence_level offline (both): confirmed per EVIDENCE.md online criterion (per-task trial counts and success rates absent).",
+  "claim_support scoped (both): confirmed; author claim kept beside the narrow supported claim.",
+  "E.statistics not_reported 0 (both): confirmed with search scope.",
+  "Scope: kept in scope (both reviewed); frontier GPT-4o present, so the 2606.12372 out_of_scope precedent does not apply.",
+  "Domain card K103: does not cite this paper (grep of patterns/ and research/patterns/ only finds an old assignments.jsonl row), so no circularity.",
+  "Arithmetic: 33.75 = mean(30, 37.5); 54.6 = mean(50.9, 58.3) - correct; derived from single runs."
+ ],
+ "resolutions": [
+  {
+   "field_path": "status",
+   "sol_value": "reviewed",
+   "son55_value": {
+    "value": "reviewed",
+    "reason": "完整正文（含全部表格）已读；无附录；图像内容未在文本中。"
+   },
+   "decision": "same_supported_fact",
+   "final_value": "reviewed",
+   "reason": "String vs object shape only (controller artifact).",
+   "evidence_ids": [],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "paper.scope_note",
+   "sol_value": null,
+   "son55_value": "edge scope; kept as reviewed, scope left to controller",
+   "decision": "revised",
+   "final_value": "in scope (broad reading), recorded in paper.scope_note",
+   "reason": "Frontier LLM/VLM present and drives a UAV through perception + controller; no exclusion rule applies.",
+   "evidence_ids": [
+    "sol:E01",
+    "son55:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    null
+   ],
+   "son55_value": [
+    "C25"
+   ],
+   "decision": "sol",
+   "final_value": [
+    null
+   ],
+   "reason": "C25's defining tactic (solver verdict closes the loop on the artifact) is absent; son55 itself marked steps 3-5 unmet. Bare 'C25' was also a format error (rs: prefix).",
+   "evidence_ids": [
+    "sol:E03",
+    "son55:E005"
+   ],
+   "score_impact": "none (pattern match is not scored)"
+  },
+  {
+   "field_path": "rs_pattern.executes_pattern",
+   "sol_value": true,
+   "son55_value": {
+    "value": "partial"
+   },
+   "decision": "revised",
+   "final_value": true,
+   "reason": "Parent signature executed; tactic-level shortfall recorded in executes_pattern_reason.",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E03"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches[K103].fit",
+   "sol_value": "partial",
+   "son55_value": "weak",
+   "decision": "son55",
+   "final_value": "weak",
+   "reason": "Two of K103's three defining steps (metric back-projection, feasibility/reselect) are missing or substituted.",
+   "evidence_ids": [
+    "sol:E02",
+    "sol:E03"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.G",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "See ratings.G.reason.",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E015"
+   ],
+   "score_impact": "-3.75 vs sol"
+  },
+  {
+   "field_path": "ratings.M",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "See ratings.M.reason; agg:A03 confirms the planar-mapping bias son55 inferred.",
+   "evidence_ids": [
+    "son55:E004",
+    "agg:A03"
+   ],
+   "score_impact": "-5 vs sol"
+  },
+  {
+   "field_path": "ratings.X",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "See ratings.X.reason (undefined Penalty_Obs, missing weights/order/arrival/baseline).",
+   "evidence_ids": [
+    "agg:A04",
+    "son55:E012"
+   ],
+   "score_impact": "-5 vs sol"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "No mission success/arrival or collision measure; single times; asymmetric timing start.",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E011",
+    "agg:A05"
+   ],
+   "score_impact": "-3.75 vs sol"
+  },
+  {
+   "field_path": "ratings.E.causality",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "Single controlled contrast with unidentified baseline, n=1; no front-end ablation.",
+   "evidence_ids": [
+    "agg:A02",
+    "son55:E012"
+   ],
+   "score_impact": "-2.5 vs sol"
+  },
+  {
+   "field_path": "ratings.E.holdout",
+   "sol_value": {
+    "status": "not_reported",
+    "rating": 0
+   },
+   "son55_value": {
+    "status": "resolved",
+    "rating": 1
+   },
+   "decision": "sol",
+   "final_value": {
+    "status": "not_reported",
+    "rating": 0
+   },
+   "reason": "Nothing that functions as holdout or a development-overlap disclosure exists in the complete text; two self-built layouts with one instruction are the evaluation itself. Search scope recorded.",
+   "evidence_ids": [
+    "sol:E04",
+    "son55:E007"
+   ],
+   "score_impact": "-2.5 vs son55"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "Hardware only; no latency/call split; human/system timing asymmetry.",
+   "evidence_ids": [
+    "son55:E014",
+    "sol:E05"
+   ],
+   "score_impact": "-1.25 vs sol"
+  },
+  {
+   "field_path": "claims",
+   "sol_value": "C1 (time gains), C2 (rapid and safe)",
+   "son55_value": "C1 (localisation), C2 (vs autopilot), C3 (vs human / traditional)",
+   "decision": "revised",
+   "final_value": "aggregate C1-C3",
+   "reason": "son55's claim split adopted; sol's safety caveats merged; agg:A01/A03 added.",
+   "evidence_ids": [
+    "agg:A01",
+    "agg:A03"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E02].status",
+   "sol_value": "partial",
+   "son55_value": "absent",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "Accept sol: NMPC vs autopilot is a single-component swap with the front end fixed, but n=1 and the semantic side is never toggled.",
+   "evidence_ids": [
+    "sol:E07"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E05].status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "None of E05's items (calls, tokens, latency, USD per episode) are reported; hardware disclosure and an unsplit mission time do not meet it. son55 accepted.",
+   "evidence_ids": [
+    "sol:E05",
+    "sol:E07",
+    "son55:E014",
+    "son55:E011"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E20].status",
+   "sol_value": "not_applicable",
+   "son55_value": "absent",
+   "decision": "sol",
+   "final_value": "not_applicable",
+   "reason": "No depth readings are converted; the analogous planar height/FoV assumption is judged under M/X (agg:A03). sol accepted.",
+   "evidence_ids": [
+    "sol:E02"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E08].status",
+   "sol_value": "absent",
+   "son55_value": "unknown",
+   "decision": "revised",
+   "final_value": "unmet",
+   "reason": "The expectation asks the paper to disclose development overlap; nothing is disclosed, so the disclosure is unmet (son55's 'unknown' described whether overlap happened, not whether it was disclosed).",
+   "evidence_ids": [
+    "son55:E007"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E16].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No arrival criterion, success rate or failure endpoints. son55 accepted.",
+   "evidence_ids": [
+    "son55:E010"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:decompose_and_delegate:RE-cost].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "Accepted (son55): delegation latency/cost not reported.",
+   "evidence_ids": [
+    "son55:E014"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:decompose_and_delegate:RE-ablate].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "Accepted (son55): no VLM-side or penalty ablation.",
+   "evidence_ids": [
+    "son55:E012"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:decompose_and_delegate:RE-generalize].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "Accepted (son55): one instruction, two layouts.",
+   "evidence_ids": [
+    "son55:E007"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "score",
+   "sol_value": 51.25,
+   "son55_value": 32.5,
+   "decision": "revised",
+   "final_value": {
+    "raw": 30.0,
+    "display": 30.0
+   },
+   "reason": "Deterministic recomputation from the resolved eight ratings; seat totals are not averaged.",
+   "evidence_ids": [],
+   "score_impact": "final raw 30.0"
+  }
+ ],
+ "shared_error_corrections": [],
+ "requests": [],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All rating and pattern disagreements resolved from the fixed text; no scoring unknowns.",
+ "score": {
+  "raw": 30.0,
+  "display": 30.0,
+  "lower": 30.0,
+  "upper": 30.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4",
+  "display_rounding": "Decimal ROUND_HALF_UP to 0.1; raw unrounded value is the selection value",
+  "status_vector": {
+   "G": "resolved",
+   "M": "resolved",
+   "X": "resolved",
+   "E.measurement": "resolved",
+   "E.causality": "resolved",
+   "E.holdout": "not_reported",
+   "E.statistics": "not_reported",
+   "E.cost": "resolved"
+  }
+ },
+ "shared_error_review_note": "Checked both seats for common omissions (baseline identity, timing asymmetry, arithmetic of the averages, scope, evidence level, statistics). None found that both seats missed; son55 alone caught the planar-mapping bias and the 25.1 cm Target 3 error, confirmed here (agg:A03).",
+ "final_record_hash": "1eb1ea3e79d37d8b9508521ca5e71041bd93e2c79a902e61ad5e97fea01f4b53"
+}

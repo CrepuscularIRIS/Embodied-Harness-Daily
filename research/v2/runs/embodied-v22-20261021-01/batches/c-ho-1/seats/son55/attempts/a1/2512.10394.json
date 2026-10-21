@@ -1,0 +1,781 @@
+{
+ "paper": {
+  "paper_key": "2512.10394",
+  "paper_id": "2512.10394",
+  "title": "RoboNeuron: A Middle-Layer Infrastructure for Agent-Driven Orchestration in Embodied AI",
+  "version": "2512.10394v2",
+  "claim_type": "system_method",
+  "central_claim": "RoboNeuron：连接 MCP 与 ROS2 的中间层——从 ROS 消息 schema 自动派生 agent 可调用工具；提供“直接路径”与“感知-推理-控制(PIC)模块组合”两种由 agent 选择的执行路径；把 VLA 后端、运行时与加速预设的变化局限在稳定的推理边界内，从而支持模块化编排并在不重接线的情况下切换后端；在仿真与硬件上通过多平台底盘、机械臂与 VLA 抓取验证。",
+  "scope_note": "B 类基础设施（agent 工具层/中间件），无 agent 层闭环评测；按“接口与动作调用”范畴保留。"
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "机器人接口→agent 工具：由 ROS 消息/接口 schema 生成工具签名",
+   "information": "ROS 消息定义(含嵌套/数组)；运行时工具注册表；参数经类型化模型验证",
+   "operation": "解析 schema→构造参数 schema+编码器+绑定发布者→注册工具；调用时验证、编码、发布",
+   "output": "可由 MCP agent 调用的消息级工具，确定性话题发布",
+   "conditions": "仅话题级消息；服务/动作未覆盖",
+   "feedback": "无(单向发布)",
+   "selection_rule": "无",
+   "persistence": "不适用(静态基础设施)",
+   "later_use": "不适用",
+   "claimed_effect": "减少手写包装、接口随 API 演进保持同步(未度量)",
+   "failure_boundary": "覆盖面限于 topics；工具命名/描述质量对 LLM 的影响未测",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E005",
+    "E006",
+    "E020"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "执行抽象：直接路径(一次性命令)与 PIC 长驻节点链",
+   "information": "agent 通过同一工具面选择路径；PIC 模块以话题交换图像/动作向量；每模块独立 OS 进程，stop 工具有限等待后强杀",
+   "operation": "agent 调用启动/停止/重启模块；闭环由感知→推理→控制自循环",
+   "output": "受生命周期管理的闭环服务",
+   "conditions": "agent 如何观测进度未说明",
+   "feedback": "Algorithm 2 一行“agent monitors progress”",
+   "selection_rule": "无",
+   "persistence": "模块进程在运行期持续",
+   "later_use": "可重启推理模块换配置",
+   "claimed_effect": "长驻闭环作为受管理的系统服务",
+   "failure_boundary": "未报告失败/异常处理案例；真机案例无计数",
+   "evidence_ids": [
+    "E007",
+    "E010",
+    "E012"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "稳定推理边界(固定 I/O 契约)",
+   "information": "输入图像话题；输出 6-DoF 末端增量+夹爪向量；后端/运行时/FastV 预设仅在推理模块注入",
+   "operation": "重启推理模块切换后端/预设，感知与控制拓扑不变",
+   "output": "同一契约下的可比较推理实现",
+   "conditions": "动作必须能表示为 7 维增量向量",
+   "feedback": "无",
+   "selection_rule": "无",
+   "persistence": "不适用",
+   "later_use": "不适用",
+   "claimed_effect": "LIBERO：OFT 基线与 P25/P50 持平(±1.4)；P75 在 Object −7.8、Long −6.6；加速 1.03–1.58×",
+   "failure_boundary": "契约排斥非增量动作空间；π0 等列为后端但无结果",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E014",
+    "E015",
+    "E016",
+    "E017",
+    "E022"
+   ]
+  }
+ ],
+ "retention_trace": {
+  "applicable": false,
+  "reason": "基础设施/接口研究，不声称自我改进、留存或学习；未编造 retained 闭环。"
+ },
+ "gap": {
+  "author_gap": "agent 的工具调用与机器人中间件接口天然不对齐；手写包装难复用；更换 VLA 后端/服务栈常需重新集成，使对比难以归因于模型差异。",
+  "checked_gap": "工程上合理，但无量化：没有集成成本、包装行数、迁移时间或与同类桥接(ROS2mcpserver/ROS2mcp/RynnRCP/RoboOS)的并排对比；对近邻只做叙述性区分。",
+  "lineage_closest_adjacent": [
+   {
+    "name": "ROS2mcpserver / ROS2mcp",
+    "relation": "将 ROS 能力暴露为 MCP 工具",
+    "version_note": "引用 [23][24]，本地未固定原文"
+   },
+   {
+    "name": "RynnRCP / RoboOS",
+    "relation": "更宽的平台级框架",
+    "version_note": "引用 [25][26]"
+   }
+  ],
+  "residue": "可扩展的 schema 派生、生命周期感知长驻执行、跨执行模式复用——作者称近邻“未充分解决”，但无证据显示其解决程度。",
+  "stakes": "论文称降低重复集成成本；无数字。",
+  "method_response": "schema 派生 + 双路径执行 + 稳定推理边界。",
+  "remaining_gap": "仅话题级；agent 层任务成功未测；多后端切换未被实测展示；更广硬件/接口。",
+  "evidence_ids": [
+   "E019",
+   "E006",
+   "E018",
+   "E022",
+   "E004"
+  ],
+  "unresolved": [
+   "agent 层任务成功率",
+   "集成成本度量"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "unify_into_shared_representation",
+  "supporting": [],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "unify_into_shared_representation",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "weak",
+    "tactic_steps_checked": {
+     "C18_step2_interface_artifact": "partial：schema 派生的工具签名=把异构 ROS 接口序列化为 agent 通用调用面，是“接口产物”，但非学习式 tokenizer/projector",
+     "C18_step3_apply_recipe_unchanged": "partial：LLM 工具调用统一用于多平台，无共享训练目标",
+     "C18_step4_ablation_vs_naive_baseline": "unmet：无手写包装/其它桥接对照",
+     "C18_step5_unlocks_capability": "unmet：未展示统一带来的新能力或不劣于专用方案的任务指标"
+    },
+    "success_failure_checks": {
+     "S_generality_across_backbones": "partial：多个 VLA 后端列出，仅 OFT/OpenVLA 有数据",
+     "F_unified_not_clearing_specialists": "untested",
+     "F_no_isolating_ablation": "applies",
+     "F_single_backbone_generality": "applies(部分)"
+    },
+    "evidence_ids": [
+     "E002",
+     "E005",
+     "E009",
+     "E022"
+    ],
+    "reason": "实际操作是把异构机器人接口统一成一套 agent 工具词汇以替代逐项手写包装，主卡层面近似；子卡 C18 的核心是造 tokenizer/serializer/projector 并在统一模型上套用同一训练目标，与此处无学习式统一模型不同，故 sub=null，整体仅 weak。"
+   }
+  ],
+  "reason": "考虑过 decompose_and_delegate（agent→模块），但 agent 层未评测，且“求解器”不在此文范围，未取。",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "实现了接口统一，未展示统一带来的收益或相对专用方案的对照",
+   "evidence_ids": [
+    "E005",
+    "E022"
+   ]
+  },
+  "resolves_problem": {
+   "value": false,
+   "reason": "无证据表明手写包装/重集成成本问题被关闭（未度量）",
+   "evidence_ids": [
+    "E003",
+    "E020",
+    "E022"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "R04",
+    "version": "patterns 2026-10-21 (taxonomy daf38e579a46)",
+    "fit": "strong",
+    "condition_checks": {
+     "card_when_works_protocol_layer_costs_no_performance": "partial：LIBERO 上 P25/P50 与 OFT 基线持平，但基线行是否经中间件重跑未说明",
+     "card_when_works_explicit_vs_open_discovery": "unmet：未比较",
+     "main_F8_agent_level_success_not_measured": "applies/unmet",
+     "main_S7_protocol_tools_vs_narrow_explicit_tool": "unmet",
+     "card_counterexample_pruning_costs_success": "observed：P75 Object −7.8/Long −6.6 (Table I)"
+    },
+    "evidence_ids": [
+     "E005",
+     "E009",
+     "E015",
+     "E016",
+     "E017",
+     "E022"
+    ],
+    "reason": "ROS 栈暴露为协议级(MCP)工具、schema 派生、启动/切换策略的调用——与 R04 逐项一致；该卡引用本论文(2512.10394#board)，属论文派生，不能当独立确认。"
+   }
+  ],
+  "unassigned": [
+   "VLA 后端“稳定推理边界”本身(固定 I/O 契约)——R04 已含；未单列"
+  ],
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "unify_into_shared_representation",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "R04"
+   },
+   "operation_correspondence": "RS：异构输入映射到统一词汇；领域：异构 ROS 接口映射为统一 MCP 工具词汇并由 agent 调用。",
+   "necessary_conditions_and_differences": "RS 需要统一模型+共享目标并有“不劣于专用”的证据；此处无统一训练与对照，仅接口层统一。",
+   "evidence_ids": [
+    "E002",
+    "E005",
+    "E022"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E19"
+   ],
+   "applies_when": "transfer to a physical robot needs trial counts/success rates",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "FR3 抓取为演示，作者明言“不是大规模任务统计”。",
+   "evidence_ids": [
+    "E012",
+    "E018"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E02"
+   ],
+   "applies_when": "harness component causes improvement via one-at-a-time toggles",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Case IV 仅改变剪枝预设（一次一项），但这是模型侧而非中间件组件；中间件本身无消融。",
+   "evidence_ids": [
+    "E014"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E04"
+   ],
+   "applies_when": "run-to-run variance",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "每任务 50 episode 单次；差异 0.2–0.8 点相当于 1–4 个 episode。",
+   "evidence_ids": [
+    "E013",
+    "E015",
+    "E016"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E05"
+   ],
+   "applies_when": "cost alongside success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "报告推理延迟/加速（含中间件开销）；无 agent 调用成本。",
+   "evidence_ids": [
+    "E021",
+    "E009"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E01"
+   ],
+   "applies_when": "harness vs alternative harness",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无与手写包装或 ROS2mcp 等桥接的对照。",
+   "evidence_ids": [
+    "E019"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E20"
+   ],
+   "applies_when": "depth-based tools state depth assumptions",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "中间件不做深度换算。",
+   "evidence_ids": [],
+   "score_item": null
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E22"
+   ],
+   "applies_when": "matched interaction budget",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "无 agent 预算比较。",
+   "evidence_ids": [],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "rs:unify_into_shared_representation:RE-ablate",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/unify_into_shared_representation.md#Reviewer expectations"
+   ],
+   "applies_when": "isolate the unification mechanism from confounds / include skeptic baseline",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无手写包装对照。",
+   "evidence_ids": [
+    "E019",
+    "E022"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "rs:unify_into_shared_representation:RE-generality",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/unify_into_shared_representation.md#Reviewer expectations"
+   ],
+   "applies_when": "generality across backbones/domains",
+   "applicable": true,
+   "status": "partial",
+   "reason": "多后端被列举，仅 OFT/OpenVLA 有数据。",
+   "evidence_ids": [
+    "E009",
+    "E022"
+   ],
+   "score_item": "E.holdout"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "schema 派生的统一 MCP 工具面可复用于多平台/多臂（直接路径）",
+   "setting": "仿真，多移动平台+单臂",
+   "baseline_control": "无",
+   "selection_vs_test": "—",
+   "result_denominator": "无计数；定性图",
+   "evidence_ids": [
+    "E005",
+    "E011"
+   ],
+   "counterevidence": [
+    "E022"
+   ],
+   "allowed_conclusion": "原型可演示工具调用；无度量不支持“降低手工/可扩展”。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "PIC 闭环可在真机上被 agent 显式管理（FR3 抓取）",
+   "setting": "FR3 真机，一次抓取序列",
+   "baseline_control": "无",
+   "selection_vs_test": "—",
+   "result_denominator": "无试验次数",
+   "evidence_ids": [
+    "E012",
+    "E018"
+   ],
+   "counterevidence": [
+    "E012"
+   ],
+   "allowed_conclusion": "可行性演示；无成功率。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "后端/加速预设可在固定拓扑内切换并可比较",
+   "setting": "LIBERO 4 套件×500 episode；OFT 的 FastV 剪枝；OpenVLA 单步延迟",
+   "baseline_control": "OFT 基线行",
+   "selection_vs_test": "标准 LIBERO；单次",
+   "result_denominator": "Spatial 98.6→99.2(P50)；Object 97.6→89.8(P75)；加速 1.03–1.58×",
+   "evidence_ids": [
+    "E009",
+    "E013",
+    "E014",
+    "E015",
+    "E016",
+    "E017",
+    "E001"
+   ],
+   "counterevidence": [
+    "E017",
+    "E022"
+   ],
+   "allowed_conclusion": "同一管线内剪枝预设可被换入并得到可比数；P75 有明显代价。不支持“跨后端无重接线切换”（无多后端结果）。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "LIBERO 为按环境检查成功的闭环仿真（经 PIC 管线），计 online；但该结果检验的是 VLA 剪枝预设，agent 编排主张仅为演示（offline 性质），未达 transfer。",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "一个把 ROS 话题暴露为类型化 MCP 工具、并以固定推理边界运行 OpenVLA-OFT（含 FastV 剪枝预设）的原型：在 LIBERO 500 episode/套件上轻剪枝与基线持平，重剪枝明显掉点，并给出加速倍数。",
+  "not_supported": "降低集成成本；schema 派生的可扩展性；agent 层任务成功；跨后端切换（π0、OpenVLA↔OFT）实测；对手写包装/其它 MCP-ROS 桥的优势。",
+  "unresolved": [
+   "基线行是否经中间件重跑",
+   "agent 观测/监督通道"
+  ],
+  "reproduction_note": "均为作者报告，非我们复现。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "接口错位与重复集成是真实工程问题，近邻已点名，但没有量化瓶颈或与近邻的并排对比，残余问题靠叙述。",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E019"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "schema 派生、直接/PIC 双路径、稳定推理边界的设计与所述问题相称；但动作契约限定为 7 维增量，工具命名/描述对 LLM 选择的影响未考虑，无可区分预测。",
+   "evidence_ids": [
+    "E005",
+    "E008",
+    "E009"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Algorithm 1/2、进程隔离与停止语义、固定 I/O 契约、URDF/IK 控制器写得可重建，并诚实标明仅话题级；但 agent 如何观测闭环进度、故障处理未写。",
+   "evidence_ids": [
+    "E005",
+    "E006",
+    "E008",
+    "E010"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "唯一定量部分（LIBERO，500 episode/套件）测的是 VLA 剪枝而非本文承重主张；agent 层成功、集成成本均无度量；基线来源未明。",
+   "evidence_ids": [
+    "E013",
+    "E015",
+    "E022"
+   ],
+   "counterevidence_ids": [
+    "E022"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "仅 Case IV 隔离剪枝预设；中间件价值无对照（无手写包装/其它桥/无中间件原生执行对比）。",
+   "evidence_ids": [
+    "E014",
+    "E022"
+   ],
+   "counterevidence_ids": [
+    "E022"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "标准 LIBERO；硬件仅一次 FR3 抓取演示；“多平台”仅仿真演示。",
+   "evidence_ids": [
+    "E011",
+    "E012"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "有分母但单次、无方差；±0.2–0.8 点相当于 1–4 个 episode。",
+   "evidence_ids": [
+    "E013",
+    "E015"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "给出含中间件开销的延迟与加速（RTX 4090），无 agent 调用成本或集成成本。",
+   "evidence_ids": [
+    "E021",
+    "E009"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  }
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "完整正文（含 Algorithm 1/2、Table I）已读；图中数值（Fig.6）未在文本中；无附录。"
+ },
+ "brief_reason": "MCP–ROS2 中间件原型，设计清晰但属工程演示：agent 层无任务评测、无集成成本度量，唯一数字是 LIBERO 剪枝预设；evidence_level=online、claim_support=scoped。",
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T17:30:00Z",
+  "notes": "session_id/receipt_ref not obtainable from inside the worker (null). Hashes computed by worker from files: rubric=SCORE_SPEC.md; rs=reference MANIFEST.tsv; domain=patterns taxonomy.json; conditions=conditions.json; expectations=.forge/domains/embodied-agent-harness-v1/profile/expectations.json. No other-seat/aggregate/archive/old-score files were read. Domain cards that cite this paper (arXiv#board/#s) are paper-derived and not treated as independent confirmation."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2512.10394v2",
+   "sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "sections_read": [
+    "Abstract",
+    "I-V",
+    "Algorithms 1-2",
+    "Table I"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "figure image content (Fig.1-6, incl. Fig.6 latency numbers)"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Abstract",
+   "quote": "demonstrating that it enables modular system orchestration under a unified interface while supporting backend transitions without system rewiring",
+   "support_explanation": "作者核心主张",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "agent ecosystems operate via tool calls, whereas robots expose capabilities through middleware interfaces and streaming I/O",
+   "support_explanation": "作者 gap",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "Converting these into agent-callable tools via manual wrappers increases maintenance costs and limits reuse across different projects.",
+   "support_explanation": "手写包装的维护成本（未量化）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "RoboNeuron is a middleware infrastructure that bridges agent tool calling and robot middleware, rather than a planning algorithm or a replacement for existing robot control stacks.",
+   "support_explanation": "作者限定：基础设施而非规划算法",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-B",
+   "quote": "RoboNeuron employs schema-based derivation to generate tool signatures directly from ROS message and interface definitions.",
+   "support_explanation": "S1：从 ROS 消息生成工具签名",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-B",
+   "quote": "Our current implementation focuses on message-level exposure via topics",
+   "support_explanation": "覆盖范围：仅话题级消息",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-A",
+   "quote": "RoboNeuron does not embed a task planner of its own; instead, it is designed to be orchestrated by an external LLM agent through the same tool interface.",
+   "support_explanation": "LLM agent 在外部，未规定",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-C",
+   "quote": "produces an action under a fixed semantic contract: a 6-DoF end-effector delta in position and orientation together with a gripper command",
+   "support_explanation": "S3：固定动作契约",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "III-D",
+   "quote": "SGLang [ 27 ] as an alternative serving runtime, and FastV-based acceleration presets [ 28 ]",
+   "support_explanation": "后端/运行时/加速预设在推理边界内切换",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Algorithm 2",
+   "quote": "Agent monitors progress and may request termination through stop tools",
+   "support_explanation": "agent 监督闭环仅一行，未说明观测通道",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-B",
+   "quote": "The following case studies examine RoboNeuron’s core mechanisms rather than task-level leaderboard performance.",
+   "support_explanation": "Case I–III 为机制演示",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-B3",
+   "quote": "The emphasis of this case is not large-scale task statistics but runtime semantics",
+   "support_explanation": "真机 FR3 案例无统计",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-A",
+   "quote": "Each suite contains 10 tasks, and each task is evaluated over 50 episodes.",
+   "support_explanation": "LIBERO 分母：每套 500 episode",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-C",
+   "quote": "Here, the serving setup is fixed and only the FastV-based pruning preset [ 28 ] inside the inference module is varied.",
+   "support_explanation": "Case IV 唯一变量",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "OpenVLA-OFT 98.6 ( – ) 97.6 ( – ) 97.2 ( – ) 95.8 ( – ) 1.00",
+   "support_explanation": "基线行（来源未说明是否经中间件重跑）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "RoboNeuron + P50 99.2",
+   "support_explanation": "P50 行 Spatial 99.2",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Table I",
+   "quote": "RoboNeuron + P75 98.4 ( \\downarrow 0.2 ) 89.8 ( \\downarrow 7.8 )",
+   "support_explanation": "P75 在 Object 掉 7.8 点",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "IV-D",
+   "quote": "At the same time, the evaluation remains focused on mechanism validation. The real-robot study emphasizes feasibility and runtime semantics rather than large-scale statistical performance.",
+   "support_explanation": "作者自述评测范围",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "II Related Work",
+   "quote": "These systems are useful for basic connectivity, but they mainly stop at protocol bridging and do not fully address scalable schema derivation, lifecycle-aware long-running execution, or reuse across different execution patterns.",
+   "support_explanation": "近邻（ROS2mcpserver/ROS2mcp）及其残余问题",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "I Introduction",
+   "quote": "which reduces the manual effort required to update interfaces",
+   "support_explanation": "“降低人工”主张，无度量",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "Fig. 6 caption",
+   "quote": "RN denotes RoboNeuron overhead",
+   "support_explanation": "延迟图含中间件开销",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "locator": "全文",
+   "quote": null,
+   "support_explanation": "全文无具名 LLM agent、无提示词、无 agent 层任务成功率或试验次数；Case I–III 为定性图示，无人力/代码行数/集成时间度量；π0 虽列为已集成后端，却未报告任何 π0 数值，也无 OpenVLA→OFT→π0 的实际切换结果（Table I 仅 OFT 的剪枝预设变化；OpenVLA 仅有延迟图）",
+   "kind": "our_inference",
+   "derived_from": [
+    "E007",
+    "E011",
+    "E012",
+    "E018"
+   ]
+  }
+ ],
+ "score": {
+  "raw": 45.0,
+  "display": "45.0",
+  "lower": 45.0,
+  "upper": 45.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}

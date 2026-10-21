@@ -1,0 +1,1722 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a1",
+ "seat": "aggregate_opus55",
+ "phase": "calibration-holdout",
+ "input_seat_hashes": {
+  "sol": "105effd65a554d050cbc2ba696d22f7a9421086fc3269a62cc0615c045bf12cb",
+  "son55": "6bb4d0c6096822dd2f3e9076ba48be4000304c45c06ac2422bf0d3c57a7fecda"
+ },
+ "input_seat_files": {
+  "sol": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/sol/attempts/a1/2609.26360.json",
+  "son55": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/son55/attempts/a1/2609.26360.json"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (calibration-holdout; weights not frozen; no tuning on holdout)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "pattern_protocol_hash": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "anchors_hash": "37f7080c6a414c927ab08f3dfb5be1dd784dbc2be41f1b21070532d9584701ed",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_cards_hash_convention": "sha256 of research/patterns/taxonomy.json (same convention as both c-ho-1 seats)",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Aggregate subagent cannot read its own session id / receipt; null per contract, no probing.",
+  "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+  "timestamp": "2026-10-21T20:30:00Z",
+  "independence_note": "Aggregate review with both seat inputs; fixed paper text read and an initial evidence judgment written before opening seat totals. Not a third blind review or human gold."
+ },
+ "aggregate_initial_judgment": "Read before opening seat totals. Claim: a frozen VLM high-level planner reasons over an online Hydra scene graph, CLIP-selected key views, history and a topological floorplan, choosing explore_room / go_to_objects / find_room; deterministic low-level planners score frontiers/viewpoints, with find_room weighting frontiers by floorplan graph distance. Evidence: 108 OpenEQA + 114 ExploreEQA single-floor HM3D episodes (filtered so floorplans can be generated from HM3D semantic annotations), five VLMs, same 50-iteration budget, GraphEQA/ExploreEQA rerun; Gemini-only leave-one-out ablations (FP, VP, SF), GraphEQA+FP, GT-semantics analysis; no-choice answers graded by an unvalidated LLM; 7 'representative' real-world questions run once. Concerns: the simulation floorplan is derived from ground-truth annotations although the method claims robustness to weak priors; without FP, HFLEX is below GraphEQA and GraphEQA+FP on ExploreEQA; no question-only (blind) baseline. Expected: online, scoped, E.causality ~2-3, E.statistics 1.",
+ "paper": {
+  "paper_key": "2609.26360",
+  "paper_id": "2609.26360",
+  "title": "Hierarchical Floorplan-Guided Vision-Language Exploration for Embodied Question Answering",
+  "version": "2609.26360v1",
+  "claim_type": "system_method",
+  "central_claim": "HFLEX-EQA combines hierarchical VLM planning, online scene graphs, specialized exploration modes and weak topological floorplan priors to outperform existing EQA baselines on OpenEQA/ExploreEQA and deploy successfully in previously unseen real indoor environments."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "aliases": [
+    "sol:M1",
+    "son55:M1"
+   ],
+   "url": "https://arxiv.org/html/2609.26360v1",
+   "sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2609.26360.txt",
+   "sections_read": [
+    "Abstract",
+    "I-VI",
+    "Tables I-IV",
+    "Figure captions"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "figure image content (Fig. 1-5, incl. Fig. 5 perturbation curves); prompts not given; no appendix exists"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E01",
+   "locator": "IV-B source of floorplan; fixed text line 18",
+   "quote": "In our experiments, we construct \\mathcal{G}^{\\mathcal{F}} from HM3D [ 23 ] semantic annotations in simulation and manually from known room layouts in the real world.",
+   "support_explanation": "Structural semantic information is provided before exploration, unlike local-observation baselines; it is not inferred solely online.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E02",
+   "locator": "IV-C room labels; fixed text line 18",
+   "quote": "We constrain the VLM to only predict classes present in the floorplan to allow the planner to relate observed rooms to the semantic room classes in the floorplan.",
+   "support_explanation": "Incorrect or missing class priors can bias online classification as well as navigation.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E03",
+   "locator": "IV-C stop policy; fixed text line 18",
+   "quote": "If an answer a_{t} is provided with confidence \\kappa_{t}\\geq\\kappa_{\\mathrm{min}} , it is returned as the final answer and the episode terminates.",
+   "support_explanation": "Self-confidence threshold, not calibrated independent answer sufficiency verifier.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E04",
+   "locator": "IV-C memory; fixed text line 18",
+   "quote": "For each room, at most M key views are selected from \\mathcal{K}_{i} according to their relevance to q , measured as the cosine similarity between the CLIP text embedding of the question and the CLIP image embedding of each key view.",
+   "support_explanation": "Harness-ranked within-episode image retrieval; per-room bound is not a fixed global context cap.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E05",
+   "locator": "IV-D viewpoint selection; fixed text line 18",
+   "quote": "Each candidate viewpoint v is then evaluated according to S_{\\mathrm{vp}}(v)=\\lambda_{\\mathrm{vis}}\\rho_{\\mathrm{vis}}(v)+\\lambda_{\\mathrm{img}}\\rho_{\\mathrm{img}}(v)",
+   "support_explanation": "Precise geometric visibility scoring owns low-level view selection instead of language-only navigation.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E06",
+   "locator": "IV-D floorplan fallback; fixed text line 18",
+   "quote": "If the current room cannot be matched to the floorplan or no path to c^{\\star} exists, w(c) are set to zero and the floorplan does not contribute to the exploration gain.",
+   "support_explanation": "Explicit mismatch fallback, but no systematic corruption experiment establishes robustness to incorrect connected priors.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E07",
+   "locator": "V-B dataset filtering; fixed text line 21",
+   "quote": "We keep only single-floor episodes with semantic annotations to be able to generate the floorplan priors. This gives 108 OpenEQA episodes and 114 ExploreEQA episodes.",
+   "support_explanation": "Filtered subset and explicit simulation denominator, not entire original benchmarks.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E08",
+   "locator": "V-B TableII ablation; fixed text line 21",
+   "quote": "HFLEX-EQA 75.0 4.49 13.0 63.2 5.96 19.6 HFLEX-EQA w/o FP 64.8 6.56 13.1 53.5 7.53 18.2 HFLEX-EQA w/o VP 67.6 7.28 8.3 58.8 7.74 14.5 HFLEX-EQA w/o SF 66.7 12.10 8.6 57.0 8.80 11.1 GraphEQA + FP 43.5 1.75 6.1 57.0 3.01 6.8",
+   "support_explanation": "Same-backbone leave-one-out components and same-prior prompt baseline distinguish hierarchy from mere added information; not every gain reduces path length.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E09",
+   "locator": "V-B protocol/metrics; fixed text line 21",
+   "quote": "All methods use a budget of 50 iterations. Metrics . We report success rate (SR%), the average number of planning steps (S), and path length in meters (P). For multiple-choice runs, success means selecting the correct answer. For no-choice runs, answers are graded by an LLM.",
+   "support_explanation": "Common planning cap and objective multiple-choice endpoint; no-choice judge identity/calibration not given.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E10",
+   "locator": "V TableIV physical versus replay; fixed text line 21",
+   "quote": "All experiments were executed using the multiple-choice setting. The no-choice results were obtained by replaying the recorded observations, scene graph and planner history while removing the answer choices.",
+   "support_explanation": "Seven representative physical cases are not fourteen independent deployments; alternate choices may change paths but replay freezes evidence/history.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E11",
+   "locator": "V-C replay robustness; fixed text line 21",
+   "quote": "replaying the real-world episodes with perturbed images while keeping the scene graph and planner history unchanged.",
+   "support_explanation": "Not closed-loop sensing/mapping robustness: graph and history insulated from visual corruption.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E12",
+   "locator": "IV-B information restriction; fixed text line 18",
+   "quote": "Metric geometry and agent localization are not retained.",
+   "support_explanation": "Floorplan privileged structure excludes exact robot location/metric map; compare fairly without pretending it is no prior.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E13",
+   "locator": "V-A model grid; fixed text line 21",
+   "quote": "We evaluate GPT-4o, GPT-5.5, Gemini-3.5 Pro, Claude Opus 4.8 and Qwen 3.5-9B as high-level planners in simulation, and use GPT-5.5 for the real-world experiments.",
+   "support_explanation": "Multiple-strength same-model baseline grid, but component ablation only Gemini3.5.",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Abstract",
+   "quote": "Our results demonstrate the benefit of combining VLM-based hierarchical planning with structural floorplan priors for the EQA task.",
+   "support_explanation": "核心主张",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "I Introduction",
+   "quote": "However, in such methods, exploration is typically treated as a single planning problem, despite the different types of information that may be missing.",
+   "support_explanation": "作者 gap 1",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "I Introduction",
+   "quote": "existing EQA approaches do not exploit it to reason about which unseen rooms are question-relevant",
+   "support_explanation": "作者 gap 2（楼层图先验未用）",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-B",
+   "quote": "semantic annotations in simulation and manually from known room layouts in the real world",
+   "support_explanation": "仿真楼层图由 HM3D 语义标注构造，真机手工",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-B",
+   "quote": "The floorplan is treated as a weak high-level structural prior rather than an accurate map.",
+   "support_explanation": "作者定位：弱先验",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "III Problem Statement",
+   "quote": "it may be incomplete or inaccurate",
+   "support_explanation": "声称楼层图是“估计的、可能出错的”",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "We project HM3D semantic regions onto a bird’s-eye-view map, assign each region a semantic room label, and extract room adjacencies from the resulting room map.",
+   "support_explanation": "楼层图=由真值语义区域生成，无噪声扰动",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "We keep only single-floor episodes with semantic annotations to be able to generate the floorplan priors. This gives 108 OpenEQA episodes and 114 ExploreEQA episodes.",
+   "support_explanation": "评测集为适配楼层图而筛选",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "All methods use a budget of 50 iterations.",
+   "support_explanation": "统一 50 迭代预算",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "For no-choice runs, answers are graded by an LLM.",
+   "support_explanation": "自由作答由 LLM 评分，评分器未说明/未验证",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table I",
+   "quote": "GPT-5.5 HFLEX-EQA 75.0 4.00 9.3 57.9 4.47 14.4 GraphEQA 35.2 1.59 6.2 50.9 3.14 6.5 ExploreEQA 59.3 19.11 35.0 54.4 18.74 37.5",
+   "support_explanation": "主比较示例行（GPT-5.5）",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table II",
+   "quote": "HFLEX-EQA 75.0 4.49 13.0 63.2 5.96 19.6 HFLEX-EQA w/o FP 64.8 6.56 13.1 53.5 7.53 18.2 HFLEX-EQA w/o VP 67.6 7.28 8.3 58.8 7.74 14.5 HFLEX-EQA w/o SF 66.7 12.10 8.6 57.0 8.80 11.1 GraphEQA + FP 43.5 1.75 6.1 57.0 3.01 6.8",
+   "support_explanation": "Gemini-3.5 消融，逐项去除",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "Finally, adding the floorplan graph to GraphEQA’s VLM prompt provides mixed results, decreasing performance on OpenEQA while slightly improving ExploreEQA.",
+   "support_explanation": "朴素注入楼层图结果不一致",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table III",
+   "quote": "GraphEQA + GT 63.9 1.88 4.1 57.9 2.75 5.8",
+   "support_explanation": "GT 语义使 GraphEQA 提升更多",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "ExploreEQA is evaluated only with answer choices",
+   "support_explanation": "ExploreEQA 无自由作答",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-A",
+   "quote": "Object detection with YOLOe [ 21 ] uses the HM3D [ 23 ] semantic classes in simulation and the ADE20K [ 24 ] classes in real-world experiments.",
+   "support_explanation": "仿真检测词表即 HM3D 语义类",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-A",
+   "quote": "We evaluate GPT-4o, GPT-5.5, Gemini-3.5 Pro, Claude Opus 4.8 and Qwen 3.5-9B as high-level planners in simulation, and use GPT-5.5 for the real-world experiments.",
+   "support_explanation": "5 个规划 VLM",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-C",
+   "quote": "We constrain the VLM to only predict classes present in the floorplan",
+   "support_explanation": "房间标签预测被限制到楼层图类别",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-C",
+   "quote": "it is returned as the final answer and the episode terminates",
+   "support_explanation": "κ≥κ_min 即终止（自报置信度）",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table IV caption",
+   "quote": "Table IV : Real-world HFLEX-EQA evaluation on representative question types.",
+   "support_explanation": "真机仅 7 个“代表性”问题",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table IV caption",
+   "quote": "The no-choice results were obtained by replaying the recorded observations, scene graph and planner history while removing the answer choices.",
+   "support_explanation": "无选项结果来自回放而非新运行",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-C",
+   "quote": "we test the VLM planner’s robustness by replaying the real-world episodes with perturbed images while keeping the scene graph and planner history unchanged",
+   "support_explanation": "鲁棒性测试为回放，且只扰动图像",
+   "kind": "author_report",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table I",
+   "quote": null,
+   "support_explanation": "10 组(5 VLM×2 数据集)选项设定中 HFLEX 在每组 SR 均高于 GraphEQA 与 ExploreEQA；无选项设定对 GraphEQA 同向。但全部为单次、108/114 episode；差 5~10 点以内的组约 5~12 个 episode",
+   "kind": "our_inference",
+   "derived_from": [
+    "son55:E011"
+   ],
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "全文",
+   "quote": null,
+   "support_explanation": "未做楼层图噪声/缺失/错误标签扰动实验，尽管 III/IV-B 反复声称其为“可能不完整或错误的弱先验”；仿真楼层图取自真值语义标注，且 ExploreEQA+FP 未测；GraphEQA+FP 仅一次",
+   "kind": "our_inference",
+   "derived_from": [
+    "son55:E004",
+    "son55:E006",
+    "son55:E007",
+    "son55:E013"
+   ],
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table II/III",
+   "quote": null,
+   "support_explanation": "去除 FP 使 SR −10.2(OpenEQA)/−9.7(ExploreEQA)；但 w/o FP 版本相对 GraphEQA(Gemini 选项)在 OpenEQA 仍 +18.5(64.8 vs 46.3)，在 ExploreEQA 反而 −0.9(53.5 vs 54.4)：说明 ExploreEQA 上的优势几乎全部来自（真值派生的）楼层图，而非其余结构",
+   "kind": "our_inference",
+   "derived_from": [
+    "son55:E012"
+   ],
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:F01",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B Floorplan generation",
+   "quote": "We project HM3D semantic regions onto a bird’s-eye-view map, assign each region a semantic room label",
+   "support_explanation": "Simulation floorplans are built from HM3D ground-truth semantic regions.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F02",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table II",
+   "quote": "HFLEX-EQA w/o FP 64.8 6.56 13.1 53.5 7.53 18.2",
+   "support_explanation": "Without the floorplan, ExploreEQA SR 53.5 is below GraphEQA (54.4, Table I Gemini) and GraphEQA+FP (57.0).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F03",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table II",
+   "quote": "GraphEQA + FP 43.5 1.75 6.1 57.0 3.01 6.8",
+   "support_explanation": "Extra-information control: the same floorplan given to GraphEQA's prompt.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F04",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B Metrics",
+   "quote": "For no-choice runs, answers are graded by an LLM.",
+   "support_explanation": "No-choice correctness is judged by an LLM with no reported validation.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F05",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B Baselines",
+   "quote": "All methods use a budget of 50 iterations.",
+   "support_explanation": "Matched planning-iteration cap across methods.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F06",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table IV caption",
+   "quote": "Table IV : Real-world HFLEX-EQA evaluation on representative question types.",
+   "support_explanation": "Physical questions are selected as representative; no attempt denominator.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F08",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B Datasets",
+   "quote": "This gives 108 OpenEQA episodes and 114 ExploreEQA episodes.",
+   "support_explanation": "Filtered evaluation set sizes.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F09",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "III",
+   "quote": "Since it is estimated rather than ground truth, it may be incomplete or inaccurate",
+   "support_explanation": "The method claims tolerance to an estimated, possibly inaccurate floorplan; this is not tested.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:F07",
+   "material_id": "M1",
+   "material_hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Entire fixed text (search)",
+   "quote": null,
+   "support_explanation": "Searched Sec V, Tables I-IV and V-C: no question-only, blind or no-exploration answering baseline is reported.",
+   "kind": "our_inference",
+   "source_seat": "aggregate",
+   "derived_from": [
+    "sol:E09",
+    "son55:E011"
+   ]
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Question-conditioned hierarchical exploration",
+   "information": "Frozen VLM sees online hierarchical graph, selected RGB memory, history, question/optional choices, and prior semantic room connectivity; RGB-D/poses/TSDF remain in low-level geometry",
+   "operation": "VLM emits one of explore_room/go_to_objects/find_room with structured target; deterministic semantic/geometric planners choose reachable frontiers or sampled visibility-maximizing views; collect new observation and repeat",
+   "output": "Navigation target and updated graph/visual evidence; final answer when self-confidence >=0.8",
+   "conditions": "Pose/depth/segmentation adequate, graph binds objects/rooms, VLM confidence meaningful, low-level reachable-space planner reliable",
+   "feedback": "Fresh images and incremental scene graph returned after low-level motion; no external answer correctness feedback at runtime",
+   "selection_rule": "CLIP relevance for within-room frontiers, depth-occlusion/image coverage for object views; self-confidence terminates answer construction",
+   "selection_data": "Current episode only; benchmark correctness not runtime feedback",
+   "persistence": "Within-episode graph/key views/decision history; static algorithm and frozen models",
+   "later_use": "Later decisions of same episode; no across-task learned edit or retained capability claim",
+   "claimed_effect": "Gather missing rather than redundant evidence for EQA",
+   "failure_boundary": "Graph errors and uncalibrated answer confidence propagate; illumination/view angle not in geometric view score",
+   "evidence_ids": [
+    "sol:E03",
+    "sol:E04",
+    "sol:E05",
+    "sol:E09"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Prior-guided discovery of unobserved room classes",
+   "information": "Floorplan labels/connectivity from simulator annotations or human layout; no metric coordinates or localization; online semantic label constrained to prior classes",
+   "operation": "Match all same-class floorplan nodes, compute neighboring-class shortest-distance softmax toward target class, mix weighted CLIP frontier scores with transition semantics and frontier size",
+   "output": "Highest-scored frontier; zero prior weight if class/path unavailable",
+   "conditions": "Prior labels/connectivity sufficiently informative and room/frontier CLIP features trustworthy",
+   "feedback": "Observed rooms update graph/class matching; static prior is not corrected or optimized",
+   "selection_rule": "Fixed weights .35 transition/.55 floorplan/.1 size; no learned selection",
+   "selection_data": "Current graph/prior; no retained selection protocol",
+   "persistence": "Fixed prior for episode and online map, not a self-improving memory",
+   "later_use": "Subsequent searches in same episode",
+   "claimed_effect": "Choose useful unseen-room direction without exact floorplan localization",
+   "failure_boundary": "Wrong but connected priors can mislead; no perturbation suite for floorplans, missing classes constrain room labels",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E02",
+    "sol:E06",
+    "sol:E12"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "EQA exploration is planned as one problem from local observations; structural priors such as floorplans that indicate which unseen rooms are question-relevant are unused.",
+  "checked_gap": "Concrete and positioned against GraphEQA/ExploreEQA, which are rerun. The prior's value is tested, but in simulation the prior is derived from ground-truth annotations, so the 'weak/estimated prior' framing is untested.",
+  "lineage_closest_adjacent": {
+   "source_version": "2609.26360v1 Sec II; neighbour originals not in the fixed input",
+   "ancestors": [
+    "Hydra scene graphs",
+    "VLFM / ESC / CoWs semantic frontiers",
+    "OpenEQA, ExploreEQA"
+   ],
+   "closest": [
+    "GraphEQA [4] (scene graph + VLM)",
+    "ExploreEQA [3]"
+   ]
+  },
+  "residue": "Mode-specific exploration and floorplan-topology-weighted room finding.",
+  "stakes": "Exploration efficiency and answer accuracy when evidence lies in unseen rooms.",
+  "method_response": "VLM selects exploration mode/target; deterministic planners realise it; floorplan graph distances weight semantic frontier scores.",
+  "remaining_gap": "Behaviour under inaccurate floorplans, multi-floor buildings, calibrated stopping, cost of the extra VLM calls.",
+  "evidence_ids": [
+   "sol:E01",
+   "sol:E07",
+   "son55:E002",
+   "son55:E003",
+   "agg:F01"
+  ],
+  "unresolved": []
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "structural_prior_encoding"
+  ],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "C25.1 boundary: VLM decides which information is missing and the mode; geometry, reachability, occlusion and frontier scoring are deterministic - met.",
+     "C25.2 typed artifact: (mode, target node/class, answer, confidence) - met.",
+     "C25.3 loop: new observations update the graph between planning iterations; termination uses self-reported confidence (not a sound verdict) - partial.",
+     "C25.4 ablation: FP/VP/SF removed one at a time on one backbone; hierarchy/modes not ablated - partial.",
+     "C25.5 cost: steps and path only; no VLM call/latency cost - partial."
+    ],
+    "success_failure_checks": [
+     "Boundary at seam and typed artifacts: met",
+     "Off-the-shelf assembly: partial (Hydra, YOLOe, LSeg, CLIP, VLM)",
+     "Cost unmeasured: applies (model calls)"
+    ],
+    "evidence_ids": [
+     "sol:E03",
+     "sol:E05",
+     "sol:E08",
+     "son55:E019"
+    ],
+    "reason": "Both seats; confirmed."
+   },
+   {
+    "main_id": "structural_prior_encoding",
+    "sub_id": "rs:C13",
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "C13 relational-topology prior: room-adjacency graph and shortest-path distances propagated into frontier weights (Eq. 10-14) - met as operation.",
+     "By-construction guarantee: absent - soft score term, not a constraint satisfied by construction.",
+     "Load-bearing ablation: w/o FP drops SR by ~10 points on Gemini (agg:F02); naive alternative (prior in prompt, GraphEQA+FP) tested (agg:F03)."
+    ],
+    "success_failure_checks": [
+     "Inflated-protocol risk applies: prior from ground-truth annotations on a filtered episode set (agg:F01)."
+    ],
+    "evidence_ids": [
+     "agg:F01",
+     "agg:F02",
+     "agg:F03",
+     "son55:E012"
+    ],
+    "reason": "son55 supporting match adopted: encoding floorplan topology into the find_room scoring operator is a distinct operation from the VLM/planner delegation, and the paper's own contrast (topology in the operator vs in the prompt) is the card's 'encode rather than rely on the model' rationale. C16 (symmetry groups) and C20 (forward corruption) do not fit; partial because there is no by-construction guarantee."
+   }
+  ],
+  "reason": "Primary agreed by both seats; supporting added from son55 for the distinct floorplan-encoding operation.",
+  "executes_pattern": true,
+  "executes_pattern_reason": "C25 decomposition and typed hand-off executed; C13 executed as a soft prior without guarantee.",
+  "resolves_problem": false,
+  "resolves_problem_reason": "Gains depend on a ground-truth-derived prior; weak-prior robustness untested; on ExploreEQA the method without the prior does not beat GraphEQA."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "S*/when-works: met = satisfied by this paper's evidence; F*/when-fails: applies = present.",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "version": "embodied-agent-harness/v1 (taxonomy daf38e579a46)",
+    "fit": "strong",
+    "circular_source": false,
+    "condition_checks": [
+     {
+      "id": "K104:discrete_semantic_vocabulary_deterministic_executor",
+      "status": "met",
+      "reason": "Three modes with graph-node/room-class targets executed by deterministic planners.",
+      "evidence_ids": [
+       "sol:E05",
+       "son55:E019"
+      ]
+     },
+     {
+      "id": "K104:vocabulary_matches_executor_capability",
+      "status": "met",
+      "reason": "Shown in simulation; physical only 7 runs.",
+      "evidence_ids": [
+       "sol:E13",
+       "sol:E10"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E05",
+     "son55:E019"
+    ],
+    "reason": "sol's 'strong' adopted: the operation matches K104 exactly; son55's 'partial' reflected evidence breadth, which belongs to E, not to fit."
+   },
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": "K301",
+    "version": "embodied-agent-harness/v1 (taxonomy daf38e579a46)",
+    "fit": "partial",
+    "circular_source": false,
+    "condition_checks": [
+     {
+      "id": "K301:harness_ranked_retrieval",
+      "status": "met",
+      "reason": "Top-M key views per room ranked by CLIP similarity to the question.",
+      "evidence_ids": [
+       "sol:E04",
+       "son55:E018"
+      ]
+     },
+     {
+      "id": "K301:contribution_tested",
+      "status": "unmet",
+      "reason": "Visual-memory selection not ablated.",
+      "evidence_ids": [
+       "sol:E08"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E04",
+     "son55:E018"
+    ],
+    "reason": "Both seats partial; confirmed."
+   }
+  ],
+  "unassigned": [
+   "Floorplan-topology-weighted frontier scoring for room finding: no domain card; single paper."
+  ],
+  "revision_proposals": [
+   {
+    "type": "new_case_candidate",
+    "text": "Structural prior (floorplan topology) -> frontier scoring for exploration",
+    "status": "unchecked_single_paper",
+    "source": "2609.26360 (son55 proposal retained)"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "VLM emits a typed mode/target from a small vocabulary; deterministic planners compute goals.",
+   "necessary_conditions_and_differences": "C25 prefers verifiable feedback; termination here is self-confidence. K104 needs the vocabulary to match executor capability (met in simulation).",
+   "evidence_ids": [
+    "sol:E03",
+    "sol:E05"
+   ]
+  },
+  {
+   "rs_main": "structural_prior_encoding",
+   "rs_sub": "rs:C13",
+   "domain": {
+    "namespace": "embodied",
+    "main": null,
+    "sub": null,
+    "unassigned": true
+   },
+   "operation_correspondence": "Room-adjacency topology encoded into frontier weights for find_room.",
+   "necessary_conditions_and_differences": "No domain card; prior quality (ground-truth-derived in simulation) is a necessary condition left untested.",
+   "evidence_ids": [
+    "agg:F01",
+    "agg:F02"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; paper-practice/limitation synthesis, not actual reviews",
+   "source_refs": [
+    "profile/expectations.json:E01"
+   ],
+   "applies_when": "System beats existing EQA harness",
+   "applicable": true,
+   "status": "met",
+   "reason": "Same five backbones and filtered episodes; full system has extra prior information. GraphEQA+FP and noFP reduce this confound on one backbone.",
+   "evidence_ids": [
+    "sol:E07",
+    "sol:E08",
+    "sol:E13",
+    "son55:E011",
+    "son55:E009",
+    "son55:E017",
+    "son55:E015"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "met"
+   },
+   "aggregate_reason": "son55 adopted (sol partial): GraphEQA and ExploreEQA are rerun with each of the five frozen backbones on the same episodes and budget."
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E02"
+   ],
+   "applies_when": "Specific component credited",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Independent FP/VP/SF removals with fixed Gemini useful; no feedback, hierarchy-only or memory removal, no interactions.",
+   "evidence_ids": [
+    "sol:E08",
+    "son55:E012"
+   ],
+   "score_item": [
+    "E.causality",
+    "X"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E03"
+   ],
+   "applies_when": "Generality across models",
+   "applicable": true,
+   "status": "met",
+   "reason": "Same-model system comparisons across five different-strength planners; specific component effect not tested across models.",
+   "evidence_ids": [
+    "sol:E13",
+    "son55:E011",
+    "son55:E017"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "met",
+    "son55": "met"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E04"
+   ],
+   "applies_when": "Success-rate comparisons",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No run repeats, CIs or paired task tests on108/114 episodes.",
+   "evidence_ids": [
+    "sol:E07",
+    "sol:E08",
+    "son55:E008",
+    "son55:E023"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E05"
+   ],
+   "applies_when": "Practical efficiency of hierarchical exploration",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Steps/path and hardware reported but subplanner calls/tokens, elapsed API/map runtime and failures' cost not separated.",
+   "evidence_ids": [
+    "sol:E08",
+    "sol:E09",
+    "son55:E011"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E12",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; adapted from privileged-channel identifiability expectation, not actual review",
+   "source_refs": [
+    "profile/expectations.json:E12"
+   ],
+   "applies_when": "Extra prior semantic information could explain gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Prior source disclosed, no metric/localization, noFP and GraphEQA+FP address information access; no corruption/missing-label sensitivity.",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E02",
+    "sol:E08",
+    "sol:E12"
+   ],
+   "score_item": [
+    "M",
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "absent"
+   },
+   "aggregate_reason": "sol adopted: the extra-information channel (GT-derived floorplan) is ablated (w/o FP, GraphEQA+FP) but its accuracy is never degraded."
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E16"
+   ],
+   "applies_when": "Confidence-based episode stopping and answer judge",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No confidence calibration, false-stop breakdown or independent LLM grader agreement.",
+   "evidence_ids": [
+    "sol:E03",
+    "sol:E09",
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_item": [
+    "E.measurement"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "partial"
+   },
+   "aggregate_reason": "sol adopted (son55 partial): no failure breakdown by endpoint (wrong answer vs not found vs premature stop) in simulation; real-world per-question rows are not a breakdown."
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice; derived practice",
+   "source_refs": [
+    "profile/expectations.json:E19"
+   ],
+   "applies_when": "Real quadruped deployment",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Seven representative questions with trajectories/end answers, but no total attempted/repeated trial denominator. No-choice/perturbations are replay, not new physical closed loops.",
+   "evidence_ids": [
+    "sol:E10",
+    "sol:E11",
+    "son55:E020",
+    "son55:E021",
+    "son55:E022"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; aggregate re-checked against the fixed text."
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E08"
+   ],
+   "applies_when": "dev-overlap, privileged information caveat",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "仿真楼层图与检测词表来自 HM3D 真值；超参来源未述。",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E016",
+    "son55:E008"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 adopted: no development-overlap or contamination disclosure; hyperparameter origin unstated."
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E20"
+   ],
+   "applies_when": "depth-based tools state depth assumptions",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "视点遮挡检查依赖深度；未讨论度量性，鲁棒性仅扰动 RGB。",
+   "evidence_ids": [
+    "son55:E022",
+    "son55:E016"
+   ],
+   "score_item": [
+    "X"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 adopted: depth back-projection and occlusion checks rely on RGB-D depth; depth calibration and non-metric behaviour not discussed."
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E22"
+   ],
+   "applies_when": "matched interaction budget",
+   "applicable": true,
+   "status": "partial",
+   "reason": "统一 50 迭代；HFLEX 步数更多已如实列出。",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E011"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "met"
+   },
+   "aggregate_reason": "Revised (son55 met): the 50-iteration cap is matched, but HFLEX makes extra VLM calls per iteration (room labelling, task parser) that are neither capped nor counted."
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-ablate",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "ablations isolating each component / load-bearing step",
+   "applicable": true,
+   "status": "partial",
+   "reason": "FP/VP/SF 有，分层本身无。",
+   "evidence_ids": [
+    "son55:E012"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Accepted (son55)."
+  },
+  {
+   "id": "rs:structural_prior_encoding:RE-baseline-incumbent",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/structural_prior_encoding.md#Reviewer expectations"
+   ],
+   "applies_when": "compare against incumbent and isolate the structure from a stronger backbone",
+   "applicable": true,
+   "status": "partial",
+   "reason": "GraphEQA+FP 为朴素注入对照；缺噪声先验与 ExploreEQA+FP。",
+   "evidence_ids": [
+    "son55:E013",
+    "son55:E012",
+    "son55:E024"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "absent",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Accepted with the C13 supporting match: GraphEQA+FP tested on one backbone only; no ExploreEQA+FP."
+  },
+  {
+   "id": "agg:blind-baseline",
+   "version": "aggregate-derived (EQA measurement validity; not in E01-E22)",
+   "source_strength": "common_practice in EQA evaluation (aggregate inference, not a reviewer quote)",
+   "source_refs": [
+    "OpenEQA-style question-only baselines (not in fixed input)"
+   ],
+   "applies_when": "multiple-choice EQA success used as evidence of exploration",
+   "applicable": true,
+   "status": "unmet",
+   "seat_status": {
+    "sol": "absent",
+    "son55": "absent"
+   },
+   "aggregate_reason": "No question-only / no-exploration baseline separates answering priors from gathered evidence (SEC-1).",
+   "evidence_ids": [
+    "agg:F07"
+   ],
+   "score_item": [
+    "E.measurement"
+   ]
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "HFLEX-EQA outperforms GraphEQA and ExploreEQA across VLMs.",
+   "setting": "108 OpenEQA + 114 ExploreEQA filtered single-floor HM3D episodes (agg:F08), five VLMs, 50-iteration budget (agg:F05)",
+   "baseline_control": "Reruns with the same VLM; baselines without the floorplan",
+   "selection_vs_test": "Episode filter requires floorplan generation; development overlap undisclosed",
+   "result_denominator": "e.g. Gemini choices 75.0 vs 46.3 (OpenEQA), 63.2 vs 54.4 (ExploreEQA); single run",
+   "evidence_ids": [
+    "sol:E13",
+    "son55:E011",
+    "agg:F05",
+    "agg:F08"
+   ],
+   "counterevidence": [
+    "agg:F02",
+    "agg:F03"
+   ],
+   "allowed_conclusion": "On this filtered set and with a ground-truth-derived floorplan available only to HFLEX, it leads all baselines for every VLM; without the floorplan it does not beat GraphEQA(+FP) on ExploreEQA."
+  },
+  {
+   "claim_id": "C2",
+   "text": "The floorplan prior helps and must be used in the scoring operator rather than the prompt.",
+   "setting": "Gemini-3.5 ablations",
+   "baseline_control": "w/o FP; GraphEQA+FP",
+   "selection_vs_test": "same episodes",
+   "result_denominator": "75.0 -> 64.8 / 63.2 -> 53.5 without FP; GraphEQA+FP 43.5 / 57.0",
+   "evidence_ids": [
+    "sol:E08",
+    "son55:E012",
+    "agg:F02",
+    "agg:F03"
+   ],
+   "counterevidence": [
+    "agg:F01",
+    "agg:F09"
+   ],
+   "allowed_conclusion": "A ground-truth-derived prior adds about 10 points for one backbone; value of a genuinely estimated or erroneous prior is unknown."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Gains persist with ground-truth semantics.",
+   "setting": "Table III, Gemini",
+   "baseline_control": "GraphEQA + GT",
+   "selection_vs_test": "same episodes",
+   "result_denominator": "79.6 vs 63.9 (OpenEQA choices), 64.0 vs 57.9 (ExploreEQA)",
+   "evidence_ids": [
+    "son55:E014"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Gap narrows but remains; single run, one backbone."
+  },
+  {
+   "claim_id": "C4",
+   "text": "Successful deployment on a quadruped in unseen indoor environments.",
+   "setting": "7 representative questions, one run each, manual floorplan",
+   "baseline_control": "none; no-choice results by replay",
+   "selection_vs_test": "questions described as representative (agg:F06)",
+   "result_denominator": "7/7 correct (multiple-choice), no attempt denominator for selection",
+   "evidence_ids": [
+    "sol:E10",
+    "son55:E020",
+    "agg:F06"
+   ],
+   "counterevidence": [
+    "agg:F06"
+   ],
+   "allowed_conclusion": "Feasibility examples, not a success rate."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Both seats online, confirmed: closed-loop Habitat EQA with benchmark answers; the 7 physical questions are representative examples without an attempt denominator, so not transfer.",
+  "claim_support": "scoped",
+  "author_claim_kept": "HFLEX-EQA combines hierarchical VLM planning, online scene graphs, specialized exploration modes and weak topological floorplan priors to outperform existing EQA baselines on OpenEQA/ExploreEQA and deploy successfully in previously unseen real indoor environments.",
+  "strongest_supported_claim": "With a ground-truth-derived topological floorplan on filtered single-floor HM3D episodes, the hierarchical planner answers more questions than rerun GraphEQA/ExploreEQA for all five VLMs; the prior is worth about 10 points for Gemini and helps more inside the scoring operator than in the prompt.",
+  "cannot_conclude": [
+   "Robustness to weak or erroneous floorplans",
+   "Advantage without the prior on ExploreEQA",
+   "Real-world success rate",
+   "Statistical significance",
+   "Free-form accuracy (LLM grader unvalidated)"
+  ],
+  "unresolved": [],
+  "author_report_only": true
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Specific planning/prior gap with rerun neighbours; prior availability and filtering bound its scope.",
+   "evidence_ids": [
+    "sol:E01",
+    "son55:E002",
+    "son55:E003"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Mode separation, topology-weighted frontiers and visibility-scored viewpoints map to distinct missing-information types, with a tested prediction (prompt-injected prior is unstable); self-reported confidence and GT-derived prior are the weak assumptions.",
+   "evidence_ids": [
+    "sol:E05",
+    "sol:E06",
+    "son55:E012"
+   ],
+   "counterevidence_ids": [
+    "agg:F01"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Equations and hyperparameters (M, N, epsilon, lambdas, alpha/beta/gamma, kappa_min) and floorplan generation are given; prompts, mode statistics and floorplan perturbation absent.",
+   "evidence_ids": [
+    "sol:E02",
+    "son55:E016",
+    "son55:E004"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "sol adopted (son55 3). Multiple-choice correctness on explicit denominators is solid, but half of Table I (no-choice) is graded by an unvalidated LLM (agg:F04; EVIDENCE rule 3), physical runs are selected representative examples (agg:F06), and no question-only baseline shows that answers reflect gathered evidence rather than priors (agg:F07, SEC-1).",
+    "evidence_ids": [
+     "sol:E09",
+     "son55:E011",
+     "agg:F08"
+    ],
+    "counterevidence_ids": [
+     "agg:F04",
+     "agg:F06",
+     "agg:F07"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "sol adopted (son55 2). Same-backbone reruns across five VLMs at a matched iteration cap, one-at-a-time removals, the extra-information control GraphEQA+FP (agg:F03) and the GT-semantics analysis test the main alternative explanations. Not 4: ablations on one backbone and one run, no noisy-prior test, hierarchy not ablated, and on ExploreEQA the w/o-FP system (53.5) does not beat GraphEQA (54.4) or GraphEQA+FP (57.0) - recorded as counterevidence; the GT-derived prior's scope problem is carried in E.holdout.",
+    "evidence_ids": [
+     "sol:E08",
+     "sol:E13",
+     "agg:F03",
+     "son55:E014"
+    ],
+    "counterevidence_ids": [
+     "agg:F02",
+     "son55:E025"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed and extended: same-source HM3D question sets, episodes filtered to those where a floorplan can be generated, floorplan derived from ground-truth annotations although claimed estimated/possibly inaccurate (agg:F01, agg:F09), hyperparameter origin unstated; physical questions selected.",
+    "evidence_ids": [
+     "sol:E07",
+     "son55:E007",
+     "agg:F01"
+    ],
+    "counterevidence_ids": [
+     "agg:F09"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both 1; confirmed. Single runs, no intervals; several gaps are 5-12 episodes; 7 physical examples.",
+    "evidence_ids": [
+     "sol:E07",
+     "son55:E011"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "son55 adopted (sol 1). The iteration budget is matched (agg:F05) and per-method planning steps and path length are reported, a real effort accounting; extra per-iteration VLM calls, latency and API cost are absent.",
+    "evidence_ids": [
+     "agg:F05",
+     "son55:E011"
+    ],
+    "counterevidence_ids": [
+     "son55:E024"
+    ],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete fixed text read (no appendix); all eight items resolved.",
+ "agreement_checks": [
+  "claim_type system_method, evidence_level online, claim_support scoped: identical; confirmed.",
+  "G/M/X, E.holdout and E.statistics identical; re-checked; E.holdout reason extended with the GT-derived floorplan point (both seats mention it).",
+  "Anchors precedent 1 (privileged channel): the floorplan's source is stated (HM3D annotations), so it is not an undisclosed channel; its ground-truth origin is penalised in E.holdout/claim scope, not double-counted."
+ ],
+ "resolutions": [
+  {
+   "field_path": "status",
+   "sol_value": "reviewed",
+   "son55_value": {
+    "value": "reviewed",
+    "reason": "完整正文与全部表格已读；无附录；图像内容未在文本中。"
+   },
+   "decision": "same_supported_fact",
+   "final_value": "reviewed",
+   "reason": "Shape difference only (controller artifact).",
+   "evidence_ids": [],
+   "score_impact": "none",
+   "controller_artifact": true
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    "rs:C25"
+   ],
+   "son55_value": [
+    "C25",
+    "C13"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "rs:C25",
+    "rs:C13"
+   ],
+   "reason": "Same primary sub; C13 supporting adopted (see rs_pattern.matches[1].reason); bare ids normalised.",
+   "evidence_ids": [
+    "agg:F02",
+    "agg:F03"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.supporting",
+   "sol_value": [],
+   "son55_value": [
+    "structural_prior_encoding"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "structural_prior_encoding"
+   ],
+   "reason": "Distinct operation (topology-encoded scoring) needing its own card.",
+   "evidence_ids": [
+    "agg:F02"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.executes_pattern/resolves_problem",
+   "sol_value": [
+    true,
+    false
+   ],
+   "son55_value": [
+    "partial",
+    "partial"
+   ],
+   "decision": "revised",
+   "final_value": [
+    true,
+    false
+   ],
+   "reason": "Executed at parent/tactic level with gaps; closure not shown (prior dependence, ExploreEQA w/o FP).",
+   "evidence_ids": [
+    "agg:F02"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches[K104].fit",
+   "sol_value": "strong",
+   "son55_value": "partial",
+   "decision": "sol",
+   "final_value": "strong",
+   "reason": "Fit concerns the operation; evidence breadth is judged in E.",
+   "evidence_ids": [
+    "sol:E05"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.unassigned/revision_proposals",
+   "sol_value": [],
+   "son55_value": "floorplan-prior frontier weighting case candidate",
+   "decision": "son55",
+   "final_value": "retained as unchecked single-paper case candidate",
+   "reason": "Operation not covered by a domain card.",
+   "evidence_ids": [
+    "agg:F02"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "See ratings.E.measurement.reason (LLM grader, selected physical examples, missing blind baseline).",
+   "evidence_ids": [
+    "agg:F04",
+    "agg:F06",
+    "agg:F07"
+   ],
+   "score_impact": "-3.75 vs son55"
+  },
+  {
+   "field_path": "ratings.E.causality",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "sol",
+   "final_value": 3,
+   "reason": "See ratings.E.causality.reason.",
+   "evidence_ids": [
+    "agg:F03",
+    "sol:E08"
+   ],
+   "score_impact": "+2.5 vs son55"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 1,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "See ratings.E.cost.reason.",
+   "evidence_ids": [
+    "agg:F05"
+   ],
+   "score_impact": "+1.25 vs sol"
+  },
+  {
+   "field_path": "claims",
+   "sol_value": "C1-C2",
+   "son55_value": "C1-C4",
+   "decision": "revised",
+   "final_value": "aggregate C1-C4",
+   "reason": "son55 split adopted; C1/C2 add the ExploreEQA w/o-FP counterevidence and the GT-prior caveat.",
+   "evidence_ids": [
+    "agg:F02",
+    "agg:F01"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E01].status",
+   "sol_value": "partial",
+   "son55_value": "met",
+   "decision": "son55",
+   "final_value": "met",
+   "reason": "son55 adopted (sol partial): GraphEQA and ExploreEQA are rerun with each of the five frozen backbones on the same episodes and budget.",
+   "evidence_ids": [
+    "sol:E07",
+    "sol:E08",
+    "sol:E13",
+    "son55:E011",
+    "son55:E009",
+    "son55:E017",
+    "son55:E015"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E12].status",
+   "sol_value": "partial",
+   "son55_value": "absent",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "sol adopted: the extra-information channel (GT-derived floorplan) is ablated (w/o FP, GraphEQA+FP) but its accuracy is never degraded.",
+   "evidence_ids": [
+    "sol:E01",
+    "sol:E02",
+    "sol:E08",
+    "sol:E12"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E16].status",
+   "sol_value": "unmet",
+   "son55_value": "partial",
+   "decision": "sol",
+   "final_value": "unmet",
+   "reason": "sol adopted (son55 partial): no failure breakdown by endpoint (wrong answer vs not found vs premature stop) in simulation; real-world per-question rows are not a breakdown.",
+   "evidence_ids": [
+    "sol:E03",
+    "sol:E09",
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E08].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "son55 adopted: no development-overlap or contamination disclosure; hyperparameter origin unstated.",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E016",
+    "son55:E008"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E20].status",
+   "sol_value": "absent",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "son55 adopted: depth back-projection and occlusion checks rely on RGB-D depth; depth calibration and non-metric behaviour not discussed.",
+   "evidence_ids": [
+    "son55:E022",
+    "son55:E016"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[E22].status",
+   "sol_value": "absent",
+   "son55_value": "met",
+   "decision": "revised",
+   "final_value": "partial",
+   "reason": "Revised (son55 met): the 50-iteration cap is matched, but HFLEX makes extra VLM calls per iteration (room labelling, task parser) that are neither capped nor counted.",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E011"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:decompose_and_delegate:RE-ablate].status",
+   "sol_value": "absent",
+   "son55_value": "partial",
+   "decision": "son55",
+   "final_value": "partial",
+   "reason": "Accepted (son55).",
+   "evidence_ids": [
+    "son55:E012"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[rs:structural_prior_encoding:RE-baseline-incumbent].status",
+   "sol_value": "absent",
+   "son55_value": "partial",
+   "decision": "son55",
+   "final_value": "partial",
+   "reason": "Accepted with the C13 supporting match: GraphEQA+FP tested on one backbone only; no ExploreEQA+FP.",
+   "evidence_ids": [
+    "son55:E013",
+    "son55:E012",
+    "son55:E024"
+   ],
+   "score_impact": "none directly (expectations map to rating reasons; ratings resolved separately)"
+  },
+  {
+   "field_path": "expectations[agg:blind-baseline]",
+   "sol_value": "absent",
+   "son55_value": "absent",
+   "decision": "revised",
+   "final_value": "unmet",
+   "reason": "No question-only / no-exploration baseline separates answering priors from gathered evidence (SEC-1).",
+   "evidence_ids": [
+    "agg:F07"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "score",
+   "sol_value": 63.75,
+   "son55_value": 66.25,
+   "decision": "revised",
+   "final_value": {
+    "raw": 65.0,
+    "display": 65.0
+   },
+   "reason": "Deterministic recomputation from the resolved eight ratings; seat totals are not averaged.",
+   "evidence_ids": [],
+   "score_impact": "final raw 65.0"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SEC-1",
+   "field_path": "expectations / ratings.E.measurement.counterevidence_ids",
+   "seat_values": {
+    "sol": "not mentioned",
+    "son55": "not mentioned"
+   },
+   "error": "Neither seat noted that no question-only (blind) or no-exploration baseline is reported, although multiple-choice EQA correctness can be reached from the VLM's priors; without it, success is not shown to measure gathered evidence.",
+   "correction": "Added expectation agg:blind-baseline = unmet and agg:F07 as measurement counterevidence.",
+   "evidence_ids": [
+    "agg:F07"
+   ],
+   "score_impact": "Supports E.measurement = 2 (decided on the LLM-grader and selected-example grounds as well); no separate change."
+  }
+ ],
+ "requests": [],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All rating and pattern disagreements resolved from the fixed text; one shared omission corrected; no scoring unknowns.",
+ "score": {
+  "raw": 65.0,
+  "display": 65.0,
+  "lower": 65.0,
+  "upper": 65.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4",
+  "display_rounding": "Decimal ROUND_HALF_UP to 0.1; raw unrounded value is the selection value",
+  "status_vector": {
+   "G": "resolved",
+   "M": "resolved",
+   "X": "resolved",
+   "E.measurement": "resolved",
+   "E.causality": "resolved",
+   "E.holdout": "resolved",
+   "E.statistics": "resolved",
+   "E.cost": "resolved"
+  }
+ },
+ "final_record_hash": "c755d5b5f51fbb5148d396efa6befead62cd19f1b563e20e2bcc238a1c61712d"
+}

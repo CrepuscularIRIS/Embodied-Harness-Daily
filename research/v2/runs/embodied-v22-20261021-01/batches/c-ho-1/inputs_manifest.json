@@ -1,0 +1,69 @@
+{
+ "batch_id": "c-ho-1",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "calibration-holdout",
+ "papers": [
+  {
+   "paper_key": "2503.02465",
+   "paper_id": "2503.02465",
+   "version": "2503.02465v2",
+   "title": "UAV-VLRR: Vision-Language Informed NMPC for Rapid Response in UAV Search and Rescue",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.02465.txt",
+   "material_sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+   "ft_size": 21397
+  },
+  {
+   "paper_key": "2610.15572",
+   "paper_id": "2610.15572",
+   "version": "2610.15572v1",
+   "title": "Look Before You Move: Agent-Interface-Aligned Supervision for Open-World Mobile Manipulation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2610.15572.txt",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "ft_size": 32034
+  },
+  {
+   "paper_key": "2609.39915",
+   "paper_id": "2609.39915",
+   "version": "2609.39915v1",
+   "title": "NavHarness: Adaptive Goals for Agentic Vision-Language Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2609.39915.txt",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "ft_size": 59172
+  },
+  {
+   "paper_key": "2512.10394",
+   "paper_id": "2512.10394",
+   "version": "2512.10394v2",
+   "title": "RoboNeuron: A Middle-Layer Infrastructure for Agent-Driven Orchestration in Embodied AI",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2512.10394.txt",
+   "material_sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+   "ft_size": 33717
+  },
+  {
+   "paper_key": "2609.26360",
+   "paper_id": "2609.26360",
+   "version": "2609.26360v1",
+   "title": "Hierarchical Floorplan-Guided Vision-Language Exploration for Embodied Question Answering",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2609.26360.txt",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "ft_size": 41253
+  },
+  {
+   "paper_key": "2503.10069",
+   "paper_id": "2503.10069",
+   "version": "2503.10069v2",
+   "title": "SmartWay: Enhanced Waypoint Prediction and Backtracking for Zero-Shot Vision-and-Language Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.10069.txt",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "ft_size": 39598
+  }
+ ],
+ "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+ "material_fix": {
+  "date": "2026-10-21",
+  "reason": "旧 research/fulltext 缓存为裁剪版（DROP related work/appendix，40KB cap），不满足 JUDGE_BATCH A.1 完整材料要求；重抓未裁剪 arXiv HTML（含附录）至 review-runs materials/，重新固定输入包",
+  "prior_attempt invalidated": "a1",
+  "prior_attempt_invalidated": null,
+  "note": "本批直接基于完整材料创建；不存在被作废的 prior attempt（裁剪材料问题在本 run 级修复，未影响本批）"
+ }
+}

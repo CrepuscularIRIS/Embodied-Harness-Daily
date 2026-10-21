@@ -1,0 +1,1742 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-2",
+ "attempt_id": "a1",
+ "seat": "aggregate_opus55",
+ "phase": "calibration-holdout",
+ "input_seat_hashes": {
+  "sol": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-2/seats/sol/attempts/a1/2608.16978.json",
+   "sha256": "2a224189c2b590b08bad4b572fe046d02114bfc51b8acde2d52f81a1365ddd5a"
+  },
+  "son55": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-2/seats/son55/attempts/a1/2608.16978.json",
+   "sha256": "8637f628b1cf486cd17482084ec15fdeeac3d799f5573f6040ef60c06484a37f"
+  }
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_provenance": {
+  "aggregate_model": "claude-opus-5-5[1m]",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Session/receipt not exposed to the internal aggregate subagent; no model probing performed.",
+  "timestamp": "2026-10-21T17:50:41.454310+00:00",
+  "anchoring_note": "Fixed full text read and an initial evidence judgment formed before reading seat rating reasons; seat totals were visible in conflicts.json at start, so this is an aggregation review, not a third blind rating or human gold.",
+  "evidence_id_namespacing": "Seat evidence ids are 'sol:E..' / 'son55:E..'; aggregator additions are 'agg:A..'. Both seats' evidence is retained verbatim.",
+  "anchors_applied": "research/v2/runs/embodied-v22-20261021-01/calibration/anchors.md (sha256 37f7080c6a414c927ab08f3dfb5be1dd784dbc2be41f1b21070532d9584701ed)"
+ },
+ "provenance": {
+  "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+  "inputs_manifest_sha256": "46fcf63b283bd767924df0384fa3ea50b779c93399ee37a3b364ff856f310f28",
+  "conflicts_sha256": "ea03d9b1bbd9feff11d3cd7787e0b00d92ed56949355507d45c788929be9d152",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "pattern_protocol_hash": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "63df41f73e20b110d2b3c2500b1501ff65203196736ccf009ab5b138f6bdb2d7",
+  "domain_cards_hash_convention": "sol convention: sha256 of sort_keys compact JSON {path: sha256} over patterns/**/*.md; son55 recorded taxonomy/conditions/overview file hashes. Both recomputed by the aggregator against current files and match (no card drift between seats).",
+  "son55_domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e|conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1|overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": "4ebe9616cdae7ea13ba04809a822f587d3b1d0bfd6f8614f49f189abd7530d14",
+  "son55_expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "material_sha256": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+  "seat_model_types": {
+   "sol": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+   "son55": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)"
+  },
+  "model_type": "fable type (overlay claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T17:50:41.454310+00:00",
+  "independence_note": "Aggregate review with both seat inputs; not a third blind review, human gold or reproduction."
+ },
+ "paper": {
+  "central_claim": "Closing the loop at the level of the control code within an episode (a frozen VLM re-observes multi-view RGB, proprioception and state delta every K steps and rewrites the Python control function) lifts a training-free, zero-demonstration policy from 3.5% to 35.1% pooled success on a 57-task MuJoCo/RoboVerse sweep, the gain traced to 27.3% within-episode recovery of failed grasps, at about 10 cache-warm VLM calls per episode.",
+  "paper_key": "2608.16978",
+  "paper_id": "2608.16978",
+  "title": "VLCP: Vision Language Control Policy Closed-Loop Code Replanning for Robot Manipulation",
+  "version": "2608.16978v1",
+  "claim_type": "system_method"
+ },
+ "materials": [
+  {
+   "material_id": "2608.16978:fulltext",
+   "aliases": [
+    "sol:2608.16978v1",
+    "son55:M1"
+   ],
+   "url": "https://arxiv.org/html/2608.16978v1",
+   "sha256": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work (Table 1)",
+    "3 Method (3.1-3.4)",
+    "4 Experiments (4.1-4.6, Tables 2-3, Figs 2-4 captions)",
+    "5 Conclusion/Limitations",
+    "Appendix 0.A Prompt assets",
+    "Appendix 0.B Generated-code sample"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E01",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L6",
+   "quote": "VLCP closes the loop where the failure actually lives, on the control code, within a single episode.",
+   "support_explanation": "原中心主张。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E02",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L12",
+   "quote": "The closest work, Act-Observe-Rewrite [ 7 ] , does rewrite the full controller, but between trials",
+   "support_explanation": "最近邻来自作者自述，原文未固定。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E03",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L15",
+   "quote": "the poses of task-relevant objects read from the simulator",
+   "support_explanation": "有pose特权，非纯RGB。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E04",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L15",
+   "quote": "every K steps the VLM re-observes the scene and rewrites the function itself",
+   "support_explanation": "代码级双环：IK/PD执行与VLM重写。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E05",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L15",
+   "quote": "If the import fails, the file is reverted and the error is surfaced to the VLM on the next replan.",
+   "support_explanation": "技能接受是import成功而非执行成功。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E06",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "Each task runs for a single episode, with the skill library reset beforehand to keep trials independent",
+   "support_explanation": "57任务主实验不测跨episode留存收益。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E07",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "pooling to 35.1\\% [ 24.0 , 48.1 ] overall",
+   "support_explanation": "20/57闭环成功。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E08",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "or 3.5\\% [ 1.0 , 11.9 ] pooled",
+   "support_explanation": "2/57一次代码生成成功。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E09",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L15",
+   "quote": "the same compiled function gets fresh obs and J each step",
+   "support_explanation": "低层固定control仍能用状态反馈恢复，不能逻辑断言恢复0。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E10",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "15 Recovery rate (recovered / failed) 27.3%",
+   "support_explanation": "75次含55次失败抓取，15次后续lift，并非15次完整任务成功。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E11",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "Open-loop ( K{=}T ) recovery rate 0% (by construction)",
+   "support_explanation": "零恢复是结构断言而非匹配测量。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E12",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "Cached-prefix fraction per replan (%) 83.8 79.4",
+   "support_explanation": "81episodes/约721调用；tokens、cache、latency均报告。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E13",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L21",
+   "quote": "the main sweep runs a single episode per task",
+   "support_explanation": "缺重复种子。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E14",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "a tenfold gap, with non-overlapping confidence intervals in every scene family",
+   "support_explanation": "数值复核反证：Object6/10 vs1/10 Wilson95%区间约[31.3,83.2]与[1.8,40.4]重叠；Living4/17 vs0/17也重叠。总体区间不重叠成立。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E15",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L15",
+   "quote": "We did not sweep K",
+   "support_explanation": "K=50敏感性未检验。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E16",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2608.16978.txt:L18",
+   "quote": "VLCP shows no such phrasing dependence. Its pooled success is unchanged under reframing (40.0% in both conditions",
+   "support_explanation": "Sec4.4对6任务只换指令形式的诊断结果。",
+   "kind": "author_report",
+   "seat_material_id": "2608.16978v1",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 3.2",
+   "quote": "VLCP’s central claim is that recovering from an execution failure means closing the loop at the level of the control code , within the episode.",
+   "support_explanation": "Author central claim: the closed loop must act on the control code itself inside one episode.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 3.3 Replan cadence",
+   "quote": "At the start of each block the VLM is queried once to generate a new control function, which then runs for every remaining step in the block with no further VLM queries.",
+   "support_explanation": "Operation: frozen VLM rewrites the control function every K steps; between replans the compiled function runs unchanged.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 3.3 role of vision",
+   "quote": "Since VLCP is handed privileged object poses, it is fair to ask what the RGB observations are for.",
+   "support_explanation": "Information: object poses are privileged simulator state; RGB is claimed to drive failure diagnosis, but no no-image ablation exists.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.1",
+   "quote": "Each task runs for a single episode, with the skill library reset beforehand to keep trials independent",
+   "support_explanation": "Denominator: one episode per task; the skill library is reset, so cross-episode reuse is not exercised in the main sweep.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.3",
+   "quote": "closed-loop VLCP reaches 60.0\\% on Object Picks, 33.3\\% on Kitchen Scenes, and 23.5\\% on Living-Room Scenes, pooling to 35.1\\% [ 24.0 , 48.1 ] overall.",
+   "support_explanation": "Main closed-loop result over the 57-task sweep with Wilson CI.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.3",
+   "quote": "Set to K{=}T , the same system collapses to 10.0\\% , 3.3\\% , and 0.0\\% , or 3.5\\% [ 1.0 , 11.9 ] pooled.",
+   "support_explanation": "Matched open-loop (K=T) comparator result.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.3",
+   "quote": "The ablation shares VLCP’s simulator, control API, privileged object poses, task set, model, and episode budget, so any difference traces to the replanning loop alone",
+   "support_explanation": "Control: matched K=T ablation; it varies re-querying frequency, not code-level rewriting versus other replan granularities.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.5",
+   "quote": "Of the 75 episodes, 55 contain at least one failed grasp.",
+   "support_explanation": "Recovery denominator: 55 episodes with a failed grasp; 15 recover (27.3%).",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.5",
+   "quote": "we label a block a failed grasp when the hand is at the object (end-effector–object distance below 0.13 m) with the gripper closed but the object still on the surface",
+   "support_explanation": "The recovery detector is a hand-set threshold heuristic on logged state, not validated against labels.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Table 2 caption",
+   "quote": "Open-loop ( K{=}T ) recovery is 0 by construction, since it never re-observes.",
+   "support_explanation": "Baseline recovery is assumed zero rather than measured.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.6",
+   "quote": "End-to-end latency for a single replan is a median of 18.8 s (mean 25.9 s)",
+   "support_explanation": "Measured cost: median ~10 calls/episode, 84% cache hit, 18.8 s per replan.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.4",
+   "quote": "we read the modified-task comparison as indicative rather than statistically conclusive at this sample size",
+   "support_explanation": "Instruction-reframing study uses N=10 per cell and a VLA-0 reference that is not matched.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 5 Limitations",
+   "quote": "VLCP relies on simulator-provided object poses and has only been run in simulation",
+   "support_explanation": "Scope limit: simulation only, privileged poses.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 5 Limitations",
+   "quote": "the main sweep runs a single episode per task (Section 4.1 ), and we lean on per-family pooling and Wilson confidence intervals rather than multi-seed repetition.",
+   "support_explanation": "Statistics limit acknowledged by the authors.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 3.3",
+   "quote": "We did not sweep K ; a systematic study of the cadence–cost trade-off",
+   "support_explanation": "Replan cadence K=50 is a single untested setting.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 1 / Sec 2",
+   "quote": "The closest work, Act-Observe-Rewrite [ 7 ] , does rewrite the full controller, but between trials",
+   "support_explanation": "Nearest neighbour for gap: rewrites controller between trials, not within episode.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 2",
+   "quote": "Concurrent work, CaP-Agent0 [ 2 ] , reaches the same design point from the benchmarking side",
+   "support_explanation": "A concurrent method occupies the same design cell; no empirical comparison on the same benchmark.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 3.4",
+   "quote": "Skill files persist across episodes and are shared across concurrent LLMPolicy instances, coordinated with a process-level lock.",
+   "support_explanation": "Persistence of the skill library; later prompts import saved skills.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 5 Limitations",
+   "quote": "The smaller open models we tried (Qwen3-4B) failed to produce reliable control code or effective replanning",
+   "support_explanation": "The method depends on a strong frozen VLM (GPT-5.5).",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.4",
+   "quote": "VLA-0 is evaluated over 50 episodes per original task and 10 per modified task, VLCP over 10 episodes per task variant in both conditions.",
+   "support_explanation": "Unequal episode counts across arms in the reframing study.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.6",
+   "quote": "All 778 generated control blocks across every episode parsed and compiled successfully",
+   "support_explanation": "Code validity is not the bottleneck.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "2608.16978:fulltext",
+   "hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "Sec 4.1",
+   "quote": "VLCP uses GPT-5.5 as the replanning model, queried every K{=}50 steps as described in Section 3 .",
+   "support_explanation": "Base model GPT-5.5 is fixed across arms.",
+   "kind": "author_report",
+   "seat_material_id": "M1",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:A01",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "materials/2608.16978.txt:L27 (Appendix 0.A output-format contract)",
+   "quote": "Each replan only needs to handle the *next* phase of the task (~K closed-loop steps), not the full multi-phase plan.",
+   "support_explanation": "Static Block A contract. If the K=T baseline (\"the same system\") keeps this contract, its single query is instructed to write single-phase code for the whole 500-step episode.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A02",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "materials/2608.16978.txt:L18 (Sec 4.3)",
+   "quote": "This K{=}T condition is precisely the Code-as-Policies / ProgPrompt protocol",
+   "support_explanation": "Authors equate K=T with the prior single-program paradigm; that equivalence fails if the K=T prompt still asks only for the next phase.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A03",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "materials/2608.16978.txt:L18 (Sec 4.1)",
+   "quote": "Object Picks (the 10 LIBERO-Object pick tasks), Kitchen Scenes ( 30 tasks), and Living-Room Scenes ( 17 tasks)",
+   "support_explanation": "Per-family denominators (10/30/17) used to recompute Wilson intervals: 6/10 vs 1/10 and 4/17 vs 0/17 overlap; 10/30 vs 1/30 and pooled 20/57 [24.0,48.1] vs 2/57 [1.0,11.9] do not (pooled values reproduce the paper, confirming the counts).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:A04",
+   "material_id": "2608.16978:fulltext",
+   "material_hash": "d30bd722f86574dcef1f6b74e64339fdbbdc7ba0230b396f37bd8e4569b3ed6b",
+   "locator": "materials/2608.16978.txt:L27 (Appendix 0.A worked example)",
+   "quote": "Single-phase example: close the gripper on the milk carton.",
+   "support_explanation": "A prompt worked example targets an object of the evaluated LIBERO-Object pick family (development/evaluation overlap risk; our inference that milk is among the 10 Object Picks).",
+   "kind": "our_inference",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Control function (Python control(obs,J)->joint targets) written by a frozen frontier VLM (GPT-5.5); baseline is the same system queried once per episode (K=T).",
+   "information": "Multi-view RGB (two fixed cameras) at the live turn only, proprioception, a numeric state delta, previous block's code and action dicts; privileged object poses from the simulator; analytic Jacobian handed to code as an IK primitive. Not available: learned detector output, real sensing.",
+   "operation": "Every K=50 steps the VLM is re-queried and emits a new control function (and optional skill modules) for the next block; the compiled function runs closed-loop on obs/J within the block.",
+   "output": "Next-block control code plus helper skill modules; actions are per-joint position targets for a PD controller.",
+   "conditions": "Simulation only; strong frozen VLM required (Qwen3-4B failed); 500-step horizon (about 10 replans); binary terminal predicate from LIBERO tasks.",
+   "feedback": "Observation is the VLM's own reading of images, a numeric summary and the previous code/trace; there is no external verifier of intermediate code beyond compile/import and runtime exceptions.",
+   "selection_rule": "None: each new block replaces the old function; there is no candidate comparison, acceptance gate or rollback of the control function.",
+   "persistence": "Within the episode: history of up to 20 replan pairs with images dropped from history. Across episodes: skill modules saved to control_policies/skills/, up to 12 most recent injected verbatim into later prompts; the library is reset per task in the sweep.",
+   "later_use": "Skills are imported by later control functions; not exercised across tasks in the reported sweep.",
+   "claimed_effect": "3.5% -> 35.1% pooled success versus K=T; 27.3% (15/55) of failed grasps recovered by a later replan.",
+   "failure_boundary": "40/55 failed-grasp episodes never recover; long-horizon tasks fall to 23.5%; replan latency 18.8 s median; no real robot; perception noise untested.",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E002",
+    "son55:E005",
+    "son55:E006",
+    "son55:E008",
+    "son55:E018"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Cross-episode skill library of VLM-written helper modules (secondary claim).",
+   "information": "Source text of previously written modules; only import success is checked (failed import reverts the file and surfaces the error).",
+   "operation": "Extract labelled helper blocks written during any replan, write atomically to disk, re-inject up to 12 by recency into Block B of later system prompts.",
+   "output": "Importable skill functions available to later control functions.",
+   "conditions": "Shared directory with process lock; no curation, promotion criteria or curriculum.",
+   "feedback": "Compile/import success only.",
+   "selection_rule": "Recency cap of 12; no quality or success filter.",
+   "persistence": "On-disk skill files.",
+   "later_use": "Imported verbatim in later replans.",
+   "claimed_effect": "Described as an outlook for continual learning; no measurement of reuse or gains is reported.",
+   "failure_boundary": "Not evaluated: the main sweep resets the library per task, so there is no retained-improvement evidence.",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E018"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Code-generation methods write the program once and cannot recover from runtime failures; monitoring/replanning methods retry a fixed policy or reselect a subtask but never rewrite the failing code; VLAs expose no point for mid-execution reasoning.",
+  "checked_gap": "Plausible and specific: a failed grasp rides to the end of an open-loop code policy (open-loop success 3.5%). The distinction between rewriting code and retrying/subtask-replanning is asserted through a feature table (Table 1) but is not tested against any such alternative.",
+  "lineage": [
+   "Code as Policies / ProgPrompt / ELLMER (single query before execution)",
+   "Code-as-Monitor / DoReMi / Inner Monologue (monitor then retry or escalate)",
+   "Act-Observe-Rewrite 2603.04466 (rewrites controller between trials; closest ancestor per authors)",
+   "CaP-Agent0 (concurrent, same design cell)"
+  ],
+  "closest_adjacent": "Act-Observe-Rewrite rewrites between trials; CaP-Agent0 already rewrites within an episode on a different benchmark (LIBERO-PRO). Neither is run on the authors' sweep; the 18-22% CaP-Agent0 figure is quoted across benchmarks.",
+  "residue": "Within-episode recovery of manipulation failures by editing code; granularity of recovery on tasks with no plan-level correlate.",
+  "stakes": "Failed grasps are terminal for single-shot code policies; success collapses to near zero in every scene family.",
+  "method_response": "Re-query a frozen VLM every K steps with live images and a state delta, rewriting the control function; add a persistent skill library.",
+  "remaining_gap": "Whether code-level rewriting matters versus any VLM replanning with re-observation; real-world perception; K sensitivity; the skill library's effect; multi-seed variance.",
+  "evidence_ids": [
+   "son55:E001",
+   "son55:E016",
+   "son55:E017",
+   "son55:E007",
+   "son55:E015"
+  ],
+  "unresolved": [
+   "Gap is substantiated mainly against the method's own degenerate case; difference from the concurrent CaP-Agent0 is unmeasured."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "1 boundary: VLM writes control logic; IK primitive / PD controller execute (met)",
+     "2 artifact: executable control(obs, J) (met)",
+     "3 loop closure mid-construction: block execution trace + re-observation drive the next rewrite (met; the grader is the VLM reading images, not a sound checker)",
+     "4 ablation: K=T collapse shown, but it isolates query frequency only and its prompt fairness is unestablished (partial)",
+     "5 cost: calls/tokens/latency/cache reported (met)"
+    ],
+    "success_failure_checks": [
+     {
+      "condition": "typed executable artifact",
+      "status": "met"
+     },
+     {
+      "condition": "no extra-compute confound",
+      "status": "unmet (1 vs ~10 calls)"
+     },
+     {
+      "condition": "isolated load-bearing mechanism",
+      "status": "partial"
+     },
+     {
+      "condition": "signals obtainable at deployment",
+      "status": "partial (privileged poses)"
+     }
+    ],
+    "evidence_ids": [
+     "son55:E002",
+     "son55:E005",
+     "son55:E006",
+     "son55:E007",
+     "son55:E011",
+     "sol:E04"
+    ],
+    "reason": "Both seats: decompose_and_delegate / C25. Namespace rs:C25 (son55 bare C25). Fit partial: no sound external solver grades the code."
+   }
+  ],
+  "reason": "C25 executed as in-episode executable-artifact rewriting. The instruction-reframing study (Sec 4.4) is an evaluation probe on a reference model, not an operation of the method, so controlled_diagnostic_design is not added as supporting.",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "Executable artifact and in-episode loop closure executed; checker is the same VLM.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E007"
+   ]
+  },
+  "resolves_problem": {
+   "value": false,
+   "reason": "40/55 failed-grasp episodes never recover; sim only with privileged poses; baseline fairness unestablished.",
+   "evidence_ids": [
+    "son55:E008",
+    "son55:E013",
+    "agg:A01"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105",
+    "version": "embodied-agent-harness/v1 (domain_cards_hash in provenance)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "item": "frozen planner writes code composing perception/geometry/motion primitives",
+      "status": "met",
+      "evidence_ids": [
+       "sol:E04",
+       "son55:E002"
+      ]
+     },
+     {
+      "item": "only requested observations return",
+      "status": "unmet (images and numeric summary pushed every replan)",
+      "evidence_ids": [
+       "son55:E002"
+      ]
+     },
+     {
+      "item": "matched call budget vs alternative",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E007",
+       "son55:E011"
+      ]
+     },
+     {
+      "item": "contact without feedback stays hard",
+      "status": "met_as_risk (27.3% recovery)",
+      "evidence_ids": [
+       "son55:E008"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E04",
+     "son55:E002",
+     "son55:E003"
+    ]
+   },
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": null,
+    "version": "embodied-agent-harness/v1",
+    "fit": "weak",
+    "condition_checks": [
+     {
+      "item": "skills persist and are re-injected into later prompts",
+      "status": "met (mechanism)",
+      "evidence_ids": [
+       "son55:E018",
+       "sol:E05"
+      ]
+     },
+     {
+      "item": "reuse measured on held-out tasks",
+      "status": "unmet (library reset per task)",
+      "evidence_ids": [
+       "sol:E06"
+      ]
+     },
+     {
+      "item": "K303 mining/consolidation/review",
+      "status": "unmet (no curation or promotion), so sub null",
+      "evidence_ids": [
+       "son55:E018"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E018",
+     "sol:E06"
+    ]
+   }
+  ],
+  "unassigned": [],
+  "revision_proposals": [
+   "(son55) Clarify the K105 vs R05 boundary for within-episode rewriting of a persistent control function with the model in the loop (VLCP, CaP-Agent0). R05 not asserted here because its defining condition (no model at run time) is violated."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105"
+   },
+   "operation_correspondence": "C25 executable artifact re-generated from execution traces = K105 frozen planner writing code over an IK primitive, re-queried every K steps.",
+   "necessary_conditions_and_differences": "K105 returns only requested observations; VLCP pushes images every block. C25 sound-solver closure is replaced by the VLM reading images.",
+   "evidence_ids": [
+    "son55:E002",
+    "sol:E04"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "harness_memory_skill_reuse",
+    "sub": null
+   },
+   "operation_correspondence": "C25 \"intermediate by-products as reusable capital\" = helper modules persisted to disk and re-injected.",
+   "necessary_conditions_and_differences": "Only an import check gates entry; reuse is not exercised in the reported sweep.",
+   "evidence_ids": [
+    "son55:E018",
+    "sol:E06"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s3",
+    "paper_practice:2609.15195#s4",
+    "paper_practice:2606.10267#s4",
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s1",
+    "paper_practice:2605.23950#s1",
+    "paper_limitation:2609.10522#s1"
+   ],
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Only the same system at K=T; no alternative loop organisation (retry, subtask reselection, between-trial rewrite) was run with the model fixed.",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E016",
+    "son55:E017"
+   ],
+   "score_item": "E.causality",
+   "source_seat": "son55",
+   "aggregate_note": "sol met vs son55 partial: K=T is one alternative organization, but its prompt fairness is unestablished (agg:A01) and no retry/subtask-replanning alternative is run although the claim is that code-level rewriting is the right locus. son55 adopted."
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s1",
+    "paper_practice:2606.14674#s1",
+    "paper_practice:2606.10577#s2",
+    "paper_practice:2606.10577#s3",
+    "paper_practice:2609.20822#s3",
+    "paper_practice:2405.15793#s1",
+    "paper_limitation:2609.15195#s2",
+    "paper_limitation:2603.22435#s3",
+    "paper_limitation:2609.29964#s1",
+    "paper_limitation:2610.01939"
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Images, state delta, history and skill library are claimed to matter but none is toggled one at a time.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E018"
+   ],
+   "score_item": "E.causality",
+   "source_seat": "son55",
+   "aggregate_note": "sol partial vs son55 unmet: the loop itself is toggled one-at-a-time (K=T); images, state delta, history and skill library are not. sol adopted."
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s2",
+    "paper_practice:2609.39207#s2",
+    "paper_practice:2608.03327#s1",
+    "paper_practice:2606.18363#s1",
+    "paper_practice:2609.24974#s1",
+    "paper_practice:2610.12549#s2"
+   ],
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student",
+   "applicable": false,
+   "status": "partial",
+   "reason": "claim concerns a loop inside one backbone (GPT-5.5); no cross-backbone harness claim is made except a note that Qwen3-4B failed",
+   "evidence_ids": [],
+   "score_item": "E.causality",
+   "source_seat": "son55",
+   "aggregate_note": "sol partial vs son55 N/A: a second backbone (Qwen3-4B) is reported qualitatively as failing; applicable, partially met. sol adopted."
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s1",
+    "paper_practice:2609.29861#s2",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2608.03327#s1",
+    "paper_limitation:2608.17393",
+    "paper_limitation:2610.28069",
+    "paper_limitation:2606.10577#s1",
+    "paper_limitation:2609.15195#s4"
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Wilson CIs and per-family pooling reported, but one episode per task, no repeats, no paired task-level test.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E005"
+   ],
+   "score_item": "E.statistics",
+   "source_seat": "son55"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2607.22585#s1",
+    "paper_practice:2609.11987#s3",
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2609.29964#s1",
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2606.27871#s3",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2606.10577#s4"
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Calls, input/output tokens, cache fraction and latency per replan are measured from logs; USD is not stated.",
+   "evidence_ids": [
+    "son55:E011"
+   ],
+   "score_item": "E.cost",
+   "source_seat": "son55",
+   "aggregate_note": "sol partial vs son55 met: calls, tokens, latency and cache reported, no USD per episode/solved task. sol adopted."
+  },
+  {
+   "id": "E06",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s4",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2609.15195#s1",
+    "paper_practice:2609.29861#s1",
+    "paper_practice:2609.39207#s1",
+    "paper_limitation:2609.29861",
+    "paper_limitation:2607.26148"
+   ],
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "manipulation, not VLN-CE/ObjectNav",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E07",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2603.22435#s3",
+    "paper_practice:2607.08448#s1",
+    "paper_practice:2609.29389#s1",
+    "paper_practice:2609.29964#s1",
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2609.21650#s2"
+   ],
+   "applies_when": "an empirical claim that an agentic manipulation harness or harness-distilled student beats end-to-end VLAs",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Compared with VLA-0 only on six reframed LIBERO-Object tasks with N=10; no LIBERO-PRO, no CaP-X or CaP-Agent0 run.",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E020",
+    "son55:E017"
+   ],
+   "score_item": "E.causality",
+   "source_seat": "son55"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_limitation:2607.26148",
+    "paper_limitation:2609.29861",
+    "paper_limitation:2609.29389",
+    "paper_limitation:2606.27871",
+    "paper_limitation:2603.28052"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Whether prompt examples/API were developed on the evaluated LIBERO tasks and whether GPT-5.5 saw them is not discussed.",
+   "evidence_ids": [],
+   "score_item": "E.holdout",
+   "source_seat": "son55",
+   "aggregate_note": "son55 unknown (sol none): development overlap is not disclosed in the complete text and a prompt example uses an evaluated object (agg:A04); disclosure expectation unmet. Revised."
+  },
+  {
+   "id": "E09",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2606.27871#s2",
+    "paper_practice:2609.29389#s2",
+    "paper_practice:2609.29964#s3",
+    "paper_practice:2610.28589#s2",
+    "paper_practice:2610.01939#s3",
+    "paper_practice:2609.10522#s3"
+   ],
+   "applies_when": "a claim that a compact VLM/VLA student distilled from frontier-harness trajectories approaches or exceeds the teacher",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no student distillation",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E10",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2605.24220#s3",
+    "paper_practice:2606.27871#s2",
+    "paper_practice:2606.18363#s2",
+    "paper_practice:2609.24974#s3",
+    "paper_limitation:2610.28589",
+    "paper_limitation:2609.32416#s3"
+   ],
+   "applies_when": "any student trained on success-filtered teacher trajectories",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no teacher-trajectory student",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E11",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2509.14257#s1",
+    "paper_practice:2610.19834#s1",
+    "paper_practice:2610.19820#s1",
+    "paper_practice:2610.02858#s1",
+    "paper_practice:2609.24974#s3",
+    "paper_practice:2609.32416#s3"
+   ],
+   "applies_when": "a claim that teacher corrections at learner-induced states (first-error repair, review, action-agreement, preference) beat offline distillation",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no teacher corrections or OPD",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E12",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2608.06065#s1",
+    "paper_practice:2602.04942#s1",
+    "paper_practice:2505.09546#s1",
+    "paper_practice:2510.03207#s1",
+    "paper_limitation:2610.15572#s2",
+    "paper_limitation:2610.28589#s1"
+   ],
+   "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no privileged teacher-student setup",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E13",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.21650#s2",
+    "paper_practice:2610.21450#s2",
+    "paper_practice:2509.14257#s2",
+    "paper_practice:2608.17393#s2",
+    "paper_practice:2610.28069#s1"
+   ],
+   "applies_when": "a claim that SFT/teacher initialization plus RL beats RL alone, or that RL lifts a student beyond its SFT data",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no RL",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E14",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2605.24220#s1",
+    "paper_practice:2608.17393#s3",
+    "paper_practice:2606.14674#s2",
+    "paper_practice:2608.03327#s3",
+    "paper_practice:2610.28069#s2",
+    "paper_limitation:2608.17393"
+   ],
+   "applies_when": "a claim that RL in a training scaffold or harness improves the deployed agent",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no RL in harness",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E15",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2608.17393#s2",
+    "paper_practice:2608.17528#s4",
+    "paper_practice:2609.27308#s1",
+    "paper_limitation:2605.24220#s2",
+    "paper_limitation:2602.04942"
+   ],
+   "applies_when": "a policy or coding agent trained or evaluated against an automatic success checker it could access or tamper with",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "success is read from the benchmark predicate by the harness; no trained policy that could tamper with it (policy-as-code could in principle read poses, but privileged access is disclosed)",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.29861#s2",
+    "paper_practice:2607.26148#s1",
+    "paper_practice:2610.12549#s1",
+    "paper_practice:2609.15195#s3",
+    "paper_practice:2610.21450#s1",
+    "paper_practice:2607.22585#s2"
+   ],
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Failed-grasp recovery is broken down (55 failed, 15 recovered) but only for pick-and-place and with a heuristic detector; false completion declarations are not analysed.",
+   "evidence_ids": [
+    "son55:E008",
+    "son55:E009"
+   ],
+   "score_item": "E.statistics",
+   "source_seat": "son55"
+  },
+  {
+   "id": "E17",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.08432#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2609.39207#s3",
+    "paper_limitation:2603.22435#s2",
+    "paper_limitation:2607.08448#s3",
+    "paper_limitation:2609.37105#s2"
+   ],
+   "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "A skill library is claimed but no held-out reuse evaluation exists; the library is reset per task.",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E018"
+   ],
+   "score_item": "E.holdout",
+   "source_seat": "son55",
+   "aggregate_note": "sol unmet vs son55 unknown: the skill library is claimed but reset per task; no held-out reuse evaluation exists. sol adopted."
+  },
+  {
+   "id": "E18",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2609.37105#s2",
+    "paper_practice:2610.28069#s2",
+    "paper_practice:2609.32416#s1",
+    "paper_practice:2609.33378#s2",
+    "paper_limitation:2610.28069"
+   ],
+   "applies_when": "a method that iteratively accepts harness, playbook or teacher-patch revisions from noisy rollouts",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no gate accepts or rejects revisions; every rewrite replaces the previous function",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.18363#s3",
+    "paper_practice:2609.10522#s1",
+    "paper_practice:2605.13119#s2",
+    "paper_practice:2609.20822#s3",
+    "paper_limitation:2607.08448",
+    "paper_limitation:2609.39207",
+    "paper_limitation:2607.26148"
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle",
+   "applicable": true,
+   "status": "not_applicable",
+   "reason": "No physical robot is used; transfer to real hardware is not claimed.",
+   "evidence_ids": [
+    "son55:E013"
+   ],
+   "score_item": "E.holdout",
+   "source_seat": "son55",
+   "aggregate_note": "sol N/A vs son55 unmet: the paper makes no real-robot claim (limitation states sim only). sol adopted."
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2606.10577#s2",
+    "paper_practice:2606.10577#s1",
+    "paper_practice:2609.29389#s1",
+    "paper_practice:2609.15195#s3",
+    "paper_practice:2609.20822#s1"
+   ],
+   "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no depth-based tool",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E21",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.02858#s3",
+    "paper_practice:2609.24974#s3",
+    "paper_practice:2610.28069#s2",
+    "paper_practice:2609.10522#s3"
+   ],
+   "applies_when": "a claim that a distilled student internalizes harness information or works under a minimal interface",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "no student",
+   "evidence_ids": [],
+   "score_item": null,
+   "source_seat": "son55"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness-v1/db5ce019a874",
+   "source_strength": "paper_practice+paper_limitation",
+   "source_note": "derived from read papers' own practice/concessions; not reviewer consensus (no reviews exist)",
+   "source_refs": [
+    "paper_practice:2610.01939#s1",
+    "paper_practice:2609.11987#s2",
+    "paper_practice:2609.34018#s1",
+    "paper_limitation:2607.22585",
+    "paper_limitation:2609.27308#s2"
+   ],
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Same simulator/model/step budget for both arms, but K=T issues 1 VLM call versus about 10, so inference compute is not matched.",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E011"
+   ],
+   "score_item": "E.causality",
+   "source_seat": "son55",
+   "aggregate_note": "sol unmet (causality) vs son55 partial (cost): budgets are not matched (1 vs ~10 calls) but the asymmetry is disclosed via call counts; mapped to E.causality because it confounds the attribution. Revised."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Within-episode code replanning (K=50) gives 35.1% pooled success versus 3.5% for the same system at K=T.",
+   "setting": "57 LIBERO-derived tasks (10 Object Picks, 30 Kitchen, 17 Living-Room), MuJoCo/RoboVerse Franka, GPT-5.5, privileged poses, 500-step horizon, one episode per task.",
+   "baseline": "Same system with K=T (single query), model/API/poses/budget fixed.",
+   "selection_vs_test": "No separate selection set; development use of these tasks is not reported.",
+   "result": "35.1% [24.0,48.1] (20/57) vs 3.5% [1.0,11.9] (2/57); per family 60.0/33.3/23.5 vs 10.0/3.3/0.0.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E007",
+    "son55:E004"
+   ],
+   "counterevidence": [
+    "Open-loop comparator also receives only one VLM call; more compute/tokens in the closed-loop arm are not controlled.",
+    "Alternative replan granularities untested."
+   ],
+   "allowed_conclusion": "In this simulator with privileged poses, giving the same frozen model repeated re-observation and rewrite opportunities greatly improves over single-shot code; it does not establish that the code-level locus is the key factor."
+  },
+  {
+   "claim_id": "C2",
+   "text": "The gain is explained by within-episode recovery: 27.3% of failed grasps are re-approached and lifted by a later replan.",
+   "setting": "75 closed-loop pick-and-place episodes (a superset including reframing-study episodes), logged traces.",
+   "baseline": "K=T recovery set to 0 by construction.",
+   "selection_vs_test": "Post hoc log analysis.",
+   "result": "55/75 episodes with a failed grasp; 15 recover; median 3 replans after the miss.",
+   "evidence_ids": [
+    "son55:E008",
+    "son55:E009",
+    "son55:E010"
+   ],
+   "counterevidence": [
+    "Detector thresholds are heuristic and unvalidated; baseline recovery is not measured; denominator differs from the sweep."
+   ],
+   "allowed_conclusion": "Recovery transitions occur in a minority of failed episodes and are consistent with the claimed mechanism; the contribution to the 3.5% -> 35.1% gap is not quantified."
+  },
+  {
+   "claim_id": "C3",
+   "text": "The loop is affordable: about 10 compact VLM calls per episode with 84% cache hits.",
+   "setting": "81 closed-loop episodes, about 721 replans.",
+   "baseline": "None.",
+   "selection_vs_test": "n/a",
+   "result": "median 10 replans, 43k input tokens, 349 output tokens, 18.8 s latency per replan.",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E021"
+   ],
+   "counterevidence": [
+    "18.8 s per replan limits reactive control; no USD cost; K not swept."
+   ],
+   "allowed_conclusion": "Token cost is measured and moderate; practical suitability is limited to slow manipulation."
+  },
+  {
+   "claim_id": "C4",
+   "text": "VLCP is robust to instruction reframing whereas VLA-0 is not (pooled 40.0% unchanged vs 97.3% -> 75.0%).",
+   "setting": "6 LIBERO-Object tasks, N=10 per VLCP cell, 10 per modified VLA-0 task.",
+   "baseline": "VLA-0 fine-tuned on LIBERO (an upper reference, not matched).",
+   "selection_vs_test": "n/a",
+   "result": "VLCP 40.0% both conditions; VLA-0 collapses on butter (96%->0%).",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E020"
+   ],
+   "counterevidence": [
+    "VLA-0 stays far above VLCP in-distribution; N=10; authors call it indicative."
+   ],
+   "allowed_conclusion": "Descriptive only."
+  },
+  {
+   "claim_id": "AGG-C1",
+   "text": "K=T is a matched comparison that isolates the replanning loop (\"any difference traces to the replanning loop alone\")",
+   "setting": "57 tasks x 1 episode; same simulator/API/poses/model/horizon",
+   "baseline": "K=T single query",
+   "selection_vs_test": "n/a",
+   "result": "20/57 vs 2/57",
+   "evidence_ids": [
+    "son55:E007",
+    "agg:A01",
+    "agg:A02",
+    "son55:E011"
+   ],
+   "counterevidence": [
+    "Static prompt contract asks each query for the next phase only (~K steps) with single-phase examples; whether K=T used an adapted prompt is not stated.",
+    "Call budget 1 vs ~10 and image/numeric feedback not separated."
+   ],
+   "allowed_conclusion": "Within this prompt/system, re-querying every 50 steps raises success relative to querying once; the 10x figure is an upper bound on the loop effect relative to a fair single-program (CaP-style) baseline.",
+   "source": "aggregate"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop success from the benchmark terminal predicate in simulation; no real robot; development/evaluation separation undisclosed (prompt example on an evaluated object), so no transfer.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "In MuJoCo/RoboVerse with privileged object poses and GPT-5.5, re-querying and rewriting the control function every 50 steps raised single-episode success from 2/57 to 20/57 relative to querying the same system once (pooled Wilson intervals separate; per-family intervals overlap for Object Picks and Living-Room); 15/55 logged failed-grasp episodes were later recovered; ~10 calls/episode with 84% cached input.",
+  "not_supported": [
+   "\"non-overlapping CIs in every scene family\" (false for 2 of 3 families)",
+   "that the gain traces to the loop alone (prompt-contract and call-budget confounds)",
+   "that code-level rewriting beats retry/subtask replanning",
+   "cross-episode skill accumulation benefit (library reset)",
+   "robustness without privileged poses / on real robots"
+  ],
+  "retained_improver_online_transfer": "retained: skill persistence exists but is not evaluated (reset per task); online: yes; transfer: no.",
+  "scope_note": "In scope: frozen frontier VLM writes and rewrites robot control code inside the episode (domain K105).",
+  "unresolved": [
+   "whether the K=T prompt kept the next-phase-only contract and single-phase examples",
+   "image vs privileged-pose contribution",
+   "K sensitivity and multi-seed variance",
+   "skill-library effect",
+   "development/evaluation overlap"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Specific bottleneck (failures silently carried by single-shot code) with closest neighbours named (Act-Observe-Rewrite between trials, concurrent CaP-Agent0 within episode) and a drawn residue; novelty vs CaP-Agent0 and vs retry/subtask replanning is argued, not measured.",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E016",
+    "son55:E017",
+    "sol:E02"
+   ],
+   "counterevidence_ids": [
+    "son55:E017"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Two-loop explanation (closed-loop numeric obs within a block, code rewrite across blocks) is reconstructable and predicts zero recovery for single-shot code; the claim that images drive diagnosis is untested and K is not swept.",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E002",
+    "son55:E003",
+    "sol:E09"
+   ],
+   "counterevidence_ids": [
+    "son55:E015"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Prompt layout, cadence, history cap, import/revert rule, skill injection and the output contract are specified with appendix assets; the skill library is not exercised and rewrites have no acceptance/rollback beyond import checks.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E018",
+    "sol:E05"
+   ],
+   "counterevidence_ids": [
+    "son55:E004"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Resolved for sol (2) over son55 (3). Success is the benchmark terminal predicate with stated denominators (57, 75, 81) - solid; but the anchors' E.measurement-2 example covers privileged channels (here simulator object poses, disclosed), the recovery metric uses an unvalidated 0.13 m heuristic and the baseline's zero recovery is asserted \"by construction\" rather than measured (a K=T function still receives fresh obs every step), and the paper misreports its own per-family interval separation.",
+    "evidence_ids": [
+     "son55:E005",
+     "son55:E006",
+     "son55:E008",
+     "sol:E07",
+     "sol:E08",
+     "agg:A03"
+    ],
+    "counterevidence_ids": [
+     "sol:E03",
+     "son55:E009",
+     "son55:E010",
+     "sol:E14"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2; confirmed with an added confound (shared_error_corrections SE1). The K=T comparison holds simulator, API, poses, model and horizon fixed, but leaves unseparated: call budget (1 vs ~10), image vs numeric feedback, code-rewrite vs other re-query forms, and - missed by both seats - whether the single K=T query still carries the \"next phase only\" contract and single-phase examples. Anchor 2 (key gain with unseparated confounds); not 1 because the loop toggle is a real same-system control.",
+    "evidence_ids": [
+     "son55:E007",
+     "son55:E006",
+     "sol:E07",
+     "sol:E08"
+    ],
+    "counterevidence_ids": [
+     "son55:E017",
+     "agg:A01",
+     "agg:A02",
+     "son55:E011"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Resolved for sol (2) over son55 (1). Training-free method over 57 tasks in three families with the skill library reset per task (no cross-task leakage through memory); development/evaluation separation is undisclosed and a worked prompt example targets an evaluated LIBERO-Object item, i.e. the anchor-2 case (development overlaps evaluation). Not 1: there is no training on, or search over, the evaluated episodes reported, and breadth is substantial; the reframing study is wording-only.",
+    "evidence_ids": [
+     "sol:E06",
+     "son55:E004",
+     "sol:E16"
+    ],
+    "counterevidence_ids": [
+     "agg:A04",
+     "son55:E013"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Resolved for sol (1) over son55 (2). One episode per task, no repeats or paired tests; pooled Wilson intervals are correct, but son55's reason relied on \"non-overlapping per-family intervals\", which recomputation from the stated counts contradicts for Object Picks and Living-Room; recovery failures are counted (40/55) but not decomposed.",
+    "evidence_ids": [
+     "sol:E13",
+     "son55:E014",
+     "son55:E008",
+     "agg:A03"
+    ],
+    "counterevidence_ids": [
+     "sol:E14"
+    ],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Both seats 3; confirmed. Calls, tokens, cache fraction and latency measured from logs over 81 episodes; no USD, and the comparator's budget (1 call) is lower and not matched.",
+    "evidence_ids": [
+     "son55:E011",
+     "sol:E12",
+     "son55:E021"
+    ],
+    "counterevidence_ids": [
+     "sol:E15"
+    ],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": 63.75,
+  "display": 63.8,
+  "lower": 63.75,
+  "upper": 63.75,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4"
+ },
+ "status": "reviewed",
+ "status_reason": "Complete fixed text including both appendices read; all eight items resolved.",
+ "initial_evidence_judgment": "Read in full before seat rating reasons. A frozen GPT-5.5 rewrites a Python control(obs, J) function every K=50 steps from two RGB views, proprioception, privileged simulator object poses and a state delta (MuJoCo/RoboVerse Franka; LIBERO-Object/LIBERO-90 tasks); helper modules persist to an on-disk skill library. Main result: 57 tasks x 1 episode, 20/57 (35.1%) vs 2/57 (3.5%) for K=T (one query per episode). Recovery: 15/55 failed-grasp episodes later lift the object (75-episode superset). Cost: ~10 calls/episode, 84% cached input, 18.8 s median latency. Checks made before reading seat reasons: (1) recomputing Wilson intervals from the per-family counts shows the claim 'non-overlapping CIs in every scene family' is false for Object Picks (6/10 [31.3,83.2] vs 1/10 [1.8,40.4]) and Living-Room (4/17 [9.6,47.3] vs 0/17 [0,18.4]); only Kitchen and pooled separate; (2) the static prompt prefix shared by 'the same system' instructs the model that each replan handles only the next phase (~K steps) and ships single-phase worked examples, so if unchanged at K=T the open-loop baseline is asked for single-phase code over a 500-step multi-phase episode - the paper does not say the K=T prompt was adapted; (3) the skill library is reset per task, so the cross-episode skill claim is untested; (4) a worked prompt example (milk carton) is an evaluated LIBERO-Object object. Initial judgment: in scope, system_method, online; claim scoped to 'within-episode re-query + rewrite beats a single query of the same prompt/system in sim with privileged poses'.",
+ "base_seat_for_unchanged_fields": "son55",
+ "base_seat_note": "signatures/gap/claims are taken from the base seat unless overridden (ids namespaced); expectations are the base list plus the other seat's additional ids, with aggregate overrides marked aggregate_note.",
+ "resolutions": [
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Privileged poses (anchor-2 example), unvalidated recovery labeler with baseline recovery asserted not measured, and misreported per-family CI separation.",
+   "evidence_ids": [
+    "sol:E03",
+    "son55:E009",
+    "son55:E010",
+    "sol:E14",
+    "agg:A03"
+   ],
+   "score_impact": "-3.75 vs son55"
+  },
+  {
+   "field_path": "ratings.E.holdout",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Training-free breadth with per-task library reset; undisclosed dev overlap incl. a prompt example on an evaluated object = anchor-2 \"development overlaps evaluation\".",
+   "evidence_ids": [
+    "sol:E06",
+    "agg:A04"
+   ],
+   "score_impact": "+2.5 vs son55"
+  },
+  {
+   "field_path": "ratings.E.statistics",
+   "sol_value": 1,
+   "son55_value": 2,
+   "decision": "sol",
+   "final_value": 1,
+   "reason": "Recomputed Wilson intervals from 6/10 vs 1/10 and 4/17 vs 0/17 overlap; son55's factual basis (\"non-overlapping per-family intervals\") is wrong. Single episode per task.",
+   "evidence_ids": [
+    "agg:A03",
+    "sol:E14",
+    "sol:E13"
+   ],
+   "score_impact": "-1.25 vs son55"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    "rs:C25",
+    "rs:C02"
+   ],
+   "son55_value": [
+    "C25"
+   ],
+   "decision": "revised",
+   "final_value": [
+    "rs:C25"
+   ],
+   "reason": "Keep only the primary C25 (son55 choice) with the rs: namespace (sol format). C02 dropped with its supporting main (next resolution).",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.supporting",
+   "sol_value": [
+    "controlled_diagnostic_design"
+   ],
+   "son55_value": [],
+   "decision": "son55",
+   "final_value": [],
+   "reason": "PATTERN_PROTOCOL: supporting only when a distinct operation of the method needs it. The Sec 4.4 rewording probe tests a reference VLA's phrasing dependence; it is not a contributed operation and is not the headline (C02 requires the de-confounded gap as the primary result).",
+   "evidence_ids": [
+    "sol:E16"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.matches[0].fit",
+   "sol_value": "strong",
+   "son55_value": "partial",
+   "decision": "son55",
+   "final_value": "partial",
+   "reason": "No sound external checker; the VLM grades its own code from images.",
+   "evidence_ids": [
+    "son55:E002"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": "K105 strong; harness_memory_skill_reuse/null partial",
+   "son55_value": "K105 partial; R05 weak; K303 weak",
+   "decision": "revised",
+   "final_value": "K105 partial; harness_memory_skill_reuse/null weak",
+   "reason": "K105 partial because observations are pushed not requested and budgets unmatched (son55). R05 dropped: its defining condition (no model at run time) is unmet. K303 dropped: no mining/review/promotion, so the memory main is kept with sub null (sol), fit weak because reuse is never exercised.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E018",
+    "sol:E06"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E01,E02,E03,E05,E08,E17,E19,E22]",
+   "sol_value": "E01 met; E02 partial; E03 partial; E05 partial; E08 -; E17 unmet; E19 N/A; E22 unmet",
+   "son55_value": "E01 partial; E02 unmet; E03 N/A; E05 met; E08 unknown; E17 unknown; E19 unmet; E22 partial",
+   "decision": "revised",
+   "final_value": "E01 partial; E02 partial; E03 partial; E05 partial; E08 unmet; E17 unmet; E19 N/A; E22 partial(E.causality)",
+   "reason": "Per-expectation aggregate_note in the expectations list.",
+   "evidence_ids": [
+    "agg:A01",
+    "agg:A04",
+    "sol:E06",
+    "son55:E019"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "score.raw",
+   "sol_value": 63.75,
+   "son55_value": 66.25,
+   "decision": "sol",
+   "final_value": 63.75,
+   "reason": "Deterministic recomputation from final ratings (coincides with sol).",
+   "evidence_ids": [],
+   "score_impact": "final 63.75"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SE1",
+   "field_path": "ratings.E.causality.reason; assessment.claim_support; claims",
+   "seats_value": "Both seats treat K=T as matched except for call budget/feedback channels; neither checks the prompt contract.",
+   "correction": "Added confound: the static prompt prefix instructs \"Each replan only needs to handle the *next* phase ... not the full multi-phase plan\" with single-phase worked examples; the paper says K=T is \"the same system\" and \"precisely the CaP/ProgPrompt protocol\" without stating that the K=T prompt was adapted. The 10x gap is therefore an upper bound on the loop effect relative to a fair single-program baseline. Rating stays 2 (already the unseparated-confound anchor); strongest claim and allowed conclusion narrowed; request R1 filed.",
+   "evidence_ids": [
+    "agg:A01",
+    "agg:A02",
+    "son55:E007"
+   ],
+   "score_impact": "none (E.causality remains 2)"
+  }
+ ],
+ "requests": [
+  {
+   "id": "R1",
+   "blocking": false,
+   "what": "K=T prompt text (whether the next-phase-only contract and single-phase examples were kept)",
+   "why": "Determines whether the 3.5% baseline is a fair single-program comparison; would change claim scope, possibly E.causality."
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All seat disagreements resolved from the fixed text; one shared omission corrected (SE1) without changing an integer; non-blocking request R1 recorded. No unknown scoring item. Not a reproduction.",
+ "final_record_hash": "ec85258225d30d8f74a55e3d58cae3d904e074e754a73acde1456bb414f981d7"
+}

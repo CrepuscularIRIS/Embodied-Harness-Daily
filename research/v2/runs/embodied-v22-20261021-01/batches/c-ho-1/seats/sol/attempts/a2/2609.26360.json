@@ -1,0 +1,763 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-1",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2609.26360",
+    "paper_id": "2609.26360",
+    "title": "Hierarchical Floorplan-Guided Vision-Language Exploration for Embodied Question Answering",
+    "version": "2609.26360v1",
+    "claim_type": "system_method",
+    "central_claim": "HFLEX-EQA improves active EQA by combining online hierarchical scene graphs, a frozen VLM selecting specialized exploration modes, semantic frontier/viewpoint planners and weak topological floorplan priors; benchmark comparisons and quadruped deployment support the combined design."
+  },
+  "provenance": {
+    "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+    "rubric_version": "v2.2 + anchors v2",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T18:18:16.780407+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144). Session/receipt unavailable; taxonomy hash binds domain, main and sub cards named explicitly. No external lookup or code execution."
+  },
+  "materials": [
+    {
+      "material_id": "2609.26360-fulltext",
+      "url": "https://arxiv.org/html/2609.26360v1",
+      "sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "sections_read": [
+        "Abstract",
+        "I-VI entire fixed HTML, IV-A-D formulas1-14",
+        "V-A-C all TableI-IV and Fig1-5 captions; no appendix section in fixed full text"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "II EQA",
+      "quote": "GraphEQA [ 4 ] further demonstrated the benefits of grounding VLM planning with an online hierarchical scene graph augmented with semantic room labels, frontiers, and task-relevant visual memory.",
+      "support_explanation": "Nearest explicit ancestor; claims not fresh invention of scene-graph memory.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-B",
+      "quote": "In our experiments, we construct \\mathcal{G}^{\\mathcal{F}} from HM3D [ 23 ] semantic annotations in simulation and manually from known room layouts in the real world.",
+      "support_explanation": "Global unseen-room prior is exogenous, privileged relative to purely online RGB-D baselines, not inferred from observations.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-B",
+      "quote": "Metric geometry and agent localization are not retained.",
+      "support_explanation": "Privilege does not include exact geometry/localization; avoid overstating.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-C",
+      "quote": "For each room, at most M key views are selected",
+      "support_explanation": "Question-ranked bounded per-room retrieval, not fixed total context.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-C",
+      "quote": "We constrain the VLM to only predict classes present in the floorplan",
+      "support_explanation": "Missing floorplan class can bias observed-room classification; perturbation robustness not topology robustness.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-C",
+      "quote": "If an answer a_{t} is provided with confidence \\kappa_{t}\\geq\\kappa_{\\mathrm{min}} , it is returned as the final answer and the episode terminates.",
+      "support_explanation": "VLM self-confidence stop, not externally validated EQA answer gate.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-D",
+      "quote": "If the current room cannot be matched to the floorplan or no path to c^{\\star} exists, w(c) are set to zero",
+      "support_explanation": "Defined fallback for unusable prior; arbitrary plausible wrong topology not explicitly tested.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "IV-D",
+      "quote": "Other factors affecting view quality, such as viewing angle or illumination, are not explicitly modeled.",
+      "support_explanation": "Viewpoint maximizes geometry visibility not actual answer identifiability.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-B",
+      "quote": "This gives 108 OpenEQA episodes and 114 ExploreEQA episodes.",
+      "support_explanation": "Filtered single-floor semantic-annotation subsets, not full benchmark.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-B Metrics",
+      "quote": "For multiple-choice runs, success means selecting the correct answer. For no-choice runs, answers are graded by an LLM.",
+      "support_explanation": "Choice ground truth defined; free-form grader identity/rubric/agreement not provided.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-B TableII",
+      "quote": "HFLEX-EQA w/o FP 64.8 6.56 13.1 53.5 7.53 18.2",
+      "support_explanation": "Same Gemini floorplan toggle versus75/63.2 supports conditional extra-prior benefit.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-B TableII",
+      "quote": "GraphEQA + FP 43.5 1.75 6.1 57.0 3.01 6.8",
+      "support_explanation": "Naive prompt-floorplan competitor compared; extra prior alone not full explanation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-B Baselines",
+      "quote": "All methods use a budget of 50 iterations.",
+      "support_explanation": "Matched high-level iteration cap, not equal model calls/tokens/physical budget.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-B TableIII",
+      "quote": "HFLEX-EQA + GT 79.6 3.16 9.5 64.0 5.11 16.6",
+      "support_explanation": "Separate explicit ground-truth semantic branch; do not attribute main online object labels to GT.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E015",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-C",
+      "quote": "The no-choice results were obtained by replaying the recorded observations, scene graph and planner history while removing the answer choices.",
+      "support_explanation": "Real free-form answers are offline replay, not independent autonomous trials.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E016",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-C",
+      "quote": "while keeping the scene graph and planner history unchanged.",
+      "support_explanation": "Image perturbation study freezes downstream state/history, so not full closed-loop robustness.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E017",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-A",
+      "quote": "We use \\kappa_{\\mathrm{min}}=0.8 in all experiments.",
+      "support_explanation": "Confidence threshold fixed; calibration/false answer endpoint missing.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E018",
+      "material_id": "2609.26360-fulltext",
+      "hash": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+      "locator": "V-C",
+      "quote": "All perception, mapping, and hierarchical planning are executed onboard in real time, except for the VLMs, which are queried via their APIs.",
+      "support_explanation": "Jetson Thor mapping and remote VLM; no measured per-stage runtime or USD.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Information-deficit-conditioned semantic action hierarchy",
+      "information": "Frozen GPT-4o/GPT-5.5/Gemini3.5/Opus4.8/Qwen3.5-9B; question/options, online RGB-D Hydra graph, question-ranked keyframes, decisions and exogenous semantic topology; no metric floorplan localization.",
+      "operation": "VLM outputs mode+room/object/class and optional answer/confidence; room mode ranks object-semantic frontiers, object mode computes occlusion/coverage viewpoint, find mode mixes graph-distance room progress, semantic entrance scores and frontier size; navigate and rebuild graph.",
+      "output": "Low-level path and renewed visual evidence or final answer",
+      "conditions": "Metric posed RGB-D, online perception/room mapping, valid semantic room classes in prior; reliable navigation.",
+      "feedback": "Fresh observations and graph; self-reported answer confidence≥0.8 stops, no independent answer verifier.",
+      "selection_rule": "Static mode selection and frontier argmax each planning turn; no retained harness optimization.",
+      "selection_data": "Current question, online graph and supplied whole-scene floorplan; no development/tuning partition reported.",
+      "persistence": "Within-episode graph/map, CLIP keyviews and action history only.",
+      "later_use": "Following planner calls retrieve at most3 views per room and current/object view.",
+      "claimed_effect": "Gather needed information with more appropriate exploration than one strategy.",
+      "failure_boundary": "Wrong prior labels constrain room classifier; geometric best viewpoint can miss useful lighting/angle; no GT-free prior estimation tested.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Validation and deployment",
+      "information": "108/114 annotation-bearing single-floor episodes; five fixed VLMs, 50-step cap; real manually supplied floorplan and GPT5.5.",
+      "operation": "Compare GraphEQA/ExploreEQA, remove FP/VP/SF, add FP to GraphEQA, evaluate GT semantic branch; replay real traces without choices and with perturbed images.",
+      "output": "Answer SR, planning steps, path length; real answer/mode consistency examples.",
+      "conditions": "Multiple-choice exact correctness; free-form LLM grading unspecified; replay state held fixed.",
+      "feedback": "Post-run answer correctness, not retained policy edits.",
+      "selection_rule": "No cross-task retained-selection claim.",
+      "selection_data": "No separate tuned/development dataset reported.",
+      "persistence": "Recorded real histories used only replay evaluation.",
+      "later_use": "Not online self-improvement.",
+      "claimed_effect": "Reported answer gains across VLMs; real feasibility and replay consistency.",
+      "failure_boundary": "Sim prior from semantic annotations, limited subset; perturbation replay not closed loop; no repeat/variance/cost.",
+      "evidence_ids": [
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015",
+        "E016"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Prior EQA uses locally observed graph/memory and largely one exploration strategy, neglecting available unseen-room structural context.",
+    "checked_gap": "GraphEQA lineage supports relevant residual but exact single-strategy claim against originals unverified; extra global room prior changes information budget.",
+    "lineage": [
+      {
+        "source": "GraphEQA [4], OpenEQA [5], ExploreEQA [3] as described in fixed2609.26360v1 II/V; originals not in fixed package",
+        "contribution": "Scene-graph memory and VLM active exploration/answering"
+      },
+      {
+        "source": "Hydra[6], VLFM[14], ESC[15], LSeg[22] in same version II/IV",
+        "contribution": "Inherited graph construction, semantic frontiers and dense features"
+      }
+    ],
+    "closest_adjacent": "GraphEQA plus floorplan is explicitly tested; local fixed source only, no nearest-original audit.",
+    "residue": "Choose different sensing/navigation operations for missing room versus unseen object attribute, while using static topology.",
+    "stakes": "Question success versus unnecessary motion/early answers in unseen indoor environments.",
+    "method_response": "Discrete planner modes plus frontier/object viewpoint geometries and weak prior progress weighting.",
+    "remaining_gap": "Noise/missing topology and unseen class robustness, internal confidence calibration, live free-form real trials, general multi-floor settings and total cost.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E005",
+      "E006",
+      "E007",
+      "E012",
+      "E015",
+      "E016"
+    ],
+    "unresolved": [
+      "Missing nearest-source originals constrain novelty claim, not fixed method readability."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [
+      "heterogeneous_decomposition"
+    ],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "strong main / C25 withheld",
+        "tactic_steps_checked": [
+          "VLM emits typed mode and target, not metric paths",
+          "Scene graph and low-level geometry/planning own spatial operations",
+          "Fresh observations return to later decisions",
+          "C25 verification of high-level artifact not established: confidence only and no feedback-gate ablation"
+        ],
+        "success_failure_checks": [
+          "Solver seam explicit",
+          "Potential privileged prior identified",
+          "Component toggles present but no general hierarchy toggle",
+          "Exact prompts/cost absent"
+        ],
+        "evidence_ids": [
+          "E002",
+          "E006",
+          "E007",
+          "E008",
+          "E011"
+        ],
+        "reason": "Actual semantic→geometric planning delegation, not merely multi-agent names; sub verification closure insufficient for full C25 assignment."
+      },
+      {
+        "main_id": "heterogeneous_decomposition",
+        "sub_id": null,
+        "role": "supporting",
+        "fit": "moderate",
+        "tactic_steps_checked": [
+          "Partition missing evidence into observed room, object inspection, unseen room",
+          "Use semantic frontier ranking, occlusion view scoring and topology-weighted frontiers respectively",
+          "No C04: not learned-artifact compression"
+        ],
+        "success_failure_checks": [
+          "Mode purposes concrete",
+          "No uniform-missing-evidence ablation",
+          "Heuristic weights disclosed rather than derived optimum"
+        ],
+        "evidence_ids": [
+          "E007",
+          "E008",
+          "E011"
+        ],
+        "reason": "Actual differentiated sensing operations conditioned on what information is missing; do not demand original quantization-specific guarantees."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Static delegation with heterogeneous information gathering; does not train or retain revised harness.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "K104",
+        "version": "embodied-agent-harness/v1",
+        "fit": "strong operational / executor differs",
+        "condition_checks": [
+          {
+            "condition": "Frozen frontier model emits discrete semantic targets",
+            "status": "met",
+            "reason": "Three modes with room/object/class targets.",
+            "evidence_ids": [
+              "E006",
+              "E007"
+            ]
+          },
+          {
+            "condition": "Reliable geometry/executor underneath",
+            "status": "partial",
+            "reason": "Hydra/frontier/viewpoint planning specified but not independently measured per-mode completion/reachability.",
+            "evidence_ids": [
+              "E007",
+              "E008"
+            ]
+          },
+          {
+            "condition": "Backbone-fixed tool and privilege controls",
+            "status": "partial",
+            "reason": "Multi-model main and fixed Gemini components; FP adds exogenous annotated information.",
+            "evidence_ids": [
+              "E002",
+              "E011",
+              "E012"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E006",
+          "E007",
+          "E008"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "K104"
+      },
+      "operation_correspondence": "Semantic action artifact routes VLM decision into deterministic frontier/viewpoint/path machinery.",
+      "necessary_conditions_and_differences": "EQA answer criterion is not navigation target reach; no mechanical high-level correctness gate and K104 point-goal policy replaced by geometric navigator.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E008"
+      ]
+    },
+    {
+      "rs_main": "heterogeneous_decomposition",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "K104"
+      },
+      "operation_correspondence": "Semantic vocabulary distinguishes kinds of missing evidence and dispatches differentiated spatial objectives.",
+      "necessary_conditions_and_differences": "Not a claim of theoretical optimal partition or exact question verification.",
+      "evidence_ids": [
+        "E007",
+        "E008"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Harness raises EQA answer success",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same VLM alternatives rerun; supplied global prior differs from baselines, Graph+FP control helps.",
+      "evidence_ids": [
+        "E012",
+        "E013"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "FP/VP/SF cause benefit",
+      "applicable": true,
+      "status": "met",
+      "reason": "Fixed Gemini one-at-a-time removals and Graph+FP reported; no all-interaction inference implied.",
+      "evidence_ids": [
+        "E011",
+        "E012"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E03",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "General benefit across backbones",
+      "applicable": true,
+      "status": "met",
+      "reason": "Five VLM main results; component deltas only Gemini, so no teacher/student extrapolation.",
+      "evidence_ids": [
+        "E009"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Better/practical exploration",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Steps/meters not token/call/USD or wall time.",
+      "evidence_ids": [
+        "E013",
+        "E018"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Frontier benchmark/privileged prior",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Annotation source and filtering disclosed; development overlap/contamination unresolved.",
+      "evidence_ids": [
+        "E002",
+        "E009"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Answer stop/completion success",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Self-confidence stop lacks false-answer/stuck endpoint breakdown.",
+      "evidence_ids": [
+        "E006",
+        "E017"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Depth-grounded map and view geometry",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Posed RGB-D/TSDF and camera setup described; no nonmetric-depth stress.",
+      "evidence_ids": [
+        "E008",
+        "E018"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Backbone-fixed budgets",
+      "applicable": true,
+      "status": "partial",
+      "reason": "50 high-level iterations each; hierarchy has uncounted additional VLM calls/prior information.",
+      "evidence_ids": [
+        "E013"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E06",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not real review",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "VLN-CE metric requirement",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Active EQA endpoint is answer correctness; do not demand R2R-specific SR/SPL/OSR.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "score_item": "E.measurement"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Hierarchical prior-guided method outperforms EQA baselines across backbones.",
+      "setting": "108 OpenEQA and114 ExploreEQA filtered HM3D single-floor episodes; choice and no-choice; five VLMs.",
+      "baseline_control": "GraphEQA/ExploreEQA same frontier backbone and50-iteration cap; not equal prior information or full API compute.",
+      "selection_vs_test": "Previously unseen scenes stated; development overlap not disclosed.",
+      "result_denominator": "Gemini choice75.0/63.2 versusGraph46.3/54.4, Explore54.6/53.5; exact choice and LLM-graded no-choice.",
+      "evidence_ids": [
+        "E009",
+        "E010",
+        "E013"
+      ],
+      "counterevidence": [
+        "Extra semantic floorplan prior changes information budget; no no-choice grader audit."
+      ],
+      "allowed_conclusion": "Author-reported gains for filtered benchmark with supplied topology, not equal-sensor-information superiority or full benchmark SOTA."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Floorplan, viewpoint and semantic frontiers contribute to gain.",
+      "setting": "FixedGemini3.5 benchmark episodes.",
+      "baseline_control": "One removed at a time; GraphEQA+FP; GT-semantic variants separately.",
+      "selection_vs_test": "Weights chosen statically; tuning split unspecified.",
+      "result_denominator": "FP removal75→64.8/63.2→53.5; VP removal67.6/58.8; SF66.7/57.0. Graph+FP43.5/57.0.",
+      "evidence_ids": [
+        "E011",
+        "E012",
+        "E014"
+      ],
+      "counterevidence": [
+        "Longer paths than some variants; no prior corruption or hierarchy-only toggle."
+      ],
+      "allowed_conclusion": "Components help under fixed supplied prior configuration; robustness to erroneous/missing topology not demonstrated."
+    },
+    {
+      "claim_id": "C3",
+      "text": "Real-world deployment and robustness support practical EQA.",
+      "setting": "Quadruped, D455/LiDAR/IMU/JetsonThor, GPT5.5 APIs; manually known room layout.",
+      "baseline_control": "Selected question examples; no robot alternative comparison; no-choice/images perturb via replay.",
+      "selection_vs_test": "Previously unseen environments asserted, no construction-independent route/task preregistration.",
+      "result_denominator": "Seven tabled question runs, all displayed correct; replay47/50 modes agree; no repeat count or uncertainty.",
+      "evidence_ids": [
+        "E002",
+        "E015",
+        "E016",
+        "E018"
+      ],
+      "counterevidence": [
+        "Free-form replay and fixed-graph perturbation not fresh closed-loop trials."
+      ],
+      "allowed_conclusion": "Qualitative real feasibility plus offline planner consistency, not denominator-complete transfer reliability."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported active simulated EQA answer rates improve with the combined hierarchy and supplied floorplan, with component toggles; real executions illustrate feasibility but free-form and perturbation studies are fixed-trace replay, not counted independent closed-loop transfer.",
+    "unresolved": [
+      "Success grader/rubric for no-choice answers unspecified.",
+      "No claim that generated estimated floorplan is perception-only: annotations/manual room layouts disclosed.",
+      "Table reference prose repeats TableIII; numeric comparisons taken from actual displayed I-III content."
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete residual after GraphEQA: different information deficits need distinct exploration and unobserved room context. Fixed predecessor originals unavailable, no broad novelty proof.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Three typed modes map missing known-room/object/unseen-room evidence to appropriate geometry/semantic operations; topological progress weights and fallback reconstructible. Weak-prior accuracy hypothesis lacks controlled corruption study; class restriction risks excluding actual room.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E007",
+        "E008"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Online RGB-D graph, question-ranked views, JSON modes, formulas7-14, threshold and parameters specified. No exact prompts/answer-grader specification and depth robustness leave implementation/verifier boundaries.",
+      "evidence_ids": [
+        "E004",
+        "E006",
+        "E007",
+        "E010",
+        "E017"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Defined answer criteria and108/114 sim denominators; no-choice judge audit absent, seven selected real question examples appear single trials, no repeated task counts/aggregate SR. v2 single-real-trial ceiling2.",
+        "evidence_ids": [
+          "E009",
+          "E010",
+          "E015",
+          "E017"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Fixed five backbones, component leave-one-outs with Gemini, GraphEQA+FP and semantic-GT checks isolate some mechanism contributions. Floorplan input unlike baseline privileged, no all-factor budget/call matching or isolated hierarchy toggle.",
+        "evidence_ids": [
+          "E011",
+          "E012",
+          "E013",
+          "E014"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Previously unseen indoor scenes and real platform, but development overlap/contamination unspecified; semantic-region-derived prior and single-floor filtering restrict scope. Replay perturbs image not online graph.",
+        "evidence_ids": [
+          "E002",
+          "E009",
+          "E015",
+          "E016"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Episode counts provided; no stochastic rerun counts/CI, no endpoint failure decomposition, selected real answers single executions (v2 ≤1).",
+        "evidence_ids": [
+          "E009",
+          "E010",
+          "E015"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Planning steps and meters are useful proxies, 50-iteration budget disclosed; missing API calls/token/cost/latency including failures. Real-time prose not measurement.",
+        "evidence_ids": [
+          "E013",
+          "E018"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 63.75,
+    "display": 63.8,
+    "lower": 63.75,
+    "upper": 63.75,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Complete fixed text supports scoped static EQA harness review; unreported prompts/variance not author-deleted material."
+}

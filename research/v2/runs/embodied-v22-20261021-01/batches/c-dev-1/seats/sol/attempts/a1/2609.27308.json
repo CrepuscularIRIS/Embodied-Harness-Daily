@@ -1,0 +1,1472 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-dev-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2609.27308",
+    "paper_id": "2609.27308",
+    "title": "EmbodiedSWE: Coding Agents for Long Horizon Dexterous Robotics",
+    "version": "2609.27308v2",
+    "claim_type": "system_method",
+    "central_claim": "Coding agents solve long-horizon dexterous simulated robotics and transfer prior solutions across tasks/embodiments; verified programs can be diversified into scalable VLA supervision improving held-out variation performance and enabling sim-to-real."
+  },
+  "provenance": {
+    "input_hash": "2e73fbac012f58e0a5ab3163a0af6249c7cab16960cc9cc3121e07c40c24182f",
+    "rubric_version": "v2.2 draft_uncalibrated; calibration-dev only",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T16:37:49.485822+00:00",
+    "notes": [
+      "Session ID and receipt unavailable to this internal worker; no model probing performed.",
+      "domain_cards_hash binds taxonomy.json; each matched main/sub SHA256 is separately bound below. Nearest-neighbor originals unavailable; author related-work claims not independently confirmed.",
+      "No other seat, aggregate, prior score, Reel, or other batch read."
+    ]
+  },
+  "materials": [
+    {
+      "material_id": "2609.27308v2",
+      "url": "https://arxiv.org/html/2609.27308v2",
+      "sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "sections_read": [
+        "Abstract",
+        "§1–5",
+        "Appendices A–J in full, including tables and printed code as data"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2609.27308.txt",
+      "format": "html-full text; figures available as extracted captions/numbers, not independently image-inspected"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Abstract",
+      "quote": "Together, our framework uses coding agents to solve complex robotics tasks and turn verified solutions into scalable supervision for robot policies.",
+      "support_explanation": "Original combined solver/teacher claim; not an assertion of generalist deployment.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "§2.1–2.2",
+      "quote": "Agents have access to full simulator states, generic rendering and inspection tools, and configurable controllers, including operational-space and inverse-kinematics control.",
+      "support_explanation": "Teacher privilege and execution interface.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "§2.2",
+      "quote": "Grading is performed entirely offline to prevent agents from modifying scene code or exploiting the reward mechanism.",
+      "support_explanation": "Separated grading intention; audit still necessary.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix C.1/Table 6",
+      "quote": "For each run, we use Opus 5 to audit whether it is a reward hack, and score it as 0 if it is.",
+      "support_explanation": "Model-based hack audit not independent human calibration.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "§3.3",
+      "quote": "Each tool run uses two RTX 4090s rather than one; the second hosts the parallel simulations of the parameter search and the sweep tool.",
+      "support_explanation": "Tool bundle compute confound.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix C.1.2/Table 7",
+      "quote": "Mean score 0.66 0.70 0.44 0.51 Success rate 50% 43% 18% 18%",
+      "support_explanation": "Bundle improves partial-credit means but not full success.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix C.3/Table 20",
+      "quote": "Both no-hint rows use the same from-scratch Franka runs on the six target tasks.",
+      "support_explanation": "Cross-embodiment no-hint comparator changes robot; cannot isolate hint effect.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix C.4",
+      "quote": "The tool restores the simulator state and returns the record of every branch already attempted from that node, including the code, action descriptions, and induced state and scene differences.",
+      "support_explanation": "Checkpoint persistence and later retrieval.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix D.2",
+      "quote": "A recorded success is accepted only if it passes an open-loop action replay check.",
+      "support_explanation": "Action-only replay gate on generated data.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "§4.2/Table 1",
+      "quote": "Overall 0.066\\pm 0.008 \\bf{0.233\\pm 0.016}",
+      "support_explanation": "Matched 1000-demo OOD rubric-score gain; not 23.3% task success.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix E, evaluation protocol",
+      "quote": "Evaluation seeds are disjoint from those used for data generation and paired across policies within each experiment.",
+      "support_explanation": "Held-out initial conditions, paired evaluation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix E/Table 22",
+      "quote": "Clearing organic objects Complete the placement of one organic object. Pen holding Insert one pen into the holder.",
+      "support_explanation": "Relaxed student success not original multi-object task completion.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "§4.3/Table 2",
+      "quote": "Sim-trained 100% 80% 30% 20% Pretrained \\pi_{0.5} -DROID 0% 0% 0% 0%",
+      "support_explanation": "Cumulative stages over ten trials: 2/10 end-to-end versus 0/10.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix F, Deployment and evaluation",
+      "quote": "We select the 14,000-step checkpoint based on real-robot performance.",
+      "support_explanation": "Robot domain used for model selection; not independent sim-to-real holdout.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E015",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix I",
+      "quote": "However, we have not yet run this pipeline end to end to study how much of the coding agent’s capability it can transfer to robot policies.",
+      "support_explanation": "Synthetic construction through distillation not end-to-end validated.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E016",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix E, model and finetuning",
+      "quote": "Each setting is trained with three random seeds.",
+      "support_explanation": "Student replication; solver base/tool runs only one per task.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E017",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix G.2",
+      "quote": "External restrictions interrupted the project before held-out evaluation could be conducted.",
+      "support_explanation": "RL appendix training gains not deployment generalization.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E018",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "§4.1",
+      "quote": "Generated trajectories are retained only if they pass the task grader and an open-loop replay check.",
+      "support_explanation": "Fixed verified corpus selection.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E019",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix D.3",
+      "quote": "The policy-learning experiments in Section 4.2 evaluate increasing dataset sizes assembled through this framework; they do not isolate the contribution of individual diversification levels.",
+      "support_explanation": "Explicit component-attribution limit.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E020",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix A, related work",
+      "quote": "We remove human-designed interfaces on long-horizon tasks and find that frontier coding agents (e.g., Claude Fable 5) already write working solutions from scratch against Isaac Sim.",
+      "support_explanation": "Author gap relative to CaP-X macros, skill libraries, MimicGen and scripted data; independent neighbor originals not fixed.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E021",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix D.2",
+      "quote": "Newly recorded trajectories count only if their source code is unchanged since recording; an edited cell therefore needs new successful recordings.",
+      "support_explanation": "Code fingerprint protects persisted trajectory provenance.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E022",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix E, observations",
+      "quote": "The proprioceptive state is 8-dimensional, consisting of the seven arm joint positions and gripper closedness.",
+      "support_explanation": "Student camera/joint-only inputs versus privileged teacher.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E023",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix C.1.1/Table 6",
+      "quote": "Success rate 50% 25% 61% 18% 11% 82% Hack rate 7% 11% 4% 43% 39% 0%",
+      "support_explanation": "Author-reported full-task solver successes and hack rates on 28 tasks.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E024",
+      "material_id": "2609.27308v2",
+      "material_hash": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+      "locator": "Appendix C.1.6",
+      "quote": "API spend (USD, first-party list prices) of each run that solved its task",
+      "support_explanation": "Cost disclosed for solved runs; failed-run token/time tables available but total failed-inclusive USD not reconciled.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "task-specific Python robot-control program",
+      "information": "full simulator state/source, snapshots, logs; privileged teacher; frozen coding models",
+      "operation": "write solve(env), run, diagnose, revise; optional checkpoint tree and CMA-ES/sweeps",
+      "output": "verified executable task solution",
+      "conditions": "resettable simulator and controller APIs, 4h budget",
+      "feedback": "execution logs and physical task outcomes; external offline grader/audit",
+      "selection_rule": "highest graded legitimate score by budget; source hints supplied read-only",
+      "selection_data": "task-specific development runs fixed seed; different grading resets",
+      "persistence": "program files, checkpoint states with code/log/snapshot/branch annotations",
+      "later_use": "restore checkpoint on later trials; source program conditions later task/robot runs",
+      "claimed_effect": "up to 82% tasks solved; tool mean-score improvements; transfer hints",
+      "failure_boundary": "reward hacks; visual misgrounding; fixed-instance specialization; cross-robot control confound",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E023"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "teacher trajectory distribution and VLA weights",
+      "information": "full-state generator teacher vs camera/joint/instruction student; real appearance used to build sim",
+      "operation": "agent scene/strategy/phase changes, physical/action/visual randomization, grader plus replay, BC",
+      "output": "fingerprinted accepted trajectories and trained camera VLA",
+      "conditions": "successful seed solution, physically valid simulation, replayable action interface",
+      "feedback": "task grader and open-loop replay; no student-error-driven iterative generator",
+      "selection_rule": "only successful replay-verified unchanged-code cells; deduplicate; balanced cell filling",
+      "selection_data": "simulation generation and separate OOD configs; real 14k checkpoint selected on robot",
+      "persistence": "accepted trajectory sets and trained model checkpoint",
+      "later_use": "subsequent closed-loop simulation/robot episodes consume trained weights",
+      "claimed_effect": "equal-demo OOD score .066 to .233; real 2/10 full completion",
+      "failure_boundary": "relaxed student criteria; observability untested; real selection overlap; end-to-end whole pipeline unrun",
+      "evidence_ids": [
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015",
+        "E018",
+        "E021",
+        "E022"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Existing interfaces/benchmarks and seed-demo synthesis constrain long-horizon contact-rich coverage and scalable robot demonstrations.",
+    "checked_gap": "Within fixed local paper, full-state program generation plus controlled downstream data comparison supports this practical bottleneck; not an exhaustive novelty claim.",
+    "lineage": [
+      {
+        "method": "Code as Policies / CaP-X, prior coding-agent interfaces and frozen VLA orchestrators",
+        "source_version": "2609.27308v2 Appendix A; original sources not supplied"
+      },
+      {
+        "method": "MimicGen transform/replay, InternData-A1 scripted generation, DART noise",
+        "source_version": "2609.27308v2 Appendix A and §4; original sources not supplied"
+      }
+    ],
+    "closest_adjacent": "CaP-X for coding-agent evaluation; MimicGen/script-only domain-randomized demonstrations for synthesis. Only author account available.",
+    "residue": "Teacher per-task search costly and specialized; simple perturbation lacks semantic/strategy coverage.",
+    "stakes": "Long horizon tasks demand expensive demonstrations and physically precise control.",
+    "method_response": "Benchmark plus verified programs; agent-edited broader trajectory support with replay filtering and VLA learning.",
+    "remaining_gap": "Strong attribution of individual tools/filter; calibrated grader; held-out real transfer; generalist distillation and trained-agent RL generalization.",
+    "evidence_ids": [
+      "E001",
+      "E020",
+      "E009",
+      "E010",
+      "E014",
+      "E015",
+      "E019"
+    ],
+    "unresolved": [
+      "Closest-neighbor original full texts are not in shared fixed package; request shared augmentation before stronger novelty judgment.",
+      "Main scaling claim lists six tasks, Appendix E/Table 21 also includes coffee and pc_gpu; success criteria relaxed."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "self_supervised_signal_engineering",
+    "supporting": [
+      "decompose_and_delegate",
+      "adapt_via_conditioning"
+    ],
+    "matches": [
+      {
+        "main_id": "self_supervised_signal_engineering",
+        "sub_id": "rs:C08",
+        "role": "primary",
+        "fit": "strong",
+        "tactic_steps_checked": [
+          "C08.1 corpus scarcity identified",
+          "C08.2 agent diversifies scene/strategy/phase/dynamics/visual",
+          "C08.3 grader plus replay filters",
+          "C08.4 filtered corpus trains VLA; no student-error-driven iterative generator",
+          "C08.5 downstream held-out comparison with script-only augmentation"
+        ],
+        "success_failure_checks": [
+          "Filter removal not isolated",
+          "Real deployment checkpoint selected on robot",
+          "Equal-demo simpler baseline is present; generator compute not matched"
+        ],
+        "evidence_ids": [
+          "E009",
+          "E010",
+          "E018",
+          "E021"
+        ],
+        "reason": "Missing long-horizon demonstrations are manufactured from generated and execution-filtered trajectories then consumed by VLA BC, not merely a diversity claim."
+      },
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "supporting",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          "C25.1 planning vs controller computation",
+          "C25.2 executable program and saved simulator states",
+          "C25.3 trial-feedback revision",
+          "C25.4 bundle rather than isolating feedback ablation",
+          "C25.5 cost and privilege disclosed"
+        ],
+        "success_failure_checks": [
+          "Typed artifact is executable",
+          "Scorer hacks and uncalibrated model audit remain"
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E008"
+        ],
+        "reason": "Executable solve(env) artifacts delegate precise control and testing to simulator; logs drive in-construction correction. Simulator validity is bounded, not a sound physical guarantee."
+      },
+      {
+        "main_id": "adapt_via_conditioning",
+        "sub_id": null,
+        "role": "supporting",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          "Read C03: upstream schema training/shared representation absent; sub=null",
+          "Parent: reference solution conditions new task without weight updates"
+        ],
+        "success_failure_checks": [
+          "Similar versus dissimilar source tested",
+          "Cross-robot no-hint controls not matched"
+        ],
+        "evidence_ids": [
+          "E007"
+        ],
+        "reason": "Verified source program provided read-only to unchanged coding model on later task/embodiment; parent applies but C03 canonical learned schema/reference-space mechanism is not established."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Primary training-distribution manufacture; solver delegation and source-program conditioning are distinct supporting operations.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "privileged_teacher_supervision",
+        "sub": "K503",
+        "version": "embodied-agent-harness/v1",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "condition": "teacher privilege and action labels",
+            "status": "met",
+            "reason": "Full-state code teacher; joint-target labels for camera student"
+          },
+          {
+            "condition": "success filter",
+            "status": "met",
+            "reason": "Grader plus replay; code fingerprints bind acceptance"
+          },
+          {
+            "condition": "observability/privilege ablation",
+            "status": "unmet",
+            "reason": "No controlled teacher privilege removal/aliasing test"
+          },
+          {
+            "condition": "scorer integrity",
+            "status": "partial",
+            "reason": "Hack audit exists but no human audit calibration"
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E009",
+          "E018",
+          "E022"
+        ],
+        "main_sha256": "31333da3258671248955b2d056e3e9eed4aac144281d10d97b053ad47e8578fb",
+        "sub_sha256": "e93762696afc6cd005702e69e7a1d7969d8936425e8a152fbbcb491cd4aeb39f"
+      },
+      {
+        "main": "code_policy_trial_revision",
+        "sub": "R05",
+        "version": "board-induced-2026-10-21",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "condition": "executable policy revised between trials",
+            "status": "met",
+            "reason": "solve(env) and source-level diagnostics; deployed program has no model"
+          },
+          {
+            "condition": "rewrite versus one-shot attribution",
+            "status": "unmet",
+            "reason": "No one-shot matched feedback-removal comparison"
+          },
+          {
+            "condition": "generalization",
+            "status": "partial",
+            "reason": "Reset jitter and source-task reuse; limited conditioning controls"
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E023"
+        ],
+        "main_sha256": "d8cc10b3ce4253c99249e920795ce41e3f4737e978c43720f59f3dd1ad2ce944",
+        "sub_sha256": "6809e3bb366487805e8d0586a28a22bcaf9c7205cf133d2930fe996437033aeb"
+      },
+      {
+        "main": "external_verification_control",
+        "sub": "K204",
+        "version": "embodied-agent-harness/v1",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "condition": "resettable state checkpoint/search",
+            "status": "met",
+            "reason": "C.4 specifies restoration, saved logs and CMA-ES"
+          },
+          {
+            "condition": "isolated tools and matched compute",
+            "status": "unmet",
+            "reason": "Bundle and extra GPU; success declines for one model"
+          }
+        ],
+        "evidence_ids": [
+          "E005",
+          "E006",
+          "E008"
+        ],
+        "main_sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "sub_sha256": "5186f67b5dec715f235bbf6421e52ee33e791ebd190f74d9a9ae9e859d358ea6"
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "self_supervised_signal_engineering",
+      "rs_sub": "rs:C08",
+      "domain_namespace": "embodied",
+      "domain_main": "privileged_teacher_supervision",
+      "domain_sub": "K503",
+      "operation_correspondence": "Verified full-state generated programs manufacture filtered action demonstrations for less-informed VLA.",
+      "necessary_conditions_differences": "Simulator privilege and replayable controller; no claim that student sees teacher oracle or inherits entire agent loop.",
+      "evidence_ids": [
+        "E002",
+        "E009",
+        "E022"
+      ]
+    },
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain_namespace": "embodied",
+      "domain_main": "external_verification_control",
+      "domain_sub": "K204",
+      "operation_correspondence": "Structured program/state artifact delegates precise simulation and CMA-ES search; feedback revises code.",
+      "necessary_conditions_differences": "Resettable simulation, not real-time robot backtracking; numeric objective is proxy.",
+      "evidence_ids": [
+        "E005",
+        "E008"
+      ]
+    },
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain_namespace": "embodied",
+      "domain_main": "code_policy_trial_revision",
+      "domain_sub": "R05",
+      "operation_correspondence": "Executable program is revised between trials and becomes controller deliverable.",
+      "necessary_conditions_differences": "Programs also reused as teacher; no matched one-shot ablation.",
+      "evidence_ids": [
+        "E002",
+        "E003"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2606.18363#s1",
+          "note": "one harness dimension varied at a time with GPT-5.4 and Qwen3.5-4B"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.14674#s1",
+          "note": "one module swapped at a time with typed interfaces"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.10577#s2",
+          "note": "w/o depth tool and depth-image replacement, backbone fixed"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.10577#s3"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.20822#s3",
+          "note": "harness layers added one at a time, scenes/seeds/backbone fixed"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2405.15793#s1",
+          "note": "per-component ACI ablations on SWE-bench Lite"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.15195#s2",
+          "note": "cumulative, order-dependent ablation on 100-episode subsets"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2603.22435#s3",
+          "note": "cumulative VDM -> +SL -> +1M -> +3M, not factorial"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.29964#s1",
+          "note": "no per-component ablation; gap bundles three components"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2610.01939",
+          "note": "does not isolate composition vs persistent state vs selective feedback (Sec 6)"
+        }
+      ],
+      "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Bundle comparison plus equal-size script control, not individual tool/filter/diversification causal effects.",
+      "evidence_ids": [
+        "E005",
+        "E006",
+        "E019"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E03",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2606.10577#s4",
+          "note": "same-backbone harness gain ranges 6 to 22 SR across backbones"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2607.26148#s2",
+          "note": "imposed waypoints help qwen3.5-4b/9b, change strong models by <=2"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.39207#s2",
+          "note": "learned VLN tool +11 SR for Sonnet 5, negative on RxR for Astra"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2608.03327#s1",
+          "note": "MCP tools +4.0 pp for Thinking, -5.9 pp for Instruct checkpoint"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.18363#s1",
+          "note": "per-action replanning +71.4% relative for 4B vs +6.9% for GPT-5.4"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.24974#s1",
+          "note": "weaker reviewer models make review net harmful"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.12549#s2",
+          "note": "magnitude varies across model-interface pairs"
+        }
+      ],
+      "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student",
+      "applicable": true,
+      "status": "met",
+      "reason": "Tool bundle tested on two backbones; no claim of uniform gain accepted.",
+      "evidence_ids": [
+        "E006"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2607.22585#s1",
+          "note": "paired-task bootstrap CIs; most 0-8 pp harness differences within noise"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.11987#s1",
+          "note": "task-level bootstrap and sign-flip permutation, k=2 repeats, power stated"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.29861#s2",
+          "note": "three runs per setting; tasks classified all-success/all-fail/mixed"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.28589#s2",
+          "note": "sign test on discordant episodes, p=0.001"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2608.03327#s1",
+          "note": "5 greedy runs, effects beyond 2 SE"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2608.17393",
+          "note": "single run per configuration; variance unquantified"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2610.28069",
+          "note": "each configuration trained once"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2606.10577#s1",
+          "note": "100-episode single run, no variance"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.15195#s4",
+          "note": "single subset runs without variance"
+        }
+      ],
+      "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Three training seeds and paired student evaluation; base/tool solver one run per task, no paired inferential test.",
+      "evidence_ids": [
+        "E016",
+        "E006"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2607.22585#s1",
+          "note": "tokens per solved task including failed-trial tokens; ~40x across harnesses"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.11987#s3",
+          "note": "re-pricing from raw per-turn usage with cache terms"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.01939#s1",
+          "note": "LLM calls, input tokens and $ at same call budget"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.29964#s1",
+          "note": "model calls / time / $ per episode vs Show-Harness"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.18363#s3",
+          "note": "per-call latency and tokens per episode, student vs teacher"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.27871#s3",
+          "note": "tokens per query and Jetson latency"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2607.26148#s1",
+          "note": "median time, calls and cost per episode"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.33378#s2",
+          "note": "$/episode for light vs teacher agent"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2606.10577#s4",
+          "note": "no cost/latency or token count reported"
+        }
+      ],
+      "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Token/time/API summaries and per-solved spend; no fully reconciled failed-inclusive end-to-end cost.",
+      "evidence_ids": [
+        "E024",
+        "E005"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_limitation",
+          "ref": "2607.26148",
+          "note": "cannot verify whether proprietary models were post-trained on benchmarks"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.29861",
+          "note": "'zero-shot' means no navigation fine-tuning by authors"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.29389",
+          "note": "benchmark conditions overlap with harness development (App C.1)"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2606.27871",
+          "note": "ablations use privileged teleport action space, not comparable to standard benchmark"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2603.28052",
+          "note": "TerminalBench-2 search and evaluation share the same 89 tasks"
+        }
+      ],
+      "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Reset seeds disjoint and privilege explicit; robot checkpoint selected on target, proprietary pretraining unknown.",
+      "evidence_ids": [
+        "E011",
+        "E014"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E09",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2606.18363#s3",
+          "note": "GPT-5.4 teacher / Qwen3.5-4B base / Guava-4B in same harness"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.27871#s2",
+          "note": "teacher, zero-shot student, SFT student"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.29389#s2",
+          "note": "OpenVLA, pi0.5, Qwen action-regression on same 107 episodes"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.29964#s3"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.28589#s2",
+          "note": "27B teacher with/without memory, untrained 9B, SFT, RL"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.01939#s3"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.10522#s3",
+          "note": "pi0.5/GR00T fine-tuned on same demos"
+        }
+      ],
+      "applies_when": "a claim that a compact VLM/VLA student distilled from frontier-harness trajectories approaches or exceeds the teacher",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No claim that student approaches teacher in identical harness; student executes joint targets, teacher solves full-state programs.",
+      "evidence_ids": [
+        "E022"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E10",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2605.24220#s3",
+          "note": "504/1,638 accepted, 17.7-53.6% by repository difficulty"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.27871#s2",
+          "note": "~500 success-filtered samples per teacher"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.18363#s2",
+          "note": "teacher success ~90% so filtering retains most data"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.24974#s3",
+          "note": "collection success does not predict distillation value"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2610.28589",
+          "note": "CaP-X Goal/Spatial: teacher rarely succeeds and provides little SFT data"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.32416#s3",
+          "note": "success-filtered teacher demos 3/50 vs verified patches 46/50 on restack"
+        }
+      ],
+      "applies_when": "any student trained on success-filtered teacher trajectories",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Kept counts, replay and code fingerprint detailed; complete attempted/accepted yield per task/difficulty not tabulated.",
+      "evidence_ids": [
+        "E018",
+        "E021"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E12",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2608.06065#s1",
+          "note": "privilege variants: action-only 58.62 vs SFT 59.05; full 64.67"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2602.04942#s1",
+          "note": "PI types compared; negative PI utility case"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2505.09546#s1",
+          "note": "state aliasing under hidden context"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2510.03207#s1",
+          "note": "distillation misspecification under stochastic dynamics"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2610.15572#s2",
+          "note": "no check whether templated privileged descriptions are identifiable"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2610.28589#s1",
+          "note": "tool arguments from removed memory kept; student must memorize"
+        }
+      ],
+      "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Camera-only student tested, but teacher privileged-channel ablation/identifiability not established.",
+      "evidence_ids": [
+        "E002",
+        "E022"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E13",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2609.21650#s2",
+          "note": "27/57 zero-success tasks; matched direct PPO rescues only 10"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.21450#s2",
+          "note": "BC-initialized Flow-GRPO stays at 19-26% SR"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2509.14257#s2",
+          "note": "compute-matched short-horizon RL"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2608.17393#s2",
+          "note": "task screening by policy-relative difficulty; unscreened pool does not improve"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.28069#s1",
+          "note": "share of mixed-outcome GRPO groups reported"
+        }
+      ],
+      "applies_when": "a claim that SFT/teacher initialization plus RL beats RL alone, or that RL lifts a student beyond its SFT data",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Main VLA training is BC, not teacher-initialized sparse RL; appendix agent RL is separately scoped.",
+      "evidence_ids": [
+        "E017"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E15",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2608.17393#s2",
+          "note": "git-history and test-editing hack rates before defenses"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2608.17528#s4",
+          "note": "4 hacking routes found and blocked"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.27308#s1",
+          "note": "scorer hacking 43% Sol / 39% Terra; hack-adjusted scores"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2605.24220#s2",
+          "note": "per-request outcome broadcast led to reward hacking"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2602.04942",
+          "note": "tau-Bench modified due to reward hacking"
+        }
+      ],
+      "applies_when": "a policy or coding agent trained or evaluated against an automatic success checker it could access or tamper with",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Separate grader and reported hack rates; Opus audit lacks independent error calibration.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E023"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2609.29861#s2"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2607.26148#s1",
+          "note": "wrong target/route and wrong stop audit"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.12549#s1",
+          "note": "completion-assessment precision and false positives"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.15195#s3",
+          "note": "OSR-SR gap with stop validation"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2610.21450#s1",
+          "note": "no-stop / early-termination failures"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2607.22585#s2",
+          "note": "failure-category fingerprints per harness"
+        }
+      ],
+      "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Per-task scores and qualitative visual-grounding/plan/hack failures; incomplete repeated endpoint distribution.",
+      "evidence_ids": [
+        "E006",
+        "E023"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E17",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2610.08432#s1",
+          "note": "separate search and held-out splits; overfitting reported"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.33378#s2",
+          "note": "held-out initial configurations with frozen playbook"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.39207#s3",
+          "note": "gains measured on the same recurring tasks with ground-truth feedback"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2603.22435#s2",
+          "note": "library mined from the evaluation-task rollouts"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2607.08448#s3",
+          "note": "retrospective best-card selection on reporting seeds"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.37105#s2",
+          "note": "repeated validation reuse can cause adaptive selection"
+        }
+      ],
+      "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Later-task hints and OOD generated-data evaluations exist; cross-embodiment reference differs in robot and robot selection is reused.",
+      "evidence_ids": [
+        "E007",
+        "E011",
+        "E014"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2606.18363#s3",
+          "note": "9 tasks x 10 trials"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.10522#s1"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2605.13119#s2",
+          "note": "20 trials each"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.20822#s3",
+          "note": "2 tasks x 20 trials"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2607.08448",
+          "note": "real-world recordings are qualitative, human resets and judgments"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.39207",
+          "note": "G1 demonstrations qualitative"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2607.26148",
+          "note": "31 physical trials hand-designed and qualitative"
+        }
+      ],
+      "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle",
+      "applicable": true,
+      "status": "met",
+      "reason": "Ten trials each and cumulative milestones given; 2/10 full completion, selection caveat preserved.",
+      "evidence_ids": [
+        "E013",
+        "E014"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2606.10577#s2",
+          "note": "assumes metric depth; non-metric untested"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2606.10577#s1"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.29389#s1",
+          "note": "simulator provides calibrated metric depth"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.15195#s3",
+          "note": "stop gate needs usable depth"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.20822#s1",
+          "note": "verifier on approximately measured scene"
+        }
+      ],
+      "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No depth-gated deployed harness claim; teacher full simulator state declared.",
+      "evidence_ids": [
+        "E002"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper_practice/paper_limitation, not observed reviews",
+      "source_refs": [
+        {
+          "kind": "paper_practice",
+          "ref": "2610.01939#s1",
+          "note": "same LLM-call budget; 52 of 96 code-only successes are tool-calling budget exhaustion"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.11987#s2",
+          "note": "fixed 1,200 s ceiling with terminal-state distribution"
+        },
+        {
+          "kind": "paper_practice",
+          "ref": "2609.34018#s1",
+          "note": "matched training budget"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2607.22585",
+          "note": "turn-budget asymmetry across harnesses"
+        },
+        {
+          "kind": "paper_limitation",
+          "ref": "2609.27308#s2",
+          "note": "tool runs use two GPUs vs one; compute not matched"
+        }
+      ],
+      "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same 4h but tools double GPU and entire bundle, explicitly disclosed not controlled.",
+      "evidence_ids": [
+        "E005"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Coding agents solve complex benchmark tasks and benefit from tools.",
+      "setting": "28 simulated tasks; 6 models/native harness; one base run per task/model; 4h, RTX4090",
+      "baseline_control": "same model base vs whole tool bundle; doubled GPU",
+      "selection_vs_test": "development against fixed seed; grading reset differences; best-so-far selection",
+      "result_denominator": "Strongest 23/28=82%; tools Opus mean .66→.70 but full success 50→43%; Sol .44→.51 and 18→18%",
+      "evidence_ids": [
+        "E005",
+        "E006",
+        "E023"
+      ],
+      "counterevidence": [
+        "Model vs harness confounded across native model families",
+        "Tool-specific causal contribution not isolated; uncalibrated hack audit"
+      ],
+      "allowed_conclusion": "Demonstrated simulated solvability; descriptive bundle partial-credit gains, not all tools increase success."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Generated diversification improves VLA held-out performance and sim-to-real.",
+      "setting": "SmolVLA, matched 1000 demos/task, six OOD tasks, 256 configs/setting, three seeds; pi0.5-DROID 500 sim demos real lamp",
+      "baseline_control": "script-only randomization equal demo count; pretrained real policy",
+      "selection_vs_test": "disjoint paired OOD simulation seeds; robot checkpoint selected using robot performance",
+      "result_denominator": ".066±.008 vs .233±.016 rubric score; 2/10 real end-to-end vs 0/10; relaxed criteria in scaling study",
+      "evidence_ids": [
+        "E009",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E016"
+      ],
+      "counterevidence": [
+        "No isolated diversification levels or replay-gate ablation",
+        "Target robot used in selection; cannot call independently held-out zero-shot real transfer"
+      ],
+      "allowed_conclusion": "Author-reported OOD simulation data-recipe gain and counted real task completion using sim-only training demonstrations, not unselected real holdout/generalist competence."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "transfer",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author reports closed-loop success across new robot/task configurations and disjoint held-out simulation variations; equal-demo generator improves restricted VLA rubric scores, with 2/10 counted robot full completions after real-robot checkpoint selection. No reproduction performed.",
+    "unresolved": [
+      "VLM grader/hack-audit accuracy uncalibrated",
+      "Cross-embodiment no-hint control and tool compute mismatch",
+      "Real checkpoint selection/test separation",
+      "Student six/eight-task and relaxed-success reporting inconsistencies",
+      "Closest-neighbor independent verification missing"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete long-horizon/contact-rich benchmark and costly demo gap; closest-neighbor lineage explained but originals absent from fixed package.",
+      "evidence_ids": [
+        "E001",
+        "E020"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Controllable generator plus grader/action replay directly addresses narrow expensive solutions; identifiable camera supervision and filter necessity not established.",
+      "evidence_ids": [
+        "E009",
+        "E018",
+        "E021",
+        "E022"
+      ],
+      "counterevidence_ids": [
+        "E019"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Program, checkpoint, generation cells, replay and BC interfaces reconstructable with explicit privilege and finite budgets; grader model calibration and observability conditions incomplete.",
+      "evidence_ids": [
+        "E002",
+        "E008",
+        "E009",
+        "E021"
+      ],
+      "counterevidence_ids": [
+        "E004",
+        "E015"
+      ],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Closed-loop task results and action replay, ten real trials; uncalibrated VLM/hack audit, relaxed student criteria and six-vs-eight scaling table mismatch limit measurement integrity.",
+        "evidence_ids": [
+          "E009",
+          "E012",
+          "E013",
+          "E023"
+        ],
+        "counterevidence_ids": [
+          "E004"
+        ],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Equal demonstrations and script-only training isolate broad diversification recipe, but not levels/filter; tool gain compute-confounded and cross-robot baseline mismatched.",
+        "evidence_ids": [
+          "E010",
+          "E019"
+        ],
+        "counterevidence_ids": [
+          "E005",
+          "E007"
+        ],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "OOD scenes and disjoint paired seeds support restricted simulation generalization; robot checkpoint selected on real performance, appendix RL has no holdout.",
+        "evidence_ids": [
+          "E011"
+        ],
+        "counterevidence_ids": [
+          "E014",
+          "E017"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Task-wise denominator and student three seeds reported; single solver/tool seed, real n=10, no confidence intervals for stage comparison and inconsistent student summary.",
+        "evidence_ids": [
+          "E013",
+          "E016",
+          "E023"
+        ],
+        "counterevidence_ids": [
+          "E006"
+        ],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Detailed token/time and per-solved API spend; generator amortization discussed but doubled tool GPU not matched and failed-inclusive USD incomplete.",
+        "evidence_ids": [
+          "E005",
+          "E024"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 63.75,
+    "display": 63.8,
+    "lower": 63.75,
+    "upper": 63.75,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Complete fixed text read including appendices; calibration-dev provisional ratings, material hashes match; limitations explicitly scoped, no independent execution."
+}

@@ -1,0 +1,714 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-2",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "provenance": {
+    "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+    "rubric_version": "v2.2",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "20c4aa07bdfdd48aa1b70989c8fe0009d3fa67f22c2e51ce5e299e8faa4c8fc9",
+    "expectations_hash": "eacb08d00a46f1ee5457f4efd37b5b47f446a6e958b835b3972c1a3579c84c9b",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T18:21:04.198701+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144); session_id/receipt_ref unavailable to internal worker. Domain hash is sorted relative-path + NUL + bytes of all main/sub cards; expectations hash uses main cards (embedded expectations). No other attempts or seat outputs read."
+  },
+  "paper": {
+    "paper_key": "2609.31760",
+    "paper_id": "2609.31760",
+    "title": "What Stops Recursive Self-Improvement in Robotics? Lessons from 123 Rounds of Agentic Skill Discovery",
+    "version": "2609.31760v1",
+    "claim_type": "evaluation_resource",
+    "central_claim": "A123-round study finds a robot can discover capabilities but accepted changes fail to compound; relational-perception substrate, sequential frontier lock and selection-harness errors rather than proposer strength explain stagnation and motivate new loop-design recommendations."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2609.31760v1",
+      "sha256": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "sections_read": [
+        "Abstract; §§1–11",
+        "FullAppendixA123roundrecord",
+        "FullAppendixB measurements/phasetotals",
+        "FullAppendixC modelregistration/use",
+        "FullAppendixD finalfailures",
+        "FullAppendixE repeatedpairs/additionalfigures"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§2",
+      "quote": "The evaluator judges each declared step with privileged simulator state",
+      "support_explanation": "Selection uses privileged evaluator, distinct from robot sensing.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§2",
+      "quote": "The robot perceives only through its head and wrist RGB-D cameras and its joint readings",
+      "support_explanation": "Runtime boundary.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§2",
+      "quote": "from round 74 the run repository and held-out task are not visible",
+      "support_explanation": "Isolation strengthened during run.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§2",
+      "quote": "The model and its reasoning effort changed twice during the run, both times by our decision, not the agent’s",
+      "support_explanation": "Agent/harness timeline confound.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "276 reachable successes at 0.849–0.850 m under a 0.85 m sphere",
+      "support_explanation": "Concrete proxy-boundary capture.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "Fridge 0/486; Cabinet 0/256; Sink 14/230, of which 9 had failed intermediate steps",
+      "support_explanation": "Native vs intended-chain success differ.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "57 accepted library changes (51 perception); 86 provider registrations over 20 identities; 847 proposal attempts",
+      "support_explanation": "Activity not end-task gain.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "Fridge : 57% fail step 1; 2.7% pass four steps; 0.9% pass five.",
+      "support_explanation": "Measured frontier-lock reach.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "Round-118 grasp change: reproduced wins on a fresh support state and a held-out state; next 60 rollouts: 0 task successes",
+      "support_explanation": "Local win not task improvement.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "22 promotions (rounds 40–65) with 0 wins and 0 losses; 16 of 36 re-run disagreeing pairs did not reproduce",
+      "support_explanation": "Gate and repeatability defects.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixB/Table5",
+      "quote": "113 numbered harness fixes",
+      "support_explanation": "Human maintenance burden.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§10",
+      "quote": "one simulator, one kitchen layout and three tasks, with no independent replicates, matched-budget baselines or ablations.",
+      "support_explanation": "Explicit limits.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§8",
+      "quote": "They come from this experiment but were not themselves tested in it",
+      "support_explanation": "Remedies untested.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§5",
+      "quote": "The vision-language class entered only after a human suggested it.",
+      "support_explanation": "Capability-class escalation not autonomous.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E015",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "AppendixC/Table7",
+      "quote": "observed_region_relational_localizer 118 60 0 0",
+      "support_explanation": "Registered provider unused in60laterrollouts.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E016",
+      "material_id": "M1",
+      "material_hash": "7aaa6c112dd862eb6446a5b9921ec01d0149d7e439d39144bae7046d7a0440b5",
+      "locator": "§2",
+      "quote": "A round took one to three hours, plus several hours when models were researched, and we ran 123 rounds.",
+      "support_explanation": "Partial walltime budget, no USD ledger.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Robot program/skill/provider library",
+      "information": "Proposer gets camera keyframes, failure diagnoses/logs and history; robotRGB-D/joints; evaluator privileged state.",
+      "operation": "Collect→judge→diagnose→edit code/request model→replay/fresh/held-out gates→accept; refit routing.",
+      "output": "Revised skills, provider wrappers, routing.",
+      "conditions": "Truthful diagnosis, reachable changed steps, useful provider integration, accurate actuator description.",
+      "feedback": "Recorded rescue and fresh paired outcomes; late sealed/regression tests.",
+      "selection_rule": "Sequential replay/fresh/no-regression gates; thresholds and rules repaired during run.",
+      "selection_data": "Recurring4seeds/task, fresh scenes and held-out task; boundary strengthenedround74.",
+      "persistence": "Accepted source/model registry, program/attempt memory and routing.",
+      "later_use": "Next rounds deploy library; count actual provider calls separately.",
+      "claimed_effect": "Autonomous discovery and cumulative gain investigated.",
+      "failure_boundary": "0/486Fridge; localgraspwin did not improve task;113humanrepairs/modelchanges; registration can mean zero actualuse.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E006",
+        "E007",
+        "E009",
+        "E011",
+        "E015"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Longitudinal evaluation instrument and trace audit",
+      "information": "Native/task-step verdicts, conditional reach, source thresholds, request status, calls and paired reruns.",
+      "operation": "Compare proxy promotions vs task outcomes; dissect firstfailures, evaluator boundary capture and zero-call models.",
+      "output": "Representability/expressibility/resolvability framework, measurement tables and12falsifiable recommendations.",
+      "conditions": "Trace truth and stable measurement semantics, weakened by evaluator changes.",
+      "feedback": "Observed proxy/outcome mismatch and source-level defects.",
+      "selection_rule": "Retrospective explanatory mechanisms, not randomized treatment selection.",
+      "selection_data": "One kitchenlayout,3developmenttasks and1gateholdout across123rounds.",
+      "persistence": "Round/measurement/use tables and proposed experiments; not an improved finalpolicy claim.",
+      "later_use": "Remedies proposed for future matched-budget replicated experiments, not tested here.",
+      "claimed_effect": "Explain why local acceptance is not task progress.",
+      "failure_boundary": "Can establish concrete observations, not universal dominance of harness over model or remedy effectiveness.",
+      "evidence_ids": [
+        "E005",
+        "E006",
+        "E008",
+        "E010",
+        "E012",
+        "E013",
+        "E014"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Positive robotRSI systems leave unclear when accepted local changes fail to compound on long relational household chains.",
+    "checked_gap": "Separate provider registration, gated local acceptance, intended-step execution and native task success; diagnose selection-side limitations under composition.",
+    "lineage": [
+      {
+        "method": "Voyager/Eureka/Reflexion/DGM",
+        "source": "M1 §1/9 references1–3,17",
+        "version": "as cited; independent originals not supplied"
+      },
+      {
+        "method": "RHO/ASPIRE/ENPIRE",
+        "source": "M1 §9 references4–6",
+        "version": "as cited; independent originals not supplied"
+      },
+      {
+        "method": "Reward misspecification/adaptive holdouts/few-run statistics",
+        "source": "M1 §7/9 references13–15",
+        "version": "as cited"
+      }
+    ],
+    "closest_adjacent": "RHO/ASPIRE code-library optimization; ENPIRE real-policy evolution; contribution is failed-run diagnosis, not positive benchmarkgain.",
+    "residue": "Truthful representation, expressible model-class change and relevant test resolution in long chains.",
+    "stakes": "Accepted patches may measure activity while no later capability is exercised.",
+    "method_response": "Chain-factorization, three necessary diagnostic conditions and detailed gate/trace/use audit.",
+    "remaining_gap": "No controlled remedies, proposer-strength counterfactual or independent replicated layout; general causality unproven.",
+    "evidence_ids": [
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E009",
+      "E010",
+      "E012",
+      "E013"
+    ],
+    "unresolved": [
+      "Independent predecessor comparison unavailable",
+      "New-layout and independent loop replicates missing"
+    ]
+  },
+  "rs_pattern": {
+    "primary": "assumption_audit_and_pivot",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "assumption_audit_and_pivot",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "moderate",
+        "tactic_steps_checked": {
+          "1": "Audit accepted-change→taskprogress and componentregistration→capability assumptions.",
+          "2": "Observed57acceptedchanges/0Fridgesuccesses, spherecapture and zero-call grounders form counterexamples.",
+          "3": "Chain product identity explains attenuation without independence assumption.",
+          "4": "Replacement conditions and falsifying experiments specified.",
+          "5": "No tested corrective pivot or universal guarantee."
+        },
+        "success/failure_checks": [
+          "Actual deployment counterexamples ground broad assumption-audit main.",
+          "Read controlled_diagnostic_design/C02 but do not assign: no one-confound constructed matched instrument.",
+          "ReadC05/C11/C28; no latent-identifiability theorem, certified choice-rule redesign or distributed-optimizer bound; subnull.",
+          "General statements that agent is rarely bottleneck exceed uncontrolled one-run evidence."
+        ],
+        "evidence_ids": [
+          "E005",
+          "E006",
+          "E008",
+          "E010",
+          "E012",
+          "E013"
+        ],
+        "reason": "Broad empirical assumption violation plus structural diagnosis fits main; no forced subcard."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Audit of progress proxy with observed counterexamples, not theorem-level subcard.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "harness_effect_evaluation",
+        "sub": "K804",
+        "version": "embodied-agent-harness/v1",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "condition": "Endpoint and repeated-seed failure decomposition",
+            "status": "met",
+            "evidence_ids": [
+              "E006",
+              "E008",
+              "E010"
+            ]
+          },
+          {
+            "condition": "Controlled causal attribution",
+            "status": "unmet",
+            "evidence_ids": [
+              "E004",
+              "E012"
+            ]
+          },
+          {
+            "condition": "Native vs intended success and deployed use distinguished",
+            "status": "met",
+            "evidence_ids": [
+              "E006",
+              "E015"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E006",
+          "E008",
+          "E009",
+          "E010"
+        ]
+      },
+      {
+        "main": "code_policy_trial_revision",
+        "sub": "R05",
+        "version": "board-induced-2026-10-21",
+        "fit": "strong (studied object, not claimed new solver)",
+        "condition_checks": [
+          {
+            "condition": "Between-round code rewriting and model-free robot execution",
+            "status": "met",
+            "evidence_ids": [
+              "E002",
+              "E007"
+            ]
+          },
+          {
+            "condition": "Retained task benefit independently demonstrated",
+            "status": "unmet",
+            "evidence_ids": [
+              "E006",
+              "E009",
+              "E010"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E006",
+          "E007",
+          "E009"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "assumption_audit_and_pivot",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "harness_effect_evaluation",
+        "sub": "K804"
+      },
+      "operation_correspondence": "Counterexamples to progress proxy grounded in failure endpoints, reach, gate outcomes and later calls.",
+      "necessary_conditions_and_differences": "Endpoint decomposition actually performed; retrospective audit does not confer causal isolation or tested remedies.",
+      "evidence_ids": [
+        "E006",
+        "E008",
+        "E010",
+        "E012"
+      ]
+    },
+    {
+      "rs_main": "assumption_audit_and_pivot",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "code_policy_trial_revision",
+        "sub": "R05"
+      },
+      "operation_correspondence": "Audited retained code-policy loop saves accepted skill edits for later trials but task results remain stagnant.",
+      "necessary_conditions_and_differences": "Harness itself changed only by humans; not autonomousK401harnessoptimization; persistent code is not retainedbenefit.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E009",
+        "E011"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/harness_effect_evaluation.md#Reviewer expectations"
+      ],
+      "applies_when": "Harness failures vs proposer strength",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Source/evaluator defects diagnosed but model/provider/harness co-change; no matched causalintervention.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E012",
+        "E013"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/harness_effect_evaluation.md#Reviewer expectations"
+      ],
+      "applies_when": "Longitudinal and paired comparisons",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Repeatedseeds/36pairreruns but no independent loopreplicates/CI.",
+      "evidence_ids": [
+        "E009",
+        "E010",
+        "E012"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/harness_effect_evaluation.md#Reviewer expectations"
+      ],
+      "applies_when": "Endpoint vs native/program success",
+      "applicable": true,
+      "status": "met",
+      "reason": "Per-roundcounts, conditionalreach, accidentalsuccess and actualuse fully decomposed.",
+      "evidence_ids": [
+        "E006",
+        "E008",
+        "E009",
+        "E015"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/harness_effect_evaluation.md#Reviewer expectations"
+      ],
+      "applies_when": "Development overlap and privileged evaluators",
+      "applicable": true,
+      "status": "met",
+      "reason": "Recurringseeds, changing isolation/models/providers and privilegedselection openly stated; limits not erased.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E004",
+        "E012"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/harness_effect_evaluation.md#Reviewer expectations"
+      ],
+      "applies_when": "Cost of autonomous loop",
+      "applicable": true,
+      "status": "partial",
+      "reason": "113humanrepairs androundtime/attemptcaps, no rawtoken/USD/GPUledger.",
+      "evidence_ids": [
+        "E011",
+        "E016"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Capabilities found but accepted changes did not compound.",
+      "setting": "PandaOmron/RoboCasa one kitchen,Fridge123rounds,laterCabinet/Sink.",
+      "baseline/control": "Pairedincumbent/candidategates, no alternate full-loop baseline.",
+      "selection_vs_test": "Fourrecurringseeds and fresh/gateholdout reused in selection; isolation strongerround74; not independentfinaltest.",
+      "result/denominator": "Fridge0/486,Cabinet0/256,Sink14/230(9withfailedsteps);57changes/847proposals;972completed/993rollouts.",
+      "evidence_ids": [
+        "E003",
+        "E006",
+        "E007",
+        "E009"
+      ],
+      "counterevidence": [
+        "Useful activeviewing and one localgraspwin exist; zero targetgain not zero discovery."
+      ],
+      "allowed_conclusion": "Supported descriptive failure of task-level compounding in this run, not robotRSI impossibility."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Harness rather than proposer dominates; three mechanisms explain stagnation.",
+      "setting": "Retrospective trace/source audit and chainproduct identity.",
+      "baseline/control": "Spherecapture,request-statuserrors, rerundifferences and zerocalls; no matched factorial intervention.",
+      "selection_vs_test": "Same run discovers/illustrates diagnoses;human-suggested4viewVLMprobe not independentbenchmark.",
+      "result/denominator": "276sphereboundarysuccesses;57%step1fail;16/36differencesnotreproduced;113repairs;zero calls oflategrounders.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E008",
+        "E010",
+        "E011",
+        "E012",
+        "E013",
+        "E014",
+        "E015"
+      ],
+      "counterevidence": [
+        "Strongeragent/morecompute/alternativearchitecture not tested; timelines confounded."
+      ],
+      "allowed_conclusion": "Concrete observed failures and plausible mechanisms; general dominance and recommended cure effects unverified."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported longitudinal simulation audit shows gated local changes/provider admissions coexist with zero target success, with concrete evaluator/memory/composition defects. It does not causally prove proposer strength is rarely limiting in general or validate remedies.",
+    "unresolved": [
+      "Independent causal/replicated loop",
+      "Newlayout finaltest",
+      "Native predicate thresholds and changing-step-evaluator independentaudit",
+      "Complete rawcost"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Specific compounding/measurementgap with close robotRSIlineage; originalsourcecomparison not independent.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E012"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+      ]
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Chainalgebra and trace-linkedmechanisms fit diagnostic aim; remedies/relativebottleneck importance untested.",
+      "evidence_ids": [
+        "E008",
+        "E010",
+        "E012",
+        "E013"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+      ]
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Full rounds/outcomes/use/gateevolution reconstruct study; exactchanging thresholds and no externalcoding audit limitexecutioncheck.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E006",
+        "E010",
+        "E015"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Rich denominators andstepfailures, but native task/step criteria not fully specified as stable auditable predicates and evaluatortruth changes; conservative v2criterion/verification cap2.",
+        "evidence_ids": [
+          "E001",
+          "E005",
+          "E006",
+          "E008",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+        ]
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Concrete source/capture/request defects, but model/provider/harnesscochange and no matchedinterventions prevent causal dominance.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E012",
+          "E013"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+        ]
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "One kitchen,4recurringseeds and selection-usedholdout; localheldoutwin not untouchednewdomain taskgain.",
+        "evidence_ids": [
+          "E003",
+          "E009",
+          "E012"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+        ]
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Extensivefailurecounts and rerunpairs, but no independentloopreplicates/CI; counts do not imply independent123samples.",
+        "evidence_ids": [
+          "E006",
+          "E009",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+        ]
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Roundtime/attemptcaps/humanrepairs only; no rawtoken/USD/providerledger or fairalternative.",
+        "evidence_ids": [
+          "E011",
+          "E016"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–11, completeAppendicesA–E, Tables1–8/Figures1–7; full§2/7/10 andAppendixcost/protocolsearch"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": 60.0,
+    "display": 60.0,
+    "lower": 60.0,
+    "upper": 60.0,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Negative/evaluation contribution judged by diagnostic validity, not by requiring positivegain; fullappendicesread, no replication."
+}

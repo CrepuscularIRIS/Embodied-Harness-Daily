@@ -1,0 +1,767 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-1",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2503.10069",
+    "paper_id": "2503.10069",
+    "title": "SmartWay: Enhanced Waypoint Prediction and Backtracking for Zero-Shot Vision-and-Language Navigation",
+    "version": "2503.10069v2",
+    "claim_type": "system_method",
+    "central_claim": "SmartWay combines a trained occupancy-aware RGB-D waypoint predictor and zero-shot MLLM navigator with history-aware single-expert planning and one-step backtracking, claiming stronger waypoint quality, zero-shot continuous VLN success and real-world adaptability."
+  },
+  "provenance": {
+    "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+    "rubric_version": "v2.2 + anchors v2",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T18:20:50.997438+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144). Session/receipt unavailable. R07/observe_act_interface cite this paper: structural references only, no independent evidence for ratings. Fixed material read offline; no code execution."
+  },
+  "materials": [
+    {
+      "material_id": "2503.10069-fulltext",
+      "url": "https://arxiv.org/html/2503.10069v2",
+      "sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "sections_read": [
+        "Abstract",
+        "I-VI full HTML",
+        "III-A/B andIV-A/B all formulas",
+        "V-A-D all TablesI-V, Fig1-3 captions; no appendix in fixed text"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "IV-A3",
+      "quote": "L_{occ}=\\text{BCE}(P,M)",
+      "support_explanation": "Depth occupancy is soft supervised auxiliary loss, not hard inference action validator.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "IV-A3",
+      "quote": "M_{k,j}=1 indicates that the region at angle k and distance d_{j} is traversable",
+      "support_explanation": "Mask derived from minimum-depth rays; occupancy not learned self-generated signal.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "III-B",
+      "quote": "Non-maximum suppression (NMS) is then applied to extract the top K navigable waypoints, and K is set up to 5.",
+      "support_explanation": "Harness produces bounded candidate set; MLLM does not infer arbitrary metric waypoints.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "IV-B1",
+      "quote": "our method builds upon MapGPT [ 30 ] ’s single-expert paradigm and extends it to VLN-CE.",
+      "support_explanation": "Clear ancestor; not first single-expert image-text planning.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "IV-B1",
+      "quote": "we incorporate the RAM [ 34 ] model for fine-grained object recognition and classification in RGB images",
+      "support_explanation": "Visual-textual auxiliary semantic labels and history, not pure raw vision only.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "IV-B2",
+      "quote": "The plan P_{t} becomes an input for the next step, meaning the model can revise its earlier intentions based on fresh observations or contextual details.",
+      "support_explanation": "Within-episode plan reuse; not cross-episode retained harness change.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "IV-B2",
+      "quote": "[‘F. Move back to last position in an opposite direction’]",
+      "support_explanation": "Backtrack is an exposed one-step action option, not full checkpoint restore or exact undo guarantee.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-A",
+      "quote": "following the evaluation framework of Open-Nav [ 16 ] across 100 episodes to ensure direct comparability.",
+      "support_explanation": "Simulation100 episode subset, not full val-unseen match to supervised rows.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-A",
+      "quote": "we train the model for 300 epochs.",
+      "support_explanation": "Waypoint predictor trained even though downstream frontier navigator zero-shot.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-A",
+      "quote": "gpt-4o-2024-08-06 API",
+      "support_explanation": "Fixed MLLM identity; competitorsGPT4/Llama different.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-A",
+      "quote": "we define 25 distinct navigation instructions",
+      "support_explanation": "Real denominator25 instructions, no repeats described.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-A Evaluation Metrics",
+      "quote": "an attempt is deemed successful if the agent halts within 3 meters of the target in the VLN-CE environment, whereas a stricter 2-meter threshold is applied for real-world scenarios.",
+      "support_explanation": "Explicit success and STOP condition; no independent learned judge.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-B TableI",
+      "quote": "Ours 13.09 7.01 51 29 22.46",
+      "support_explanation": "R2R SR29,OSR51,SPL22.46,NE7.01; cannot claim all metric dominance.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-B TableI",
+      "quote": "Open-Nav-GPT4 [ 16 ] 7.68 6.70 23 19 16.10",
+      "support_explanation": "Older baseline better NE; backbone and loop bundled.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E015",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-C TableII",
+      "quote": "Ours (w/o Backtrack) 24 3.28 Ours (with Backtrack) 36 3.06",
+      "support_explanation": "Real with same candidate setup gives6/25→9/25 reported rates; no repeated route precision.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E016",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-D TableIV",
+      "quote": "128 ✓ ✗ 1.47 82.15 1.09 2.09 128 ✓ ✓ 1.48 87.26 1.03 1.96",
+      "support_explanation": "Occupancy increment under sameDINO/cross-attention improves open predictions but not guaranteed obstacle-free.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E017",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-D TableV",
+      "quote": "3 ✓ ✓ 15.32 6.73 52 26 17.61 0.042 4 ✓ ✓ 13.09 7.01 51 29 22.46 0.033",
+      "support_explanation": "Enhanced predictor-only versus full:SR rises but NE/OSR worsen; collisions0.042→0.033, not text’s0.067→0.044 full comparison.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E018",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-D TableV",
+      "quote": "1 ✓ ✓ 10.51 7.61 36 24 18.20 0.067 2 ✓ ✓ 12.75 7.11 53 28 21.22 0.044",
+      "support_explanation": "Baseline predictor backtrack toggle gives24→28SR, two-by-two component control more informative than cross-model SOTA.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E019",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "VI",
+      "quote": "we plan to extend our backtracking mechanism to support multi-step undo operations",
+      "support_explanation": "Current recovery cannot undo deeper sequences or exact state changes.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E020",
+      "material_id": "2503.10069-fulltext",
+      "hash": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+      "locator": "V-A Real-world Environments",
+      "quote": "All methods are executed in real-time on a laptop equipped with an NVIDIA RTX 3080 Mobile GPU (16 GB VRAM).",
+      "support_explanation": "Hardware stated but no runtime/token/call/USD measurements; API backend remote.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Occupancy-aware learned candidate generator",
+      "information": "12RGB+12depth panorama, pretrained DINOv2Small and PointGoal depth encoder; ground-truth navigability heatmap during training; minimum-depth rays produce occupancy targets. MLLM sees candidate images/labels rather than numeric depth.",
+      "operation": "Adjacent-sector masked RGB-depth cross-attention,120×12 waypoint heatmap, MSE target plus0.5BCE occupancy; NMS up to5 candidates.",
+      "output": "Relative-angle/distance candidate waypoints",
+      "conditions": "Calibrated metric depth and panoramic registration; soft probability loss not hard collision check.",
+      "feedback": "Static MP3D waypoint open-space/spatial-distance metrics, downstream collision rates.",
+      "selection_rule": "300epoch supervised waypoint training; static argmax/NMS at deployment.",
+      "selection_data": "Training dataset identity/split counts not fully specified; MP3Dval_unseen test protocol cited.",
+      "persistence": "Learned waypoint predictor, not revised frontier LLM weights.",
+      "later_use": "Frozen predictor candidates feed navigator each turn.",
+      "claimed_effect": "More traversable and aligned waypoints.",
+      "failure_boundary": "Open prediction fraction87.26, not100; labels based on depth rays do not guarantee full-body collision safety.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E009",
+        "E016"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "History/plan-conditioned frozen candidate chooser with reverse action",
+      "information": "GPT4o2024-08-06 receives task, current candidate images+RAM labels/action directions, summarized past actions/scenes and previous thought/plan.",
+      "operation": "Select one action, update multi-step thought/plan, preserve for next call; add F move-back-last-position opposite-direction option and30/90degree turning.",
+      "output": "Chosen candidate/turn/reverse movement; replanning after observations.",
+      "conditions": "Low-level angle/distance motion realizes choice; previous pose reachable; plan/history quality and STOP choice reliable.",
+      "feedback": "New observation vs instruction landmarks allows model reassessment, no mechanical failure detector or checkpoint restoration specified.",
+      "selection_rule": "Online next-action/model choice only; no cross-episode edit selection.",
+      "selection_data": "Current episode history; no offline harness tuning protocol reported.",
+      "persistence": "Within-episode action/scene history and previous plan, no demonstrated retained future-task improvement.",
+      "later_use": "Reinsert previous plan on next step.",
+      "claimed_effect": "Backtracking corrects local missteps and reduces compounding errors.",
+      "failure_boundary": "Only one-step reverse; no bounded history/retrieval design or safety monitor. NE/OSR can worsen with backtrack.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E010",
+        "E017",
+        "E019"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "WeakRGB features and fusion/occupancy unconstrained waypoints limit traversability; text-only prior navigators lose visual history and cannot reliably backtrack.",
+    "checked_gap": "Named modules and comparator operations make plausible engineering residual. Histories/backtracking precede in learned VLN and single-expertMapGPT; first-MMLM/SOTA must remain author assertion.",
+    "lineage": [
+      {
+        "source": "Hong etal[4], ETPNav[8/17], Open-Nav[16], MapGPT[30] described in fixed2503.10069v2 I-II/III; no adjacent originals supplied",
+        "contribution": "Learned waypoints/continuous execution and LLM graph/history navigation"
+      },
+      {
+        "source": "DINOv2[11], RAM[34] as fixedIV-A/B",
+        "contribution": "Inherited stronger visual encoder and semantic labels"
+      }
+    ],
+    "closest_adjacent": "Open-Nav as continuous zero-shot loop and MapGPT single-expert previous-plan reasoning, neither source version independently audited.",
+    "residue": "Improve candidate traversability and add recoverable reverse choice to multimodal navigation.",
+    "stakes": "Collision/error propagation and physical navigation generalization.",
+    "method_response": "DINO+fusion+occupancy objective plus multimodal history and reverse action.",
+    "remaining_gap": "Full held-out development test, equal-backbone full loops, history/planning attribution, actual action realization, false STOP and total cost.",
+    "evidence_ids": [
+      "E001",
+      "E004",
+      "E007",
+      "E014",
+      "E017",
+      "E019"
+    ],
+    "unresolved": [
+      "Source versions of nearest works absent; no comprehensive novelty conclusion."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "moderate main; C25 not met",
+        "tactic_steps_checked": [
+          "Spatial traversability estimation delegated to learned depth-grounded waypoint predictor",
+          "Structured candidate set/image-action pairs route semantic navigation to frozen MLLM",
+          "Chosen angle/distance executed and observations support replanning",
+          "No independently checkable high-level artifact verdict or feedback ablation: C25 withheld"
+        ],
+        "success_failure_checks": [
+          "Distinct geometric and semantic roles named",
+          "Two-by-two module ablation available",
+          "Executor correctness/backtrack-inverse guarantee missing",
+          "Whole-loop comparison not backbone-matched and cost absent"
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E006",
+          "E007",
+          "E016",
+          "E017",
+          "E018"
+        ],
+        "reason": "Actual geometric candidate generation separated from semantic choice at structured handoff. Also inspected structural_prior_encoding: soft BCE occupancy does not guarantee navigability by construction; not assigned. No pattern novelty bonus."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Modular learned-candidate/semantic-solver navigation fits main only; no forced original sub.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "R07",
+        "version": "board-induced/2026-10-21",
+        "fit": "strong structural, circular source excluded as independent rating evidence",
+        "condition_checks": [
+          {
+            "condition": "Harness-made dynamic candidates rather than arbitrary VLM spatial targets",
+            "status": "met",
+            "reason": "Up to5 learned RGB-D candidates then image/label chooser.",
+            "evidence_ids": [
+              "E002",
+              "E003"
+            ]
+          },
+          {
+            "condition": "Candidate/recovery channel ablated with same model",
+            "status": "partial",
+            "reason": "Waypoint×backtrack2×2, not whole loop/previous model comparison; currentGPT4o only.",
+            "evidence_ids": [
+              "E010",
+              "E017",
+              "E018"
+            ]
+          },
+          {
+            "condition": "Geometry reliable and action realization verified",
+            "status": "partial",
+            "reason": "Open fraction and collisions measured but no hard feasibility gate or realized-motion receipts.",
+            "evidence_ids": [
+              "E016",
+              "E017"
+            ]
+          },
+          {
+            "condition": "Counted real backtrack comparison",
+            "status": "met",
+            "reason": "25 instructions, explicit2m success criterion,24→36SR.",
+            "evidence_ids": [
+              "E011",
+              "E012",
+              "E015"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E003",
+          "E007",
+          "E015",
+          "E017"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "R07"
+      },
+      "operation_correspondence": "Learned geometric predictor emits short action candidate artifact; frozen semantic MLLM chooses and receives later observation.",
+      "necessary_conditions_and_differences": "R07 describes pushed geometry candidates, not numeric-receipt query K102 or free target K103. Learned predictor is not a sound formal solver, so main moderate and C25 null.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E006",
+        "E007"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Whole harness improves navigation",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Competitor full loops use differentGPT4/Llama while proposedGPT4o; only local module comparisons same model.",
+      "evidence_ids": [
+        "E010",
+        "E014",
+        "E018"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Predictor/backtrack cause improvement",
+      "applicable": true,
+      "status": "partial",
+      "reason": "2×2 navigator modules and final occupancy toggle; encoder/fusion cumulative and no history/RAM/turn-scale ablation.",
+      "evidence_ids": [
+        "E016",
+        "E017",
+        "E018"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E03",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "General tool benefit across models",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "OnlyGPT4o for proposed loop; no different-strength backbone deltas.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Practical/efficient navigation",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Hardware and real-time claim, no API/token/wall-time/USD measurements.",
+      "evidence_ids": [
+        "E020"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E06",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Zero-shot VLN-CE metrics",
+      "applicable": true,
+      "status": "partial",
+      "reason": "SR/SPL/OSR/NE on100subset; trained full-split rows not demonstrably matched.",
+      "evidence_ids": [
+        "E008",
+        "E013",
+        "E014"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Zero-shot and development caveats",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Predictor training and val-unseen explicit, no prompt/dev overlap or contamination audit.",
+      "evidence_ids": [
+        "E008",
+        "E009",
+        "E010"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Navigation endpoint failures",
+      "applicable": true,
+      "status": "partial",
+      "reason": "OSR51-SR29 and collisions expose failures, but no explicit false-STOP/stuck/repeat decomposition.",
+      "evidence_ids": [
+        "E013",
+        "E017"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Depth-grounded feasibility",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Minimum-depth geometric mask explicit; no calibration scaling noise test or full-body clearance proof.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1 + board-induced",
+      "source_strength": "common_practice; paper-derived; self-source not independent evidence",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Matched interaction budget",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Same100test protocol claimed, no call/turn/time caps disclosed and backtrack adds trajectory opportunities.",
+      "evidence_ids": [
+        "E008",
+        "E017",
+        "E018"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Enhanced predictor improves feasible waypoint quality.",
+      "setting": "MP3Dval_unseen; trained300epochs; DINOv2Small and fixed depth encoder.",
+      "baseline_control": "ResNet64→128→DINO→crossattention→occupancy progressive rows; final occupancy toggle same last-stage setup.",
+      "selection_vs_test": "Val-unseen test named; training-source scene count/dev tuning not disclosed.",
+      "result_denominator": "Open87.26 versus79.86RecBERT; occupancy increment82.15→87.26; no per-waypoint sample count/uncertainty.",
+      "evidence_ids": [
+        "E009",
+        "E016"
+      ],
+      "counterevidence": [
+        "Some geometric metrics worsen at intermediate crossattention row; occupancy soft not hard validity."
+      ],
+      "allowed_conclusion": "Reported higher open-waypoint fraction and final distance metrics; not by-construction collision freedom or training-free predictor."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Full zero-shot navigator has state-of-the-art performance/robustness.",
+      "setting": "100R2R-CE val_unseen episodes,GPT4o2024-08-06; other rows differ in backbone/training/subset.",
+      "baseline_control": "Full comparisons GPT4/Llama versusGPT4o confounded; TableV predictor×backtrack2×2 within proposed navigator.",
+      "selection_vs_test": "No held-out prompt/harness-development split reported.",
+      "result_denominator": "SR29/SPL22.46/OSR51/NE7.01; original-predictor/no-backtrack24/18.20/36/7.61. Enhanced-onlySR26/NE6.73.",
+      "evidence_ids": [
+        "E008",
+        "E010",
+        "E013",
+        "E014",
+        "E017",
+        "E018"
+      ],
+      "counterevidence": [
+        "SR52-60 trained baselines substantially higher; Open-NavNE6.70 better; full worse NE/OSR than enhanced-only. Prose says predictor-onlyNE7.11 but displayedTableV says6.73."
+      ],
+      "allowed_conclusion": "Modest author-reported local SR/SPL gains with recovery/candidates; no equal-backbone full-loop SOTA attribution or uniform error dominance."
+    },
+    {
+      "claim_id": "C3",
+      "text": "Real-world backtracking improves adaptability.",
+      "setting": "Turtlebot4,OAK-DPro70cm,12views,25instructions in semantically rich indoor setting.",
+      "baseline_control": "RecBERT and proposed with/without reverse option.",
+      "selection_vs_test": "Sim-trained predictor deployed real; new-body sim-to-real demonstrated, development overlap not reported.",
+      "result_denominator": "20%RecBERT,24%without backtrack,36%with;25instructions implies5/6/9success;2m STOP. No repeats or paired success contingency.",
+      "evidence_ids": [
+        "E011",
+        "E012",
+        "E015",
+        "E020"
+      ],
+      "counterevidence": [
+        "Low absolute9/25 success and64% failure; single environment; runtime assertion not numeric cost."
+      ],
+      "allowed_conclusion": "Counted sim-to-real feasibility with a3/25 absolute success difference, no statistical-significance/reliability claim."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "transfer",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported100-episode simulated closed-loop and25-instruction sim-to-real robot tests support candidate-quality improvements and a local backtracking gain, with explicit success thresholds. Transfer label follows counted sim-to-real branch only, not uncontaminated harness-development holdout or general hardware competence.",
+    "unresolved": [
+      "Prose/TableV NE mismatch: use displayed6.73 for predictor-only; prosecollision0.067→0.044 corresponds original-predictor toggle not full0.033.",
+      "Only navigator zero-shot; learned waypoint predictor uses300epochs supervised training.",
+      "Real9/25 inferred arithmetically from36%of25; paper reports percentages, not individual trial logs."
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Named waypoint obstacle risk, text-conversion/history loss and no reverse action after errors, grounded in Hong/ETPNav/MapGPT/Open-Nav lineage. Original adjacent fixed papers unavailable and broad first/SOTA claims unverified.",
+      "evidence_ids": [
+        "E004",
+        "E007",
+        "E014"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Depth-derived occupancy target logically reduces obstacle-scored predictions and one-step return enables recovery; semantic imagery/history helps chooser. Soft loss does not guarantee collision-free operation or invertibility.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E006",
+        "E007",
+        "E016",
+        "E019"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 2,
+      "reason": "Encoder/fusion/loss/grid and training parameters reconstructible, candidate/history/plan/backtrack interface described. Low-level path execution/real drift recovery, stop logic and exact prompt strings not sufficiently specified; one-step opposite move not full state undo.",
+      "evidence_ids": [
+        "E003",
+        "E005",
+        "E006",
+        "E007",
+        "E009",
+        "E019"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "SR/OSR/SPL/NE and collision signals with100 simulated/25 physical instructions,3m/2m STOP success defined. All task results apparently single attempts, repeat count absent; frozen v2 single-trial measurement ceiling2.",
+        "evidence_ids": [
+          "E008",
+          "E011",
+          "E012",
+          "E013",
+          "E015",
+          "E017"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Two-by-two predictor×backtrack and last-stage occupancy toggle support local factors. History/RAM/turn-granularity not isolated; whole-method advantage comparesGPT4o toGPT4 and stronger learned waypoint features.",
+        "evidence_ids": [
+          "E010",
+          "E014",
+          "E016",
+          "E017",
+          "E018"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "MP3D/R2R val-unseen and counted sim-to-real25-instruction deployment. No development/tuning overlap or proprietary model contamination audit, single indoor setting and no independent room/body holdout protocol.",
+        "evidence_ids": [
+          "E008",
+          "E009",
+          "E011",
+          "E015"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "100/25 trial denominators and OSR-SR failure endpoint plus collisions, but no repeated seeds/CI or paired success contingency. OSR51 vsSR29 exposes unresolved stopping; cannot call robust statistical significance.",
+        "evidence_ids": [
+          "E011",
+          "E013",
+          "E017",
+          "E018"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "not_reported",
+        "rating": 0,
+        "reason": "No measured inference latency, API/model call count, token/USD or per-success cost; “real-time” and similar encoder size are assertions, hardware alone not a cost result.",
+        "evidence_ids": [
+          "E020"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire fixed2503.10069v2 HTML Abstract,I-VI, all method/training and real-setup paragraphs, TablesI-V and Fig1-3 captions; no appendix sections present. Checked for calls/tokens/API cost, per-step/wall-clock latency and training/inference runtime."
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": 56.25,
+    "display": 56.2,
+    "lower": 56.25,
+    "upper": 56.25,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "A-class static frontier-model navigation harness with trained geometric component, not pureVLA or cross-episode RSI."
+}

@@ -1,0 +1,1408 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-2",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2605.13119",
+  "paper_id": "2605.13119",
+  "title": "Towards Long-horizon Embodied Agents with Tool-Aligned Vision-Language-Action Models",
+  "version": "2605.13119v2",
+  "claim_type": "system_method",
+  "central_claim": "VLAs-as-Tools: a high-level VLM agent invokes a family of specialized VLA tools through a typed tool-family interface (explicit tool selection and in-execution progress feedback enabling event-triggered replanning), with Tool-Aligned Post-Training (invocation-aligned training units and tool-family residual adapters) so VLAs faithfully follow invocations; across five simulated benchmarks it improves pi05 success by 8.9 points on average and Non-biased Rate by 15.0 points, and raises real-world Franka success from 16.7% to 58.3% under matched data and compute."
+ },
+ "provenance": {
+  "input_hash": "cef6819a0456f4a2a6c434ba14b8b42165da7242f014bf617492272f3181b9fc",
+  "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": {
+   "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+   "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+  },
+  "expectations_hash": null,
+  "expectations_note": "profile/expectations.json 不在仓库；使用 patterns/main/*.md 内嵌的 E01–E22 reviewer expectations（source_strength=common_practice），故 expectations_hash=null",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "notes": "盲评：仅读固定材料与规则。披露：(1) 一次仓库范围 grep -l 曾列出他席/他批次文件名（未打开内容）；(2) 读取 run 级 manifest.json 仅为获取哈希；(3) 本文是领域卡 K106/K202 及 planner_composes 的 S5/F6、external_verification 的 F5 的来源论文，卡片条件与本文一致是构造使然，本席直接对照原文判断，不因卡片来源额外加分。session_id 无法自取，故为 null。",
+  "timestamp": "2026-10-21T16:45:00Z"
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "高层 VLM 智能体与 VLA 执行器之间的接口 I=(C,R)：调用消息 c=(g,z)(工具族标签+场景化子任务指令)与反馈 r(进度 p_t∈[0,1])",
+   "information": "智能体见观测、历史调用与反馈；VLA 工具只见机器人观测、调用(g,z)与短历史；进度头与动作块同一次 2 Hz 推理输出，无额外模型调用；规划器不看低层动作",
+   "operation": "智能体选工具族并给出局部指令→选定族的残差适配器执行有界窗口→监控按阈值(τ=0.90)+平滑+lookback 决定继续/推进/重规划",
+   "output": "有界轨迹+进度信号；事件触发重规划",
+   "conditions": "任务可表示为已注册工具族的组合；新原语须有演示；执行器需对调用忠实",
+   "feedback": "工具侧进度(时间代理)；智能体视觉观察核对物理目标",
+   "selection_rule": "进度阈值/停滞规则决定推进或重规划",
+   "selection_data": "not_applicable(无选择集，部署时规则)",
+   "persistence": "智能体侧状态 s_k 累积已完成调用；无跨任务持久化",
+   "later_use": "同任务后续步骤；真机 Conditioned 任务靠阶段记忆消歧别名状态",
+   "claimed_effect": "LIBERO-Long 92.4→97.2(π0.5)；真机 16.7→58.3；运行时规划调用 57→0.23/episode",
+   "failure_boundary": "直接套规划器于普通 SFT VLA 反而下降；新原语需演示；进度仅为时间代理；单机器人单相机",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E027",
+    "E028",
+    "E032",
+    "E022"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "VLA 执行器的训练：调用对齐的训练单元+每族 LoRA 残差适配器+进度头(+可选 GRPO 子任务 RL)",
+   "information": "示教被自动标注管线(MLLM+状态变化线索+操作定义)切成有界窗口并标 (g,z,p*)；RL 起点来自演示边界或前序子任务成功状态，奖励为局部完成谓词；推理时 VLA 只见观测/指令/族标签",
+   "operation": "IA Post-train(DROID-split 1 epoch)→IA SFT(基准分段数据)；L=动作克隆+λ·进度回归(λ=0.1)；RL 用子任务谓词奖励并在一轮后用训练后策略刷新 reset 状态池；新族只训新适配器、冻结骨干",
+   "output": "可被规划器按 (g,z) 调用并返回进度的 VLA 工具族(参数增 9%)",
+   "conditions": "示教可按接触/夹爪状态分段；工具族分类法数据驱动(DROID 11 族，LIBERO/RoboTwin 各 7)",
+   "feedback": "模仿损失+进度回归；RL 局部谓词奖励",
+   "selection_rule": "RL：谓词成功=1；reset 池仅保留前序调用成功的边界状态",
+   "selection_data": "benchmark 演示/rollout；是否与评测任务重叠(同基准内)未说明",
+   "persistence": "适配器与进度头权重；刷新后的 reset 状态池",
+   "later_use": "推理时按族路由；增量新增族无需回放",
+   "claimed_effect": "IA SFT +1.0、适配器恢复/提升、完整 TAPT LIBERO-Long 97.2；LIBERO-IF Faithful +30–35、Non-biased +15–16；少样本最高 +11.5",
+   "failure_boundary": "IA Post-train 使 π0.5 下降 93.4→91.2；新原语需演示；标注准确率未报告",
+   "retention_trace": {
+    "before": "reset 池=初始策略/演示边界状态",
+    "candidate": "训练后的组合策略部署所得边界状态",
+    "selection": "仅保留前序调用成功的边界状态",
+    "persisted": "刷新后的 S0 池",
+    "later_tasks": "下一轮子任务 RL",
+    "measured_gain": "文中仅定性“恢复全任务增益”(Table 10)，无定量对照",
+    "trace_note": "非自我改进主张；此条仅为训练流程中的数据保留，未声称 retained improvement"
+   },
+   "evidence_ids": [
+    "E030",
+    "E031",
+    "E029",
+    "E026",
+    "E039",
+    "E038",
+    "E043"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "LIBERO-IF 反事实指令忠实度诊断(静态评测)",
+   "information": "计划固定，仅换执行器变体；场景保持与源任务视觉相近",
+   "operation": "修改目标(对象/关系/停止点)→测 Faithful(完成新目标)与 Biased(仍完成源任务目标)",
+   "output": "Faithful/Non-biased 率",
+   "conditions": "仿真谓词作真值",
+   "feedback": "not_applicable",
+   "selection_rule": "not_applicable",
+   "selection_data": "not_applicable",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "完整 TAPT 使 Non-biased +15.0(π0.5)",
+   "failure_boundary": "仅 10 个任务；组件开关为累积式",
+   "static_note": "静态评测构造",
+   "evidence_ids": [
+    "E035",
+    "E036",
+    "E037"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "端到端 VLA 执行强但长程推理弱；agent 系统规划强但依赖弱而僵的工具；独立 VLA 又不易被当作工具调用(受场景先验偏置，任务适配会损伤预训练语义)。",
+  "checked_gap": "作者自测支持：直接规划器+SFT VLA 使 LIBERO-Long −0.2/−11.8/−12.0；无 TAPT 的 LIBERO-IF Non-biased 仅 31.2–39.6。",
+  "lineage_closest_adjacent": {
+   "source_version": "v2 Sec 2",
+   "ancestors": [
+    "SayCan",
+    "Code as Policies",
+    "π0.5 内部子任务预测",
+    "分层具身系统"
+   ],
+   "closest": [
+    "AtomicVLA",
+    "RoboClaw"
+   ],
+   "note": "与 AtomicVLA/RoboClaw 仅文字区分(其低层技能是系统内部原语而非 agent 可见调用)，无实验比较。"
+  },
+  "residue": "新原语需新演示；规划器未训练；动态场景/新本体/真机多本体未验证。",
+  "stakes": "长程任务中局部执行偏差级联为整体失败；别名状态使无状态 VLA 重复错误阶段。",
+  "method_response": "把 VLA 变成可调用、可监控、忠实执行的有界工具，并用事件触发重规划减少规划调用。",
+  "remaining_gap": "接口自身(规划+进度反馈)的边际收益、对未见原语/本体的泛化、监控可靠性、与同类系统的实证比较仍未关闭。",
+  "evidence_ids": [
+   "E003",
+   "E004",
+   "E036",
+   "E043",
+   "E023"
+  ],
+  "unresolved": [
+   "主实验规划器 VLM 型号/prompt",
+   "RoboMemArena/RoboLab 的训练数据",
+   "自动标注准确率",
+   "接口相对 TAPT 的边际增益是否超出噪声"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "controlled_diagnostic_design",
+   "self_supervised_signal_engineering"
+  ],
+  "outside_taxonomy": false,
+  "reason": "实际操作：把长程任务分解为有界子任务，由 VLM 经类型化调用(g,z)路由给选定的 VLA 工具，并以工具侧进度作为交接的可检查信号——符合主卡 signature(“learned or symbolic/external solver via structured intermediate artifacts”)。supporting 各对应不同操作：LIBERO-IF 反事实诊断(controlled_diagnostic_design/C02)、自动标注/进度代理的监督信号制造(self_supervised_signal_engineering，无合适子卡)。异质分解(每族 LoRA)已考虑但受 supporting≤2 且非独立操作而未列。",
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": 1,
+      "status": "executed",
+      "note": "责任边界：VLM 管分解/状态/恢复，VLA 管局部连续控制"
+     },
+     {
+      "step": 2,
+      "status": "executed",
+      "note": "类型化调用 (g,z) 为可检查中间物；但 z 为自然语言，且“求解器”是学习型 VLA 而非可证健全的求解器"
+     },
+     {
+      "step": 3,
+      "status": "partial",
+      "note": "闭环信号为学习型进度头+阈值监控与智能体视觉复核，不是确定性验证器；质量未单独校验"
+     },
+     {
+      "step": 4,
+      "status": "partial",
+      "note": "有 Table 1/4 去接口、去 TAPT 消融；接口边际增益小且累积式，非“移除后塌回基线”的单点证明"
+     },
+     {
+      "step": 5,
+      "status": "executed",
+      "note": "报告适配器开销与运行时规划调用；未计规划器成本"
+     }
+    ],
+    "success_failure_checks": [
+     {
+      "id": "success: 与端到端基线公平比较",
+      "status": "met",
+      "note": "同底座 standalone/直接规划/TAPT+接口"
+     },
+     {
+      "id": "failure: 仅略优于统一端到端基线",
+      "status": "partial",
+      "note": "LIBERO-Long +4.8，但 RoboMemArena +3.85；真机大幅"
+     },
+     {
+      "id": "failure: 手工针对单基准",
+      "status": "partial",
+      "note": "工具族数据驱动，跨 5 基准+真机，但 RoboTwin 任务按可分段性筛选"
+     },
+     {
+      "id": "failure: 求解器代价未测",
+      "status": "partial",
+      "note": "VLA 适配器开销已测，规划器成本未测"
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E008",
+     "E007",
+     "E013",
+     "E032",
+     "E038",
+     "E025"
+    ],
+    "reason": "主卡适配度高；C25 子卡的“可健全验证的求解器”在此被学习型 VLA+时间代理进度替代，故 sub fit=partial。"
+   },
+   {
+    "main_id": "controlled_diagnostic_design",
+    "sub_id": "C02",
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": "构造仅改变一个混杂的实例集",
+      "status": "executed",
+      "note": "计划固定、改目标、场景近似源任务"
+     },
+     {
+      "step": "真值独立于被评系统",
+      "status": "executed",
+      "note": "仿真谓词"
+     },
+     {
+      "step": "报告表观 vs 去混杂差距",
+      "status": "executed",
+      "note": "Faithful 与 Non-biased 双指标"
+     },
+     {
+      "step": "实例规模/泛化",
+      "status": "partial",
+      "note": "仅 10 个任务，基于 LIBERO-10"
+     }
+    ],
+    "success_failure_checks": [
+     {
+      "id": "failure: 组件开关累积",
+      "status": "unmet",
+      "note": "Table 3 组件逐步叠加"
+     }
+    ],
+    "evidence_ids": [
+     "E035",
+     "E036",
+     "E037"
+    ],
+    "reason": "LIBERO-IF 是一个独立的评测构造，操作与 C02 战术吻合，但规模小且为自建。"
+   },
+   {
+    "main_id": "self_supervised_signal_engineering",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": "缺失监督→自生成信号",
+      "status": "executed",
+      "note": "MLLM 自动给工具族标签；进度目标取线性时间 p*=(t-1)/(T-1)"
+     },
+     {
+      "step": "质量门",
+      "status": "partial",
+      "note": "低置信/冲突送人工复核；标注准确率与一致性未报"
+     },
+     {
+      "step": "信号用于训练",
+      "status": "executed",
+      "note": "动作克隆+进度回归"
+     }
+    ],
+    "success_failure_checks": [
+     {
+      "id": "failure: 代理信号未校验",
+      "status": "unmet",
+      "note": "作者自承进度为时间代理，非语义完成度"
+     }
+    ],
+    "evidence_ids": [
+     "E029",
+     "E026",
+     "E031"
+    ],
+    "reason": "C07/C08/C26 战术不贴合(非内部读数、非生成训练样本、非偏好)，故子卡 null。"
+   }
+  ],
+  "considered": [
+   {
+    "main_id": "heterogeneous_decomposition",
+    "rejected_as_supporting": "每族 LoRA 路由属分解后“差异化处理”，但非独立于主卡的贡献操作，且 C04 为压缩类，不贴合；受 supporting≤2 未列"
+   }
+  ],
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "类型化交接+路由到专用工具+可检查进度信号已执行；求解器为学习型而非健全型。"
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "在所测基准与三项真机任务上，同底座对 standalone 明显更优且证据含分母；但归因于“接口”的部分增益小，对未见原语/本体未关闭。",
+   "evidence_ids": [
+    "E002",
+    "E020",
+    "E013",
+    "E043"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "planner_composes_code_and_policies",
+    "sub": "K106",
+    "version": "taxonomy@daf38e57",
+    "fit": "good",
+    "condition_checks": [
+     {
+      "id": "S5",
+      "kind": "success",
+      "status": "met",
+      "reason": "演示被分段为调用窗口，并有数据驱动工具分类；TAPT+接口 95.6/97.2 vs 接口单独 80.2/80.4（本文即该卡来源，直接对照原文核实）",
+      "evidence_ids": [
+       "E031",
+       "E008",
+       "E007",
+       "E029"
+      ]
+     },
+     {
+      "id": "F6",
+      "kind": "failure",
+      "status": "unmet",
+      "reason": "工具覆盖缺口存在：IA Post-train 使 π0.5 下降，新原语需演示，进度目标为时间代理",
+      "evidence_ids": [
+       "E010",
+       "E043",
+       "E026"
+      ]
+     },
+     {
+      "id": "F3",
+      "kind": "failure",
+      "status": "met",
+      "reason": "规划器 VLM 互换仅 0.6 点波动(OFT 工具族固定)，该风险被检验",
+      "evidence_ids": [
+       "E040"
+      ]
+     },
+     {
+      "id": "F7",
+      "kind": "failure",
+      "status": "partial",
+      "reason": "真机有计数，但仅一机器人/一相机/三任务",
+      "evidence_ids": [
+       "E020",
+       "E023"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E031",
+     "E008",
+     "E007"
+    ]
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K202",
+    "version": "taxonomy@daf38e57",
+    "fit": "good",
+    "condition_checks": [
+     {
+      "id": "S4",
+      "kind": "success",
+      "status": "partial",
+      "reason": "执行器上报进度、运行时规划调用 57→0.23；但监控的精度/召回未单独评估，进度是时间代理",
+      "evidence_ids": [
+       "E032",
+       "E027",
+       "E026"
+      ]
+     },
+     {
+      "id": "F5",
+      "kind": "failure",
+      "status": "unmet",
+      "reason": "规划器增益依赖执行器保真：普通 SFT VLA 上直接规划器 −11.8/−12.0",
+      "evidence_ids": [
+       "E004"
+      ]
+     },
+     {
+      "id": "F1",
+      "kind": "failure",
+      "status": "unknown",
+      "reason": "进度作为成功的代理强弱：只有定性图与重规划成功率(47.1/34.4/61.4)，无误判率",
+      "evidence_ids": [
+       "E034"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E027",
+     "E028",
+     "E032"
+    ]
+   },
+   {
+    "main": "harness_effect_evaluation",
+    "sub": "K803",
+    "version": "taxonomy@daf38e57",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "id": "S3",
+      "kind": "success",
+      "status": "partial",
+      "reason": "同底座同初始状态比较 standalone/直接规划/TAPT；规划器互换；LIBERO-IF 固定计划换执行器",
+      "evidence_ids": [
+       "E006",
+       "E005",
+       "E040",
+       "E035"
+      ]
+     },
+     {
+      "id": "F1",
+      "kind": "failure",
+      "status": "unmet",
+      "reason": "多处 ≤1–2 点差在无方差下不可区分于噪声",
+      "evidence_ids": [
+       "E009",
+       "E013"
+      ]
+     },
+     {
+      "id": "F3",
+      "kind": "failure",
+      "status": "unmet",
+      "reason": "具身互换为单次运行，成本仅部分报告",
+      "evidence_ids": [
+       "E024",
+       "E038"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E006",
+     "E040",
+     "E035"
+    ]
+   }
+  ],
+  "unassigned": [
+   "以局部完成谓词为奖励的子任务 GRPO，并用训练后组合策略刷新 reset 状态池：不在 K704–K708（其对象是 LLM coder/planner 的稀疏成功 RL）",
+   "数据驱动工具分类法+自动标注管线"
+  ],
+  "revision_proposals": [
+   {
+    "id": "RP-TA-1",
+    "type": "K106 来源强度",
+    "proposal": "K106 的 S5/F6 的主要依据即本文；若要作为稳定条件需第二篇独立论文佐证，且本文各条件应保持“作者报告”强度。",
+    "status": "pending_unchecked"
+   },
+   {
+    "id": "RP-TA-2",
+    "type": "新候选线索",
+    "proposal": "“有界调用单元上的 VLA RL + 边界状态池刷新”目前仅本文一篇，不足 candidate_pattern。",
+    "status": "pending_unchecked"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K106"
+   },
+   "operation_correspondence": "RS：把整体任务分解，经结构化中间物路由给最合适求解器 ↔ 领域：冻结规划器经类型化调用(族标签+指令)调用训练好的紧凑策略",
+   "necessary_conditions": "调用落在工具训练分布内；工具可返回可监控信号",
+   "differences": "领域卡强调“为所收到调用而训练”；RS 战术强调可健全验证的求解器——本文的验证信号为学习型",
+   "evidence_ids": [
+    "E003",
+    "E031",
+    "E008"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K202"
+   },
+   "operation_correspondence": "RS：闭环用求解器输出做信号 ↔ 领域：执行器运行至进度阈值/停滞再交还规划器",
+   "necessary_conditions": "部署时可计算的完成信号(此处由 VLA 进度头给出，非特权)",
+   "differences": "RS 要求机械可检查；本文为时间代理",
+   "evidence_ids": [
+    "E027",
+    "E032",
+    "E026"
+   ]
+  },
+  {
+   "rs_main": "controlled_diagnostic_design",
+   "rs_sub": "C02",
+   "domain": {
+    "namespace": "embodied",
+    "main": "harness_effect_evaluation",
+    "sub": "K803"
+   },
+   "operation_correspondence": "RS：固定一个混杂并变化隐含轴 ↔ 领域：固定计划换执行器(同 episode)",
+   "necessary_conditions": "真值独立于被评系统",
+   "differences": "领域卡在 K803 偏重模型×harness 互换；本文为执行器互换",
+   "evidence_ids": [
+    "E035",
+    "E037"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E01"
+   ],
+   "applies_when": "claim that a harness raises success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "同底座与 standalone、直接规划器比较；未与 AtomicVLA/RoboClaw 等已发表 harness 重跑。",
+   "evidence_ids": [
+    "E006",
+    "E005"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E02"
+   ],
+   "applies_when": "claim that a specific component causes improvement",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Table 4 为累积式；缺“分段数据+规划器”“TAPT+周期监控”对照；非接口行部署模式未说明。",
+   "evidence_ids": [
+    "E012",
+    "E011",
+    "E013"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E03"
+   ],
+   "applies_when": "claim that a harness component helps in general",
+   "applicable": true,
+   "status": "met",
+   "reason": "三种 VLA 骨干与四种规划 VLM。",
+   "evidence_ids": [
+    "E040",
+    "E006"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E04"
+   ],
+   "applies_when": "success-rate comparisons",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无种子方差/CI/配对检验。",
+   "evidence_ids": [
+    "E024"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E05"
+   ],
+   "applies_when": "claim that harness is better or more practical",
+   "applicable": true,
+   "status": "partial",
+   "reason": "适配器开销与规划调用已报；规划器 USD/延迟、IA 后训练算力未报。",
+   "evidence_ids": [
+    "E038",
+    "E032"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E07",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E07"
+   ],
+   "applies_when": "agentic manipulation harness beats end-to-end VLAs",
+   "applicable": true,
+   "status": "partial",
+   "reason": "与 π0.5/OpenVLA/OFT 比较并含 RoboTwin；未用 LIBERO-PRO 扰动。",
+   "evidence_ids": [
+    "E006",
+    "E002"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E19",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E19"
+   ],
+   "applies_when": "claim of physical-robot transfer",
+   "applicable": true,
+   "status": "met",
+   "reason": "每任务 20 trials 的成功计数与同初始配置；但仅一机器人/相机/三任务，裁判者未说明。",
+   "evidence_ids": [
+    "E020",
+    "E018",
+    "E023"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E22",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E22"
+   ],
+   "applies_when": "harness comparison with the model fixed",
+   "applicable": true,
+   "status": "partial",
+   "reason": "训练步数/硬件/初始配置匹配；规划器推理为额外成本且未设等调用预算。",
+   "evidence_ids": [
+    "E019",
+    "E018"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E16",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#E16"
+   ],
+   "applies_when": "manipulation agent success claim with completion check",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无按 endpoint/误判完成的失败分解；仅重规划率与个案图。",
+   "evidence_ids": [
+    "E034"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E08",
+   "version": "embedded@main-cards",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E08"
+   ],
+   "applies_when": "benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "未披露 DROID 后训练/基准重叠与开发用任务。",
+   "evidence_ids": [
+    "E030"
+   ],
+   "score_item": "E.holdout"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "CL1",
+   "text": "五个仿真基准对 π0.5 平均 +8.9 点。",
+   "setting": "LIBERO-Long、RoboTwin-SA、CALVIN(自划分)、RoboMemArena、RoboLab-120",
+   "baseline_control": "同骨干 standalone SFT/标准 RL/标准 π0.5",
+   "selection_vs_test": "LIBERO-Long 留出初始状态；CALVIN 80/20；其余训练数据未说明",
+   "result_denominator": "500/160/—/260/600 episodes，无方差",
+   "evidence_ids": [
+    "E002",
+    "E045",
+    "E006",
+    "E007",
+    "E017",
+    "E024"
+   ],
+   "counterevidence": [
+    "E016",
+    "E025",
+    "E030"
+   ],
+   "allowed_conclusion": "在所列基准上、对作者定义的同骨干基线，整体系统（规划器+TAPT+适配器+接口）平均更优；均值混合 IL/RL，且增益来自捆绑，未能分离接口。"
+  },
+  {
+   "claim_id": "CL2",
+   "text": "调用忠实度：Non-biased +15.0(π0.5)，Faithful +30–35。",
+   "setting": "LIBERO-IF 10 个反事实任务",
+   "baseline_control": "无 TAPT 组件的执行器，计划固定",
+   "selection_vs_test": "场景与 LIBERO-10 训练布局相近(刻意)",
+   "result_denominator": "任务数 10，rollout 数未给",
+   "evidence_ids": [
+    "E035",
+    "E036",
+    "E037"
+   ],
+   "counterevidence": [
+    "E035"
+   ],
+   "allowed_conclusion": "TAPT 组件逐步叠加提高了对反事实调用的忠实度；任务少、自建、累积式。"
+  },
+  {
+   "claim_id": "CL3",
+   "text": "真机成功率 16.7%→58.3%(matched data and compute)。",
+   "setting": "Franka Research 3，三任务，每任务 20 trials，相同初始配置",
+   "baseline_control": "微调 π0.5，同 30 示教/30K 步/硬件",
+   "selection_vs_test": "同分布初始配置",
+   "result_denominator": "10/60 vs 35/60",
+   "evidence_ids": [
+    "E001",
+    "E018",
+    "E020",
+    "E021",
+    "E019"
+   ],
+   "counterevidence": [
+    "E019",
+    "E022",
+    "E023"
+   ],
+   "allowed_conclusion": "在作者设计的三项桌面任务上同数据/步数对比有显著差；其中 Conditioned 任务为别名状态设计；规划器推理成本不计入“matched compute”。"
+  },
+  {
+   "claim_id": "CL4",
+   "text": "TAPT 与接口互补：接口单独 80.2/80.4，TAPT+接口 95.6/97.2。",
+   "setting": "LIBERO-Long，OFT/π0.5",
+   "baseline_control": "累积式组件表",
+   "selection_vs_test": "同留出初始状态",
+   "result_denominator": "500 episodes",
+   "evidence_ids": [
+    "E008",
+    "E011",
+    "E013",
+    "E012"
+   ],
+   "counterevidence": [
+    "E013",
+    "E012",
+    "E009"
+   ],
+   "allowed_conclusion": "执行器对齐是主要来源；接口边际增益小(+0.8/+1.2 IL，+2.6/+2.0 RL)，“互补”的统计强度未证。"
+  },
+  {
+   "claim_id": "CL5",
+   "text": "事件触发重规划将运行时规划调用从 57–110 降至 0.2–2/episode。",
+   "setting": "LIBERO-Long",
+   "baseline_control": "每 5 步直接 VLM 监控",
+   "selection_vs_test": "同",
+   "result_denominator": "调用均值，未报成功率对比",
+   "evidence_ids": [
+    "E032",
+    "E033",
+    "E034"
+   ],
+   "counterevidence": [
+    "E033"
+   ],
+   "allowed_conclusion": "调用次数显著减少；与直接监控相比的成功率与延迟未报。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "多个基准在仿真中按原生谓词闭环判定，真机有每任务 20 trials 计数；但训练均为基准内/自采数据，所有本体为 Franka，RoboMemArena/RoboLab/CALVIN 的适配范围不明，无未用过本体/场景的零样本或 sim-to-real 证据，故不判 transfer。",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在所测 Franka 操作基准与三项自建真机任务上，由现成 VLM 规划器经类型化工具族接口调用、并经 TAPT 对齐训练的 VLA 工具族，相对同骨干 standalone/直接规划基线成功率更高（LIBERO-Long π0.5 92.4→97.2，真机 10/60→35/60，作者报告）；增益主要来自执行器的调用对齐训练与分段监督，接口（规划+进度反馈）的边际收益小且未做统计检验；未证明对未见原语/本体泛化。",
+  "author_claim_kept": "VLAs-as-Tools 提升长程具身任务，并使 VLA 成为忠实可调用的工具。",
+  "unresolved": [
+   "接口边际增益是否超出噪声",
+   "额外 DROID 分段后训练/自动标注监督的混杂",
+   "主实验规划器 VLM 与 prompt",
+   "RoboMemArena/RoboLab/CALVIN 训练数据",
+   "规划器推理成本",
+   "监控精度/召回",
+   "未复现(仅作者报告)"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "gap 具体：VLA 执行强但长程推理弱，agent 系统规划强但依赖弱工具，且 VLA 并非天然可作工具(受场景先验偏置)。作者自测量化了残余问题：在 SFT VLA 上直接套规划器反而下降(−11.8/−12.0)，无 TAPT 时 LIBERO-IF Non-biased 仅 31–40%。近邻/谱系(π0.5 内部子任务预测、SayCan、Code-as-Policies、AtomicVLA、RoboClaw)已命名并区分“agent 可见调用”。扣分：与 AtomicVLA/RoboClaw 无实验比较；残余缺口(新原语、单机器人、动态场景)部分已写明，但“规划器不训练、不覆盖未学原语”的边界较简。",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E036",
+    "E043",
+    "E023"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作与问题对准：类型化调用(g,z)让规划器的请求落到有界执行；进度头+阈值监控把重规划改为事件触发；TAPT 把训练单元对齐到推理时调用单元；每族 LoRA 适配器保留预训练语义。能提出可区分预测并被检验(仅套规划器会下降；去掉对齐接口增益消失)。弱点：进度目标是线性时间代理，作者自承非语义完成度，监控能否识别“卡住”靠定性图而非精度/召回；“适配器缓解预训练语义退化”除 LIBERO-IF 外无直接检验。",
+   "evidence_ids": [
+    "E004",
+    "E008",
+    "E026",
+    "E027",
+    "E037",
+    "E011"
+   ],
+   "counterevidence_ids": [
+    "E026"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作链基本可重建：形式化(式1–3)、消息集、监控(阈值 0.90、平滑、lookback)、三阶段自动标注+Table 6 操作定义+低置信回退、联合损失(λ=0.1)、GRPO 子任务奖励+Table 9 谓词、reset 池刷新、新工具族增量扩展；真机协议详细。缺口：主实验所用 VLM 规划器与 prompt 未在正文明示(仅 Table 13 列出候选)；LoRA 秩、监控其余超参、标注准确率未报；Table 4 非接口行的部署模式未定义；代码尚未发布。",
+   "evidence_ids": [
+    "E027",
+    "E028",
+    "E029",
+    "E031",
+    "E039",
+    "E018"
+   ],
+   "counterevidence_ids": [
+    "E044"
+   ],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "成功判据多为基准原生谓词(LIBERO-Long、CALVIN、RoboMemArena、RoboLab-120)，真机以最终物理状态判定并预先标记 20 个相同初始配置、分母明确(10/60 vs 35/60)；LIBERO-IF 用 Faithful/Biased 双指标并有持续窗口。扣分：LIBERO-IF 与 CALVIN 80/20 划分为自建；RL 中间谓词为作者新增；真机裁判者/是否盲评未说明；“+8.9”平均混合 IL/RL 与异质基线；自动标注准确率未验证。",
+   "evidence_ids": [
+    "E024",
+    "E020",
+    "E021",
+    "E035",
+    "E045",
+    "E016"
+   ],
+   "counterevidence_ids": [
+    "E016",
+    "E029"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "控制较多：同底座三种 VLA(OpenVLA/OFT/π0.5)、standalone vs 直接规划 vs TAPT+接口、Table 4 组件表、RL 路径(标准 RL/IA-RL/TAPT/+接口)、LIBERO-IF 固定计划只换执行器、规划器 VLM 互换(0.6 点)、工具族粒度、真机同数据/步数/初始配置。缺口：(1) TAPT 引入额外 DROID 分段后训练与自动标注监督，基线无，“更多/更细监督”与“工具对齐”未分离；(2) 接口(规划+进度反馈)相对 TAPT 单独仅 +0.8/+1.2(IL)、+2.6/+2.0(RL)，Table 14 只比调用次数而非成功率；(3) Table 4 为累积式，非接口行部署模式未说明；(4) 未提供“分段数据+规划器+无适配器/进度头”对照。",
+   "evidence_ids": [
+    "E004",
+    "E008",
+    "E013",
+    "E037",
+    "E040",
+    "E018",
+    "E042"
+   ],
+   "counterevidence_ids": [
+    "E030",
+    "E012",
+    "E013",
+    "E033"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "LIBERO-Long 用留出初始状态，LIBERO-IF 刻意构造反事实，真机用同一批预标记初始配置；覆盖 LIBERO/RoboTwin/CALVIN/RoboMemArena/RoboLab-120 与真机。但：RoboTwin-SA 仅取 8 个“可被本方法分段”的任务；CALVIN 为同环境 80/20 划分；RoboMemArena/RoboLab 的训练/适配数据未说明；所有本体均为 Franka，真机单机器人单相机三任务；未做污染/开发重叠说明(DROID 后训练与基准重叠未讨论)；主张题目为“长程具身智能体”，范围超过证据。",
+   "evidence_ids": [
+    "E024",
+    "E025",
+    "E016",
+    "E017",
+    "E023"
+   ],
+   "counterevidence_ids": [
+    "E025",
+    "E016",
+    "E043"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "分母明确(500/160/260/600 episodes、20 trials/任务)，重规划频率与成功率、调用次数有报告；但无种子方差、CI 或显著性，表中多处 ≤1–2 点差(IA SFT +1.0、接口 +0.8/+1.2)不可区分于噪声却被叙述为“互补”；真机 10/60 vs 35/60 差距大(有分母)；失败分析以个案图为主。",
+   "evidence_ids": [
+    "E024",
+    "E020",
+    "E032",
+    "E034",
+    "E009"
+   ],
+   "counterevidence_ids": [
+    "E009",
+    "E013"
+   ],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "报告了适配器 +9% 参数/+7% 推理(OFT)、π0.5 1.34x 延迟、运行时规划调用 109.5→1.988。缺口：规划器 VLM 的推理成本/延迟/USD 未并入成功率对比，IA 后训练(DROID)与自动标注的额外算力未计入“matched compute”，Table 14 与直接监控只比调用次数。",
+   "evidence_ids": [
+    "E038",
+    "E032",
+    "E033",
+    "E019"
+   ],
+   "counterevidence_ids": [
+    "E030",
+    "E019"
+   ],
+   "search_scope": []
+  }
+ },
+ "score": {
+  "raw": 70.0,
+  "display": "70.0",
+  "lower": 70.0,
+  "upper": 70.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "全文与附录齐全；八项均已判定。"
+ },
+ "readable_summary": "VLAs-as-Tools：VLM 规划器经类型化工具族接口调用 TAPT 对齐的 VLA 工具，并用进度反馈触发重规划。证据面广(5 基准+LIBERO-IF+真机 20 trials/任务)且同骨干对照较完整；但增益主要来自执行器侧训练，接口边际增益小，额外 DROID 后训练/标注监督的混杂未分离，无方差/CI，规划器成本未计，无未见本体证据。claim_type=system_method，evidence=online，claim_support=scoped，S=70.0(draft_uncalibrated)。",
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2605.13119v2",
+   "sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2605.13119.txt",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 Formalizing VLAs as Callable Tools",
+    "4 Methods",
+    "5 Experiment",
+    "6 Conclusion",
+    "Appendix A–G"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "notes": "html-full 全文含完整附录；图(Fig.1–8)与 Fig.3 CALVIN 柱状数据仅散文可见；代码尚未发布；主实验规划器 VLM 型号正文未明示。"
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "On three real-world Franka tasks, it improves success rate from 16.7% to 58.3% under matched data and compute.",
+   "support_explanation": "真机主张：16.7%→58.3%，“matched data and compute”。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "Across five simulated benchmarks, VLAs-as-Tools improves the success rate of pi05 by 8.9 percentage points on average and enhances invocation fidelity by 15.0 points in Non-biased Rate.",
+   "support_explanation": "sim 主张：5 个基准平均 +8.9，LIBERO-IF Non-biased +15.0。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "We therefore propose VLAs-as-Tools, a strategy that distributes this burden across a high-level vision language model (VLM) agent for temporal reasoning and a family of specialized VLA tools",
+   "support_explanation": "中心策略：VLM 智能体+一族专用 VLA 工具。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "direct planner deployment changes performance by -0.2",
+   "support_explanation": "在普通 SFT VLA 上直接套规划器反而下降(−0.2/−11.8/−12.0)：作者自测的 gap 证据。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 1",
+   "quote": "SFT Direct planner 80.2 18.80",
+   "support_explanation": "Direct planner 行：80.2 (OFT LIBERO-Long)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 1",
+   "quote": "SFT Standalone 92.4 39.38",
+   "support_explanation": "π0.5 standalone 基线：LIBERO-Long 92.4，RoboTwin-SA 39.38。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 1",
+   "quote": "TAPT VLA tool-family interface 97.2",
+   "support_explanation": "π0.5 完整系统 97.2。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "The interface alone reaches only 80.2%/80.4%, showing that planner wrapping cannot make an unaligned executor reliable",
+   "support_explanation": "“仅接口”=80.2/80.4，与 Table 1 Direct planner 数值相同：该消融无法含进度反馈。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "Invocation-aligned SFT adds 1.0 point for both backbones.",
+   "support_explanation": "IA SFT 仅 +1.0，量级在 500 episode 噪声内。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "likely because the open-source post-training data is less matched to the high-quality training distribution of",
+   "support_explanation": "IA Post-train 使 π0.5 下降(93.4→91.2)，作者归因于数据不匹配(未检验)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.6",
+   "quote": "Tool-family residual adapters then raise OpenVLA-OFT to 94.8%",
+   "support_explanation": "适配器步的增益。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 4 caption",
+   "quote": "Core ablation of TAPT and the VLA tool-family interface on LIBERO-Long with OpenVLA-OFT and",
+   "support_explanation": "Table 4 为累积式组件表；非接口行的部署模式未说明。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "The VLA tool-family interface further adds +2.6 and +2.0 points over TAPT alone",
+   "support_explanation": "RL 下接口(规划+反馈)相对 TAPT 单独仅 +2.6/+2.0。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "Standard RL denotes full-task RL that optimizes the original long-horizon task success without IA units.",
+   "support_explanation": "RL 基线定义。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.2",
+   "quote": "success also increases from 76.0 to 78.8 with Invocation-aligned RL and further to 82.3 with full TAPT",
+   "support_explanation": "CALVIN 结果(散文)：76.0→82.3。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.1",
+   "quote": "For CALVIN, we use CALVIN_D with an 80%/20% train-test episode split",
+   "support_explanation": "CALVIN 使用自划分 80/20，非标准泛化协议。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.3",
+   "quote": "Table 2 shows that VLAs-as-Tools improves RoboMemArena full-task SR by 3.85 points",
+   "support_explanation": "RoboMemArena +3.85；RoboLab-120 +6.3；训练/适配数据未说明。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.4",
+   "quote": "Both use 30 demonstrations per task, 30K training steps on eight A100s, one RTX 4090 at inference, and the same 20 marked initial configurations.",
+   "support_explanation": "真机匹配：数据量、训练步数、推理硬件、初始配置。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. F",
+   "quote": "Thus, the comparison controls the real-robot data, training budget, and inference hardware.",
+   "support_explanation": "“matched”的实际含义：数据/训练预算/推理硬件，不含规划器推理成本。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 5",
+   "quote": "Avg. 10/60 (16.7) 35/60 (58.3)",
+   "support_explanation": "真机分母：每任务 20 trials，共 60。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.4",
+   "quote": "Success is judged by the final physical state",
+   "support_explanation": "真机判据：最终物理状态(任务专用准则，裁判者未说明)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.4",
+   "quote": "Conditioned provides the clearest evidence, improving from 5.0% to 65.0%",
+   "support_explanation": "作者设计的别名状态任务，基线无阶段信息。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 6",
+   "quote": "The real-world study covers one robot, one camera, and three tabletop tasks",
+   "support_explanation": "作者自承真机范围。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. G",
+   "quote": "each policy is evaluated over 50 trials per task from the held-out LIBERO-Long initial states",
+   "support_explanation": "LIBERO-Long 分母：10 任务×50 trials，留出初始状态。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. G",
+   "quote": "A task is included if its successful demonstrations do not require bimanual coordination and can be segmented into the tool-family invocation types used in our interface.",
+   "support_explanation": "RoboTwin-SA 任务筛选标准依赖方法自身的可分段性。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. A",
+   "quote": "Because supervision comes from temporal position within segmented windows, the prediction is a learned temporal completion proxy correlated with physical execution state",
+   "support_explanation": "进度头目标是线性时间代理，非语义完成度。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. A",
+   "quote": "A runtime monitor combines a completion threshold with consecutive-sample smoothing and lookback-based progress gains",
+   "support_explanation": "监控规则(τ=0.90 等)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. A",
+   "quote": "each 2 Hz VLA inference jointly predicts an action chunk and its aligned progress feedback",
+   "support_explanation": "2 Hz 联合预测动作块与进度。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. B",
+   "quote": "If local evidence conflicts with the global context or a family definition, the pipeline lowers confidence or sends the segment for manual review rather than forcing a label.",
+   "support_explanation": "自动标注管线有低置信/人工复核回退，但未报告标注准确率。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E030",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.1",
+   "quote": "an intermediate post-training stage on DROID-split",
+   "support_explanation": "IA Post-train 使用额外的 DROID 分段数据(基线无)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E031",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 4.1.1",
+   "quote": "yielding 11 families on DROID, 7 of which are used in each of LIBERO and RoboTwin",
+   "support_explanation": "工具族数据驱动：DROID 11 族，LIBERO/RoboTwin 各 7。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E032",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.2",
+   "quote": "the average runtime calls decrease from 109.5/58.2/57.2 to 1.988/0.304/0.228 per episode",
+   "support_explanation": "规划调用次数对比直接 VLM 监控。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E033",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.2",
+   "quote": "Table 14 compares progress-triggered replanning with direct VLM monitoring every five steps.",
+   "support_explanation": "Table 14 只比调用次数，未比成功率。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E034",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.2",
+   "quote": "replan success rate is the fraction of these intervened episodes that ultimately succeed",
+   "support_explanation": "重规划成功率定义。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E035",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. G",
+   "quote": "we construct 10 counterfactual tasks from LIBERO-10 layouts by modifying the requested goal while keeping the scene visually close to a familiar source task",
+   "support_explanation": "LIBERO-IF：10 个反事实任务，计划固定、仅换执行器。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E036",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Table 3",
+   "quote": "19.4 31.2 24.8 39.6",
+   "support_explanation": "无 TAPT 时 Faithful/Non-biased(OFT 19.4/31.2；π0.5 24.8/39.6)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E037",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 5.5",
+   "quote": "full TAPT improves Faithful/Non-biased Rate by +34.6/+16.2 points for OpenVLA-OFT",
+   "support_explanation": "完整 TAPT 提升 Faithful/Non-biased。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E038",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E.1",
+   "quote": "Adapters add only 9% parameters and 7% inference time to OpenVLA-OFT",
+   "support_explanation": "适配器开销。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E039",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. D",
+   "quote": "In our experiments, this mismatch can make individually improved subtasks compose worse, sometimes reducing full-task success.",
+   "support_explanation": "RL 子任务的 reset-state 池刷新动机(无定量对照)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E040",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E",
+   "quote": "across four strong VLM planners, LIBERO-Long success varies by only 0.6 points",
+   "support_explanation": "规划器底座互换(固定工具族)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E041",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. E",
+   "quote": "TAPT improves downstream sample efficiency, with the largest gain in the most data-limited OpenVLA-OFT 10-shot setting",
+   "support_explanation": "少样本适配增益。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E042",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "App. C.1",
+   "quote": "The modest gap indicates that performance is not overly sensitive to the exact taxonomy",
+   "support_explanation": "工具族粒度敏感性(96.6 vs 97.2)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E043",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Sec 6",
+   "quote": "primitives absent from pretraining and adaptation data still require new demonstrations",
+   "support_explanation": "覆盖局限。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E044",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract",
+   "quote": "Code will be released.",
+   "support_explanation": "代码未发布；无我们的运行/静态检查。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E045",
+   "material_id": "M1",
+   "material_sha256": "c4a13f84ca78f6933c9ab299de04a0a735c4b8982e3e2b691263b0b9d0424e66",
+   "locator": "Abstract+Table 1/2+Sec 5.2 (our arithmetic)",
+   "quote": null,
+   "support_explanation": "复算 +8.9：LIBERO-Long +4.8(92.4→97.2)、RoboTwin-SA +23.12(39.38→62.50)、RoboMemArena +3.85、RoboLab-120 +6.3、CALVIN +6.3(76.0→82.3，若以 76.0 为 π0.5 基线)，均值=8.87。该均值混合 IL 与 RL 设置、不同基线定义，且三个基准的训练/适配数据未在文中说明。",
+   "kind": "our_inference"
+  }
+ ]
+}

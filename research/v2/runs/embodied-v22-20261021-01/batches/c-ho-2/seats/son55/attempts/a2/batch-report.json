@@ -1,0 +1,90 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-2",
+ "attempt_id": "a2",
+ "seat": "son55",
+ "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+ "anchors_version": "v2 (3ececdd11cc3d144)",
+ "assigned": 6,
+ "reviewed": 6,
+ "needs_fulltext": 0,
+ "needs_evidence": 0,
+ "out_of_scope": 0,
+ "outside_taxonomy": 0,
+ "outside_taxonomy_rate": 0.0,
+ "schema_errors": 0,
+ "schema_check_note": "Self-check script verified, per record: key/version/sha256 against inputs_manifest, every non-inference evidence quote is a whitespace-normalised substring of the fixed material, all evidence_ids resolve, rs primary/supporting ids and rs: sub-card parents (PARENTS.tsv), domain namespace=embodied with at most 3 matches, rating status/rating consistency, not_reported has search_scope, and raw score recomputed from SCORE_SPEC weights. Mechanical only; semantic correctness not claimed. The helper script was removed after use.",
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_id": null,
+ "session_id_note": "not available to the subagent",
+ "receipt_ref": null,
+ "contamination": "none observed: the seat's other attempts, other seat, aggregate, conflicts, other batches, archive, assignments.jsonl, round1_consistency/plan were not read (the directory listing of batches/c-ho-2 and seats/son55 showed names only; a1 contents were not opened)",
+ "flags_for_controller": [
+  "2602.19983 (CORE): scope borderline - open-weight Gemma 3 27B VLM, no agent loop; kept in scope as a B-class robot-safety layer; may be out_of_scope under the 2606.12372 precedent (conditional score 67.5).",
+  "2601.18492 (DV-VLN): domain card R06 (sample_verify_select) lists this paper as a member source; match used as structural reference only (anchors precedent 4). Scope mildly borderline (fine-tuned LLaMA-2-7B, discrete-graph VLN).",
+  "2609.29091: evidence_level judged offline because the real-robot table gives success rates without any trial counts (EVIDENCE.md requires counts for online); E.causality and E.statistics are not_reported (rating 0) after full short-paper search.",
+  "2608.18227: headline '46% fewer steps' is for the privileged-state controller against an image-based DP checkpoint; agent also had simulator-source access and human interaction.",
+  "expectations_hash is null in all records: no standalone expectations file exists in the run; E01-E22 text was read from the frozen domain profile."
+ ],
+ "papers": [
+  {
+   "paper_key": "2608.16978",
+   "summary": "system_method; claim_support=scoped; evidence_level=online; raw 67.5 (G3 M3 X3 E: meas2 caus3 hold2 stat2 cost3). Matched K=T ablation 3.5%->35.1% over 57 single-episode LIBERO sim tasks with privileged poses; no retry/monitor baselines, no variance; RS C25 (good), domain K105 + R05.",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "raw_score": 67.5,
+   "status": "reviewed"
+  },
+  {
+   "paper_key": "2602.19983",
+   "summary": "system_method; claim_support=scoped; evidence_level=transfer; raw 67.5 (G3 M3 X3 E: meas2 caus2 hold3 stat2 cost3). VLM-predicate safety filter (CBF); sim 95.0% vs No-Context 55.0%, Spot hardware 86.6% of 30; baselines are self-built, certificate conditional on non-conservative calibration; scope borderline; RS C25 (partial) + assumption_audit_and_pivot; domain K201 + K103.",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "raw_score": 67.5,
+   "status": "reviewed"
+  },
+  {
+   "paper_key": "2601.18492",
+   "summary": "system_method; claim_support=scoped; evidence_level=online; raw 52.5 (G2 M2 X2 E: meas3 caus2 hold2 stat1 cost2). Generate-then-verify VLN; subset SR 39->52 on n=90, K=1 anomaly shows noise; R2R SR 52 far below trained language-only agents (67-74), competitiveness claim overstated; RS C25 (partial); domain R06 (circular, structural only) + K109.",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "raw_score": 52.5,
+   "status": "reviewed"
+  },
+  {
+   "paper_key": "2608.18227",
+   "summary": "system_method; claim_support=scoped; evidence_level=online; raw 53.75 (display 53.8; G2 M2 X2 E: meas3 caus2 hold2 stat1 cost3). Claude Code coding-agent Push-T controller 97-100% vs public DP 62.5% over 200 seeds; dev=test on agent-written A-Z suite, sim-source access, human steering, cross-embodiment sims agent-built; RS C25 (good); domain R05.",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "raw_score": 53.75,
+   "status": "reviewed"
+  },
+  {
+   "paper_key": "2609.31760",
+   "summary": "system_method (negative-result/diagnostic); claim_support=scoped; evidence_level=online; raw 78.75 (display 78.8; G4 M3 X4 E: meas3 caus2 hold2 stat3 cost3). 123-round agent self-improvement loop: 57 accepted changes, Fridge 0/486; three-condition account (representability/expressibility/resolvability), fully recorded; no interventions, one run, four seeds, held-out visible before round 74; RS assumption_audit_and_pivot (partial, sub null); domain K401 + K804 + K303.",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "raw_score": 78.75,
+   "status": "reviewed"
+  },
+  {
+   "paper_key": "2609.29091",
+   "summary": "system_method; claim_support=scoped; evidence_level=offline (no trial counts); raw 26.25 (display 26.3; G1 M2 X1 E: meas1 caus0(not_reported) hold1 stat0(not_reported) cost1). Real Franka Find-and-Place 94-96% with no counts, baselines or ablations; planner backbone unnamed; RS C25 (partial); domain K104 + K109.",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "offline",
+   "raw_score": 26.25,
+   "status": "reviewed"
+  }
+ ],
+ "score_distribution_raw": [26.25, 52.5, 53.75, 67.5, 67.5, 78.75],
+ "rs_primary_counts": {"decompose_and_delegate": 5, "assumption_audit_and_pivot": 1},
+ "domain_card_counts": {"K105": 1, "R05": 2, "K201": 1, "K103": 1, "R06": 1, "K109": 2, "K104": 1, "K401": 1, "K804": 1, "K303": 1}
+}

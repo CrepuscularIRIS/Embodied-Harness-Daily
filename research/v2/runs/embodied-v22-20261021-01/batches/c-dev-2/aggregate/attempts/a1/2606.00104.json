@@ -1,0 +1,1518 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-2",
+ "attempt_id": "a1",
+ "seat": "aggregate_opus55",
+ "phase": "calibration",
+ "input_seat_hashes": {
+  "sol": "c96a7809997208f4af6048ad242b6c1141e8f13e3daaa98712712db58d8235c6",
+  "son55": "9eba787c06a9fdb0e816e07cb5d6bbc6f6835588d6e7cadff78e008d1cfaa336"
+ },
+ "input_seat_files": {
+  "sol": "research/v2/runs/embodied-v22-20261021-01/batches/c-dev-2/seats/sol/attempts/a1/2606.00104.json",
+  "son55": "research/v2/runs/embodied-v22-20261021-01/batches/c-dev-2/seats/son55/attempts/a1/2606.00104.json"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "provenance": {
+  "input_hash": "cef6819a0456f4a2a6c434ba14b8b42165da7242f014bf617492272f3181b9fc",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (calibration-dev; not frozen)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "pattern_protocol_hash": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "eeb8ba7127abcee445b8d46663e4aeef55882de69e2c4cf943254e91989ca258",
+  "domain_cards_hash_convention": "sha256 over sorted lines '<repo-relative path>\\t<sha256>\\n' for patterns/main/*.md, patterns/sub/*.md, research/patterns/taxonomy.json, research/patterns/conditions.json",
+  "expectations_hash": null,
+  "expectations_note": "profile/expectations.json absent from repo; expectations E01-E22 are the 'Reviewer expectations' sections embedded in patterns/main/*.md, bound via domain_cards_hash.",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "Aggregate subagent cannot read its own session id / receipt; null per contract, no probing.",
+  "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+  "timestamp": "2026-10-21T18:30:00Z",
+  "independence_note": "Aggregate review with both seat inputs; core paper text read before opening seat totals. Not a third blind review or human gold."
+ },
+ "paper": {
+  "paper_key": "2606.00104",
+  "paper_id": "2606.00104",
+  "title": "PEACE: A Planner-Executor Agent with Constraint Enforcement for UAVs",
+  "version": "2606.00104v1",
+  "claim_type": "system_method",
+  "central_claim": "A planner-executor agent for PX4 drones (single-pass LLM MissionPlan of typed ROS 2/MAVLink tool calls, detector + pinhole-depth world model, altitude/geofence constraint enforcement, bounded replanning on tool failure) is feasible in PX4 SITL/Gazebo, and results highlight improved explainability, constraint enforcement and reduced LLM calls compared to tightly coupled LLM control."
+ },
+ "materials": [
+  {
+   "material_id": "2606.00104:fulltext",
+   "aliases": [],
+   "url": "https://arxiv.org/html/2606.00104v1",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt",
+   "sections_read": [
+    "Abstract",
+    "I-V",
+    "Acknowledgment (all 24 lines)"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L6",
+   "quote": "Results highlight improved explainability, constraint enforcement, and reduced LLM calls compared to tightly coupled LLM control.",
+   "support_explanation": "Original comparative claim retained, not replaced by weaker feasibility-only target.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L12",
+   "quote": "TypeFly generates flight plans in a domain-specific language (MiniSpec) to reduce LLM inference latency",
+   "support_explanation": "Closest lineage already amortizes planning; cannot accept blanket claim that fixed planning or reduced calls is new.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+   "quote": "a reasoning string followed by an ordered list of tool calls.",
+   "support_explanation": "Typed MissionPlan separates planner construction from deterministic executor dispatch.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+   "quote": "a bounded replan is issued.",
+   "support_explanation": "Executor re-invokes planner only after failure, not after every action; numerical cap not specified in release.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+   "quote": "using the synchronized depth image and camera intrinsics, and exposes an explicit depth-validity flag",
+   "support_explanation": "Perception assumes metric calibrated depth; invalid flag is an explicit information-boundary mechanism, not robustness proof.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+   "quote": "Each planner invocation reads a consistent snapshot from both services",
+   "support_explanation": "Grounding uses bounded timestamped state and world histories; snapshots can stale during nominal open-loop execution.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L15",
+   "quote": "Out-of-band altitude targets are clamped; geofence breaches abort the offending tool calls and surfaces a structured failure to the replanner.",
+   "support_explanation": "Specific gate actions and physical scope. Altitude/geofence alone do not certify obstacle collision avoidance or full trajectory safety.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+   "quote": "The aim is not a quantitative benchmark, but to characterize the agent’s behavior",
+   "support_explanation": "Explicit qualitative study; 108 prompts are not an empirical success denominator.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+   "quote": "takeoff and landing (12), relative motion (12), altitude and attitude control (12), waypoint navigation (13), geometric path following (13), object search and localization (12), open-vocabulary navigation (13), composite multi-step missions (13), and safety violation (8).",
+   "support_explanation": "Prompt inventory totals108 but enumerates nine categories despite prose saying eight; not completed execution counts.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+   "quote": "takeoff(5) followed by forward(3)",
+   "support_explanation": "Concrete nominal SITL trace, not per-task success rates or a baseline comparison.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E011",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L18",
+   "quote": "these are by design but propagate to the mission failure.",
+   "support_explanation": "Gate rejects can be correct yet task fails; mission success cannot be substituted with safety-filter activation.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E012",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L21",
+   "quote": "the current open- loop planning assumption is brittle in such settings",
+   "support_explanation": "Authors acknowledge dynamic-scene limitation; feedback only on tool failure does not handle all scene changes.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E013",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L21",
+   "quote": "The first is a sim-to-real deployment on physical UAV hardware.",
+   "support_explanation": "Real transfer is future work, not evidence from this release.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E014",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2606.00104.txt:L21",
+   "quote": "the adoption of a planner–executor paradigm reduces LLM invocations to a single call",
+   "support_explanation": "Structural nominal call count; no measured call/latency/USD comparator and bounded replans can add calls.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Abstract",
+   "quote": "Results highlight improved explainability, constraint enforcement, and reduced LLM calls compared to tightly coupled LLM control.",
+   "support_explanation": "中心比较性主张：对“紧耦合 LLM 控制”改进三项。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Abstract",
+   "quote": "demonstrate its feasibility in PX4 software-in-the-loop simulations in Gazebo",
+   "support_explanation": "实际声称的证据层级：SITL 可行性演示。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec I",
+   "quote": "Planner–Executor agent in which an LLM generates a complete mission plan in a single pass as a sequence of structured tool calls, executed without further model intervention.",
+   "support_explanation": "贡献1：单次计划、结构化工具调用、执行期无模型介入。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec V",
+   "quote": "reduces LLM invocations to a single call, which is substantially lower than ReAct-based agents",
+   "support_explanation": "“减少调用”为架构论断，无实测对照。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-B",
+   "quote": "re-invokes the LLM only on tool failure, in which case a bounded replan is issued",
+   "support_explanation": "重规划仅在工具失败时触发；界限数值未给。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-B",
+   "quote": "Removing the LLM from the fast control path eliminates an entire class of latency-induced and hallucination-induced failure modes",
+   "support_explanation": "设计论断，引用他人基准，未在本文测量。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV",
+   "quote": "The aim is not a quantitative benchmark",
+   "support_explanation": "作者自述实验非定量基准。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-A",
+   "quote": "We compiled a set of 108 natural-language prompts spanning eight task categories",
+   "support_explanation": "108 条提示，8 类；无成功率/计数。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-A",
+   "quote": "safety violation (8)",
+   "support_explanation": "安全违规类仅 8 条提示；结果未报告。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-B",
+   "quote": "Across categories, four behavioral patterns are visible.",
+   "support_explanation": "仅定性行为模式。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-B",
+   "quote": "the planner emits a single MissionPlan comprising takeoff(5) followed by forward(3)",
+   "support_explanation": "唯一给出的具体示例。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-B",
+   "quote": "The mission logging makes each mission auditable offline.",
+   "support_explanation": "可审计性是日志属性，非测量结果。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-C",
+   "quote": "The preliminary results exhibit three recurring failure modes.",
+   "support_explanation": "失败模式：规划器错误/感知不确定/安全中止，无计数。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-C",
+   "quote": "extended runs of uncertain observations, collapse object search and navigation to degenerate plans",
+   "support_explanation": "感知不确定使搜索导航退化为空计划。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-C",
+   "quote": "these are by design but propagate to the mission failure",
+   "support_explanation": "安全中止“按设计”但传导为任务失败。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-F",
+   "quote": "Out-of-band altitude targets are clamped; geofence breaches abort the offending tool calls and surfaces a structured failure to the replanner.",
+   "support_explanation": "约束层：高度带钳制、围栏越界中止并回传结构化失败。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-F",
+   "quote": "Because the check is purely geometric, it is verifiable independently of the language model",
+   "support_explanation": "检查器为确定性几何，独立于 LLM。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-F",
+   "quote": "provides the construction required by the avoid-collision and regulatory-compliance axes of recent physical-safety benchmarks for LLM-controlled UAVs",
+   "support_explanation": "称满足避碰轴，但实现仅高度带+水平围栏。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-C",
+   "quote": "exposes an explicit depth-validity flag so the planner can distinguish confident localizations from uncertain ones",
+   "support_explanation": "深度有效性标记；深度度量/校准假设未述。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-C",
+   "quote": "a fast 2D object detector and a vision–language model generating structured detections",
+   "support_explanation": "两种可插拔感知后端，具体模型未指明。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec III-E",
+   "quote": "On replan, the user message is rebuilt from a fresh snapshot",
+   "support_explanation": "重规划用新快照重建上下文。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec II-C",
+   "quote": "the executor binds each tool directly to a MAVLink via ROS 2",
+   "support_explanation": "工具直接绑定 MAVLink/ROS 2。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec II-C",
+   "quote": "The action space is therefore fixed, inspectable",
+   "support_explanation": "固定、可检视的动作空间。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec II-C",
+   "quote": "TypeFly generates flight plans in a domain-specific language (MiniSpec) to reduce LLM inference latency",
+   "support_explanation": "最近邻：同为降推理延迟的计划-执行路线。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec V",
+   "quote": "This design point is distinct from code-generating planners",
+   "support_explanation": "与代码生成式规划器的区分仅为文字陈述。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec V",
+   "quote": "the current open- loop planning assumption is brittle in such settings",
+   "support_explanation": "作者承认开环单次规划在动态场景脆弱。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec V",
+   "quote": "idempotency at the tool layer is required",
+   "support_explanation": "工具层状态机交互问题。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-B",
+   "quote": "Metric tasks (waypoint, relative motion, altitude control) admit the most reliable plans",
+   "support_explanation": "定性陈述，无数字。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec V",
+   "quote": "an off-the-shelf LLM is sufficient for the planner",
+   "support_explanation": "称现成 LLM 足够；未指明模型。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E030",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec V",
+   "quote": "The first is a sim-to-real deployment on physical UAV hardware.",
+   "support_explanation": "真机部署为未来工作。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E031",
+   "material_id": "M1",
+   "material_sha256": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "Sec IV-A",
+   "quote": "Object-referential prompts are restricted to the vocabulary",
+   "support_explanation": "物体指称限于 5 个类别。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:C01",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "materials/2606.00104.txt:L15; III-F",
+   "quote": "Out-of-band altitude targets are clamped",
+   "support_explanation": "Altitude violations are clamped (command modified); only geofence breaches are stated to surface a structured failure.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:C02",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "aggregate inference over III-F",
+   "quote": null,
+   "support_explanation": "Inference: a clamped altitude target changes the executed motion without a stated failure message to the planner, so the planner's plan and the realized motion can diverge silently (observe_act_interface F2 'requested rather than realized motion').",
+   "kind": "our_inference",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:C03",
+   "material_id": "2606.00104:fulltext",
+   "material_hash": "356962e6fc0aeccb00cc72c79ad6410daf51bb2c8080bda15959aa951e5a3ddb",
+   "locator": "materials/2606.00104.txt:L15; III-F",
+   "quote": "enforcing two geometric constraints: an altitude band and a horizontal geofence around the takeoff point",
+   "support_explanation": "The checker covers only altitude and a takeoff-centred geofence; no obstacle model, so the avoid-collision axis claim is not met by construction.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "PX4/Gazebo UAV planner–executor control path, replacing per-action LLM reasoning with fixed MissionPlan",
+   "information": "Natural-language task, static tool/rule/schema prompt, timestamped bounded robot/world histories; world objects projected from 2D detections using synchronized metric depth and intrinsics in ENU; actual LLM ID and detailed schemas absent.",
+   "operation": "One planner invocation emits reasoning plus ordered calls; ROS2 executor binds to MAVLink and executes sequentially; fresh state snapshot and bounded replan on tool failure.",
+   "output": "Inspectable fixed tool sequence, per-step records and final state; no generated arbitrary executable policy.",
+   "conditions": "Known fixed tool vocabulary, accurate state/arming preconditions, sufficiently static scene and valid depth calibration.",
+   "feedback": "Typed execution failure, invalid depth/world detections and gate abort; no continuous model-level reconsideration in successful nominal tool sequence.",
+   "selection_rule": "Static deterministic schema and geometry validation, not optimized retained artifact selection.",
+   "selection_data": "Per-call requested motion and current flight state against configured limits; numerical caps not stated.",
+   "persistence": "Fixed tool/schema/context services and mission logs; no learned policy or persistent harness modification reported.",
+   "later_use": "Mission dispatch in qualitative SITL prompts; logs suggested for future distillation, which is not implemented evidence.",
+   "claimed_effect": "Explainable plans with fewer LLM calls and externally constrained flight.",
+   "failure_boundary": "Undetected tool/scene changes cascade; perception degeneracy and arming/offboard idempotency errors; exact model/limits/retry policy insufficiently specified.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E003",
+    "sol:E004",
+    "sol:E005",
+    "sol:E006",
+    "sol:E007",
+    "sol:E008",
+    "sol:E010",
+    "sol:E012",
+    "sol:E014"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Independent altitude and horizontal-geofence motion gate",
+   "information": "Requested target altitude, horizontal target and takeoff-centered geofence; geometric, not LLM confidence.",
+   "operation": "Clamp altitude out of band; abort geofence breach; return structured failure for bounded planner recovery.",
+   "output": "Only accepted/clamped target motion commands reach low-level controller.",
+   "conditions": "Geometry and frame conventions correct; point/target check scope, trajectory sweep and control tracking not demonstrated.",
+   "feedback": "Safety-validation abort distinct from task success.",
+   "selection_rule": "Configured altitude band and horizontal radius; numerical values not supplied.",
+   "selection_data": "Per-call command values, not training data or selected test outcomes.",
+   "persistence": "Static service unchanged across tasks.",
+   "later_use": "Applies to each emitted motion command; qualitative safety prompts described.",
+   "claimed_effect": "Constraints enforced independently of planner mistakes.",
+   "failure_boundary": "Does not establish obstacle avoidance, dynamics-aware continuous constraint satisfaction or regulatory compliance.",
+   "evidence_ids": [
+    "sol:E007",
+    "sol:E011"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Tight per-tool LLM loops add latency and expose hallucinated commands; end-to-end policies are opaque, hard to constrain and data-dependent.",
+  "checked_gap": "Plausible engineering motivation; no measurement of neighbours' residual problems or of this system's effect. TypeFly already compiles flight plans to reduce latency.",
+  "lineage_closest_adjacent": {
+   "source_version": "2606.00104v1 Sec II-C; originals not in fixed input",
+   "ancestors": [
+    "ReAct-style tool loops",
+    "TypeFly/MiniSpec",
+    "FlockGPT"
+   ],
+   "closest": [
+    "TypeFly",
+    "Co-NavGPT"
+   ]
+  },
+  "residue": "Fixed inspectable action schema plus an LLM-independent command gate and failure-only replanning in a PX4/ROS 2 stack.",
+  "stakes": "Physical harm from hallucinated/ill-typed UAV commands.",
+  "method_response": "Single typed plan, deterministic dispatch, geometric gate, bounded replan.",
+  "remaining_gap": "All comparative effects unmeasured; collision avoidance not covered; dynamic scenes and real hardware future work.",
+  "evidence_ids": [
+   "sol:E001",
+   "sol:E002",
+   "son55:E018",
+   "sol:E012"
+  ],
+  "unresolved": [
+   "Nearest-neighbour originals not supplied; no novelty verdict."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "good at design level; evidential steps absent",
+    "tactic_steps_checked": [
+     {
+      "step": 1,
+      "status": "met",
+      "note": "LLM plans; deterministic components execute and check.",
+      "evidence_ids": [
+       "sol:E003"
+      ]
+     },
+     {
+      "step": 2,
+      "status": "met",
+      "note": "Typed MissionPlan, fixed schema.",
+      "evidence_ids": [
+       "sol:E003",
+       "son55:E023"
+      ]
+     },
+     {
+      "step": 3,
+      "status": "partial",
+      "note": "Gate verdicts/tool failures trigger bounded replans; clamp is silent.",
+      "evidence_ids": [
+       "sol:E007",
+       "agg:C02"
+      ]
+     },
+     {
+      "step": 4,
+      "status": "unmet",
+      "note": "No ablation showing the gate/replan is load-bearing.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "step": 5,
+      "status": "unmet",
+      "note": "Cost claims unmeasured.",
+      "evidence_ids": [
+       "sol:E014"
+      ]
+     }
+    ],
+    "success_failure_checks": [
+     {
+      "id": "failure: off-the-shelf assembly without load-bearing proof",
+      "status": "unmet",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E003",
+     "sol:E007"
+    ],
+    "reason": "Both seats: decompose_and_delegate / C25 (sol 'rs:C25', son55 'C25'; same card, namespaced form kept)."
+   }
+  ],
+  "reason": "Structured artifact delegated to deterministic execution and checking.",
+  "executes_pattern": true,
+  "resolves_problem": false,
+  "resolves_problem_reason": "No measurement closes latency, hallucination or safety problems."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "S*: met = success condition satisfied by this paper's evidence. F*: met = paper guards against / does not exhibit the failure mode; unmet = failure mode present; partial; unknown; not_applicable (with reason). Normalized by aggregate because the two seats used opposite conventions for F-checks.",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "role": "primary_operation",
+    "version": "domain_cards_hash (see provenance)",
+    "fit": "good (fixed semantic action vocabulary executed by PX4 via ROS 2/MAVLink)",
+    "condition_checks": [
+     {
+      "id": "S4",
+      "status": "partial",
+      "reason": "Fixed vocabulary bound to a reliable autopilot; embodiment-convention fit untested.",
+      "evidence_ids": [
+       "son55:E022",
+       "son55:E023"
+      ]
+     },
+     {
+      "id": "S1",
+      "status": "unmet",
+      "reason": "No interface swap with backbone fixed.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "S5",
+      "status": "unmet",
+      "reason": "No per-backbone tool check.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "F2",
+      "status": "unmet",
+      "reason": "Requested vs realized motion: altitude clamp silently modifies commands; no realized-motion report described.",
+      "evidence_ids": [
+       "agg:C01",
+       "agg:C02"
+      ]
+     },
+     {
+      "id": "F3",
+      "status": "unmet",
+      "reason": "Metric depth assumed (sim depth); non-metric robustness untested.",
+      "evidence_ids": [
+       "sol:E005"
+      ]
+     },
+     {
+      "id": "F4",
+      "status": "unmet",
+      "reason": "Bundle never decomposed (no comparison at all).",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "F7",
+      "status": "unmet",
+      "reason": "Latency and contamination unaccounted.",
+      "evidence_ids": [
+       "sol:E014"
+      ]
+     },
+     {
+      "id": "F8",
+      "status": "unmet",
+      "reason": "Agent-level success not measured.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E003",
+     "son55:E022",
+     "son55:E023"
+    ]
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K201",
+    "role": "primary_operation",
+    "version": "domain_cards_hash (see provenance)",
+    "fit": "good (pre-execution geometric command gate)",
+    "condition_checks": [
+     {
+      "id": "S1",
+      "status": "partial",
+      "reason": "Cheap LLM-independent checker with structured failure feedback; contribution unmeasured.",
+      "evidence_ids": [
+       "sol:E007",
+       "son55:E017"
+      ]
+     },
+     {
+      "id": "S2",
+      "status": "unmet",
+      "reason": "No obstacle-grounded route check.",
+      "evidence_ids": [
+       "agg:C03"
+      ]
+     },
+     {
+      "id": "F1",
+      "status": "unmet",
+      "reason": "Checker is a weak proxy for the claimed collision safety.",
+      "evidence_ids": [
+       "agg:C03",
+       "son55:E018"
+      ]
+     },
+     {
+      "id": "F3",
+      "status": "unmet",
+      "reason": "Gate contribution not isolated.",
+      "evidence_ids": [
+       "sol:E008"
+      ]
+     },
+     {
+      "id": "F4",
+      "status": "unknown",
+      "reason": "Correct aborts propagate to mission failure, but no rates to judge net effect.",
+      "evidence_ids": [
+       "sol:E011"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E007",
+     "son55:E016",
+     "son55:E017"
+    ]
+   }
+  ],
+  "unassigned": [
+   "Whole plan-then-execute flow with failure-only replanning (opposite of K101/K102 observe-step loops); single paper."
+  ],
+  "considered_not_selected": [
+   {
+    "sub": "R04",
+    "reason": "R04 centres on exposing the robot stack through a generic agent protocol/tool discovery; PEACE's load-bearing claim is a fixed, typed vocabulary dispatched deterministically, which K104 states directly. One match per main card."
+   }
+  ],
+  "revision_proposals": [
+   {
+    "id": "RP-PE-1",
+    "status": "pending_unchecked",
+    "proposal": "If a second independent full text shows single-pass typed plans + deterministic geometric gate + failure-triggered replanning, consider a variant under observe_act_interface/external_verification_control. No card edited."
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "RS：模型抽取结构化工件→确定性组件处理 ↔ 领域：模型输出限定在固定语义动作词汇，由确定性/冻结执行器执行",
+   "necessary_conditions": "可靠低层执行器(PX4)；词汇与本体能力对齐",
+   "differences": "领域卡常有逐步观察-动作环路；本文为单次计划开环",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E022",
+    "son55:E023"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K201"
+   },
+   "operation_correspondence": "RS：校验器输出闭环回修正 ↔ 领域：提案经外部检查器放行或带结构化反馈驳回",
+   "necessary_conditions": "检查器独立于评测真值；成功代理强度",
+   "differences": "本文检查器仅高度/围栏，非障碍物或完成判断",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E017"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#reviewer-expectations"
+   ],
+   "applies_when": "harness raises success over alternative",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No same-model alternative loop run.",
+   "evidence_ids": [
+    "sol:E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#reviewer-expectations"
+   ],
+   "applies_when": "gate/component causes gains",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No gate or replanning toggle.",
+   "evidence_ids": [
+    "sol:E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#reviewer-expectations"
+   ],
+   "applies_when": "success/comparative reliability statements",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Comparative claims are made without any success rates, repeats or uncertainty.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E008"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#reviewer-expectations"
+   ],
+   "applies_when": "reduced calls / more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No calls, tokens, latency or USD reported; only architectural statement.",
+   "evidence_ids": [
+    "sol:E014"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#reviewer-expectations"
+   ],
+   "applies_when": "frontier-model harness claim",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Prompts built to match the tool set; planner LLM unnamed; no overlap disclosure.",
+   "evidence_ids": [
+    "sol:E008",
+    "son55:E029"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#reviewer-expectations"
+   ],
+   "applies_when": "success claim with checks",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Three qualitative failure classes; no counts or endpoint breakdown.",
+   "evidence_ids": [
+    "son55:E013",
+    "sol:E011"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E19",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "applies_when": "physical-vehicle transfer claim",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "SITL only; real deployment explicitly future work; no physical claim made.",
+   "evidence_ids": [
+    "sol:E013"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E20",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#reviewer-expectations"
+   ],
+   "applies_when": "depth converted to 3D targets",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Synchronized depth + intrinsics + validity flag stated; metric/calibration robustness untested.",
+   "evidence_ids": [
+    "sol:E005"
+   ],
+   "score_item": "X"
+  },
+  {
+   "id": "E22",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#reviewer-expectations"
+   ],
+   "applies_when": "comparative efficiency/safety claim vs other harness",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Claim is comparative ('compared to tightly coupled LLM control') but no matched-budget comparison exists.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E014"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "CL1",
+   "text": "相对紧耦合 LLM 控制，LLM 调用减少。",
+   "setting": "PX4 SITL/Gazebo；未指明 LLM",
+   "baseline_control": "无（未运行基线）",
+   "selection_vs_test": "无划分",
+   "result_denominator": "无",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E005"
+   ],
+   "counterevidence": [
+    "son55:E007"
+   ],
+   "allowed_conclusion": "按架构，规划阶段一次调用，另加工具失败触发的重规划调用；实际调用数与重规划率未报，不能声称实测减少。"
+  },
+  {
+   "claim_id": "CL2",
+   "text": "约束层强制高度与水平围栏约束（并满足避碰/合规轴）。",
+   "setting": "SITL；8 条安全违规提示",
+   "baseline_control": "无（未关闭约束层对照）",
+   "selection_vs_test": "无",
+   "result_denominator": "8 条提示，结果未报",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E017",
+    "son55:E009"
+   ],
+   "counterevidence": [
+    "son55:E018",
+    "son55:E015",
+    "agg:C03"
+   ],
+   "allowed_conclusion": "Design: every motion command passes a deterministic altitude-clamp / geofence check. The stated satisfaction of the avoid-collision axis is contradicted by the checker's own scope (no obstacle model); interception and false-reject rates unreported.",
+   "sub_claim_support": {
+    "constraint enforcement (altitude/geofence)": "unsupported (design only, no measurement)",
+    "avoid-collision axis": "contradicted"
+   }
+  },
+  {
+   "claim_id": "CL3",
+   "text": "可解释性提高。",
+   "setting": "任务日志",
+   "baseline_control": "无",
+   "selection_vs_test": "无",
+   "result_denominator": "无",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E011"
+   ],
+   "counterevidence": [
+    "son55:E007"
+   ],
+   "allowed_conclusion": "计划与逐步结果可从日志恢复，属实现属性；与对照比的“改进”未证。"
+  },
+  {
+   "claim_id": "CL4",
+   "text": "可行性：108 提示在 SITL 中由 LLM 规划并经 ROS 2 执行。",
+   "setting": "PX4 SITL/Gazebo，8 类任务",
+   "baseline_control": "无",
+   "selection_vs_test": "提示集与工具集对齐构造",
+   "result_denominator": "108 条提示，成功数未报",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E008",
+    "son55:E010",
+    "son55:E028",
+    "son55:E011"
+   ],
+   "counterevidence": [
+    "son55:E007",
+    "son55:E013"
+   ],
+   "allowed_conclusion": "系统可在仿真中运行并产生可读日志，定性观察到若干行为/失败模式；无成功率。"
+  },
+  {
+   "claim_id": "CL5",
+   "text": "物体指称命令可基于实时 3D 世界模型接地。",
+   "setting": "检测+针孔深度投影，5 类物体",
+   "baseline_control": "无",
+   "selection_vs_test": "无",
+   "result_denominator": "无",
+   "evidence_ids": [
+    "son55:E020",
+    "son55:E019",
+    "son55:E031"
+   ],
+   "counterevidence": [
+    "son55:E014"
+   ],
+   "allowed_conclusion": "接地模块的设计成立；检测召回/定位误差未测，作者承认感知不确定性使搜索导航退化。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "offline",
+  "evidence_level_reason": "Both seats: SITL interaction but only a qualitative demonstration and one logged example; no environment-judged success counts.",
+  "claim_support": "unsupported",
+  "author_claim_kept": "Results highlight improved explainability, constraint enforcement, and reduced LLM calls compared to tightly coupled LLM control.",
+  "strongest_supported_claim": "The paper describes a single-pass typed planner-executor UAV agent with an LLM-independent altitude/geofence gate and failure-only replanning, implemented in PX4 SITL and illustrated with one logged mission and qualitative behaviour over 108 prompts. None of the comparative improvements is measured, and the gate does not cover collisions despite the stated avoid-collision axis.",
+  "cannot_conclude": [
+   "Any improvement over tightly coupled LLM control.",
+   "Collision safety.",
+   "Measured reduction of calls or latency.",
+   "Task success rates."
+  ],
+  "unresolved": [],
+  "author_report_only": true
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Both seats 2; confirmed. Real engineering bottlenecks (per-tool LLM latency, unaudited actions, data dependence) motivated by cited surveys/benchmarks; closest neighbour TypeFly already amortizes planning, and the difference (typed MissionPlan + independent gate) is stated, not measured; no residual measured in neighbours.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E002",
+    "son55:E024"
+   ],
+   "counterevidence_ids": [
+    "son55:E025"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "son55 value adopted (sol 3). Single-pass typed plan + deterministic executor addresses latency/auditability, but: the independent gate is orthogonal to the planner-executor paradigm and is justified as satisfying the avoid-collision axis while checking only altitude and a geofence (agg:C03, son55:E018); open-loop single-pass planning conflicts with the stated perception uncertainty and is handled only at tool-failure granularity (authors' own failure modes); clamping silently alters commands (agg:C02). Concrete mechanism with weak key assumptions = anchor 2.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E004",
+    "sol:E005",
+    "sol:E007"
+   ],
+   "counterevidence_ids": [
+    "agg:C03",
+    "son55:E018",
+    "sol:E012",
+    "son55:E014",
+    "agg:C02"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Both seats 2; confirmed. Data flow, two-message prompt assembly, snapshot rebuild on replan, clamp vs abort semantics and pluggable perception are described; planner LLM, detector models, tool schema, numeric altitude/geofence bounds, replan cap and depth-validity rule are not given.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E006",
+    "son55:E021",
+    "sol:E007"
+   ],
+   "counterevidence_ids": [
+    "son55:E029",
+    "son55:E020"
+   ],
+   "search_scope": [
+    "Complete v1 text L1-L24 (Abstract, I-V) re-read by aggregate; no appendix, table or numeric outcome exists in the fixed material; external repository not part of the fixed input."
+   ]
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "Both seats 1. One logged nominal mission (takeoff(5), forward(3)) and qualitative behaviour/failure categories over a 108-prompt inventory (whose 9 listed categories conflict with 'eight'); no success criterion, counts or rates. The geometric checker is deterministic but its trigger/false-reject behaviour is unmeasured.",
+   "evidence_ids": [
+    "sol:E010",
+    "sol:E008",
+    "sol:E009"
+   ],
+   "counterevidence_ids": [
+    "son55:E007"
+   ],
+   "search_scope": [
+    "Complete v1 text L1-L24 (Abstract, I-V) re-read by aggregate; no appendix, table or numeric outcome exists in the fixed material; external repository not part of the fixed input."
+   ]
+  },
+  "E.causality": {
+   "status": "not_reported",
+   "rating": 0,
+   "reason": "Both seats 0. No ReAct/tightly coupled baseline, no gate or replanning ablation, no same-model comparison; the comparative claims are assertions.",
+   "evidence_ids": [
+    "sol:E008"
+   ],
+   "counterevidence_ids": [
+    "sol:E001",
+    "son55:E004"
+   ],
+   "search_scope": [
+    "Complete v1 text L1-L24 (Abstract, I-V) re-read by aggregate; no appendix, table or numeric outcome exists in the fixed material; external repository not part of the fixed input."
+   ]
+  },
+  "E.holdout": {
+   "status": "not_reported",
+   "rating": 0,
+   "reason": "Both seats 0. No development/test split, held-out scenes or contamination statement; prompts constructed to match the tool set; five object classes; SITL only.",
+   "evidence_ids": [
+    "sol:E008",
+    "son55:E031"
+   ],
+   "counterevidence_ids": [
+    "sol:E013"
+   ],
+   "search_scope": [
+    "Complete v1 text L1-L24 (Abstract, I-V) re-read by aggregate; no appendix, table or numeric outcome exists in the fixed material; external repository not part of the fixed input."
+   ]
+  },
+  "E.statistics": {
+   "status": "not_reported",
+   "rating": 0,
+   "reason": "sol value adopted (son55 1). No executed-trial denominators, repeats, rates or uncertainty; qualitative failure categories without frequencies are boundary descriptions, already credited in M/X and measurement, and cannot stand in for a failure denominator. Cross-paper consistency: 2605.13119 gets 1 for clear denominators without variance; PEACE has no outcome numbers at all.",
+   "evidence_ids": [
+    "sol:E008",
+    "sol:E009"
+   ],
+   "counterevidence_ids": [
+    "son55:E013"
+   ],
+   "search_scope": [
+    "Complete v1 text L1-L24 (Abstract, I-V) re-read by aggregate; no appendix, table or numeric outcome exists in the fixed material; external repository not part of the fixed input."
+   ]
+  },
+  "E.cost": {
+   "status": "not_reported",
+   "rating": 0,
+   "reason": "son55 value adopted (sol 1). The 'reduced LLM calls' claim rests only on the architecture (one call plus unquantified bounded replans); no calls, tokens, latency or USD are measured or compared. Crediting the design property here would double-count a fact already credited under M/X.",
+   "evidence_ids": [
+    "sol:E014"
+   ],
+   "counterevidence_ids": [
+    "sol:E004",
+    "son55:E005"
+   ],
+   "search_scope": [
+    "Complete v1 text L1-L24 (Abstract, I-V) re-read by aggregate; no appendix, table or numeric outcome exists in the fixed material; external repository not part of the fixed input."
+   ]
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete short release read; missing quantitative evidence is the paper's own omission (not_reported with search scope), not a material gap.",
+ "resolutions": [
+  {
+   "field_path": "assessment.claim_support",
+   "sol_value": "scoped",
+   "son55_value": "unsupported",
+   "decision": "son55",
+   "final_value": "unsupported",
+   "reason": "The central claim is comparative ('results highlight ... compared to tightly coupled LLM control') and no comparison or outcome count exists; the only narrower statements available are design descriptions and one anecdote, which are not empirical support for the claim, and the collision-axis sub-claim is contradicted by the checker's scope (agg:C03).",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E008",
+    "sol:E010",
+    "agg:C03",
+    "son55:E018"
+   ],
+   "score_impact": "none on raw score; claim_support is reported beside the score."
+  },
+  {
+   "field_path": "ratings.M",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "Gate rationale mismatched with its stated purpose (collision axis vs altitude/geofence only); gate orthogonal to the planner-executor change; open-loop plan vs acknowledged perception uncertainty; silent clamp. Weak key assumptions -> 2.",
+   "evidence_ids": [
+    "agg:C03",
+    "son55:E018",
+    "sol:E012",
+    "agg:C02"
+   ],
+   "score_impact": "-5.0 vs sol"
+  },
+  {
+   "field_path": "ratings.E.statistics",
+   "sol_value": {
+    "status": "not_reported",
+    "rating": 0
+   },
+   "son55_value": {
+    "status": "resolved",
+    "rating": 1
+   },
+   "decision": "sol",
+   "final_value": {
+    "status": "not_reported",
+    "rating": 0
+   },
+   "reason": "No outcome denominators at all; qualitative failure categories already credited elsewhere and are not statistics/failure denominators.",
+   "evidence_ids": [
+    "sol:E008",
+    "sol:E009"
+   ],
+   "score_impact": "-1.25 vs son55"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": {
+    "status": "resolved",
+    "rating": 1
+   },
+   "son55_value": {
+    "status": "not_reported",
+    "rating": 0
+   },
+   "decision": "son55",
+   "final_value": {
+    "status": "not_reported",
+    "rating": 0
+   },
+   "reason": "Architecture-only call argument; nothing measured; avoid double-crediting the design fact.",
+   "evidence_ids": [
+    "sol:E014",
+    "son55:E005"
+   ],
+   "score_impact": "-1.25 vs sol"
+  },
+  {
+   "field_path": "ratings.E.measurement / E.causality / E.holdout",
+   "sol_value": [
+    1,
+    0,
+    0
+   ],
+   "son55_value": [
+    1,
+    0,
+    0
+   ],
+   "decision": "same_supported_fact",
+   "final_value": [
+    1,
+    0,
+    0
+   ],
+   "reason": "Controller diffs (son55=null) were key-structure artifacts; both seats agree and the text confirms.",
+   "evidence_ids": [
+    "sol:E008",
+    "son55:E007"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    "rs:C25"
+   ],
+   "son55_value": [
+    "C25"
+   ],
+   "decision": "same_supported_fact",
+   "final_value": [
+    "rs:C25"
+   ],
+   "reason": "Same original sub-card; namespaced form kept per PATTERN_PROTOCOL.",
+   "evidence_ids": [
+    "sol:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "K201",
+    "R04"
+   ],
+   "son55_value": [
+    "K104",
+    "K201"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "K104",
+    "K201"
+   ],
+   "reason": "Read K104 and R04: K104's fixed semantic vocabulary with deterministic executor is the paper's load-bearing interface claim; R04 is about generic protocol exposure/discovery. Both under observe_act_interface; one match per main card.",
+   "evidence_ids": [
+    "son55:E022",
+    "son55:E023",
+    "sol:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E04,E22]",
+   "sol_value": [
+    "unmet",
+    "unmet"
+   ],
+   "son55_value": [
+    "not_applicable",
+    "not_applicable"
+   ],
+   "decision": "sol",
+   "final_value": [
+    "unmet",
+    "unmet"
+   ],
+   "reason": "The paper makes comparative claims, so the comparison expectations apply; their absence is unmet, not N/A.",
+   "evidence_ids": [
+    "sol:E001"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations[E05]",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "E05 asks for reported calls/tokens/latency/USD; none reported.",
+   "evidence_ids": [
+    "sol:E014"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "score",
+   "sol_value": {
+    "raw": 37.5
+   },
+   "son55_value": {
+    "raw": 32.5
+   },
+   "decision": "revised",
+   "final_value": {
+    "raw": 31.25,
+    "display": 31.3
+   },
+   "reason": "Deterministic recomputation from final ratings G2 M2 X2 Em1 Ec0 Eh0 Es0 Ek0; each item resolved separately, not averaged.",
+   "evidence_ids": [],
+   "score_impact": "final 31.25"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SE-PE-1",
+   "field_path": "domain_pattern observe_act_interface F2",
+   "error": "Both seats missed that the altitude clamp silently modifies commands (only geofence breaches surface a failure): sol marked F2 not_applicable, son55 unknown.",
+   "correction": "F2 = unmet (failure present) via agg:C01/agg:C02; also counted as an M weakness.",
+   "evidence_ids": [
+    "agg:C01",
+    "agg:C02"
+   ],
+   "score_impact": "none beyond supporting the M resolution (M decided on independent grounds)."
+  }
+ ],
+ "requests": [],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All disagreements resolved; not_reported items have recorded search scope; no scoring unknowns.",
+ "score": {
+  "raw": 31.25,
+  "display": 31.3,
+  "lower": 31.25,
+  "upper": 31.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4",
+  "display_rounding": "Decimal ROUND_HALF_UP to 0.1; raw unrounded value is the selection value",
+  "status_vector": {
+   "G": "resolved",
+   "M": "resolved",
+   "X": "resolved",
+   "E.measurement": "resolved",
+   "E.causality": "not_reported",
+   "E.holdout": "not_reported",
+   "E.statistics": "not_reported",
+   "E.cost": "not_reported"
+  }
+ },
+ "final_record_hash": "39a16fc1ac7e2a3a4883c1b1601409e6131e14ace345bf950923446c45ed07af"
+}

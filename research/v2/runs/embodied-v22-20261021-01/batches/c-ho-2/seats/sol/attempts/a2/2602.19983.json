@@ -1,0 +1,654 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-2",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "provenance": {
+    "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+    "rubric_version": "v2.2",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "20c4aa07bdfdd48aa1b70989c8fe0009d3fa67f22c2e51ce5e299e8faa4c8fc9",
+    "expectations_hash": "eacb08d00a46f1ee5457f4efd37b5b47f446a6e958b835b3972c1a3579c84c9b",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T18:09:30.149704+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144); session_id/receipt_ref unavailable to internal worker. Domain hash is sorted relative-path + NUL + bytes of all main/sub cards; expectations hash uses main cards (embedded expectations). No other attempts or seat outputs read."
+  },
+  "paper": {
+    "paper_key": "2602.19983",
+    "paper_id": "2602.19983",
+    "title": "Contextual Safety Reasoning and Grounding for Open-World Robots",
+    "version": "2602.19983v2",
+    "claim_type": "system_method",
+    "central_claim": "CORE infers contextual constraints online without prebuilt maps/specifications, grounds them spatially and enforces them with probabilistic safety guarantees under perception uncertainty, approaching an oracle and outperforming non-contextual methods in unseen settings."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2602.19983v2",
+      "sha256": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "sections_read": [
+        "Abstract",
+        "I–VII",
+        "Summary",
+        "Appendix A including full proof",
+        "Appendix B including tasks, uncertainty optimization and prompt"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§III",
+      "quote": "The robot is provided with high-level safety guidelines",
+      "support_explanation": "No environment-specific rules required but guidelines and operator semantics are supplied.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§IV-A",
+      "quote": "The final output is a JSON object containing the VLM’s justification, safety-relevant semantics, and the predicates defining safe and unsafe regions,",
+      "support_explanation": "Structured semantic-to-control handoff.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§IV-C Assumption 1",
+      "quote": "updates to h(x) cannot instantaneously classify the robot’s current position as unsafe.",
+      "support_explanation": "Safe initialization at map updates is essential, not automatic.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§V setup",
+      "quote": "We evaluate four tasks per environment—two safe and two unsafe—and we repeat each task five times, yielding 60 evaluations.",
+      "support_explanation": "Complete simulation task denominator with repeats.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§V-A Table I",
+      "quote": "CORE 95.0% 96.6% 93.3% 3.3% 1.7% 0.0%",
+      "support_explanation": "57/60 overall; safe29/30 unsafe28/30 with attribution.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§V-D",
+      "quote": "We evaluate 3 safe and 3 unsafe tasks, each repeated 5 times, for a total of 30 tasks per method.",
+      "support_explanation": "Counted physical transfer; per-task rates only pooled by type.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§V-D",
+      "quote": "CORE achieves a success rate of 86.6% split evenly across safe and unsafe tasks",
+      "support_explanation": "26/30 hardware overall;13/15 per type.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§V-E",
+      "quote": "The detection function is calibrated from the Gemma 3 27B results",
+      "support_explanation": "Calibration images from same experimental setup, not independently held-out risk validation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "Appendix B-D3",
+      "quote": "Here, we make the (not conservative) assumption that the lower bound holds independently of the context",
+      "support_explanation": "Certificate operationalization drops context-tail risk; conditional guarantee only.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "Appendix B-A Table A.I",
+      "quote": "Safety Reasoning 4.37 \\pm 0.45 Semantic Grounding 0.75 \\pm 1.14 Safety Enforcement 0.04 \\pm 0.15",
+      "support_explanation": "Measured module latency and variation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "§V-C Table III",
+      "quote": "Full (ours) 91.0% 85.0% 4.1s No Safety Logic 90.0% 80.0% 4.1s No CoT Reasoning 61.0% 77.0% 2.8s",
+      "support_explanation": "One-at-a-time reasoning changes tested on100 images, not all closed-loop components.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "Appendix A-C",
+      "quote": "if the process expectation is contracting with respect to the filtration",
+      "support_explanation": "Ville bound requires conditional supermartingale; stationary-measurement monotonicity does not alone prove moving-state process condition.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "M1",
+      "material_hash": "125d037eaef4fc4bd602e579e27b8dc22d73e47852b7bd64d9f6b25019706688",
+      "locator": "Appendix B-A",
+      "quote": "We therefore discard measurements within 3 meters of the robot.",
+      "support_explanation": "Observation restriction and sensing-range dependence bound realistic safety.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Contextual safety rule generation",
+      "information": "Streaming RGB, high-level guidelines, fixed ON/NEAR/AROUND/BETWEEN semantics; no prior map or local hazard rules.",
+      "operation": "4-bit Gemma3-27B infers semantic classes and safe/unsafe predicate JSON online.",
+      "output": "Predicates and rationale",
+      "conditions": "Hazards detectable early; field of view; structured prompt.",
+      "feedback": "New camera frames; no outcome-optimized self-modification.",
+      "selection_rule": "Fixed structured inference, not candidate optimization",
+      "selection_data": "Runtime observations; VLM choice uses100 images from setup.",
+      "persistence": "Rules/map counts maintained during operation; model/prompt static.",
+      "later_use": "Grounding module and subsequent control cycles.",
+      "claimed_effect": "Context-aware hazard prevention",
+      "failure_boundary": "Missed wet-floor sign or late detection; no per-frame uncertainty estimates.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E011",
+        "E013"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Nominal robot velocity",
+      "information": "SAM3 masks, depth/odometry, thresholded safe-count grid, known dynamics; Spot depth scaled with measured returns.",
+      "operation": "Project predicates into SDF barrier; solve minimum-change CBF QP; regulate traversal against calibrated detection function.",
+      "output": "Filtered velocity command",
+      "conditions": "Control-affine dynamics; valid conservative detection model, safe radius; updates must not make current pose unsafe.",
+      "feedback": "RGB-D/odometry at slower perception and faster control loops",
+      "selection_rule": "QP feasibility and barrier inequality; certificate parameter search at fixed risk target",
+      "selection_data": "Calibration on100 setup images; gamma=0 assumed in worked certificate",
+      "persistence": "Within-run map only; no retained training/skill improvement claim.",
+      "later_use": "Continuous robot execution",
+      "claimed_effect": "Probabilistic context safety with minimal deviation",
+      "failure_boundary": "Grounding ghosts block safe motion; contextual distribution/temporal correlation and moving-state supermartingale condition not fully empirically validated.",
+      "evidence_ids": [
+        "E003",
+        "E005",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E012"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "User-specified semantic constraints cannot cover unknown contextual hazards; geometry-only filters miss social/semantic boundaries.",
+    "checked_gap": "Demonstrated gap between generic upfront safety rules and visually inferred constraints on prescribed unsafe tasks; strong physical-control integration, not unrestricted open-world safety.",
+    "lineage": [
+      {
+        "method": "Language-grounded safe sets / HJ reachability",
+        "source": "M1 II-A/B refs10–12",
+        "version": "as cited in v2; originals not supplied"
+      },
+      {
+        "method": "Uncertain-state/dynamics CBFs",
+        "source": "M1 II-A",
+        "version": "as cited in v2"
+      }
+    ],
+    "closest_adjacent": "Prior semantics-to-costmap safety vs online VLM-generated constraints; perception-induced barrier uncertainty rather than only state error.",
+    "residue": "Ground contextual predicates in usable geometry and control risk under missed semantic detections.",
+    "stakes": "Collision-free paths can still violate semantic exclusion zones.",
+    "method_response": "Structured predicates→depth-grounded safe sets→QP filter with probabilistic analysis.",
+    "remaining_gap": "Dynamic contexts, calibration shift, timely detection and proof-to-discrete implementation assurance.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E005",
+      "E009",
+      "E012",
+      "E013"
+    ],
+    "unresolved": [
+      "Independent predecessor texts unavailable",
+      "No independent theorem verification or calibrated worst-context risk test."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong",
+        "tactic_steps_checked": {
+          "1": "VLM handles semantic interpretation, segmentation/geometry/CBF handle precise spatial/control operations",
+          "2": "Predicate JSON and barrier SDF are load-bearing artifacts",
+          "3": "Repeated perception updates change barrier and filtered controls",
+          "4": "No-context and geometry baselines plus prompt ablations; grounding/QP not separately ablated",
+          "5": "Physical validation and module latency given"
+        },
+        "success/failure_checks": [
+          "Typed handoff met",
+          "Available sensor feedback met",
+          "End-to-end solver soundness conditional, not semantic correctness",
+          "Mechanism ablation partial"
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E005",
+          "E007",
+          "E010",
+          "E011"
+        ],
+        "reason": "Symbolic spatial constraints are converted into an exact constrained control problem, not just serial model prompts."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Actual semantic extraction delegated to metric enforcement; no claim that solver validates VLM semantics.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "external_verification_control",
+        "sub": null,
+        "version": "embodied-agent-harness/v1",
+        "fit": "partial",
+        "condition_checks": [
+          {
+            "condition": "External geometry-based intervention before motion",
+            "status": "met",
+            "evidence_ids": [
+              "E002",
+              "E003",
+              "E005"
+            ]
+          },
+          {
+            "condition": "Reliable proxy for true contextual safety",
+            "status": "partial",
+            "evidence_ids": [
+              "E005",
+              "E007",
+              "E009"
+            ]
+          },
+          {
+            "condition": "K201 discrete model-proposal accept/reject feedback",
+            "status": "not_applicable",
+            "reason": "CORE modifies conventional controller velocities by QP; VLM proposes constraints, not navigation requests.",
+            "evidence_ids": [
+              "E002",
+              "E003"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E005",
+          "E007"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": [
+      "Continuous CBF intervention from inferred constraints is a partial main match but distinct from K201 discrete request gate."
+    ]
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "external_verification_control",
+        "sub": null
+      },
+      "operation_correspondence": "VLM safety predicates become grounded metric constraints consumed by independent CBF solver.",
+      "necessary_conditions_and_differences": "Checker only certifies safe set it receives; cannot certify missing semantics. Continuous projection differs from request rejection.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E009"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not reviews)",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Component gain",
+      "applicable": true,
+      "status": "partial",
+      "reason": "No-context controlled comparison and one-at-a-time prompt removal; no grounding/QP/uncertainty closed-loop toggle.",
+      "evidence_ids": [
+        "E005",
+        "E011"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not reviews)",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Success-rate comparison",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Five randomized-start repeats per task and failure types; no task-level confidence interval/paired significance.",
+      "evidence_ids": [
+        "E004",
+        "E006"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not reviews)",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Failure-sensitive safety/navigation claim",
+      "applicable": true,
+      "status": "met",
+      "reason": "Context/grounding/enforcement split plus safe-vs-unsafe success; not just positive success.",
+      "evidence_ids": [
+        "E005",
+        "E007"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not reviews)",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Physical robot transfer",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Six tasks×5 specified; pooled class rates rather than all six per-task rates.",
+      "evidence_ids": [
+        "E006",
+        "E007"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not reviews)",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Depth-to-safety grounding",
+      "applicable": true,
+      "status": "met",
+      "reason": "Sensor projection intrinsics, calibrated-depth scaling and failures/range limitations disclosed.",
+      "evidence_ids": [
+        "E007",
+        "E013"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not reviews)",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Harness comparison",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same CBF for baselines; hardware and model/module latency reported, no complete run-token/energy budget.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Online contextual safety approaches oracle and outperforms fixed rules.",
+      "setting": "Three IsaacSim scenes,12 tasks×5 random starts",
+      "baseline/control": "Oracle98.3%, no-context55%, geometry50%, common CBF synthesis",
+      "selection_vs_test": "Safety scenarios explicitly designed; model selected on100 images from same setup; no independent held-out development protocol",
+      "result/denominator": "CORE57/60=95%;safe29/30,unsafe28/30",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E011"
+      ],
+      "counterevidence": [
+        "Setup-specific scenario construction and model-selection images; not uncontrolled open-world distribution."
+      ],
+      "allowed_conclusion": "Reported controlled-scene advantage of online context."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Safety framework transfers to real Spot.",
+      "setting": "Lab RGB-D Spot,6 tasks×5",
+      "baseline/control": "Geometry50% overall, zero unsafe prevention",
+      "selection_vs_test": "Lab transfer; depth implementation adjusted for hardware",
+      "result/denominator": "CORE26/30=86.6%, 13/15 each safe/unsafe",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E013"
+      ],
+      "counterevidence": [
+        "Only single lab; full per-task rates not tabulated."
+      ],
+      "allowed_conclusion": "Counted sim-to-real execution, not broad open-world guarantee."
+    },
+    {
+      "claim_id": "C3",
+      "text": "Probabilistic bounds guarantee90% safe trajectories and empirically validate safety.",
+      "setting": "Conservative distance detection function and safe initial radius; derived CBF/NSM certificate",
+      "baseline/control": "Calibrated100-image unsafe prediction85%, lower bound75%",
+      "selection_vs_test": "Certificate calibration and simulation setup overlap; no independent risk-calibration test",
+      "result/denominator": "Main text gamma=one-third risk; worked appendix certificate gamma=0 with explicitly non-conservative context-independent assumption",
+      "evidence_ids": [
+        "E003",
+        "E008",
+        "E009",
+        "E012"
+      ],
+      "counterevidence": [
+        "Conditional-supermartingale requirement is stronger than unconditional expectation bound; not established for arbitrary moving/context-changing robot by fixed-position monotonicity."
+      ],
+      "allowed_conclusion": "Conditional theoretical certificate and descriptive safety rates; no independently established universal open-world probability bound."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "transfer",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author reports substantial contextual safety gains in repeated simulated tasks and26/30 real Spot trials. Guarantees depend on safe initialization, conservative/context-stable detection calibration and conditional process assumptions; general open-world risk is not validated.",
+    "unresolved": [
+      "Calibration distribution shift",
+      "Conditional process assumption in proof-to-implementation link",
+      "No independent statistical theorem/implementation audit"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete gap vs semantics supplied in advance; specific lineage is in-text only.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E005"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+      ]
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Predicate→grounding→QP is well aligned; explicit detection assumptions limit stated probabilistic generality.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E009",
+        "E012"
+      ],
+      "counterevidence_ids": [
+        "E009",
+        "E012"
+      ],
+      "search_scope": [
+        "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+      ]
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Reconstructible operators, prompts, projection, QP and timing; map update/detection assumptions and gamma discrepancy leave enforcement boundary.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E009",
+        "E010",
+        "E013"
+      ],
+      "counterevidence_ids": [
+        "E009",
+        "E012"
+      ],
+      "search_scope": [
+        "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Task criteria enumerated, repeat counts and failure attribution supplied; physical per-task results and annotation audit incomplete.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E006",
+          "E007"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+        ]
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Shared control stack/no-context/oracle and isolated prompt removals support contextual role; no independent grounding/theorem intervention.",
+        "evidence_ids": [
+          "E005",
+          "E011"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+        ]
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Three simulations plus counted physical lab, but model/calibration from experimental setup and no clear independent held-out scenario construction.",
+        "evidence_ids": [
+          "E004",
+          "E006",
+          "E008"
+        ],
+        "counterevidence_ids": [
+          "E009",
+          "E012"
+        ],
+        "search_scope": [
+          "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+        ]
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Five repeats/random starts and failure categories; no SR uncertainty/paired significance.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E006"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+        ]
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "GPU/quantization/memory and measured module latency with SD; not full end-to-end cost/fair-budget curves.",
+        "evidence_ids": [
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 full I–VII, Appendix A proof/operators and Appendix B implementation/tasks/certificate"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": 71.25,
+    "display": 71.2,
+    "lower": 71.25,
+    "upper": 71.25,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Complete versioned material and appendices read; theoretical scope kept conditional, no independent reproduction claimed."
+}

@@ -1,0 +1,623 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-2",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "provenance": {
+    "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+    "rubric_version": "v2.2",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "20c4aa07bdfdd48aa1b70989c8fe0009d3fa67f22c2e51ce5e299e8faa4c8fc9",
+    "expectations_hash": "eacb08d00a46f1ee5457f4efd37b5b47f446a6e958b835b3972c1a3579c84c9b",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T18:16:41.217829+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144); session_id/receipt_ref unavailable to internal worker. Domain hash is sorted relative-path + NUL + bytes of all main/sub cards; expectations hash uses main cards (embedded expectations). No other attempts or seat outputs read."
+  },
+  "paper": {
+    "paper_key": "2608.18227",
+    "paper_id": "2608.18227",
+    "title": "Revisiting the \"Push-T\" Robot Manipulation Task with Agentic Robotics",
+    "version": "2608.18227v1",
+    "claim_type": "system_method",
+    "central_claim": "A Fable5 coding-agent loop autonomously generates demonstration-free procedural controllers that solve Push-T at100% with46% fewer steps than a200-demo diffusion policy, scale to the full alphabet through self-generated curriculum and port to simulated Franka/UR5 with vision."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2608.18227v1",
+      "sha256": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "sections_read": [
+        "Abstract",
+        "§§1–6, Tables1–2/Figures1–4",
+        "§7 Appendix: full geometry, dynamics, visibility, seeds and independent push-count protocol"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§2",
+      "quote": "the LLM does not operate inside the high-frequency control loop.",
+      "support_explanation": "The deployed program, not a continuously queried LLM, controls motion.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§3.3/Table 1",
+      "quote": "Table 1 reports performance on gym_pusht over 200 fixed evaluation seeds.",
+      "support_explanation": "Claimed fixed matched evaluation denominator.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "Table 1",
+      "quote": "Claude_vision_controller 97.2% 170.4 4.76 94.2%",
+      "support_explanation": "97.2% cannot be a binary count out of exactly200 (increments0.5%); reported table needs reconciliation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§3.2",
+      "quote": "color segmentation against a pre-defined render palette",
+      "support_explanation": "Vision is palette-dependent with calibrated geometric templates, not general-purpose RGB reasoning.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§4.2",
+      "quote": "the agent generating both the environment suite and controller iterations",
+      "support_explanation": "Benchmark construction and controller search share agent/workflow.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§4.2",
+      "quote": "In round v1, a single prompt generated an initial controller achieving a 47.1% success rate. In round v2, autonomous self-refinement overnight elevated the success rate to 73.1%.",
+      "support_explanation": "Sequential search trajectory rather than repeated controlled agent runs.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§4.2/Fig 2",
+      "quote": "then 98.3\\%\\rightarrow 99.4\\% (25 tries per letter, the strict final number).",
+      "support_explanation": "Final all-letter exams recur during improvement; disjoint search/test not established.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "Table 2",
+      "quote": "Franka MPC + vision 668.1 5.78 83.4% 89.8% UR5e MPC + vision 545.8 5.06 90.0% 98.5%",
+      "support_explanation": "Counted simulated embodiment portability, not hardware trials.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§5",
+      "quote": "the total API cost was approximately $1,500–$2,000.",
+      "support_explanation": "Actual aggregate development cost disclosed.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§5",
+      "quote": "221 hours in Claude “auto mode” under human interactions.",
+      "support_explanation": "Human interaction and long search budget remain part of provenance.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§7.1",
+      "quote": "full (letter polygon, pusher radius, inertia, friction, PD gains), shape (polygon and radius only), or blind (no geometry).",
+      "support_explanation": "Independent task-spec geometry privilege; reported rows do not identify visibility level.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§7.1",
+      "quote": "evaluations run 25 episodes per letter with seeds 0 – 24 ( 650 episodes total).",
+      "support_explanation": "Alphabet final denominator and exact seed rule.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§3.3",
+      "quote": "Claude_state_controller 100.0% 120.1 3.72 96.8%",
+      "support_explanation": "Headline100%/46%fewer steps is the privileged state controller; vision97.2%/170.4 steps.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "M1",
+      "material_hash": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+      "locator": "§4.2",
+      "quote": "Refining only the adapter’s recovery and reachability logic raises success to 97.2% and coverage to 90.3%",
+      "support_explanation": "Strong classical baseline improves too; gain is not wholly new MPC mechanics.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Procedural pushing controller",
+      "information": "State vector first; agent source/API access, trial logs and simulator outcomes; vision added after human request.",
+      "operation": "Generate hybrid plan/approach/push/retreat code; fit quasi-static mechanics; inspect failures and rewrite to MPC.",
+      "output": "Executable controller code, no LLM in deployed high-frequency loop.",
+      "conditions": "Cheap resettable simulator; contact library/model and render conventions.",
+      "feedback": "Success, coverage, control steps, failure logs and source inspection.",
+      "selection_rule": "Continue revising for higher all-letter coverage; explicit independent promotion gate not specified.",
+      "selection_data": "Practice5episodes on hard-letter subsets; recurring all-letter exams5 then25/letter.",
+      "persistence": "Revised source, calibrated geometry/dynamics.",
+      "later_use": "Subsequent trials and ported simulated arms.",
+      "claimed_effect": "47.1→73.1→99.4% Alphabet; high Push-T success.",
+      "failure_boundary": "Changing practice groups cannot be read as monotonic learning; final seeds not independently withheld; no repeated agent searches.",
+      "evidence_ids": [
+        "E001",
+        "E005",
+        "E006",
+        "E007",
+        "E010",
+        "E012"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Vision-guided deployed MPC",
+      "information": "RGB render palette/template fits; task specification has full/shape/blind modes; row-specific mode unspecified.",
+      "operation": "Segment masks, fit pose/scale, initialize geometry and adapt per-push friction in a digital twin; receding-horizon geometric pushing.",
+      "output": "Pusher targets, contact switches and recovery.",
+      "conditions": "Calibrated simulated camera/palette; stable rigid geometry/contact physics.",
+      "feedback": "Fresh RGB and realized orientation change.",
+      "selection_rule": "Contact reachability and predicted pose-error improvement; friction gain revised after push.",
+      "selection_data": "Current episode frames and predicted/observed orientation changes.",
+      "persistence": "Per-episode tracking/calibration/friction; shared controller source.",
+      "later_use": "Next control steps; ported arm code.",
+      "claimed_effect": "Vision removes runtime ground-truth pose dependence and preserves performance across simulated bodies.",
+      "failure_boundary": "No physical robot; task-spec privilege not bound per row; Frankavision falls89.8%; not general perception transfer.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E008",
+        "E011"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Can a coding agent design manipulation algorithms without demonstrations/manual contact-model derivation, and extend them beyond canonicalT?",
+    "checked_gap": "Push-T learned imitation and classical fixed-contact/Dubins/contact-implicit approaches already solve related planar pushing; residual is end-to-end agent authoring/adaptation over concave letters and efficient runtime programs.",
+    "lineage": [
+      {
+        "method": "Implicit Behavioral Cloning / Diffusion Policy",
+        "source": "M1 §1/3.3 references1–2",
+        "version": "as cited; released LeRobot checkpoint, exact checkpoint revision unspecified"
+      },
+      {
+        "method": "Zhou–Hou–Mason Dubins pushing",
+        "source": "M1 §1/4.2 reference4",
+        "version": "as cited; original fulltext not supplied"
+      },
+      {
+        "method": "CRISP, Code-as-policy/agentic robotics",
+        "source": "M1 §1 references5,7–9",
+        "version": "as cited; independent original sources not supplied"
+      }
+    ],
+    "closest_adjacent": "Classical pushing with online identification/contact adapters plus iterative code-policy repair.",
+    "residue": "Can agent revisions produce robust reusable controller code under independent states/geometry and fair development information/budget?",
+    "stakes": "Contact reasoning and re-engagement dominate efficient manipulation; runtime model latency can be avoided.",
+    "method_response": "Geometric state machine→MPC, palette/template pose estimation and friction adaptation; agent-authored benchmark and adapters.",
+    "remaining_gap": "Search/evaluation overlap, privileged geometry, model/agent variation and hardware robustness remain unresolved.",
+    "evidence_ids": [
+      "E004",
+      "E005",
+      "E006",
+      "E007",
+      "E011",
+      "E014"
+    ],
+    "unresolved": [
+      "No independent predecessor fulltexts in fixed package; novelty comparison limited to article description.",
+      "Exact task-spec visibility per table row and200-seed/97.2% reconciliation."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong",
+        "tactic_steps_checked": {
+          "1": "Agent generates explicit controller program instead of token-level direct control.",
+          "2": "Geometry/contact/dynamics intermediate artifacts feed simulator and MPC.",
+          "3": "Simulator outcomes drive code repair before deployment.",
+          "4": "One-shot and successive versions plus classical adapter provide partial alternatives.",
+          "5": "Aggregate tokens/USD/hours reported; no matched total-search baseline."
+        },
+        "success/failure_checks": [
+          "Executable-feedback loop actually run; runtime controller is model-free.",
+          "Simulator feedback validates selected examples, not physical soundness or independent retention.",
+          "No untested formal optimum claimed for complete Dubins adapter."
+        ],
+        "evidence_ids": [
+          "E001",
+          "E006",
+          "E009",
+          "E011",
+          "E014"
+        ],
+        "reason": "C25 code-generation/verification loop is executed; no additional card awarded merely because MPC is mentioned."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Concrete code→simulator feedback→repair→numeric solver delegation fits main/C25.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "code_policy_trial_revision",
+        "sub": "R05",
+        "version": "board-induced-2026-10-21",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "condition": "Between-trial whole-policy code revision and model-free deployment",
+            "status": "met",
+            "evidence_ids": [
+              "E001",
+              "E006"
+            ]
+          },
+          {
+            "condition": "One-shot vs rewrite trajectory and classical alternative",
+            "status": "partial",
+            "evidence_ids": [
+              "E006",
+              "E014"
+            ]
+          },
+          {
+            "condition": "Independent test and real robustness",
+            "status": "unmet",
+            "evidence_ids": [
+              "E004",
+              "E007",
+              "E011",
+              "E012"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E005",
+          "E006"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "code_policy_trial_revision",
+        "sub": "R05"
+      },
+      "operation_correspondence": "Agent emits explicit controller; simulator validates/rejects behavior and numeric MPC executes; repaired source persists between trials.",
+      "necessary_conditions_and_differences": "UnlikeK105 model stays out at deployment; unlikeK401 policy itself, not agent harness, is edited; validation is empirical simulation, not sound general proof.",
+      "evidence_ids": [
+        "E001",
+        "E005",
+        "E006"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "Feedback/MPC revision causes gain",
+      "applicable": true,
+      "status": "partial",
+      "reason": "One-shot→overnight→MPC compares versions but changes search budget, mechanics and diagnosis together; no channel-isolating ablation.",
+      "evidence_ids": [
+        "E006",
+        "E007"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "Success-rate comparisons",
+      "applicable": true,
+      "status": "partial",
+      "reason": "200/650 fixed-state panels and failure explanation; no independent coding-agent replicates, CIs or paired discordant-state statistics.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E012"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E17",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "Retained code/curriculum generalization",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Recurring all-letter exams and final0–24seeds; construction-disjoint test letters/seeds not established.",
+      "evidence_ids": [
+        "E005",
+        "E007",
+        "E012"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "Physical robot transfer",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Only simulated Franka/UR5 are evaluated; their counted trials do not establish real hardware.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E07",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice (reading-derived, not actual review)",
+      "source_refs": [
+        "patterns/main/code_policy_trial_revision.md#Reviewer expectations"
+      ],
+      "applies_when": "End-to-end VLA superiority",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Released200-demo diffusion and strong classical adapter included; conclusion confined to this benchmark, not broad tabletopVLA superiority.",
+      "evidence_ids": [
+        "E013",
+        "E014"
+      ],
+      "score_item": "E.causality"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "100% Push-T,46% fewer steps than best200-demo diffusion.",
+      "setting": "CanonicalgymPushT; state and calibrated RGB variants.",
+      "baseline/control": "Released LeRobot checkpoint62.5%,223.7steps vs state100%,120.1; vision97.2%,170.4.",
+      "selection_vs_test": "200 fixed evaluation seeds; development separation not specified; state controller receives privileged pose, vision uses palette/templates.",
+      "result/denominator": "Claimed200 seeds;97.2% binaryvisionSR incompatible with exact200 denominator;95%coverage threshold.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E013"
+      ],
+      "counterevidence": [
+        "Headline combines best state result with visuomotor baseline; no equal-information/total-search budget."
+      ],
+      "allowed_conclusion": "Author reports high canonical simulated pushing; state100% is not raw-image100%; denominator discrepancy prevents fully trusted exact vision count."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Self-generated curriculum produces99.4% Alphabet and cross-embodiment portability.",
+      "setting": "26letters×25episodes650; ≥90%coverage within720steps; simulatedarmvision randomgoals.",
+      "baseline/control": "Refined classicaladapter97.2%; MPCstate99.4%,vision99.2%; Frankavision89.8%,UR5vision98.5%.",
+      "selection_vs_test": "All-letter exams repeatedly used during revision; finalseeds0–24; ported bodies part of construction, not proven unseen.",
+      "result/denominator": "650 per Table2 row; no independent search replicates; mean steps/pushes/coverage disclosed.",
+      "evidence_ids": [
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E011",
+        "E012",
+        "E014"
+      ],
+      "counterevidence": [
+        "No construction-disjoint retention; rendering/geometry assumptions and221hhuman-interacted development."
+      ],
+      "allowed_conclusion": "Procedural solution can be adapted to multiple simulated embodiments; not evidence of autonomous retained generalization to unseen hardware."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported closed-loop simulated planar pushing and adapted two-arm execution, with concrete successive controller improvements and a classical baseline. Search-test disjointness, equal-information diffusion comparison and hardware transfer are not established;200-trial vision percentage is inconsistent.",
+    "unresolved": [
+      "Table1vision denominator",
+      "Visibility mode by row",
+      "Independent search/evaluation and agent-run variance"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Specific planar manipulation/design-effort bottleneck and classical lineage, but no independent closest-source verification or broad frontier gap.",
+      "evidence_ids": [
+        "E005",
+        "E014"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+      ]
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete geometry/MPC/perception/adaptation explains operation; privileged pose, calibrated render and large search budget restrict problem-fit.",
+      "evidence_ids": [
+        "E001",
+        "E004",
+        "E011"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+      ]
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Code repair, persistence, runtime program and environment protocol reconstructible; promotion/visibility and independent-retention boundaries incomplete.",
+      "evidence_ids": [
+        "E001",
+        "E006",
+        "E011",
+        "E012"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Success criteria and many seeds supplied;200-seed97.2% inconsistency and row visibility prevent high-trust complete measurement.",
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E011",
+          "E012",
+          "E013"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+        ]
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Diffusion and refined classical controls useful, but information, search effort and accumulated algorithm changes confounded.",
+        "evidence_ids": [
+          "E006",
+          "E010",
+          "E013",
+          "E014"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+        ]
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Recurring exams/developed letters and simulated body ports do not establish untouched construction-disjoint gain.",
+        "evidence_ids": [
+          "E005",
+          "E007",
+          "E008",
+          "E012"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+        ]
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Substantial seeded counts and bounded-time failures, but no CI, independent agent repeats or paired effect uncertainty.",
+        "evidence_ids": [
+          "E002",
+          "E008",
+          "E012"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+        ]
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "9.5M outputtokens,$1500–2000,221hours disclosed; input/simulator/human budget and equal total-compute baseline absent.",
+        "evidence_ids": [
+          "E009",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "M1 fullAbstract/§§1–7, all tables/figures, completeAppendix7.1 geometry/dynamics/visibility/seeds"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": 62.5,
+    "display": 62.5,
+    "lower": 62.5,
+    "upper": 62.5,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Full material including appendix reviewed independently; scoped simulated result, no claim of our replication."
+}

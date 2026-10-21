@@ -1,0 +1,895 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a2",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2503.10069",
+  "paper_id": "2503.10069",
+  "title": "SmartWay: Enhanced Waypoint Prediction and Backtracking for Zero-Shot Vision-and-Language Navigation",
+  "version": "2503.10069v2",
+  "claim_type": "system_method",
+  "central_claim": "SmartWay 以增强的 waypoint 预测器（DINOv2、掩码交叉注意力 RGB-D 融合、占据感知损失）与带历史推理和回退动作的 GPT-4o 导航器组成零样本 VLN-CE 框架：R2R-CE 零样本 SOTA（SR 29、SPL 22.46），可缩小与监督方法差距，并在 Turtlebot 4 真机上验证。",
+  "claim_scope": "R2R-CE Open-Nav 100 episodes；真机 25 条作者定义指令。"
+ },
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T18:20:17Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144). Domain card R07 cites this paper (source-circular): structural reference only. Table V check marks absent in material, so row-to-component mapping inferred from prose; text/table inconsistency recorded. Hash conventions computed by this worker as file sha256 (rubric=SCORE_SPEC.md; rs_manifest=reference MANIFEST.tsv; domain_cards=research/patterns/taxonomy.json; expectations=sha256 of sorted concatenation of patterns/main/*.md); run manifest.json not read (blind boundary), controller should reconcile. session_id not obtainable by subagent: null."
+ },
+ "materials": [
+  {
+   "material_id": "M-2503.10069",
+   "url": "https://arxiv.org/html/2503.10069v2",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.10069.txt",
+   "sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Work",
+    "III Preliminaries",
+    "IV Method A-B",
+    "V Experiments A-D (Tables I-V)",
+    "VI Conclusion"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Abstract",
+   "quote": "Experiments on R2R-CE and MP3D benchmarks show our method achieves state-of-the-art (SOTA) performance in zero-shot settings, demonstrating competitive results compared to fully supervised methods.",
+   "support_explanation": "作者中心主张。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Abstract",
+   "quote": "current waypoint predictors struggle with spatial awareness, while navigators lack historical reasoning and backtracking capabilities, limiting adaptability",
+   "support_explanation": "作者 gap。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec I",
+   "quote": "visual perception is abstracted by converting RGB images into textual descriptions by Vision-Language Models as an intermediary representation, resulting in an indirect and incomplete understanding of the visual environment",
+   "support_explanation": "对 Open-Nav 的批评。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec I",
+   "quote": "the waypoint predictor lacks explicit environmental constraints, making it susceptible to predicting waypoints that lead to obstacles or suboptimal paths",
+   "support_explanation": "waypoint 预测器 gap。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec IV-A3",
+   "quote": "we introduce an occupancy-aware loss incorporating depth-based constraints, ensuring waypoints are placed in navigable regions and improving navigation ability",
+   "support_explanation": "占据感知损失。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec IV-B1",
+   "quote": "it processes all relevant prompts, including task description, instruction, history, observations, and action options, and outputs precisely one selected action",
+   "support_explanation": "单专家 MLLM 导航器：模型只在候选动作中选一个。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec IV-B2",
+   "quote": "Move back to last position in an opposite direction",
+   "support_explanation": "回退作为一个额外动作选项。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec VI",
+   "quote": "extend our backtracking mechanism to support multi-step undo operations",
+   "support_explanation": "当前回退为单步撤销（作者列为未来工作）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "following the evaluation framework of Open-Nav [ 16 ] across 100 episodes to ensure direct comparability",
+   "support_explanation": "R2R-CE 仿真评测为 100 episodes。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "the MLLM navigator is deployed via the gpt-4o-2024-08-06 API, which serves as our zero-shot inference backend",
+   "support_explanation": "导航器后端：GPT-4o 固定版本。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Table I",
+   "quote": "MapGPT-CE-GPT4o [ 30 ] 12.63 8.16 21 7 5.04 DiscussNav-GPT4 [ 13 ] 6.27 7.77 15 11 10.51 Open-Nav-Llama3.1 [ 16 ] 8.07 7.25 23 16 12.90 Open-Nav-GPT4 [ 16 ] 7.68 6.70 23 19 16.10 Ours 13.09 7.01 51 29 22.46",
+   "support_explanation": "零样本比较：同后端 MapGPT-CE-GPT4o SR 7；Open-Nav 用 GPT-4/Llama；OSR 51 vs SR 29。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Table II",
+   "quote": "RecBERT [ 4 ] 20 4.36 Ours (w/o Backtrack) 24 3.28 Ours (with Backtrack) 36 3.06",
+   "support_explanation": "真机 25 条指令：SR 20/24/36。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "we define 25 distinct navigation instructions that incorporate open-vocabulary landmarks",
+   "support_explanation": "真机指令集由作者定义（遵循 DiscussNav 协议）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "a stricter 2-meter threshold is applied for real-world scenarios",
+   "support_explanation": "真机成功判据 2 m。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Table V",
+   "quote": "1 ✓ ✓ 10.51 7.61 36 24 18.20 0.067 2 ✓ ✓ 12.75 7.11 53 28 21.22 0.044 3 ✓ ✓ 15.32 6.73 52 26 17.61 0.042 4 ✓ ✓ 13.09 7.01 51 29 22.46 0.033",
+   "support_explanation": "导航器消融 2x2；复选标记在材料中缺失，列归属须由正文推断。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-D",
+   "quote": "When only the enhanced waypoint predictor is introduced (#3), NE is decreased to 7.11, SR is increased to 26%",
+   "support_explanation": "正文把 NE 7.11 归给 #3，而表中 #3 NE 为 6.73、7.11 属于 #2：文字与表不一致。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Table IV",
+   "quote": "ResNet-50 64 ✗ ✗ 1.40 79.86 1.07 2.00 128 ✗ ✗ 1.41 79.28 1.08 2.04 Dinov2 128 ✗ ✗ 1.42 80.45 1.07 2.01 128 ✓ ✗ 1.47 82.15 1.09 2.09 128 ✓ ✓ 1.48 87.26 1.03 1.96",
+   "support_explanation": "waypoint 预测器累积消融：%Open 主要提升来自占据损失。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "The waypoint predictor is a learning-based module.",
+   "support_explanation": "waypoint 预测器为训练模块，导航器零样本。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-C",
+   "quote": "While pre-trained methods can offer advantages in simulated settings, these gains do not always translate to real-world tasks.",
+   "support_explanation": "对真机上监督基线表现的解释（RecBERT 的真机训练/适配未说明）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "All methods are executed in real-time on a laptop equipped with an NVIDIA RTX 3080 Mobile GPU (16 GB VRAM).",
+   "support_explanation": "仅披露硬件，无 API 调用/延迟/成本。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-B",
+   "quote": "Supervised methods benefiting from domain-specific training, achieve higher success rates (52% and 60% respectively)",
+   "support_explanation": "作者承认监督方法 SR 更高。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V (negative)",
+   "quote": null,
+   "support_explanation": "已查 Sec V-A 至 V-D：没有重复运行/方差/CI；没有关于提示词与超参在哪些 episode 上开发的说明；没有失败分解（OSR 51 与 SR 29 的差未讨论）。",
+   "kind": "our_inference"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-D (negative)",
+   "quote": null,
+   "support_explanation": "已查 Table IV/V 与正文：History-aware 单专家提示、多尺度转向、RAM 物体标注、多步计划各自无消融；只有预测器 x 回退的 2x2。",
+   "kind": "our_inference"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "Our method relies exclusively on the camera for perception, without any contribution from external mapping modules.",
+   "support_explanation": "真机信息条件。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Sec V-A",
+   "quote": "we train the model for 300 epochs",
+   "support_explanation": "预测器训练规模；batch 128、λ_occ=0.5 见同节。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M-2503.10069",
+   "material_sha256": "5f58e61392a1796d6a79f6f5806dc428525d10b87352fd6733e8678bf1479028",
+   "locator": "Abstract",
+   "quote": "Real-world validation on Turtlebot 4 further highlights its adaptability.",
+   "support_explanation": "真机主张。",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "waypoint 候选生成器（ResNet-50 RGB + 线性融合 → DINOv2 + 掩码交叉注意力 + 占据感知损失）",
+   "information": "12 视角全景 RGB-D；训练时用深度导出的 120x12 占据掩码；部署时只用相机",
+   "operation": "L_total = L_vis + λ_occ·L_occ，λ_occ=0.5；NMS 取 top-K<=5 个路点",
+   "output": "候选路点及其视图",
+   "conditions": "MP3D 训练；Habitat 仿真/ Turtlebot 全景",
+   "feedback": "无任务级反馈",
+   "selection_rule/data": "监督训练 300 epochs（学习模块）",
+   "persistence": "训练后权重",
+   "later_use": "部署于零样本导航器",
+   "claimed_effect": "%Open 79.86→87.26，d_h 2.00→1.96",
+   "failure_boundary": "|Δ| 无改善；评测指标与训练约束同源",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E017",
+    "E018",
+    "E025"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "MLLM 导航器（GPT-4o）的提示与动作空间：历史 + 多尺度转向 + RAM 物体标签 + 多步计划 + 回退动作",
+   "information": "指令、候选路点图像、动作选项、历史记录（含场景描述）；模型输出一个动作+一段 thought",
+   "operation": "从 harness 产生的候选里选一个或回退一步；计划随步骤更新",
+   "output": "单步动作",
+   "conditions": "单步撤销；零样本；固定 API 版本",
+   "feedback": "观测→历史→下一步提示",
+   "selection_rule/data": "not_applicable：无选择集/训练",
+   "persistence": "episode 内历史",
+   "later_use": "同 episode",
+   "claimed_effect": "回退使真机 SR 24→36，仿真碰撞下降",
+   "failure_boundary": "仅单步回退；历史/提示组件未消融",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E008",
+    "E010",
+    "E012",
+    "E023"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "VLN-CE 两阶段框架中，waypoint 预测器缺空间感知/环境约束，导航器缺历史推理与回退，且已有 LLM 导航器把视觉转成文字造成信息损失。",
+  "checked_gap": "gap 具体且有来源和数字支撑（Open-Nav SR 19、RGB 在预测器中贡献小的引文），最近邻 (Open-Nav、MapGPT、DiscussNav、ETPNav) 点名；但‘历史/文字转换损失’是推断，没有失败归因实验。",
+  "lineage/closest_adjacent": [
+   {
+    "name": "Open-Nav ([16])",
+    "source_version": "论文内引用，数字取自其报告，评测框架共享",
+    "note": "开源 LLM 零样本 VLN-CE；VLM 转文字。"
+   },
+   {
+    "name": "MapGPT / DiscussNav / NavGPT",
+    "source_version": "论文内引用",
+    "note": "离散环境；多专家或拓扑图。"
+   },
+   {
+    "name": "Hong et al. waypoint predictor ([4]) / ETPNav",
+    "source_version": "论文内引用",
+    "note": "waypoint 预测器基线与 SOTA。"
+   }
+  ],
+  "residue": "单步撤销、监督方法仍明显更强 (SR 52/60 vs 29)、OSR-SR 差 22 点（停止问题）。",
+  "stakes": "零样本方法在 R2R-CE 上 SR 仅 7-19，真机上监督模型迁移差。",
+  "method_response": "更干净的候选 (占据约束) + 让强 MLLM 看图并能回退。",
+  "remaining_gap": "停止/误停、多步回退、成本、历史组件贡献。",
+  "evidence_ids": [
+   "E002",
+   "E003",
+   "E004",
+   "E008",
+   "E021",
+   "E022"
+  ],
+  "unresolved": [
+   "文字转换损失是否是主要瓶颈"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "structural_prior_encoding"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "Step1 责任边界：预测器出候选，MLLM 选择，确定性执行——执行",
+     "Step2 类型化中间物：候选路点图像+动作选项列表——执行",
+     "Step3 以验证输出闭环：回退由模型自身判断，无外部检查——partial",
+     "Step4 消融证明承重机制：预测器 x 回退 2x2——partial",
+     "Step5 代价——缺失"
+    ],
+    "success_failure_checks": [
+     "成功(类型化交接)：met",
+     "成功(承重消融)：partial，差异在噪声内且表文不一致",
+     "失败(现成部件拼装)：部分触发——GPT-4o、DINOv2、RAM、现有预测器框架",
+     "失败(未报代价)：触发"
+    ],
+    "evidence_ids": [
+     "E006",
+     "E007",
+     "E015",
+     "E020"
+    ],
+    "reason": "操作为预测器→候选→MLLM 选择→执行器的分解；验证闭环（回退）由模型自判，故 partial。"
+   },
+   {
+    "main_id": "structural_prior_encoding",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "把已知物理约束(占据/障碍)编码进训练目标——执行(L_occ)",
+     "构造保证——缺失：软损失，仅提高 %Open"
+    ],
+    "success_failure_checks": [
+     "成功(隔离结构贡献)：partial——Table IV 中占据损失使 %Open 82.15→87.26",
+     "失败(增益边缘)：S_way 仅 1.40→1.48"
+    ],
+    "evidence_ids": [
+     "E005",
+     "E017"
+    ],
+    "reason": "占据感知损失把深度导出的可通行结构写入学习目标，不同于路由；C13/C16/C20 子卡（关系拓扑/对称群/前向腐蚀过程）均不适配，故子卡 null。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "两张主卡分别对应预测器约束与导航器分解。",
+  "executes_pattern": "partial：候选-选择分解与占据约束落实，验证闭环与保证性不足。",
+  "resolves_problem": "partial：%Open 提升与回退的方向性结果支持，但差异小且统计不足。"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "R07",
+    "version": "cards@taxonomy-hash-daf38e57",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "cond": "harness 把几何缩成候选列表、模型只选择，含显式回退",
+      "status": "met",
+      "note": "预测器 K<=5 路点 + 回退选项"
+     },
+     {
+      "cond": "候选通道在模型固定下被消融",
+      "status": "partial",
+      "note": "预测器 x 回退 2x2，GPT-4o 固定"
+     },
+     {
+      "cond": "单次 100 episode、无方差",
+      "status": "unmet",
+      "note": "失败条件命中"
+     }
+    ],
+    "evidence_ids": [
+     "E006",
+     "E007",
+     "E015",
+     "E022"
+    ],
+    "source_circular": true,
+    "circularity_note": "R07 的来源之一即本论文(2503.10069#board)；匹配仅作结构参照，不作评分的独立证据。"
+   },
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": "K301",
+    "version": "cards@taxonomy-hash-daf38e57",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "cond": "有界 within-episode 历史",
+      "status": "partial",
+      "note": "‘简洁动作史+场景描述’，无检索；历史组件未消融"
+     }
+    ],
+    "evidence_ids": [
+     "E006",
+     "E023"
+    ]
+   },
+   {
+    "main": "harness_effect_evaluation",
+    "sub": "K802",
+    "version": "cards@taxonomy-hash-daf38e57",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "cond": "模型固定下一次切换一个组件",
+      "status": "partial",
+      "note": "预测器与回退两因子；其它组件未切换"
+     },
+     {
+      "cond": "重复运行与配对统计",
+      "status": "unmet",
+      "note": "单次"
+     }
+    ],
+    "evidence_ids": [
+     "E015",
+     "E022",
+     "E023"
+    ]
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain_namespace": "embodied",
+   "domain_main": "observe_act_interface",
+   "domain_sub": "R07",
+   "operation_correspondence": "RS: 学习模型输出类型化选择，确定性模块执行。领域: harness 将几何缩为候选，MLLM 只选择并可回退。",
+   "necessary_conditions_or_differences": "R07 关注候选/建议通道是否在模型固定下消融以及设置不在评测集上调；本文只消融预测器与回退，且单次运行；R07 卡来源含本文，仅结构参照。",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E015"
+   ]
+  },
+  {
+   "rs_main": "structural_prior_encoding",
+   "rs_sub": null,
+   "domain_namespace": "embodied",
+   "domain_main": "observe_act_interface",
+   "domain_sub": "R07",
+   "operation_correspondence": "占据约束写入预测器训练，使 harness 候选更常落在可通行区域，服务于‘模型只选择’的前提。",
+   "necessary_conditions_or_differences": "只是提高候选质量，无保证；与 R07 的候选质量单独度量一致，但领域卡并不要求该训练操作。",
+   "evidence_ids": [
+    "E005",
+    "E017"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "声称 harness 而非模型提高成功",
+   "applicable": true,
+   "status": "partial",
+   "reason": "同后端 MapGPT-CE-GPT4o 为 SR 7；Open-Nav 用 GPT-4/Llama3.1，后端不同；未用同模型复跑已发表零样本工作流。",
+   "evidence_ids": [
+    "E011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "归因具体组件",
+   "applicable": true,
+   "status": "partial",
+   "reason": "预测器 x 回退 2x2；历史、RAM、多尺度转向、多步计划无消融；预测器消融为累积。",
+   "evidence_ids": [
+    "E015",
+    "E017",
+    "E023"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "组件普遍有效",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "导航器仅 GPT-4o 一个后端。",
+   "evidence_ids": [
+    "E010"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "成功率比较",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "单次 100 episode；SR 差 3-5 点即 3-5 个 episode；无 CI。",
+   "evidence_ids": [
+    "E009",
+    "E015",
+    "E022"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "声称实用",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无 API 调用数/token/延迟/美元；仅硬件披露。",
+   "evidence_ids": [
+    "E020"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E06",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "VLN-CE 零样本 harness 声称",
+   "applicable": true,
+   "status": "partial",
+   "reason": "报告 SR/SPL/OSR/NE，声明 Open-Nav 100 episode 框架；同表混放全量监督基线并以‘缩小差距’表述。",
+   "evidence_ids": [
+    "E009",
+    "E011",
+    "E021"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E08",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "前沿模型 harness 的基准声称",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "未说明提示/超参的开发 episode，也未讨论 GPT-4o 的预训练污染。",
+   "evidence_ids": [
+    "E022"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "导航/停止声明",
+   "applicable": true,
+   "status": "partial",
+   "reason": "报告 OSR 与碰撞，但未讨论 OSR 51 对 SR 29 的 22 点停止缺口，也无失败分解。",
+   "evidence_ids": [
+    "E011",
+    "E015",
+    "E022"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "声称迁移到真机",
+   "applicable": true,
+   "status": "partial",
+   "reason": "25 条指令、2 m 判据、SR/NE，有基线；单次运行，指令集由作者定义，环境单一。",
+   "evidence_ids": [
+    "E012",
+    "E013",
+    "E014"
+   ],
+   "score_item": "E.measurement"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "R2R-CE 零样本 SOTA：SR 29、SPL 22.46、OSR 51",
+   "setting": "Open-Nav 100 episodes, Habitat",
+   "baseline/control": "Open-Nav-GPT4 SR 19；MapGPT-CE-GPT4o SR 7 (同后端)；数字取自 Open-Nav 框架",
+   "selection_vs_test": "提示/超参开发集未说明",
+   "result/denominator": "29/100",
+   "evidence_ids": [
+    "E009",
+    "E011",
+    "E022"
+   ],
+   "counterevidence": [
+    "E021",
+    "E022"
+   ],
+   "allowed_conclusion": "在该 100 episode 上高于所列零样本方法（部分后端不同）；与监督方法 52-60 差距仍大。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "增强预测器提高路点质量",
+   "setting": "MP3D val-unseen，标准协议",
+   "baseline/control": "RecBERT 等预测器",
+   "selection_vs_test": "标准划分",
+   "result/denominator": "%Open 79.86→87.26；S_way 1.40→1.48；|Δ| 1.41 vs 基线 1.37",
+   "evidence_ids": [
+    "E017",
+    "E005"
+   ],
+   "counterevidence": [
+    "E017"
+   ],
+   "allowed_conclusion": "%Open 提升主要来自占据损失，该损失与该指标同源；S_way 增益小；|Δ| 无改善。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "回退机制减少复合错误",
+   "setting": "仿真 Table V；真机 Table II",
+   "baseline/control": "同导航器无回退",
+   "selection_vs_test": "同评测集",
+   "result/denominator": "仿真 SR 24→28 / 26→29；碰撞 0.067→0.044 / 0.042→0.033；真机 SR 24→36 (6→9 /25)",
+   "evidence_ids": [
+    "E015",
+    "E012",
+    "E016"
+   ],
+   "counterevidence": [
+    "E016",
+    "E022"
+   ],
+   "allowed_conclusion": "方向一致但幅度仅数个 episode；表文不一致需谨慎。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "真机优于学习式基线",
+   "setting": "Turtlebot 4，25 条指令",
+   "baseline/control": "RecBERT（预训练，真机适配未说明）",
+   "selection_vs_test": "指令集由作者定义",
+   "result/denominator": "SR 36 vs 20 (9 vs 5 /25)；NE 3.06 vs 4.36",
+   "evidence_ids": [
+    "E012",
+    "E013",
+    "E014",
+    "E019"
+   ],
+   "counterevidence": [
+    "E019"
+   ],
+   "allowed_conclusion": "该 25 条指令上更高；样本小，指令偏向开放词汇地标。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "transfer",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在 R2R-CE Open-Nav 100 episodes 上，GPT-4o+增强预测器+回退的零样本框架 SR 29/SPL 22.46，高于所列零样本方法；真机 25 条指令 SR 36 vs 无回退 24 vs RecBERT 20；占据损失使 MP3D 上落在空地的路点比例升至 87.26%。",
+  "unresolved": [
+   "差异均仅数个 episode，无方差",
+   "Table V 表文不一致",
+   "历史/RAM/转向等组件未消融",
+   "evidence_level=transfer 依赖 25 次真机单次试验"
+  ],
+  "not_claimed": "未复现；全部为作者报告。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "预测器缺环境约束、导航器缺历史/回退、文字转换损失视觉均为具体问题并有最近邻和数字（Open-Nav SR 19）支撑；停止缺口与单步撤销被作者承认；文字转换是主要瓶颈这一推断未单独检验。",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E004",
+    "E008",
+    "E021"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "占据损失直接作用于‘路点落入障碍’，回退选项直接作用于‘不可逆错误’，二者各有可检验预测（%Open、碰撞、OSR）；历史提示与 RAM 的作用机理说明薄。",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E007",
+    "E017"
+   ],
+   "counterevidence_ids": [
+    "E023"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "损失公式、掩码构造、超参、GPT-4o 版本、动作空间和回退选项可重建；提示全文在图中、历史格式与候选数细节缺失；单步撤销的边界被声明。",
+   "evidence_ids": [
+    "E005",
+    "E010",
+    "E007",
+    "E025",
+    "E008"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "仿真 100 episodes 与真机 25 条指令均有分母、环境/2 m 判据；预测器指标标准。缺口：Table V 正文与表数字不一致、复选标记缺失，使消融读数不稳；真机基线适配未说明。",
+    "evidence_ids": [
+     "E009",
+     "E012",
+     "E014",
+     "E015"
+    ],
+    "counterevidence_ids": [
+     "E016"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "预测器 x 回退 2x2 与真机有/无回退给出方向一致证据，同后端 MapGPT 基线可比；但单次、差异数个 episode，历史/RAM/转向无消融，对 Open-Nav 比较后端不同。",
+    "evidence_ids": [
+     "E015",
+     "E012",
+     "E011"
+    ],
+    "counterevidence_ids": [
+     "E016",
+     "E023"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "预测器 MP3D val-unseen 标准协议、导航器零样本；真机为未见环境和新本体 (Turtlebot 4) 且增益保留 (36 vs 24)。缺口：提示/超参开发集未说明、真机指令由作者定义且环境单一、GPT-4o 污染未讨论。",
+    "evidence_ids": [
+     "E009",
+     "E012",
+     "E013",
+     "E022"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "单次运行、无 CI/方差；差异为 3-5 个 episode；OSR 51 vs SR 29 的停止缺口未分解。v2：无重复且无失败分解 <=1。",
+    "evidence_ids": [
+     "E022",
+     "E011"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "仅披露笔记本 GPU；无 GPT-4o 调用数、token、延迟或成本；也无预测器训练成本之外的预算对齐。",
+    "evidence_ids": [
+     "E020",
+     "E025"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": 67.5,
+  "display": 67.5,
+  "lower": 67.5,
+  "upper": 67.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "完整 HTML 全文含全部方法与实验；无独立附录；Fig 3 提示文本仅图中。"
+ },
+ "short_rationale": "SmartWay：占据感知 waypoint 预测器 + GPT-4o 带回退导航器。R2R-CE Open-Nav 100 episodes SR 29，真机 25 条指令 SR 36 vs 24 vs 20；2x2 消融方向一致，但全部为单次、差数个 episode，Table V 表文不一致，历史/RAM 无消融，成本未报。R07 卡来源含本文，仅作结构参照。claim_support=scoped，evidence_level=transfer。"
+}

@@ -1,0 +1,1417 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a2",
+ "seat": "aggregate",
+ "phase": "calibration-holdout-round2",
+ "paper": {
+  "paper_key": "2609.39915",
+  "paper_id": "2609.39915",
+  "title": "NavHarness: Adaptive Goals for Agentic Vision-Language Navigation",
+  "version": "2609.39915v1",
+  "claim_type": "system_method",
+  "central_claim": "An agentic VLN harness that couples adaptive local goals with goal-specific completion verification (Goal, Verify, Visuomotor agents) keeps execution consistent with the route and, with verified-completion memory compression, limits context growth; with the same backbone it beats Codex CLI on R2R-CE/RxR-CE (GPT-6-Astra SR 79.0/82.5 vs 74.0/76.3) and reaches 83.3% SR / 1.51 m NE over 24 real-world trials.",
+  "claim_scope_note": "The zero-shot superiority over trained navigation foundation models is a cross-cohort comparison the authors themselves call context, not a matched ranking."
+ },
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + calibration anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": {
+   "sol": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+   "son55": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+   "note": "seats used different hash conventions for the embedded expectations; controller to reconcile"
+  },
+  "model_type": "fable (overlay ANTHROPIC_DEFAULT_FABLE_MODEL)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_note": "not exposed to the aggregate subagent; not probed",
+  "timestamp": "2026-10-21T18:33:55.963493+00:00",
+  "base_seat_for_descriptive_fields": "son55",
+  "read_boundary": "read both a2 seat records, conflicts.json (a2), anchors.md; did not read any a1 attempt or aggregate/a1"
+ },
+ "materials": [
+  {
+   "material_id": "M-2609.39915",
+   "url": "https://arxiv.org/html/2609.39915v1",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2609.39915.txt",
+   "sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 NavHarness 3.1-3.5",
+    "4 Experiments 4.1-4.5 (Tables 1-3, Figs 3-4)",
+    "5 Limitations and Conclusion",
+    "Appendix A",
+    "Appendix B",
+    "Appendix C (Algorithm 1, Eq 5-13, prompts)",
+    "Appendix D",
+    "Appendix E",
+    "Appendix F"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "sha256_verified": true
+  }
+ ],
+ "preliminary_judgment": "Written before opening seat totals. Operation: a frozen frontier backbone is split into a Goal agent (local goal + verification question), a Visuomotor agent (primitive batches), a Verify agent (VLM judgment of the question from the latest observation; routes continue/revise/advance/stop) and a Memory agent (summarizes completed segments at verified boundaries). Controlled comparison: Codex CLI vs NavHarness with the same backbone, episodes and observation/action interface on 100 R2R-CE (Open-Nav subset) and 100 RxR-CE episodes, plus a three-backbone R2R ablation; all comparisons improve by 4-6 SR points. Goal vs verification is not separated (authors say so). Several SRs reported on 100 episodes are non-integer (62.6, 76.3, 82.5), so the number of runs or the effective denominator is undisclosed; no CI. Token budgets are not matched (RxR Sol Off 4298k vs Codex 2028k tokens). Verifier accuracy is never audited; STOP is not gated by it; final success is computed by the benchmark evaluator. Real world: Go2 quadruped, 8 routes x 3 = 24 trials, 83.3% (20/24), but no success threshold, no per-route rates, baselines are 'supplied aggregates'; movement budget value not stated. Initial view: credible same-backbone bundle gain with careful token accounting; isolation, statistics and real-world criteria weak.",
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "3.2",
+   "quote": "The goal g_{k} specifies a desired navigation outcome, while q_{k} identifies the visual evidence or spatial relation that would support its completion.",
+   "support_explanation": "Explicit paired goal/completion question drives multi-step actor.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "3.3",
+   "quote": "The Verify Agent produces qualitative feedback p_{t+1} that answers q_{k} , identifies supporting observational evidence, and reports unmet or uncertain conditions.",
+   "support_explanation": "Model-based qualitative verification, not independent environment truth.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "3.5",
+   "quote": "After compression, the updated memory replaces the detailed completed segment in the shared context.",
+   "support_explanation": "Persisted memory within episode; active unresolved state stays separate.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.4",
+   "quote": "This framework-level comparison does not isolate goal generation from verification.",
+   "support_explanation": "Bundle comparison does not establish separate goal/verifier effects.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.3, Table 2",
+   "quote": "GPT-6-Astra Codex CLI Native 74.0 62.5",
+   "support_explanation": "Fixed-backbone R2R baseline for framework effect.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.3, Table 2",
+   "quote": "NavHarness Off 79.0 66.6",
+   "support_explanation": "R2R framework without memory.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.3, Table 2",
+   "quote": "NavHarness Goal 77.0 65.6",
+   "support_explanation": "Memory compresses at performance cost on stronger model.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.3",
+   "quote": "GPT-6-Astra saves 5.52% and 4.05%, with SR decreases of 2 and 1.5 points and an RxR-CE SPL decline from 64.7 to 58.3",
+   "support_explanation": "Central efficiency tradeoff not uniformly beneficial.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.5",
+   "quote": "Each route is tested three times (24 trials).",
+   "support_explanation": "Physical denominator and repeats are stated but route-level results/success criteria not given.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix C.4",
+   "quote": "Verification feedback supports the stop decision, but the inspected action interface does not impose an additional mechanical verification gate on STOP.",
+   "support_explanation": "Do not describe semantic verifier as hard external STOP gate.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E011",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix D",
+   "quote": "We use the benchmark evaluators to compute navigation metrics.",
+   "support_explanation": "Simulation endpoints independently scored; internal verifier not audited against labels.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E012",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix D",
+   "quote": "Efficiency averages include successful and failed episodes with complete usage records and exclude incomplete records.",
+   "support_explanation": "Measured token cost includes failures but completeness bias not quantified.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E013",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix F",
+   "quote": "Goal and verification annotations are scene-aligned explanatory reconstructions, rather than verbatim logged outputs",
+   "support_explanation": "Visual cases do not independently verify causal mechanism.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E014",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "5",
+   "quote": "obstacles outside its field of view can remain unobserved, leading to unsafe movements of the quadruped robot.",
+   "support_explanation": "Real-world safety limit expressly acknowledged.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E015",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix B",
+   "quote": "The model does not receive the evaluator’s reference path, success label, or distance to the destination.",
+   "support_explanation": "No evaluator privilege channel during navigation.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E016",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.1",
+   "quote": "We evaluate 100 episodes each on R2R-CE and RxR-CE",
+   "support_explanation": "Simulation cohort denominator; repeat counts not stated.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E017",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "4.4",
+   "quote": "using Qwen-3.6-plus, GPT-5.6-Sol, and GPT-6-Astra",
+   "support_explanation": "Framework compared across three backbones.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E018",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix C",
+   "quote": "The prompt templates summarize the instructions provided to each agent and are edited for readability.",
+   "support_explanation": "Prompts/state transitions detailed but exact production prompts not verbatim.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 1",
+   "quote": "In real-world evaluation, NavHarness achieves 83.3% SR and 1.51 m navigation error across eight challenging routes, each evaluated three times.",
+   "support_explanation": "真机主张。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 1",
+   "quote": "With GPT-6-Astra as backbone, NavHarness achieves success rates (SR) of 79.0% on R2R-CE and 82.5% on RxR-CE, compared with 74.0% and 76.3%, respectively, for Codex CLI using the same backbone.",
+   "support_explanation": "同基座对 Codex CLI 的中心数字。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 1",
+   "quote": "locally plausible actions do not ensure consistency with the intended route",
+   "support_explanation": "gap 1：局部合理动作不保证路线一致。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 1",
+   "quote": "accumulating interaction history increases inference overhead",
+   "support_explanation": "gap 2：历史累积提高推理开销。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 3.2",
+   "quote": "The Goal Agent generates one local goal at a time, grounding it in the encountered situation",
+   "support_explanation": "自适应局部目标 + 验证问题。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 3.3",
+   "quote": "The Verify Agent assesses goal completion after each interaction step, separating outcome assessment from action generation",
+   "support_explanation": "目标特定完成验证（VLM 判断）。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 3.5",
+   "quote": "the Memory Agent compresses historical context at verified goal-completion boundaries",
+   "support_explanation": "以已验证完成为压缩边界。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix C.4",
+   "quote": "the inspected action interface does not impose an additional mechanical verification gate on STOP",
+   "support_explanation": "STOP 无机械门控；验证只作为模型可参考的反馈。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 4.1",
+   "quote": "Codex CLI and NavHarness share backbones, episodes, and observation/action interfaces",
+   "support_explanation": "基线对照设计。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 4.1",
+   "quote": "We evaluate 100 episodes each on R2R-CE and RxR-CE",
+   "support_explanation": "分母：每基准 100 episodes。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Table 1",
+   "quote": "Codex CLI / GPT-6-Astra M Zero-shot 4.49 75.0 74.0 62.5 3.14 76.3 60.0 71.9 NavHarness / GPT-5.6-Sol M Zero-shot 4.60 69.5 67.0 47.9 7.28 34.0 25.0 47.0 NavHarness / GPT-6-Astra M Zero-shot 3.27 81.5 79.0 66.6 2.42 82.5 64.7 73.8",
+   "support_explanation": "主表控制比较行（含 OSR/SPL/nDTW）。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 4.4",
+   "quote": "This framework-level comparison does not isolate goal generation from verification.",
+   "support_explanation": "作者承认 Goal 与 Verify 未分离。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 4.4",
+   "quote": "Without compression, SR increases from 28%, 63%, and 74% to 32%, 67%, and 79%, respectively.",
+   "support_explanation": "三基座 R2R-CE：+4/+4/+5。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 4.3",
+   "quote": "GPT-6-Astra saves 5.52% and 4.05%, with SR decreases of 2 and 1.5 points and an RxR-CE SPL decline from 64.7 to 58.3",
+   "support_explanation": "压缩收益依赖基座，且伴随 SR/SPL 下降。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Table 2",
+   "quote": "Codex CLI Native 28.0 21.0 1946.31 2017.16 2027.81 34.59 78.65 — NavHarness Off 34.0 25.0 4008.33 4277.80 4298.55 45.05 122.09",
+   "support_explanation": "RxR-CE/GPT-5.6-Sol：NavHarness(Off) 总 token 约为 Codex CLI 的 2.1 倍，预算未匹配。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Table 3",
+   "quote": "Baselines use the supplied aggregates; NavHarness uses eight routes with three trials each.",
+   "support_explanation": "真机基线来自“提供的汇总”，协议不明。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Table 3",
+   "quote": "NaVILA 20.83 3.91 AwareVLN 20.83 3.89 StreamVLN 25.00 3.78 JanusVLN 50.00 2.34 NavHarness 83.30 1.51",
+   "support_explanation": "真机对比行。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix B",
+   "quote": "These external results provide context rather than a single matched ranking.",
+   "support_explanation": "作者承认外部结果非匹配排名。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix E",
+   "quote": "Each route is tested three times with NavHarness, yielding 24 trials.",
+   "support_explanation": "真机试验数 24。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 5",
+   "quote": "reliance on remotely served closed-source models incurs substantial inference costs and communication latency, slowing the navigation loop",
+   "support_explanation": "作者局限：成本与延迟。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 1",
+   "quote": "Experimental results on VLN-CE, and Real-World show that the NavHarness outperforms navigation foundation models which trained on large-scale datasets in a zero-shot setting.",
+   "support_explanation": "贡献第三条：对训练模型的优越性主张。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix F",
+   "quote": "The sequences show observed behavior and do not independently establish the causal contribution of an individual framework component.",
+   "support_explanation": "定性案例不作因果证据；标注为解释性重构。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix C.1",
+   "quote": "The real-robot briefing identifies the physical platform and adds motion-uncertainty and clearance guidance rather than assuming exact simulator motion.",
+   "support_explanation": "真机提示有平台特定调整。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix A",
+   "quote": "Those text-task findings motivate careful context design without establishing a navigation failure mechanism.",
+   "support_explanation": "作者承认压缩动机未建立导航失败机制。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Table 1",
+   "quote": "Codex CLI / GPT-5.6-Sol M Zero-shot 4.75 70.0 62.6 44.5 9.03 28.0 21.0 41.2",
+   "support_explanation": "100 个 episode 却出现 62.6 的非整数 SR，暗示多次运行平均，运行数未说明。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix D",
+   "quote": "Both configurations include all recorded inference components, and Goal includes the Memory Agent’s compression overhead.",
+   "support_explanation": "token 记账包含全部内部调用。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Appendix D",
+   "quote": "Efficiency averages include successful and failed episodes with complete usage records and exclude incomplete records.",
+   "support_explanation": "效率均值排除不完整记录。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 4.2",
+   "quote": "Using monocular input in a zero-shot setting, GPT-6-Astra-based NavHarness exceeds Qwen-RobotNav by 6.9 and 6.0 SR points.",
+   "support_explanation": "与训练模型的跨 cohort 比较。",
+   "kind": "author_report",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "material_id": "M-2609.39915",
+   "material_sha256": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "locator": "Sec 3.3 / Appx C.3 (negative)",
+   "quote": null,
+   "support_explanation": "全文未报告 Verify Agent 判断相对环境真值/人工标注的准确率，也无误判分解；已查 Sec 3.3, 4.2-4.5, Appx C-D。",
+   "kind": "our_inference",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "locator": "Appendix C.1",
+   "quote": "You have [movement budget] actions.",
+   "support_explanation": "The primitive-action budget value is a placeholder; no numeric movement or interaction budget is given anywhere in the text, so budget matching with Codex CLI cannot be checked.",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "locator": "Appendix E",
+   "quote": "Table 3 reports aggregate SR and mean NE across routes, retaining the recorded baseline values.",
+   "support_explanation": "Real-world protocol gives trial counts but no success distance threshold, no per-route outcomes and no description of how NE was measured or how baseline values were obtained.",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "locator": "Appendix B",
+   "quote": "The exact image selection policy determines which archived observations are actually attached to a request",
+   "support_explanation": "Which historical images reach the model is governed by an unspecified policy; an execution parameter missing for full reconstruction (X).",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E004",
+   "locator": "Table 2",
+   "quote": "NavHarness Off 82.5 64.7 1392.89 1533.90 1538.84 27.26 105.92",
+   "support_explanation": "RxR SR 82.5 on 100 episodes is not an integer count; with 62.6 and 76.3 elsewhere, the run count or effective denominator is undisclosed (our_inference).",
+   "material_id": "2609.39915-fulltext",
+   "hash": "bf70667a4bc4042e27df0b087cbad26ba31cc467e0bd4c4081037601b7f5a753",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "导航 agent 的局部目标生成与进度判定回路（相对 Codex CLI 原生循环）",
+   "information": "指令 x、当前 RGB、历史 (压缩记忆+近期记录)；Verify Agent 看到执行记录与最新观测但不含正在生成的判断；模型不获得评测器的参考路径/成功标签/距离",
+   "operation": "Goal Agent 产出 (g_k, q_k)；Visuomotor 执行动作批；Verify 回答 q_k 并给出继续/修订/推进建议；Eq.8 路由 Continue/UpdateGoal/Stop/Halt",
+   "output": "执行动作序列 + 已验证的目标完成事件",
+   "conditions": "单目 RGB，前进0.25m/转15°/STOP，动作预算",
+   "feedback": "观测结果驱动的 VLM 验证文本；STOP 无机械门控",
+   "selection_rule/data": "not_applicable：无候选选择/训练",
+   "persistence": "仅 episode 内（goal 状态+记忆）",
+   "later_use": "同一 episode 后续目标生成/执行/验证",
+   "claimed_effect": "同基座 SR +5.0/+6.2 (Astra)；+4.4/+6.0 (Sol)",
+   "failure_boundary": "Goal 与 Verify 未分离；验证准确率未测；STOP 不被验证强制",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E008",
+    "son55:E011",
+    "son55:E012",
+    "son55:E029"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "多模态历史上下文（相对原生上下文管理与不压缩）",
+   "information": "在验证完成边界对已完成段做摘要：已走目标/地标/空间关系、验证结果、各验证点关键帧",
+   "operation": "Memory Agent 用 m+ = M(x, m-, H_b, g_k, q_k, p_b) 替换已完成段",
+   "output": "压缩后的上下文，保留未完成状态",
+   "conditions": "仅在验证通过时压缩；修订未完成目标时保留细节",
+   "feedback": "验证完成作为触发信号",
+   "selection_rule/data": "not_applicable",
+   "persistence": "episode 内",
+   "later_use": "后续决策上下文",
+   "claimed_effect": "Sol: 总 token -35.9%/-56.6%，SR -1/-2；Astra: -5.5%/-4.1%，SR -2/-1.5，RxR SPL 64.7→58.3",
+   "failure_boundary": "收益依赖基座；SR/SPL 小幅下降",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E014",
+    "son55:E015",
+    "son55:E026",
+    "son55:E024"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "通用多模态 agent 的局部合理动作与路线一致性脱节、偏差沿长程累积；累积历史使推理输入膨胀，而粗暴截断会丢地标/纠正/未完成目标。",
+  "checked_gap": "两条 gap 有来源（引用 Zhou et al. 2026 等）并与 token 数据一致；但文中未对基线失败做偏差归因诊断，且作者自承文本任务研究并未建立导航失败机制。路线偏离被复合的机理仅由结果间接支持。",
+  "lineage/closest_adjacent": [
+   {
+    "name": "AgenticNav / HarnessVLN / SmartWay (agentic VLN)",
+    "source_version": "表 1 外部数字(原文未在本批固定)",
+    "note": "工具调用 agent / 工作流；NavHarness 以显式目标-验证耦合区分。"
+   },
+   {
+    "name": "Self-Monitoring / Regretful / AwareVLN",
+    "source_version": "论文内引用",
+    "note": "学习式进度估计与回退；本文用 VLM 验证问题而非训练。"
+   },
+   {
+    "name": "StreamVLN / JanusVLN / NavGPT 摘要",
+    "source_version": "论文内引用",
+    "note": "记忆与上下文管理；本文边界取自验证完成。"
+   }
+  ],
+  "residue": "验证可靠性、目标/验证贡献分离、压缩 trade-off、延迟与成本。",
+  "stakes": "长程 RxR-CE 上 Codex CLI 受 GPT-5.6-Sol 仅 28.0% SR，说明问题位置真实存在。",
+  "method_response": "每个目标绑定可观察完成条件并由独立 Verify 判断，推进/修订/压缩均挂在验证上。",
+  "remaining_gap": "验证器未被审计；STOP 无硬门；延迟；单目 RGB 覆盖。",
+  "evidence_ids": [
+   "son55:E003",
+   "son55:E004",
+   "son55:E024",
+   "son55:E025",
+   "son55:E020"
+  ],
+  "unresolved": [
+   "Verify Agent 误判率",
+   "Goal vs Verify 各自贡献"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "heterogeneous_decomposition"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "C25 step 1 (responsibility boundary): executed - goal setting, execution, verification and memory are separate roles",
+     "C25 step 2 (structured artifact): executed - paired goal g_k and verification question q_k carried across roles",
+     "C25 step 3 (close the loop during construction): executed via the model's own verify-and-revise loop - verification routes continue/revise/advance mid-episode; but the checker is the same class of VLM and is never audited against ground truth",
+     "C25 step 4 (ablate the verification step): absent - goal and verification are not separated (author statement)",
+     "C25 step 5 (cost of delegation): executed - per-episode token accounting across all calls including compression"
+    ],
+    "success_failure_checks": [
+     "S(typed handoff): partial - textual but explicit goal/question",
+     "S(load-bearing mechanism isolated by ablation): unmet",
+     "F(off-the-shelf assembly without component removal): risk present",
+     "F(cost unmeasured): avoided"
+    ],
+    "evidence_ids": [
+     "son55:E005",
+     "son55:E006",
+     "son55:E012",
+     "son55:E015",
+     "son55:E026"
+    ],
+    "reason": "The headline gains (Table 1, Off configuration) come from the goal/verify decomposition with in-episode correction from verification output, which is C25's 'back through the model's own verify-and-revise loop' variant. Caveat recorded: C25 warns that unreliable self-evaluation should be replaced by an external oracle; verifier reliability is unaudited."
+   },
+   {
+    "main_id": "heterogeneous_decomposition",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "main signature for the memory component; C04 not executed",
+    "tactic_steps_checked": [
+     "Partition history into completed (verified) vs active/unresolved segments",
+     "Summarize completed segments, keep active evidence at full detail",
+     "Off vs Goal comparison across two backbones and two benchmarks",
+     "C04 magnitude/sensitivity-stratified compression of a trained artifact with fidelity analysis: not performed"
+    ],
+    "success_failure_checks": [
+     "Partition operationally explicit",
+     "No uniform-truncation comparator or summary-fidelity audit"
+    ],
+    "evidence_ids": [
+     "sol:E003",
+     "sol:E008",
+     "sol:E012"
+    ],
+    "reason": "The memory contribution is a distinct operation (differentiated treatment of completed vs active history) needing its own card; C04's discriminating criterion (magnitude/sensitivity in a trained artifact) differs from semantic completion, so sub_id=null."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "Primary = the operation behind the central SR claim (goal/verify decomposition with verification-driven revision); supporting = the separate memory partition. Other mains have no operational correspondence.",
+  "executes_pattern": "partial: decomposition, artifact and feedback loop executed; isolating ablation absent",
+  "resolves_problem": "not_established: same-backbone SR gains exist but route-drift correction by verification is not shown (no verifier accuracy or recovery analysis)"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "external_verification_control",
+    "sub": "K202",
+    "version": "embodied-agent-harness/v1",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "condition": "Executor runs until a completion monitor fires, then hands back to the planner",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E005",
+       "son55:E006"
+      ]
+     },
+     {
+      "condition": "Completion monitor accurate and deployable",
+      "status": "unknown",
+      "reason": "VLM judgment never audited; STOP not gated",
+      "evidence_ids": [
+       "son55:E008",
+       "son55:E029"
+      ]
+     },
+     {
+      "condition": "Gate contribution separated",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E012"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E005",
+     "son55:E006",
+     "son55:E008"
+    ]
+   },
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": null,
+    "version": "embodied-agent-harness/v1",
+    "fit": "main-level; K301 not executed (no retrieval, no fixed bound)",
+    "condition_checks": [
+     {
+      "condition": "Within-episode memory reused by later calls",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E007"
+      ]
+     },
+     {
+      "condition": "K301 bounded selection + retrieval",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E007"
+      ]
+     },
+     {
+      "condition": "Memory variant compared with model and episodes fixed",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E014",
+       "son55:E015"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E007",
+     "son55:E014"
+    ]
+   },
+   {
+    "main": "harness_effect_evaluation",
+    "sub": "K803",
+    "version": "embodied-agent-harness/v1",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "condition": "Models x harnesses on the same episodes",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E009",
+       "son55:E013"
+      ]
+     },
+     {
+      "condition": "Repeated runs and paired statistics",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E025",
+       "agg:E004"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E009",
+     "son55:E013"
+    ]
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": [
+   "sol proposal retained: a completion-conditioned history-compression sub-card would need a second independent paper; no asset change in-batch."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain_namespace": "embodied",
+   "domain_main": "external_verification_control",
+   "domain_sub": "K202",
+   "operation_correspondence": "Goal/question artifact is executed until the Verify agent judges completion, then control returns to the Goal agent for revision or advancement.",
+   "necessary_conditions_or_differences": "K202 needs an accurate deployable monitor; here it is an unaudited same-class VLM text judgment and STOP is not hard-gated.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E008",
+    "son55:E029"
+   ]
+  },
+  {
+   "rs_main": "heterogeneous_decomposition",
+   "rs_sub": null,
+   "domain_namespace": "embodied",
+   "domain_main": "harness_memory_skill_reuse",
+   "domain_sub": null,
+   "operation_correspondence": "Completed vs active history partition; completed part summarized, active part preserved.",
+   "necessary_conditions_or_differences": "No retrieval of older content (unlike K301); boundary is semantic verified completion.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E008"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "声称 harness 而非模型提高成功",
+   "applicable": true,
+   "status": "met",
+   "reason": "同基座同 episode 重跑 Codex CLI；另引用已发表工作流作参考。",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "归因具体组件",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Off vs Goal 为单组件开关；Codex CLI→NavHarness(Off) 为多组件打包，Goal/Verify 未分离。",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E014"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "组件/工具普遍有效",
+   "applicable": true,
+   "status": "met",
+   "reason": "Qwen-3.6-plus/GPT-5.6-Sol/GPT-6-Astra 三基座，增益 +4/+4/+5。",
+   "evidence_ids": [
+    "son55:E013"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "固定任务子集上的成功率比较",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "运行次数未说明（非整数 SR 暗示多次平均）、无 CI/配对检验；4-6 点差在 n=100 噪声量级。",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E025"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "声称更实用",
+   "applicable": true,
+   "status": "partial",
+   "reason": "逐 episode token（含内部调用与压缩开销）详尽；无墙钟延迟/美元成本，作者承认延迟问题。",
+   "evidence_ids": [
+    "son55:E026",
+    "son55:E027",
+    "son55:E020"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E06",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "VLN-CE 零样本 harness 结论",
+   "applicable": true,
+   "status": "partial",
+   "reason": "报 SR/SPL/OSR/NE/nDTW，Open-Nav 100 子集已声明；RxR 子集选取未说明；与训练模型全量结果的 cohort 差异在附录自承。",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E011",
+    "son55:E018"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E08",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "前沿模型 harness 的基准声称",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "未讨论开发所用 episode 与评测重叠，也未讨论预训练污染。",
+   "evidence_ids": [
+    "son55:E010"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "添加了完成/停止检查的智能体",
+   "applicable": true,
+   "status": "partial",
+   "reason": "表 1 有 OSR vs SR（81.5 vs 79.0 等）；无误停/卡死/重复模式分解。",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E008"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "声称迁移到真实机器人",
+   "applicable": true,
+   "status": "partial",
+   "reason": "给出 8 路线 x3=24 trials 与 SR/NE；成功判据未在文中定义；基线为‘提供的汇总’。",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E016",
+    "son55:E017"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "匹配预算下比较 harness",
+   "applicable": true,
+   "status": "partial",
+   "reason": "基座/episode/接口匹配；token 预算不匹配（RxR Sol NavHarness(Off) 约 2.1 倍）。",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E015"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "同基座下 NavHarness 优于 Codex CLI",
+   "setting": "R2R-CE(Open-Nav 100)/RxR-CE(100)，GPT-5.6-Sol 与 GPT-6-Astra，单目 RGB",
+   "baseline/control": "Codex CLI，同基座/episode/接口",
+   "selection_vs_test": "开发所用 episode 未说明",
+   "result/denominator": "R2R SR 74.0→79.0、RxR 76.3→82.5 (Astra)；62.6→67.0、28.0→34.0 (Sol)；运行次数未说明",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E009",
+    "son55:E010",
+    "son55:E011",
+    "son55:E025"
+   ],
+   "counterevidence": [
+    "E015",
+    "E025"
+   ],
+   "allowed_conclusion": "同基座 5 个比较均同向提升（3 基座 R2R + RxR 双基座），但每个 4-6 点且无不确定性度量；整体打包提升，不能归因给目标或验证。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "验证完成边界的压缩降低上下文",
+   "setting": "同上，Off vs Goal",
+   "baseline/control": "NavHarness(Off)",
+   "selection_vs_test": "同上",
+   "result/denominator": "总 token 比 35.9%/56.6% (Sol)，5.5%/4.1% (Astra)；SR 下降 1-2 点，RxR Astra SPL -6.4",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E015",
+    "son55:E026"
+   ],
+   "counterevidence": [
+    "E014"
+   ],
+   "allowed_conclusion": "压缩有显著节省但依赖基座，且伴随小幅质量下降。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "真机 83.3% SR、1.51 m NE，优于基线",
+   "setting": "Go2 四足，8 路线 x3",
+   "baseline/control": "‘提供的汇总’数字，不是同协议重跑，无 Codex CLI 真机对照",
+   "selection_vs_test": "提示含真机调整",
+   "result/denominator": "24 试验：83.30% / 1.51 m",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E016",
+    "son55:E017",
+    "son55:E019",
+    "son55:E023"
+   ],
+   "counterevidence": [
+    "E016",
+    "E023"
+   ],
+   "allowed_conclusion": "NavHarness 在该 24 次真机试验中表现良好；与基线比较不严格。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "零样本超过大规模训练的导航基础模型",
+   "setting": "表 1 跨 cohort",
+   "baseline/control": "各论文报告数字",
+   "selection_vs_test": "n/a",
+   "result/denominator": "超 Qwen-RobotNav 6.9/6.0 SR 点",
+   "evidence_ids": [
+    "son55:E021",
+    "son55:E028",
+    "son55:E018"
+   ],
+   "counterevidence": [
+    "E018"
+   ],
+   "allowed_conclusion": "仅作参考性背景；附录自承非匹配排名。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "transfer",
+  "evidence_level_reason": "EVIDENCE.md transfer: harness built and evaluated in simulation, then run zero-shot on a physical embodiment (Go2 quadruped) and real scenes not used in construction, with stated trial counts (8 routes x 3 = 24). Lower bound: success threshold and per-route rates are not reported and the real-robot prompt adds platform guidance; these limits are scored in E.measurement/E.holdout.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "With backbone, episodes and observation/action interface fixed, NavHarness (no compression) raises SR over Codex CLI by 4-6 points in all five reported comparisons (three backbones on R2R-CE, two on RxR-CE), with undisclosed run counts and no CI and with up to 2.1x more tokens; verified-completion compression saves 4-57% tokens at a 1-2 point SR cost; 20/24 real trials reported successful under an unstated criterion.",
+  "not_supported_as_stated": [
+   "separate effects of adaptive goals vs verification",
+   "superiority over trained navigation models (cross-cohort)",
+   "real-world superiority over baselines given as supplied aggregates"
+  ],
+  "unresolved": [],
+  "not_claimed": "No reproduction; all results are author reports."
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Two concrete bottlenecks (route drift from unchecked local progress; history growth vs lossy truncation) with nearest lineage (agentic VLN harnesses, progress monitors, navigation memory); baseline drift not diagnosed and the compression motivation admittedly not a navigation failure mechanism. Both seats agree.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E004",
+    "son55:E024"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Goal + observable completion condition + separate verification + completion-bounded compression is reconstructible with distinguishable predictions (larger gains on long RxR; drops at boundaries); verifier reliability is the untested core assumption. Both seats agree.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E007",
+    "son55:E029"
+   ],
+   "counterevidence_ids": [
+    "son55:E008"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Algorithm 1, Eq. 1-13, routing priorities, evidence ordering and information permissions are reconstructible and STOP/coverage limits are stated; but the movement/interaction budget values are placeholders, the archived-image selection policy is unspecified, prompts are 'edited for readability' and the real-robot briefing is only summarized. Anchor 4 requires the chain to be fully reconstructible; these gaps hold it at 3.",
+   "evidence_ids": [
+    "sol:E018",
+    "son55:E008",
+    "agg:E001",
+    "agg:E003",
+    "son55:E023"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Simulation success is computed by the benchmark evaluator, but the effective denominators/run counts are undisclosed (non-integer SRs on 100 episodes) and the real-world success criterion is undefined with baselines as supplied aggregates. Anchors v2: undefined success criterion -> <=2; criterion present with incomplete denominators -> 2. Verifier never audited.",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E025",
+     "agg:E004",
+     "agg:E002",
+     "son55:E016"
+    ],
+    "counterevidence_ids": [
+     "son55:E029"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Same backbone/episodes/interface vs Codex CLI with consistent direction over three backbones, and Off/Goal as a single toggle; but the Codex->NavHarness step is a bundle, goal vs verification not separated, and token budgets differ up to 2.1x, so more model calls is an unseparated alternative. Both seats agree.",
+    "evidence_ids": [
+     "son55:E009",
+     "son55:E013",
+     "son55:E012",
+     "son55:E015"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "No training, but development/evaluation episode overlap and RxR subset selection are undisclosed, trained-model comparisons are cross-cohort, and the real-robot prompt is platform-adjusted; real routes are new scenes but with an undefined success criterion. Both seats agree.",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E018",
+     "son55:E023",
+     "son55:E028"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Anchors v2 'trial counts without variance -> 1-2': real repeats exist (3 per route) but are only aggregated; for the central simulation comparisons the run count is undisclosed despite non-integer SRs, there is no CI or paired test for 4-6 point gaps at n=100, and failure breakdown is limited to OSR vs SR. The lower end (1) reflects the undisclosed simulation denominators.",
+    "evidence_ids": [
+     "son55:E025",
+     "agg:E004",
+     "son55:E011",
+     "son55:E019"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Per-episode tokens across all agents including compression overhead, cache and failed episodes are reported per backbone/benchmark, with exclusions disclosed; wall-clock latency and USD missing and budgets not matched (disclosed via the token table). Both seats agree.",
+    "evidence_ids": [
+     "son55:E026",
+     "son55:E027",
+     "son55:E015",
+     "son55:E020"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": 63.75,
+  "display": 63.8,
+  "lower": 63.75,
+  "upper": 63.75,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4"
+ },
+ "status": "reviewed",
+ "input_seat_hashes": {
+  "sol": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/sol/attempts/a2/2609.39915.json",
+   "sha256": "0c9a552aaecfc48f848050614ea7f8f59162b60a3b25cbb21ec1a179d89e3866"
+  },
+  "son55": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/c-ho-1/seats/son55/attempts/a2/2609.39915.json",
+   "sha256": "d0b621e4c8e6f1c5d9acb5253e6abd07944bc8e07459387d4b76326eea9ed26b"
+  }
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "resolutions": [
+  {
+   "field_path": "assessment.evidence_level",
+   "sol_value": "online",
+   "son55_value": "transfer",
+   "decision": "son55",
+   "final_value": "transfer",
+   "reason": "Sim-developed harness run zero-shot on an unused physical embodiment and unseen real scenes with stated trial counts (24) satisfies EVIDENCE.md transfer (sim-to-real with trial counts / unused embodiment). Sol's objections (no success threshold, no route-wise breakdown) are real but bear on measurement quality, which is deducted in E.measurement, not on the level definition. Recorded as lower bound.",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E001",
+    "agg:E002"
+   ],
+   "score_impact": "none (label not scored)"
+  },
+  {
+   "field_path": "status",
+   "sol_value": "reviewed",
+   "son55_value": {
+    "value": "reviewed",
+    "reason": "完整 HTML 全文含附录 A-F、算法与提示模板。"
+   },
+   "decision": "same_supported_fact",
+   "final_value": "reviewed",
+   "reason": "Format difference only.",
+   "evidence_ids": [
+    "son55:E010"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.primary",
+   "sol_value": "heterogeneous_decomposition",
+   "son55_value": "decompose_and_delegate",
+   "decision": "revised",
+   "final_value": "decompose_and_delegate (primary) + heterogeneous_decomposition (supporting)",
+   "reason": "The central SR claim (Table 1, compression Off) rests on the goal/verify decomposition, so decompose_and_delegate is primary; sol correctly identified the memory partition as a distinct operation, kept as supporting. Neither seat alone had both roles right.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "sol:E003",
+    "sol:E008"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    null,
+    "rs:C25"
+   ],
+   "son55_value": [
+    "rs:C25"
+   ],
+   "decision": "revised",
+   "final_value": [
+    "rs:C25",
+    null
+   ],
+   "reason": "C25 under the primary (model's own verify-and-revise loop during construction is executed); null under heterogeneous_decomposition because C04's magnitude/sensitivity-stratified compression of a trained artifact is not the operation.",
+   "evidence_ids": [
+    "son55:E006",
+    "sol:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.X",
+   "sol_value": 3,
+   "son55_value": 4,
+   "decision": "sol",
+   "final_value": 3,
+   "reason": "Anchor 4 needs a fully reconstructible operation chain; the movement/interaction budget values are placeholders, the image-selection policy is unspecified and prompts are edited summaries, so the chain is reconstructible in structure but not in its operative parameters.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E003",
+    "sol:E018"
+   ],
+   "score_impact": "-5.0 raw vs son55"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Anchors v2 binding: real-world success criterion undefined -> <=2; additionally the simulation denominators are ambiguous (non-integer SRs on 100 episodes). son55's own reason lists the undefined real criterion but did not apply the v2 ceiling.",
+   "evidence_ids": [
+    "agg:E002",
+    "agg:E004",
+    "son55:E025"
+   ],
+   "score_impact": "-3.75 raw vs son55"
+  },
+  {
+   "field_path": "ratings.E.statistics",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "Within the v2 1-2 band, the central simulation comparisons have undisclosed run counts despite non-integer SRs and no CI/paired test for 4-6 point gaps; real repeats are only aggregated. Sol credited the physical repeats but its own reason notes simulation repeats unspecified.",
+   "evidence_ids": [
+    "son55:E025",
+    "agg:E004",
+    "son55:E019"
+   ],
+   "score_impact": "-1.25 raw vs sol"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "K202 partial",
+    "harness_memory_skill_reuse (sub null)"
+   ],
+   "son55_value": [
+    "K202 partial",
+    "K301 partial",
+    "K803 partial"
+   ],
+   "decision": "revised",
+   "final_value": [
+    "K202 partial",
+    "harness_memory_skill_reuse (sub null)",
+    "K803 partial"
+   ],
+   "reason": "K301 requires retrieval of older content, absent here (sol); K803 (models x harnesses on the same episodes) is executed by the three-backbone comparison (son55).",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E013"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations (set/answers)",
+   "sol_value": "E02 partial, E04 partial, E16 partial, E19 partial, E22 partial, E03 met, E17 n/a",
+   "son55_value": "E01 met, E02 partial, E03 met, E04 unmet, E05 partial, E06 partial, E08 unmet, E16 partial, E19 partial, E22 partial",
+   "decision": "son55",
+   "final_value": "son55 set (E01 met, E02 partial, E03 met, E04 unmet, E05 partial, E06 partial, E08 unmet, E16 partial, E19 partial, E22 partial)",
+   "reason": "E04 unmet: no run counts or CI for the core comparison (consistent with statistics=1); son55's set is the superset and its answers match the final ratings; sol's E17 not_applicable is consistent and adds nothing scored.",
+   "evidence_ids": [
+    "son55:E025",
+    "son55:E010"
+   ],
+   "score_impact": "none directly"
+  },
+  {
+   "field_path": "score.raw",
+   "sol_value": 65.0,
+   "son55_value": 72.5,
+   "decision": "revised",
+   "final_value": 63.75,
+   "reason": "Deterministic recomputation from final ratings G3 M3 X3 Em2 Ec2 Eh2 Es1 Ek3.",
+   "evidence_ids": [
+    "son55:E011"
+   ],
+   "score_impact": "final raw 63.75"
+  }
+ ],
+ "shared_error_corrections": [],
+ "revision_proposals": [],
+ "requests": [],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All scoring and core-claim disagreements resolved from the fixed full text; no unknown ratings.",
+ "final_record_hash": "08a7c227050bc94165f71e30687e2e835001c70af40e6bd52cd640193f97a602"
+}

@@ -1,0 +1,1565 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-1",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2609.27308",
+  "paper_id": "2609.27308",
+  "title": "EmbodiedSWE: Coding Agents for Long Horizon Dexterous Robotics",
+  "version": "2609.27308v2",
+  "claim_type": "evaluation_resource",
+  "claim_type_note": "论文同时含基准(evaluation_resource)与数据引擎/学生训练(component_training)；以首要研究问题和 contribution(1)为准选 evaluation_resource，但 E 项按作者的整体中心主张(含 Gen 与真机)评分，不缩窄主张。分类歧义留给聚合席。",
+  "central_claim": "We study coding agents for long-horizon, dexterous robotics and ask whether their solutions can provide scalable supervision for learning general robot policies. EmbodiedSWE-Bench shows frontier coding agents can solve complex long-horizon tasks and transfer prior solutions across tasks and embodiments; supporting tools help agents; EmbodiedSWE-Gen expands a single verified solution into large diverse trajectories, VLA performance improves with more generated demonstrations, agent-aided diversification improves generalization to held-out task variations, and a VLA finetuned solely on coding-agent-generated simulation demonstrations completes a long-horizon task on a real robot.",
+  "scope_note": "在 docs/EVIDENCE.md 范围内(coding-agent harness + 教师→VLA 学生蒸馏 + 评测)"
+ },
+ "provenance": {
+  "input_hash": "2e73fbac012f58e0a5ab3163a0af6249c7cab16960cc9cc3121e07c40c24182f",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "pattern_overview_hash": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T16:44:47Z",
+  "notes": "session_id/receipt_ref 无法自取，按指令填 null；盲评：未读取 seats/sol、aggregate、其他批次、archive 与旧分数；未读取输入包以外的论文全文(保证两席材料一致)。"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2609.27308v2",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2609.27308.txt",
+   "sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 EmbodiedSWE-Bench",
+    "3 Evaluating Coding Agents as Solvers",
+    "4 Coding Agents as Teachers",
+    "5 Discussions and Conclusion",
+    "App A-J (含 Tables 3-22、Fig 说明文字、Listing 1-2)"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "图像/图表像素内容(Fig 5 RL对比数值、Fig 8 成本、Fig 3/6 曲线)不在文本提取中；Appendix G 的 PPO/RL 曲线仅有叙述"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 2.2 Evaluation Protocol",
+   "quote": "Grading is performed entirely offline to prevent agents from modifying scene code or exploiting the reward mechanism.",
+   "support_explanation": "评分在独立离线环境中进行，降低 agent 篡改场景/奖励的空间。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 2.2 Evaluation Protocol",
+   "quote": "In others, a human-written rubric is used, combined with a VLM, to grade the trajectory or subcomponents of the trajectory.",
+   "support_explanation": "部分任务(形变类)的评分含 VLM 判分环节，属学习型/判官组件，文中未给出其校验。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1.1 / C.1.3 Tables 6, 8",
+   "quote": "Success rate 50% 25% 61% 18% 11% 82% Hack rate 7% 11% 4% 43% 39% 0%",
+   "support_explanation": "六个模型的成功率与作弊率(每个 task-model 单次 4h 运行)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1 Detailed Evaluation Results",
+   "quote": "For each run, we use Opus 5 to audit whether it is a reward hack, and score it as 0 if it is.",
+   "support_explanation": "作弊判定由 Opus 5(同时是被评模型之一)审计，未报告人工校验或审计准确率。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1.1 Table 6 caption",
+   "quote": "One 4-hour run per (task, model).",
+   "support_explanation": "每个 (task, model) 仅单次运行，无重复种子，仅有跨任务 SEM。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.1 Standard-harness performance",
+   "quote": "Each run uses one NVIDIA RTX 4090 for simulation and a 4-hour wall-clock budget.",
+   "support_explanation": "预算设定。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.1 Standard-harness performance",
+   "quote": "Each model uses its native coding harness: the first three use Claude Code, while the latter three use Codex.",
+   "support_explanation": "模型与 harness 完全共变(Claude 系列=Claude Code，GPT 系列=Codex)，模型比较不能分离 harness 效应。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.1",
+   "quote": "every evaluated task has been successfully completed at least once by a domain expert working with a coding model",
+   "support_explanation": "任务可行性由专家+编码模型验证过，支持任务有效性。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App B.2 Randomization",
+   "quote": "Agents develop against a fixed seed but are explicitly informed that grading uses different initial conditions.",
+   "support_explanation": "开发种子与评分初始条件分开，是一层留出。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.3",
+   "quote": "We can see that both models are able to achieve better score with the tools, though effect sizes are relatively small.",
+   "support_explanation": "作者对工具效应的自述：均值分数略升、效应小。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.3",
+   "quote": "Each tool run uses two RTX 4090s rather than one",
+   "support_explanation": "工具运行额外 GPU，预算不对等(已披露)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1.2 Table 7",
+   "quote": "Mean score 0.66 0.70 0.44 0.51 Success rate 50% 43% 18% 18%",
+   "support_explanation": "工具前后：Opus 5 均分 0.66→0.70 但成功率 50%→43%；Sol 均分 0.44→0.51，成功率不变。单次运行，无检验。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.2 Transfer across embodiments",
+   "quote": "As the no-hint reference, we reuse the Franka runs on these six tasks from the cross-task experiments.",
+   "support_explanation": "跨本体对照的无提示基线来自 Franka，而非 Kinova/xArm 的无提示运行，混杂了本体难度。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.2 Transfer across tasks",
+   "quote": "Hints from similar tasks help the agent solve the target both better and faster; hints from dissimilar tasks speed up early progress but end at the same final score as the no-hint runs.",
+   "support_explanation": "跨任务提示：相似/不相似/无提示三臂对照，2 模型×3 种子，6 个目标任务。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.1 Scalable Data Engine",
+   "quote": "Generated trajectories are retained only if they pass the task grader and an open-loop replay check.",
+   "support_explanation": "数据保留规则：grader 通过 + 仅凭动作回放可复现成功。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.2 Scaling with generated demonstrations",
+   "quote": "the mean success rate over the six tasks rises from 18% with 10 demonstrations to 69% with 400, and the mean rubric score from 0.32 to 0.76",
+   "support_explanation": "VLA 数据规模曲线(6 任务均值)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.2",
+   "quote": "using the same scene and initial-state distribution as the generated data",
+   "support_explanation": "规模曲线评测使用与训练数据同一场景/初态分布，属分布内。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App E Relaxation of some evaluation criteria",
+   "quote": "For some tasks, we relax the original success condition.",
+   "support_explanation": "VLA 实验对部分任务放宽了成功判据。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App E Table 22",
+   "quote": "Clearing organic objects Complete the placement of one organic object. Pen holding Insert one pen into the holder. Banana slicing Cut the banana into at least three pieces.",
+   "support_explanation": "6 个头条任务中的 3 个(clear_organic_objects、pen_holder、slice)使用放宽判据。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.2 Generalization across diversification pipelines",
+   "quote": "we train on 1000 generated trajectories, and evaluate on 256 out of distribution settings, reporting the average rubric score over evaluations.",
+   "support_explanation": "泛化对比的设置：等量 1000 条，256 个留出设置。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.2",
+   "quote": "VLA policies trained with agent-aided diversified data consistently achieve better performance on unseen scenarios than those trained with script-only data.",
+   "support_explanation": "agent 辅助多样化 vs 纯脚本：留出变体上整体 rubric 0.233 vs 0.066(表1)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.2",
+   "quote": "The script-only baseline remains concentrated around the original task distribution",
+   "support_explanation": "对照臂按设计只覆盖原分布(非等多样性的人/脚本场景扩展)，因此比较含有多样性混杂。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App D.3 Delivered Dataset",
+   "quote": "they do not isolate the contribution of individual diversification levels",
+   "support_explanation": "作者承认未隔离五个多样化层级各自的贡献。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.3 Evaluation and results",
+   "quote": "report the fraction of trials that successfully complete all stages up to each milestone",
+   "support_explanation": "真机阶段成功率为累计到各里程碑的试验比例。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.3 Table 2",
+   "quote": "Sim-trained 100% 80% 30% 20%",
+   "support_explanation": "真机 10 次试验：抓灯罩100%、放置80%、抓灯泡30%、旋出灯泡(全程)20%。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App F Deployment and evaluation",
+   "quote": "We select the 14,000-step checkpoint based on real-robot performance.",
+   "support_explanation": "检查点按真机表现选取，选择与评测未见分离说明。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Abstract",
+   "quote": "We also show that a VLA finetuned solely on coding-agent-generated simulation demonstrations completes a long-horizon task on real robot.",
+   "support_explanation": "摘要主张'completes'；表2显示全程成功率20%。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App I Limitations",
+   "quote": "we have not yet run this pipeline end to end",
+   "support_explanation": "作者承认合成任务→解法→多样化→VLA 全流程未端到端跑通，蒸馏能力转移程度未知。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 1 Introduction",
+   "quote": "Existing work remains largely constrained to navigation and pick-and-place tasks",
+   "support_explanation": "作者给出的 gap：既有 coding-agent 机器人工作局限于导航/抓放。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E030",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 1 Introduction",
+   "quote": "while simulation benchmarks rarely combine long horizon tasks with challenging physical interactions",
+   "support_explanation": "作者给出的 gap：缺少长程+灵巧物理交互的仿真评测。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E031",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App A Related Work",
+   "quote": "i.e., the deployed policy itself, as opposed to a teacher.",
+   "support_explanation": "既有工作将代码视作终点策略，本文将其作为教师。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E032",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.3",
+   "quote": "Checkpoint tree. The agent saves reached simulator states together with the programs, logs, snapshots, and transition annotations",
+   "support_explanation": "K204 对应的 harness 工具：检查点树(另有 CMA-ES、sweep、场景查看器、评估日志)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E033",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App G.2",
+   "quote": "External restrictions interrupted the project before held-out evaluation could be conducted.",
+   "support_explanation": "编码 agent RL 无留出评测(作者承认)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E034",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App G.2",
+   "quote": "We train Seed-2.1-Lite with turn-level PPO on 400 environments produced by the pipeline above.",
+   "support_explanation": "附录 G：在合成任务上做 turn-level PPO。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E035",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.1",
+   "quote": "learning tabula rasa with PPO still substantially underperforms the programmatic policies discovered by coding agents within the evaluated budgets",
+   "support_explanation": "编码 agent 程序策略 vs PPO 的主张；具体数值只在 Fig 5(无文本数值)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E036",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.2",
+   "quote": "The tasks are drawn from the easier tiers of EmbodiedSWE-Bench",
+   "support_explanation": "PPO 对照仅在 5 个较易任务，且作者称这些任务偏向 RL。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E037",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.1 Failure modes",
+   "quote": "Scorer hacking. Some agents attempt to improve the score without solving the task through the robot",
+   "support_explanation": "记录的三类失败之一：作弊。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E038",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App D.2 Agent sessions and time limits",
+   "quote": "A session runs one coding-agent process with a stage-specific brief",
+   "support_explanation": "多样化的核心操作由 agent 按'stage-specific brief'执行，brief 原文不在材料中。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E039",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1.6 Table 13",
+   "quote": "Total spend of solved runs ($) 1029 220 597 133 39 1591",
+   "support_explanation": "解决任务运行的 API 花费汇总(按模型)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E040",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.2",
+   "quote": "on a subset of six tasks: clear_organic_objects , pen_holder , tool_packing , bulb , nut_thread , and slice",
+   "support_explanation": "正文称 6 个任务。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E041",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App E Table 21",
+   "quote": "coffee 3.10",
+   "support_explanation": "表21 实际包含 8 个任务(另含 coffee、pc_gpu)，与正文 6 任务头条均值不一致且未解释。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E042",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3.2",
+   "quote": "the agent receives, in addition to the standard task materials, one read-only file containing either a verified solution to another task or a verified solution to the same task on a different embodiment",
+   "support_explanation": "经验提示机制：只读文件，非累积技能库。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E043",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 3 intro",
+   "quote": "Each agent iteratively inspects the environment, executes candidate solutions, diagnoses failures, and revises its code, optimizing a program rather than the parameters of a learned policy.",
+   "support_explanation": "solver 操作签名。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E044",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.1 Agent-based diversification",
+   "quote": "to cover intermediate states that are rarely visited by end-to-end rollouts, the agent generates demonstrations that begin partway through a task.",
+   "support_explanation": "'phase' 层多样化：agent 构造中间状态起点。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E045",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.1 Agent-based diversification",
+   "quote": "The agent adapts DART-style noise injection ( Laskey et al., 2017 ) to the task by inspecting a rendered rollout and writing phase-specific perturbations into the solution code",
+   "support_explanation": "'noise' 层：按阶段写入扰动并触发恢复分支。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E046",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1.2 Table 7 caption",
+   "quote": "deformable scores exclude the final VLM gate as in Table 6",
+   "support_explanation": "表7 称形变任务得分排除最终 VLM gate，但表6 标题未说明此处理，口径需核对。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E047",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.3",
+   "quote": "Observations comprise external and wrist RGB images, joint angles, and gripper states.",
+   "support_explanation": "学生只见 RGB+本体状态，教师(编码 agent)见完整仿真状态。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E048",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.3 Table 2",
+   "quote": "Pretrained \\pi_{0.5} -DROID 0% 0% 0% 0%",
+   "support_explanation": "真机未微调基线 0%。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E049",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "App C.1.7 Table 14",
+   "quote": "Hacked runs (total) 2 3 1 12 11 0",
+   "support_explanation": "作弊运行总数(按模型)；Sol/Terra 12/11。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E050",
+   "material_id": "M1",
+   "material_sha256": "fba5a4fde8c6930d5438f4479ddaad8d0779ddb912b06f92f329483a9406306d",
+   "locator": "Sec 4.1",
+   "quote": "Figure 8 plots cost per trajectory with each level of added diversification",
+   "support_explanation": "每轨迹成本仅以图给出，文本无数值。",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "由前沿 coding agent 在其原生 harness(Claude Code/Codex)中编写的机器人控制程序 solve(env)，运行于 Isaac Lab 仿真",
+   "information": "完整仿真状态、场景/benchmark 源码、渲染与检查工具、可配置控制器；评分器隐藏且离线，评分环境禁用 set_states()",
+   "operation": "编写→执行→检查→诊断→改写循环，可提交中间解",
+   "output": "Python 程序(solve(env))",
+   "conditions": "每任务 4h wall-clock、1×RTX4090(带工具为2×)、隔离 Docker、仅限模型API与包索引网络",
+   "feedback": "执行日志、打印的仿真状态、渲染快照；(工具)评估日志、检查点注释",
+   "selection_rule": "hidden rubric 的 best-so-far 分数；被 Opus 5 判为作弊的运行记 0",
+   "persistence": "程序文件与提交；(工具)磁盘上的检查点树",
+   "later_use": "已验证解作为只读提示进入其他任务/本体(S3)，或作为 EmbodiedSWE-Gen 的种子(S2)",
+   "claimed_effect": "最强模型解决约82%任务；工具使均分小幅提高",
+   "failure_boundary": "视觉落地差、过度坚持错误分解、作弊(Sol 43%/Terra 39%)；形变类任务全部0%成功",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E032",
+    "E037",
+    "E043"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "一个已验证的 coding-agent 解 → 多样化轨迹数据集 → 小型 VLA 学生(SmolVLA 450M；真机 π0.5-DROID)",
+   "information": "教师侧特权：完整仿真状态，可改场景/grader/解码；学生仅见 RGB、关节角、夹爪状态与语言目标",
+   "operation": "agent 沿 scene/strategy/phase/dynamics(含DART式阶段扰动)/visual 五层编辑解码并批量并行 rollout；脚本采样物理与视觉随机化",
+   "output": "通过 grader 与开环回放校验的轨迹(LeRobot 格式)",
+   "conditions": "需可重置、可批并行仿真；每阶段 12h 预算；接触关键机制不允许改动",
+   "feedback": "grader 成功判定+开环动作回放复核+新单元/去重规则",
+   "selection_rule": "必须通过 grader 与回放；新单元至少一个回放通过；按单元轮询取样",
+   "persistence": "数据集；轨迹带源码指纹",
+   "later_use": "监督微调 VLA；规模与泛化实验；真机500条仿真轨迹微调 π0.5-DROID",
+   "claimed_effect": "VLA 成功率随示范数上升(18%→69%)；agent 辅助多样化在留出变体上优于纯脚本(0.233 vs 0.066)；真机非零分阶段成功",
+   "failure_boundary": "未隔离各层贡献；仅6任务进入VLA训练；无 on-policy 纠正；真机全程成功20%；全流程未端到端验证",
+   "evidence_ids": [
+    "E015",
+    "E044",
+    "E045",
+    "E047",
+    "E023",
+    "E028"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "跨任务/跨本体的经验迁移：已验证解作为只读提示文件",
+   "information": "agent 额外获得一个只读文件(另一任务或另一本体上同一任务的已验证解)",
+   "operation": "把提示文件放入工作区，其余协议不变，比较有/无提示",
+   "output": "目标任务的 solve(env) 程序",
+   "conditions": "2 模型×3 种子，6 个目标任务；Franka 臂 OSC 控制",
+   "feedback": "同 S1",
+   "selection_rule": "提示源为专家/已验证解(grader 成功)；相似/不相似源按预先设定",
+   "persistence": "仅提示文件，无技能库累积",
+   "later_use": "仅当次运行",
+   "claimed_effect": "相似任务提示提高终分与速度；跨本体迁移优于无提示",
+   "failure_boundary": "不相似任务提示最终不增益；跨本体对照用了不同本体的无提示基线",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E042"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "coding agents 在机器人上的既有工作局限于导航/抓放并依赖人工设计接口；仿真基准缺少长程+灵巧交互；VLA 数据采集昂贵，脚本化生成多样性饱和。",
+  "checked_gap": "gap 的前两项由附录A的文献组织支持，第三项(脚本化生成多样性饱和)由论文自带对照间接支持；但依赖本文自述的相关工作，输入包内无最近邻全文。",
+  "residue": "长程灵巧任务缺少无人工接口的解与可迁移的教师数据",
+  "stakes": "数据采集成本与长程任务 VLA 失败",
+  "method_response": "全状态 coding agent 作 solver，并把其解经五层多样化+回放过滤变为 VLA 监督",
+  "remaining_gap": "学生无法获得特权信息；全流程未端到端验证；真机仅1任务；形变任务0%成功",
+  "evidence_ids": [
+   "E029",
+   "E030",
+   "E031",
+   "E028"
+  ],
+  "unresolved": [
+   "最近邻原文未固定",
+   "空检索不证明新颖"
+  ],
+  "lineage": "祖先：脚本/规划器化数据生成(MimicGen 系列、InternData-A1)与 coding-agent 机器人编程(CaP-X 等) → 前沿 frontier：技能库+进化搜索、真机自改进、冻结规划器+VLA 工具调用 → 本文：去人工接口、授予全状态、把 agent 解当教师并多样化为 VLA 数据。均据本文 App A (v2) 转述，未在本地核验原文。",
+  "closest_adjacent": [
+   {
+    "name": "CaP-X(Fu et al., 2026)",
+    "source": "本文 App A (v2)",
+    "what_it_solved": "分层 API 的 coding-agent 机器人基准",
+    "what_remains": "接口按任务写死、视觉层引入感知噪声、代码即终点策略",
+    "verified_locally": false
+   },
+   {
+    "name": "MimicGen 系列/InternData-A1",
+    "source": "本文 App A (v2)",
+    "what_it_solved": "由少量遥操作种子放大数据 / 脚本化技能链生成",
+    "what_remains": "依赖人类种子与人工单任务配置",
+    "verified_locally": false
+   }
+  ]
+ },
+ "rs_pattern": {
+  "primary": "self_supervised_signal_engineering",
+  "supporting": [
+   "decompose_and_delegate",
+   "controlled_diagnostic_design"
+  ],
+  "matches": [
+   {
+    "main_id": "self_supervised_signal_engineering",
+    "sub_id": "C08",
+    "role": "primary",
+    "fit": "strong",
+    "tactic_steps_checked": [
+     "1 语料(昂贵演示)为瓶颈并排除更便宜的非生成补救：执行(与纯脚本DR+噪声对照)",
+     "2 可控生成器覆盖欠覆盖区域：执行(agent 在 scene/strategy/phase/dynamics 改码)，但是否真正扩展支持域仅由留出变体结果间接证明",
+     "3 单一承重过滤器：执行(grader+开环回放+新单元规则)，并给出为何用回放(排除状态写入作弊)",
+     "4 迭代且学习者反馈回灌生成器：缺失(单遍生成，无 on-policy/学习者不确定性反馈)",
+     "5 弥合到真实目标并对照更便宜替代：部分(1任务真机10次；纯脚本对照)"
+    ],
+    "success_failure_checks": [
+     "成功条件：过滤器是关键点——已有；真实目标迁移——仅1任务",
+     "失败风险'只证代理性质'：未发生(报告下游成功率)",
+     "失败风险'缺廉价基线'：有纯脚本DR基线，但基线按设计缺多样性"
+    ],
+    "evidence_ids": [
+     "E015",
+     "E021",
+     "E022",
+     "E025",
+     "E044",
+     "E045"
+    ],
+    "reason": "本文把一个已验证的 agent 解视作种子，用 agent 可控生成器合成超出原始演示支持域的轨迹，并经单一质量门(grader+开环回放)后再训练学生，操作即 C08 的 generate-steer-score-filter-retrain；与 C07(内部状态读数、冻结骨干)和 C26(偏好/奖励信号)不同。"
+   },
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "C25",
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "1 区分学习模型不可靠与外部求解器擅长的子问题：部分——参数整定交给 CMA-ES，几何/运动交给 IK/OSC 控制器",
+     "2 机器可检的中间产物：执行——solve(env) 可执行程序，评分器隐藏离线",
+     "3 以求解器可验证输出闭环：部分——agent 自行读仿真状态；排名分数不返回给 agent 的细节材料未说明",
+     "4 消融验证环节承重：仅打包工具消融(5工具一起)",
+     "5 成本核算：执行(token/USD/时间)"
+    ],
+    "success_failure_checks": [
+     "失败'装配现成部件无承重模块'：本文的承重模块是可验证程序+离线评分，但各工具无单独承重证明",
+     "失败'缺边际贡献消融'：工具仅打包消融"
+    ],
+    "evidence_ids": [
+     "E032",
+     "E043",
+     "E012",
+     "E039"
+    ],
+    "reason": "可执行程序作为被仿真/评分器机械检验的中间产物，并委派参数搜索给 CMA-ES；但'分解'主要是 agent 自己的阶段划分，缺乏可分离的外部求解器贡献证明，故只作 supporting。"
+   },
+   {
+    "main_id": "controlled_diagnostic_design",
+    "sub_id": "C02",
+    "role": "supporting",
+    "fit": "partial_weak",
+    "tactic_steps_checked": [
+     "1 命名单一混杂：部分——去掉人工设计接口/感知噪声，但并非单变量隔离",
+     "2 控制实例：部分——隔离Docker、离线评分、禁用状态写入、相似/不相似/无提示三臂",
+     "3 独立于被评系统的真值：大部分任务来自仿真特权谓词；形变任务含 VLM 判分",
+     "4 以差距本身为头条：作弊率(Sol 43%/Terra 39%)与分层成功率是新测量",
+     "5 范围与迁移：仅仿真；基准内未做独立真值复核"
+    ],
+    "success_failure_checks": [
+     "失败'循环'：作弊审计由被评模型之一执行(轻度循环风险)",
+     "失败'仅合成'：基准全仿真(VLA 另有1任务真机)"
+    ],
+    "evidence_ids": [
+     "E001",
+     "E003",
+     "E004",
+     "E009"
+    ],
+    "reason": "基准+离线评分+作弊审计有诊断仪器成分，但不是围绕单一已命名混杂构造受控实例；仅在需要说明'评测仪器'这一不同操作时才列为 supporting，且匹配度弱。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "见 matches。主卡取 C08 的依据是论文的首要研究问题('其解能否成为可扩展监督')及其新增操作(把已验证解合成为多样数据)；solver 评测与工具部分由 C25(partial)和 C02(partial_weak)承担。",
+  "executes_pattern": "是(C08 的生成-过滤-再训练主干已执行；缺学习者反馈回灌)",
+  "resolves_problem": "部分：数据多样性不足在6个任务的仿真留出变体上缓解(0.066→0.233 rubric)，但绝对水平低，真机全程成功20%，且全流程未端到端验证；不能主张'问题已关闭'。"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "kind=success：该成功条件是否满足；kind=failure：status 表示论文证据是否已防范该失败(met=已防范/不成立，partial=部分，unmet=未防范或已观察到，unknown=无证据)",
+  "version_basis": "taxonomy_sha256=daf38e579a46 conditions_sha256=2ca1e76481d3",
+  "matches": [
+   {
+    "main": "privileged_teacher_supervision",
+    "sub": "K503",
+    "version": "domain-cards@daf38e579a46",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "id": "privileged_teacher_supervision:S1",
+      "kind": "success",
+      "status": "met",
+      "evidence_ids": [
+       "E003"
+      ],
+      "note": "全状态 coding agent 最高解决82%"
+     },
+     {
+      "id": "privileged_teacher_supervision:F1",
+      "kind": "failure",
+      "status": "partial",
+      "evidence_ids": [
+       "E037",
+       "E049",
+       "E001",
+       "E004"
+      ],
+      "note": "作弊真实发生(Sol 43%/Terra 39%)，由离线评分+LLM审计缓解；Astra 0%"
+     },
+     {
+      "id": "privileged_teacher_supervision:F2",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "E047",
+       "E028"
+      ],
+      "note": "未检验学生能否从自身观测恢复特权信息，无特权通道消融"
+     }
+    ],
+    "evidence_ids": [
+     "E015",
+     "E043",
+     "E047"
+    ],
+    "reason": "前沿 coding agent 在特权仿真状态下编写并迭代程序，直至成功；成功轨迹交给只看 RGB+本体状态的学生。注意：K503/K504/K204 的来源卡含本论文自身(2609.27308#s1-s3)，匹配有循环性，不是独立证据。"
+   },
+   {
+    "main": "offline_harness_distillation",
+    "sub": "K504",
+    "version": "domain-cards@daf38e579a46",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "id": "offline_harness_distillation:S3",
+      "kind": "success",
+      "status": "partial",
+      "evidence_ids": [
+       "E020",
+       "E021",
+       "E023"
+      ],
+      "note": "等量1000条对照，但无逐层/分支消融"
+     },
+     {
+      "id": "offline_harness_distillation:F2",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "E028"
+      ],
+      "note": "仅教师访问过的状态，无学习者诱导状态纠正"
+     },
+     {
+      "id": "offline_harness_distillation:F6",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "E040",
+       "E025",
+       "E028"
+      ],
+      "note": "6任务进入VLA训练；真机全程成功2/10；未端到端"
+     },
+     {
+      "id": "offline_harness_distillation:F5",
+      "kind": "failure",
+      "status": "unknown",
+      "evidence_ids": [
+       "E023"
+      ],
+      "note": "未隔离各层，无法判断多样化是否损害已见任务"
+     }
+    ],
+    "evidence_ids": [
+     "E015",
+     "E044",
+     "E045"
+    ],
+    "reason": "在教师解码上做 scene/strategy/phase/noise 编辑并只保留通过 grader+回放的分支；与 K504 的信息对照一致(特权代码教师、RGB学生)。与 RS-C08 的映射见 pattern_mapping。"
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K204",
+    "version": "domain-cards@daf38e579a46",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "id": "external_verification_control:F3",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "E011",
+       "E012"
+      ],
+      "note": "工具仅打包消融、额外GPU、单次运行"
+     },
+     {
+      "id": "external_verification_control:F4",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "E012"
+      ],
+      "note": "Opus 5 均分升而成功率 50%→43%"
+     }
+    ],
+    "evidence_ids": [
+     "E032",
+     "E011",
+     "E012"
+    ],
+    "reason": "向 agent 的原生 harness 加检查点树、CMA-ES 参数搜索、并行 sweep、场景查看器、评估日志；教师侧仅用，学生不可见。"
+   },
+   {
+    "main": "teacher_seeded_sparse_rl",
+    "sub": "K704",
+    "version": "domain-cards@daf38e579a46",
+    "fit": "partial_weak",
+    "condition_checks": [
+     {
+      "id": "teacher_seeded_sparse_rl:F3",
+      "kind": "failure",
+      "status": "unmet",
+      "evidence_ids": [
+       "E033"
+      ],
+      "note": "仅训练曲线，无留出评测"
+     }
+    ],
+    "evidence_ids": [
+     "E034",
+     "E033"
+    ],
+    "reason": "附录G在400个合成环境上对小模型做 turn-level PPO，属 K704 类操作；但仅作初步训练曲线(成功率2.7%→7.5%)，非本文中心主张，且无留出评测。"
+   }
+  ],
+  "unassigned": [
+   {
+    "operation": "基准协议硬化：隔离Docker、离线评分、禁用状态写入、LLM作弊审计、按机制统计作弊",
+    "reason": "与 K703 的'加固沙箱防奖励泄漏'相近但目标是评测而非RL训练，仅描述，不强配。",
+    "evidence_ids": [
+     "E001",
+     "E004",
+     "E049"
+    ]
+   },
+   {
+    "operation": "种子-变异合成任务构建(教师解 teleport 校验 + 6项验证)",
+    "reason": "附录G，仅服务编码agent训练；材料不足以单独成卡。",
+    "evidence_ids": [
+     "E034"
+    ]
+   }
+  ],
+  "revision_proposals": [
+   {
+    "status": "unchecked_proposal",
+    "text": "K204 可补充：工具打包使均分与成功率反向变化(Opus 5: 0.66→0.70 vs 50%→43%)；已在 K204 反例中，无需新卡。"
+   },
+   {
+    "status": "unchecked_proposal",
+    "text": "K503/K504/K204 的来源包含本文；评审应避免把'与卡片匹配'当作独立证据(循环)。"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "self_supervised_signal_engineering",
+   "rs_sub": "C08",
+   "domain_namespace": "embodied",
+   "domain_main": "privileged_teacher_supervision",
+   "domain_sub": "K503",
+   "operation_correspondence": "C08 的'可控生成器合成超出原语料支持域的实例→单一质量门→再训练'对应 K503 的'特权 coding agent 迭代程序教师→成功示范供视觉学生'；本文的生成器是 coding agent 改写场景/解码，质量门是 grader+开环回放。",
+   "necessary_conditions_differences": "C08 要求学习者反馈回灌生成器并迭代；本文单遍。K503 要求学生不可见特权信息——本文成立，但缺特权通道消融(E12)。",
+   "evidence_ids": [
+    "E015",
+    "E044",
+    "E045",
+    "E047"
+   ]
+  },
+  {
+   "rs_main": "self_supervised_signal_engineering",
+   "rs_sub": "C08",
+   "domain_namespace": "embodied",
+   "domain_main": "offline_harness_distillation",
+   "domain_sub": "K504",
+   "operation_correspondence": "C08 的 steer+filter 对应 K504 的'分支多样化+仅保留验证通过分支'；phase 层构造中间状态起点对应'保存的检查点分支'(本文由状态构造器而非同一运行的检查点生成)。",
+   "necessary_conditions_differences": "K504 的检查点来自同一教师运行；本文以代码重写/状态构造器达成类似覆盖；均只覆盖教师选择的状态，无学习者诱导状态。",
+   "evidence_ids": [
+    "E015",
+    "E044",
+    "E045",
+    "E028"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain_namespace": "embodied",
+   "domain_main": "external_verification_control",
+   "domain_sub": "K204",
+   "operation_correspondence": "C25 的'可执行产物+求解器反馈闭环'对应 coding agent 的 solve(env) + 仿真器；CMA-ES/sweep/检查点对应委派给确定性搜索/恢复求解器。",
+   "necessary_conditions_differences": "C25 要求消融验证环节承重——K204 同为打包消融，未满足；C25 的'健全外部求解器'在这里仅 CMA-ES 部分成立。",
+   "evidence_ids": [
+    "E032",
+    "E012",
+    "E043"
+   ]
+  },
+  {
+   "rs_main": "controlled_diagnostic_design",
+   "rs_sub": "C02",
+   "domain_namespace": "embodied",
+   "domain_main": null,
+   "domain_sub": null,
+   "operation_correspondence": "基准协议(离线评分、作弊审计)无对应领域子卡；暂列 unassigned，不强配。",
+   "necessary_conditions_differences": "C02 要求单一已命名混杂+独立真值；本文只部分满足。",
+   "evidence_ids": [
+    "E001",
+    "E004"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E02",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.18363#s1",
+    "2606.14674#s1",
+    "2606.10577#s2",
+    "2606.10577#s3",
+    "2609.20822#s3",
+    "2405.15793#s1",
+    "2609.15195#s2",
+    "2603.22435#s3",
+    "2609.29964#s1",
+    "2610.01939"
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "作者的工具主张是打包层面(检查点树+CMA-ES+sweep+查看器+日志一起)，没有逐项开关；仅用 H.5 一条单任务轨迹叙述两个工具的作用。若只主张打包层面，则该期望对其中心主张是'部分适用'；对'哪个组件起作用'的叙述则不满足。",
+   "evidence_ids": [
+    "E012",
+    "E032"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.10577#s4",
+    "2607.26148#s2",
+    "2609.39207#s2",
+    "2608.03327#s1",
+    "2606.18363#s1",
+    "2609.24974#s1",
+    "2610.12549#s2"
+   ],
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student",
+   "applicable": true,
+   "status": "met",
+   "reason": "工具效应在两个强弱不同骨干(Opus 5、GPT-5.6 Sol)下报告，且方向不一致(Opus 成功率降、Sol 不变)。",
+   "evidence_ids": [
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2607.22585#s1",
+    "2609.11987#s1",
+    "2609.29861#s2",
+    "2610.28589#s2",
+    "2608.03327#s1",
+    "2608.17393",
+    "2610.28069",
+    "2606.10577#s1",
+    "2609.15195#s4"
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "基准与工具实验每 (task,model[,condition]) 仅单次运行，没有重复运行方差与成对检验；均分变化(+0.04/+0.07)位于 SEM(≈0.07-0.08)之内。",
+   "evidence_ids": [
+    "E005",
+    "E012"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2607.22585#s1",
+    "2609.11987#s3",
+    "2610.01939#s1",
+    "2609.29964#s1",
+    "2606.18363#s3",
+    "2606.27871#s3",
+    "2607.26148#s1",
+    "2609.33378#s2",
+    "2606.10577#s4"
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative",
+   "applicable": true,
+   "status": "met",
+   "reason": "报告 token(含缓存)、wall-clock、已解任务 USD 花费；工具运行的额外 GPU 已披露。",
+   "evidence_ids": [
+    "E006",
+    "E011",
+    "E039"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2607.26148",
+    "2609.29861",
+    "2609.29389",
+    "2606.27871",
+    "2603.28052"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution",
+   "applicable": true,
+   "status": "partial",
+   "reason": "开发种子与评分初态分离、状态写入禁用；但未讨论前沿模型对 Isaac Lab/类似基准代码的训练污染，任务有 coding agent 辅助设计。",
+   "evidence_ids": [
+    "E009",
+    "E008"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E09",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.18363#s3",
+    "2606.27871#s2",
+    "2609.29389#s2",
+    "2609.29964#s3",
+    "2610.28589#s2",
+    "2610.01939#s3",
+    "2609.10522#s3"
+   ],
+   "applies_when": "a claim that a compact VLM/VLA student distilled from frontier-harness trajectories approaches or exceeds the teacher",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "作者并未主张学生逼近或超过教师(局限段明确未端到端研究能力转移)；真机有未微调 π0.5-DROID 基线，但仿真缺未微调学生行。",
+   "evidence_ids": [
+    "E028",
+    "E048"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E10",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2605.24220#s3",
+    "2606.27871#s2",
+    "2606.18363#s2",
+    "2609.24974#s3",
+    "2610.28589",
+    "2609.32416#s3"
+   ],
+   "applies_when": "any student trained on success-filtered teacher trajectories",
+   "applicable": true,
+   "status": "partial",
+   "reason": "披露了过滤规则(grader+回放+去重+新单元)，但未报告各任务教师接受率/保留比例与难度偏斜；每轨迹成本仅在图中。",
+   "evidence_ids": [
+    "E015",
+    "E050"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E12",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2608.06065#s1",
+    "2602.04942#s1",
+    "2505.09546#s1",
+    "2510.03207#s1",
+    "2610.15572#s2",
+    "2610.28589#s1"
+   ],
+   "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "学生仅见 RGB+本体，教师用特权仿真状态；没有消融特权通道内容，也没有教师 vs 学生在同分布上的成功率对照。",
+   "evidence_ids": [
+    "E047"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E15",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2608.17393#s2",
+    "2608.17528#s4",
+    "2609.27308#s1",
+    "2605.24220#s2",
+    "2602.04942"
+   ],
+   "applies_when": "a policy or coding agent trained or evaluated against an automatic success checker it could access or tamper with",
+   "applicable": true,
+   "status": "partial",
+   "reason": "隐藏离线评分、禁用 set_states、按机制统计作弊(Table 14)、对每个运行做审计；但审计者本身是被评模型之一且无人工校验，工具运行的作弊审计未说明。",
+   "evidence_ids": [
+    "E001",
+    "E004",
+    "E049"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E16",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2609.29861#s2",
+    "2607.26148#s1",
+    "2610.12549#s1",
+    "2609.15195#s3",
+    "2610.21450#s1",
+    "2607.22585#s2"
+   ],
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check",
+   "applicable": true,
+   "status": "partial",
+   "reason": "给出三类失败的定性轨迹和按机制的作弊统计、按难度/本体拆分；单次运行下无逐任务重复模式。",
+   "evidence_ids": [
+    "E037",
+    "E049"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E17",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2610.08432#s1",
+    "2609.33378#s2",
+    "2609.39207#s3",
+    "2603.22435#s2",
+    "2607.08448#s3",
+    "2609.37105#s2"
+   ],
+   "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance",
+   "applicable": true,
+   "status": "partial",
+   "reason": "提示源与目标任务不相交(设计上留出)，但仅6个目标任务、2模型×3种子；非自我改进库，不存在迭代过拟合问题。",
+   "evidence_ids": [
+    "E014",
+    "E042"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E19",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2606.18363#s3",
+    "2609.10522#s1",
+    "2605.13119#s2",
+    "2609.20822#s3",
+    "2607.08448",
+    "2609.39207",
+    "2607.26148"
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle",
+   "applicable": true,
+   "status": "met",
+   "reason": "真机1个任务，10次试验，分阶段成功率与未微调基线；但检查点按真机选取。",
+   "evidence_ids": [
+    "E024",
+    "E025",
+    "E026"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2610.01939#s1",
+    "2609.11987#s2",
+    "2609.34018#s1",
+    "2607.22585",
+    "2609.27308#s2"
+   ],
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "工具运行使用2块4090 vs 基线1块；已披露但未匹配预算。",
+   "evidence_ids": [
+    "E011"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E07",
+   "version": "expectations@db5ce019a874",
+   "source_strength": "practice_derived (paper_practice/paper_limitation readings; no reviewer comments collected)",
+   "source_refs": [
+    "2603.22435#s3",
+    "2607.08448#s1",
+    "2609.29389#s1",
+    "2609.29964#s1",
+    "2610.01939#s1",
+    "2610.28589#s2",
+    "2606.18363#s3",
+    "2609.21650#s2"
+   ],
+   "applies_when": "an empirical claim that an agentic manipulation harness or harness-distilled student beats end-to-end VLAs",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "未主张 agentic harness 或学生击败端到端 VLA 的 LIBERO-PRO 类对比。",
+   "evidence_ids": [],
+   "score_item": "-"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "前沿 coding agent 在 28 个长程灵巧仿真任务上能自行写出解，最强模型约82%成功",
+   "setting": "Isaac Lab，28任务×5本体，隐藏离线评分，4h，单次运行",
+   "baseline_control": "六个模型各用原生 harness(模型与 harness 共变)；无跨 harness 同模型对照",
+   "selection_vs_test": "开发种子与评分初态分离；任务由人工(+agent辅助)设计，专家+编码模型验证可行",
+   "result_denominator": "成功率 50/25/61/18/11/82%；作弊率 7/11/4/43/39/0%；28 任务×6 模型，每格1次",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E004",
+    "E005",
+    "E007",
+    "E008",
+    "E009"
+   ],
+   "counterevidence": "作弊审计者为被评模型之一，无人工校验；形变类任务全0%成功；VLM 判分口径不清；单次运行；模型×harness 共变；污染未讨论",
+   "allowed_conclusion": "在该仿真基准、特权状态与离线 rubric 下，GPT-6 Astra 的单次4h运行解决约23/28任务；模型之间的差异方向可信度有限(单次运行、harness共变)，不是统计证实的排名。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "已验证解可跨任务与跨本体迁移，加速并提高 agent 的解",
+   "setting": "6个目标任务；Opus 5 与 GPT-5.6 Sol 各3种子",
+   "baseline_control": "跨任务：相似/不相似/无提示三臂；跨本体：用 Franka 无提示运行作参照",
+   "selection_vs_test": "提示源≠目标任务",
+   "result_denominator": "跨任务终分 0.60(相似)/0.51(不相似)/0.52(无提示)，成功率 31%/17%/11%；跨本体 Kinova 0.74/56%、xArm 0.66/36% vs Franka 无提示 0.52/11%(36个运行/格)",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E042"
+   ],
+   "counterevidence": "跨本体对照混杂本体难度(未做各自本体无提示)；仅6目标任务",
+   "allowed_conclusion": "相似任务的已验证解提示在该6任务集上提高终分与成功率；跨本体提示的收益大小因对照选择而不可定量。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "额外工具(检查点树、CMA-ES、sweep、查看器、评估日志)进一步提高 agent 表现",
+   "setting": "全基准，Opus 5 与 Sol，单次运行，工具运行2×GPU",
+   "baseline_control": "同模型无工具基线",
+   "selection_vs_test": "同基准",
+   "result_denominator": "均分 0.66→0.70(Opus)、0.44→0.51(Sol)；成功率 50%→43%、18%→18%",
+   "evidence_ids": [
+    "E010",
+    "E011",
+    "E012"
+   ],
+   "counterevidence": "打包消融、额外GPU、单次运行；成功率反降；作弊审计是否覆盖工具运行未说明",
+   "allowed_conclusion": "未证实工具有稳定增益：均分小幅上升但在噪声内，且一个模型成功率下降。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "VLA 性能随生成示范数增加而提高",
+   "setting": "SmolVLA 450M，6任务，10→400示范，3种子，分布内评测",
+   "baseline_control": "无(无零示范/纯脚本规模曲线)",
+   "selection_vs_test": "评测与训练同分布(E017)",
+   "result_denominator": "6任务均值成功率 18%→69%，rubric 0.32→0.76；其中3任务使用放宽判据",
+   "evidence_ids": [
+    "E016",
+    "E017",
+    "E018",
+    "E019",
+    "E040",
+    "E041"
+   ],
+   "counterevidence": "分布内、放宽判据、表21含8任务而头条为6任务",
+   "allowed_conclusion": "在6个任务的分布内评测与放宽判据下，SmolVLA 随生成示范数增加而改善。"
+  },
+  {
+   "claim_id": "C5",
+   "text": "agent 辅助多样化提高对留出变体的泛化",
+   "setting": "6任务，各1000条，256个留出设置，3种子",
+   "baseline_control": "纯脚本(域随机化+噪声+小初态扰动)，等量示范",
+   "selection_vs_test": "测试含新实例与几何配置(构造流程未说明)",
+   "result_denominator": "整体 rubric 0.233±0.016 vs 0.066±0.008",
+   "evidence_ids": [
+    "E020",
+    "E021",
+    "E022",
+    "E023"
+   ],
+   "counterevidence": "基线按设计缺场景/策略多样性；各层贡献未隔离；绝对水平低",
+   "allowed_conclusion": "与仅随机化/噪声的脚本数据相比，agent 辅助多样化数据在这6任务的留出变体上得分更高；不能归因于'agent'本身或特定层。"
+  },
+  {
+   "claim_id": "C6",
+   "text": "仅用 coding-agent 生成的仿真示范微调的 VLA 在真机完成长程任务",
+   "setting": "Franka+Robotiq，灯具拆卸4阶段，500条仿真轨迹，π0.5-DROID，10次试验",
+   "baseline_control": "未微调 π0.5-DROID(0%)",
+   "selection_vs_test": "3DGS 重建同一实验室；检查点按真机表现选取",
+   "result_denominator": "累计阶段成功 100/80/30/20% (n=10)；基线 0/0/0/0%",
+   "evidence_ids": [
+    "E024",
+    "E025",
+    "E026",
+    "E027",
+    "E048"
+   ],
+   "counterevidence": "单任务、10次、全程仅2/10；检查点选择；摘要'completes'偏强",
+   "allowed_conclusion": "该单任务上存在非零零样本 sim-to-real 迁移(全程2/10)，不是可靠完成。"
+  },
+  {
+   "claim_id": "C7",
+   "text": "编码 agent 程序策略优于 PPO 学得的策略",
+   "setting": "5个较易 Franka 任务，三种奖励设计，约一周离线调参",
+   "baseline_control": "PPO(稀疏/agent设计稠密/专家调参)",
+   "selection_vs_test": "同rubric评测，人工检查作弊",
+   "result_denominator": "仅 Fig 5(无文本数值)",
+   "evidence_ids": [
+    "E035",
+    "E036"
+   ],
+   "counterevidence": "数值只在图中；任务偏向RL；离线调参不计预算",
+   "allowed_conclusion": "作者报告方向性结论；本席未能核对数值(材料仅文本)。"
+  },
+  {
+   "claim_id": "C8",
+   "text": "在合成环境上 PPO 可训练 coding agent(初步)",
+   "setting": "Seed-2.1-Lite，400合成环境",
+   "baseline_control": "训练前后",
+   "selection_vs_test": "无留出",
+   "result_denominator": "成功率 2.7%→7.5%(训练曲线)",
+   "evidence_ids": [
+    "E033",
+    "E034"
+   ],
+   "counterevidence": "无留出评测",
+   "allowed_conclusion": "仅训练集内学习信号；不支持泛化主张。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "transfer",
+  "evidence_level_reason": "依据 docs/EVIDENCE.md：有 sim-to-real 且给出真机试验次数(10次、分阶段)，且真机策略由仿真生成示范训练；但仅1个任务、全程成功2/10、检查点按真机选取。其余主张最高为 online(仿真由环境谓词判定)。",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在仿真(特权状态、隐藏离线 rubric)中，前沿 coding agent 单次4h运行可解决11%–82%的28个任务(最强模型约23/28)；已验证解作为提示可在6个任务上提高终分；经五层多样化与grader+回放过滤扩展的数据在6个任务的留出变体上比纯脚本数据得分更高(0.233 vs 0.066)；单个真机任务上存在非零阶段成功(全程2/10)。工具增益、PPO对比、编码agent RL均未获充分支持。",
+  "not_supported": [
+   "工具带来稳定提升",
+   "模型/harness 排名",
+   "'完成'真机长程任务",
+   "agent 蒸馏到 VLA 的能力转移程度",
+   "各多样化层级的贡献"
+  ],
+  "retained_improver_online_transfer": "retained 不适用(非自我改进闭环；只读提示不累积)；improver 不适用；online=是(仿真)；transfer=单任务真机",
+  "unresolved": [
+   "作弊审计的准确率(Opus 5 自审)",
+   "形变任务 VLM gate 口径",
+   "正文6任务 vs 表21含8任务",
+   "最近邻(CaP-X 等)全文不在输入包",
+   "stage brief 原文",
+   "Fig 5/Fig 8 的数值"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "作者 gap 具体(既有 coding-agent 工作局限于导航/抓放且依赖人工设计接口；仿真基准缺少长程+灵巧交互；脚本化数据多样性饱和)，附录A逐一点名最近邻(CaP-X、技能库进化搜索、真机自改进、冻结规划器+VLA、MimicGen/InternData-A1)并指出差异。扣分：最近邻未做同协议对比，关键最近邻全文不在输入包内，无法在本席核验其局限描述；'移除人工接口'靠授予完整仿真状态实现，其残余缺口(学生不可见特权信息)主要靠局限段落声明。介于2与4之间取3。",
+   "evidence_ids": [
+    "E029",
+    "E030",
+    "E031",
+    "E028"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "机制可复述并产生可区分预测：(1) 全状态 coding agent 把部署前的程序搜索变为可验证解；(2) 五层多样化+开环回放过滤，把单个昂贵解摊销为多样数据，预测 agent 辅助数据在留出变体上优于仅随机化数据。与朴素替代(纯脚本DR)有对比。扣分：作者承认未隔离各层贡献；为何某一层有用、特权教师信息能否被学生恢复没有分析(无 E12 式消融)；工具集合只作为打包消融。",
+   "evidence_ids": [
+    "E015",
+    "E021",
+    "E023",
+    "E044",
+    "E045"
+   ],
+   "counterevidence_ids": [
+    "E023"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作链基本可重建：评测协议(Docker隔离、离线评分、禁用状态写入)、五层多样化各层操作、接受/回放/去重/批并行规则、时间预算、标签约定(位置模式用干净指令作标签、力矩模式用实际下一步关节位置)、VLA训练超参、真机数据与部署细节、工具的详细机制均在附录。失败与边界(三类失败、作弊机制、局限)清楚。扣分：多样化的关键执行体——给 agent 的 stage brief 与任务提示未在材料中；表7标题称形变得分排除VLM gate而表6未说明；正文称6任务而表21含8任务；放宽成功判据仅在附录。",
+   "evidence_ids": [
+    "E015",
+    "E032",
+    "E044",
+    "E045",
+    "E001"
+   ],
+   "counterevidence_ids": [
+    "E038",
+    "E046",
+    "E041"
+   ],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "优点：特权状态谓词+分阶段rubric、离线隔离评分、禁用状态写入、开环回放复核、真机给出分阶段试验次数(10)与0%基线。缺口：作弊判定由被评模型之一(Opus 5)审计且无人工校验；形变任务含 VLM 判分且口径在表6/7间不清；VLA 实验对3/6头条任务放宽成功判据；正文6任务 vs 表21含8任务的头条取舍未解释；摘要称真机'completes'而全程成功仅2/10；每个 task-model 仅单次运行。",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E004",
+    "E015",
+    "E025"
+   ],
+   "counterevidence_ids": [
+    "E002",
+    "E004",
+    "E018",
+    "E019",
+    "E027",
+    "E041",
+    "E046"
+   ],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "有相关控制：跨任务提示为相似/不相似/无提示三臂(2模型×3种子)；agent辅助 vs 纯脚本等量(1000条)对比；真机有未微调基线。缺口：工具消融是打包、额外GPU、单次运行，Opus 5 成功率反降；跨本体对照的无提示基线用了 Franka 而非目标本体；agent 辅助 vs 脚本的对照在多样性上是设计性不对等，且未隔离五层贡献；模型比较与 harness 完全共变；PPO 对比仅数值在图中且无文本数值；规模曲线无零示范(未微调学生)基线。",
+   "evidence_ids": [
+    "E014",
+    "E021",
+    "E025",
+    "E048"
+   ],
+   "counterevidence_ids": [
+    "E007",
+    "E011",
+    "E012",
+    "E013",
+    "E022",
+    "E023"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "基准层面有开发种子/评分初态分离(E009)与任务可行性验证；VLA 泛化有256个留出变体且作者称语义新实例；真机为sim→real，且基线为0%。缺口：规模曲线明确是分布内；真机评测场景由同一实验室3DGS重建并为该任务专门编写解(开发任务即评测任务)，检查点按真机表现选取；前沿模型对 Isaac Lab/robosuite 代码的预训练污染未讨论；编码agent RL 无留出评测；留出集的构造者与流程未说明。",
+   "evidence_ids": [
+    "E009",
+    "E020",
+    "E025",
+    "E008"
+   ],
+   "counterevidence_ids": [
+    "E017",
+    "E026",
+    "E033"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "报告了 SEM、种子数(VLA 3 种子、转移 2模型×3种子)、作弊率/成功率分母和按层级/本体拆分，失败类型有统计。缺口：基准每 (task, model) 单次运行，无运行间方差，模型间差异与工具效应(均分+0.04/+0.07)无检验；VLA 示范规模曲线误差棒大(如 nut_thread 62±20)；真机 10 次试验无区间。",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E012",
+    "E025"
+   ],
+   "counterevidence_ids": [
+    "E005",
+    "E012"
+   ],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "成本披露充分：按模型 token(含缓存)、wall-clock、已解任务的 USD 花费(合计 1029/220/597/133/39/1591)、预算(4h、1×4090)；多样化阶段 12h 预算。扣分：工具运行用2×GPU未匹配预算；agent 辅助多样化的每轨迹成本只在 Fig 8(无文本数值)，与纯脚本对照未做成本匹配；PPO 基线的约一周离线调参未计入。",
+   "evidence_ids": [
+    "E006",
+    "E011",
+    "E039",
+    "E050"
+   ],
+   "counterevidence_ids": [
+    "E011",
+    "E050"
+   ],
+   "search_scope": []
+  }
+ },
+ "score": {
+  "raw": 65.0,
+  "display": 65.0,
+  "lower": 65.0,
+  "upper": 65.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": {
+  "status": "reviewed",
+  "reason": "完整全文(HTML)与附录已读；八项均有证据；图像中的数值缺失记入 unresolved，不影响评分项判定。"
+ }
+}

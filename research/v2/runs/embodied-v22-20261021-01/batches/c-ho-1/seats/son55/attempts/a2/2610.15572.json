@@ -1,0 +1,958 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a2",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2610.15572",
+  "paper_id": "2610.15572",
+  "title": "Look Before You Move: Agent-Interface-Aligned Supervision for Open-World Mobile Manipulation",
+  "version": "2610.15572v1",
+  "claim_type": "component_training",
+  "central_claim": "通过让教师直接经学生部署的高层技能接口选择并执行动作（AIDA），配合主动视觉（保持可见/找回目标/接近操作位）教师、模板式空间推理监督与训练-推理共享 harness，8B VLM 学生在 OWMM 上获得 71.76% 全任务成功（170 个留出 episode），无额外训练迁移到真机达 38%，并可用于 EmbodiedBench 导航子集。",
+  "claim_scope": "仿真 OWMM（预建图+已知定位+简化抓取）为主；真机与 EB 导航为外推证据。"
+ },
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T18:10:41Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144). Domain cards K505/K706 cite this paper (source-circular): structural reference only, not used as evidence for ratings. Teacher is a rule-based privileged simulator teacher, student a Qwen3-VL-8B VLM in a skill-interface harness; treated in scope as student training in a harness (not a precedent 2606.12372 case). Hash conventions computed by this worker as file sha256 (rubric=SCORE_SPEC.md; rs_manifest=reference MANIFEST.tsv; domain_cards=research/patterns/taxonomy.json; expectations=sha256 of sorted concatenation of patterns/main/*.md); run manifest.json not read (blind boundary), controller should reconcile. session_id not obtainable by subagent: null."
+ },
+ "materials": [
+  {
+   "material_id": "M-2610.15572",
+   "url": "https://arxiv.org/html/2610.15572v1",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2610.15572.txt",
+   "sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 Method 3.1-3.5",
+    "4 Experiments 4.1-4.6 (Tables 1-4)",
+    "5 Conclusion",
+    "6 Limitations",
+    "Appendix A",
+    "Appendix B",
+    "Appendix C",
+    "Appendix D"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Abstract",
+   "quote": "achieves 71.76% full-task success on 170 held-out OWMM episodes",
+   "support_explanation": "中心结果。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Abstract",
+   "quote": "shortest-path progress provides limited supervision for deciding where to look",
+   "support_explanation": "作者 gap。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 3.2",
+   "quote": "AIDA collects demonstrations by executing teacher decisions through the student’s skill interface.",
+   "support_explanation": "核心操作：教师经学生技能接口执行。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 1",
+   "quote": "The teacher can use privileged simulator information",
+   "support_explanation": "教师特权/学生仅部署时可得信息的不对称。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 3.3",
+   "quote": "Such unsuccessful trajectories are excluded from the training dataset.",
+   "support_explanation": "教师失败轨迹被过滤（成功过滤）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 3.4",
+   "quote": "It generates this reasoning offline using deterministic templates and the simulator information recorded during collection.",
+   "support_explanation": "推理标签来自特权模拟器信息模板，学生需从自身观测产出。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 3.5",
+   "quote": "The shared harness uses the same prompt format, history representation, and output schema for training and inference.",
+   "support_explanation": "训练/推理共享 harness。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Table 1",
+   "quote": "AIDA-OWMM (ours) Qwen3-VL-8B-Instruct 90.59% 82.35% 74.12% 72.35% 71.76%",
+   "support_explanation": "主表行，分阶段完成率+Full Task。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.2",
+   "quote": "Results for OWMM-VLM-38B, OWMM-VLM-8B, GPT-4o+PIVOT, and GPT-4o+RoboPoint are taken from OWMM-Agent",
+   "support_explanation": "基线数字来自他人报告，非本文重跑。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Table 2",
+   "quote": "OWMM, relabeled 152,478 38.8% AIDA: distance-greedy 28,480 46.3% AIDA: visibility-aware 28,480 65.5% AIDA: target recovery 28,480 69.6%",
+   "support_explanation": "教师敏感性：同基座/接口/标注/harness 下换演示来源。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.3",
+   "quote": "We train the three AIDA students with the same seed and report mean success over three evaluations of the 170 episodes.",
+   "support_explanation": "单一训练种子；三次评测重复。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Table 3",
+   "quote": "Every stage None No 55.88% Search only None No 60.00% Search only Actions No 65.88% Search only Actions Yes 71.76%",
+   "support_explanation": "harness 消融为累积叠加，单次评测。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.5",
+   "quote": "The robot achieves 38% end-to-end success with a 15-step horizon, including low-level grasp failures in the evaluation.",
+   "support_explanation": "真机结果，正文未给试验次数。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.5",
+   "quote": "The office environment contains two office rooms and an open tea room, with five movable objects and five receptacles.",
+   "support_explanation": "真机场景描述，无 trial 计数。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.6",
+   "quote": "Evaluation uses 60 episodes from each of the base and common_sense splits, with results averaged over two runs.",
+   "support_explanation": "EB 分母：2x60 episodes，两次运行。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Table 4",
+   "quote": "AIDA policies AIDA (EB-trained) 0.85 0.83 0.84 AIDA (OWMM-trained) 0.54 0.55 0.55",
+   "support_explanation": "EB 训练 vs OWMM 训练零样本。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Table 4",
+   "quote": "Qwen3-VL-8B-Instruct 0.02 0.02 0.02",
+   "support_explanation": "同接口下未训练基座在 EB 上 0.02。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 6",
+   "quote": "AIDA-OWMM uses an offline teacher with privileged simulator state, so generalization is bounded by the teacher data diversity",
+   "support_explanation": "作者局限。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 3.1",
+   "quote": "In simulation, grasping is simplified: the object is attached to the gripper when the end effector is within the configured grasp distance.",
+   "support_explanation": "仿真抓取简化：成功判定偏乐观。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Appendix A",
+   "quote": "collection attempts cover 13,608 episodes, of which 11,740 succeed. Removing 1,528 successful episodes longer than 16 steps leaves 10,212 episodes and 67,183 training examples.",
+   "support_explanation": "教师成功率与过滤记录（但无按难度偏斜）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Appendix D",
+   "quote": "Max VLM decisions per episode 10",
+   "support_explanation": "评测决策上限 10（教师数据保留至 16 步）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Appendix D",
+   "quote": "Validation during training Disabled",
+   "support_explanation": "训练无验证集；配置选择依赖评测集消融。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Appendix C",
+   "quote": "Low-level grasp execution accounts for the largest failure share on the real robot, while scene-frame retrieval is the largest failure source in simulation",
+   "support_explanation": "失败分解文字描述，数据在 Fig 5（图，文本无数值）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.1",
+   "quote": "The OWMM comparisons vary the demonstration policy, skill set, or harness while keeping the base model, fine-tuning method, and low-level executors fixed.",
+   "support_explanation": "对照设计：固定基座/微调/执行器。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.3",
+   "quote": "The OWMM baseline represents trajectory-based data construction: simulator trajectories are divided into chunks, and trajectory points are projected into image coordinates to form high-level action labels.",
+   "support_explanation": "最近邻方法的复现式基线（作者自建重标）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.6",
+   "quote": "We train a policy on 1,200 navigation episodes constructed with the AIDA pipeline.",
+   "support_explanation": "EB 训练数据来源；无 AIDA vs 轨迹重标在导航上的对照。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 3.1",
+   "quote": "we assume a pre-mapped environment and known robot localization",
+   "support_explanation": "预建图+已知定位前提。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 6",
+   "quote": "Whether agent-interface-aligned supervision provides similar benefits for longer instruction-following and search-based navigation settings",
+   "support_explanation": "导航范围局限。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.6",
+   "quote": "Hosted-model baselines use the same prompt format, action parser, skill executor, and 10-step horizon.",
+   "support_explanation": "EB 基线接口匹配。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E030",
+   "material_id": "M-2610.15572",
+   "material_sha256": "3466cc091a174bdbadd3bf0b9ddbb98ef0fb305ffe203b8a75d3fa787f3a4513",
+   "locator": "Sec 4.1",
+   "quote": "Following the OWMM evaluation protocol [ 2 ] , we evaluate on 170 held-out episodes in pre-mapped simulated homes.",
+   "support_explanation": "评测分母；训练/评测场景是否不相交未明示。",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "VLM 学生的 SFT 演示数据来源（由规划轨迹重标 → 教师经技能接口闭环执行）",
+   "information": "教师：模拟器掩码/位姿/路径/方位角（特权）；学生与部署：头部 RGB、指令、技能定义、历史技能调用、搜索期关键帧；特权信息明确排除出提示",
+   "operation": "规则教师在每步选技能+参数、执行、依据结果选下一步；主动视觉三层教师（距离贪心/可见性感知/目标找回）",
+   "output": "成功 episode 的 (观测, 技能调用) 序列，67,183 训练样本；失败与过长(>16 步)轨迹剔除",
+   "conditions": "预建图、已知定位、简化抓取、短时程",
+   "feedback": "教师以执行结果驱动下一步，无学生在环",
+   "selection_rule/data": "成功过滤（11,740/13,608 成功）+ 长度剔除 1,528；模拟器内部选择",
+   "persistence": "离线数据集，LoRA 微调后固定",
+   "later_use": "学生以同一 harness 部署，不带特权",
+   "claimed_effect": "对比轨迹重标基线 38.8% → 最优教师 69.6%（4 技能）",
+   "failure_boundary": "教师多样性上界、无 on-policy 纠正、真机抓取瓶颈",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E010",
+    "E020"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "逐步空间状态推理监督（模板标注器）+ 训练/推理共享 harness",
+   "information": "标注器读取记录的掩码与位姿生成可见性/方向/就绪/进度模板文本；harness 在训练与推理使用同样提示、历史（仅技能调用，不带摘要）与输出模式",
+   "operation": "学生被训练先输出 state_estimation/reasoning 再输出 action",
+   "output": "r_t, a_t, u_t, m_t 五字段",
+   "conditions": "学生需从自身观测复现特权派生的标签（如视野外方向）",
+   "feedback": "无",
+   "selection_rule/data": "not_applicable",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "累积消融 55.88 → 71.76%",
+   "failure_boundary": "标签可识别性未验证",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E012"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "既有 OWMM 流水线把规划/执行轨迹转成高层动作标签，由最短路径驱动，对主动视觉（保持可见、找回目标、取得合适操作视角）监督不足。",
+  "checked_gap": "gap 有来源（OWMM-Agent 轨迹重标）并被可检验：作者自建 OWMM 重标基线与教师来源在固定条件下对比。但并未展示基线学生的失败正是因目标丢失/视角不佳，而是用总体成功率代理。",
+  "lineage/closest_adjacent": [
+   {
+    "name": "OWMM-Agent (论文引用 [2])",
+    "source_version": "论文内引用；基线数字取自其报告，原文未在本批固定材料中",
+    "note": "轨迹分块重标为高层动作标签；本文以教师闭环执行替代。"
+   },
+   {
+    "name": "主动感知/NBV 方法 [4,5,27-29]",
+    "source_version": "论文内引用",
+    "note": "选视角以降低不确定性；本文把视角控制蒸馏进 VLM 高层策略。"
+   },
+   {
+    "name": "空间推理 VLM [30-39]",
+    "source_version": "论文内引用",
+    "note": "空间状态作策略中间变量。"
+   }
+  ],
+  "residue": "教师特权依赖、真机抓取、训练分布外泛化、非 on-policy 数据。",
+  "stakes": "OWMM 全任务成功从 21.90%(OWMM-VLM-38B，他人报告) 到 71.76%（本文），差距大于方法归因所需。",
+  "method_response": "让教师在学生接口内闭环选择动作，使每个标签是真实高层决策，并加上主动视觉教师与推理监督。",
+  "remaining_gap": "特权标签可识别性、on-policy 纠正、更长时程导航、真机统计。",
+  "evidence_ids": [
+   "E002",
+   "E025",
+   "E018",
+   "E028"
+  ],
+  "unresolved": [
+   "基线失败是否由目标丢失造成未被诊断",
+   "训练/评测场景是否不相交"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "self_supervised_signal_engineering",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "self_supervised_signal_engineering",
+    "sub_id": "rs:C08",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "Step1 瓶颈在训练语料(监督不足)而非学习器——执行：对照轨迹重标",
+     "Step2 可控生成器覆盖未被覆盖区域——执行：教师主动视觉行为产生视野维持/找回数据",
+     "Step3 单一质量门——执行：成功过滤+长度剔除",
+     "迭代/动态反馈生成器——缺失(离线一次生成，无学生状态反馈)"
+    ],
+    "success_failure_checks": [
+     "成功(使生成扩展支持而非复述偏置)：partial：教师覆盖面由规则决定，Table 2 显示提升",
+     "失败(过滤准则松散)：触发风险——仅用成功/长度，教师质量对学生的预测性未验证"
+    ],
+    "evidence_ids": [
+     "E003",
+     "E005",
+     "E010",
+     "E020"
+    ],
+    "reason": "核心操作是用规则教师(可控生成过程)合成 SFT 数据，成功过滤后训练学生；非用模型自身熵/伪标签，故为 partial，与 C07/C26 的内部信号/偏好对差异明确(无内部读数、无偏好对)。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "最近的原主卡为‘制造监督信号’；教师/标注器是合成监督来源。其余主卡无更贴合操作。",
+  "executes_pattern": "partial：生成+成功门执行；无动态回路。",
+  "resolves_problem": "partial：Table 2 在控制条件下支持‘教师来源改善学生’，但未证明‘主动视觉监督不足’是基线失败主因。"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "privileged_teacher_supervision",
+    "sub": "K505",
+    "version": "cards@taxonomy-hash-daf38e57",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "cond": "教师在学生词汇内逐步行动并带模板状态推理",
+      "status": "met",
+      "note": "技能接口一致；模板标注"
+     },
+     {
+      "cond": "特权推理标签对学生可识别",
+      "status": "unknown",
+      "note": "未验证视野外方向等标签"
+     },
+     {
+      "cond": "教师多样性上界",
+      "status": "partial",
+      "note": "作者承认"
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E006",
+     "E018"
+    ],
+    "source_circular": true,
+    "circularity_note": "K505 的来源即本论文(2610.15572#s1/s2)；匹配仅作结构参照，不作任何评分的独立证据。"
+   },
+   {
+    "main": "offline_harness_distillation",
+    "sub": "K501",
+    "version": "cards@taxonomy-hash-daf38e57",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "cond": "成功过滤教师轨迹 SFT，学生保持完整 harness",
+      "status": "met",
+      "note": "LoRA SFT，同 harness 部署"
+     },
+     {
+      "cond": "教师为前沿冻结模型",
+      "status": "unmet",
+      "note": "教师是规则/特权教师，不是前沿模型"
+     },
+     {
+      "cond": "教师-未训练学生-蒸馏学生三行",
+      "status": "partial",
+      "note": "OWMM 上缺教师与未训练学生行；EB 上有基座行"
+     }
+    ],
+    "evidence_ids": [
+     "E005",
+     "E007",
+     "E017",
+     "E020"
+    ]
+   },
+   {
+    "main": "harness_native_rl",
+    "sub": "K706",
+    "version": "cards@taxonomy-hash-daf38e57",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "cond": "训练与部署用同一上下文构造规则",
+      "status": "met",
+      "note": "共享 prompt/history/schema"
+     },
+     {
+      "cond": "RL 训练",
+      "status": "unmet",
+      "note": "本文为 SFT，非 RL；仅匹配‘训练/部署上下文一致’这一子操作"
+     }
+    ],
+    "evidence_ids": [
+     "E007",
+     "E012"
+    ],
+    "source_circular": true,
+    "circularity_note": "K706 引用本论文 (2610.15572#s3)，仅结构参照。"
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": [
+   "K705/K505 之类的特权教师卡缺少‘评测集上选配置’这一失败条件的记录(本文 Table 3)"
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "self_supervised_signal_engineering",
+   "rs_sub": "rs:C08",
+   "domain_namespace": "embodied",
+   "domain_main": "privileged_teacher_supervision",
+   "domain_sub": "K505",
+   "operation_correspondence": "RS: 可控生成器合成训练实例+单一门。领域: 特权规则教师在学生技能词汇内执行，成功过滤，模板化推理标签。对应点：监督由模拟器侧过程制造而非人标，经成功门。",
+   "necessary_conditions_or_differences": "领域卡额外要求‘学生观测中含教师标签所编码信息’(可识别性)，本文未验证；RS 卡要求动态反馈，本文无。",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E006",
+    "E020"
+   ]
+  },
+  {
+   "rs_main": "self_supervised_signal_engineering",
+   "rs_sub": "rs:C08",
+   "domain_namespace": "embodied",
+   "domain_main": "offline_harness_distillation",
+   "domain_sub": "K501",
+   "operation_correspondence": "成功过滤的教师数据 SFT 学生，学生在同一 harness 内部署。",
+   "necessary_conditions_or_differences": "教师非前沿模型；缺教师与未训练学生同 harness 对照行。",
+   "evidence_ids": [
+    "E005",
+    "E007"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E10",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/privileged_teacher_supervision.md"
+   ],
+   "applies_when": "学生用成功过滤教师轨迹",
+   "applicable": true,
+   "status": "partial",
+   "reason": "披露 13,608 尝试/11,740 成功/剔除 1,528/最终 10,212；未按任务难度报偏斜。",
+   "evidence_ids": [
+    "E020"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E12",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/privileged_teacher_supervision.md"
+   ],
+   "applies_when": "教师用学生看不到的信息",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Table 3 显示推理监督 +5.88 pts，但未检验标签可识别性或对特权通道内容消融。",
+   "evidence_ids": [
+    "E006",
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E09",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/offline_harness_distillation.md"
+   ],
+   "applies_when": "声称蒸馏学生逼近/超过教师",
+   "applicable": true,
+   "status": "partial",
+   "reason": "OWMM 上无教师全任务成功与未训练基座行；EB 有基座 0.02；Table 1 外部基线非同 harness。",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E017"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "归因具体 harness 组件",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Table 3 为累积叠加(关键帧→+历史→+推理)，无逐项开关。",
+   "evidence_ids": [
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "成功率比较",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Table 2 三次评测均值但单训练种子；Table 1/3 单次；EB 两次运行；无 CI。",
+   "evidence_ids": [
+    "E011",
+    "E012",
+    "E015"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "声称迁移到真机",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "正文只给 38%，未给试验次数；是否在 Fig 5 未知。",
+   "evidence_ids": [
+    "E013",
+    "E014"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E16",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "导航/操作成功声明",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Table 1 给出阶段完成率；Appendix C 失败份额仅图/文字，无数值。",
+   "evidence_ids": [
+    "E008",
+    "E023"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E08",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "基准声称/开发重叠",
+   "applicable": true,
+   "status": "partial",
+   "reason": "训练验证关闭；harness 配置经评测集消融选定；场景是否不相交未明示。",
+   "evidence_ids": [
+    "E022",
+    "E030",
+    "E012"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E03",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "声称 harness 组件普遍有效",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "仅 Qwen3-VL-8B 一个学生基座。",
+   "evidence_ids": [
+    "E024"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E05",
+   "version": "domain-main-card",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "声称更实用",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "无推理延迟/训练 GPU 时/调用成本；仅数据规模。",
+   "evidence_ids": [
+    "E020"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "AIDA-OWMM 71.76% 全任务，远超 OWMM-VLM-38B 21.90%",
+   "setting": "OWMM 170 episode，Qwen3-VL-8B LoRA",
+   "baseline/control": "他人报告的 OWMM-Agent 数字，非本文重跑",
+   "selection_vs_test": "配置经评测集消融选定(Table 3)；验证关闭",
+   "result/denominator": "122/170 约 71.76%（170 分母）",
+   "evidence_ids": [
+    "E001",
+    "E008",
+    "E009",
+    "E022"
+   ],
+   "counterevidence": [
+    "E009",
+    "E022"
+   ],
+   "allowed_conclusion": "在 OWMM 仿真，本文学生高于他人报告的基线；跨论文比较不可视为严格受控。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "教师来源/主动视觉提升学生",
+   "setting": "同基座/LoRA/4 技能/标注/harness，仅换演示来源",
+   "baseline/control": "作者自建 OWMM 重标(152,478 样本)",
+   "selection_vs_test": "评测集同 C1，单训练种子",
+   "result/denominator": "38.8 → 46.3 → 65.5 → 69.6 (三次评测均值，170 episodes)",
+   "evidence_ids": [
+    "E010",
+    "E011",
+    "E024",
+    "E025"
+   ],
+   "counterevidence": [
+    "E011"
+   ],
+   "allowed_conclusion": "单种子下，闭环教师数据优于轨迹重标，且可见性/找回行为再提升；差距大(>=7.2 pts 起)。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "空间推理监督与历史有助于成功",
+   "setting": "同 AIDA 数据，改 harness",
+   "baseline/control": "无历史无推理",
+   "selection_vs_test": "同评测集",
+   "result/denominator": "55.88 → 60.00 → 65.88 → 71.76，单次评测",
+   "evidence_ids": [
+    "E012"
+   ],
+   "counterevidence": [
+    "E012"
+   ],
+   "allowed_conclusion": "累积叠加，单次；170 个 episode 下每个 episode 0.59 pts，难分离交互。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "无额外训练迁移真机 38%",
+   "setting": "Atribot S1 办公室 5 物 5 容器",
+   "baseline/control": "无真机对照",
+   "selection_vs_test": "未见本体",
+   "result/denominator": "38%；试验数正文未给",
+   "evidence_ids": [
+    "E013",
+    "E014"
+   ],
+   "counterevidence": [
+    "E023"
+   ],
+   "allowed_conclusion": "描述性迁移证据，分母缺失，不可作为统计比较。"
+  },
+  {
+   "claim_id": "C5",
+   "text": "AIDA 适用于导航",
+   "setting": "EB 导航子集 2x60 episodes x 2 runs，10 步",
+   "baseline/control": "零样本 VLM、基座 0.02、OWMM 训练零样本",
+   "selection_vs_test": "EB 训练 1,200 episodes 同分布",
+   "result/denominator": "EB 训练 0.84；OWMM 零样本 0.55；GPT-5.5 零样本 0.78",
+   "evidence_ids": [
+    "E015",
+    "E016",
+    "E017",
+    "E026",
+    "E029"
+   ],
+   "counterevidence": [
+    "E026"
+   ],
+   "allowed_conclusion": "同分布训练学生高于零样本模型；无 AIDA vs 轨迹重标对照，不能证明 AIDA 本身有效；OWMM→EB 零样本 0.55 为跨环境证据。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "transfer",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在 OWMM 仿真、单训练种子下，教师经学生技能接口闭环执行得到的演示（尤其目标找回教师）比作者自建的轨迹重标数据训练出更高成功率的 8B 学生（69.6% vs 38.8%，4 技能），OWMM 训练的学生零样本在 EB 导航上达 0.55 (基座 0.02)。",
+  "unresolved": [
+   "transfer 由 OWMM→EB 零样本(计数，2x120 次)支撑；真机 38% 缺试验数，不单独支撑",
+   "与他人报告基线的跨论文可比性",
+   "标签可识别性",
+   "评测集上选配置"
+  ],
+  "not_claimed": "未复现；全部为作者报告。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "gap 具体且有最近邻(OWMM-Agent 轨迹重标)，并被受控对比检验；但未诊断基线失败是否来自目标丢失，残余缺口(特权依赖、非 on-policy)边界已写明。",
+   "evidence_ids": [
+    "E002",
+    "E025",
+    "E018",
+    "E028"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "教师/学生信息权限、接口对齐、模板推理的逻辑可重建，并给出可区分预测(三类教师)；特权派生标签对学生是否可识别未检验，‘接口对齐’与‘闭环状态分布’的解释未分离。",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E006",
+    "E010"
+   ],
+   "counterevidence_ids": [
+    "E018"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "阈值(1.0 m/100 px/15°/40°)、过滤规则、数据量、LoRA 超参、提示/输出模式、评测上限均给出，可重建；找回教师的具体规则、模板文本、真机执行细节与代码缺，条件/失败边界在 Limitations 写明。",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E020",
+    "E021",
+    "E022"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "仿真闭环由环境判定，170 分母+阶段完成率；EB 2x60x2 有分母；缺口：真机 38% 无试验数、仿真抓取简化、主要基线为他人报告。",
+    "evidence_ids": [
+     "E008",
+     "E013",
+     "E015",
+     "E019",
+     "E009"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Table 2 固定基座/微调/接口/标注/harness 仅换演示来源，含更小样本量的 AIDA 胜出，是较强的因果对照；缺口：单种子、Table 3 累积叠加、无特权标签内容消融、单一基座。",
+    "evidence_ids": [
+     "E010",
+     "E024",
+     "E025"
+    ],
+    "counterevidence_ids": [
+     "E011",
+     "E012"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "OWMM 留出 episode + OWMM→EB 跨环境零样本(0.55 vs 基座 0.02) + 真机；缺口：训练/评测场景是否不相交未写明，配置经评测集消融选定，真机无试验数，EB 导航无 AIDA vs 重标对照。",
+    "evidence_ids": [
+     "E030",
+     "E016",
+     "E017",
+     "E013",
+     "E022"
+    ],
+    "counterevidence_ids": [
+     "E026"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "有分母；Table 2 三次评测均值但仅单训练种子；Table 1/3 单次；无方差/CI；失败份额只在图中，文本无数值。v2 条款：有试验数无方差 1-2。",
+    "evidence_ids": [
+     "E011",
+     "E012",
+     "E023"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "披露数据规模、成功率过滤、评测决策上限；无训练/推理 GPU 时、延迟；EB 基线匹配接口与步数。",
+    "evidence_ids": [
+     "E020",
+     "E021",
+     "E029"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": 72.5,
+  "display": 72.5,
+  "lower": 72.5,
+  "upper": 72.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "完整 HTML 全文含方法、实验及附录 A-D；图 5 等仅图形内容未入文本。"
+ },
+ "short_rationale": "AIDA：规则特权教师经学生技能接口闭环收集成功过滤演示 + 模板空间推理 + 共享 harness，SFT 8B VLM；OWMM 受控对比(38.8→69.6)较强，但单训练种子、配置经评测集选择、真机无试验数、导航无同条件对照。K505/K706 卡来源即本文，仅作结构参照。"
+}

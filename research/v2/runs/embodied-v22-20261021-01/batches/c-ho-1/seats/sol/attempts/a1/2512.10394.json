@@ -1,0 +1,648 @@
+{
+  "paper": {
+    "paper_key": "2512.10394",
+    "paper_id": "2512.10394",
+    "title": "RoboNeuron: A Middle-Layer Infrastructure for Agent-Driven Orchestration in Embodied AI",
+    "version": "2512.10394v2",
+    "claim_type": "system_method",
+    "central_claim": "RoboNeuron derives MCP tools from ROS schemas, provides unified direct and persistent PIC execution, and localizes backend/runtime/acceleration changes within a stable inference boundary, enabling reusable modular robot orchestration without system rewiring."
+  },
+  "evidence": [
+    {
+      "evidence_id": "E01",
+      "locator": "I contribution scope; fixed text line 9",
+      "quote": "RoboNeuron is a middleware infrastructure that bridges agent tool calling and robot middleware, rather than a planning algorithm or a replacement for existing robot control stacks.",
+      "support_explanation": "Evaluate software execution/interface claim, not invented planning superiority.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E02",
+      "locator": "III-B / Algorithm 1; fixed text line 15",
+      "quote": "The system parses ROS message definitions to resolve fields, including nested structures and arrays, and constructs a structured tool argument schema.",
+      "support_explanation": "Typed schema derivation is the actual bridge mechanism.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E03",
+      "locator": "III-A lifecycle; fixed text line 15",
+      "quote": "A dedicated stop tool manages process cleanup, utilizing a bounded wait period before resorting to a forced termination to maintain predictable system states.",
+      "support_explanation": "Explicit runtime lifecycle, not a validated physical safety guarantee.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E04",
+      "locator": "III-C action/control contract; fixed text line 15",
+      "quote": "Upon initialization, the controller parses a URDF (omitting visual and collision elements for efficiency) to build a kinematic chain, and it subscribes to both the action topic and joint-state feedback.",
+      "support_explanation": "Geometry is kinematic with state feedback; collision-aware planning cannot be inferred.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E05",
+      "locator": "III-E switching; fixed text line 15",
+      "quote": "the agent can restart the inference module with the new configuration while the perception and control modules continue to run, ensuring the overall system topology remains intact.",
+      "support_explanation": "Retained runtime topology, not retained learned improvement; restart rather than atomic seamless policy handover.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E06",
+      "locator": "IV-A denominator; fixed text line 18",
+      "quote": "Each suite contains 10 tasks, and each task is evaluated over 50 episodes.",
+      "support_explanation": "LIBERO four suites supply counted closed-loop evaluation (500 episodes per suite).",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E07",
+      "locator": "IV-C Table I; fixed text line 18",
+      "quote": "RoboNeuron + P50 99.2 ( \\uparrow 0.6 ) 98.4 ( \\uparrow 0.8 ) 96.8 ( \\downarrow 0.4 ) 94.4 ( \\downarrow 1.4 ) 1.17",
+      "support_explanation": "Moderate pruning has small mixed success changes and 1.17x inference speed, not universal improvement.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E08",
+      "locator": "IV-C Table I; fixed text line 18",
+      "quote": "RoboNeuron + P75 98.4 ( \\downarrow 0.2 ) 89.8 ( \\downarrow 7.8 ) 96.6 ( \\downarrow 0.6 ) 89.2 ( \\downarrow 6.6 ) 1.58",
+      "support_explanation": "Strong pruning reduces success materially; boundary preserves wiring, not behavior.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E09",
+      "locator": "IV-D limitations; fixed text line 18",
+      "quote": "The real-robot study emphasizes feasibility and runtime semantics rather than large-scale statistical performance.",
+      "support_explanation": "FR3 grasping lacks counted task reliability; qualitative hardware case is not transfer evidence under the strict rule.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E10",
+      "locator": "IV-A separate experiments; fixed text line 18",
+      "quote": "This design separates task-level comparison under a fixed serving setup from inference-level efficiency comparison under runtime-augmented configurations, while keeping the external observation/action contract unchanged.",
+      "support_explanation": "Do not combine two distinct VLA studies into a joint speed-and-success result.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E11",
+      "locator": "III-B scope; fixed text line 15",
+      "quote": "Our current implementation focuses on message-level exposure via topics, which addresses the low-latency primitives required for our evaluation.",
+      "support_explanation": "Broader ROS service/action coverage is not demonstrated.",
+      "material_id": "M1",
+      "material_hash": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "ROS capability to external agent tool",
+      "information": "Robot message schemas and configured topic endpoints; external frozen agent sees typed tools, not an embedded planner",
+      "operation": "Parse nested/array fields, build typed validation schema, recursively encode validated arguments and publish ROS messages",
+      "output": "Discoverable MCP tool, one-shot commands or timed sequences",
+      "conditions": "Correct topic/schema binding and robot-side command semantics; syntactic validation does not establish physical feasibility",
+      "feedback": "Tool/runtime state available to external agent; no independent task-success verifier implemented",
+      "selection_rule": "Static deterministic schema validation and configured endpoints",
+      "selection_data": "Not applicable: no learned optimization",
+      "persistence": "Registered tools and static implementation",
+      "later_use": "Reused invocations/robots through configured bindings, not retained autonomous learning",
+      "claimed_effect": "Less manual wrapper drift and integration work",
+      "failure_boundary": "Only topic/message exposure; no measured schema-evolution or maintenance-effort benchmark",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E11"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Persistent PIC execution and backend switching",
+      "information": "Camera images/instructions to selected frozen VLA; action delta plus gripper to controller; current joints and URDF to IK",
+      "operation": "Spawn isolated ROS2 processes, stream perception/inference/control; stop/restart inference under unchanged topics",
+      "output": "Joint commands, explicit bounded lifecycle and selectable runtime/pruning presets",
+      "conditions": "Backends obey fixed 6-DoF delta/gripper semantics; process termination and restart safe for robot state",
+      "feedback": "Joint feedback closes controller; external agent monitors progress; no newly trained state persists",
+      "selection_rule": "Agent/config selects backend/preset; no automatic performance-based accept/reject protocol",
+      "selection_data": "LIBERO evaluates choices but not an online selector",
+      "persistence": "Static modules/configurations and current running processes only",
+      "later_use": "Same communication topology after restart; no measured later-task learning",
+      "claimed_effect": "Topology-preserving orchestration and controlled backend comparison",
+      "failure_boundary": "URDF collision elements omitted; action semantic equivalence, reset/switch hazards and long-running reliability unquantified",
+      "evidence_ids": [
+        "E03",
+        "E04",
+        "E05",
+        "E08"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Ad hoc agent wrappers drift from robot schemas; persistent execution and changing VLA/serving backends require repeated integration.",
+    "checked_gap": "Specific reusable runtime seam between MCP tool calls and ROS streaming is credible. Paper distinguishes its middleware claim from planning algorithms, but does not quantify engineering costs saved.",
+    "lineage": [
+      {
+        "source": "II fixed text",
+        "relation": "ROS2/MoveIt/Nav2/OpenRTM supply modular robot software; SayCan/Code as Policies/ProgPrompt target reasoning rather than bridge maintenance."
+      }
+    ],
+    "closest_adjacent": [
+      {
+        "source": "ROS2mcpserver and ROS2mcp, as described in II",
+        "version": "Neighbor originals not fixed in packet",
+        "limitation": "Only paper's comparison of protocol bridge versus schema/lifecycle reuse is available; no independent exhaustive novelty claim."
+      }
+    ],
+    "residue": "Schema-aligned exposure plus explicit persistent lifecycle and replaceable inference boundary under common topic contracts.",
+    "stakes": "Integration and attribution costs matter to robot experimentation, but developer time/drift reduction is not measured.",
+    "method_response": "Deterministic schema derivation, control/data-plane separation, direct/PIC workflows and inference-only restart.",
+    "remaining_gap": "Lifecycle reliability under faults, agent-level task success/false completion, service/action coverage, quantitative maintenance benefit and multiple-hardware switching trials.",
+    "evidence_ids": [
+      "E01",
+      "E02",
+      "E03",
+      "E05",
+      "E11"
+    ],
+    "unresolved": [
+      "Novelty-critical adjacent original sources would require common fixed supplementation for both seats."
+    ]
+  },
+  "rs_pattern": {
+    "primary": null,
+    "supporting": [],
+    "matches": [],
+    "outside_taxonomy": true,
+    "candidate_checks": [
+      {
+        "main": "unify_into_shared_representation",
+        "sub": "rs:C18",
+        "reason": "Full card read. Common tool schema is a software protocol, not mapping modalities into one uniform model/objective. Bespoke VLA wrappers/controllers remain; C18 steps 2-3 and its semantic shared-substrate validation do not apply."
+      },
+      {
+        "main": "decompose_and_delegate",
+        "sub": "rs:C25",
+        "reason": "Full cards read. Modularity and typed dispatch alone do not implement the solver/check/revise tactic; no external result-validity loop into LLM artifact revision. Middleware is the contribution rather than comparative-advantage reasoning decomposition."
+      }
+    ],
+    "reason": "Useful runtime infrastructure without a justified exact original 15+31 operation; do not stretch 'unify' to generic API standardization.",
+    "executes_pattern": false,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "R04",
+        "version": "embodied-agent-harness/v1",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "id": "typed-protocol-exposure",
+            "status": "met",
+            "reason": "Schemas generated from nested ROS messages and bound publishers.",
+            "evidence_ids": [
+              "E02",
+              "E11"
+            ]
+          },
+          {
+            "id": "governed-policy-lifecycle",
+            "status": "met",
+            "reason": "Direct/PIC share tools; bounded stop and inference restart preserve topic wiring.",
+            "evidence_ids": [
+              "E03",
+              "E05"
+            ]
+          },
+          {
+            "id": "performance-preservation",
+            "status": "partial",
+            "reason": "Counted LIBERO moderate presets retain similar success, but no unpruned RN row, and P75 harms outcomes.",
+            "evidence_ids": [
+              "E06",
+              "E07",
+              "E08"
+            ]
+          },
+          {
+            "id": "agent-reliability",
+            "status": "unmet",
+            "reason": "Qualitative agent/hardware cases, no end-to-end completion denominator or audited false completion.",
+            "evidence_ids": [
+              "E09"
+            ]
+          }
+        ],
+        "failure_checks": [
+          "R04's qualitative-agent and aggressive-pruning failure conditions apply; schema validation is not physical safety."
+        ],
+        "evidence_ids": [
+          "E02",
+          "E03",
+          "E05",
+          "E06",
+          "E07",
+          "E08",
+          "E09"
+        ]
+      }
+    ],
+    "executes_pattern": true,
+    "resolves_problem": false,
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": null,
+      "rs_sub": null,
+      "domain_namespace": "embodied",
+      "domain_main": "observe_act_interface",
+      "domain_sub": "R04",
+      "operation_correspondence": "Exact domain operation is exposing ROS and policy lifecycle as typed MCP tools; no original-taxonomy match asserted.",
+      "necessary_conditions_and_differences": "Stable syntactic and action contracts assumed; protocol uniformity does not guarantee safe agent choices or behavior-equivalent backends.",
+      "evidence_ids": [
+        "E02",
+        "E04",
+        "E05",
+        "E08"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-practice/limitation synthesis, not actual reviewer comments",
+      "source_refs": [
+        "patterns/sub/R04.md#When-it-fails",
+        "profile/expectations.json:E01"
+      ],
+      "applies_when": "Middleware contribution claimed to improve agent orchestration",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same VLA harness in LIBERO shows feasibility; no same-agent alternate middleware task-success or developer-effort comparison.",
+      "evidence_ids": [
+        "E06",
+        "E09"
+      ],
+      "score_item": [
+        "E.causality",
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; derived practice",
+      "source_refs": [
+        "profile/expectations.json:E02"
+      ],
+      "applies_when": "Individual integration choices credited",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Pruning variants held within fixed topology; baseline to RN+pruning confounds wrapper and preset. No schema/lifecycle removal test.",
+      "evidence_ids": [
+        "E07",
+        "E10"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; derived practice",
+      "source_refs": [
+        "profile/expectations.json:E04"
+      ],
+      "applies_when": "Small reported success differences",
+      "applicable": true,
+      "status": "partial",
+      "reason": "500 episodes per suite, but no seed repeats/intervals or task-paired uncertainty for subpercentage gains.",
+      "evidence_ids": [
+        "E06",
+        "E07"
+      ],
+      "score_item": [
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; derived practice",
+      "source_refs": [
+        "profile/expectations.json:E05"
+      ],
+      "applies_when": "Efficiency and integration-cost claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Normalized inference speed and hardware provided; no end-to-end agent tokens/time/failure cost or measured engineering effort. Latency and task studies differ.",
+      "evidence_ids": [
+        "E07",
+        "E10"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; derived practice",
+      "source_refs": [
+        "profile/expectations.json:E19",
+        "patterns/sub/R04.md#When-it-fails"
+      ],
+      "applies_when": "Physical deployment as reliability evidence",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "FR3 case intentionally feasibility-only without counted trials.",
+      "evidence_ids": [
+        "E09"
+      ],
+      "score_item": [
+        "E.measurement",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E17",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; derived practice",
+      "source_refs": [
+        "profile/expectations.json:E17"
+      ],
+      "applies_when": "Cross-episode mined memory or optimization",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No retained self-improvement claim; static infrastructure evaluated as such.",
+      "evidence_ids": [
+        "E01",
+        "E05"
+      ],
+      "score_item": [
+        "X"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Unified reusable tool/PIC interface and switching without rewiring",
+      "setting": "Multi-base and single-arm simulation; FR3 grasping; OpenVLA/OFT/pi0 supported",
+      "baseline/control": "Paper-described ad hoc wrappers and existing ROS-MCP bridges, no direct empirical maintenance control",
+      "selection_vs_test": "Mechanism case studies; no development/holdout schema-evolution partition",
+      "budget": "Runtime configuration and common streams; case-level call/attempt counts absent",
+      "result/denominator": "Architectural algorithms and qualitative execution sequences; no agent-task success denominator",
+      "failures": "Fault/switch stress reliability and false completion not counted",
+      "statistics": "No case-level repeated uncertainty",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E03",
+        "E05",
+        "E09",
+        "E11"
+      ],
+      "counterevidence": [
+        "Code-level architecture supports mechanism feasibility, not quantified savings or general reliable orchestration"
+      ],
+      "allowed_conclusion": "Authors describe and demonstrate a coherent schema/lifecycle infrastructure, with broad effectiveness not causally measured."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Backend-side changes under fixed topology can preserve success and accelerate inference",
+      "setting": "LIBERO four suites, 10 tasks each, 50 episodes/task; separate OpenVLA RTX4090 latency study",
+      "baseline/control": "OpenVLA-OFT baseline versus RN+P25/P50/P75; pruning presets otherwise fixed serving",
+      "selection_vs_test": "Standard benchmark evaluation, no disclosure of tuning/development overlap",
+      "budget": "Same evaluation topology; inference speed normalized, end-to-end resource use absent",
+      "result/denominator": "P50 99.2/98.4/96.8/94.4 success at1.17x; P75 Object/Long -7.8/-6.6pp",
+      "failures": "Aggressive pruning performance loss, no per-task failure taxonomy",
+      "statistics": "Episode counts clear; repeats/intervals absent",
+      "evidence_ids": [
+        "E06",
+        "E07",
+        "E08",
+        "E10"
+      ],
+      "counterevidence": [
+        "No unpruned RN success row; task-success and runtime-enhanced latency studies are separate"
+      ],
+      "allowed_conclusion": "Moderate preset feasibility and an explicit speed/quality tradeoff, not agent-level superiority or universally free swapping."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported counted LIBERO closed-loop results support compatible topology-preserving inference variations; qualitative simulation/FR3 cases demonstrate orchestration feasibility. They do not measure engineering savings, safe lifecycle reliability or end-to-end LLM-agent success, and uncounted hardware cases do not qualify as transfer.",
+    "unresolved": [
+      "No independent execution performed",
+      "Figure6 numeric plot values unavailable in fixed text; not used in rating",
+      "Adjacent bridge originals unavailable for independent novelty verification"
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete runtime mismatch, specific closest bridging lineage and appropriately infrastructure-scoped objective; residual maintenance burden remains unmeasured and nearest original sources absent.",
+      "evidence_ids": [
+        "E01",
+        "E02",
+        "E11"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "I-II full related work"
+      ]
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Schema derivation, direct/PIC separation and inference boundary directly address wrapper drift and reuse; command-semantic/safety compatibility is assumed rather than established.",
+      "evidence_ids": [
+        "E02",
+        "E03",
+        "E05"
+      ],
+      "counterevidence_ids": [
+        "E04"
+      ],
+      "search_scope": [
+        "III-A-E Algorithms1-2"
+      ]
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Static operation, input/action contract and explicit process lifecycle reconstructable; only topic exposure, no fault/lifecycle semantic audit or quantified cross-backend equivalence.",
+      "evidence_ids": [
+        "E02",
+        "E03",
+        "E04",
+        "E05",
+        "E11"
+      ],
+      "counterevidence_ids": [
+        "E08"
+      ],
+      "search_scope": [
+        "III-IV-D"
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Counted LIBERO success and concrete cases support feasibility; central orchestration/maintenance benefits and physical safety not directly quantified.",
+        "evidence_ids": [
+          "E06",
+          "E07"
+        ],
+        "counterevidence_ids": [
+          "E09"
+        ],
+        "search_scope": [
+          "IV all cases/TableI/Figures3-6 captions"
+        ]
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Fixed topology controls preset variation, but no pure RN/unpruned comparison or schema/lifecycle alternative baseline; cannot attribute success differences or saved engineering work to middleware.",
+        "evidence_ids": [
+          "E07",
+          "E10"
+        ],
+        "counterevidence_ids": [
+          "E08"
+        ],
+        "search_scope": [
+          "IV-A-C"
+        ]
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Four standard suites offer task variety, but development/preset selection overlap unreported; qualitative cross-platform cases do not establish independent reliability transfer.",
+        "evidence_ids": [
+          "E06",
+          "E09"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire fixed text, III-D and IV setup/limitations"
+        ]
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Episode denominator explicit; no repeated-seed variability/task-paired uncertainty, no counted physical or lifecycle failures.",
+        "evidence_ids": [
+          "E06",
+          "E07"
+        ],
+        "counterevidence_ids": [
+          "E09"
+        ],
+        "search_scope": [
+          "IV-A-D TableI; full text has no appendix"
+        ]
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Normalized pruning speed and RTX4090 latency-study protocol relevant; no end-to-end orchestration cost or integration-effort measurement, and separate studies cannot support joint optimum.",
+        "evidence_ids": [
+          "E07",
+          "E08",
+          "E10"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "IV-A-C TableI/Figure6 caption; numeric plotted latencies not inferred"
+        ]
+      }
+    }
+  },
+  "status": "reviewed",
+  "reason": "Complete fixed textual material and all scoring items evaluated. Original taxonomy nonfit is justified, not a quality penalty; infrastructure feasibility supported with narrower quantitative evidence than broad reuse/reliability implications.",
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-1",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "provenance": {
+    "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; assigned calibration-holdout weights",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+    "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T17:30:40.040236+00:00",
+    "notes": [
+      "Model identity from dispatch context only; no probe. Session ID and external receipt unavailable to worker.",
+      "domain_cards_hash binds fixed taxonomy; exact read card files separately hashed below. Coordinator clarified copied material_fix prior-attempt field was erroneous: c-ho-1 has no invalidated attempt; this is its first legal a1 with full material. Directory was empty before writing. No other seat, aggregate, archive or prior attempt read."
+    ],
+    "read_card_hashes": {
+      "research/reference/researchstudio-15-31/ideation-patterns/unify_into_shared_representation.md": "ebba3230237271e37d5280030ad147493deed2605fe53f5324f3ebb70f1d599c",
+      "research/reference/researchstudio-15-31/ideation-sub-patterns/C18.md": "871ad780b2120f7f4bd0930a3ae0d2c66e3928368a5ffbf36f4777c3fb8d01a6",
+      "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+      "research/reference/researchstudio-15-31/ideation-sub-patterns/C25.md": "ced46168bbcc6ab1aeaf9a242b47631d6076097bd8758c08560c3faa888da4ff",
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "patterns/sub/R04.md": "2cb295561bb649fcb88b5a1b8e606de87fb53f376c38a197a8e66095fc573f10"
+    }
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2512.10394v2",
+      "version": "2512.10394v2",
+      "sha256": "1e92b60ff16ed09ef2b82def2369f2ea1e0896860d59cca2c0905c08ac13e1f7",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2512.10394.txt",
+      "sections_read": [
+        "Abstract",
+        "I Introduction",
+        "II Related Work",
+        "III-A through III-E, Algorithms 1-2",
+        "IV-A through IV-D, Table I and all figure captions",
+        "V Conclusions"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "completeness_note": "Complete fixed html-full text through conclusion; no appendix indicated. Figure 6 plotted numerical latency values are not represented in text; do not infer those values or claim image-level inspection."
+    }
+  ],
+  "score": {
+    "raw": 60.0,
+    "display": 60.0,
+    "lower": 60.0,
+    "upper": 60.0,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  }
+}

@@ -1,0 +1,132 @@
+{
+ "batch_id": "c-dev-2",
+ "attempt": "a1",
+ "generated": "controller",
+ "papers": [
+  {
+   "paper_key": "2602.20323",
+   "n_diffs": 5,
+   "diffs": [
+    {
+     "field": "evidence_level",
+     "sol": "transfer",
+     "son55": "online"
+    },
+    {
+     "field": "status",
+     "sol": "needs_evidence",
+     "son55": {
+      "value": "reviewed",
+      "reason": "全文与附录齐全(除作者删节的任务提示)；八项均已判定。"
+     }
+    },
+    {
+     "field": "rating.X",
+     "sol": null,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.causality",
+     "sol": null,
+     "son55": 2
+    },
+    {
+     "field": "rating.E.cost",
+     "sol": 2,
+     "son55": 3
+    }
+   ]
+  },
+  {
+   "paper_key": "2605.13119",
+   "n_diffs": 5,
+   "diffs": [
+    {
+     "field": "status",
+     "sol": "reviewed",
+     "son55": {
+      "value": "reviewed",
+      "reason": "全文与附录齐全；八项均已判定。"
+     }
+    },
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      "rs:C25",
+      null
+     ],
+     "son55": [
+      "C25",
+      "C02",
+      null
+     ]
+    },
+    {
+     "field": "rating.E.causality",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.statistics",
+     "sol": 1,
+     "son55": 2
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 66.25,
+     "son55": 70.0,
+     "abs_diff": 3.75
+    }
+   ]
+  },
+  {
+   "paper_key": "2606.00104",
+   "n_diffs": 7,
+   "diffs": [
+    {
+     "field": "claim_support",
+     "sol": "scoped",
+     "son55": "unsupported"
+    },
+    {
+     "field": "status",
+     "sol": "reviewed",
+     "son55": {
+      "value": "reviewed",
+      "reason": "文本方法/实验/局限完整可读；缺的是论文本身未报告的定量证据（not_reported 项已记录查找范围），非材料缺失，故不标 needs_fulltext/needs_evidence。"
+     }
+    },
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      "rs:C25"
+     ],
+     "son55": [
+      "C25"
+     ]
+    },
+    {
+     "field": "rating.M",
+     "sol": 3,
+     "son55": 2
+    },
+    {
+     "field": "rating.E.statistics",
+     "sol": 0,
+     "son55": 1
+    },
+    {
+     "field": "rating.E.cost",
+     "sol": 1,
+     "son55": 0
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 37.5,
+     "son55": 32.5,
+     "abs_diff": 5.0
+    }
+   ]
+  }
+ ]
+}

@@ -1,0 +1,219 @@
+{
+ "schema_version": "radar-batch-report-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-2",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "assigned": 6,
+ "reviewed": 6,
+ "needs_fulltext": 0,
+ "needs_evidence": 0,
+ "outside_taxonomy": 1,
+ "outside_taxonomy_ratio": 0.167,
+ "out_of_scope": 0,
+ "schema_errors": [],
+ "schema_error_count": 0,
+ "self_checks": [
+  "exactly the 6 paper_keys of inputs_manifest.json",
+  "material sha256 matches manifest and files",
+  "every evidence quote is a contiguous substring of the pinned material",
+  "rs sub-cards under valid PARENTS.tsv parents",
+  "domain namespace=embodied and sub-cards under taxonomy.json parents",
+  "unknown/not_reported handling: no unknown; 2 not_reported (paper 2609.29091) with rating 0 and search_scope",
+  "score recomputed mechanically from ratings (G15 M20 X20 Em15 Ec10 Eh10 Es5 Ecost5)/4",
+  "JSON parses"
+ ],
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_id": null,
+ "receipt_ref": null,
+ "session_note": "session_id/receipt_ref unavailable to the internal Subagent; no extra probing performed.",
+ "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+ "contamination": "none: no other seat, aggregate, other batch, archive, old score/Reel or assignments.jsonl read; domain cards that cite batch papers as sources (R05, R06, K-series) were not used as evidence.",
+ "notes": [
+  "2602.19983 (CORE) is borderline for scope (VLM constraint inference inside a CBF safety filter around a classical controller; no LLM agent loop); scored on its own claim, scope decision left to controller.",
+  "2601.18492 (DV-VLN) RS layer outside_taxonomy with reasons; domain layer R06 (strong) + K109 (partial).",
+  "2609.29091 evidence_level graded offline because per-task trial counts are absent (EVIDENCE online bar); would be online if counts exist.",
+  "2609.31760 claim_type chosen system_method (negative/diagnostic study) since no benchmark/resource is contributed.",
+  "Scratch helpers kept outside the repo in /tmp/eh_cho2_son55 (not outputs of the attempt)."
+ ],
+ "papers": [
+  {
+   "paper_key": "2608.16978",
+   "version": "2608.16978v1",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "status": "reviewed",
+   "score_raw": 66.25,
+   "score_display": "66.2",
+   "rs_primary": "decompose_and_delegate",
+   "rs_sub": [
+    "C25"
+   ],
+   "outside_taxonomy": false,
+   "domain_matches": [
+    "K105",
+    "R05",
+    "K303"
+   ],
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 1,
+    "E.statistics": 2,
+    "E.cost": 3
+   },
+   "one_line": "system_method / scoped / online: matched K=T ablation supports big gain from within-episode VLM code replanning in sim with privileged poses (35.1% vs 3.5%, 57 tasks, 1 episode each); code-vs-other-replan locus, K, skill library, real robot untested."
+  },
+  {
+   "paper_key": "2602.19983",
+   "version": "2602.19983v2",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "transfer",
+   "status": "reviewed",
+   "score_raw": 67.5,
+   "score_display": "67.5",
+   "rs_primary": "decompose_and_delegate",
+   "rs_sub": [
+    "C25"
+   ],
+   "outside_taxonomy": false,
+   "domain_matches": [
+    "K201"
+   ],
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 3
+   },
+   "one_line": "system_method / scoped / transfer(weak reading): VLM predicates -> grounding -> CBF filter, sim 95.0% vs No-Context proxy 55.0%, Spot 86.6% vs geometric 50%; guarantee calibrated on same-setup images, grounding ablation claimed but absent; scope borderline."
+  },
+  {
+   "paper_key": "2601.18492",
+   "version": "2601.18492v1",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "status": "reviewed",
+   "score_raw": 51.25,
+   "score_display": "51.2",
+   "rs_primary": null,
+   "rs_sub": [],
+   "outside_taxonomy": true,
+   "domain_matches": [
+    "R06",
+    "K109"
+   ],
+   "ratings": {
+    "G": 2,
+    "M": 2,
+    "X": 2,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 1
+   },
+   "one_line": "system_method / scoped / online: TFV+MEV re-ranking lifts R2R subset SR 39-40 -> 52 and 52/45 on Val Unseen, but 90-pair ablation, no matched compute, no cost, below NaviLLM/EvolveNav/NavGPT-2; K=1 anomaly; outside_taxonomy on RS layer."
+  },
+  {
+   "paper_key": "2608.18227",
+   "version": "2608.18227v1",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "status": "reviewed",
+   "score_raw": 52.5,
+   "score_display": "52.5",
+   "rs_primary": "decompose_and_delegate",
+   "rs_sub": [
+    "C25"
+   ],
+   "outside_taxonomy": false,
+   "domain_matches": [
+    "R05"
+   ],
+   "ratings": {
+    "G": 2,
+    "M": 2,
+    "X": 2,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 1,
+    "E.statistics": 2,
+    "E.cost": 3
+   },
+   "one_line": "system_method / scoped / online: coding agent writes Push-T controllers (97-100% on 200 seeds vs DP checkpoint 62.5%) and 99.4% on its own Push-A..Z benchmark; dev=test, agent-authored envs, unmatched baseline, one run."
+  },
+  {
+   "paper_key": "2609.31760",
+   "version": "2609.31760v1",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "status": "reviewed",
+   "score_raw": 73.75,
+   "score_display": "73.8",
+   "rs_primary": "assumption_audit_and_pivot",
+   "rs_sub": [
+    null
+   ],
+   "outside_taxonomy": false,
+   "domain_matches": [
+    "K401",
+    "K804"
+   ],
+   "ratings": {
+    "G": 4,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 3,
+    "E.statistics": 2,
+    "E.cost": 2
+   },
+   "one_line": "system_method (negative/diagnostic) / scoped / online: 123-round robot self-improvement loop never solved Fridge (0/486); measured evaluator capture, frontier lock, semantic displacement, memory corruption; single run, mechanisms from records."
+  },
+  {
+   "paper_key": "2609.29091",
+   "version": "2609.29091v1",
+   "claim_type": "system_method",
+   "claim_support": "unsupported",
+   "evidence_level": "offline",
+   "status": "reviewed",
+   "score_raw": 26.25,
+   "score_display": "26.2",
+   "rs_primary": "decompose_and_delegate",
+   "rs_sub": [
+    null
+   ],
+   "outside_taxonomy": false,
+   "domain_matches": [
+    "K104",
+    "K109"
+   ],
+   "ratings": {
+    "G": 1,
+    "M": 2,
+    "X": 1,
+    "E.measurement": 1,
+    "E.causality": 0,
+    "E.holdout": 1,
+    "E.statistics": 0,
+    "E.cost": 1
+   },
+   "one_line": "system_method / unsupported / offline: real-robot Find-and-Place at 94-96% with no trial counts, baseline, ablation, planner identity or cost; improvement claims unsupported."
+  }
+ ]
+}

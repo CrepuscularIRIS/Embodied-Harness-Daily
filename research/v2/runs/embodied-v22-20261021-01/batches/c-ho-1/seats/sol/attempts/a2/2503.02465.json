@@ -1,0 +1,534 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "c-ho-1",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2503.02465",
+    "paper_id": "2503.02465",
+    "title": "UAV-VLRR: Vision-Language Informed NMPC for Rapid Response in UAV Search and Rescue",
+    "version": "2503.02465v2",
+    "claim_type": "system_method",
+    "central_claim": "A vision-language target/obstacle extractor combined with point-to-point NMPC gives rapid, safe SAR mission execution, averaging 33.75% faster than autopilot and 54.6% faster than human pilot."
+  },
+  "provenance": {
+    "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+    "rubric_version": "v2.2 + anchors v2",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-21T18:06:51.524033+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144). Session/receipt not exposed to worker. Domain hash binds taxonomy; expectation hash binds the cited main card; no independent review text. All results author reports, not our reproduction."
+  },
+  "materials": [
+    {
+      "material_id": "2503.02465-fulltext",
+      "url": "https://arxiv.org/html/2503.02465v2",
+      "sha256": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "sections_read": [
+        "Abstract",
+        "I",
+        "II-A/B",
+        "III-A/B equations",
+        "IV",
+        "V-A/B Tables I-III Fig captions",
+        "VI",
+        "VII",
+        "Acknowledgements"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "III-A",
+      "quote": "ChatGPT-4o serves as the LLM agent, responsible for extracting goal objects, specifically “target points” and “obstacles”.",
+      "support_explanation": "Frozen frontier planner separates semantic selection from geometric control.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "III-A",
+      "quote": "their pixel coordinates are mapped onto the image and converted into real-world coordinates using image metadata.",
+      "support_explanation": "Geometric handoff uses height/FoV, not learned end-to-end control.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "III-B",
+      "quote": "The NMPC finds the optimal trajectory and the set of control inputs designed for rapid control.",
+      "support_explanation": "Point-to-point control takes target/obstacle coordinates; constrained optimization is delegated.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "IV",
+      "quote": "Each experiment was timed to assess the speed of execution.",
+      "support_explanation": "Timing protocol starts at code launch versus image shown to pilot; mission objective specified but no numerical flight-completion threshold.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "V-A",
+      "quote": "For this analysis, an identification was considered accurate if the detected point was within a 25 cm radius of the actual object.",
+      "support_explanation": "Ground-truth Vicon checks coordinate identification, not a repeated mission-success audit.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "V-B, Table III",
+      "quote": "Time Taken for Scene 1 (s) 28 40 57 Time Taken for Scene 2 (s) 30 48 72",
+      "support_explanation": "Two scene timings, not trial-counted success rates; no variance.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "II-B",
+      "quote": "This approach is also advantageous in the sense that it only requires the target points and the obstacle points, which perfectly fits in the pipeline when cascading with the multimodal system.",
+      "support_explanation": "Connects UAV-VLA perception lineage to point-to-point NMPC and onboard-compute bottleneck.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "VII",
+      "quote": "Another important direction is the integration of dynamic environmental factors, such as moving obstacles",
+      "support_explanation": "Dynamic obstacles remain future work, not demonstrated safe SAR deployment.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "IV",
+      "quote": "The multimodal system ran on a remote server with an RTX 4090 GPU (24GB VRAM) and an Intel Core i9-13900K processor.",
+      "support_explanation": "Hardware disclosed but API/call latency, tokens and computational budget not separated.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "2503.02465-fulltext",
+      "hash": "4543b85f490de062b810d77d7690ca940f6f36e7f40b1fccd3cc7c423bfa90e9",
+      "locator": "V-B",
+      "quote": "When comparing the flight times of experiment 1 and 2, it was evident that the custom NMPC was able to complete the mission faster than the off-the-shelf autopilot",
+      "support_explanation": "Same multimodal setup in Exp1/2 gives a controller comparison, not attribution to language interface.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "SAR semantic target selection + quadrotor controller",
+      "information": "Image, operator command, camera height/FoV; NMPC current state and model; Vicon used for coordinate evaluation. No claim of teacher training.",
+      "operation": "GPT-4o/Molmo select target/obstacle pixels; scale to metric coordinates; CasADi onboard NMPC solves constrained point-to-point motion.",
+      "output": "Target/obstacle coordinates then motor control inputs and mission trajectory",
+      "conditions": "Static planar arena geometry, camera calibration, known dynamics; obstacle points represented by penalty.",
+      "feedback": "Physical flight/state feedback at NMPC level; no documented semantic-model repair loop.",
+      "selection_rule": "Static design, no retained candidate optimization; numeric target accept/reject rule unreported.",
+      "selection_data": "Two scenes used for evaluation; development split not disclosed.",
+      "persistence": "not_applicable: no learned/retained modification; static controller configuration only.",
+      "later_use": "not_applicable: no cross-task retained improvement claim.",
+      "claimed_effect": "Faster mission completion against autopilot/human.",
+      "failure_boundary": "Moving obstacles future work; low-altitude distortion; mission failures not counted.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E008"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Manual SAR mission planning is slow; existing agile NMPC often needs expensive offboard trajectory tracking.",
+    "checked_gap": "Motivated interface/controller integration with measurable flight times, not evidence of robust disaster-scene autonomy.",
+    "lineage": [
+      {
+        "source": "UAV-VLA [4], prior work as described in fixed v2 II-A; source version not independently fixed",
+        "contribution": "Aerial image-language mission coordinate extraction"
+      },
+      {
+        "source": "NMPC/DFBC and contouring/adaptive/data-driven MPC [14-18], II-B; originals unavailable",
+        "contribution": "Agile control but compute/model/simulation limitations"
+      }
+    ],
+    "closest_adjacent": "UAV-VLA for mission extraction; standard autopilot as tested controller comparator. No original adjacent fulltext supplied.",
+    "residue": "Onboard fast point-to-point controller integrated with semantic coordinates rather than external trajectory generation.",
+    "stakes": "Response latency and collision risk in SAR.",
+    "method_response": "Coordinates feed a low-dimensional constrained NMPC solved onboard.",
+    "remaining_gap": "Semantic grounding uncertainty, moving obstacles, repeatability, operational SAR conditions and clean latency attribution.",
+    "evidence_ids": [
+      "E007",
+      "E010",
+      "E008"
+    ],
+    "unresolved": [
+      "Nearest-neighbour original versions not supplied; no exhaustive novelty claim."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "strong main / no complete sub-tactic",
+        "tactic_steps_checked": [
+          "C25 steps 1-2: semantic extraction→coordinate artifact→NMPC",
+          "Step 3: control feedback remains in solver, no documented verifier-to-model repair during construction",
+          "Step 4: controller swap partially tests delegation; no verify-feedback ablation",
+          "Step 5: two-scene real flights/timing, not broad deployment"
+        ],
+        "success_failure_checks": [
+          "Comparative-advantage boundary exists",
+          "Coordinate error checked against Vicon",
+          "No robust intermediate rejection or uncertainty feedback",
+          "Narrow scene and missing repeat/cost analysis remain"
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E005",
+          "E006"
+        ],
+        "reason": "This is actual learned semantic extraction delegated to numerical control, not merely multiple modules. rs:C25 not assigned because its load-bearing verifier feedback/correction during artifact construction is absent."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Main decomposition is present; null sub avoids exaggerating C25 verification closure.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "K103",
+        "version": "embodied-agent-harness/v1",
+        "fit": "partial",
+        "condition_checks": [
+          {
+            "condition": "K103 calibrated geometric projection",
+            "status": "partial",
+            "reason": "FoV/height scaling rather than metric depth; Vicon coordinate check only.",
+            "evidence_ids": [
+              "E002",
+              "E005"
+            ]
+          },
+          {
+            "condition": "K103 feasibility/reselect feedback",
+            "status": "unmet",
+            "reason": "Controller obstacle penalty exists but no rejection/reselection loop described.",
+            "evidence_ids": [
+              "E003"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003"
+        ]
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "K103"
+      },
+      "operation_correspondence": "Learned coordinate extraction hands precise numerical motion to NMPC; resembles grounded visual-target execution.",
+      "necessary_conditions_and_differences": "No K103 depth tool or model-facing feasibility/reselect loop; only partial domain execution.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Harness success rather than model effect",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Controller comparator shared multimodal setup, but no alternate matched frontier harness.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Specific NMPC/interface contribution",
+      "applicable": true,
+      "status": "partial",
+      "reason": "NMPC swap exists; semantic extraction/interface contribution not toggled.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Practical speed claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Times/hardware reported, no model-call/token/cost breakdown.",
+      "evidence_ids": [
+        "E004",
+        "E006",
+        "E009"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Frontier-model empirical generality",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "No development/evaluation overlap or contamination statement.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Navigation safety/success claim",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Crash tendency mentioned qualitatively, no failures or stopping denominator.",
+      "evidence_ids": [
+        "E006"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Depth backprojection",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Uses camera height/FoV planar scaling, not depth readings; calibration error instead checked under K103.",
+      "evidence_ids": [
+        "E002"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; paper-derived, not actual review; main-card source collection only",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations"
+      ],
+      "applies_when": "Interface/controller comparison budget",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Timing start described, compute/controller budgets not matched in detail.",
+      "evidence_ids": [
+        "E004",
+        "E009"
+      ],
+      "score_item": "E.cost"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Rapid safe response and quoted average speedups.",
+      "setting": "Real quadrotor laboratory; 3 targets/2 obstacles then 4 targets/3 obstacles.",
+      "baseline_control": "Exp2 off-the-shelf autopilot with same multimodal setup; Exp3 human sees image and belly camera.",
+      "selection_vs_test": "Static system, no specified development-independent test split.",
+      "result_denominator": "Table III 28/40/57s and 30/48/72s; two scenes, repetitions unspecified. Means of relative speedups give reported percentages.",
+      "evidence_ids": [
+        "E004",
+        "E006",
+        "E010"
+      ],
+      "counterevidence": [
+        "No statistical repeat or collision-rate denominator; grounding threshold does not define mission success."
+      ],
+      "allowed_conclusion": "Author-reported faster timings for two static arena missions; not verified general safe SAR performance."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "offline",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author reports two physical mission timings and Vicon coordinate errors consistent with faster point-to-point execution in the tested static scenes. Strict online label withheld because per-task trial counts/success rates are absent.",
+    "unresolved": [
+      "Real flight exists, but EVIDENCE online per-task trial/rate requirement not met.",
+      "No retained improvement or transfer demonstrated."
+    ]
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 2,
+      "reason": "Real mission latency bottleneck and UAV-VLA/NMPC lineage identified, but no fixed nearest-neighbour original papers or broad SAR residual validation.",
+      "evidence_ids": [
+        "E007",
+        "E008"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Structured coordinates and onboard point-to-point NMPC directly separate semantic interpretation from fast motion; imaging assumptions and obstacle penalty robustness limit guarantees.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 2,
+      "reason": "Static pipeline reconstructible in outline, but target acceptance/reselection, goal-reached tolerance, obstacle penalty tuning and failure recovery not specified enough for full mechanism closure.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E008"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Vicon grounding and two real flight traces/timings exist; no repeated task denominators and no quantitative mission-completion criterion. v2 single-trial ceiling applies.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E006"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Exp1/2 broadly isolate controller on same multimodal target setup; human comparison bundles perception/planning/control and no fixed-model interface ablation.",
+        "evidence_ids": [
+          "E010",
+          "E004"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Two laboratory scene variants without documented development-independent split, other environments or embodiments.",
+        "evidence_ids": [
+          "E004",
+          "E006",
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Two scene results and coordinate errors, but no repeat count, confidence interval or counted crash/failure breakdown; v2 no-repeat ceiling.",
+        "evidence_ids": [
+          "E005",
+          "E006"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "End-to-end times and hardware support limited speed claim; compute/API cost and matched autopilot/pilot budget not fully specified.",
+        "evidence_ids": [
+          "E004",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 51.25,
+    "display": 51.2,
+    "lower": 51.25,
+    "upper": 51.25,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Full fixed text read; score is scoped to limited author evidence, not reproduction."
+}

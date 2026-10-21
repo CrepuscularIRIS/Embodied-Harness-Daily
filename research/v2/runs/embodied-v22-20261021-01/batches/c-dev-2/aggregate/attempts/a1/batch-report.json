@@ -1,0 +1,226 @@
+{
+ "schema_version": "radar-batch-report-v2.2",
+ "report_type": "aggregate-batch-report",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-2",
+ "attempt_id": "a1",
+ "phase": "calibration",
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "model_type": "fable type (overlay claude-opus-5-5[1m], Opus 5.5)",
+ "session_id": null,
+ "receipt_ref": null,
+ "input_hash": "cef6819a0456f4a2a6c434ba14b8b42165da7242f014bf617492272f3181b9fc",
+ "assigned": 3,
+ "accepted_final": 3,
+ "needs_revision": 0,
+ "needs_evidence": 0,
+ "needs_fulltext": 0,
+ "scored": 3,
+ "outside_taxonomy": 0,
+ "outside_taxonomy_ratio": 0.0,
+ "coverage_warning": false,
+ "papers": [
+  {
+   "paper_key": "2602.20323",
+   "version": "2602.20323v6",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "aggregate_status": "accepted_final",
+   "score_raw": 60.0,
+   "score_display": 60.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 2,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 3
+   },
+   "seat_scores": {
+    "sol": null,
+    "son55": 65.0
+   },
+   "n_resolutions": 17,
+   "n_substantive_disagreements": 13,
+   "n_same_supported_fact": 4,
+   "n_shared_error_corrections": 2,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: son55 -> \"online\"",
+    "status: son55 -> \"reviewed (aggregate_status=accepted_final)\"",
+    "ratings.X: revised -> {\"status\": \"resolved\", \"rating\": 2}",
+    "ratings.E.causality: son55 -> {\"status\": \"resolved\", \"rating\": 2}",
+    "ratings.E.cost: son55 -> 3",
+    "score: revised -> {\"raw\": 60.0, \"display\": 60.0}",
+    "domain_pattern.matches: son55 -> [\"K302 (primary_operation)\", \"K802 (evaluation_practice)\"]",
+    "domain_pattern.matches[K302].condition_checks: revised -> \"see condition_checks with explicit semantics\"",
+    "rs_pattern.executes_pattern/resolves_problem: sol -> [true, false]",
+    "expectations[E02].status: son55 -> \"met\"",
+    "expectations[E08]: revised -> \"unmet\"",
+    "expectations[E16,E22]: son55 -> [\"partial\", \"partial\"]",
+    "claims: son55 -> \"son55 CL1-CL5 (covers sol C1/C2); allowed conclusions bounded by assessment.cannot_conclude\""
+   ],
+   "shared_error_summary": [
+    "Both seats omitted applicable expectation E18 (gated acceptance: rule, accepted/rejected counts, ungated comparison).",
+    "Both seats left the provenance of simulator symbolic blocker features as an open question although the fixed text (dependencies computed from voxel intersections; image-only planner input; no perception path for these features) supports a determinate inference."
+   ],
+   "requests": [
+    {
+     "blocking": false,
+     "to": "controller",
+     "request": "Only if the review target changes from v6: earlier arXiv versions (v1-v5) may contain the per-task prompt specifications that v6 elides ('This section originally contained...'). Adding them would require re-dispatching both seats for X and E.causality."
+    }
+   ],
+   "final_record_hash": "1bc4c767501ad4699c3f2ec4fec13285d944fe79e978ac85a6b71e0e1234cddc",
+   "file": "2602.20323.json",
+   "file_sha256": "cf0cd6f178d0a78d022d15e4f421bd5ea4fe0ce49a3e6fbbadd2028b0852066c"
+  },
+  {
+   "paper_key": "2605.13119",
+   "version": "2605.13119v2",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "aggregate_status": "accepted_final",
+   "score_raw": 66.25,
+   "score_display": 66.3,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 2
+   },
+   "seat_scores": {
+    "sol": 66.25,
+    "son55": 70.0
+   },
+   "n_resolutions": 14,
+   "n_substantive_disagreements": 10,
+   "n_same_supported_fact": 4,
+   "n_shared_error_corrections": 1,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "ratings.E.causality: sol -> 2",
+    "ratings.E.statistics: sol -> 1",
+    "rs_pattern (sub_ids/supporting): revised -> {\"primary\": [\"decompose_and_delegate\", \"rs:C25\"], \"supporting\": [[\"heterogeneous_decomposition\", null], [\"controlled_diagnostic_design\", \"rs:C02\"]]}",
+    "domain_pattern.matches: son55 -> [\"K106\", \"K202\", \"K803 (evaluation_practice)\"]",
+    "domain_pattern condition_checks (K106 F2/F3/F6/F7, K202 F1/F3/F5): revised -> \"normalized per condition_status_semantics\"",
+    "expectations[E16].status: sol -> \"partial\"",
+    "expectations[E19].score_item / E07.score_item: sol -> [\"E.measurement\", \"E.holdout\"]",
+    "expectations[E08]: revised -> \"unmet\"",
+    "rs_pattern.executes_pattern/resolves_problem: sol -> [true, false]",
+    "score: sol -> {\"raw\": 66.25, \"display\": 66.3}"
+   ],
+   "shared_error_summary": [
+    "Both seats omitted that for OpenVLA on RoboTwin-SA the full system (5.00) is below the direct-planner baseline (13.80); both reported only the gain vs standalone."
+   ],
+   "requests": [],
+   "final_record_hash": "cc35a827a4d3d9206c76f30c05b80464a893f123f00c0a98acf92680e47e8a5e",
+   "file": "2605.13119.json",
+   "file_sha256": "97bbeb2bd47d4bf39137fd29223cf5b1e508d6eaeb867c11f4d51f0734eb115b"
+  },
+  {
+   "paper_key": "2606.00104",
+   "version": "2606.00104v1",
+   "claim_type": "system_method",
+   "claim_support": "unsupported",
+   "evidence_level": "offline",
+   "aggregate_status": "accepted_final",
+   "score_raw": 31.25,
+   "score_display": 31.3,
+   "ratings": {
+    "G": 2,
+    "M": 2,
+    "X": 2,
+    "E.measurement": 1,
+    "E.causality": 0,
+    "E.holdout": 0,
+    "E.statistics": 0,
+    "E.cost": 0
+   },
+   "seat_scores": {
+    "sol": 37.5,
+    "son55": 32.5
+   },
+   "n_resolutions": 10,
+   "n_substantive_disagreements": 8,
+   "n_same_supported_fact": 2,
+   "n_shared_error_corrections": 1,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.claim_support: son55 -> \"unsupported\"",
+    "ratings.M: son55 -> 2",
+    "ratings.E.statistics: sol -> {\"status\": \"not_reported\", \"rating\": 0}",
+    "ratings.E.cost: son55 -> {\"status\": \"not_reported\", \"rating\": 0}",
+    "domain_pattern.matches: son55 -> [\"K104\", \"K201\"]",
+    "expectations[E04,E22]: sol -> [\"unmet\", \"unmet\"]",
+    "expectations[E05]: son55 -> \"unmet\"",
+    "score: revised -> {\"raw\": 31.25, \"display\": 31.3}"
+   ],
+   "shared_error_summary": [
+    "Both seats missed that the altitude clamp silently modifies commands (only geofence breaches surface a failure): sol marked F2 not_applicable, son55 unknown."
+   ],
+   "requests": [],
+   "final_record_hash": "39a16fc1ac7e2a3a4883c1b1601409e6131e14ace345bf950923446c45ed07af",
+   "file": "2606.00104.json",
+   "file_sha256": "981ba2a4e4d0655753874b876f7170caebab07ef11a4d19442c31725c5368bd7"
+  }
+ ],
+ "validation": [
+  {
+   "paper_key": "2602.20323",
+   "final_record_hash_verified": true,
+   "score_recomputed_match": true,
+   "input_seat_hashes_match_current_files": true,
+   "material_hash_match": true,
+   "rs_parent_child_valid": true,
+   "domain_main_sub_valid": true,
+   "quotes_verified": 66,
+   "quote_mismatches": [],
+   "dangling_evidence_refs": []
+  },
+  {
+   "paper_key": "2605.13119",
+   "final_record_hash_verified": true,
+   "score_recomputed_match": true,
+   "input_seat_hashes_match_current_files": true,
+   "material_hash_match": true,
+   "rs_parent_child_valid": true,
+   "domain_main_sub_valid": true,
+   "quotes_verified": 66,
+   "quote_mismatches": [],
+   "dangling_evidence_refs": []
+  },
+  {
+   "paper_key": "2606.00104",
+   "final_record_hash_verified": true,
+   "score_recomputed_match": true,
+   "input_seat_hashes_match_current_files": true,
+   "material_hash_match": true,
+   "rs_parent_child_valid": true,
+   "domain_main_sub_valid": true,
+   "quotes_verified": 47,
+   "quote_mismatches": [],
+   "dangling_evidence_refs": []
+  }
+ ],
+ "validation_scope": "Structural, arithmetic, hash and verbatim-quote checks on aggregate outputs; not proof of semantic/scientific correctness or reproduction.",
+ "controller_notes": [
+  "conflicts.json E-subitem diffs showing son55=null are artifacts: sol nests ratings.E.{item}, son55 uses flat 'E.{item}' keys. Real E differences the mechanical diff missed: 2602.20323 E.causality (sol unknown vs son55 2) and E.cost (2 vs 3); 2605.13119 E.causality (2 vs 3), E.statistics (1 vs 2); 2606.00104 E.statistics (0 vs 1), E.cost (1 vs 0). All resolved in the final records. Final records use flat keys per BATCH_CONTRACT.",
+  "Seat dispatch matches run manifest (sol=sonnet overlay gpt-6.1-sol; son55=haiku overlay claude-sonnet-5-5[1m]).",
+  "son55 disclosed minor blindness exposures (saw assignments.jsonl domain-card row for 2602.20323 and sol file names, no contents); judged non-contaminating; no conclusions read.",
+  "Domain-card F-condition status semantics differed between seats; final records declare condition_status_semantics.",
+  "K802/K803 recorded as evaluation-practice secondary matches (not contributed operations) for consistency within the batch.",
+  "2602.20323 carries one non-blocking request (earlier arXiv versions may contain prompts elided in v6) - only relevant if the review version changes.",
+  "All scores are calibration-dev values under draft_uncalibrated weights; no Reel selection, no index write."
+ ],
+ "blockers": [],
+ "timestamp": "2026-10-21T18:40:00Z"
+}

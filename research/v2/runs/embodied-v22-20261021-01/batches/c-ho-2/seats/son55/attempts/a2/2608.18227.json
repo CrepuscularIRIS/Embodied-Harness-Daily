@@ -1,0 +1,224 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-2",
+ "attempt_id": "a2",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2608.18227",
+  "paper_id": "2608.18227",
+  "title": "Revisiting the \"Push-T\" Robot Manipulation Task with Agentic Robotics",
+  "version": "2608.18227v1",
+  "claim_type": "system_method",
+  "central_claim": "A frontier coding agent (Claude Code with Fable 5), prompted to write a code-as-policy for Push-T and allowed to iterate against the simulator without demonstrations, produced a procedural controller that reaches 100% success (97.2% with a vision pipeline) over 200 seeds with 46% fewer steps than the public LeRobot diffusion-policy checkpoint (62.5%), then self-improved on an agent-written Push-Alphabet A-Z benchmark to 99.4% (650 episodes) and ported to Franka/UR5e simulations.",
+  "claim_scope_note": "Short case study; 2D gym_pusht plus agent-authored Push-Alphabet and 3D sims; no real robot; one agent trajectory; ~221 h with human interaction and $1,500-2,000 API cost."
+ },
+ "provenance": {
+  "input_hash": "215d73626a002f2c5a8fce2342cd41821e264b90495c3d8ce5304b2f142bafdf",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": null,
+  "expectations_hash_note": "no standalone expectations file in the run manifest; E01-E22 text read from the frozen domain profile as quoted inside patterns/main/*.md; source_strength=common_practice",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "session_id_note": "subagent cannot read its own session id",
+  "receipt_ref": null,
+  "timestamp": "2026-10-21",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); blind seat son55, attempt a2; no other seat/aggregate/a1/old-score artifacts read"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2608.18227v1",
+   "sha256": "57a06486e12b504f2314d704215cafa5e164d3302e6eb7023844467be0c9e05d",
+   "sections_read": ["Abstract", "1 Introduction", "2 Problem Setup", "3 Solving Push-T (3.1-3.3, Table 1)", "4 Self-Learning Push A-Z (4.1-4.3, Table 2)", "5 Model Cost", "6 Limitation and Discussion", "7 Appendix (benchmark specification)"],
+   "complete": true,
+   "missing_sections": ["Code, videos and policies are 'to be posted online' and are not in the material"]
+  }
+ ],
+ "evidence": [
+  {"evidence_id": "E001", "material_id": "M1", "locator": "Abstract", "quote": "iteratively optimizing to achieve 100% success rate using 46% fewer steps than the best diffusion policy trained with 200 human demonstrations", "support_explanation": "Headline claim; the comparison is to one public checkpoint, not a 'best' policy.", "kind": "author_report"},
+  {"evidence_id": "E002", "material_id": "M1", "locator": "Table 1", "quote": "Diffusion_Policy_LeRobot 62.5% 223.7 6.38 87.4% Claude_state_controller 100.0% 120.1 3.72 96.8% Claude_vision_controller 97.2% 170.4 4.76 94.2%", "support_explanation": "Main result over 200 seeds: DP 62.5%, state controller 100%, vision controller 97.2%; steps 223.7 / 120.1 / 170.4 (the '46% fewer steps' is for the privileged-state controller).", "kind": "author_report"},
+  {"evidence_id": "E003", "material_id": "M1", "locator": "Sec 3.3", "quote": "Results Table 1 reports performance on gym_pusht over 200 fixed evaluation seeds.", "support_explanation": "Evaluation denominator for Push-T.", "kind": "author_report"},
+  {"evidence_id": "E004", "material_id": "M1", "locator": "Sec 3.3", "quote": "the pusher position using a ResNet-18 visual encoder and a U-Net denoiser", "support_explanation": "Diffusion baseline is a public image+proprioception checkpoint, not retrained, and has no simulator interaction.", "kind": "author_report"},
+  {"evidence_id": "E005", "material_id": "M1", "locator": "Abstract / Sec 4.2", "quote": "Notably, operating without external web search, the agent synthesized the MPC control logic entirely from its training background.", "support_explanation": "Information access is stated for the MPC phase only; abstract says the agent found the gym simulation online.", "kind": "author_report"},
+  {"evidence_id": "E006", "material_id": "M1", "locator": "Sec 4.2", "quote": "In round v3, the agent autonomously inspected failure logs, read the simulation source code to diagnose kinematic bugs on difficult shapes", "support_explanation": "The agent had simulator source access; success criterion and dynamics were inspectable.", "kind": "author_report"},
+  {"evidence_id": "E007", "material_id": "M1", "locator": "Sec 4.2", "quote": "In round v1, a single prompt generated an initial controller achieving a 47.1% success rate. In round v2, autonomous self-refinement overnight elevated the success rate to 73.1%.", "support_explanation": "Development trajectory v1 47.1% -> v2 73.1% -> v3 99.4% measured on the same Push-Alphabet suite the agent iterated on.", "kind": "author_report"},
+  {"evidence_id": "E008", "material_id": "M1", "locator": "Fig 2 caption", "quote": "(25 tries per letter, the strict final number)", "support_explanation": "Exams on all 26 letters were part of the self-improvement loop; the 25-tries-per-letter figure is the final number on the same suite.", "kind": "author_report"},
+  {"evidence_id": "E009", "material_id": "M1", "locator": "Sec 4.1", "quote": "with the agent generating both the environment suite and controller iterations (Figure 1 )", "support_explanation": "The Push A-Z benchmark was authored by the same agent that was tuned on it.", "kind": "author_report"},
+  {"evidence_id": "E010", "material_id": "M1", "locator": "Table 2", "quote": "Agent-generated controllers gym MPC + state 248.7 5.15 90.9% 99.4% gym MPC + vision 269.7 5.36 90.9% 99.2% Franka MPC + state 477.0 4.10 90.3% 99.2% Franka MPC + vision 668.1 5.78 83.4% 89.8% UR5e MPC + vision 545.8 5.06 90.0% 98.5%", "support_explanation": "Push-Alphabet results (650 episodes each) and cross-embodiment sim results.", "kind": "author_report"},
+  {"evidence_id": "E011", "material_id": "M1", "locator": "Sec 4.2", "quote": "raises success to 97.2% and coverage to 90.3%", "support_explanation": "Classical Dubins baseline reaches 90.2% with the initial adapter and 97.2% after the agent refines the adapter; the baseline is also tuned by the agent on the benchmark.", "kind": "author_report"},
+  {"evidence_id": "E012", "material_id": "M1", "locator": "Sec 4.3", "quote": "These results provide preliminary evidence that the generated controller is portable across distinct simulated embodiments without modifying its task-level contact reasoning.", "support_explanation": "Authors label cross-embodiment evidence preliminary; the 3D sims were generated by the agent.", "kind": "author_report"},
+  {"evidence_id": "E013", "material_id": "M1", "locator": "Sec 5", "quote": "the total API cost was approximately $1,500", "support_explanation": "Cost disclosure (9.5 M output tokens, $1,500-2,000, ~221 h with human interaction); no breakdown, no comparison with DP training/demo cost.", "kind": "author_report"},
+  {"evidence_id": "E014", "material_id": "M1", "locator": "Sec 5", "quote": "The agentic development process required approximately 221 hours in Claude", "support_explanation": "Development ran ~221 hours 'under human interactions'; the share of human steering is unreported.", "kind": "author_report"},
+  {"evidence_id": "E015", "material_id": "M1", "locator": "Sec 3.2", "quote": "to eliminate reliance on privileged ground-truth geometric states, we ask the coding agent to add vision feedback into the perception loop", "support_explanation": "Human-issued follow-up prompt shaped the agent's work (the first controller used privileged state).", "kind": "author_report"},
+  {"evidence_id": "E016", "material_id": "M1", "locator": "Sec 6", "quote": "The agent may exploit simulator-specific APIs, state variables, rendering conventions, contact behavior, or numerical regularities that are unavailable or inaccurate on a physical robot.", "support_explanation": "Authors concede simulator exploitation risk; no audit of it is reported.", "kind": "author_report"},
+  {"evidence_id": "E017", "material_id": "M1", "locator": "Sec 6", "quote": "Claude is computationally expensive and sensitive to the prompt.", "support_explanation": "Prompt sensitivity admitted; no repeated agent runs reported.", "kind": "author_report"},
+  {"evidence_id": "E018", "material_id": "M1", "locator": "Sec 4", "quote": "An episode is considered successful if the final target coverage reaches at least 90% within 720 control steps.", "support_explanation": "Environment-checked success predicate for Push-Alphabet (90% threshold, versus 95% for Push-T).", "kind": "author_report"},
+  {"evidence_id": "E019", "material_id": "M1", "locator": "Appendix 7.1", "quote": "evaluations run 25 episodes per letter with seeds 0 – 24 ( 650 episodes total)", "support_explanation": "Fixed evaluation seeds; the paper does not state whether development used the same seeds.", "kind": "author_report"},
+  {"evidence_id": "E020", "material_id": "M1", "locator": "Appendix 7.1", "quote": "redacted by a visibility level: full (letter polygon, pusher radius, inertia, friction, PD gains), shape (polygon and radius only), or blind (no geometry)", "support_explanation": "A per-episode specification with graded privilege exists; the paper does not say which level underlies Tables 1-2 (our inference: information access unresolved).", "kind": "our_inference"},
+  {"evidence_id": "E021", "material_id": "M1", "locator": "Sec 4.2", "quote": "For both method, the remaining failures are caused by hard reorientation episodes exceeding the finite step limit before convergence.", "support_explanation": "Only a one-sentence failure account; no per-letter or per-category counts.", "kind": "author_report"},
+  {"evidence_id": "E022", "material_id": "M1", "locator": "Sec 1", "quote": "Despite their different formulations, these methods require substantial task-specific effort in algorithm design, optimization modeling, or interaction-data collection.", "support_explanation": "Author's stated gap against CRISP, learned world models and classical pushing.", "kind": "author_report"},
+  {"evidence_id": "E023", "material_id": "M1", "locator": "Abstract", "quote": "Videos, policies and details will be posted online.", "support_explanation": "Generated policies/code are not part of the material.", "kind": "author_report"},
+  {"evidence_id": "E024", "material_id": "M1", "locator": "Sec 3.3", "quote": "stringent criterion of at least 95% target coverage", "support_explanation": "Push-T success predicate from the gym environment.", "kind": "author_report"}
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "A procedural controller (perception/planning/dynamics/control code) for planar pushing, authored by a coding agent; baseline = diffusion policy trained on 200 demos, and a classical Dubins-pushing controller",
+   "information": "Natural-language task prompt; the gym simulator (found online; source readable by the agent; web search not used in the MPC phase); execution outcomes and failure logs; state variant sees pusher and block poses, vision variant RGB frames; task-specification visibility level unstated",
+   "operation": "Write controller -> run in sim -> observe success/failure -> diagnose model or control error -> revise (agentic self-learning); resulting controllers: scripted state machine with contact library and quasi-static model, then receding-horizon MPC with parameter adaptation",
+   "output": "Standalone controller code; the LLM is not in the control loop at run time",
+   "conditions": "Cheap resettable simulation, frontier coding agent, human interactions over ~221 h",
+   "feedback": "Self-run simulation outcomes and the agent's own practice tests (5 episodes on struggling letters) and exams (all 26 letters)",
+   "selection_rule_data": "Agent judgement on practice/exam success; no stated acceptance rule or held-out set",
+   "persistence": "Controller code files across iterations (14 iterations in round v3)",
+   "later_use": "Next iteration and harder letters in the curriculum",
+   "claimed_effect": "Push-T 62.5% (DP) vs 100% / 97.2%; Push-Alphabet 47.1% -> 73.1% -> 99.4%",
+   "failure_boundary": "Simulator exploitation, prompt sensitivity, cost; remaining failures are step-limit timeouts on hard reorientations; real-world robustness untested",
+   "evidence_ids": ["E001", "E005", "E006", "E007", "E014", "E016", "E021"]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Vision-conditioned variant of the controller",
+   "information": "Rendered RGB frames; colour segmentation against a known palette; template geometry; no ground-truth state at run time",
+   "operation": "Per-frame segmentation and IoU pose tracking; one-time calibration; per-push friction-gain adaptation via a digital twin",
+   "output": "Same controller driven by estimated poses",
+   "conditions": "Clean synthetic renders with a known palette",
+   "feedback": "Replayed predicted rotation vs observed",
+   "selection_rule_data": "none",
+   "persistence": "Within-episode parameters only",
+   "later_use": "next pushes",
+   "claimed_effect": "97.2% on Push-T, 99.2% on Push-Alphabet in gym",
+   "failure_boundary": "Franka vision 89.8%; real perception untested",
+   "evidence_ids": ["E010", "E015", "E002"]
+  }
+ ],
+ "retention_trace": {
+  "applicable": "partial",
+  "explanation": "The study includes a self-improving agent on a benchmark the agent wrote; retention in the SCORE_SPEC sense is only the persistence of improved controller code across rounds, evaluated on the same suite.",
+  "before": "Round v1 controller: 47.1% success on Push-Alphabet",
+  "proposed_change": "Agent revises code from failure logs and sim source, shifting to MPC in round v3",
+  "selection_data_rule": "Practice tests (5 episodes on currently failing letters) and exams on all 26 letters; no accept/reject rule stated",
+  "persisted_change": "Controller code in the working repository across 14 iterations",
+  "later_tasks": "Harder letters enter the curriculum; all 26 letters were in the loop, none held out",
+  "measured_gain": "47.1% -> 73.1% -> 99.4% on the same suite (task improvement, not retained or improver improvement on unseen tasks)",
+  "evidence_ids": ["E007", "E008", "E009"]
+ },
+ "gap": {
+  "author_gap": "Push-T has mostly been used for demonstration-trained visuomotor policies; classical and model-based solutions require substantial task-specific design, and agentic coding for such procedural solutions has not been revisited on this iconic task.",
+  "checked_gap": "Thin: no concrete failure of existing agentic/code-as-policy systems is identified, and agentic-robotics neighbours [7]-[9] are not compared; the practical residue (how a coding agent compares with a demonstration-trained policy) is a reasonable case-study question. Nearest classical neighbours are present (Dubins pushing via adapter, CRISP cited but not compared). Neighbour full texts were not pinned.",
+  "lineage": "Implicit BC / Diffusion Policy (demonstrations) vs geometric pushing (Dubins) vs contact-implicit trajectory optimisation (CRISP) vs learned world model -> coding-agent code-as-policy with simulator-in-the-loop iteration",
+  "closest_adjacent": [
+   {"ref": "Dubins pushing (Zhou, Hou, Mason) re-implemented with an agent-authored adapter", "solved": "time-optimal fixed-contact pushing; 90.2% -> 97.2% on Push-Alphabet", "remaining": "contact switching and workspace limits handled by the adapter"},
+   {"ref": "CRISP (contact-implicit sequential convex programming)", "solved": "Push-T via trajectory optimisation", "remaining": "task-specific modelling effort; not compared"},
+   {"ref": "LeRobot Diffusion Policy checkpoint (200 demonstrations)", "solved": "demonstration-trained visuomotor policy, 62.5% (65.4% official)", "remaining": "needs demos; lower coverage"}
+  ],
+  "residue": "Evidence that a coding agent can author a competitive procedural Push-T controller without demonstrations",
+  "stakes": "62.5% vs 100% success and 223.7 vs 120.1 steps (modalities differ)",
+  "method_response": "Agentic self-learning loop in simulation (S1)",
+  "remaining_gap": "Real-world robustness, variance across agent runs, compute/interaction-matched comparison, what part is due to the agent versus the human prompts and simulator access",
+  "evidence_ids": ["E022", "E004", "E011", "E016"],
+  "unresolved": ["Whether the agent's result is reproducible across runs and models", "Contribution of simulator source access and human steering"]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "good",
+    "tactic_steps_checked": "Step 1 boundary: agent writes the executable program, the simulator and interpreter evaluate it exactly (present). Step 2 machine-checkable artifact: controller code (present). Step 3 close the loop with the solver's verifiable output during construction: sim success/coverage and failure logs drive revision (present; the agent also reads the simulator source). Step 4 ablate the verification feedback: not done (absent). Step 5 cost accounting and beyond-toy validation: tokens, dollars and hours disclosed (present); cross-embodiment sims agent-built (partial).",
+    "success_failure_checks": "Success: executable artifact, obtainable feedback (met; but feedback includes simulator internals), reusable capital (the Push-T controller is carried to A-Z, partial). Failure: no ablation isolating the loop (present), benchmark-tailored hacks (partial), reliance on privileged signal not disclosed as a limitation of deployment (partly disclosed in Sec 6).",
+    "evidence_ids": ["E005", "E006", "E007", "E013", "E016"],
+    "reason": "The paper's operation is exactly agent-authored code evaluated by an exact executor and revised from its outputs. Considered and rejected as primary: structural_prior_encoding (physics structure is chosen by the agent, not the contribution), adapt_via_conditioning."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "Single original-card match; no supporting card because no second distinct operation needs one.",
+  "executes_pattern": true,
+  "resolves_problem": "partial: demonstrates that an agent-authored controller beats the public DP checkpoint on gym_pusht; does not establish that the loop (rather than simulator access, human steering or privileged state) is responsible."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "code_policy_trial_revision",
+    "sub": "R05",
+    "version": "board-induced 2026-10-21",
+    "fit": "good",
+    "condition_checks": [
+     {"id": "S1", "status": "partial", "note": "single-prompt round v1 (47.1%) vs later rounds is a within-run progression, not a matched one-shot-vs-rewrite comparison with a fixed budget"},
+     {"id": "S2", "status": "met", "note": "rewrite history with success curve over 14 iterations and a narrative of which fixes mattered (MPC shift, recovery rules)"},
+     {"id": "S3", "status": "partial", "note": "controller compared with DP and a classical Dubins baseline; no code-generation baselines"},
+     {"id": "F1", "status": "met", "note": "rewriting and scoring on the same suite, no held-out letters (failure condition present)"},
+     {"id": "F2", "status": "unmet", "note": "classical baseline is included (failure condition absent), though agent-tuned"},
+     {"id": "F4", "status": "met", "note": "simulation only; no real-robot rewriting (failure condition present)"}
+    ],
+    "evidence_ids": ["E007", "E008", "E009", "E011", "E016"]
+   }
+  ],
+  "unassigned": "Agent use of simulator source and parameter fitting inside the simulator resembles K204-type privileged tooling but is not a designed harness component here; not assigned.",
+  "revision_proposals": ["R05 'When it fails' could add: simulator source access and benchmark authored by the same agent (dev=test, environment hackability)."]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain_namespace": "embodied",
+   "domain_main": "code_policy_trial_revision",
+   "domain_sub": "R05",
+   "operation_correspondence": "C25's executable artifact checked by an exact executor and revised from its outputs corresponds to R05's controller program run in simulated trials, diagnosed from logs, and rewritten until success.",
+   "necessary_conditions_and_differences": "R05 assumes a primitive library and a deployed program with no model at runtime (met here); the paper adds free access to simulator source and human prompts.",
+   "evidence_ids": ["E005", "E006", "E007"]
+  }
+ ],
+ "expectations": [
+  {"id": "E01", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/planner_composes_code_and_policies.md"], "applies_when": "a claim that a harness/loop (not just the model) raises success", "applicable": true, "status": "unmet", "reason": "A single coding agent and one loop; no alternative harness, no second agent or model, no no-iteration control.", "evidence_ids": ["E017", "E007"], "score_item": "E.causality"},
+  {"id": "E02", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/code_policy_trial_revision.md"], "applies_when": "a claim that a specific component causes the improvement", "applicable": true, "status": "unmet", "reason": "No toggling of simulator access, vision, web search, or human prompts.", "evidence_ids": ["E006", "E015"], "score_item": "E.causality"},
+  {"id": "E03", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/planner_composes_code_and_policies.md"], "applies_when": "a claim of general effect across backbones", "applicable": true, "status": "unmet", "reason": "Only Claude Code with Fable 5; cheaper models are left as future work.", "evidence_ids": ["E017"], "score_item": "E.causality"},
+  {"id": "E04", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/code_policy_trial_revision.md"], "applies_when": "any success-rate comparison", "applicable": true, "status": "unmet", "reason": "200 seeds and 650 episodes are reported without intervals; the agent run (the thing being claimed) is a single trajectory with no repeats.", "evidence_ids": ["E003", "E019", "E017"], "score_item": "E.statistics"},
+  {"id": "E05", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/planner_composes_code_and_policies.md"], "applies_when": "a claim that a harness is better or more practical", "applicable": true, "status": "partial", "reason": "Tokens, dollars and hours disclosed once for the whole project; no per-stage breakdown, no comparison with the DP's demonstration cost.", "evidence_ids": ["E013", "E014"], "score_item": "E.cost"},
+  {"id": "E07", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/code_policy_trial_revision.md"], "applies_when": "tabletop manipulation harness vs end-to-end VLAs on LIBERO-PRO/RoboTwin", "applicable": false, "status": "not_applicable", "reason": "Planar pushing in gym_pusht, not a tabletop VLA benchmark; the comparison class is a diffusion policy.", "evidence_ids": ["E004"], "score_item": "E.holdout"},
+  {"id": "E08", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/planner_composes_code_and_policies.md"], "applies_when": "a benchmark claim by a frontier-model harness", "applicable": true, "status": "unmet", "reason": "No statement on seed overlap between development and evaluation, no discussion of training-data familiarity with Push-T solutions, agent found the sim online and read its source.", "evidence_ids": ["E005", "E006", "E019"], "score_item": "E.holdout"},
+  {"id": "E15", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/harness_native_rl.md"], "applies_when": "an agent evaluated against an automatic success checker it could access", "applicable": true, "status": "unmet", "reason": "The agent could read simulator source (including the success criterion) and wrote the Push-Alphabet suite; no hack audit or hidden checker is reported.", "evidence_ids": ["E006", "E009", "E016"], "score_item": "E.measurement"},
+  {"id": "E16", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/external_verification_control.md"], "applies_when": "an embodied agent success claim", "applicable": true, "status": "partial", "reason": "One-sentence account of remaining failures; no per-letter or per-category counts.", "evidence_ids": ["E021"], "score_item": "E.statistics"},
+  {"id": "E17", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/code_policy_trial_revision.md"], "applies_when": "a claim that self-improvement generalises beyond the search set", "applicable": true, "status": "unmet", "reason": "All 26 letters were part of the curriculum and exams; the final numbers are on the same suite.", "evidence_ids": ["E008", "E009"], "score_item": "E.holdout"},
+  {"id": "E19", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/code_policy_trial_revision.md"], "applies_when": "a claim of real-robot transfer", "applicable": false, "status": "not_applicable", "reason": "No real-robot claim; limited to simulation (stated).", "evidence_ids": ["E012", "E016"], "score_item": "E.holdout"},
+  {"id": "E22", "version": "domain-v1", "source_strength": "common_practice", "source_refs": ["patterns/main/planner_composes_code_and_policies.md"], "applies_when": "a comparison between harnesses/policies at matched budgets", "applicable": true, "status": "unmet", "reason": "The DP uses 200 demonstrations and no sim interaction; the agent uses unlimited simulation, ~221 h and $1.5-2k; modality (image vs privileged state) differs in the headline.", "evidence_ids": ["E004", "E013", "E014"], "score_item": "E.causality / E.cost"}
+ ],
+ "claims": [
+  {"claim_id": "C1", "text": "An agent-authored code policy outperforms the diffusion policy on Push-T.", "setting": "gym_pusht, 200 fixed seeds, success = coverage >= 95%", "baseline_control": "public LeRobot DP checkpoint (200 demos); classical baseline not run on Push-T", "selection_vs_test": "development seeds vs evaluation seeds unstated", "result_denominator": "DP 62.5%, state controller 100.0% (200/200), vision 97.2%; steps 223.7 vs 120.1 vs 170.4", "evidence_ids": ["E001", "E002", "E003", "E004", "E024"], "counterevidence": "Privileged-state controller vs image-based policy; the vision controller (modality-matched) uses 24% fewer steps, not 46%; one checkpoint, not 'best'; agent has simulator interaction and human steering", "allowed_conclusion": "A coding-agent-authored controller scored 97-100% on the standard gym_pusht criterion versus 62.5% for the released diffusion checkpoint; the comparison is not matched in interaction budget or information."},
+  {"claim_id": "C2", "text": "The agent generalises to Push-A to Push-Z and self-improves to 99.4%.", "setting": "Agent-written 26-letter suite, 25 episodes per letter, success = coverage >= 90% in 720 steps", "baseline_control": "Dubins pushing (initial adapter 90.2%, refined adapter 97.2%)", "selection_vs_test": "all letters used in the curriculum; same suite for exams and final numbers", "result_denominator": "650 episodes: MPC state 99.4%, vision 99.2%", "evidence_ids": ["E007", "E008", "E009", "E010", "E011", "E018", "E019"], "counterevidence": "Dev equals test, agent-authored benchmark, baseline also agent-tuned, difference over refined Dubins is 2.2 points without intervals", "allowed_conclusion": "On a benchmark it wrote and iterated against, the agent's final controller scored 99.4% (state); this documents task improvement during development, not held-out generalisation."},
+  {"claim_id": "C3", "text": "The controller ports across simulated embodiments (Franka, UR5e).", "setting": "Agent-generated 3D sims with visual feedback, randomized goal poses", "baseline_control": "none", "selection_vs_test": "unstated whether tuned in these sims", "result_denominator": "Franka vision 89.8%, UR5e vision 98.5% (650 each)", "evidence_ids": ["E010", "E012"], "counterevidence": "Simulators authored by the same agent; no independent validation of fidelity or success checking", "allowed_conclusion": "Preliminary evidence in agent-built simulators only (authors' own wording)."},
+  {"claim_id": "C4", "text": "The development cost was about 9.5 M output tokens and $1,500-2,000.", "setting": "Whole project", "baseline_control": "none", "selection_vs_test": "not applicable", "result_denominator": "~221 h under human interaction", "evidence_ids": ["E013", "E014"], "counterevidence": "No stage breakdown; human effort unquantified", "allowed_conclusion": "Order-of-magnitude development cost is disclosed."}
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop simulation with environment-defined coverage success; development and evaluation overlap on the same environments/suite; cross-embodiment sims were generated by the agent and described as preliminary, so no independent transfer is credited.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "Claude Code with Fable 5 produced controllers that, on the standard gym_pusht criterion over 200 fixed seeds, scored 100% (privileged state) and 97.2% (vision), against 62.5% for the public LeRobot diffusion checkpoint, and reached 99.4% on an agent-authored 26-letter suite it was developed on; no real-robot, variance or ablation evidence supports attributing this to the loop alone.",
+  "unresolved": ["Reproducibility across agent runs/models", "Seed overlap between development and evaluation", "Contribution of simulator-source access, web and human prompts", "Which visibility level was used", "Independent validation of the 3D sims"],
+  "reproduction_note": "All results are author-reported; nothing was run by us; code and policies are not provided."
+ },
+ "ratings": {
+  "G": {"status": "resolved", "rating": 2, "reason": "A real if modest gap (Push-T studied only via demonstrations; classical solutions need heavy design) with classical neighbours (Dubins, CRISP) named and one re-implemented, but no concrete failure of existing agentic-robotics systems is identified and CRISP and agentic neighbours are not compared.", "evidence_ids": ["E022", "E011"], "counterevidence_ids": [], "search_scope": []},
+  "M": {"status": "resolved", "rating": 2, "reason": "The agent-authored controllers' mechanism (contact library, quasi-static model, MPC, digital-twin friction adaptation) is described and plausible, but the paper offers no hypothesis about why the agent loop succeeds, no distinguishing predictions, and the result may owe to simulator access or training-data familiarity.", "evidence_ids": ["E005", "E006", "E015"], "counterevidence_ids": ["E006"], "search_scope": []},
+  "X": {"status": "resolved", "rating": 2, "reason": "The prompts and loop stages are listed and the benchmark is specified in the appendix, but code and policies are not provided, human interaction share is unquantified, the privilege/visibility level is unstated, and web/sim-source access is described inconsistently.", "evidence_ids": ["E005", "E014", "E020", "E023"], "counterevidence_ids": ["E020"], "search_scope": []},
+  "E": {
+   "measurement": {"status": "resolved", "rating": 3, "reason": "Environment-defined coverage success over 200 seeds (Push-T) and 650 episodes (Push-Alphabet), DP re-evaluated under the same protocol and sanity-checked against its official 65.4%; held back by agent-authored suites/simulators, a changed threshold (90% vs 95%) and unaudited agent access to the success checker.", "evidence_ids": ["E003", "E018", "E009", "E010"], "counterevidence_ids": ["E009"], "search_scope": []},
+   "causality": {"status": "resolved", "rating": 2, "reason": "A DP baseline and a classical Dubins baseline exist, but the headline mixes modality (state vs image), interaction budget, simulator-source access and human steering, and the self-improvement gain has no control or ablation; model/agent not varied.", "evidence_ids": ["E002", "E004", "E011", "E006"], "counterevidence_ids": ["E004"], "search_scope": []},
+   "holdout": {"status": "resolved", "rating": 2, "reason": "Development and evaluation share environments and the agent-written letter suite (all letters in the curriculum); seed overlap unstated; cross-embodiment simulators are agent-authored and labelled preliminary, which gives only weak partial credit.", "evidence_ids": ["E008", "E009", "E012", "E019"], "counterevidence_ids": [], "search_scope": []},
+   "statistics": {"status": "resolved", "rating": 1, "reason": "Trial counts are given but no CIs or variance, one agent trajectory with no repeats (prompt sensitivity admitted), and failure analysis is a single sentence (anchor v2: no repeats and no decomposition -> <=1).", "evidence_ids": ["E003", "E017", "E021"], "counterevidence_ids": [], "search_scope": []},
+   "cost": {"status": "resolved", "rating": 3, "reason": "Tokens, dollars and hours are disclosed (limitations discuss them); no per-stage breakdown, human effort not quantified, and the DP baseline's demonstration/training cost is not put on the same scale.", "evidence_ids": ["E013", "E014"], "counterevidence_ids": [], "search_scope": []}
+  }
+ },
+ "score": {"raw": 53.75, "display": 53.8, "lower": 53.75, "upper": 53.75, "coverage": 1.0, "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"},
+ "status": {"value": "reviewed", "reason": "Complete HTML full text with appendix read; code/policies not provided but the paper is a short case study whose claims are evaluable from its tables."}
+}

@@ -1,0 +1,839 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-dev-1",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2602.20323",
+  "paper_id": "2602.20323",
+  "title": "PhysMem: Scaling Test-Time Memory for Embodied Physical Reasoning",
+  "version": "2602.20323v6",
+  "claim_type": "system_method",
+  "central_claim": "A frozen VLM robot planner can learn specific physical principles at test time through a memory loop that generates typed hypotheses from interaction and verifies them before promoting them to guide decisions; \"principled abstraction\" (verified principles) beats direct experience retrieval (76% vs 23% on medium brick insertion) and yields learning curves in real-world sessions."
+ },
+ "provenance": {
+  "input_hash": "814ece7e0086c985aa5634a0b9eb228b0a430642f680b410ee5c50e58bf60964",
+  "rubric_version": "research/SCORE_SPEC.md v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "Sonnet 5.5 (经 LiteLLM)",
+  "actual_model": "claude-sonnet-5-5",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T16:20:10.217498+00:00",
+  "notes": "session_id/receipt_ref not obtainable inside this headless session. Blind-seat boundary kept: no other seat, aggregate, archive, old score, Reel, acceptance or citation data was read. Domain card sources cite some calibration papers; card text was used only for pattern definitions, never as evidence about the paper."
+ },
+ "materials": [
+  {
+   "material_id": "2602.20323",
+   "url": "https://arxiv.org/abs/2602.20323v6",
+   "local_path": "research/fulltext/2602.20323.txt",
+   "sha256": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "sections_read": [
+    "Abstract",
+    "I Introduction (contributions paragraph truncated in source)",
+    "III Method",
+    "IV Experimental Setup",
+    "V Experiments (V-A..V-G)",
+    "VI Discussion & Limitation"
+   ],
+   "complete": false,
+   "missing_sections": [
+    "II Related Work",
+    "tail of the I contributions paragraph ([...] in source)",
+    "Appendices A-F (implementation, full ablations, principle inventories, task specifications, transfer details)",
+    "Figures/Tables bodies other than Table II-IV prose",
+    "References"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "Abstract",
+   "quote": "We present PhysMem, a memory framework that enables VLM robot planners to learn physical principles from interaction at test time, without updating model parameters.",
+   "support_explanation": "central claim: frozen VLM planner, test-time memory, no weight update",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "Abstract",
+   "quote": "The system records experiences, generates candidate hypotheses, and verifies them through targeted interaction before promoting validated knowledge to guide future decisions.",
+   "support_explanation": "author description of verification step (targeted interaction)",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "III-C Action-Level Attribution",
+   "quote": "Hypotheses are judged by action-level outcomes, not episode-level success.",
+   "support_explanation": "selection rule for hypotheses is outcome statistics per action type, not designed experiments",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "III-D Memory Architecture",
+   "quote": "Long-term memory contains verified principles that guide decisions, with importance scores that decay over time",
+   "support_explanation": "persistence tier with decay (retention/forgetting)",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "III-E Retrieval and Application",
+   "quote": "The top- k principles and active hypotheses are injected into the VLM prompt",
+   "support_explanation": "later use: prompt conditioning of frozen planner",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "IV intro",
+   "quote": "Our experimental design deliberately separates high-level reasoning from low-level control.",
+   "support_explanation": "VLM picks discrete decisions; executor is a fixed motion planner",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-A",
+   "quote": "MemER [ 55 ] and MemoryVLA [ 51 ] require parameter updates (imitation finetuning or end-to-end VLA training); running their full systems would take us out of the frozen-base setting, so we benchmark training-free proxies that isolate their retrieval mechanism",
+   "support_explanation": "neighbour systems are compared only as training-free proxies, not the original systems",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-A Table II caption",
+   "quote": "TABLE II: Main results: PhysMem vs. memory paradigms on Brick Insertion (100 episodes per cell, 3 seeds).",
+   "support_explanation": "sim comparison denominator: 100 episodes per cell, 3 seeds, same frozen base (Gemini-3-Flash) and budget",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-A",
+   "quote": "Selective retrieval is no better than no memory: MemER-style retrieval lands at 53% on medium, exactly the No-Memory baseline",
+   "support_explanation": "unverified retrieval gives no gain; direct retrieval 23% vs no memory 53% (Table II) is the counter-example motivating verification",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-G",
+   "quote": "Principle abstraction is the load-bearing component.",
+   "support_explanation": "leave-one-out ablation (Table IV) with Gemini-3-Flash, 100 episodes per difficulty",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-G",
+   "quote": "Verification ensures hypothesis quality before promotion",
+   "support_explanation": "w/o Verification lowers medium from 76% to 64% in Table IV (figures in table not in prose quote)",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-C",
+   "quote": "Without memory (0%), performance remains flat",
+   "support_explanation": "real-world learning-curve control: 0% experience vs full memory, 3 runs per condition",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "IV-A",
+   "quote": "Each task runs for 10–20 episodes.",
+   "support_explanation": "real-world denominator is small: 10-20 episodes per task",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-D",
+   "quote": "Each condition runs 10 trials.",
+   "support_explanation": "OOD transfer table: 10 trials per cell",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-D",
+   "quote": "In contrast, Ball Navigation with new ball types shows that prior knowledge matches zero-shot performance: the new balls have different dynamics, so prior principles do not transfer.",
+   "support_explanation": "transfer boundary is stated: prior principles fail under changed dynamics, adaptation needed",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-F",
+   "quote": "so the planner gets better largely by ruling moves out, not by solving the task end-to-end",
+   "support_explanation": "on hard sim tasks gains come from Avoid constraints; limits what is claimed to be learned",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "III-C Hypothesis Generation",
+   "quote": "(VLM in real-world, LLM in simulation)",
+   "support_explanation": "reflection model differs between real-world (VLM) and simulation (LLM); real-world uses Qwen3-VL async every 15 s",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "IV-A",
+   "quote": "For VLM planning, we use Gemini-3.0-Flash [ 15 ] with thinking mode.",
+   "support_explanation": "real-world planner backbone; single backbone in real world",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-E",
+   "quote": "The gain from test-time learning then scales with that baseline",
+   "support_explanation": "memory gain measured on four VLMs: Gemini-3-Flash +23, GPT-5.1 +14, Qwen3-VL +12, Gemini-ER-1.5 +5 on medium",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "V-G",
+   "quote": "and at 3.4\\times the token cost the trade-off favors forgetting",
+   "support_explanation": "token costs are reported for ablations (relative to PhysMem full)",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "VI Limitations",
+   "quote": "Our work focuses on high-level planning rather than low-level control.",
+   "support_explanation": "scope limit: high-level planning only; reset needs human intervention",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "I Introduction",
+   "quote": "The issue is that unverified memory hardens into a fixed rule, and a small change in friction or object shape then turns a useful heuristic into a repeated error.",
+   "support_explanation": "author gap statement: unverified retrieval memory rigid under physical change",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "IV-A",
+   "quote": "Hypothesis generation uses Qwen3-VL [ 4 ] , running asynchronously every 15 seconds.",
+   "support_explanation": "extra model calls from reflection are not part of the reported token ratios in prose",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "2602.20323",
+   "material_hash": "4e1a4d624c363d6a1dd580f63ee6b898240148bc8898a37a895e322af6cd04b1",
+   "locator": "III-C vs Algorithm 1",
+   "quote": null,
+   "support_explanation": "Algorithm 1 promotes by confidence accumulated from outcomes of past attempts (conf update, >=3 supporting experiences); the material does not describe any procedure that actively designs a discriminating experiment, so \"targeted interaction\" in the abstract is not a separately specified or ablated mechanism.",
+   "kind": "our_inference"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Persistent principle store (three-tier memory) conditioning a frozen VLM option-level planner",
+   "information": "Planner sees observation, task text and top-k retrieved principles/hypotheses; reflection model (Qwen3-VL real, LLM sim) sees clustered experiences, current principles and hypotheses; executor is a fixed motion planner/policy",
+   "operation": "Record experience (o, option, outcome, context, symbolic state) -> resonance check -> cluster by symbolic state -> reflection model drafts typed Avoid/Prefer/Sequence hypotheses -> update confidence by action-level outcomes",
+   "output": "Promoted principles (human-readable) injected into the planner prompt; refuted hypotheses removed",
+   "conditions": "Tasks recur with hidden physical parameters; outcome signal r in {0,1} available per attempt; symbolic state features available",
+   "feedback": "Own attempt outcomes; surprise = low resonance with active principles",
+   "selection_rule": "Promote if conf>=tau_p (~0.8) and >=3 supporting experiences; refute if conf<=tau_r with >=2 contradicting; high-resonance experiences only reinforce",
+   "persistence": "Episodic buffer (capped N_max), working-memory hypotheses, long-term principles with decay gamma=0.995; supporting episodes folded into the principle on promotion",
+   "later_use": "Top-k principles by symbolic filter then semantic ranking are injected at every planning call; low resonance prioritises fresh learning",
+   "claimed_effect": "Brick insertion medium 76% vs direct retrieval 23% vs no memory 53%; real-world learning curves; OOD adaptation 10%->40% on new balls",
+   "failure_boundary": "Prior principles do not transfer when dynamics change; hard tasks learn mostly Avoid constraints; reset requires humans; no low-level/VLA integration",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E004",
+    "E005",
+    "E012",
+    "E015",
+    "E016"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Verification-before-application gate for retained experience",
+   "information": "Same as S1; no designed probing actions are specified in the material",
+   "operation": "Withhold hypotheses from the long-term store until outcome-statistics threshold; keep unpromoted hypotheses in working memory and inject them as active hypotheses",
+   "output": "Verified principle set vs direct retrieval of raw experiences",
+   "conditions": "Enough repeated attempts of the same action type for attribution",
+   "feedback": "Action-type outcome ratios",
+   "selection_rule": "conf threshold plus support count (see S1)",
+   "persistence": "Working memory then long-term memory",
+   "later_use": "Injected with top-k principles",
+   "claimed_effect": "w/o Verification: medium 64% vs 76%",
+   "failure_boundary": "Gate quality depends on outcome signal and symbolic-state clustering; \"targeted interaction\" not separately specified",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E011",
+    "E024"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "VLM planners know physics in the abstract but cannot predict how a specific object/surface behaves; retrieval-augmented memory applies past experience without verifying it still holds, so it hardens into rigid rules when conditions change.",
+  "checked_gap": "Partly confirmed inside the paper: direct retrieval (23%) is worse than no memory (53%) on medium and unverified variants drop below the no-memory floor on hard (E009). Whether this holds for the original MemER/MemoryVLA systems is not checked (proxies, E007).",
+  "lineage_closest_adjacent": {
+   "neighbours": [
+    "Direct retrieval of raw experience",
+    "MemER-style retrieval (proxy)",
+    "MemoryVLA-style token memory (proxy)",
+    "Reflexion-style reflection"
+   ],
+   "source_versions": "Neighbour papers are cited only by reference number; reference list and Section II are not in the fixed material",
+   "note": "Closest adjacent is Reflexion-style free-form reflection (61% medium vs 76%), which already summarises experience; the delta is typed hypotheses plus a promotion gate plus folding/decay."
+  },
+  "residue": "Unverified or stale experience degrading decisions when physics changes; context growth over long deployments.",
+  "stakes": "Repeated errors from rigid heuristics; token growth (3.4x without forgetting).",
+  "method_response": "Typed hypotheses promoted only after action-level outcome evidence, resonance-based surprise filtering, folding and decay.",
+  "remaining_gap": "Low-level control and VLA integration; continuous dynamics poorly expressed in text; human resets; real-world scoring and variance not evidenced in available text; verification not shown to involve designed experiments.",
+  "evidence_ids": [
+   "E022",
+   "E009",
+   "E007",
+   "E021",
+   "E024"
+  ],
+  "unresolved": [
+   "Related work absent: lineage and novelty versus other test-time memory/skill-library work not checkable here",
+   "Appendix content not available"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "adapt_via_conditioning",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "C03 step1 canonical schema: typed Avoid/Prefer/Sequence hypotheses (partial; not a format the model is trained to parse)",
+     "C03 step2 reference substrate: self-built principle store, not a broad pre-existing corpus",
+     "C03 step3 upstream phase teaching the model to read the format: absent, frozen VLM only",
+     "C03 step4 category-level holdout and overlap audit: partial (OOD ball variants, 10 trials; no contamination audit)",
+     "C03 step5 cheaper conditioning baselines under equal budget: done (direct retrieval, token memory, Reflexion-style, no memory)"
+    ],
+    "success_checks": [
+     "isolating ablation of the conditioning signal: met (no memory, direct retrieval, leave-one-out)",
+     "regime where naive alternative breaks: met (hard difficulty, changed dynamics)"
+    ],
+    "failure_checks": [
+     "unaudited zero-shot/held-out claim: not claimed but no overlap statement",
+     "generic recipe on multiple tasks: three real tasks plus one sim benchmark"
+    ],
+    "evidence_ids": [
+     "E001",
+     "E005",
+     "E008",
+     "E009",
+     "E014"
+    ],
+    "reason": "The operation at deployment is adaptation of a frozen model by injecting retrieved/verified principles as conditioning, with no parameter update; this is the actual operation, not just a mention. Sub-card C03 is not selected because C03 requires a canonical schema plus an upstream phase that teaches the model to parse it and category holdout, none of which PhysMem does; sibling-free parent so sub=null."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "Primary chosen over assumption_audit_and_pivot (no formal relax/violate-then-rederive step) and self_supervised_signal_engineering (reward signal exists; nothing is trained).",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "Conditioning without updates is executed; the format-reading and category-holdout parts of the card are not."
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "Simulation shows verified abstraction beating retrieval on a controlled benchmark with matched base; real-world evidence has small denominators and unresolved measurement definitions.",
+   "evidence_ids": [
+    "E009",
+    "E010",
+    "E013",
+    "E014"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": "K302",
+    "version": "taxonomy.json sha256:daf38e579a46",
+    "fit": "good",
+    "condition_checks": [
+     {
+      "id": "S2",
+      "kind": "S",
+      "status": "met",
+      "reason": "Memory variants compared with model and episodes fixed (Table II, Gemini-3-Flash, 100 episodes x 3 seeds).",
+      "evidence_ids": [
+       "E008"
+      ]
+     },
+     {
+      "id": "S3",
+      "kind": "S",
+      "status": "met",
+      "reason": "Tasks recur across episodes; learning curve with 0% vs 100% experience.",
+      "evidence_ids": [
+       "E012"
+      ]
+     },
+     {
+      "id": "F1",
+      "kind": "F",
+      "status": "partially_observed",
+      "reason": "Memory is learned on the same stream it is scored on; only the OOD variants are separate.",
+      "evidence_ids": [
+       "E014"
+      ]
+     },
+     {
+      "id": "F2",
+      "kind": "F",
+      "status": "partially_observed",
+      "reason": "Novel dynamics tested only for ball types; prior principles fail there.",
+      "evidence_ids": [
+       "E015"
+      ]
+     },
+     {
+      "id": "F3",
+      "kind": "F",
+      "status": "not_observed",
+      "reason": "Leave-one-out ablation with 100 episodes per cell is reported; not_observed does not mean avoided.",
+      "evidence_ids": [
+       "E010"
+      ]
+     },
+     {
+      "id": "F4",
+      "kind": "F",
+      "status": "observed",
+      "reason": "Stored content can mislead: unverified/direct retrieval falls below no memory.",
+      "evidence_ids": [
+       "E009"
+      ]
+     },
+     {
+      "id": "F5",
+      "kind": "F",
+      "status": "observed",
+      "reason": "Environment reset needs human intervention in real-world runs.",
+      "evidence_ids": [
+       "E021"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E005"
+    ],
+    "operation_match": "frozen planner + cross-episode summarisation into typed hypotheses/principles + injection into later contexts; extra: promotion gate, folding, decay."
+   }
+  ],
+  "unassigned": [],
+  "revision_proposals": [
+   {
+    "status": "unchecked_proposal",
+    "text": "Single-paper observation: a verification gate between hypothesis and long-term memory (promote on outcome statistics, refute on contradiction, fold supporting episodes) is not part of K302 as written. Needs a second independent paper before a candidate sub-pattern; do not edit cards in-batch."
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "harness_memory_skill_reuse",
+    "sub": "K302"
+   },
+   "operation_correspondence": "Retrieved verified principles injected into the prompt of a frozen planner (conditioning, no update) <-> cross-episode notes injected into later planner contexts.",
+   "necessary_conditions": "Tasks recur; outcome signal per attempt available.",
+   "differences": "K302 is note summarisation; PhysMem adds typed hypotheses, promotion gate, folding/decay. RS card expects trained format parsing and category holdout, which are absent.",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E005"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E02",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E02"
+   ],
+   "applies_when": "a claim that a specific harness component (memory, verifier) causes the improvement",
+   "applicable": true,
+   "status": "met",
+   "reason": "Leave-one-out toggles of resonance, verification, forgetting and working memory with the backbone fixed; single backbone and simulation only.",
+   "evidence_ids": [
+    "E010",
+    "E011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E03"
+   ],
+   "applies_when": "a claim that a component helps in general",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Memory gain reported on four VLMs (gain shrinks to +5 for the weakest), but component ablations on one backbone.",
+   "evidence_ids": [
+    "E019"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E04"
+   ],
+   "applies_when": "any success-rate comparison on a fixed task subset",
+   "applicable": true,
+   "status": "partial",
+   "reason": "3 seeds and 100 episodes per cell but no intervals/paired tests in available text; real world 3 runs.",
+   "evidence_ids": [
+    "E008",
+    "E012"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E05"
+   ],
+   "applies_when": "a claim that a harness or interface is better or more practical",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Relative token cost per variant reported; reflection-model calls, latency and USD not.",
+   "evidence_ids": [
+    "E008",
+    "E020",
+    "E023"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E08"
+   ],
+   "applies_when": "benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "No statement on contamination of Reflect-VLM benchmark or on development overlap; appendix not available.",
+   "evidence_ids": [
+    "E013"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E17",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E17"
+   ],
+   "applies_when": "a claim that experience memory improves performance",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Evaluated in-stream; OOD variants are the only disjoint evaluation, 10 trials each; no overfitting-across-iterations report in available text.",
+   "evidence_ids": [
+    "E014",
+    "E015"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E19",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E19"
+   ],
+   "applies_when": "a claim about physical robot results",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Trial counts given (10-20 episodes per task, 10 per OOD cell) but real-world success is mostly reported as plan-quality scores with definitions in absent appendix.",
+   "evidence_ids": [
+    "E013",
+    "E014"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E22"
+   ],
+   "applies_when": "comparison between harness/memory variants with the model fixed",
+   "applicable": true,
+   "status": "met",
+   "reason": "Identical task budget, frozen base and top-K=5 across memory paradigms.",
+   "evidence_ids": [
+    "E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E01",
+   "version": "v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "profile/expectations.json#E01"
+   ],
+   "applies_when": "a claim that a harness rather than the model raises success",
+   "applicable": false,
+   "status": "unknown",
+   "reason": "Not applicable as stated: the contribution is a memory module on a fixed planner and the comparison is memory paradigms, covered by E22.",
+   "evidence_ids": [],
+   "score_item": null
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Verified principle abstraction outperforms direct experience retrieval and other memory paradigms on brick insertion.",
+   "setting": "MuJoCo Franka brick insertion, easy/medium/hard, Gemini-3-Flash, 100 episodes per cell, 3 seeds",
+   "baseline_control": "No memory, direct retrieval, MemER-style (proxy), MemoryVLA-style (proxy), Reflexion-style",
+   "selection_vs_test": "Memory built online within the evaluated stream; no separate dev split described",
+   "result_denominator": "Medium: 76% vs 23% direct retrieval vs 53% no memory vs 61% Reflexion-style; hard 39% vs 28% no memory; denominators per Table II caption",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E007"
+   ],
+   "counterevidence": [
+    "E007"
+   ],
+   "allowed_conclusion": "In this simulator with one backbone, verified abstraction beats the tested retrieval proxies; not shown against original MemER/MemoryVLA."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Verification before application is load-bearing.",
+   "setting": "Table IV leave-one-out, Gemini-3-Flash, 100 episodes per difficulty",
+   "baseline_control": "PhysMem full",
+   "selection_vs_test": "same stream",
+   "result_denominator": "Medium 76% -> 64% w/o verification; denominator 100 episodes",
+   "evidence_ids": [
+    "E010",
+    "E011"
+   ],
+   "counterevidence": [
+    "E024"
+   ],
+   "allowed_conclusion": "Removing the promotion gate lowers success in sim; the gate is outcome-statistics based, not shown to use designed targeted tests."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Test-time learning improves real-world performance over 30-minute deployments and adapts to new dynamics.",
+   "setting": "xArm6, three tasks, Gemini-3.0-Flash planner, 10-20 episodes per task, 3 runs per experience level; OOD variants 10 trials",
+   "baseline_control": "0% experience; prior-only/adapt-only/both",
+   "selection_vs_test": "In-stream learning; OOD variants separate",
+   "result_denominator": "Plan-quality scores (e.g. Ball Navigation 14.7 vs 0.7) and x/10 success in Table III; scoring definitions in absent appendix",
+   "evidence_ids": [
+    "E012",
+    "E013",
+    "E014",
+    "E015"
+   ],
+   "counterevidence": [
+    "E015"
+   ],
+   "allowed_conclusion": "Small-sample real-world evidence of in-session improvement and of adaptation helping when dynamics change; scoring unresolved."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "On a controlled MuJoCo brick-insertion benchmark with a fixed frozen planner and executor, verified principle memory with promotion/decay beats raw retrieval and unverified memory variants (medium 76% vs 23%/53%), with real-world in-session gains of small denominators.",
+  "unresolved": [
+   "Whether \"targeted interaction\" is an actual designed-experiment mechanism",
+   "Real-world scoring/outcome measurement (Appendix F/A absent)",
+   "Comparison to original MemER/MemoryVLA systems",
+   "Statistical uncertainty",
+   "Contamination/development overlap"
+  ],
+  "not_claimed": "Not our reproduction; all numbers are author-reported. No transfer-level evidence (no new embodiment/sim-to-real)."
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Concrete gap with own measured counter-example: direct retrieval (23%) falls below no memory (53%) on medium brick insertion, motivating verification before application (E022,E009). Nearest neighbours (MemER, MemoryVLA, Reflexion, direct retrieval) are named and run as baselines but two are training-free proxies (E007). Related-work section and references are absent from the fixed material, so lineage and version binding of neighbours cannot be checked; capped at 3.",
+   "evidence_ids": [
+    "E022",
+    "E009",
+    "E007"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Typed hypotheses, surprise-triggered consolidation, action-level attribution, promotion/refutation thresholds, folding and decay form a coherent mechanism aimed at the stated rigidity problem, and it makes distinguishable predictions (direct retrieval degrades with difficulty 48->23->8 while abstraction holds; leave-one-out drops grow with difficulty). Weakness: the claimed \"verification through targeted interaction\" is, per Algorithm 1, accumulated outcome statistics rather than designed tests (E024), so the verification mechanism is only partly explained.",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E010",
+    "E011"
+   ],
+   "counterevidence_ids": [
+    "E024"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Operation chain is reconstructable: experience tuple with symbolic state -> resonance check -> clustering and hypothesis generation by a reflection model -> conf update -> promote at tau_p~0.8 with >=3 support, or refute -> fold -> three-tier memory with decay -> top-k injection (E003,E004,E005). Missing from the fixed material: Appendix A constants (tau_r, n_min, alpha, N_max), retrieval details, and how reward r is determined in real-world runs. Transfer and failure boundaries are stated (E015,E016,E021).",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E015",
+    "E016",
+    "E021"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "unknown",
+   "rating": null,
+   "reason": "Simulation success is binary and environment-checked, but real-world outcomes use plan-quality scores whose exact definition and how outcome r is judged are deferred to Appendices A/F, which are not in the fixed material; the resonance metric depends on a model-judged consistent(e,p). Item cannot be resolved without those sections.",
+   "evidence_ids": [
+    "E013",
+    "E017"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Same frozen base, budget and top-K across no-memory, direct retrieval, MemER-style, MemoryVLA-style, Reflexion-style (E008); leave-one-out ablation of resonance, verification, forgetting, working memory (E010,E011); 0/25/50/100% experience and prior x adapt factorial (E012,E014). Remaining gaps: neighbours are proxies (E007), ablations only on one backbone in simulation, token budgets differ across variants, real-world ablation is limited.",
+   "evidence_ids": [
+    "E008",
+    "E010",
+    "E011",
+    "E012",
+    "E014"
+   ],
+   "counterevidence_ids": [
+    "E007"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Memory is learned and evaluated on the same task stream, so in-stream gains are not held-out generalization; held-out evidence is limited to OOD variants (10 trials/cell, new ball types) and four VLM backbones (E014,E019). No statement on benchmark contamination or on development overlap (tasks were chosen as ones where initial attempts fail).",
+   "evidence_ids": [
+    "E014",
+    "E019"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Sim: 100 episodes per cell, 3 seeds, point estimates only; real world: 10-20 episodes per task, 3 runs per condition, 10 trials per OOD cell; no intervals or paired tests in the available text (E008,E013,E014). Appendix B (full ablations) is absent so provisional.",
+   "evidence_ids": [
+    "E008",
+    "E013",
+    "E014"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Relative token cost is reported for baselines and every ablation (e.g. no memory 0.40x, PhysMem 1.0x, token memory 2.5x, w/o forgetting 3.4x) with matched task budget and top-K (E008,E020). Omitted: reflection-model calls and wall-clock/latency of real-world runs (E023).",
+   "evidence_ids": [
+    "E008",
+    "E020"
+   ],
+   "counterevidence_ids": [
+    "E023"
+   ],
+   "search_scope": []
+  }
+ },
+ "score": {
+  "raw": null,
+  "display": null,
+  "lower": 60.0,
+  "upper": 75.0,
+  "coverage": 0.85,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "Central method and sim experiments are readable in the fixed material, but Section II and Appendices A-F are absent (complete=false); E.measurement is therefore unknown and total score is null. Request fuller material (appendices) via the controller; no outside retrieval done."
+ }
+}

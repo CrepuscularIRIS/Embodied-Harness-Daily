@@ -1,0 +1,948 @@
+{
+ "paper": {
+  "paper_key": "2609.26360",
+  "paper_id": "2609.26360",
+  "title": "Hierarchical Floorplan-Guided Vision-Language Exploration for Embodied Question Answering",
+  "version": "2609.26360v1",
+  "claim_type": "system_method",
+  "central_claim": "HFLEX-EQA：在线分层场景图+开放词汇占据图，高层 VLM 规划器综合场景图、任务相关视觉记忆、历史与估计的拓扑楼层图，选择 explore_room / go_to_objects / find_room 三种探索模式，低层语义规划器执行；find_room 用楼层图与开放词汇前沿语义引导至相关但未观察的房间类型。在 OpenEQA 与 ExploreEQA 上优于现有 EQA 基线（最高 75.0%/63.2% SR），并在四足机器人上部署。",
+  "scope_note": "EQA 探索 agent：前沿 VLM 规划+工具式探索模式+四足真机，输出为答案而非操作；按“导航/问答式具身 harness”边缘收录。"
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "高层规划接口：VLM 的状态与输出",
+   "information": "问题、选项、场景图 JSON、CLIP 选出的相关视觉记忆（每房间≤3 个关键视图+物体检视图+当前帧）、历史决策、楼层图 JSON",
+   "operation": "输出 (模式, 目标, 可选答案, 置信度 κ)；κ≥0.8 即作答并终止，否则低层规划器执行",
+   "output": "离散探索模式+目标；答案",
+   "conditions": "模式词表固定三种；κ 为模型自报",
+   "feedback": "执行后场景图与记忆更新进入下一轮",
+   "selection_rule": "模式由 VLM 选；答案门限 κ_min=0.8（自报置信度，未校准）",
+   "persistence": "episode 内场景图与历史",
+   "later_use": "同 episode 后续规划",
+   "claimed_effect": "相对 GraphEQA/ExploreEQA 在 5 个 VLM 上 SR 更高",
+   "failure_boundary": "κ 自报；模式选择无独立验证",
+   "evidence_ids": [
+    "E019",
+    "E017",
+    "E011",
+    "E002"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "find_room 前沿打分：楼层图拓扑先验+开放词汇前沿语义",
+   "information": "当前房间标签（VLM 在楼层图类别内预测）、楼层图邻接；仿真楼层图取自 HM3D 真值语义",
+   "operation": "候选房间类按到目标类最短路径距离经 softmax 得权重；与“doorway to a …”模板相似度及空闲面积线性组合（0.35/0.55/0.1）选前沿",
+   "output": "下一探索前沿",
+   "conditions": "当前房间能匹配到楼层图，否则先验权重为零",
+   "feedback": "无外部验证；楼层图不更新",
+   "selection_rule": "分数最高前沿",
+   "persistence": "无",
+   "later_use": "不适用",
+   "claimed_effect": "去除 FP：SR −10.2/−9.7 (Gemini-3.5)",
+   "failure_boundary": "楼层图错误/缺失时的鲁棒性未测",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E007",
+    "E012",
+    "E018",
+    "E024"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "go_to_objects 视点选择与 explore_room 前沿打分",
+   "information": "物体包围盒、Hydra 场景图、深度遮挡检查；任务解析 VLM 预测 N=6 相关物体",
+   "operation": "采样方位/半径视点，按可见顶点比例与图像覆盖打分（0.7/0.3）；explore_room 以 CLIP 相似度最大化的前沿",
+   "output": "视点/前沿目标",
+   "conditions": "RGB-D，深度度量性及其对遮挡检查的影响未检验",
+   "feedback": "到达后物体检视图加入视觉记忆",
+   "selection_rule": "最高分",
+   "persistence": "episode 内",
+   "later_use": "作为 VLM 视觉记忆",
+   "claimed_effect": "w/o VP：SR −7.4/−4.4；w/o SF：−8.3/−6.2",
+   "failure_boundary": "光照/视角等未建模；深度假设未检验",
+   "evidence_ids": [
+    "E012",
+    "E016"
+   ]
+  }
+ ],
+ "retention_trace": {
+  "applicable": false,
+  "reason": "无跨 episode 留存或自我改进；场景图/记忆为 episode 内状态；未编造 retained 闭环。"
+ },
+ "gap": {
+  "author_gap": "EQA 探索被当作单一规划问题，仅靠局部观察；楼层图/建筑模型等结构先验未被用来判断哪些未见房间与问题相关。",
+  "checked_gap": "部分成立：GraphEQA 与 ExploreEQA 确无楼层图输入；但近邻 ESC（软常识房间约束）、VLFM 等在 related work 中被点名，未同口径比较。GraphEQA+FP 结果不一致，为“如何使用先验重要”提供间接支持。",
+  "lineage_closest_adjacent": [
+   {
+    "name": "GraphEQA",
+    "relation": "在线分层场景图+VLM 规划，语义房间标签/前沿/视觉记忆",
+    "version_note": "文献 [4]，本文重跑为基线"
+   },
+   {
+    "name": "ExploreEQA",
+    "relation": "VLM 打分图像前沿、概率比较固定选项",
+    "version_note": "文献 [3]，仅选项设定"
+   },
+   {
+    "name": "ESC / VLFM / CLIP-Nav",
+    "relation": "开放词汇前沿、软常识房间-物体约束",
+    "version_note": "related work 描述，未比较"
+   }
+  ],
+  "residue": "先验可用性（现实中楼层图从何获得、多大误差）；高层模式选择的可靠性；自报置信度终止。",
+  "stakes": "EQA 效率与正确率；表中 HFLEX 步数/路径常多于 GraphEQA。",
+  "method_response": "分层规划（模式分离）+楼层图引导的房间发现+视点选择。",
+  "remaining_gap": "楼层图噪声下的行为、深度假设、统计显著性、未测的纯层次/模式消融。",
+  "evidence_ids": [
+   "E002",
+   "E003",
+   "E013",
+   "E024"
+  ],
+  "unresolved": [
+   "ExploreEQA+FP 对照",
+   "楼层图扰动实验"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "structural_prior_encoding"
+  ],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": {
+     "step1_boundary": "met：VLM 决定“缺什么信息/用哪种模式”，几何与打分交给确定性低层规划器",
+     "step2_typed_artifact": "met：(m_t,g_t,a_t,κ_t) 结构化输出，目标为场景图节点/房间类",
+     "step3_close_loop": "partial：执行结果经场景图更新反馈；终止依赖自报 κ，非独立求解器验证",
+     "step4_ablate_loop": "partial：FP/VP/SF 逐项去除，但无“去层次/去模式”消融",
+     "step5_cost": "partial：报告步数与路径，无 VLM 调用/延迟成本"
+    },
+    "success_failure_checks": {
+     "S_boundary_at_seam": "met",
+     "S_typed_artifact": "met",
+     "S_load_bearing_ablation": "partial：FP 消融使 SR 降约 10 点，但未使其回到 GraphEQA",
+     "F_assembly_of_offshelf": "partial：Hydra、YOLOe、LSeg、CLIP、VLM 现成，新的是模式分离与 FP 打分",
+     "F_single_benchmark": "partial：两基准同源 HM3D + 7 个真机例",
+     "F_cost_unmeasured": "applies：VLM 调用/延迟缺",
+     "F_only_marginally_beats_simple": "not triggered（OpenEQA）；ExploreEQA 上去 FP 版不优于 GraphEQA（见推断）"
+    },
+    "evidence_ids": [
+     "E019",
+     "E012",
+     "E025",
+     "E002"
+    ],
+    "reason": "高层 VLM 输出类型化决策、低层规划器执行几何/打分，符合 C25 的分解+结构化交接；终止判据与反馈闭环弱于 C25 所要求的“可靠求解器验证”。"
+   },
+   {
+    "main_id": "structural_prior_encoding",
+    "sub_id": "C13",
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": {
+     "step1_named_relational_object": "met：房间类型邻接图的最短路径距离",
+     "step2_construct_so_satisfied_by_construction": "partial：作为打分项软注入，非“按构造满足”",
+     "step3_ablate_load_bearing": "met：去 FP −10 点",
+     "step4_guarantee": "unmet：无表达力/鲁棒性保证",
+     "step5_simplest_structure_agnostic_explanation": "partial：GraphEQA+FP 做了朴素对照，缺 ExploreEQA+FP 与噪声楼层图"
+    },
+    "success_failure_checks": {
+     "F_no_guarantee_domain_wiring": "applies",
+     "F_inflated_protocol": "applies：先验取自真值标注且数据集被筛选为可生成楼层图"
+    },
+    "evidence_ids": [
+     "E004",
+     "E007",
+     "E012",
+     "E013",
+     "E024"
+    ],
+    "reason": "不同操作：把拓扑先验写进 find_room 前沿权重（与 C25 分工无关）。C13 的“按构造满足+保证”不满足，只是启发式软先验，因而 fit=partial。"
+   }
+  ],
+  "reason": "依据 IV-B/IV-D 与 Table II–III；弱处已逐项说明。",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "C25 的分工+结构化交接已执行；闭环验证、成本核算、层次消融不足；C13 无保证",
+   "evidence_ids": [
+    "E019",
+    "E012",
+    "E024"
+   ]
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "相对两个基线 SR 更高；但“弱/不准先验”鲁棒性未验证，信息不对称（楼层图仅 HFLEX 默认拥有）限制结论",
+   "evidence_ids": [
+    "E011",
+    "E012",
+    "E013",
+    "E024"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "version": "patterns 2026-10-21 (taxonomy daf38e579a46)",
+    "fit": "partial",
+    "condition_checks": {
+     "S4_semantic_vocabulary_over_reliable_executor": "partial：三模式由确定性低层规划器+几何打分执行；真机四足实际执行",
+     "F3_depth_assumption_untested": "applies：视点遮挡检查依赖深度，鲁棒性测试仅扰动 RGB",
+     "F4_interface_bundle_compared_instead_of_components": "partial：FP/VP/SF 逐项去除，但“分层/模式词表”本身无消融",
+     "card_scene_graph_cannot_bind_transient_semantics": "applies(未测)"
+    },
+    "evidence_ids": [
+     "E019",
+     "E012",
+     "E016",
+     "E022"
+    ],
+    "reason": "离散模式词表+确定性执行器与 K104 同构；卡条件中“词表层级匹配执行器能力”在 sim 中满足，真机仅 7 例。"
+   },
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": "K301",
+    "version": "patterns 2026-10-21 (taxonomy daf38e579a46)",
+    "fit": "partial",
+    "condition_checks": {
+     "S1_bounded_window_with_retrieval": "partial：harness 端 CLIP 排序取 ≤3 个房间关键视图",
+     "visual_memory_ablation": "unmet：未单独消融相关视觉记忆",
+     "F3_cumulative_single_run": "不适用于 FP/VP/SF（逐项）；单次"
+    },
+    "evidence_ids": [
+     "E012",
+     "E019"
+    ],
+    "reason": "“harness 排序检索”变体，但未检验其贡献。"
+   }
+  ],
+  "unassigned": [
+   "楼层图拓扑先验引导 find_room 的前沿加权——无既有领域卡；单篇，仅记观察"
+  ],
+  "revision_proposals": [
+   {
+    "type": "new_case_candidate",
+    "text": "结构先验（楼层图拓扑）→前沿打分的探索规划",
+    "status": "unchecked_single_paper",
+    "source": "2609.26360"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "RS：模型输出类型化产物→专用求解器；领域：VLM 在固定三模式词表中选择→确定性低层规划器执行。",
+   "necessary_conditions_and_differences": "RS 需要独立可靠验证闭环；此处终止依赖自报 κ。K104 需要词表-执行器层级匹配并有组件消融：词表本身未消融。",
+   "evidence_ids": [
+    "E019",
+    "E012",
+    "E002"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E01"
+   ],
+   "applies_when": "a claim that a harness (not the model) raises success; same-backbone alternative harness",
+   "applicable": true,
+   "status": "met",
+   "reason": "5 个 VLM 下与 GraphEQA/ExploreEQA（同 VLM、同 50 迭代预算）对比；ExploreEQA 仅选项设定。",
+   "evidence_ids": [
+    "E011",
+    "E009",
+    "E017",
+    "E015"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E02"
+   ],
+   "applies_when": "harness component causes improvement via one-at-a-time toggles",
+   "applicable": true,
+   "status": "partial",
+   "reason": "FP/VP/SF 逐项去除（仅 Gemini-3.5、单次）；分层模式、视觉记忆、房间标签预测未消融。",
+   "evidence_ids": [
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E03"
+   ],
+   "applies_when": "effect under >=2 backbones",
+   "applicable": true,
+   "status": "met",
+   "reason": "5 个 VLM 全表；消融仅一个。",
+   "evidence_ids": [
+    "E011",
+    "E017"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E04"
+   ],
+   "applies_when": "variance / paired statistics",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "单次；108/114 episode；VLM 非确定性未处理。",
+   "evidence_ids": [
+    "E008",
+    "E023"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E05"
+   ],
+   "applies_when": "cost alongside success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "给出规划步数与路径长度；无调用数、延迟、token。",
+   "evidence_ids": [
+    "E011"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E08"
+   ],
+   "applies_when": "dev-overlap, privileged information caveat",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "仿真楼层图与检测词表来自 HM3D 真值；超参来源未述。",
+   "evidence_ids": [
+    "E007",
+    "E016",
+    "E008"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E16"
+   ],
+   "applies_when": "success claim with stop/completion; failure by endpoint",
+   "applicable": true,
+   "status": "partial",
+   "reason": "自报 κ 门限；有步数/路径但无错答/早停/未到达拆分；真机有 κ 值。",
+   "evidence_ids": [
+    "E019",
+    "E020"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E19"
+   ],
+   "applies_when": "transfer to a physical robot needs counts per task",
+   "applicable": true,
+   "status": "partial",
+   "reason": "7 个问题有逐题结果，但标注为“代表性”，未说明总尝试数；无选项与扰动为回放。",
+   "evidence_ids": [
+    "E020",
+    "E021",
+    "E022"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E20"
+   ],
+   "applies_when": "depth-based tools state depth assumptions",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "视点遮挡检查依赖深度；未讨论度量性，鲁棒性仅扰动 RGB。",
+   "evidence_ids": [
+    "E022",
+    "E016"
+   ],
+   "score_item": "X"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "E22"
+   ],
+   "applies_when": "matched interaction budget",
+   "applicable": true,
+   "status": "met",
+   "reason": "统一 50 迭代；HFLEX 步数更多已如实列出。",
+   "evidence_ids": [
+    "E009",
+    "E011"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "rs:decompose_and_delegate:RE-ablate",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/decompose_and_delegate.md#Reviewer expectations"
+   ],
+   "applies_when": "ablations isolating each component / load-bearing step",
+   "applicable": true,
+   "status": "partial",
+   "reason": "FP/VP/SF 有，分层本身无。",
+   "evidence_ids": [
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "rs:structural_prior_encoding:RE-baseline-incumbent",
+   "version": "researchstudio-15-31",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "ideation-patterns/structural_prior_encoding.md#Reviewer expectations"
+   ],
+   "applies_when": "compare against incumbent and isolate the structure from a stronger backbone",
+   "applicable": true,
+   "status": "partial",
+   "reason": "GraphEQA+FP 为朴素注入对照；缺噪声先验与 ExploreEQA+FP。",
+   "evidence_ids": [
+    "E013",
+    "E012",
+    "E024"
+   ],
+   "score_item": "E.causality"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "HFLEX-EQA 优于 GraphEQA/ExploreEQA",
+   "setting": "HM3D 单层 108(OpenEQA)/114(ExploreEQA) episode；5 VLM；选项/无选项；50 迭代预算",
+   "baseline_control": "GraphEQA、ExploreEQA（后者仅选项）；HFLEX 另得到楼层图",
+   "selection_vs_test": "episode 为适配楼层图而筛选；超参来源未述",
+   "result_denominator": "选项设定 SR：如 GPT-5.5 75.0/57.9 vs 35.2/50.9 与 59.3/54.4；单次",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E011",
+    "E023",
+    "E001"
+   ],
+   "counterevidence": [
+    "E024",
+    "E025"
+   ],
+   "allowed_conclusion": "在该筛选集与 HFLEX 独占（真值派生）楼层图条件下，5 个 VLM 一致领先；信息不对称使纯方法优势无法单独认定。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "楼层图先验有益，且优于朴素塞入提示",
+   "setting": "Gemini-3.5，逐项去除",
+   "baseline_control": "w/o FP；GraphEQA+FP",
+   "selection_vs_test": "同上",
+   "result_denominator": "去 FP：75.0→64.8、63.2→53.5；GraphEQA+FP：46.3→43.5(OpenEQA)、54.4→57.0(ExploreEQA)",
+   "evidence_ids": [
+    "E012",
+    "E013"
+   ],
+   "counterevidence": [
+    "E024"
+   ],
+   "allowed_conclusion": "先验（取自真值）带来约 10 点增益；对噪声先验的价值未知。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "增益在真值语义下仍然成立",
+   "setting": "Gemini-3.5 + GT 语义",
+   "baseline_control": "GraphEQA + GT",
+   "selection_vs_test": "—",
+   "result_denominator": "选项：79.6 vs 63.9(OpenEQA)，64.0 vs 57.9(ExploreEQA)",
+   "evidence_ids": [
+    "E014"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "差距缩小（28.7→15.7 点）但仍在；单次。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "真机四足在未见室内环境成功作答",
+   "setting": "Jetson Thor，D455，GPT-5.5，选项设定",
+   "baseline_control": "无",
+   "selection_vs_test": "楼层图手工；问题类型“代表性”",
+   "result_denominator": "7 个问题全部正确，κ 0.84–0.95；无选项结果由回放得到",
+   "evidence_ids": [
+    "E020",
+    "E021"
+   ],
+   "counterevidence": [
+    "E021"
+   ],
+   "allowed_conclusion": "可行性示例；非系统成功率。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Habitat/HM3D 闭环评测按答案正确判定，成功由环境外真值给出；真机 7 例“代表性”问题未给出完整尝试分母，不足以按 transfer 计。",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在为生成楼层图而筛选的 222 个 HM3D 单层 episode 上，带真值派生楼层图的 HFLEX 在 5 个 VLM 与两个数据集上均高于重跑的 GraphEQA/ExploreEQA；楼层图贡献约 10 个 SR 点；朴素把楼层图塞入 GraphEQA 提示收益不稳定。",
+  "not_supported": "“弱/不准先验”仍有效；各模式/分层本身的贡献；统计显著性；真机成功率；效率优势（步数/路径常更长）。",
+  "unresolved": [
+   "噪声楼层图实验",
+   "ExploreEQA+FP",
+   "VLM 调用成本",
+   "基线实现细节与超参来源"
+  ],
+  "reproduction_note": "均为作者报告，非我们复现。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "瓶颈（单一规划+未用结构先验）具体并有近邻与基线；GraphEQA+FP 提供了“如何用先验”的间接证据；ESC/VLFM 等近邻未同口径比较。",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E013"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "模式分离对应不同缺失信息类型，楼层图以拓扑距离加权前沿，视点打分针对属性可见性——机制清楚且与消融对应，并能预测“朴素注入不稳”（已见）；κ 自报置信度与先验取自真值是弱点。",
+   "evidence_ids": [
+    "E002",
+    "E012",
+    "E013",
+    "E019"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "方程与超参完整（M=3, N=6, ε=1, λ, α/β/γ, κ_min），楼层图生成、预算与指标明确；缺提示词、模式选择统计与楼层图扰动，故失败/适用边界不清。",
+   "evidence_ids": [
+    "E004",
+    "E007",
+    "E009",
+    "E017"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.measurement": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "答案正确性由环境真值判定、分母明确、含步数与路径；LLM 评分器未说明；真机无选项为回放；楼层图/词表来自真值（另列于 E.causality）。",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E010",
+    "E021"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.causality": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "有逐项去除、GraphEQA+FP、GT 语义分析与多 VLM 对照；但楼层图为 HFLEX 独占的真值派生信息、未测噪声先验与 ExploreEQA+FP，分层/记忆未消融，且 ExploreEQA 上去 FP 版不优于 GraphEQA（E025）。",
+   "evidence_ids": [
+    "E011",
+    "E012",
+    "E013",
+    "E014"
+   ],
+   "counterevidence_ids": [
+    "E024",
+    "E025"
+   ],
+   "search_scope": []
+  },
+  "E.holdout": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "两个数据集+真机新环境，但同源 HM3D、数据集被筛选、超参来源未述、真机问题与楼层图人工选定。",
+   "evidence_ids": [
+    "E008",
+    "E007",
+    "E020"
+   ],
+   "counterevidence_ids": [
+    "E007",
+    "E020"
+   ],
+   "search_scope": []
+  },
+  "E.statistics": {
+   "status": "resolved",
+   "rating": 1,
+   "reason": "单次、无区间；若干差异仅 5~12 个 episode；真机为 7 例。",
+   "evidence_ids": [
+    "E008",
+    "E023"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E.cost": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "报告规划步数与路径长度（HFLEX 多于 GraphEQA 已披露）；无 VLM 调用数/延迟/美元。",
+   "evidence_ids": [
+    "E011",
+    "E009"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  }
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "完整正文与全部表格已读；无附录；图像内容未在文本中。"
+ },
+ "brief_reason": "分层 VLM 规划+楼层图先验的 EQA 系统；多 VLM 对基线领先且有逐项消融，但楼层图取自真值、仅 HFLEX 持有、未测噪声先验，单次评测。",
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "c-ho-1",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "provenance": {
+  "input_hash": "ba6454d9bc590556aac27181f3dd26766c0618a70a97f7c84632bab387cffe18",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-21T17:30:00Z",
+  "notes": "session_id/receipt_ref not obtainable from inside the worker (null). Hashes computed by worker from files: rubric=SCORE_SPEC.md; rs=reference MANIFEST.tsv; domain=patterns taxonomy.json; conditions=conditions.json; expectations=.forge/domains/embodied-agent-harness-v1/profile/expectations.json. No other-seat/aggregate/archive/old-score files were read. Domain cards that cite this paper (arXiv#board/#s) are paper-derived and not treated as independent confirmation."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2609.26360v1",
+   "sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "sections_read": [
+    "Abstract",
+    "I-VI",
+    "Tables I-IV",
+    "Fig.5 caption"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "figure image content (Fig.1-5); no appendix in this version; prompts not provided"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Abstract",
+   "quote": "Our results demonstrate the benefit of combining VLM-based hierarchical planning with structural floorplan priors for the EQA task.",
+   "support_explanation": "核心主张",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "I Introduction",
+   "quote": "However, in such methods, exploration is typically treated as a single planning problem, despite the different types of information that may be missing.",
+   "support_explanation": "作者 gap 1",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "I Introduction",
+   "quote": "existing EQA approaches do not exploit it to reason about which unseen rooms are question-relevant",
+   "support_explanation": "作者 gap 2（楼层图先验未用）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-B",
+   "quote": "semantic annotations in simulation and manually from known room layouts in the real world",
+   "support_explanation": "仿真楼层图由 HM3D 语义标注构造，真机手工",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-B",
+   "quote": "The floorplan is treated as a weak high-level structural prior rather than an accurate map.",
+   "support_explanation": "作者定位：弱先验",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "III Problem Statement",
+   "quote": "it may be incomplete or inaccurate",
+   "support_explanation": "声称楼层图是“估计的、可能出错的”",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "We project HM3D semantic regions onto a bird’s-eye-view map, assign each region a semantic room label, and extract room adjacencies from the resulting room map.",
+   "support_explanation": "楼层图=由真值语义区域生成，无噪声扰动",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "We keep only single-floor episodes with semantic annotations to be able to generate the floorplan priors. This gives 108 OpenEQA episodes and 114 ExploreEQA episodes.",
+   "support_explanation": "评测集为适配楼层图而筛选",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "All methods use a budget of 50 iterations.",
+   "support_explanation": "统一 50 迭代预算",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "For no-choice runs, answers are graded by an LLM.",
+   "support_explanation": "自由作答由 LLM 评分，评分器未说明/未验证",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table I",
+   "quote": "GPT-5.5 HFLEX-EQA 75.0 4.00 9.3 57.9 4.47 14.4 GraphEQA 35.2 1.59 6.2 50.9 3.14 6.5 ExploreEQA 59.3 19.11 35.0 54.4 18.74 37.5",
+   "support_explanation": "主比较示例行（GPT-5.5）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table II",
+   "quote": "HFLEX-EQA 75.0 4.49 13.0 63.2 5.96 19.6 HFLEX-EQA w/o FP 64.8 6.56 13.1 53.5 7.53 18.2 HFLEX-EQA w/o VP 67.6 7.28 8.3 58.8 7.74 14.5 HFLEX-EQA w/o SF 66.7 12.10 8.6 57.0 8.80 11.1 GraphEQA + FP 43.5 1.75 6.1 57.0 3.01 6.8",
+   "support_explanation": "Gemini-3.5 消融，逐项去除",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "Finally, adding the floorplan graph to GraphEQA’s VLM prompt provides mixed results, decreasing performance on OpenEQA while slightly improving ExploreEQA.",
+   "support_explanation": "朴素注入楼层图结果不一致",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table III",
+   "quote": "GraphEQA + GT 63.9 1.88 4.1 57.9 2.75 5.8",
+   "support_explanation": "GT 语义使 GraphEQA 提升更多",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-B",
+   "quote": "ExploreEQA is evaluated only with answer choices",
+   "support_explanation": "ExploreEQA 无自由作答",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-A",
+   "quote": "Object detection with YOLOe [ 21 ] uses the HM3D [ 23 ] semantic classes in simulation and the ADE20K [ 24 ] classes in real-world experiments.",
+   "support_explanation": "仿真检测词表即 HM3D 语义类",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-A",
+   "quote": "We evaluate GPT-4o, GPT-5.5, Gemini-3.5 Pro, Claude Opus 4.8 and Qwen 3.5-9B as high-level planners in simulation, and use GPT-5.5 for the real-world experiments.",
+   "support_explanation": "5 个规划 VLM",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-C",
+   "quote": "We constrain the VLM to only predict classes present in the floorplan",
+   "support_explanation": "房间标签预测被限制到楼层图类别",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "IV-C",
+   "quote": "it is returned as the final answer and the episode terminates",
+   "support_explanation": "κ≥κ_min 即终止（自报置信度）",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table IV caption",
+   "quote": "Table IV : Real-world HFLEX-EQA evaluation on representative question types.",
+   "support_explanation": "真机仅 7 个“代表性”问题",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table IV caption",
+   "quote": "The no-choice results were obtained by replaying the recorded observations, scene graph and planner history while removing the answer choices.",
+   "support_explanation": "无选项结果来自回放而非新运行",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "V-C",
+   "quote": "we test the VLM planner’s robustness by replaying the real-world episodes with perturbed images while keeping the scene graph and planner history unchanged",
+   "support_explanation": "鲁棒性测试为回放，且只扰动图像",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table I",
+   "quote": null,
+   "support_explanation": "10 组(5 VLM×2 数据集)选项设定中 HFLEX 在每组 SR 均高于 GraphEQA 与 ExploreEQA；无选项设定对 GraphEQA 同向。但全部为单次、108/114 episode；差 5~10 点以内的组约 5~12 个 episode",
+   "kind": "our_inference",
+   "derived_from": [
+    "E011"
+   ]
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "全文",
+   "quote": null,
+   "support_explanation": "未做楼层图噪声/缺失/错误标签扰动实验，尽管 III/IV-B 反复声称其为“可能不完整或错误的弱先验”；仿真楼层图取自真值语义标注，且 ExploreEQA+FP 未测；GraphEQA+FP 仅一次",
+   "kind": "our_inference",
+   "derived_from": [
+    "E004",
+    "E006",
+    "E007",
+    "E013"
+   ]
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "f596d30430b4c61c797cb1231e1dbbb2fc95e6d57d7d1351e6c3eac2b23acdb7",
+   "locator": "Table II/III",
+   "quote": null,
+   "support_explanation": "去除 FP 使 SR −10.2(OpenEQA)/−9.7(ExploreEQA)；但 w/o FP 版本相对 GraphEQA(Gemini 选项)在 OpenEQA 仍 +18.5(64.8 vs 46.3)，在 ExploreEQA 反而 −0.9(53.5 vs 54.4)：说明 ExploreEQA 上的优势几乎全部来自（真值派生的）楼层图，而非其余结构",
+   "kind": "our_inference",
+   "derived_from": [
+    "E012"
+   ]
+  }
+ ],
+ "score": {
+  "raw": 66.25,
+  "display": "66.3",
+  "lower": 66.25,
+  "upper": 66.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}
