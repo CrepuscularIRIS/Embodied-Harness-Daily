@@ -1,31 +1,31 @@
 {"arxiv": "2501.04268", "sub_pattern": "K501", "fit": "weak", "fit_note": "SFT code-writing VLM on teacher-synthesised programs for a fixed API library; data not success-filtered, no harness teacher."}
 {"arxiv": "2502.16707", "sub_pattern": "K604", "fit": "good", "fit_note": "DAgger-style loop relabels VLM-visited states with a privileged oracle; reflection with imagined futures is added."}
-{"arxiv": "2502.19135", "sub_pattern": "K201", "fit": "weak", "fit_note": "LLM-generated Prolog KB gated by consistency checks and repair loop; symbolic planning, little closed-loop embodiment."}
-{"arxiv": "2502.19417", "sub_pattern": "K106", "fit": "weak", "fit_note": "Trained high-level VLM issues atomic language commands to a trained pi0 low-level VLA; neither side frozen."}
-{"arxiv": "2503.01700", "sub_pattern": "K105", "fit": "weak", "fit_note": "Frozen LLM writes solver and checker code in multi-round loop; no robot primitives, mostly plan-level checks."}
+{"arxiv": "2502.19135", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
+{"arxiv": "2502.19417", "sub_pattern": "R02", "fit": "good", "fit_note": "wave-1 re-assignment (was K106 weak): reading-group verdict"}
+{"arxiv": "2503.01700", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K105 weak): reading-group verdict"}
 {"arxiv": "2503.02465", "sub_pattern": "K103", "fit": "weak", "fit_note": "VLM/LLM picks image targets projected to world coordinates for NMPC; no feasibility feedback or reselect loop."}
-{"arxiv": "2503.04280", "sub_pattern": "K704", "fit": "weak", "fit_note": "GPT-4 writes dense reward and success code, then SAC trains skills in simulation; no harness or sparse-reward LLM RL."}
+{"arxiv": "2503.04280", "sub_pattern": "R05", "fit": "good", "fit_note": "wave-1 re-assignment (was K704 weak): reading-group verdict"}
 {"arxiv": "2503.07885", "sub_pattern": "K201", "fit": "good", "fit_note": "Each LLM plan is checked against LTL safety specs and replaced by control synthesis before execution."}
 {"arxiv": "2503.08302", "sub_pattern": "K104", "fit": "weak", "fit_note": "LLM selects from a UAV action set plus waypoints; main contribution is onboard hardware, evidence is qualitative."}
 {"arxiv": "2503.10069", "sub_pattern": "K104", "fit": "weak", "fit_note": "MLLM picks among discrete waypoint/turn options with history and backtrack; trained waypoint predictor not covered."}
-{"arxiv": "2503.12533", "sub_pattern": "K104", "fit": "weak", "fit_note": "Skill-vocabulary executor matches, but the contribution is a trained VLM Connector between planner and skills."}
+{"arxiv": "2503.12533", "sub_pattern": "R02", "fit": "good", "fit_note": "wave-1 re-assignment (was K104 weak): reading-group verdict"}
 {"arxiv": "2503.18666", "sub_pattern": "K201", "fit": "good", "fit_note": "Rules gate each proposed action before execution and enforce stop, inspection or corrective action."}
 {"arxiv": "2503.21969", "sub_pattern": "K105", "fit": "good", "fit_note": "Frozen GPT-4o-mini writes whole code plans over perception and pick-place APIs; VLM reporter feedback between episodes."}
-{"arxiv": "2503.22122", "sub_pattern": "K201", "fit": "weak", "fit_note": "VLM pre/post-condition checks gate subtasks, plus cross-iteration reflection memory; no sub-pattern covers both."}
-{"arxiv": "2503.23875", "sub_pattern": "K105", "fit": "weak", "fit_note": "LLM agents generate deployable multi-robot code policies with VLM video feedback, not interactive code cells."}
+{"arxiv": "2503.22122", "sub_pattern": "K302", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
+{"arxiv": "2503.23875", "sub_pattern": "R05", "fit": "good", "fit_note": "wave-1 re-assignment (was K105 weak): reading-group verdict"}
 {"arxiv": "2504.03015", "sub_pattern": "K105", "fit": "good", "fit_note": "Frozen LLM selects planning/control APIs and writes integration code, refined on execution errors."}
-{"arxiv": "2504.09532", "sub_pattern": "K104", "fit": "weak", "fit_note": "Action-library vocabulary matches, but the contribution is the chain-of-action reasoning prompt over VLM scene text."}
+{"arxiv": "2504.09532", "sub_pattern": "K109", "fit": "good", "fit_note": "wave-1 re-assignment (was K104 weak): reading-group verdict"}
 {"arxiv": "2504.09587", "sub_pattern": "K301", "fit": "good", "fit_note": "Rebuilds each MLLM call from a compact top-down map and a scene graph queried for localization."}
-{"arxiv": "2504.14588", "sub_pattern": "K106", "fit": "weak", "fit_note": "Motion-instruction-conditioned diffusion policy matches a typed-call tool, but the instruction model is fine-tuned, not a frozen planner."}
+{"arxiv": "2504.14588", "sub_pattern": "R02", "fit": "good", "fit_note": "wave-1 re-assignment (was K106 weak): reading-group verdict"}
 {"arxiv": "2504.21432", "sub_pattern": "K104", "fit": "weak", "fit_note": "Fine-tuned TinyLlama maps instructions to discrete UAV actions, but no frozen-model interface is studied."}
 {"arxiv": "2504.21716", "sub_pattern": "K301", "fit": "weak", "fit_note": "RAG over past chat history for a knowledge-base agent; no per-call context rebuild, evaluation is offline plan/QA accuracy"}
 {"arxiv": "2505.00820", "sub_pattern": "K201", "fit": "good", "fit_note": "Each robot's LLM agent verifies assigned tasks before execution and rejects for reallocation; human oversight on disagreement"}
-{"arxiv": "2505.03673", "sub_pattern": "K107", "fit": "weak", "fit_note": "Brain MLLM trained for multi-robot planning and tool calls over a VLA/expert skill library; no planner-VLA staging or inspection studied"}
+{"arxiv": "2505.03673", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K107 weak): reading-group verdict"}
 {"arxiv": "2505.05622", "sub_pattern": "K304", "fit": "weak", "fit_note": "Topological memory graph of successful trajectories drives graph-search action replay, but hierarchical LLM planning is the main contribution"}
 {"arxiv": "2505.07236", "sub_pattern": "K105", "fit": "weak", "fit_note": "smolagents CodeAgent calls VLM tools for UAV mission planning; no embodied closed loop, evaluation is 2D replay and grounding SFT"}
-{"arxiv": "2505.07532", "sub_pattern": "K108", "fit": "weak", "fit_note": "Software framework (Agents, Connectors, Tools) for ROS 2 LLM agents; tools offered to the model but no interface comparison"}
+{"arxiv": "2505.07532", "sub_pattern": "R04", "fit": "good", "fit_note": "wave-1 re-assignment (was K108 weak): reading-group verdict"}
 {"arxiv": "2505.07815", "sub_pattern": "K201", "fit": "good", "fit_note": "A VLM Verifier accepts or rejects the Explorer's skill sequence with reasons before execution, using memory of past transitions"}
-{"arxiv": "2505.08765", "sub_pattern": "K102", "fit": "weak", "fit_note": "Depth stays in harness-built 3D semantic, cognitive and uncertainty maps, but maps are pushed as prompt advice, not queried for receipts"}
+{"arxiv": "2505.08765", "sub_pattern": "R07", "fit": "good", "fit_note": "wave-1 re-assignment (was K102 weak): reading-group verdict"}
 {"arxiv": "2505.13948", "sub_pattern": "K301", "fit": "good", "fit_note": "Vector memory with viewpoint-contrastive update and entropy-adaptive retrieval gives each planner/stop/answer call minimal relevant memory"}
 {"arxiv": "2505.14899", "sub_pattern": "K303", "fit": "good", "fit_note": "LLM abstracts and clusters modular skills with exemplars from prior successes into a reusable library, retrieved at inference plus reflection"}
 {"arxiv": "2505.22050", "sub_pattern": "K708", "fit": "weak", "fit_note": "SFT on distilled Gemini data before outcome-style RL fits; but reward is offline prefix-matching, no simulator rollouts or harness."}
@@ -34,58 +34,58 @@
 {"arxiv": "2506.07509", "sub_pattern": "K104", "fit": "weak", "fit_note": "Bounded Turn/Move vocabulary executed by PX4 plus a VLM yes/no detector; paper mainly benchmarks LLM/VLM pairs, not an interface design."}
 {"arxiv": "2506.15096", "sub_pattern": "K301", "fit": "good", "fit_note": "Graph memory of objects/relations queried by retrieval per step; ablated by removing the Memory Manager. Candidate-point action proposer is secondary."}
 {"arxiv": "2506.17462", "sub_pattern": "K105", "fit": "good", "fit_note": "LVLM generates a pseudocode workflow with if/while and self-written reasoning functions composing perception, geometry and navigation tools."}
-{"arxiv": "2506.17811", "sub_pattern": "K201", "fit": "weak", "fit_note": "Learned VLM verifier scores sampled VLA proposals and executes the best; checker is trained and best-of-N, not a cheap rule gate."}
+{"arxiv": "2506.17811", "sub_pattern": "R06", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
 {"arxiv": "2506.23127", "sub_pattern": "K704", "fit": "weak", "fit_note": "Teacher-free GRPO-style RL on sparse completion reward fits, but the setting is text-only ALFWorld/ScienceWorld, not an embodied code harness."}
 {"arxiv": "2507.00833", "sub_pattern": "K503", "fit": "good", "fit_note": "Frontier LLM with annotated simulator geometry and MCTS iterates a constraint-code program teacher; successes kept as demos for vision-only diffusion policies."}
-{"arxiv": "2507.01378", "sub_pattern": "K501", "fit": "weak", "fit_note": "Only the GPT-4o to Qwen2.5 SFT on filtered samples fits; headline contribution is LLM consensus plus RMIX role selection, which no sub-pattern covers."}
-{"arxiv": "2507.01485", "sub_pattern": "K201", "fit": "weak", "fit_note": "Wet-lab multi-agent system; only its code checker and anomaly gate resemble a pre-execution gate."}
+{"arxiv": "2507.01378", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K501 weak): reading-group verdict"}
+{"arxiv": "2507.01485", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
 {"arxiv": "2508.01415", "sub_pattern": "K301", "fit": "good", "fit_note": "Short-term spatial/temporal memory plus query-based retrieval of long-term memory around a frozen planner."}
-{"arxiv": "2508.02629", "sub_pattern": "K203", "fit": "weak", "fit_note": "Repair loop diagnoses logged sim trials then regenerates code; no diagnostic program written by the agent."}
-{"arxiv": "2509.01106", "sub_pattern": "K501", "fit": "weak", "fit_note": "Trained high-level planner VLM (CPT, SFT, RL) over a low-level controller; abstract only, teacher data unknown."}
+{"arxiv": "2508.02629", "sub_pattern": "R05", "fit": "good", "fit_note": "wave-1 re-assignment (was K203 weak): reading-group verdict"}
+{"arxiv": "2509.01106", "sub_pattern": "R02", "fit": "good", "fit_note": "wave-1 re-assignment (was K501 weak): reading-group verdict"}
 {"arxiv": "2509.18597", "sub_pattern": "K303", "fit": "good", "fit_note": "Skills and examples distilled from human-guided successes into a frozen library retrieved at run time."}
 {"arxiv": "2509.20070", "sub_pattern": "K401", "fit": "weak", "fit_note": "Bandit selects the best LLM annotation by rollout success; goal is demo data for IL, not harness revision."}
 {"arxiv": "2509.22653", "sub_pattern": "K103", "fit": "good", "fit_note": "Model picks a pixel waypoint; harness unprojects it to a 3D displacement command and replans in closed loop."}
 {"arxiv": "2509.24160", "sub_pattern": "K303", "fit": "good", "fit_note": "Library of successful planner code from other benchmarks, retrieved and adapted at run time with a frozen LLM."}
 {"arxiv": "2509.24219", "sub_pattern": "K304", "fit": "good", "fit_note": "Successful plan code stored per task and replayed without LLM calls; also vision-grounded replanning on failure."}
-{"arxiv": "2509.24230", "sub_pattern": "K201", "fit": "weak", "fit_note": "Multi-agent action-chain planner; validation step is a precondition/conflict check, but main claim is token efficiency."}
-{"arxiv": "2510.03342", "sub_pattern": "K106", "fit": "weak", "fit_note": "Orchestrator VLM calls a trained VLA by language instruction; contribution is the models, not a harness pattern."}
+{"arxiv": "2509.24230", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
+{"arxiv": "2510.03342", "sub_pattern": "R02", "fit": "good", "fit_note": "wave-1 re-assignment (was K106 weak): reading-group verdict"}
 {"arxiv": "2510.12693", "sub_pattern": "K708", "fit": "good", "fit_note": "SFT on teacher-augmented priors gives nonzero success before online PPO; direct RL from the base scores 0."}
 {"arxiv": "2510.20328", "sub_pattern": "K301", "fit": "good", "fit_note": "Short recent window plus clustered selected keyframes; but the high-level VLM is fine-tuned to pick keyframes, not frozen."}
 {"arxiv": "2510.21302", "sub_pattern": "K201", "fit": "good", "fit_note": "SMT verification and PDDL/LLM-confidence validation gate generated code before execution, with safe probes on rejection."}
-{"arxiv": "2510.25548", "sub_pattern": "K201", "fit": "weak", "fit_note": "VLM writes SMT constraints before planning and revises them from planner failures; it is not a per-proposal action gate."}
+{"arxiv": "2510.25548", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
 {"arxiv": "2511.00917", "sub_pattern": "K105", "fit": "good", "fit_note": "A VLM coding agent composes perception, planning and control modules into a programmatic policy."}
-{"arxiv": "2511.01594", "sub_pattern": "K109", "fit": "weak", "fit_note": "Perception agent turns images into text for downstream agents, but the contribution is a four-agent assistive pipeline judged offline."}
+{"arxiv": "2511.01594", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K109 weak): reading-group verdict"}
 {"arxiv": "2511.19033", "sub_pattern": "K302", "fit": "good", "fit_note": "Trajectories are abstracted into experience notes and retrieved into the planner context in later episodes, with the MLLM frozen."}
-{"arxiv": "2511.22354", "sub_pattern": "K202", "fit": "weak", "fit_note": "Task-status and event monitors trigger LLM replanning, but the core is multi-robot task allocation and code-composing robot LLMs."}
+{"arxiv": "2511.22354", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K202 weak): reading-group verdict"}
 {"arxiv": "2512.02002", "sub_pattern": "K201", "fit": "good", "fit_note": "An LLM text simulator plus evaluator checks generated robot code before deployment and returns mismatch feedback."}
-{"arxiv": "2512.10394", "sub_pattern": "K108", "fit": "weak", "fit_note": "MCP middleware deriving tools from ROS schemas plus VLA backend switching; no sub-pattern describes the middleware itself."}
+{"arxiv": "2512.10394", "sub_pattern": "R04", "fit": "good", "fit_note": "wave-1 re-assignment (was K108 weak): reading-group verdict"}
 {"arxiv": "2512.14442", "sub_pattern": "K109", "fit": "weak", "fit_note": "Training-free affordance pipeline (image editing, VLM text, detector+SAM); static prediction, not an embodied control loop."}
-{"arxiv": "2601.11063", "sub_pattern": "K104", "fit": "weak", "fit_note": "LLM-to-PDDL planning compiled to behavior trees of fixed skills; the planning pipeline is the contribution, not the vocabulary."}
+{"arxiv": "2601.11063", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K104 weak): reading-group verdict"}
 {"arxiv": "2601.14681", "sub_pattern": "K106", "fit": "weak", "fit_note": "LLM global waypoints steer an RL local policy trained with adherence reward; not a typed tool call to a VLA."}
 {"arxiv": "2601.15486", "sub_pattern": "K201", "fit": "good", "fit_note": "Every LLM command passes server-side validation, geofence and confirmation gates before reaching the autopilot."}
-{"arxiv": "2601.18492", "sub_pattern": "K201", "fit": "weak", "fit_note": "Candidate actions verified by the same LLM's True-False and Masked-Entity prompts; checker is not an external cheap one."}
-{"arxiv": "2601.19510", "sub_pattern": "K105", "fit": "weak", "fit_note": "Code-as-policy executor fits K105, but headline is CaP-vs-TaP comparison of ten LLMs plus a new benchmark."}
+{"arxiv": "2601.18492", "sub_pattern": "R06", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
+{"arxiv": "2601.19510", "sub_pattern": "K803", "fit": "good", "fit_note": "wave-1 re-assignment (was K105 weak): reading-group verdict"}
 {"arxiv": "2601.20334", "sub_pattern": "K105", "fit": "good", "fit_note": "Unmodified coding agent writes and runs scripts over simulator primitives, retrying from execution feedback."}
 {"arxiv": "2601.20577", "sub_pattern": "K304", "fit": "good", "fit_note": "Solved multi-robot plans cached and reused through a similar-task planner without LLM calls; tasks must be similar."}
 {"arxiv": "2601.20831", "sub_pattern": "K301", "fit": "weak", "fit_note": "Trainable write-time gate filters observations into memory; K301 describes windowed context with retrieval, not gating."}
 {"arxiv": "2602.01662", "sub_pattern": "K201", "fit": "good", "fit_note": "VLM plans in PDDL; precondition and effect checker gates each action, with replanning on mismatch"}
 {"arxiv": "2602.04157", "sub_pattern": "K102", "fit": "weak", "fit_note": "Tools for attention and on-demand vision under a realtime LM; closest is perception-as-tools, but returns images not numeric receipts"}
 {"arxiv": "2602.04315", "sub_pattern": "K103", "fit": "weak", "fit_note": "Fine-tuned ASM picks 2D points, depth back-projects, LLM plans 3D path; also knowledge bank and BC distillation"}
-{"arxiv": "2602.06967", "sub_pattern": "K201", "fit": "weak", "fit_note": "Multi-LLM grouping and negotiation; closest is executor LLM feasibility check with feedback, but main claim is coordination"}
+{"arxiv": "2602.06967", "sub_pattern": "R03", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
 {"arxiv": "2602.12281", "sub_pattern": "K201", "fit": "good", "fit_note": "Learned contrastive verifier scores sampled VLA action chunks and instruction rephrases before execution; frozen VLA"}
 {"arxiv": "2602.13081", "sub_pattern": "K104", "fit": "good", "fit_note": "LLM limited to a fixed action catalogue through one act tool over existing skills, plus state and event tools"}
 {"arxiv": "2602.13193", "sub_pattern": "K106", "fit": "good", "fit_note": "VLA trained on synthetic multi-abstraction steering commands, invoked by VLM planners through typed commands"}
-{"arxiv": "2602.13591", "sub_pattern": "K104", "fit": "weak", "fit_note": "VLM controllers call Go2/G1 primitives as tools, but the paper is a forum-to-robot system description without evaluation"}
+{"arxiv": "2602.13591", "sub_pattern": "R04", "fit": "good", "fit_note": "wave-1 re-assignment (was K104 weak): reading-group verdict"}
 {"arxiv": "2602.15513", "sub_pattern": "K302", "fit": "good", "fit_note": "Semantic memory of rules distilled from training-episode traces and injected into prompts; plus episodic recall verified by MLLM"}
 {"arxiv": "2602.15875", "sub_pattern": "K103", "fit": "good", "fit_note": "Frozen MLLM grounds point and box, harness lifts depth to a persistent 3D anchor and a planner flies it"}
 {"arxiv": "2602.20323", "sub_pattern": "K302", "fit": "good", "fit_note": "Verified-principle notes distilled from interaction episodes and injected into later frozen-VLM planner prompts."}
-{"arxiv": "2602.21198", "sub_pattern": "K302", "fit": "weak", "fit_note": "Reflections steer candidate choice and test-time weight updates, not notes injected into later episodes; closest experience-reuse card."}
-{"arxiv": "2602.21670", "sub_pattern": "K201", "fit": "weak", "fit_note": "LLM-written PDDL is gated by a classical planner with failure feedback, but main contribution is hierarchy plus prompt optimization."}
+{"arxiv": "2602.21198", "sub_pattern": "R06", "fit": "good", "fit_note": "wave-1 re-assignment (was K302 weak): reading-group verdict"}
+{"arxiv": "2602.21670", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K201 weak): reading-group verdict"}
 {"arxiv": "2602.23592", "sub_pattern": "K301", "fit": "weak", "fit_note": "KV-cache management for retrieved embodied memory; serving-efficiency contribution, not a context-selection design."}
-{"arxiv": "2603.01113", "sub_pattern": "K202", "fit": "weak", "fit_note": "Behavior-tree retries gated by VLM condition nodes; main contribution is MoA proxy answering for interactive planning."}
+{"arxiv": "2603.01113", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K202 weak): reading-group verdict"}
 {"arxiv": "2603.02623", "sub_pattern": "K303", "fit": "good", "fit_note": "Skill repository mined from annotated DROID videos, expanded on demand and retrieved to implement new skills for a planner."}
-{"arxiv": "2603.02669", "sub_pattern": "K105", "fit": "weak", "fit_note": "LLM builds a scheduling graph for a deterministic solver and writes programs over pre-implemented skills; main claim is the solver and process tree."}
-{"arxiv": "2603.04466", "sub_pattern": "K401", "fit": "weak", "fit_note": "Coding agent rewrites the controller code between trials from traces; policy code, not a harness around a fixed model, and no held-out search split."}
+{"arxiv": "2603.02669", "sub_pattern": "R01", "fit": "good", "fit_note": "wave-1 re-assignment (was K105 weak): reading-group verdict"}
+{"arxiv": "2603.04466", "sub_pattern": "R05", "fit": "good", "fit_note": "wave-1 re-assignment (was K401 weak): reading-group verdict"}
 {"arxiv": "2603.05185", "sub_pattern": "K202", "fit": "good", "fit_note": "A learned visual Critic keeps the VLA executing until completion, anomaly or stagnation fires, then wakes the VLM planner."}
 {"arxiv": "2602.19983", "sub_pattern": "K201", "fit": "weak", "fit_note": "VLM-inferred safety rules are grounded into a barrier and enforced by a CBF filter on a nominal controller; a safety filter rather than a proposal gate."}
 {"arxiv": "2603.05621", "sub_pattern": "K109", "fit": "weak", "fit_note": "Monitors turn camera images into text for a controller, but the claim is cross-embodiment prompt-only transfer plus LLM memory curator."}
@@ -93,11 +93,11 @@
 {"arxiv": "2603.07997", "sub_pattern": "K302", "fit": "good", "fit_note": "Reflection writes successful routes and first-error failure notes into memory, retrieved as rules in later episodes."}
 {"arxiv": "2603.08814", "sub_pattern": "K104", "fit": "weak", "fit_note": "Action-graph filtering of task-relevant actions/objects before an LLM planner; plan mapped to simulator actions. No sub-pattern covers filtering."}
 {"arxiv": "2603.10682", "sub_pattern": "K103", "fit": "good", "fit_note": "VLM predicts image-space goal point; verifier uses depth/features to refine, planner executes; monitor agent gates STOP."}
-{"arxiv": "2603.11558", "sub_pattern": "K107", "fit": "weak", "fit_note": "VLM agent schedules and monitors trained pi0.5 skills via MCP tools; main claim also covers self-resetting data collection, not frozen VLA."}
+{"arxiv": "2603.11558", "sub_pattern": "R04", "fit": "good", "fit_note": "wave-1 re-assignment (was K107 weak): reading-group verdict"}
 {"arxiv": "2603.13131", "sub_pattern": "K303", "fit": "good", "fit_note": "Skills mined from successful executions plus remedies from failures, validated and merged by a curator, retrieved by a frozen planner."}
 {"arxiv": "2603.14523", "sub_pattern": "K708", "fit": "weak", "fit_note": "SFT cold-start on VLM-synthesized CoT then sparse-reward GRPO; closest sparse-RL pattern but headline is the zoom-in thinking tool."}
-{"arxiv": "2603.18210", "sub_pattern": "K102", "fit": "weak", "fit_note": "Geometry (depth back-projection, BEV map, FMM) stays in harness tools, but model only ranks frontiers; no numeric receipts to the VLM."}
-{"arxiv": "2603.18520", "sub_pattern": "K108", "fit": "weak", "fit_note": "Platform paper; agent part compares explicit tools vs MCP service discovery for the same removal action. Closest is optional tool calls."}
+{"arxiv": "2603.18210", "sub_pattern": "R07", "fit": "good", "fit_note": "wave-1 re-assignment (was K102 weak): reading-group verdict"}
+{"arxiv": "2603.18520", "sub_pattern": "R04", "fit": "good", "fit_note": "wave-1 re-assignment (was K108 weak): reading-group verdict"}
 {"arxiv": "2606.18363", "sub_pattern": "K501", "fit": "good", "fit_note": "GPT-5.4 teacher success-filtered turns SFT Qwen3.5-4B piloting identical harness; perturbation branches (K504) secondary"}
 {"arxiv": "2607.26148", "sub_pattern": "K101", "fit": "good", "fit_note": "Frozen frontier MLLMs drive VLN/ObjectNav/EQA through observe() plus bounded step() primitives"}
 {"arxiv": "2603.22435", "sub_pattern": "K105", "fit": "weak", "fit_note": "CaP-Gym is a code-cell harness, but main contribution is benchmark across abstraction/feedback tiers plus VDM"}
