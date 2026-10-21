@@ -8,7 +8,7 @@
 - 旧评分、双席判定、Reel、校准参考与榜单均已退役，位于 `archive/2026-10-21-reset/`。禁止从旧记录恢复当前分数，禁止续跑旧批次。
 - 已完成的 `patterns/` 模式卡、`cards/`、领域构建和原始论文材料保留。不得为了配合新分数重写卡片。
 - Grok 仅收集候选，写 `inbox/`；本地 Claude Code 负责来源核对、阅读、判定和 Reel。
-- 新评分规则见 `research/SCORE_SPEC.md`，状态为 draft_uncalibrated。先校准，后冻结，最后批量评审。当前无新版得分。
+- 新评分规则见 `research/SCORE_SPEC.md`，状态为 draft_uncalibrated。先做 gap/谱系、模式条件与审稿期望分析，校准冻结后评审；评分后动态阈值选题，默认最多 9 篇交 Reel。当前无新版得分。
 - 用户此次明确授权了清理及评分重设计；后续日常评审不得自行修改权重、rubric、卡片或校准门槛。
 
 ## 常用入口

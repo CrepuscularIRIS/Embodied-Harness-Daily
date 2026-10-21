@@ -50,3 +50,10 @@ The local ingest.py only processes new arXiv IDs; you must not present a script 
 When the maintainer hands you this prompt and authorizes repository writes, each successful run makes one commit `collect: YYYY-MM-DD (+n candidates, u updates)`,
 containing only that run's inbox JSONL and run log. Inspect the working tree first; never include someone else's changes; pulling from remote is fast-forward only — on conflict, keep the input and report.
 With no candidates, record the retrieval log honestly; never admit items just to make a count. Any automatic run cadence not configured here is decided by the maintainer; this prompt does not create scheduled tasks on its own.
+
+
+## Handoff to local review and Reel
+
+Keep the existing shared inbox format; do not add required scoring fields. Look for the concrete object changed, feedback and acceptance/retention rules, nearest prior methods, and failure boundaries. Record only leads supported by primary sources; an abstract alone cannot establish that a gap is closed or that a retained improvement is demonstrated.
+Local Claude Code performs full-text reading, gap/lineage analysis, Harness pattern checks, reviewer-expectation assessment, and scoring. Only high-scoring papers selected by a dynamic threshold and a default cap of nine papers per issue go to ResearchStudio Reel.
+Grok does not set quality_floor, assign local-review scores, or create posters. Mechanism studies, negative results, and evaluation work are eligible leads; do not filter solely for popularity or positive gains.

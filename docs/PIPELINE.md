@@ -1,44 +1,42 @@
-# 现行流程：收集 → 本地阅读 → 校准 → 重评 → Reel
+# Embodied Harness：先研究分析与评分，再精选 Reel
 
-状态：旧路线已退役；候选收集/入库工具保留；新评分是待校准设计。本次整理不调用付费评审模型，不批量重评。
+当前：旧分数/Reel 已归档；已有模式卡保留；v2.1 是待校准设计，尚无新分数或新画报。
+[设计依据](DESIGN_BASIS.md) → [评分规则](../research/SCORE_SPEC.md) → [逐篇工作表](../research/REVIEW_WORKSHEET.md)。
 
-1. **Grok 收集**：按 [GROK_PROMPT](agents/GROK_PROMPT.md) 读标题、摘要与官方论文/项目页。只把机制和研究对象清楚、能回到一手来源的候选写入 inbox。
-   高质量线索不等于高分；负结果、审计和 benchmark 同样可收，不能靠热点/演示/转述充数。
-2. **本地核对**：读 [inbox 格式](../inbox/README.md)，验证 ID、标题、版本与来源相符，去掉同论文改名/多来源重复。
-   对新 arXiv ID 可运行 `python3 research/ingest.py inbox/<batch>.jsonl`。脚本保留旧的截取文本抓取，结果只作为阅读索引。
-   该脚本会跳过 corpus 已有 ID；版本更新保留在 inbox 并人工核对新版本，不能以“nothing new”认定已处理。
-   无 arXiv ID 的论文/技术报告留在 inbox 单独处理，不假造 ID。确认所有行都有处理结果后再移动 inbox 到 processed。
-3. **材料检查**：固定版本并取完整正文、附录、补充实验；为每份材料保存 URL、hash 与覆盖范围。
-   旧 HTML 截取去掉了附录并有字符上限，不能据此认定论文“未报告”。缺材料 → `needs_fulltext`，不评分。
-4. **Claude Code 小样本校准**：使用 [LOCAL_SCORING_PROMPT](agents/LOCAL_SCORING_PROMPT.md)。现有卡片只作机制参考，旧分数不输入。
-   按 [SCORE_SPEC](../research/SCORE_SPEC.md) 校准规则和同一版本材料，先记录引用，再逐项判断，最后计算。
-5. **冻结后重评**：记录 rubric 哈希、校准报告及通过的证据。实现并验证新版确定性评分器后，评审新批次到 `research/v2/judgments/`；
-   任何得分必须能从同一批次的证据重算，重复 ID/version 要明确 supersedes，不用“后写文件覆盖”隐式决定。
-6. **展示与 Reel**：新发布器只读经审核的 v2 结果。先做三篇不同机制的样片，经核对后再扩展。
-   按 [REEL_PROMPT](agents/REEL_PROMPT.md) 给每篇设计可解释机制的叙述与图；不按旧高分清单批量套版。
+## 一次性准备与按证据更新
 
-## 数据位置
+先核既有语料、签名、Harness 模式卡和 reviewer expectations 的来源/适用范围。
+从实际研究操作及成功/失败条件逆向形成卡片；没有真实审稿就使用有来源的审稿期望。
+现有卡片已完成，先复用；只有资料缺口或新反证触发定向补读、修订建议和版本更新。
+再将期望映射到评分轴，做开发/留出校准、冻结 rubric。Open Scientist 建议安装到 CC，用 study 支持缺口诊断与独立审阅。
+不把安装完成、卡片存在或结构检查通过当作评分已经可靠。
 
-| 内容 | 位置 |
+## 每批流程
+
+1. **Grok 收集**：[GROK_PROMPT](agents/GROK_PROMPT.md)。一手来源、明确操作/实验的候选写 inbox，保留当前统一格式；不打分、不生成 Reel。
+2. **核对与入库**：检查 ID/title/version、原始来源与重复。`python3 research/ingest.py inbox/<batch>.jsonl` 只处理新 arXiv ID；
+   已有 ID 的版本更新单独处理，无 arXiv ID 的正式材料保留 inbox 独立核对。确认逐行有处理结果后才移动到 processed。
+3. **完整阅读与签名**：固定全文/附录及 hash。旧裁剪全文只可作索引；缺材料标 needs_fulltext。先提取改了什么、怎么选择与留存、信息权限、对照和结果，不评分。
+4. **Gap identify 与谱系**：核作者 gap、最近邻、祖先/前沿残余与代价；说明本文机制如何回应它，以及还剩什么。不是每篇强行生成一个新 idea。
+5. **模式与审稿期望**：按真实操作选相关卡或 outside_taxonomy，逐项核生效条件、失败边界和适用 expectation；无真实 review 不跳过此步。
+6. **证据判定与评分**：[LOCAL_SCORING_PROMPT](agents/LOCAL_SCORING_PROMPT.md)。核主张-证据矩阵，尤其留存改动在之后任务上是否有效；
+   写独立的 evidence_level 与 claim_support，再按冻结权重计算 G/M/X/E；独立语义审核通过才成为有效分数。
+7. **动态选题**：[REEL_SELECTION](REEL_SELECTION.md)。先过质量底线，再按数量上限/可选机制限额挑选；默认最多 9 篇，不凑数量。
+8. **Reel 画报**：[REEL_PROMPT](agents/REEL_PROMPT.md)。只处理有效 selection；paper2assets → 内容策划 → paper2poster → 图文核验与渲染 QA → 精选入口。
+
+证据不足返回阅读/检索；机制条件冲突返回审阅；Reel 发现新反证返回判定。不是走完步骤就自动通过。
+日常改阈值只重选题，改论文判断须重审，改 rubric/卡片须新版本并复核受影响分数。
+
+## 数据与边界
+
+| 资产 | 位置 / 状态 |
 |---|---|
-| 现有原始语料与全文缓存 | `research/corpus.jsonl`、`research/fulltext/`（后者本地） |
-| 已完成模式卡与机器可读定义 | `patterns/`、`research/patterns/taxonomy*.json`、`conditions.json` |
-| 历史分档/适配线索 | `research/screen.jsonl`、`research/patterns/assignments.jsonl`；未经新流程认可 |
-| 新版评审工作 | `research/v2/`；当前只有说明，尚无新分数 |
-| 退役产物 | `archive/2026-10-21-reset/`；索引和哈希清单在内 |
-| 当前展示入口 | `papers/README.md`、`reel/README.md`；当前为空榜/待重做 |
+| 原始语料/全文 | research/corpus.jsonl、research/fulltext/（本地；旧缓存可能裁剪） |
+| 既有逆向模式卡 | patterns/、research/patterns/；保持原件 |
+| 历史线索 | research/screen.jsonl、research/patterns/assignments.jsonl；不能直接当新判断 |
+| 新版阅读、校准、判断、选题 | research/v2/；当前只有说明，拟分开 readings/calibration/judgments/selections |
+| 旧分数/Reel/运行记录 | archive/2026-10-21-reset/；不进入新评分输入 |
+| 对外画报 | reel/；只容纳选中且完成 QA 的新成品 |
 
-## Open Scientist 的位置
-
-已有模式卡与期望条目是有用的来源索引，不能把它们的存在等同于评分可靠。
-其 `paper_practice` / `paper_limitation` 表示论文惯例/作者局限，不可改称“实际审稿共识”。
-目前 Embodied 本地 profile 明确说没有 reviews/labels，现有权重不是经验标定得到的。
-
-**建议 CC 安装用于后续 rubric 研究、独立审阅和卡片维护，但不是日常打分的必需依赖。**
-本次只读取已安装 Open Scientist 的说明与现有领域 profile 来评估适配，不创建新 study，不重新构建领域。
-冻结后的规则与证据记录可以直接交给 Claude Code；只有要改领域结构或研究判据时再进入 Open Scientist 研究循环。
-
-## 已停用的入口
-
-`research/score.py`、`build_board.py`、双席 merge/batch、旧 calibration、monitor 和 Reel 生成入口已改成明确失败的退役提示。
-旧源码在归档中保存。不存在“v2 打分已完成”或“重做 Reel 已完成”的状态。
+旧 scorer、board、merge/batch、monitor 与 Reel 批量入口继续返回退役错误。
+新版 scorer/selector/publisher 尚未实现；本次没有批量评审、抓取、启动 Grok Bot 或运行研究实验。

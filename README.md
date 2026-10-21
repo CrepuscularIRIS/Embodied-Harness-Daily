@@ -20,29 +20,29 @@
 | Reel 重做 | [REEL_PROMPT](docs/agents/REEL_PROMPT.md)：先做单篇机制叙述，再设计图解 |
 | 整理记录 | [RESET](docs/RESET_2026-10-21.md)；[旧产物归档](archive/2026-10-21-reset/README.md) |
 
-## 新评分的权重草案
+## 新评分：先 gap / 模式 / 期望，再核主张证据
 
-| 维度 | 分值 | 本项目重点 |
-|---|---:|---|
-| 结果与测量可信度 | 25 | 模拟器执行真值或计数的真机任务结果；逐任务试验数、成功判据、人工接管、重置和失败分母清楚。视频仅是线索。 |
-| 因果归因与对照 | 20 | 固定 frontier backbone 替换 harness；学生方法比较 teacher/base/distilled student 在同一 harness 下；逐项消融工具、反馈、记忆和控制。 |
-| 留出与外推 | 15 | 留出任务、场景、物体或本体；检查开发/技能挖掘/教师采集重叠。sim-to-real 主张需真机计数，跨本体主张需独立闭环证据。 |
-| 统计与失败分析 | 15 | 真机少量试验的不确定性、随机种子/配对统计、碰撞/接管/超时、恢复与安全边界；不以一次演示代表稳定性能。 |
-| 预算公平与成本 | 10 | 同传感器、特权状态、动作空间、交互/重试预算；纳入教师采集、训练、失败 episode、调用和硬件时延。 |
-| 机制清晰度与模式执行 | 10 | 说明 model–harness–embodiment 接口、观测、工具/原语、状态、完成检测、执行门控与 hand-back；区分仿真和真机配置。 |
-| 可迁移研究价值 | 5 | 说明迁移到另一任务/本体所需的控制接口、传感器、技能和工程改动；代码存在与运行验证单列。 |
+[方法依据](docs/DESIGN_BASIS.md)借鉴 ResearchStudio Idea 与 Open Scientist；[逐篇工作表](research/REVIEW_WORKSHEET.md)记录改了什么、怎样保留、提升是否被支持。
 
-分数回答“论文自身的主张被怎样的证据支持”；它不预测录用，也不等同于新颖性。
-证据覆盖率、适用主张类型、模式适配、代码状态和阅读优先级单列。三个领域的数值不跨榜比较。
+| 轴 | 权重上限 |
+|---|---:|
+| G：Gap 与问题位置 | 15 |
+| M：方法质量与 problem-fit | 20 |
+| X：机制执行与模式条件 | 20 |
+| E：主张的证据支撑 | 45 |
+
+权重是待校准提案。G/M/X/E 总分与 claim_support、evidence_level 分开；匹配模式不直接加分，无审稿仍用有来源的审稿期望。
+[动态选题](docs/REEL_SELECTION.md)：先过最低分，再控制篇数，默认一期最多 9 篇；不足可少做，调阈值不改原分数。
+只有入选论文交给 ResearchStudio Reel 做画报，展示只包含成品 QA 通过的精选。
 
 ## 当前工作边界
 
 Grok 找候选并写 inbox → 本地核对来源/去重/入库 → Claude Code 读完整材料、做小样本校准 →
-冻结 rubric 后重新评分 → 通过证据审核的论文逐篇重做 Reel。
+冻结 rubric 后重新评分 → 动态阈值与数量筛选 → 入选论文重做 Reel。
 
 - 原有 `research/fulltext/` 是经过裁剪的历史文本缓存，不保证覆盖附录；新打分必须核对材料完整性。
 - 原有 `research/screen.jsonl`、`research/patterns/assignments.jsonl` 是历史分档/适配线索，不能直接代替新的判断。
-- Open Scientist 适合维护模式卡、研究问题与证据要求；日常打分不依赖完整研究循环。
+- 建议 CC 安装 Open Scientist，支持 gap 诊断、模式/期望维护与独立审阅；日常评审使用冻结资产，缺口才返回研究循环。
 - `make check` 只做离线结构检查。旧 `make score` / `make board` 和旧脚本入口会明确拒绝运行。
 - inherited arXiv digest 的关键词相关性分数不属于论文质量分数，见 [digest 用法](docs/digest-pipeline.md)。
 

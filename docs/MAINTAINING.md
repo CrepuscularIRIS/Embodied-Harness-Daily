@@ -19,4 +19,6 @@
 - `research/fulltext/`、`research/paper_text/`、`.forge/`、密钥、私人工作稿保持本地。
 - 新评分权重目前是提案。日常评审 agent 不得改权重、证据边界或模式卡来让论文通过。
 
-离线检查：`make check`。新版评分器和发布器尚未实现；旧命令返回非零，防止误续跑。
+离线检查：`make check`。新版评分器、动态选题器和发布器尚未实现；旧命令返回非零，防止误续跑。
+
+现行方法依据为 [DESIGN_BASIS](DESIGN_BASIS.md)；评分后按 [REEL_SELECTION](REEL_SELECTION.md) 选择，默认最多 9 篇。没有真实审稿仍使用有来源的审稿期望。
