@@ -1,47 +1,5 @@
-# Reel — posters and interpretations of top papers
+# Reel 待重新制作
 
-Made locally by the maintainers (an Opus session following [docs/agents/REEL_PROMPT.md](../docs/agents/REEL_PROMPT.md)),
-not by Dots or the collector, with the [ResearchStudio-Reel](https://github.com/microsoft/ResearchStudio) skills.
-Shown in the README poster gallery. Setup: `bash research/setup_reel.sh`. Gate: `python3 research/check_reel.py`.
-
-- **Candidates:** [candidates.md](candidates.md) — every ranked board paper scoring ≥ 60 (abstract-only papers
-  excluded), with its arXiv license. Refresh after the board changes: `python3 research/reel_candidates.py` (keeps `status`).
-- **Figures:** `reuse` = CC BY / BY-SA / CC0 — the paper's figures may be shown, each credited. `redraw` = arXiv
-  default or NC/ND license — no figure or screenshot from the paper; a diagram we draw ourselves, or none.
-- **Order:** highest score first.
-
-## Output (one directory per paper, committed)
-
-```
-reel/<arxiv_id>/
-  poster.png     # ≤ 3 MB, gallery thumbnail
-  poster.pdf     # print version
-  blog_zh.md     # Chinese interpretation
-  blog_en.md     # English interpretation
-  SOURCE.md      # see below
-```
-Never committed: `poster.html`, `.pptx`, `.mp3`, `.docx`, videos, the `paper2assets` bundle, `research/paper_text/`.
-
-`SOURCE.md` must contain these exact lines (checked):
-- `Read from: arXiv <version>` — the version in `candidates.jsonl`, read from the PDF or arXiv HTML. No PDF → no poster.
-- `Paper figures shown: none` — required when `figure_reuse` is false; otherwise a table of each figure shown and its credit.
-- A note for every number marked `‡` (computed by us from paper numbers, e.g. a difference), saying how it was computed.
-
-## Content standard
-1. **The system:** the embodiment (arm, mobile manipulator, drone, humanoid, navigation agent), sim or real, what the
-   model observes (RGB, depth, scene graph, state, text), what it calls through the harness (perception tools, code
-   over primitives, skills, frozen VLAs, navigation policies) and how actions reach the embodiment. Name the pattern
-   from the board.
-2. **The mechanism:** what is new (interface, tools, verification, execution control, memory, skill library, student
-   training, on-policy correction, RL recipe, harness search, …), and what signal trains or steers it.
-3. **Results exactly as reported:** model and size, benchmark and split, closed-loop vs open-loop, sim vs real, trials
-   per task, interaction budget, seeds/runs. Every decimal number must occur in the paper — the checker verifies this
-   against the full text, tables included. Never recompute from a code repository, project page or leaderboard.
-4. **The paper's own controls** that decide whether the gain is real: ablations, the same backbone under another
-   harness, teacher / base / distilled rows in one harness, held-out tasks or scenes (tasks used to design the
-   harness, synthesise skills or collect teacher data are not held-out), closed-loop vs open-loop evaluation,
-   validation of any learned success detector or judge. The takeaway follows from these, not from the headline.
-5. Where gains are absent, small or only open-loop, say so with the paper's numbers; do not invent weaknesses or
-   strengths.
-6. **"Our read" box:** EH Radar score, band, evidence level, and what evidence the paper does and does not report —
-   taken from `research/scores.jsonl` and `research/judgments/`. Neutral wording, no hype.
+旧海报、解读、候选清单与中间产物见 [归档](../archive/2026-10-21-reset/README.md)。当前没有新版成品。
+按 [REEL_PROMPT](../docs/agents/REEL_PROMPT.md) 逐篇重做：先验证论文机制和结果，再设计有针对性的图解。
+选题依据完整阅读与机制差异，不能读取旧分数/旧博客生成改写版。
