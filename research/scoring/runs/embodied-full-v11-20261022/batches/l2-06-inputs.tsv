@@ -1,0 +1,15 @@
+paper_id	l1_source	audit_sample	l1_tier	l1_next
+2401.02695	full	True	P2	to_l2
+2601.14681	full	True	P2	to_l2
+2501.05478	full	True	P1	park
+2406.19741	full	True	P2	to_l2
+2602.15875	full	True	P2	to_l2
+2501.11858	full	True	P2	to_l2
+2306.17582	full	True	P2	to_l2
+2505.07815	pilot	False	P2	to_l2
+2311.13373	pilot	False	P2	to_l2
+2307.04738	pilot	False	P2	to_l2
+2311.11183	pilot	False	P3	to_l2
+2610.15572	pilot	False	P3	to_l2
+2509.01106	pilot	False	None	to_l2
+2511.00917	pilot	False	None	to_l2
