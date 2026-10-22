@@ -1,5 +1,7 @@
 # embodied-v3.1 — Embodied-Harness-Daily
 
+> 自 `problem-core-v1.1` 起，下文的四轴权重与轴表停用。本文件仍提供：收录范围（`out_of_scope` 判断）、领域核心问题、证据等级和优先查阅的卡片。
+
 权重：G=15、M=20、X=20、E=45。正式范围以仓库 `docs/EVIDENCE.md` 为准。
 
 核心问题：**模型经由什么 harness 控制什么本体，成败怎样判定，改进来自 harness、策略还是额外预算/特权信息？**
