@@ -1,0 +1,6 @@
+# Predictive Semantic Safety: From Visual Physical Reasoning to Safety-Critical Control
+
+## Abstract
+Physical interactions can create future hazards that are not apparent from the robot's current geometric surroundings. We present a framework termed Predictive Semantic Safety (PSS), which connects visual physical reasoning to backup-based safety filtering. A vision-language model (VLM) predicts physical events and their timing or directly predicts object displacements. An explicit motion model converts event hypotheses into object trajectories. Split conformal prediction calibrates position errors jointly across specified objects, observation times, and future times; geometric shape bounds convert the resulting position regions into predicted object occupancy. PSS evaluates a prescribed backup maneuver against this occupancy and derives input-affine constraints for minimally modifying the nominal input while preserving backup feasibility under the robot dynamics and input limits. MuJoCo experiments with a Unitree Go1 consider falling fixtures, impact-driven support loss, and contact propagation. PSS achieves a safe episode rate of 99.3%, compared with 43.3% for a Backup Control Barrier Function baseline that only uses current obstacle geometry.
+
+

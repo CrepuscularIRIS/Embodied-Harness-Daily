@@ -1,0 +1,6 @@
+# Robotic Long-Horizon Manipulation with Progressive In-Context Code Generation and Episodic Feedback
+
+## Abstract
+Robotic long-horizon manipulation requires robots to compose perception, reasoning, and action over extended task sequences, yet existing language-conditioned frameworks often rely on dense step-wise feedback, learned action policies, or unstructured prompting, which limits robustness and generalization. We propose DAHLIA, a data-agnostic code-generation framework that treats long-horizon manipulation as episodic task planning and evaluation. DAHLIA uses progressively organized in-context examples with chain-of-thought reasoning to guide an LLM in synthesizing executable code plans from language instructions. To improve robustness under partial observability, a VLM-based reporter evaluates task outcomes only after each execution episode and provides structured feedback for replanning, avoiding the overhead of per-step inference. Experiments on LoHoRavens, CALVIN, Franka Kitchen, and real-world manipulation tasks show that DAHLIA achieves strong performance on over 30 long-horizon tasks and improves generalization to unseen scenarios, including cluttered scenes and occluded objects.
+
+
