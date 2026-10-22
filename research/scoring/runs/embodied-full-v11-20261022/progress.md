@@ -35,3 +35,12 @@ L1 全量 ≈ 2.9M（20 批 + fixmat）；L2 ≈ 0.8M（6 批）；pilot 已单�
 - L2 inc-l2-01：7 篇（to_l2×5 + audit×2）；4 篇 confirmed/to_l3、3 篇 park/pending_experiment；audit 改判 1/2（2610.27039 P2→P3）
 - **最终候选池（P3 confirmed to_l3）：92 篇**（candidates-l3.json + candidates-l3-overview.json）
 - 全 run 用量 ≈ 4.0M subagent tokens；L3/SELECTION 与 Reel 待用户授权后执行
+
+## L2 第二波（用户解除预算限制，2026-10-22 晚）
+
+- 范围：395 篇（high 溢出 222 + medium 173；2 篇仅摘要排除；pilot 3 篇 confirmed 补并入）
+- 20 批（l2-07..l2-26）全部完成，枚举/封顶终查 0 错误
+- **相对 L1 改判：上移 P2→P3 共 67 篇**（摘要差被全文纠正的主要效应）、下移 3 篇（含 1 篇 out_of_scope）
+- L2 全量合计：516 篇记录；P3×391 / P2×118 / P1×3 / null×4
+- **最终 to_l3 候选池：336 篇**（s001 已用 9，可供 s002：327 篇）
+- 用量：wave2 ≈ 2.9M subagent tokens（20 批）
