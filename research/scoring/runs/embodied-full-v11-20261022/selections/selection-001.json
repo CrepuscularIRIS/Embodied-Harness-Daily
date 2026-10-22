@@ -1,0 +1,1443 @@
+{
+ "run": "embodied-full-v11-20261022",
+ "rule_version": "problem-core-v1.1",
+ "selection_id": "selection-001",
+ "selector": "Opus 5.5 精选席（内部 Subagent）",
+ "date": "2026-10-22",
+ "pool": {
+  "file": "candidates-l3-overview.json",
+  "size": 91,
+  "note": "progress.md 记“92 篇”，但 candidates-l3.json 与 overview 均为 91 篇；本选择以文件为准，差异待总控核对。"
+ },
+ "selected": [
+  {
+   "paper_id": "2610.27350",
+   "title": "Refuses When Asked, Complies When Acting: A Runtime Safety Check for R",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "new_bottleneck",
+   "mechanism_type": "安全诊断",
+   "reason": "同一模型、同一首帧下问答拒绝15/15而动作循环拒绝0/15，直接隔离出“文本对齐≠行动安全”，是安全族里问题最清楚、对照最干净的一篇。",
+   "reel_focus": "问题：拒绝行为是否随控制回路改变；结果：问询拒绝15/15 vs 执行尝试15/15/完成4/15，无害控制误拒0/15。版式宜做“同一输入、两条通道”的对照画面；必须标注n=15、单机器人、离线问询，不能写成门控已部署有效。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2411.04549",
+   "title": "Vision Language Models are In-Context Value Learners",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "验证信号",
+   "reason": "同一VLM去掉打乱后成功/失败的VOC不可区分，直接证明进度分数可退化为时间顺序回声，改变“相关性高即可当价值信号”的做法。",
+   "reel_focus": "问题：VLM进度估计是否只是时间顺序捷径；结果：shuffle+首帧锚点恢复区分度，成功检测P0.85/R0.70。版式宜突出“打乱帧→判进度”机制；须同时展示ALOHA上open-drawer/remove-gears加权反而下降的负面结果。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2610.25114",
+   "title": "Compile Once, Run Cheap: Frozen, Portable Skills for Embodied Agents, ",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "challenges_barrier",
+   "mechanism_type": "自我改进归因",
+   "reason": "把代码技能迭代收益拆成反馈、版本继承与尝试选择，并测冻结后独立/异族模型执行，直接挑战“收益来自反馈自我改进”的判断。",
+   "reel_focus": "问题：迭代收益来自哪里、冻结技能能否廉价复用；结果：冻结技能code-only 148/150、异族caller 147/150，inherit−rewrite 8.7/45而repair−inherit仅1.5/45（p=.125）。版式宜做三路归因分解图；只限仿真，不写成普遍递归自我改进或成本胜率。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2510.20328",
+   "title": "MemER: Scaling Up Memory for Robot Control via Experience Retrieval",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "记忆",
+   "reason": "固定低层、真机对比无历史/8帧/32帧与关键帧检索，直接回答分钟级部分可观测操作“要记什么而非记更多”。",
+   "reel_focus": "问题：有限上下文下如何保留关键视觉事件；结果：三类真机任务每方法20次，关键帧记忆优于长上下文与文字记忆。版式宜做时间轴关键帧选择示意；注明三类任务、同一15类对象，非未见物体迁移。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2610.15572",
+   "title": "Look Before You Move: Agent-Interface-Aligned Supervision for Open-Wor",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "蒸馏/监督",
+   "reason": "等量数据只换教师标注策略（最短路→可见性→目标恢复），学生成功46.3→65.5→69.6%，对特权教师监督缺口的归因最直接。",
+   "reel_focus": "问题：最短路后标注是否漏教“主动看、保持可见、丢失后恢复”；结果：同骨干/LoRA/技能接口三教师对照与真机38%。版式宜做三教师并列轨迹对比；不扩大为任意特权信息都可蒸馏。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2506.17811",
+   "title": "RoboMonkey: Scaling Test-Time Sampling and Verification for Vision-Lan",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/sample_verify_select"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "new_bottleneck",
+   "mechanism_type": "测试时采样-验证",
+   "reason": "唯一的sample/verify/select卡候选，问题是无oracle验证器时VLA多次采样能否转成闭环收益。",
+   "reel_focus": "问题：非特权验证器能否选出好动作；结果：LIBERO-Long 49.8→56.5%，真机OOD 35→60%（另一验证器30%），16候选约650ms。版式宜做“采样—打分—选择”流水与时延条；注明排序器学的是示范动作距离、可能拒绝其他成功动作。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2311.13373",
+   "title": "Large Language Model as a Policy Teacher for Training Reinforcement Le",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/teacher_seeded_sparse_rl",
+    "main/on_policy_distillation_objectives"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "RL/教师引导",
+   "reason": "会犯错的LLM教师引导小RL学生减少探索、学生退出教师后超越教师，直接检验“教师上限”与“RL自己能找到解”两条障碍。",
+   "reel_focus": "问题：如何用昂贵且出错的LLM教师加速RL又不受其上限束缚；结果：从零RL难学，学生在ColoredDoorKey 0.77 vs 教师0.52，软/硬指导对照。版式宜做学习曲线交叉图；标注仅四个MiniGrid与一个Habitat Nav&Pick、缺等算力对照。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2411.00081",
+   "title": "PARTNR: A Benchmark for Planning and Reasoning in Embodied Multi-agent",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "多智能体评测",
+   "reason": "集中/分散、全/部分观测、oracle/学习技能、特权/非特权感知的受控对照，直接显示LLM伙伴使人类协作步数反增。",
+   "reel_focus": "问题：多智能体协作是否真带来效率；结果：单人3046步，与ReAct伙伴4267步，非特权LLM约30%完成。版式宜做“越协作越慢”的步数对比与错误归属；注明人类在模拟环境操作，错误类别非全部因果分解。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2602.15875",
+   "title": "Fly0: Persistent Metric Anchoring for Zero-Shot Aerial Vision-Language",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "动作接口",
+   "reason": "严格固定MLLM、传感与局部规划器只换目标接口，SR 62.1→70.4、false-lock 0.16→0.05，是接口卡里隔离最干净且含真机与延迟测量的一篇；同时代表UAV/导航簇。",
+   "reel_focus": "问题：低频不确定的语言定位如何变成目标出视野后仍可用的度量目标；结果：+1s延迟55.2、10s断云53.9、暂不可见目标52.4 vs 23.7。版式宜做“逐帧控制 vs 持久锚”双轨示意；注明来自漏检抽查P2→P3改判，复杂关系仍失败。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  }
+ ],
+ "dedup": [
+  {
+   "paper_id": "2407.20242",
+   "title": "BadRobot: Jailbreaking Embodied LLM Agents in the Physical World",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.27350",
+   "reason": "同问“文本对齐能否延伸到动作安全”；本篇跨平台权限/终点不一，2610.27350以同模型同首帧对照更直接隔离问题。"
+  },
+  {
+   "paper_id": "2410.13691",
+   "title": "Jailbreaking LLM-Controlled Robots",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.27350",
+   "reason": "同问“文本对齐能否延伸到动作安全”；本篇跨平台权限/终点不一，2610.27350以同模型同首帧对照更直接隔离问题。"
+  },
+  {
+   "paper_id": "2412.13178",
+   "title": "SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Age",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2506.16402",
+   "title": "IS-Bench: Evaluating Interactive Safety of VLM-Driven Embodied Agents ",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2503.08663",
+   "title": "Generating Robot Constitutions & Benchmarks for Semantic Safety",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_self_optimization"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2503.07885",
+   "title": "Safety Guardrails for LLM-Enabled Robots",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2503.18666",
+   "title": "AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM ",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2601.15486",
+   "title": "An LLM-Agnostic, MAVLink-Based Drone Command and Control Interface and",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2409.19471",
+   "title": "SELP: Generating Safe and Efficient Task Plans for Robot Agents with L",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2610.27350",
+   "reason": "同卡external_verification_control的其他安全问题（安全-能力权衡、过程风险、宪法、护栏/运行时约束、无人机状态归属、LTL约束）；本期安全槽已由对照最干净的诊断占用。"
+  },
+  {
+   "paper_id": "2402.04210",
+   "title": "Task Success is not Enough: Investigating the Use of Video-Language Mo",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2411.04549",
+   "reason": "同问“VLM批评/进度信号能否当验证器”；本篇主证据依赖人工完美grounding上界，GVL有同模型去捷径对照更直接。"
+  },
+  {
+   "paper_id": "2410.00371",
+   "title": "AHA: A Vision-Language-Model for Detecting and Reasoning Over Failures",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2506.09937",
+   "title": "SAFE: Multitask Failure Detection for Vision-Language-Action Models",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2509.16072",
+   "title": "I-FailSense: Towards General Robotic Failure Detection with Vision-Lan",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2307.00329",
+   "title": "DoReMi: Grounding Language Model by Detecting and Recovering from Plan",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2412.04455",
+   "title": "Code-as-Monitor: Constraint-aware Visual Programming for Reactive and ",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2207.05608",
+   "title": "Inner Monologue: Embodied Reasoning through Planning with Language Mod",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2510.21302",
+   "title": "Towards Reliable Code-as-Policies: A Neuro-Symbolic Framework for Embo",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/code_policy_trial_revision"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.04549",
+   "reason": "失败检测/执行中监控族（同卡external_verification_control）；该卡本期已入选两篇，且多篇未报告误报/漏报或依赖额外标签。"
+  },
+  {
+   "paper_id": "2307.01928",
+   "title": "Robots That Ask For Help: Uncertainty Alignment for Large Language Mod",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "求助/询问消歧族；问题成立，但本期按机制类型多样性未留该槽，下期优先候选（2307.01928证据最完整）。"
+  },
+  {
+   "paper_id": "2305.15695",
+   "title": "Asking Before Acting: Gather Information in Embodied Decision Making w",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "求助/询问消歧族；问题成立，但本期按机制类型多样性未留该槽，下期优先候选（2307.01928证据最完整）。"
+  },
+  {
+   "paper_id": "2412.01250",
+   "title": "Collaborative Instance Object Navigation: Leveraging Uncertainty-Aware",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "求助/询问消歧族；问题成立，但本期按机制类型多样性未留该槽，下期优先候选（2307.01928证据最完整）。"
+  },
+  {
+   "paper_id": "2310.07968",
+   "title": "Think, Act, and Ask: Open-World Interactive Personalized Robot Navigat",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "求助/询问消歧族；问题成立，但本期按机制类型多样性未留该槽，下期优先候选（2307.01928证据最完整）。"
+  },
+  {
+   "paper_id": "2610.22496",
+   "title": "Scaling Online Exploration for Robot Agents",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.25114",
+   "reason": "同卡同题（在线试错编译为可复用程序）；本篇缺同信息同预算的继承/反馈消融且含人工介入，归因不如2610.25114直接。"
+  },
+  {
+   "paper_id": "2305.16291",
+   "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.25114",
+   "reason": "技能库自主累积/复用同题组；2610.25114明确拆分收益来源并测冻结复用，问题更清楚。"
+  },
+  {
+   "paper_id": "2405.15019",
+   "title": "Agentic Skill Discovery",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.25114",
+   "reason": "技能库自主累积/复用同题组；2610.25114明确拆分收益来源并测冻结复用，问题更清楚。"
+  },
+  {
+   "paper_id": "2509.24160",
+   "title": "Memory Transfer Planning: LLM-driven Context-Aware Code Adaptation for",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.25114",
+   "reason": "技能库自主累积/复用同题组；2610.25114明确拆分收益来源并测冻结复用，问题更清楚。"
+  },
+  {
+   "paper_id": "2506.15635",
+   "title": "FindingDory: A Benchmark to Evaluate Memory in Embodied Agents",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2510.20328",
+   "reason": "同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2409.13682",
+   "title": "ReMEmbR: Building and Reasoning Over Long-Horizon Spatio-Temporal Memo",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2510.20328",
+   "reason": "同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2411.17735",
+   "title": "3D-Mem: 3D Scene Memory for Embodied Exploration and Reasoning",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2510.20328",
+   "reason": "同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2306.17840",
+   "title": "Statler: State-Maintaining Language Models for Embodied Reasoning",
+   "families": [
+    "F4",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2510.20328",
+   "reason": "同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2406.14596",
+   "title": "VLM Agents Generate Their Own Memories: Distilling Experience into Emb",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2510.20328",
+   "reason": "记忆卡内的经验抽象/跨域迁移/探索经验问题；记忆槽已占用。"
+  },
+  {
+   "paper_id": "2404.19065",
+   "title": "HELPER-X: A Unified Instructable Embodied Agent to Tackle Four Interac",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2510.20328",
+   "reason": "记忆卡内的经验抽象/跨域迁移/探索经验问题；记忆槽已占用。"
+  },
+  {
+   "paper_id": "2511.19033",
+   "title": "ReEXplore: Improving MLLMs for Embodied Exploration with Contextualize",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2510.20328",
+   "reason": "记忆卡内的经验抽象/跨域迁移/探索经验问题；记忆槽已占用。"
+  },
+  {
+   "paper_id": "2504.13059",
+   "title": "RoboTwin: Dual-Arm Robot Benchmark with Generative Digital Twins",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision",
+    "main/code_policy_trial_revision"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.15572",
+   "reason": "privileged_teacher_supervision同卡；均为教师数据生成规模/鲁棒性，未像2610.15572那样等量数据只换教师策略。2504.13059另有later_work 2506.18088（同系列扩展），二者均未入选。"
+  },
+  {
+   "paper_id": "2506.18088",
+   "title": "RoboTwin 2.0: A Scalable Data Generator and Benchmark with Strong Doma",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision",
+    "main/code_policy_trial_revision"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.15572",
+   "reason": "privileged_teacher_supervision同卡；均为教师数据生成规模/鲁棒性，未像2610.15572那样等量数据只换教师策略。2504.13059另有later_work 2506.18088（同系列扩展），二者均未入选。"
+  },
+  {
+   "paper_id": "2406.18915",
+   "title": "Manipulate-Anything: Automating Real-World Robots using Vision-Languag",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/privileged_teacher_supervision",
+    "main/external_verification_control"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2610.15572",
+   "reason": "privileged_teacher_supervision同卡；均为教师数据生成规模/鲁棒性，未像2610.15572那样等量数据只换教师策略。2504.13059另有later_work 2506.18088（同系列扩展），二者均未入选。"
+  },
+  {
+   "paper_id": "2404.14285",
+   "title": "LLM-Personalize: Aligning LLM Planners with Human Preferences via Rein",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2311.13373",
+   "reason": "训练/RL槽：2404.14285偏好来自物品—容器标注、主卡仅邻接；2505.22050的RFT奖励为静态前缀匹配，非环境在线RL，与RL槽机制不符。"
+  },
+  {
+   "paper_id": "2505.22050",
+   "title": "Reinforced Reasoning for Embodied Planning",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_native_rl"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2311.13373",
+   "reason": "训练/RL槽：2404.14285偏好来自物品—容器标注、主卡仅邻接；2505.22050的RFT奖励为静态前缀匹配，非环境在线RL，与RL槽机制不符。"
+  },
+  {
+   "paper_id": "2403.12482",
+   "title": "Embodied LLM Agents Learn to Cooperate in Organized Teams",
+   "families": [
+    "F1",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_self_optimization"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2411.00081",
+   "reason": "同问“多智能体协作/通信是否真带来效率”；2403.12482 GPT-4结构收益p=.20，Robotouille/ELHPlan为单一设置，PARTNR受控维度最全、证据最直接。"
+  },
+  {
+   "paper_id": "2502.05227",
+   "title": "Robotouille: An Asynchronous Planning Benchmark for LLM Agents",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2411.00081",
+   "reason": "同问“多智能体协作/通信是否真带来效率”；2403.12482 GPT-4结构收益p=.20，Robotouille/ELHPlan为单一设置，PARTNR受控维度最全、证据最直接。"
+  },
+  {
+   "paper_id": "2509.24230",
+   "title": "ELHPlan: Efficient Long-Horizon Task Planning for Multi-Agent Collabor",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/llm_symbolic_solver_planning"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2411.00081",
+   "reason": "同问“多智能体协作/通信是否真带来效率”；2403.12482 GPT-4结构收益p=.20，Robotouille/ELHPlan为单一设置，PARTNR受控维度最全、证据最直接。"
+  },
+  {
+   "paper_id": "2307.04738",
+   "title": "RoCo: Dialectic Multi-Robot Collaboration with Large Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2409.15146",
+   "title": "COHERENT: Collaboration of Heterogeneous Multi-Robot System with Large",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2410.22662",
+   "title": "EMOS: Embodiment-aware Heterogeneous Multi-robot Operating System with",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2503.22122",
+   "title": "REMAC: Self-Reflective and Self-Evolving Multi-Agent Collaboration for",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2407.10031",
+   "title": "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Obse",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2307.02485",
+   "title": "Building Cooperative Embodied Agents Modularly with Large Language Mod",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2401.12963",
+   "title": "AutoRT: Embodied Foundation Models for Large Scale Orchestration of Ro",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2404.06413",
+   "title": "Foundation Models to the Rescue: Deadlock Resolution in Connected Mult",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2601.11063",
+   "title": "EmboTeam: Grounding LLM Reasoning into Reactive Behavior Trees via PDD",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/multi_robot_llm_coordination"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2502.19135",
+   "title": "Combining Large Language Models and Symbolic Reasoning for Multi-Robot",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/multi_robot_llm_coordination"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "多机器人协调方法族（分配、协商、纠错、死锁、行为树/知识库）；多智能体槽已由判断类评测占用。"
+  },
+  {
+   "paper_id": "2304.11477",
+   "title": "LLM+P: Empowering Large Language Models with Optimal Planning Proficie",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号求解器规划族；本期未留符号规划槽，问题成立但机制类型与入选篇差异不足以挤占。"
+  },
+  {
+   "paper_id": "2503.01700",
+   "title": "Code-as-Symbolic-Planner: Foundation Model-Based Robot Planning via Sy",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号求解器规划族；本期未留符号规划槽，问题成立但机制类型与入选篇差异不足以挤占。"
+  },
+  {
+   "paper_id": "2509.22653",
+   "title": "See, Point, Fly: A Learning-Free VLM Framework for Universal Unmanned ",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2602.15875",
+   "reason": "UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2505.05622",
+   "title": "CityNavAgent: Aerial Vision-and-Language Navigation with Hierarchical ",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2602.15875",
+   "reason": "UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2505.08765",
+   "title": "Towards Autonomous UAV Visual Object Search in City Space: Benchmark a",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2602.15875",
+   "reason": "UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2508.00288",
+   "title": "UAV-ON: A Benchmark for Open-World Object Goal Navigation with Aerial ",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2602.15875",
+   "reason": "UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2410.07087",
+   "title": "Towards Realistic UAV Vision-Language Navigation: Platform, Benchmark,",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "同题去重",
+   "kept_by": "2602.15875",
+   "reason": "UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2409.10906",
+   "title": "Multi-Floor Zero-Shot Object Navigation Policy",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "地面目标/语言导航能力族（多楼层、开放词表、户外、航点回溯、场景图）；导航槽已占用。"
+  },
+  {
+   "paper_id": "2303.03480",
+   "title": "Can an Embodied Agent Find Your \"Cat-shaped Mug\"? LLM-Guided Explorati",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "地面目标/语言导航能力族（多楼层、开放词表、户外、航点回溯、场景图）；导航槽已占用。"
+  },
+  {
+   "paper_id": "2309.10103",
+   "title": "Reasoning about the Unseen for Efficient Outdoor Object Navigation",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "地面目标/语言导航能力族（多楼层、开放词表、户外、航点回溯、场景图）；导航槽已占用。"
+  },
+  {
+   "paper_id": "2503.10069",
+   "title": "SmartWay: Enhanced Waypoint Prediction and Backtracking for Zero-Shot ",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "地面目标/语言导航能力族（多楼层、开放词表、户外、航点回溯、场景图）；导航槽已占用。"
+  },
+  {
+   "paper_id": "2309.04077",
+   "title": "SayNav: Grounding Large Language Models for Dynamic Planning to Naviga",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "地面目标/语言导航能力族（多楼层、开放词表、户外、航点回溯、场景图）；导航槽已占用。"
+  },
+  {
+   "paper_id": "2609.34412",
+   "title": "From Language to Task Maps: Compiling Semantic Relations While Preserv",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2201.07207",
+   "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2209.07753",
+   "title": "Code as Policies: Language Model Programs for Embodied Control",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2306.08647",
+   "title": "Language to Rewards for Robotic Skill Synthesis",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2204.01691",
+   "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2404.06645",
+   "title": "GenCHiP: Generating Robot Policy Code for High-Precision and Contact-R",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2212.04088",
+   "title": "LLM-Planner: Few-Shot Grounded Planning for Embodied Agents with Large",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2207.04429",
+   "title": "LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, ",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2602.15875",
+   "reason": "observe_act_interface/planner_composes同卡接口问题；接口槽已由Fly0占用。2609.34412（关系任务映射，同模型60配对）为下期接口槽首选备选。"
+  },
+  {
+   "paper_id": "2410.06237",
+   "title": "BUMBLE: Unifying Reasoning and Acting with Vision-Language Models for ",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/分层VLA能力族；问题成立但本期机制类型已覆盖。"
+  },
+  {
+   "paper_id": "2302.01560",
+   "title": "Describe, Explain, Plan and Select: Interactive Planning with Large La",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/分层VLA能力族；问题成立但本期机制类型已覆盖。"
+  },
+  {
+   "paper_id": "2410.06473",
+   "title": "GRAPPA: Generalizing and Adapting Robot Policies via Online Agentic Gu",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/分层VLA能力族；问题成立但本期机制类型已覆盖。"
+  },
+  {
+   "paper_id": "2503.12533",
+   "title": "Being-0: A Humanoid Robotic Agent with Vision-Language Models and Modu",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy",
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/分层VLA能力族；问题成立但本期机制类型已覆盖。"
+  },
+  {
+   "paper_id": "2502.19417",
+   "title": "Hi Robot: Open-Ended Instruction Following with Hierarchical Vision-La",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/分层VLA能力族；问题成立但本期机制类型已覆盖。"
+  },
+  {
+   "paper_id": "2501.11858",
+   "title": "EmbodiedEval: Evaluate Multimodal LLMs as Embodied Agents",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "评测/诊断benchmark族；诊断类本期已有安全诊断与PARTNR两篇，按诊断集中规则截断。EmbodiedEval（漏检抽查改判）与EmbodiedBench为下期评测槽备选。"
+  },
+  {
+   "paper_id": "2502.09560",
+   "title": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language M",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "评测/诊断benchmark族；诊断类本期已有安全诊断与PARTNR两篇，按诊断集中规则截断。EmbodiedEval（漏检抽查改判）与EmbodiedBench为下期评测槽备选。"
+  },
+  {
+   "paper_id": "2410.07166",
+   "title": "Embodied Agent Interface: Benchmarking LLMs for Embodied Decision Maki",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "评测/诊断benchmark族；诊断类本期已有安全诊断与PARTNR两篇，按诊断集中规则截断。EmbodiedEval（漏检抽查改判）与EmbodiedBench为下期评测槽备选。"
+  },
+  {
+   "paper_id": "2401.12202",
+   "title": "OK-Robot: What Really Matters in Integrating Open-Knowledge Models for",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "评测/诊断benchmark族；诊断类本期已有安全诊断与PARTNR两篇，按诊断集中规则截断。EmbodiedEval（漏检抽查改判）与EmbodiedBench为下期评测槽备选。"
+  },
+  {
+   "paper_id": "2412.18194",
+   "title": "VLABench: A Large-Scale Benchmark for Language-Conditioned Robotics Ma",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "评测/诊断benchmark族；诊断类本期已有安全诊断与PARTNR两篇，按诊断集中规则截断。EmbodiedEval（漏检抽查改判）与EmbodiedBench为下期评测槽备选。"
+  },
+  {
+   "paper_id": "2311.11183",
+   "title": "Deploying and Evaluating LLMs to Program Service Mobile Robots",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/external_verification_control"
+   ],
+   "kind": "多样性截断",
+   "kept_by": "2411.00081",
+   "reason": "评测/诊断benchmark族；诊断类本期已有安全诊断与PARTNR两篇，按诊断集中规则截断。EmbodiedEval（漏检抽查改判）与EmbodiedBench为下期评测槽备选。"
+  },
+  {
+   "paper_id": "2310.17555",
+   "title": "Interactive Robot Learning from Verbal Correction",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction"
+   ],
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "口头纠正转训练标签（learner_state_teacher_correction）；单篇卡，本期按类型多样性未留槽。"
+  }
+ ],
+ "counts": {
+  "selected": 9,
+  "dedup_same_problem": 22,
+  "dedup_diversity": 60
+ },
+ "diversity_note": "9篇对应9种机制类型：安全诊断、验证信号、自我改进归因、记忆、蒸馏/监督、测试时采样-验证、RL/教师引导、多智能体评测、动作接口；问题族F0–F5全覆盖；q3为judgment 5篇、capability 4篇；诊断/评测类为2篇（2610.27350、2411.00081），另有2411.04549、2610.25114兼具诊断性质。external_verification_control卡入选2篇（安全与信号两个不同问题），其余卡各≤1篇主卡。",
+ "editing_reasons": [
+  "候选池91篇全为P3 confirmed；不按数值排序，先按主卡+问题族聚同题组，组内保留问题最清楚、对照最直接的一篇（同题去重）。",
+  "同题去重后仍远超9篇，按SELECTION.md“按问题族多样性选题”每种机制类型取一篇；被截断者问题本身成立，记为“多样性截断”，未改动任何记录字段。",
+  "同类型内优先选择“固定其余部件只改一处”的受控对照（2610.27350、2411.04549、2610.15572、2602.15875），这是证据最直接的判据，不是档位或分数。",
+  "RL槽选2311.13373而非harness_native_rl卡唯一候选2505.22050：后者L2明确其RFT奖励为静态前缀匹配、非环境在线RL，放进RL槽会误导画报。",
+  "later_work：仅2504.13059记有later_work（2506.18088 RoboTwin 2.0），二者同题去重均未入选；其余入选篇无later_work。",
+  "入选篇的原文核对尚未进行；按SELECTION.md最终制作条件，制作前须读完整原文，若发现L2错误则暂停并写correction退回Sol。"
+ ]
+}
