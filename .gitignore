@@ -200,3 +200,4 @@ reel/*/assets/
 # Open Scientist domain builds stay local (contain private project notes)
 .forge/
 HANDOFF.md
+archive/
