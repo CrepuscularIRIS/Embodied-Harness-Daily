@@ -1,0 +1,1106 @@
+[
+ {
+  "paper_id": "2201.07207",
+  "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2204.01691",
+  "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/planner_composes_code_and_policies",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2207.04429",
+  "title": "LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, ",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2207.05608",
+  "title": "Inner Monologue: Embodied Reasoning through Planning with Language Mod",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2209.07753",
+  "title": "Code as Policies: Language Model Programs for Embodied Control",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2212.04088",
+  "title": "LLM-Planner: Few-Shot Grounded Planning for Embodied Agents with Large",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2302.01560",
+  "title": "Describe, Explain, Plan and Select: Interactive Planning with Large La",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/planner_composes_code_and_policies",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2303.03480",
+  "title": "Can an Embodied Agent Find Your \"Cat-shaped Mug\"? LLM-Guided Explorati",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2304.11477",
+  "title": "LLM+P: Empowering Large Language Models with Optimal Planning Proficie",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/llm_symbolic_solver_planning"
+  ]
+ },
+ {
+  "paper_id": "2305.15695",
+  "title": "Asking Before Acting: Gather Information in Embodied Decision Making w",
+  "families": [
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2305.16291",
+  "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+  "families": [
+   "F3",
+   "F5"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/code_policy_trial_revision"
+  ]
+ },
+ {
+  "paper_id": "2306.08647",
+  "title": "Language to Rewards for Robotic Skill Synthesis",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2306.17840",
+  "title": "Statler: State-Maintaining Language Models for Embodied Reasoning",
+  "families": [
+   "F4",
+   "F5"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2307.00329",
+  "title": "DoReMi: Grounding Language Model by Detecting and Recovering from Plan",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2307.01928",
+  "title": "Robots That Ask For Help: Uncertainty Alignment for Large Language Mod",
+  "families": [
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2307.02485",
+  "title": "Building Cooperative Embodied Agents Modularly with Large Language Mod",
+  "families": [
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination"
+  ]
+ },
+ {
+  "paper_id": "2307.04738",
+  "title": "RoCo: Dialectic Multi-Robot Collaboration with Large Language Models",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2309.04077",
+  "title": "SayNav: Grounding Large Language Models for Dynamic Planning to Naviga",
+  "families": [
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2309.10103",
+  "title": "Reasoning about the Unseen for Efficient Outdoor Object Navigation",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2310.07968",
+  "title": "Think, Act, and Ask: Open-World Interactive Personalized Robot Navigat",
+  "families": [
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2310.17555",
+  "title": "Interactive Robot Learning from Verbal Correction",
+  "families": [
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/learner_state_teacher_correction"
+  ]
+ },
+ {
+  "paper_id": "2311.11183",
+  "title": "Deploying and Evaluating LLMs to Program Service Mobile Robots",
+  "families": [
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_effect_evaluation",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2311.13373",
+  "title": "Large Language Model as a Policy Teacher for Training Reinforcement Le",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/teacher_seeded_sparse_rl",
+   "main/on_policy_distillation_objectives"
+  ]
+ },
+ {
+  "paper_id": "2401.12202",
+  "title": "OK-Robot: What Really Matters in Integrating Open-Knowledge Models for",
+  "families": [
+   "F1",
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2401.12963",
+  "title": "AutoRT: Embodied Foundation Models for Large Scale Orchestration of Ro",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination"
+  ]
+ },
+ {
+  "paper_id": "2402.04210",
+  "title": "Task Success is not Enough: Investigating the Use of Video-Language Mo",
+  "families": [
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2403.12482",
+  "title": "Embodied LLM Agents Learn to Cooperate in Organized Teams",
+  "families": [
+   "F1",
+   "F5"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/harness_self_optimization"
+  ]
+ },
+ {
+  "paper_id": "2404.06413",
+  "title": "Foundation Models to the Rescue: Deadlock Resolution in Connected Mult",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2404.06645",
+  "title": "GenCHiP: Generating Robot Policy Code for High-Precision and Contact-R",
+  "families": [
+   "F0",
+   "F1"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2404.14285",
+  "title": "LLM-Personalize: Aligning LLM Planners with Human Preferences via Rein",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/teacher_seeded_sparse_rl"
+  ]
+ },
+ {
+  "paper_id": "2404.19065",
+  "title": "HELPER-X: A Unified Instructable Embodied Agent to Tackle Four Interac",
+  "families": [
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2405.15019",
+  "title": "Agentic Skill Discovery",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2406.14596",
+  "title": "VLM Agents Generate Their Own Memories: Distilling Experience into Emb",
+  "families": [
+   "F1",
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2406.18915",
+  "title": "Manipulate-Anything: Automating Real-World Robots using Vision-Languag",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/privileged_teacher_supervision",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2407.10031",
+  "title": "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Obse",
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2407.20242",
+  "title": "BadRobot: Jailbreaking Embodied LLM Agents in the Physical World",
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2409.10906",
+  "title": "Multi-Floor Zero-Shot Object Navigation Policy",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2409.13682",
+  "title": "ReMEmbR: Building and Reasoning Over Long-Horizon Spatio-Temporal Memo",
+  "families": [
+   "F0",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2409.15146",
+  "title": "COHERENT: Collaboration of Heterogeneous Multi-Robot System with Large",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination"
+  ]
+ },
+ {
+  "paper_id": "2409.19471",
+  "title": "SELP: Generating Safe and Efficient Task Plans for Robot Agents with L",
+  "families": [
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/llm_symbolic_solver_planning"
+  ]
+ },
+ {
+  "paper_id": "2410.00371",
+  "title": "AHA: A Vision-Language-Model for Detecting and Reasoning Over Failures",
+  "families": [
+   "F2",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2410.06237",
+  "title": "BUMBLE: Unifying Reasoning and Acting with Vision-Language Models for ",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2410.06473",
+  "title": "GRAPPA: Generalizing and Adapting Robot Policies via Online Agentic Gu",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/planner_composes_code_and_policies"
+  ]
+ },
+ {
+  "paper_id": "2410.07087",
+  "title": "Towards Realistic UAV Vision-Language Navigation: Platform, Benchmark,",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2410.07166",
+  "title": "Embodied Agent Interface: Benchmarking LLMs for Embodied Decision Maki",
+  "families": [
+   "F1",
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2410.13691",
+  "title": "Jailbreaking LLM-Controlled Robots",
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2410.22662",
+  "title": "EMOS: Embodiment-aware Heterogeneous Multi-robot Operating System with",
+  "families": [
+   "F0",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination"
+  ]
+ },
+ {
+  "paper_id": "2411.00081",
+  "title": "PARTNR: A Benchmark for Planning and Reasoning in Embodied Multi-agent",
+  "families": [
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2411.04549",
+  "title": "Vision Language Models are In-Context Value Learners",
+  "families": [
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2411.17735",
+  "title": "3D-Mem: 3D Scene Memory for Embodied Exploration and Reasoning",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2412.01250",
+  "title": "Collaborative Instance Object Navigation: Leveraging Uncertainty-Aware",
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2412.04455",
+  "title": "Code-as-Monitor: Constraint-aware Visual Programming for Reactive and ",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2412.13178",
+  "title": "SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Age",
+  "families": [
+   "F1",
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2412.18194",
+  "title": "VLABench: A Large-Scale Benchmark for Language-Conditioned Robotics Ma",
+  "families": [
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_effect_evaluation",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2501.11858",
+  "title": "EmbodiedEval: Evaluate Multimodal LLMs as Embodied Agents",
+  "families": [
+   "F0",
+   "F5"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_effect_evaluation",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2502.05227",
+  "title": "Robotouille: An Asynchronous Planning Benchmark for LLM Agents",
+  "families": [
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2502.09560",
+  "title": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language M",
+  "families": [
+   "F1",
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/harness_effect_evaluation",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2502.19135",
+  "title": "Combining Large Language Models and Symbolic Reasoning for Multi-Robot",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/llm_symbolic_solver_planning",
+   "main/multi_robot_llm_coordination"
+  ]
+ },
+ {
+  "paper_id": "2502.19417",
+  "title": "Hi Robot: Open-Ended Instruction Following with Hierarchical Vision-La",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/trained_vlm_vla_hierarchy"
+  ]
+ },
+ {
+  "paper_id": "2503.01700",
+  "title": "Code-as-Symbolic-Planner: Foundation Model-Based Robot Planning via Sy",
+  "families": [
+   "F0",
+   "F1"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/llm_symbolic_solver_planning"
+  ]
+ },
+ {
+  "paper_id": "2503.07885",
+  "title": "Safety Guardrails for LLM-Enabled Robots",
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2503.08663",
+  "title": "Generating Robot Constitutions & Benchmarks for Semantic Safety",
+  "families": [
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control",
+   "main/harness_self_optimization"
+  ]
+ },
+ {
+  "paper_id": "2503.10069",
+  "title": "SmartWay: Enhanced Waypoint Prediction and Backtracking for Zero-Shot ",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2503.12533",
+  "title": "Being-0: A Humanoid Robotic Agent with Vision-Language Models and Modu",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/trained_vlm_vla_hierarchy",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2503.18666",
+  "title": "AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM ",
+  "families": [
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2503.22122",
+  "title": "REMAC: Self-Reflective and Self-Evolving Multi-Agent Collaboration for",
+  "families": [
+   "F0",
+   "F2"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2504.13059",
+  "title": "RoboTwin: Dual-Arm Robot Benchmark with Generative Digital Twins",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/privileged_teacher_supervision",
+   "main/code_policy_trial_revision"
+  ]
+ },
+ {
+  "paper_id": "2505.05622",
+  "title": "CityNavAgent: Aerial Vision-and-Language Navigation with Hierarchical ",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2505.08765",
+  "title": "Towards Autonomous UAV Visual Object Search in City Space: Benchmark a",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2505.22050",
+  "title": "Reinforced Reasoning for Embodied Planning",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_native_rl"
+  ]
+ },
+ {
+  "paper_id": "2506.09937",
+  "title": "SAFE: Multitask Failure Detection for Vision-Language-Action Models",
+  "families": [
+   "F2",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2506.15635",
+  "title": "FindingDory: A Benchmark to Evaluate Memory in Embodied Agents",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2506.16402",
+  "title": "IS-Bench: Evaluating Interactive Safety of VLM-Driven Embodied Agents ",
+  "families": [
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2506.17811",
+  "title": "RoboMonkey: Scaling Test-Time Sampling and Verification for Vision-Lan",
+  "families": [
+   "F2",
+   "F5"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/sample_verify_select"
+  ]
+ },
+ {
+  "paper_id": "2506.18088",
+  "title": "RoboTwin 2.0: A Scalable Data Generator and Benchmark with Strong Doma",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/privileged_teacher_supervision",
+   "main/code_policy_trial_revision"
+  ]
+ },
+ {
+  "paper_id": "2508.00288",
+  "title": "UAV-ON: A Benchmark for Open-World Object Goal Navigation with Aerial ",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2509.16072",
+  "title": "I-FailSense: Towards General Robotic Failure Detection with Vision-Lan",
+  "families": [
+   "F2",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control"
+  ]
+ },
+ {
+  "paper_id": "2509.22653",
+  "title": "See, Point, Fly: A Learning-Free VLM Framework for Universal Unmanned ",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2509.24160",
+  "title": "Memory Transfer Planning: LLM-driven Context-Aware Code Adaptation for",
+  "families": [
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/code_policy_trial_revision"
+  ]
+ },
+ {
+  "paper_id": "2509.24230",
+  "title": "ELHPlan: Efficient Long-Horizon Task Planning for Multi-Agent Collabor",
+  "families": [
+   "F0",
+   "F5"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/multi_robot_llm_coordination",
+   "main/llm_symbolic_solver_planning"
+  ]
+ },
+ {
+  "paper_id": "2510.20328",
+  "title": "MemER: Scaling Up Memory for Robot Control via Experience Retrieval",
+  "families": [
+   "F0",
+   "F5"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/trained_vlm_vla_hierarchy"
+  ]
+ },
+ {
+  "paper_id": "2510.21302",
+  "title": "Towards Reliable Code-as-Policies: A Neuro-Symbolic Framework for Embo",
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/external_verification_control",
+   "main/code_policy_trial_revision"
+  ]
+ },
+ {
+  "paper_id": "2511.19033",
+  "title": "ReEXplore: Improving MLLMs for Embodied Exploration with Contextualize",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2601.11063",
+  "title": "EmboTeam: Grounding LLM Reasoning into Reactive Behavior Trees via PDD",
+  "families": [
+   "F0",
+   "F1"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/llm_symbolic_solver_planning",
+   "main/multi_robot_llm_coordination"
+  ]
+ },
+ {
+  "paper_id": "2601.15486",
+  "title": "An LLM-Agnostic, MAVLink-Based Drone Command and Control Interface and",
+  "families": [
+   "F1",
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control",
+   "main/observe_act_interface",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2602.15875",
+  "title": "Fly0: Persistent Metric Anchoring for Zero-Shot Aerial Vision-Language",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2609.34412",
+  "title": "From Language to Task Maps: Compiling Semantic Relations While Preserv",
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/observe_act_interface"
+  ]
+ },
+ {
+  "paper_id": "2610.15572",
+  "title": "Look Before You Move: Agent-Interface-Aligned Supervision for Open-Wor",
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/privileged_teacher_supervision"
+  ]
+ },
+ {
+  "paper_id": "2610.22496",
+  "title": "Scaling Online Exploration for Robot Agents",
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "cards": [
+   "main/code_policy_trial_revision",
+   "main/harness_memory_skill_reuse"
+  ]
+ },
+ {
+  "paper_id": "2610.25114",
+  "title": "Compile Once, Run Cheap: Frozen, Portable Skills for Embodied Agents, ",
+  "families": [
+   "F1",
+   "F3"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/code_policy_trial_revision",
+   "main/harness_memory_skill_reuse",
+   "main/harness_effect_evaluation"
+  ]
+ },
+ {
+  "paper_id": "2610.27350",
+  "title": "Refuses When Asked, Complies When Acting: A Runtime Safety Check for R",
+  "families": [
+   "F1",
+   "F2"
+  ],
+  "q3": "judgment",
+  "cards": [
+   "main/external_verification_control",
+   "main/harness_effect_evaluation"
+  ]
+ }
+]

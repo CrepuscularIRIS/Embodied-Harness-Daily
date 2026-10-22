@@ -28,3 +28,10 @@
 ## 用量（subagent tokens）
 
 L1 全量 ≈ 2.9M（20 批 + fixmat）；L2 ≈ 0.8M（6 批）；pilot 已单列。
+
+## 增量批（inbox +25，完成）
+
+- L1 inc01：25/25（P3×16 / P2×9，全 to_l2；0 错误）
+- L2 inc-l2-01：7 篇（to_l2×5 + audit×2）；4 篇 confirmed/to_l3、3 篇 park/pending_experiment；audit 改判 1/2（2610.27039 P2→P3）
+- **最终候选池（P3 confirmed to_l3）：92 篇**（candidates-l3.json + candidates-l3-overview.json）
+- 全 run 用量 ≈ 4.0M subagent tokens；L3/SELECTION 与 Reel 待用户授权后执行

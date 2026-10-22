@@ -1,0 +1,8 @@
+paper_id	l1_source	audit_sample	l1_tier	l1_next
+2610.22496	inc	False	P3	to_l2
+2610.23288	inc	False	P3	to_l2
+2610.25114	inc	False	P3	to_l2
+2610.26545	inc	False	P3	to_l2
+2610.27039	inc	True	P2	to_l2
+2610.27350	inc	False	P3	to_l2
+2610.29761	inc	True	P2	to_l2
