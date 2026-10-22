@@ -20,6 +20,24 @@
 | 模式卡 | [overview](patterns/overview.md)（embodied 领域 17 主卡/58 子卡）；[原 15+31 冻结副本](research/reference/researchstudio-15-31/) |
 | Grok 收集 | [GROK_PROMPT](docs/agents/GROK_PROMPT.md)：只收有一手证据的候选，定时更新写 inbox/ |
 
+## 高分速览（第 1 期 · 满分 100）
+
+本期入选 Reel 的 9 篇（初筛 88.8，Opus 逐篇原文核对通过；完整 500 篇分数见 [index.jsonl](research/v3/runs/embodied-v3-20261021-01/final/index.jsonl)）：
+
+| paper | 分 | 标题 | 机制一句话 | 链接 |
+|---|---:|---|---|---|
+| [2204.01691](reel/2204.01691/poster.png) | 88.8 | Do As I Can, Not As I Say（SayCan） | 语言似然×技能可行性打分选择 | [arXiv](https://arxiv.org/abs/2204.01691) · [site](https://say-can.github.io) |
+| [2609.34412](reel/2609.34412/poster.png) | 88.8 | From Language to Task Maps | LLM 写实体/关系，编译器生成任务映射 | [arXiv](https://arxiv.org/abs/2609.34412) · code — |
+| [2610.19600](reel/2610.19600/poster.png) | 88.8 | Cracking Mobile Manipulation | 最早未恢复错误诊断 → 针对性干预 | [arXiv](https://arxiv.org/abs/2610.19600) · [code](https://github.com/PKU-VaLuE-Lab/Cracking-Mobile-Manipulation) |
+| [2510.20328](reel/2510.20328/poster.png) | 88.8 | MemER: Scaling Up Memory | 高层 VLM 子任务＋关键帧记忆 | [arXiv](https://arxiv.org/abs/2510.20328) · [site](https://jen-pan.github.io/memer/) |
+| [2606.10577](reel/2606.10577/poster.png) | 88.8 | AgenticNav | 像素目标/深度/历史召回工具化导航 | [arXiv](https://arxiv.org/abs/2606.10577) · code — |
+| [2609.19906](reel/2609.19906/poster.png) | 88.8 | Learning & Transferring Closed-Loop Robot Software | 源任务性能 vs 新任务参考价值 | [arXiv](https://arxiv.org/abs/2609.19906) · code — |
+| [2608.11350](reel/2608.11350/poster.png) | 88.8 | Self-Evolving Embodied Agents via Skill-Harness Evolution | 冻结策略，只演化技能与上下文代码 | [arXiv](https://arxiv.org/abs/2608.11350) · code — |
+| [2410.07166](reel/2410.07166/poster.png) | 88.8 | Embodied Agent Interface | 对象状态＋LTL 统一接口基准 | [arXiv](https://arxiv.org/abs/2410.07166) · [code](https://github.com/embodied-agent-interface/embodied-agent-interface) |
+| [2609.33807](reel/2609.33807/poster.png) | 88.8 | CodeActionBench | 隐藏物理验证 vs agent 完成声明 | [arXiv](https://arxiv.org/abs/2609.33807) · code — |
+
+> 分档参考：88.75×53 篇 ≥ 85 分 77 篇 ≥ 80 分 214 篇（中位 75.0）。分数为选读初筛优先级，非审稿分；`code —` 表示论文材料中未提供代码/项目页。
+
 ## 模型分工
 
 | 环节 | 模型 | 做什么 |
