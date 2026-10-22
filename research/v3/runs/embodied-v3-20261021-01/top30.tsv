@@ -1,0 +1,31 @@
+paper_id	score	G	M	X	E	claim_support	title	move	code
+2609.34412	88.75	4	4	4	3	supported_in_material	From Language to Task Maps: Compiling Semantic Relations While Preserving Task-Relevant Freedom	LLM只写实体、关系和阶段，编译器查注册关系生成保留零空间的CGA任务映射及导数，再经RMPflow组合控制。	
+2610.19600	88.75	4	4	4	3	supported_in_material	Cracking Mobile Manipulation: From Failure Diagnosis to Agentic Robot System	先按最早未恢复错误诊断长程失败，再围绕固定VLA增加示范技能卡、按需视觉回忆、可达距离检查及底盘和末端修正。	https://github.com/PKU-VaLuE-Lab/Cracking-Mobile-Manipulation
+2606.10577	88.75	4	4	4	3	supported_in_material	AgenticNav: Zero-Shot Vision-and-Language Navigation as a Tool-Calling Harness	将像素目标移动、按需深度查询和历史图像召回暴露为工具，配合六步文本历史、BEV和几何拒绝反馈。	
+2609.19906	88.75	4	4	4	3	supported_in_material	Learning and Transferring Closed-Loop Robot Software	编码代理用仿真轨迹改进完整闭环程序，按验证集选入档案，再作为新任务代码生成和修订的参考。	
+2608.11350	88.75	4	4	4	3	supported_in_material	Self-Evolving Embodied Agents via Skill-Harness Evolution	冻结规划器与执行器，以回合诊断先演化文本技能，再沙箱验证并搜索上下文构造代码。	
+2609.33807	88.75	4	4	4	3	supported_in_material	CodeActionBench: Evaluating Agentic Code-as-Policy for Embodied Manipulation	固定RGB几何API、任务实例与双预算，将隐藏物理验证与智能体完成声明分离并记录代码执行轨迹。	
+2602.15875	88.75	4	4	4	3	scoped	Fly0: Persistent Metric Anchoring for Zero-Shot Aerial Vision-Language Navigation	将VLM区域与关系输出转成经不确定性门控的持久三维锚点，由机载几何规划器持续跟踪。	https://github.com/xuzhenxing1/Fly0
+2610.12549	88.75	4	4	4	3	scoped	Fly-by-Code: Embodied Coding Agents for Aerial Manipulation with Active Visual and Physical Feedback	每次任务执行后另写诊断程序主动换视角或物理探测，收集新证据后判断完成或修订任务代码。	
+2609.38178	88.75	4	4	4	3	scoped	Skill-Space Shooting for Autonomous Robot Policy Improvement	失败值模型触发VLM选择短技能修复，完成任务后仅保留被接受的技能修复段聚合训练任务策略，测试时移除辅助系统。	
+2607.13049	88.75	4	4	4	3	scoped	SPINE: Bridging the Cyber-Physical Gap with Agentic AI	先编译经人工确认的机器人profile，再协调只读诊断、软件修复或人类物理干预，最终以同轮实机遥操作与检查闭合。	
+2607.06256	88.75	4	4	4	3	scoped	Diagnosing Semantic Handoff Failures in Agent-Orchestrated Vision-Language-Action Skill Composition	以相同VLA检查点对比干净技能快照与串联终态，并用契约和多视角验证追踪交接失败。	
+2604.25788	88.75	4	4	4	3	supported_in_material	KinDER: A Physical Reasoning Benchmark for Robot Learning and Planning	构建分离感知语言因素的程序化物理推理环境、技能接口和跨规划学习范式评测。	
+2610.10388	88.75	4	4	4	3	scoped	RoboQuest: Generalist Physical Agents that Search, Inspect and Test	构造需搜索、翻看和试验的十类移动操作任务，以物理提交冻结计分，并按未满足目标追溯证据和执行错误。	
+2609.21650	88.75	4	4	4	3	scoped	SynthDemo-RL: Breaking the Zero-Reward Barrier in VLA Adaptation with LLM-Guided Synthetic Demonstrations	LLM修订特权状态教师的轨迹生成程序，成功过滤后SFT视觉学生，再用二元成功PPO补足性能。	
+2603.22435	88.75	4	4	4	3	scoped	CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation	建立分层API与反馈的代码机器人评测，再以视觉差分、复用库和候选集成改进agent，并用仿真奖励训练小模型。	
+2607.00272	88.75	4	4	4	3	scoped	ASPIRE: Agentic /Skills Discovery for Robotics	编码代理读取逐原语多模态轨迹修复程序，将验证过的修复压成技能，再用演化搜索选择候选程序。	
+2607.12220	88.75	4	4	4	3	scoped	Contract-Grounded Behavior Tree Synthesis via Coding Agents	coding agent先查询机器人技能、类型、BT算子与模板契约，再提交行为树，由运行时校验后执行。	https://jsalfity.github.io/agentic-bt-gen-webviewer/
+2608.17386	88.75	4	4	4	3	scoped	MANIGUARD: A Benchmark and Data Suite for Specification-Grounded Safety Evaluation and Improvement of Robotic Manipulation	构建安全与完成正交的任务、固定规范的单轴扰动，用物理谓词和时序自动机标注执行及安全演示。	
+2608.22657	88.75	4	4	4	3	scoped	Physical Agentic AI: An Architecture for Orchestrating a Robot Crew with LLMs	将LLM限定为非执行规划器，由独占执行权的确定性编排器逐步校验技能、请求一致性、工作流和运行时状态绑定。	
+2608.29537	88.75	4	4	4	3	scoped	AGM: Achievement-Grounded Memory for Closed-Loop Agents with Frozen VLA Policies	用夹爪事件触发抓取跟踪和放置验证，仅据验证结果推进、保留或回退子目标指针。	
+2608.30396	88.75	4	4	4	3	scoped	Scaffolding Foundation Models into Physical-World Agents Pushes the Frontier of Long-Horizon Navigation	以语义导航意图、带帧来源的沿途摘要和跨调用证据账本连接冻结VLM与导航模型。	
+2609.12285	88.75	4	4	4	3	scoped	AnchorVLN: Geometry-Anchored Vision-Language Grounding Reasoning for Open-Vocabulary Navigation	用只接受短语和对象句柄的工具边界隔离VLM语义决策与LiDAR度量，并预测不可修改控制器的实际停点。	
+2609.19554	88.75	4	4	4	3	scoped	VABench: Measuring Embodied Spatial Intelligence through Visual Demonstrations, Active Perception, and Metric Control	让冻结MLLM从RGB示范推导流程，自选视角并输出数值动作，由共享IK执行器落地并返回反馈。	
+2609.22966	88.75	4	4	4	3	scoped	Transferring the Intelligence of VLMs to Robotic Control	为冻结VLM提供以指尖中点为基准的离散运动命令、网格观测和接口兼容示范，执行后返回实际反馈。	
+2609.23841	88.75	4	4	4	3	scoped	Structured World-State Reasoning for Agentic Robotic Search	用感知独占写入的持久图承载候选，多个推理器提出查证问题，共享观测巡回并由Examiner和Judge裁决。	
+2609.23997	88.75	4	4	4	3	scoped	RoboTalk: Learning Multi-Robot Communication and Coordination from Multimodal Demonstrations	用FSM过滤双机器人联合通信/技能轨迹，回放取得图像后拆为私有上下文样本，SFT共享小VLM策略。	
+2609.24563	88.75	4	4	4	3	scoped	ARSTAG: An Agentic Real2Sim2Real System for Task-Specific Robot Data Generation	协调器依据工具诊断修订重建、专家采集及学习阶段，以特权状态专家生成随机化与扰动恢复数据训练视觉策略。	https://boweili666.github.io/ARSTAG/
+2609.28236	88.75	4	4	4	3	scoped	EmbodiedMemory-Bench: Benchmarking Embodied Memory for Long-Horizon Embodied Tasks	构造带历史线索和干扰的四族可执行记忆任务，并以场景、空间、事件三类记忆作基线。	https://zju-omniai.github.io/EmbodiedMemoryBench/
+2609.28798	88.75	4	4	4	3	scoped	OCC4M: Object-Centric 4D Memory for Spatiotemporal Reasoning in Long-Horizon Manipulation	把检测写入世界坐标持续对象轨迹与时序/包含关系，一次VLM选身份或历史位置，再在线重投影给无历史执行器。	https://occ4m-sup.github.io/occ4m-supplementary/
+2609.29394	88.75	4	4	4	3	scoped	RACaP: Agentic Reasoning, Acting, and Coding as Policies for Evolvable Robot Learning	离线课程与配对试验共同演化类型化控制API、ReAct调度和经验记忆，部署冻结源码，仅按反馈调整调用和参数。	
