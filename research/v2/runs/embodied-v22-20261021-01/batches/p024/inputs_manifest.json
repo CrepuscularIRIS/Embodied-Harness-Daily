@@ -1,0 +1,48 @@
+{
+ "batch_id": "p024",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2505.07815",
+   "paper_id": "2505.07815",
+   "version": "2505.07815v3",
+   "title": "Imagine, Verify, Execute: Memory-guided Agentic Exploration with Vision-Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2505.07815.txt",
+   "material_sha256": "fe2941acac571b872f8bbac91313c02d21557c11a92aef5974a78c305eef9a53"
+  },
+  {
+   "paper_key": "2505.08765",
+   "paper_id": "2505.08765",
+   "version": "2505.08765v2",
+   "title": "Towards Autonomous UAV Visual Object Search in City Space: Benchmark and Agentic Methodology",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2505.08765.txt",
+   "material_sha256": "fca5f74266dd577290443b71d12b727e4389581f76a0162785b044b64e1c3a6b"
+  },
+  {
+   "paper_key": "2505.13948",
+   "paper_id": "2505.13948",
+   "version": "2505.13948v2",
+   "title": "Memory-Centric Embodied Question Answering",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2505.13948.txt",
+   "material_sha256": "e4ee3ef1f98bbea6e59503e001e0b6105aa587178b55e9ff25cc0b6d80f1f8ce"
+  },
+  {
+   "paper_key": "2505.14899",
+   "paper_id": "2505.14899",
+   "version": "2505.14899v3",
+   "title": "REFLEX: Metacognitive Reasoning for Reflective Zero-Shot Robotic Planning with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2505.14899.txt",
+   "material_sha256": "d1a6e9ad8fb34d2c25e76dde611c1c21a09b8236a25084d8b0a75ee3cc371df4"
+  },
+  {
+   "paper_key": "2505.22050",
+   "paper_id": "2505.22050",
+   "version": "2505.22050v2",
+   "title": "Reinforced Reasoning for Embodied Planning",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2505.22050.txt",
+   "material_sha256": "844197a993e241cd1a2ea75a4c0b45585fa9f946c244adc34b62a7497806780a"
+  }
+ ],
+ "input_hash": "9ee93f75dfe0e2154b1f80ca835d4ca9b43cd5b7046106401353a975b4af1ab4"
+}

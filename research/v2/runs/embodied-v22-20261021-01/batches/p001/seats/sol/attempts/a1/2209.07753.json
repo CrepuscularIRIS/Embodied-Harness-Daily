@@ -1,0 +1,259 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p001",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2209.07753",
+    "paper_id": "2209.07753",
+    "title": "Code as Policies: Language Model Programs for Embodied Control",
+    "version": "2209.07753v4",
+    "claim_type": "system_method",
+    "central_claim": "Code as Policies uses pretrained code-generating language models to synthesize executable robot policy programs from language, recursively defining helper functions and composing perception/control APIs with precise computation and feedback, enabling generalization across instructions and embodied domains."
+  },
+  "provenance": {
+    "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "0f9e90179cca637227f34fd72bb78de4365c82b39430b93e0e9775de2e55cc42",
+    "expectations_hash": "f2b30256da73535ceb775213a0fd83d61196d05d58689d31c0f963419a474ba1",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T02:03:11.950597+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144), phase=production; production-under-anchors-v2. Rubric is not formally frozen; no formal ranking or Reel authorization. Session ID and receipt_ref are unavailable from this worker invocation; an inherited transcript path is not treated as an invocation receipt. No network, paper-code execution, or peer conclusions used.",
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "score_qualification": "production-under-anchors-v2",
+    "domain_cards_binding": {
+      "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping relative card paths to file SHA256",
+      "files": {
+        "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+        "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+        "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+        "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+        "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+        "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+      },
+      "taxonomy_sha256": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "conditions_sha256": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+    },
+    "expectations_binding": {
+      "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping paths to exact expectation lines: domain main-card lines beginning - **E; original RS main-card lines under Reviewer expectations. All source lines are included, not only applicable ones.",
+      "sources": {
+        "patterns/main/observe_act_interface.md": [
+          "- **Extra tools are optional and checked per backbone.** Tools are added beside primitives rather than replacing them, harness parse/coordinate/feedback correctness is verified before comparison, and effects are reported per model: optional hybrid tools raise the strongest model 82.3 -> 85.7 SR at 0.59x calls, while imposed waypoints lift weak models (5 -> 43 SR) and move strong ones by <=2 points (2607.26148#s2, 2608.03327#s1).",
+          "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success.",
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E03 (ablation, common_practice).** Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student. — _applies when_ a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student.",
+          "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+          "- **E06 (dataset, common_practice).** For a VLN-CE harness, report SR, SPL, OSR and NE on R2R-CE val_unseen, either on the shared 100-episode zero-shot subset or the full split. State which one, and do not mix subset results with full-split numbers of trained methods as if they were matched. — _applies when_ an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent.",
+          "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+          "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+          "- **E20 (other, common_practice).** State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested. — _applies when_ a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+          "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        ],
+        "patterns/main/external_verification_control.md": [
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+          "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+          "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+          "- **E20 (other, common_practice).** State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested. — _applies when_ a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+          "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        ],
+        "patterns/main/llm_symbolic_solver_planning.md": [
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+          "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+          "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+          "- **E17 (dataset, common_practice).** Evaluate harness optimization, skill libraries, memory and replay cards on held-out tasks or episodes disjoint from the search, mining or validation set, and report overfitting across iterations. Gains on recurring tasks with ground-truth feedback do not show generalization. — _applies when_ a claim that a self-improving harness, skill library, playbook or experience memory improves performance.",
+          "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+        ],
+        "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": [
+          "- **Run an ablation that isolates the conditioning signal — comparing instruction, format, or retrieval conditioning against the same multitask training without it — to prove the gain comes from conditioning and not merely from broader exposure.** _(source: both)_",
+          "- **Provide a contamination or data-overlap analysis between the adaptation tasks and the held-out evaluation set before any genuine held-out or zero-shot generalization claim is accepted.** _(source: both)_",
+          "- **Compare against the obvious cheaper alternative — longer input context, nearest-neighbor lookup, or plain multitask fine-tuning — so the unique value of the conditioning or retrieval is established rather than assumed.** _(source: reject_reviews)_",
+          "- **Justify each component of a multi-module conditioning pipeline with ablations that isolate its contribution; shallow ablations over interacting components are treated as insufficient.** _(source: both)_",
+          "- **Demonstrate that the recipe is generic across multiple tasks or domains and explain how the conditioning signal is obtained without a manual, per-task search.** _(source: reject_reviews)_",
+          "- **Characterize sensitivity to the quality and coverage of the conditioning source — the demonstration or retrieval database — and to the distributional gap between that source and the test domain.** _(source: both)_"
+        ],
+        "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": [
+          "- **Report the cost of the added structure — token and API budget, number of model or solver calls, and solver latency — rather than only end-task accuracy.** _(source: both)_",
+          "- **Provide ablations that isolate each component's marginal contribution, and especially show the claimed load-bearing step is what drives the gains rather than extra data or compute.** _(source: both)_",
+          "- **Disclose the exact prompts and implementation details so the decomposed pipeline is reproducible and the results are not suspected prompt-engineering artifacts.** _(source: both)_",
+          "- **Demonstrate generalization beyond a single narrow benchmark or domain, ideally with cross-domain or real-world tasks rather than templates specific to one dataset.** _(source: both)_",
+          "- **Compare fairly against simpler unified or end-to-end baselines and against concurrent decomposition methods, clarifying precisely what is novel relative to them.** _(source: both)_",
+          "- **Justify that the decomposition targets a genuine structural bottleneck — ideally evidenced by an empirical diagnostic linking a sub-task to the final outcome — instead of imposing structure for its own sake.** _(source: both)_"
+        ]
+      },
+      "source_file_sha256": {
+        "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+        "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+        "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": "b5aac2a729f2c46ae2a7a593823115fec9749da30477c6aeb75a2c36325f085b",
+        "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd"
+      }
+    },
+    "protocol_hashes": {
+      "pattern_protocol": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+      "batch_contract": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+      "worksheet": "b0ca3ac92a458c934894aee62c88d6de8ab53901047326e0c8abdfd1a0d3219e",
+      "evidence": "612b7df7eec04add15b47c9316206fee7f572d824a03143fb82bdfcc5aab3ce2",
+      "evidence_schema": "b7dd7fa66ce5d3eb4a87e13f65fdb7d9ac69b9a268bb84474049274f9f65b8cb",
+      "rs_parents": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b"
+    },
+    "reference_hashes_verified": true
+  },
+  "materials": [
+    {
+      "material_id": "M001",
+      "paper_id": "2209.07753",
+      "version": "2209.07753v4",
+      "url": "https://arxiv.org/html/2209.07753v4",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.07753.txt",
+      "sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+      "sections_read": [
+        "Abstract",
+        "SectionsI–V",
+        "Acknowledgments"
+      ],
+      "complete": false,
+      "missing_sections": [
+        "AppendicesA–M: full prompts/generated outputs referenced in main text",
+        "AppendicesD/E: HumanEval/RoboCodeGen protocol",
+        "AppendixF: low-level controller details",
+        "AppendicesH/I/J: robot-domain prompts/examples",
+        "AppendixK: simulation tasks/splits/protocol and relevant supplementary evidence"
+      ]
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M001",
+      "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+      "locator": "SectionI; local text L9",
+      "quote": "Full prompts and generated outputs are in the Appendix",
+      "support_explanation": "Necessary implementation material is explicitly delegated to appendices absent from the local package.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [],
+  "gap": {},
+  "rs_pattern": {},
+  "domain_pattern": {},
+  "pattern_mapping": [],
+  "expectations": [],
+  "claims": [],
+  "assessment": {
+    "evidence_level": null,
+    "claim_support": "unresolved",
+    "strongest_supported_claim": null,
+    "unresolved": [
+      "AppendicesA–M: full prompts/generated outputs referenced in main text",
+      "AppendicesD/E: HumanEval/RoboCodeGen protocol",
+      "AppendixF: low-level controller details",
+      "AppendicesH/I/J: robot-domain prompts/examples",
+      "AppendixK: simulation tasks/splits/protocol and relevant supplementary evidence"
+    ],
+    "reproduction": "No reproduction or paper-code execution."
+  },
+  "ratings": {
+    "G": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+      "evidence_ids": [
+        "E001"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+      "evidence_ids": [
+        "E001"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+      "evidence_ids": [
+        "E001"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+        "evidence_ids": [
+          "E001"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+        "evidence_ids": [
+          "E001"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+        "evidence_ids": [
+          "E001"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+        "evidence_ids": [
+          "E001"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "The fixed package lacks referenced appendices with prompts, protocols, controllers and splits; cannot complete relevant evidence search. Unavailable material is not not_reported.",
+        "evidence_ids": [
+          "E001"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": null,
+    "display": null,
+    "lower": 0.0,
+    "upper": 100.0,
+    "coverage": 0.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "qualification": "production-under-anchors-v2"
+  },
+  "status": "needs_fulltext",
+  "reason": "Concrete clipped-package blocker despite html-full header: provided text ends after main SectionsI–V/acknowledgments while it repeatedly references absent AppendicesA–M for prompts, controllers, evaluation protocols and simulation splits. Controller should fix a complete v4 shared package; no independent browsing or unilateral supplement. All eight unknown, raw/display null, interval0–100,coverage0. No adverse scientific inference from unavailable material."
+}

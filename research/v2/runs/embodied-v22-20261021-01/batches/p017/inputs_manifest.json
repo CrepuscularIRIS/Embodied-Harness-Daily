@@ -1,0 +1,48 @@
+{
+ "batch_id": "p017",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2410.06237",
+   "paper_id": "2410.06237",
+   "version": "2410.06237v1",
+   "title": "BUMBLE: Unifying Reasoning and Acting with Vision-Language Models for Building-wide Mobile Manipulation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2410.06237.txt",
+   "material_sha256": "af312bb2abc025aae2c09d2cc22f4a819819689a3e8fbb003721c379c6e1fe71"
+  },
+  {
+   "paper_key": "2410.06472",
+   "paper_id": "2410.06472",
+   "version": "2410.06472v2",
+   "title": "Enabling Novel Mission Operations and Interactions with ROSA: The Robot Operating System Agent",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2410.06472.txt",
+   "material_sha256": "08dfbd605e79e60801053c46eb04554d30a0e66733a26551d136b69b2c52ca05"
+  },
+  {
+   "paper_key": "2410.06473",
+   "paper_id": "2410.06473",
+   "version": "2410.06473v3",
+   "title": "GRAPPA: Generalizing and Adapting Robot Policies via Online Agentic Guidance",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2410.06473.txt",
+   "material_sha256": "636d91995b142e2c30df00d2f126c518e7ba97e64d20a1233bf89b39414a6468"
+  },
+  {
+   "paper_key": "2410.08500",
+   "paper_id": "2410.08500",
+   "version": "2410.08500v3",
+   "title": "Exploring Spatial Representation to Enhance LLM Reasoning in Aerial Vision-Language Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2410.08500.txt",
+   "material_sha256": "92801a5fcc319e3738e3232e1d44230991a408fd72627582c6dd49440d368601"
+  },
+  {
+   "paper_key": "2410.22662",
+   "paper_id": "2410.22662",
+   "version": "2410.22662v2",
+   "title": "EMOS: Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2410.22662.txt",
+   "material_sha256": "414a345457f73040003b7f43213584797f9c327ffb36c981c647a7312bd5d586"
+  }
+ ],
+ "input_hash": "04ebf456cc61726543cb9a2c98f9b74f1ee9930381421b52c7b182b64e00129d"
+}

@@ -1,0 +1,694 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p006",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2309.04077",
+    "paper_id": "2309.04077",
+    "title": "SayNav: Grounding Large Language Models for Dynamic Planning to Navigation in New Environments",
+    "version": "2309.04077v4",
+    "claim_type": "system_method",
+    "central_claim": "Incrementally grounding an LLM in an explored 3D scene graph enables dynamic MultiON planning in unknown large houses, outperforming the privileged PointNav baseline (64.34% vs 56.06%) with a sample-efficient low-level policy."
+  },
+  "provenance": {
+    "input_hash": "682d488acfee84cba361bc0fc1f9b301936e28dff782dff94fbc993c9550e37d",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "ea0dbf7a09dc8c79cc460737cd6a9d6259c0392a8cfd39115b5065ddc30ad5f8",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T02:51:31.709567+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; production-under-anchors-v2. Model identity supplied by dispatch, not probed. session_id/receipt_ref unavailable to this internal worker. domain_cards_hash binds frozen taxonomy; domain_conditions_hash and expectations_sources bind condition/card text. No network, paper-code execution, old scores or other-seat records read. Run manifest read only as fixed input provenance; no outcome artifacts read.",
+    "anchors_hash": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+    "expectations_hash_method": "SHA256 of UTF-8 sorted compact JSON mapping main-card relative paths to file SHA256; expectations are embedded, not a standalone file.",
+    "expectations_sources": {
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "patterns/main/multi_robot_llm_coordination.md": "ce9425dd38f7e565a53c44d48316957c901a4abde65a1ad77152cfc051fc94b2",
+      "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121"
+    }
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2309.04077v4",
+      "version": "2309.04077v4",
+      "sha256": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.04077.txt",
+      "sections_read": [
+        "Abstract",
+        "1 Introduction",
+        "2 Related Work",
+        "3 SayNav",
+        "4 Experimental Results",
+        "5 Limitations and Discussion",
+        "6 Conclusion",
+        "7 Acknowledgement"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "rendering_limitations": "Fixed HTML text contains prose, equations and text tables, but no figure pixels. Figure-only prompts/plots were not reconstructed or treated as read; limitations are preserved in assessment. No appendix section is asserted read unless present."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§3.1; fixed text L15",
+      "quote": "The observations include RGBD images, semantic segmentation maps, and the agent’s pose (location and orientation).",
+      "support_explanation": "Semantic segmentation and pose are supplied observations, not a demonstrated raw-RGB perception system.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§3.4; fixed text L15",
+      "quote": "For instance, we constrain each step to generate a navigate or look function call with arguments and a high-level comment.",
+      "support_explanation": "Fixed typed calls connect LLM-generated plans to the executor.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§3.5; fixed text L15",
+      "quote": "This low-level planner is trained from scratch (without pretraining) on only 2800 episodes or 7\\times 10^{5} simulation steps.",
+      "support_explanation": "The LLM is frozen but the PointNav executor is trained with oracle demonstrations.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§4.1; fixed text L18",
+      "quote": "We build a benchmark dataset of 132 episodes using 132 different houses with 3-10 rooms each and select 3 objects for each house to conduct MultiON task.",
+      "support_explanation": "Simulation evaluation denominator and house scale.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§4.5; fixed text L18",
+      "quote": "SayNav, without using any ground truth, achieves a higher SR ( 60.32\\% and 64.34\\% with gpt-3.5-turbo and gpt-4 respectively).",
+      "support_explanation": "Author-reported VO/PNav results; their no-ground-truth phrasing must be read alongside supplied semantic segmentation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§4.5; fixed text L18",
+      "quote": "Looking at the SPL metric, we see a drop in SayNav as compared to the baseline.",
+      "support_explanation": "Success improves, but path efficiency does not dominate the baseline.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§4.7; fixed text L18",
+      "quote": "We do observe substantial drop in SR and SPL metrics by using LLM Memory in the case of gpt-3.5-turbo as compared to the results reported in Table 1 .",
+      "support_explanation": "Memory effect depends on backbone; it is not a universal gain.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§4.8; fixed text L18",
+      "quote": "The demonstration video for a cafeteria environment is available at our project link.",
+      "support_explanation": "Real-robot evidence is a qualitative demonstration, not counted transfer trials.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§5; fixed text L21",
+      "quote": "In the future, we would like to develop verification and feedback mechanisms to validate the plans generated by LLMs for improving SayNav’s performance.",
+      "support_explanation": "Plan validation remains future work; scene-graph door-state errors cause failures.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f",
+      "locator": "§4 Table 1; fixed text L18",
+      "quote": "Baseline 56.06 0.49 GT OrNav 95.35 0.43 0.70 SayNav GT PNav 80.62 0.32 0.72 (gpt-3.5) VO OrNav 71.32 0.48 0.56 VO PNav 60.32 0.34 0.62 GT OrNav 93.93 0.46 0.76 SayNav GT PNav 84.09 0.36 0.78 (gpt-4) VO OrNav 69.80 0.47 0.76 VO PNav 64.34 0.33 0.78",
+      "support_explanation": "Direct SR/SPL and privileged sensing/executor arms; baseline is not an upper bound on local waypoint organization.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S01",
+      "object": "LLM-to-navigation interface",
+      "information": "Incremental RGBD, simulator semantic segmentation and pose; optional explicitly privileged GT graph and A* executor arms.",
+      "operation": "Update hierarchical scene graph, extract local subgraph, use two examples to generate navigate/look calls; replan after new observations or failure.",
+      "output": "Short-range PointNav targets and look actions",
+      "conditions": "Static houses; visible/segmentable objects; reachable open doors; learned short-range executor.",
+      "feedback": "New observations, found-object list and explored-door/room annotations",
+      "selection_rule": "Current-room object likelihood/feasibility prioritization; no persistent harness edit acceptance.",
+      "selection_data": "Current episode observations; fixed few-shot examples where specified. No claim of accepted cross-task harness edits.",
+      "persistence": "Episode-local 3D graph and investigated-room flags; no cross-episode optimizer.",
+      "later_use": "Later planning calls in the same episode read the graph.",
+      "claimed_effect": "MultiON SR increase with less low-level training.",
+      "failure_boundary": "Small objects, glass doors, open-door visibility; privileged sensing assumptions; long-range baseline differs structurally.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E009"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Prior LLM planners use small/known spaces or static whole-task plans; unknown multi-room MultiON requires online semantic exploration.",
+    "checked_gap": "The fixed text distinguishes full GT SayPlan scene graphs from incremental exploration and L3MVN frontier hints from step-by-step planning; this is a concrete interface/planning residual.",
+    "lineage/closest_adjacent": [
+      {
+        "name": "SayPlan (Rana et al. 2023)",
+        "version": "as discussed in fixed 2309.04077v4 §2; separate original not supplied",
+        "relationship": "Prebuilt complete scene graph versus explored partial graph."
+      },
+      {
+        "name": "L3MVN (Yu et al. 2023)",
+        "version": "as cited in §2, not independently fixed",
+        "relationship": "Semantic-frontier hinting versus dynamic short-term plan."
+      },
+      {
+        "name": "ProgPrompt / Singh et al. 2023",
+        "version": "author-cited §3.4",
+        "relationship": "Programming-language prompting ancestor."
+      }
+    ],
+    "residue": "Online partial-world grounding and memory under long-range PointNav weakness.",
+    "stakes": "Avoid expensive direct long-range policy training while finding three objects in unseen houses.",
+    "method_response": "Scene graph + dynamic typed local plans shorten executor subproblems.",
+    "remaining_gap": "Planner-specific contribution is not separated from local-waypoint decomposition; supplied segmentation/pose and perception errors remain.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E004",
+      "E009"
+    ],
+    "unresolved": [
+      "Adjacent originals not fixed independently; no exhaustive novelty conclusion.",
+      "Prompt figure pixels not present in supplied text."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [
+      "adapt_via_conditioning"
+    ],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "operational",
+        "tactic_steps_checked": [
+          "1: Distinguish semantic search from short-range motion.",
+          "2: Typed navigate/look handoff is present.",
+          "3: Observations update the plan, but a sound external plan-validity checker is not implemented.",
+          "4: GT/VO and OrNav/PNav swaps probe modules; no matched removal of dynamic planning.",
+          "5: No end-to-end API/latency costing."
+        ],
+        "success/failure_checks": [
+          "Typed artifact condition met; full verifier soundness is not established.",
+          "Failure-mode checks: baseline local-vs-global mismatch, perception privilege, no cost accounting.",
+          "Cross-episode verified-library accumulation is not applicable to this static episode-local method."
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E009"
+        ],
+        "reason": "High-level search is delegated through executable navigate/look artifacts to an IL or A* PointNav solver; observed outcomes update subsequent planning, not merely a prose decomposition."
+      },
+      {
+        "main_id": "adapt_via_conditioning",
+        "sub_id": null,
+        "role": "supporting",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          "Frozen LLM uses examples and current goal at inference; no task-specific LLM update.",
+          "C03 broad reference substrate, upstream schema training and category holdout are not established; sub_id=null."
+        ],
+        "success/failure_checks": [
+          "Conditioning is operational, but generic transfer and simpler-baseline tests remain incomplete."
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E009"
+        ],
+        "reason": "Frozen LLM consumes task goals, subgraph and two examples; C03 broad reference/task-category recipe not demonstrated."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "High-level search is delegated through executable navigate/look artifacts to an IL or A* PointNav solver; observed outcomes update subsequent planning, not merely a prose decomposition.",
+    "executes_pattern": true,
+    "resolves_problem": false,
+    "resolves_problem_reason": "Execution of the pattern is not closure of the broader problem; limitations and attribution gaps remain."
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "K104",
+        "version": "embodied-agent-harness/v1",
+        "fit": "operational",
+        "condition_checks": [
+          {
+            "id": "S4",
+            "status": "met",
+            "reason": "navigate/look entity calls resolve to PointNav targets.",
+            "evidence_ids": [
+              "E002",
+              "E003"
+            ]
+          },
+          {
+            "id": "S3",
+            "status": "partial",
+            "reason": "RGBD/pose support coordinates, but semantic segmentation is supplied and metric-depth robustness not tested.",
+            "evidence_ids": [
+              "E001"
+            ]
+          },
+          {
+            "id": "F4",
+            "status": "partial",
+            "reason": "Module arms exist, but dynamic planning is not isolated from waypoint subdivision.",
+            "evidence_ids": [
+              "E003",
+              "E005"
+            ]
+          },
+          {
+            "id": "F5",
+            "status": "met",
+            "reason": "Observed negative LLM-memory effect for gpt-3.5, not gpt-4.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "id": "F1",
+            "status": "partial",
+            "reason": "Door-state/target detection failures discussed but no full endpoint audit.",
+            "evidence_ids": [
+              "E009"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E005"
+        ],
+        "reason": "RS structured delegation becomes semantic navigate/look calls over online scene-graph entities with a learned PointNav executor; K104 applies, whereas K105 general free-form tool code is not the central operation."
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "K104"
+      },
+      "operation_correspondence": "RS structured delegation becomes semantic navigate/look calls over online scene-graph entities with a learned PointNav executor; K104 applies, whereas K105 general free-form tool code is not the central operation.",
+      "necessary_conditions_and_differences": "The RS definition supplies the research-operation level; the domain card supplies embodiment/information conditions. A match does not establish effectiveness or require every source-domain success condition. All card expectations are check questions, not independent empirical evidence.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E005"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Harness, rather than model, claimed to raise embodied success.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Privileged PointNav baseline is compared, but local subgoal subdivision is unmatched.",
+      "evidence_ids": [
+        "E003",
+        "E005"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Specific component claimed to cause gain.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "GT/VO and OrNav/PNav swaps, plus memory variants; no no-LLM or no-dynamic-plan matched control.",
+      "evidence_ids": [
+        "E005",
+        "E007"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E03",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Harness or tool value claimed beyond one backbone.",
+      "applicable": true,
+      "status": "met",
+      "reason": "gpt-3.5 and gpt-4, including adverse memory effect, are reported.",
+      "evidence_ids": [
+        "E005",
+        "E007"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Practicality or superiority comparison.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Low-level training size disclosed; no episode/API/token/wall-time cost accounting.",
+      "evidence_ids": [
+        "E003"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Frontier benchmark/generalization claim.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "ProcTHOR train vs val/test described, but harness development overlap/pretraining and semantic-label privilege not fully audited.",
+      "evidence_ids": [
+        "E001",
+        "E004"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Navigation/manipulation endpoint success or stopping claim.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Qualitative missed objects/doors and lower SPL; no reached-versus-stop counts.",
+      "evidence_ids": [
+        "E006",
+        "E009"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Metric-depth conversion or distance gating.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Depth and pose used; no calibration-error sensitivity test.",
+      "evidence_ids": [
+        "E001"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Matched-model harness/interface comparison.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "No matched LLM-call/wall-time caps or cost comparison.",
+      "evidence_ids": [
+        "E003",
+        "E005"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E06",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "VLN-CE benchmark-specific metric protocol.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "This is custom ProcTHOR MultiON, not R2R-CE VLN-CE; do not require R2R-CE metric values.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": "E.measurement"
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Physical-robot transfer claim.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Cafeteria demo has no per-task real-robot trial counts.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not actual reviews of this paper",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Success-rate comparisons on fixed tasks.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "132 episodes are task denominator, not repeated LLM runs or confidence intervals.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": "E.statistics"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C01",
+      "text": "SayNav raises MultiON success over a privileged PointNav baseline.",
+      "setting": "132 houses, three targets, simulator semantic labels and pose.",
+      "baseline/control": "Same IL PointNav policy used for long-range GT-target baseline; SayNav uses local subgoals.",
+      "selection_vs_test": "Executor train split is separate; val/test pooled and harness-tuning separation not audited.",
+      "result/denominator": "GPT-4 VO/PNav SR 64.34% vs baseline 56.06%; SPL 0.33 vs 0.49 (Table 1).",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E006",
+        "E010"
+      ],
+      "counterevidence": "Baseline is not the same local-planning organization; oracle label does not make it an upper bound.",
+      "allowed_conclusion": "Descriptive increase on this dataset under supplied sensing, not isolated proof of superior LLM reasoning."
+    },
+    {
+      "claim_id": "C02",
+      "text": "SayNav generalizes to real environments.",
+      "setting": "Physical cafeteria example.",
+      "baseline/control": "No counted hardware control.",
+      "selection_vs_test": "No hardware development/heldout split.",
+      "result/denominator": "Qualitative video only; no trial denominator.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "counterevidence": "No hardware rates; semantic perception differs from simulator.",
+      "allowed_conclusion": "Demonstration feasibility only, not measured transfer."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Authors report closed-loop 132-episode simulated MultiON success under RGBD, supplied segmentation/pose and an IL PointNav executor; GPT-4 VO/PNav exceeds the privileged long-range baseline in SR, not SPL.",
+    "unresolved": [
+      "No independently checked nearest-neighbor originals.",
+      "Exact figure-only prompt templates unavailable in text; not claimed reconstructed.",
+      "No hardware denominator, repeated-run uncertainty, or isolated dynamic-planning advantage.",
+      "Author no-ground-truth description does not remove the semantic segmentation/pose observation channel."
+    ],
+    "our_reproduction": false
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Specific unknown-house semantic-search residual and adjacent approaches are stated; independent original-paper gap audit incomplete.",
+      "evidence_ids": [
+        "E001",
+        "E004"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Typed local planning responds logically to global PointNav weakness, but simpler waypoint planning is not distinguished.",
+      "evidence_ids": [
+        "E002",
+        "E003"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Incremental graph, prompts, actions and executor training are described; door/geometry and verification limits explicit, exact prompt figures not read.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E009"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Closed-loop definitions and 132 episodes exist, but no repeated setting trials and no counted real demo; anchors v2 cap at 2.",
+        "evidence_ids": [
+          "E004",
+          "E005"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "GT/VO and executor swaps informative; baseline task subdivision remains a strong confound.",
+        "evidence_ids": [
+          "E003",
+          "E005",
+          "E006"
+        ],
+        "counterevidence_ids": [
+          "E003",
+          "E006",
+          "E007"
+        ],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Executor train vs validation houses is separated; no harness-development audit or counted sim-to-real success.",
+        "evidence_ids": [
+          "E001",
+          "E004",
+          "E008"
+        ],
+        "counterevidence_ids": [
+          "E001",
+          "E008"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Dataset denominator and qualitative failure modes, but no repeated trials or uncertainty; anchors v2 at most 1 for this evidence.",
+        "evidence_ids": [
+          "E004",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "not_reported",
+        "rating": 0,
+        "reason": "No applicable run-cost accounting reported in full supplied main text, tables and discussion.",
+        "evidence_ids": [],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Abstract",
+          "1 Introduction",
+          "2 Related Work",
+          "3 SayNav",
+          "4 Experimental Results",
+          "5 Limitations and Discussion",
+          "6 Conclusion",
+          "7 Acknowledgement"
+        ]
+      }
+    }
+  },
+  "score": {
+    "raw": 60.0,
+    "display": 60.0,
+    "lower": 60.0,
+    "upper": 60.0,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Fixed main-text method, experiments and discussion read; author reports evaluated, not reproduced."
+}

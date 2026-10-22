@@ -1,0 +1,219 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "counts": {
+  "assigned": 5,
+  "reviewed": 4,
+  "needs_fulltext": 1,
+  "needs_evidence": 0,
+  "out_of_scope": 0,
+  "outside_taxonomy": 0
+ },
+ "outside_taxonomy_ratio": 0.0,
+ "schema_errors": {},
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_id": null,
+ "session_id_reason": "subagent cannot read its own session id; no receipt available to the worker",
+ "receipt_ref": null,
+ "anchors": "v2 (3ececdd11cc3d144), phase=production, rubric not frozen (production-under-anchors-v2)",
+ "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+ "blockers": [
+  "2209.07753 (Code as Policies): pinned material is main text only; Appendix -A..-M (prompts, Appendix -K sim task/success definitions and splits, ablation details) and references are missing, so status=needs_fulltext and all eight ratings unknown. Controller must supply appendix/PDF text and re-pin the input package for BOTH seats if a score is wanted.",
+  "2207.04429 (LM-Nav): Table 1 in the pinned text is garbled (row labels shifted); ratings use the prose (85%, 1 intervention/6.4 km) and the Planning column, conflict noted in claims[C1].",
+  "expectations_hash is null: no independent expectations file exists in the repo (E01-E22 read from patterns/main cards)."
+ ],
+ "contamination": "none observed: sol seat outputs, aggregate, calibration (other than anchors.md), archive, old scores, assignments.jsonl were not read",
+ "papers": [
+  {
+   "paper_key": "2201.07207",
+   "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "offline",
+   "claim_support": "scoped",
+   "rs_primary": "adapt_via_conditioning",
+   "rs_matches": [
+    [
+     "adapt_via_conditioning",
+     "rs:C03"
+    ],
+    [
+     "decompose_and_delegate",
+     null
+    ]
+   ],
+   "domain_matches": [
+    "K104",
+    "K201"
+   ],
+   "score_raw": 68.75,
+   "score_display": 68.8,
+   "lower": 68.75,
+   "upper": 68.75,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 3,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 1
+   },
+   "summary": "plan-level LLM+translation harness for VirtualHome; executability 18->79 (Codex) at a correctness drop; offline, scoped; hyperparameters selected on the 88 eval tasks; cost unreported"
+  },
+  {
+   "paper_key": "2204.01691",
+   "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     "rs:C25"
+    ]
+   ],
+   "domain_matches": [
+    "K104",
+    "K201"
+   ],
+   "score_raw": 73.75,
+   "score_display": 73.8,
+   "lower": 73.75,
+   "upper": 73.75,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 4,
+    "M": 3,
+    "X": 4,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 1
+   },
+   "summary": "SayCan: LLM label scoring x value-function affordance over learned skills; 84% plan / 74% exec (mock), 60% real; single trial per instruction; 'nearly doubles' overstated; eval env = skill training env"
+  },
+  {
+   "paper_key": "2207.04429",
+   "title": "LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     "rs:C25"
+    ],
+    [
+     "reframe_as_solvable_object",
+     null
+    ]
+   ],
+   "domain_matches": [
+    "R01"
+   ],
+   "score_raw": 62.5,
+   "score_display": 62.5,
+   "lower": 62.5,
+   "upper": 62.5,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 0
+   },
+   "summary": "LM-Nav: GPT-3 landmarks + CLIP + ViNG + graph search, 20 outdoor queries, ~85% success; pre-explored graph, single runs, ambiguous Table 1, no cost reported"
+  },
+  {
+   "paper_key": "2207.05608",
+   "title": "Inner Monologue: Embodied Reasoning through Planning with Language Models",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     "rs:C25"
+    ]
+   ],
+   "domain_matches": [
+    "K202",
+    "K109",
+    "K108"
+   ],
+   "score_raw": 66.25,
+   "score_display": 66.3,
+   "lower": 66.25,
+   "upper": 66.25,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 4,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 0
+   },
+   "summary": "Inner Monologue: text feedback (success/scene/human) to LLM planner; sim/real tabletop and kitchen gains; oracle/human feedback, small unreported cells; trained CLIPort+oracle wins some seen tasks"
+  },
+  {
+   "paper_key": "2209.07753",
+   "title": "Code as Policies: Language Model Programs for Embodied Control",
+   "status": "needs_fulltext",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "unresolved",
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     "rs:C25"
+    ],
+    [
+     "adapt_via_conditioning",
+     null
+    ]
+   ],
+   "domain_matches": [
+    "K105"
+   ],
+   "score_raw": null,
+   "score_display": null,
+   "lower": 0.0,
+   "upper": 100.0,
+   "coverage": 0.0,
+   "ratings": {
+    "G": null,
+    "M": null,
+    "X": null,
+    "E.measurement": null,
+    "E.causality": null,
+    "E.holdout": null,
+    "E.statistics": null,
+    "E.cost": null
+   },
+   "summary": "Code as Policies: needs_fulltext (appendix -A..-M absent from pinned material); main-text provisional ratings kept off-index; sim Table III vs CLIPort/NL planner"
+  }
+ ],
+ "timestamp": "2026-10-22T01:50:00Z"
+}

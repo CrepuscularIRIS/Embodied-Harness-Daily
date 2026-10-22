@@ -1,0 +1,48 @@
+{
+ "batch_id": "p019",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2412.04455",
+   "paper_id": "2412.04455",
+   "version": "2412.04455v3",
+   "title": "Code-as-Monitor: Constraint-aware Visual Programming for Reactive and Proactive Robotic Failure Detection",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2412.04455.txt",
+   "material_sha256": "4142cb6731776b22aec4e1e6d84a4b046b0dafcebd147b63c1d7a7c7299e3400"
+  },
+  {
+   "paper_key": "2501.04268",
+   "paper_id": "2501.04268",
+   "version": "2501.04268v1",
+   "title": "Robotic Programmer: Video Instructed Policy Code Generation for Robotic Manipulation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2501.04268.txt",
+   "material_sha256": "899ea9db61b0c3ee9302f9fa71442186bd08ab85fc1c1e0920ee0f18327a324b"
+  },
+  {
+   "paper_key": "2502.16707",
+   "paper_id": "2502.16707",
+   "version": "2502.16707v1",
+   "title": "Reflective Planning: Vision-Language Models for Multi-Stage Long-Horizon Robotic Manipulation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2502.16707.txt",
+   "material_sha256": "1f9ac4cdc78c111d297d9c80449c467d6bca49394c65b66de4a24ef356d1231c"
+  },
+  {
+   "paper_key": "2502.19135",
+   "paper_id": "2502.19135",
+   "version": "2502.19135v2",
+   "title": "Combining Large Language Models and Symbolic Reasoning for Multi-Robot Temporal Planning through Explainable Knowledge Bases",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2502.19135.txt",
+   "material_sha256": "16fb0159473349dcfb82ca8621575fb78519f5e5aa186b95f76938a05481e692"
+  },
+  {
+   "paper_key": "2502.19417",
+   "paper_id": "2502.19417",
+   "version": "2502.19417v2",
+   "title": "Hi Robot: Open-Ended Instruction Following with Hierarchical Vision-Language-Action Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2502.19417.txt",
+   "material_sha256": "7735742c290d07eda860d28118261436af83c23af02b4ab86198dd6408561a87"
+  }
+ ],
+ "input_hash": "ca62a7c73cf8fd9c46a1d4b657b9209fe3de8df7247f15e69de37bd49ce430e5"
+}

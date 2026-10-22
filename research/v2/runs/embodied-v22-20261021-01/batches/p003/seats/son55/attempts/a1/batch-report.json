@@ -1,0 +1,183 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "kind": "seat-batch-report",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p003",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "generated": "2026-10-22T02:27:53Z",
+ "counts": {
+  "assigned": 5,
+  "reviewed": 5,
+  "needs_fulltext": 0,
+  "needs_evidence": 0,
+  "out_of_scope": 0,
+  "outside_taxonomy": 1,
+  "outside_taxonomy_ratio": 0.2,
+  "coverage_warning_over_30pct": false,
+  "schema_errors": 0
+ },
+ "schema_errors": [],
+ "schema_check_note": "worker-side checks only: exact manifest paper_key coverage, material sha256 equality, score recomputation from the eight ratings (raw/display), verbatim quote presence in the pinned material, evidence-id references, rs: sub-card parent legality (PARENTS.tsv), embodied namespace and <=3 domain matches, unknown/not_reported rules. The controller's check_batch.py was intentionally not run (it reads the other seat).",
+ "model": {
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "session_note": "not self-obtainable inside an internal Subagent; no probe made"
+ },
+ "anchors": {
+  "version": "v2",
+  "sha256_prefix": "3ececdd11cc3d144",
+  "phase": "production"
+ },
+ "contamination": "none: no other-seat, aggregate, other-batch, archive, assignments.jsonl or old-score material was read; sol/ attempt directory was only listed by the pre-existing directory structure, never opened",
+ "flags_for_aggregation": [
+  "scope: 2305.16291 Voyager (Minecraft avatar, high-level API, perception/sensorimotor out of scope per authors) reviewed in scope on the domain overview wording; may be reversed to out_of_scope",
+  "scope: 2305.15695 ABA reviewed in scope (robot-arm sim closed loop) but harness is thin, informant and captioner are privileged, real-world part has no robot",
+  "evidence_level: 2306.08647 kept online; cross-embodiment clause of EVIDENCE could be read as transfer but EVIDENCE rule 2 (co-designed tasks/templates) caps it",
+  "headline caveat: 2306.08647 '90% vs 50%' is a best-of-N pass rate selected by task success",
+  "comparison caveat: 2305.15695 ReAct baseline has no access to the oracle information ABA queries",
+  "figure-only evidence not scored: 2305.11176 Fig 5 (L2/L3), 2305.15695 Fig 2/Fig 3 detail, 2305.16291 Fig 1/9, 2306.08647 Figs 4/8/9"
+ ],
+ "papers": [
+  {
+   "paper_key": "2305.11176",
+   "title": "Instruct2Act: Mapping Multi-modality Instructions to Robotic Actions with Large Language Model",
+   "version": "2305.11176v3",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 62.5,
+   "score_display": 62.5,
+   "ratings": {
+    "G": 2,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 1
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K105"
+   ],
+   "summary": "Instruct2Act: LLM-written Python over SAM/CLIP/pick-place; VIMABench L1 avg 84.4 = VIMA-20M (copied baselines), no CaP baseline, prompt covers all eval tasks, L2/L3 figure-only; online/scoped. RS decompose_and_delegate/rs:C25 (+unify/rs:C18 weak); domain K105 partial."
+  },
+  {
+   "paper_key": "2305.15695",
+   "title": "Asking Before Acting: Gather Information in Embodied Decision Making with Language Models",
+   "version": "2305.15695v2",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 68.75,
+   "score_display": 68.8,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 3,
+    "E.cost": 2
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": null,
+   "rs_outside_taxonomy": true,
+   "domain_matches": [
+    "K108",
+    "K505"
+   ],
+   "summary": "ABA: ask action + metadata ICL / ABA-FT; beats ReAct in ALFWorld and Ravens sim but only with an oracle-informed LLM informant and by-construction ambiguous variants; real-world part has no robot; online/scoped; RS outside_taxonomy; domain K108, K505 partial. Scope borderline (thin harness)."
+  },
+  {
+   "paper_key": "2305.16291",
+   "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+   "version": "2305.16291v2",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 82.5,
+   "score_display": 82.5,
+   "ratings": {
+    "G": 3,
+    "M": 4,
+    "X": 4,
+    "E.measurement": 3,
+    "E.causality": 3,
+    "E.holdout": 3,
+    "E.statistics": 2,
+    "E.cost": 2
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K303",
+    "K105"
+   ],
+   "summary": "Voyager: curriculum + critic-gated code skill library + iterative prompting in Minecraft; 3 runs/method, strong component ablations, fresh-world unseen-task test; baselines authors-adapted; online/scoped. RS decompose_and_delegate/rs:C25 (+adapt_via_conditioning); domain K303, K105. Scope flag: virtual avatar via high-level API, no robot body."
+  },
+  {
+   "paper_key": "2305.16986",
+   "title": "NavGPT: Explicit Reasoning in Vision-and-Language Navigation with Large Language Models",
+   "version": "2305.16986v3",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 61.25,
+   "score_display": 61.2,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 3,
+    "E.causality": 1,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 0
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "unify_into_shared_representation",
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K109"
+   ],
+   "summary": "NavGPT: text-serialised views (BLIP-2/detector/summariser) + ReAct LLM on R2R val-unseen 783 eps, SR 34 vs trained 66, single run; no reasoning-trace ablation, depth gain within noise; cost not_reported; online/scoped. RS unify_into_shared_representation/rs:C18 partial; domain K109."
+  },
+  {
+   "paper_key": "2306.08647",
+   "title": "Language to Rewards for Robotic Skill Synthesis",
+   "version": "2306.08647v2",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 78.75,
+   "score_display": 78.8,
+   "ratings": {
+    "G": 4,
+    "M": 4,
+    "X": 4,
+    "E.measurement": 3,
+    "E.causality": 2,
+    "E.holdout": 1,
+    "E.statistics": 3,
+    "E.cost": 1
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "R01"
+   ],
+   "summary": "Language to Rewards: GPT-4 Motion Descriptor + Reward Coder -> MJPC; 90% vs 50% is best-of-10 oracle pass rate on 17 co-designed sim tasks, CaP baseline authored by proposers, real robot qualitative without counts; online/scoped. RS decompose_and_delegate/rs:C25; domain R01 partial."
+  }
+ ],
+ "output_dir": "research/v2/runs/embodied-v22-20261021-01/batches/p003/seats/son55/attempts/a1",
+ "not_reported": "published / merged / committed: none (worker does not touch git)"
+}

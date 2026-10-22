@@ -1,0 +1,48 @@
+{
+ "batch_id": "p020",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2503.01700",
+   "paper_id": "2503.01700",
+   "version": "2503.01700v2",
+   "title": "Code-as-Symbolic-Planner: Foundation Model-Based Robot Planning via Symbolic Code Generation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.01700.txt",
+   "material_sha256": "5544001e3e94601f06ac706b76a35ae2ca21b0f716e6124291d8bdf57bc191c3"
+  },
+  {
+   "paper_key": "2503.04280",
+   "paper_id": "2503.04280",
+   "version": "2503.04280v4",
+   "title": "Towards Autonomous Reinforcement Learning for Real-World Robotic Manipulation with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.04280.txt",
+   "material_sha256": "876f832b78df8e2137094cb53d91a2a04cf731887346761350291e6e7f89431f"
+  },
+  {
+   "paper_key": "2503.07885",
+   "paper_id": "2503.07885",
+   "version": "2503.07885v2",
+   "title": "Safety Guardrails for LLM-Enabled Robots",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.07885.txt",
+   "material_sha256": "51d9260d160cd87693e001353f31f9607ce71f2745c659d97bc2fbc0545a2231"
+  },
+  {
+   "paper_key": "2503.08302",
+   "paper_id": "2503.08302",
+   "version": "2503.08302v1",
+   "title": "General-Purpose Aerial Intelligent Agents Empowered by Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.08302.txt",
+   "material_sha256": "74a78ffe9afe3b9cbc84695895a04465992ebe97ad12c6d67e34b1fbbab60d37"
+  },
+  {
+   "paper_key": "2503.12533",
+   "paper_id": "2503.12533",
+   "version": "2503.12533v2",
+   "title": "Being-0: A Humanoid Robotic Agent with Vision-Language Models and Modular Skills",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2503.12533.txt",
+   "material_sha256": "43786b5ee8da4c0f1b487cc92edca70e393949fc8f98bca880580e09cbcceee3"
+  }
+ ],
+ "input_hash": "76ce10cc29da7fe7b11ec5d92b653fb8d877cca61952a667d5cb647e7f3e757c"
+}

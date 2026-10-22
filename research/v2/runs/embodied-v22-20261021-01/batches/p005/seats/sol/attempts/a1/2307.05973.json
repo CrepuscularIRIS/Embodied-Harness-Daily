@@ -1,0 +1,992 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p005",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2307.05973",
+    "paper_id": "2307.05973",
+    "title": "VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models",
+    "version": "2307.05973v2",
+    "claim_type": "system_method",
+    "central_claim": "LLM-generated programs compose observation-grounded 3D affordance/constraint maps for motion-planner trajectory synthesis across open-set instructions/objects without task-specific training or reliance on acquiring individual primitives; replanning yields disturbance robustness, and trajectory priors enable efficient online contact-dynamics learning."
+  },
+  "materials": [
+    {
+      "sections_read": [
+        "Abstract",
+        "1–5",
+        "Appendix A.1–A.6 including API, setup, full task table and prompt link inventory"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "missing_linked_artifacts": [
+        "A.6 gives external planner/composer/perception/value-map prompt URLs, not their5–20-shot examples. Exact prompt/example bodies are not included in fixed offline package."
+      ],
+      "linked_artifacts_accessed": false,
+      "limitation": "Article/appendix text complete; critical linked execution evidence absent, leading to X unknown/needs_evidence, not an author not_reported penalty.",
+      "material_id": "M1",
+      "url": "https://arxiv.org/abs/2307.05973v2",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2307.05973.txt",
+      "sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "locator": "Abstract, line6",
+      "quote": "most still rely on pre-defined motion primitives to carry out the physical interactions with the environment, which remains a major bottleneck",
+      "support_explanation": "Original primitive-acquisition bottleneck; do not retroactively narrow away this claimed advance.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "locator": "§3.2, line15",
+      "quote": "can be approximated by accumulating the values",
+      "support_explanation": "Voxel trajectory score is an approximate semantic task objective, not a proven equivalence for arbitrary language.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "locator": "§3.2, line15",
+      "quote": "executing the code via a Python interpreter",
+      "support_explanation": "Code is an operational artifact for perception/map construction, not merely prose advice.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "locator": "§4 implementation, line18",
+      "quote": "For each LMP, we include 5-20 example queries and corresponding responses as part of the prompt.",
+      "support_explanation": "Training-free does not mean demonstration-free; exact examples are load-bearing evidence for implementation and holdout audit.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "locator": "§4 implementation, line18",
+      "quote": "the first waypoint is executed, and then a new trajectory is re-planned at 5 Hz.",
+      "support_explanation": "Receding-horizon physical loop uses fresh observations; not continuous LLM regeneration at5Hz.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "locator": "§4 dynamics model, line18",
+      "quote": "Then a pre-defined pushing primitive is executed based on the action parameters.",
+      "support_explanation": "Object-centric planar pushing retains an engineered primitive, limiting a universal primitive-free claim.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "locator": "§4 value maps, line18",
+      "quote": "weights 2 and 1",
+      "support_explanation": "Fixed affordance/avoidance cost composition, followed by other parameter maps; choice not independently isolated.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "locator": "Table1, line18",
+      "quote": "Total 24.0% 0.0% 88.0% 70.0%",
+      "support_explanation": "Aggregated real success for primitive baseline static/disturbed versus VoxPoser; preserve denominators and disturbance contract separately.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "locator": "Table1, line18",
+      "quote": "Move & Avoid 0/10 0/10 9/10 8/10",
+      "support_explanation": "One of five task-specific real10-trial cells; disturbances change execution condition.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "locator": "§4.2, line18",
+      "quote": "13 highly-randomizable tasks with 2766 unique instructions",
+      "support_explanation": "Constructed simulation breadth is not2766 independently evaluated episodes.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M1",
+      "locator": "§4.2, line18",
+      "quote": "success rates averaged across 20 episodes per task",
+      "support_explanation": "Actual simulation denominator, distinct from instruction pool size.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M1",
+      "locator": "§4.2, line18",
+      "quote": "Seen instructions/attributes may appear in the prompt (or in the training data for supervised baselines).",
+      "support_explanation": "Reported split allows prompt exposure to seen tasks; unseen audit needs exact prompts, unavailable offline.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "M1",
+      "locator": "Table3 caption, line18",
+      "quote": "Results are reported over 3 runs different seeds.",
+      "support_explanation": "Repeated seeds apply to the contact-dynamics learning study, not automatically all simulation and real conditions.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "M1",
+      "locator": "§4.3, line18",
+      "quote": "less than 3 minutes of online interactions",
+      "support_explanation": "Learning cost is online interaction time for narrow tasks, not all model inference/optimization/hardware overhead.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E015",
+      "material_id": "M1",
+      "locator": "§4.3, line18",
+      "quote": "exploring without prior all exceed the maximum 12-hour limit",
+      "support_explanation": "Prior/no-prior control suggests sample/time benefit, but broader exploration policy controls and full costs not established.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E016",
+      "material_id": "M1",
+      "locator": "§4.4, line18",
+      "quote": "access to ground-truth perception and dynamics model",
+      "support_explanation": "Oracle error-analysis experiment can attribute components in simulation; not deployable perception.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E017",
+      "material_id": "M1",
+      "locator": "§4.4, line18",
+      "quote": "most errors are from perception",
+      "support_explanation": "Real dominant residual failure not solved by map composition.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E018",
+      "material_id": "M1",
+      "locator": "§5, line21",
+      "quote": "our motion planner considers only end-effector trajectories",
+      "support_explanation": "Whole-arm safety/feasibility not established by end-effector maps.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E019",
+      "material_id": "M1",
+      "locator": "§5, line21",
+      "quote": "manual prompt engineering is required for LLMs.",
+      "support_explanation": "Exact prompt/example omission is critical execution evidence, not a trivial external link.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E020",
+      "material_id": "M1",
+      "locator": "Appendix A.3, line24",
+      "quote": "“movable” and the input value maps are functions that can be re-evaluated to reflect the latest environment observation.",
+      "support_explanation": "Feedback refreshes geometric objectives during control; no claim of persistent code self-optimization.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E021",
+      "material_id": "M1",
+      "locator": "Appendix A.6, line24",
+      "quote": "Prompts used in Sec. 4.1 and Sec. 4.2 can be found below.",
+      "support_explanation": "The following content lists external prompt URLs, not their bodies. Missing linked artifacts were not retrieved in this offline review.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E022",
+      "material_id": "M1",
+      "locator": "Appendix A.5.2 Table4, line24",
+      "quote": "85.0% 60.0% 90.0% 55.0%",
+      "support_explanation": "For move-relative task, unseen primitive60% exceeds VoxPoser55%, contrary to a universal taskwise-superiority reading.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E023",
+      "material_id": "M1",
+      "locator": "Appendix A.5.2 Table4, line24",
+      "quote": "75.0% 70.0% 65.0% 40.0%",
+      "support_explanation": "Grasp task primitive baseline75/70 exceeds VoxPoser65/40; aggregate generalization is not every-task superiority.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E024",
+      "material_id": "M1",
+      "locator": "Appendix A.4, line24",
+      "quote": "we pre-select a sequence of them at the start of the evaluation",
+      "support_explanation": "Disturbance protocol specified qualitatively; magnitude/timing and task success thresholds not fully operationalized.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E025",
+      "material_id": "M1",
+      "locator": "§2, line12",
+      "quote": "an end-to-end cost predictor is optimized via supervised learning to map language instructions to 2D costmaps",
+      "support_explanation": "Author identifies closest cost-map predecessor; original Sharma et al. paper not independently present in fixed pack.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E026",
+      "material_id": "M1",
+      "locator": "§3.4, line15",
+      "quote": "interleaves between 1) collecting environment transition data",
+      "support_explanation": "Online state-transition data trains a dynamics model, not a new LLM or a persistent harness program.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    },
+    {
+      "evidence_id": "E027",
+      "material_id": "M1",
+      "locator": "§4.3, line18",
+      "quote": "Then an MLP dynamics model is learned",
+      "support_explanation": "Persistence is contact-dynamics parameters; subsequent MPC exploits them on the same task, not tested broad retained skill transfer.",
+      "kind": "author_report",
+      "material_sha256": "c1728d58ba7b71277157f0ca67af11b1135a4e5e205630b57bdc7e8defd85fdd"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Language-conditioned end-effector/object manipulation phase",
+      "information": "Instruction, RGB-D with metric calibration; OWL-ViT→SAM→XMEM object/part point clouds; known robot model; engineered API and5–20 examples/LMP.",
+      "operation": "High-level LMP decomposes instruction; composer calls perception/map LMPs; Python/NumPy produce100^3 affordance/avoidance/rotation/velocity/gripper fields; geometric planner optimizes affordance/avoidance objective, attaches other parameter maps, executes first waypoint and refreshes at5Hz.",
+      "output": "Dense6-DoF end-effector trajectories and gripper/velocity commands.",
+      "conditions": "Faithful object geometry/calibration and language-to-map semantics; end-effector collision geometry; sufficient heuristic dynamics; prompt/example recipes unspecified in offline payload.",
+      "feedback": "Fresh point cloud/map-function evaluation for MPC; no explicitly reported Python-error/solver-verdict→LLM repair procedure.",
+      "selection_rule": "Greedy map-based path or random-shooting MPC according to weighted objective; no artifact admission filter claimed.",
+      "data": "Pretrained models and in-context examples; real objects/tasks and randomized block-world variants.",
+      "persistence": "Code/map functions and tracking state within rollout; base LLM and static harness not updated.",
+      "later_use": "Maps re-evaluated on current observation during same rollout; no cross-task retained harness update.",
+      "claimed_effect": "Spatial composition beyond sequential primitive calls and robustness to moving obstacles/targets.",
+      "failure_boundary": "Approximate proxy objective, perception/geometry limits, end-effector-only planning, pushing still uses predefined primitive, exact prompt-example evidence unavailable.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E017",
+        "E018",
+        "E020",
+        "E021"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Contact-dynamics model for door/window/fridge tasks",
+      "information": "Zero-shot synthesized waypoint trajectories plus measured environment transitions.",
+      "operation": "Start with zero-shot prior; sample noisy nearby actions; collect transitions; fit MLP dynamics by next-state loss; MPC uses fitted model and collects more local data.",
+      "output": "Updated task dynamics model and later MPC performance.",
+      "conditions": "Prior local neighborhood reaches meaningful contacts; transition measurement/model class adequate; local exploration not a universal dynamics model.",
+      "feedback": "Observed next-state prediction error; task success used for final evaluation.",
+      "selection_rule": "Action distribution biased around prior trajectories; parameter fit minimizes prediction loss. No independent accepted/rejected skill-store update.",
+      "data": "Task-local transitions,3-seed learning study.",
+      "persistence": "MLP dynamics parameters; no language-model/harness-code revision.",
+      "later_use": "MPC for subsequent interactions in the same contact task.",
+      "claimed_effect": "Faster task-dynamics learning and higher eventual task success.",
+      "failure_boundary": "No independent later task/body retention study; no-prior search baseline may be weak; sample time does not price all compute.",
+      "evidence_ids": [
+        "E013",
+        "E014",
+        "E015",
+        "E026",
+        "E027"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "LLM planners typically compose learned/hand-designed primitives; direct text control cannot express dense high-frequency motion. Need observation-grounded spatial objectives that synthesize action trajectories without acquiring each task primitive.",
+    "checked_gap": "Fixed text distinguishes code-as-policies primitive parameterization from generated3D fields and explicit downstream optimization. Practical gap well defined, but no independent original costmap/code-policy texts to close novelty.",
+    "lineage": [
+      {
+        "source": "2307.05973v2 §2/§4.1",
+        "version": "v2",
+        "neighbor": "Code as Policies (Liang et al. [75]) and supervised2D costmaps (Sharma et al. [50])",
+        "verification": "Author description/adapted baselines only; originals not in fixed pack."
+      },
+      {
+        "source": "2307.04738v1 §§3/5.2 (fixed batch)",
+        "version": "v1",
+        "neighbor": "RoCo optional task-space waypoints",
+        "verification": "Independently read; structured numeric waypoints + joint IK/RRT versus dense observation-grounded objective fields with MPC. Does not establish temporal priority."
+      }
+    ],
+    "closest_adjacent": "LLM-coded primitive composition and learned-cost-map planning; language/reward generation with classical control.",
+    "residue": "Specify spatially dense object/part affordances and simultaneous constraints in scene coordinates, then re-evaluate under disturbances.",
+    "stakes": "Narrow primitive inventory and brittle direct parameter calls limit open-object task coverage and physical robustness.",
+    "method_response": "Turn language affordances/constraints into executable code and3D value fields as geometric planner objectives; exploit trajectories as local contact-learning priors.",
+    "remaining_gap": "Maps are approximate semantic proxies; perception, contact/whole-arm dynamics and manual prompt engineering remain; primitive-free claim not universal and some taskwise baselines win.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E005",
+      "E006",
+      "E017",
+      "E018",
+      "E019",
+      "E022",
+      "E023",
+      "E025"
+    ],
+    "unresolved": [
+      "Exact5–20-shot prompts/example identities and selection are external to fixed offline material.",
+      "Original nearest-neighbor sources unavailable; report provisional lineage, not a novel-first verdict.",
+      "Prompt/development versus claimed unseen-condition overlap cannot be fully audited."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [
+      "reframe_as_solvable_object"
+    ],
+    "outside_taxonomy": false,
+    "reason": "Generated code yields a dense intermediate consumed by geometric optimization; free-form instruction is approximated by a voxel objective.",
+    "executes_pattern": "Yes at broad main-card level: model/perception extraction → structured value fields → planner/MPC.",
+    "resolves_problem": "Partly supported aggregate manipulation and disturbance gains; exact execution recipe unresolved, and general primitive-free/semantic-equivalence claim not closed.",
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "strong main, child not established",
+        "tactic_steps_checked": [
+          {
+            "step": "Separate semantic specification from control solving",
+            "status": "met",
+            "reason": "LLM produces executable map-generation code, planner consumes spatial arrays."
+          },
+          {
+            "step": "C25 mechanically checkable artifact",
+            "status": "partial",
+            "reason": "Code executes and maps are structured; no demonstrated language-semantic validity checker."
+          },
+          {
+            "step": "C25 solver-feedback repair during artifact construction",
+            "status": "unmet",
+            "reason": "Physical MPC updates objectives/trajectories, but not an explicit LLM code proposal/validation/repair loop."
+          },
+          {
+            "step": "Matched controls and cost",
+            "status": "partial",
+            "reason": "Primitive and learned-map variants compare components, actual total calls and exact examples not fixed locally."
+          }
+        ],
+        "success_checks": [
+          "Distinct control/symbolic interface and observed trajectory feedback."
+        ],
+        "failure_checks": [
+          "Approximate specification and unvalidated perception propagate into the solver; manual examples may carry mechanism."
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E004",
+          "E005",
+          "E020",
+          "E021"
+        ],
+        "reason": "Do not assign rs:C25 solely because an interpreter or physical MPC exists; its verification-closure tactic not established."
+      },
+      {
+        "main_id": "reframe_as_solvable_object",
+        "sub_id": null,
+        "role": "supporting",
+        "fit": "partial empirical reframe",
+        "tactic_steps_checked": [
+          {
+            "step": "Explicit new mathematical object",
+            "status": "met",
+            "reason": "Voxel objective and kinematic/dynamic optimization equation specify a solvable proxy."
+          },
+          {
+            "step": "Correspondence to original instruction",
+            "status": "partial",
+            "reason": "Authors explicitly approximate semantic task score; no exact equivalence theorem, nor claimed one."
+          },
+          {
+            "step": "Independent faithfulness and boundaries",
+            "status": "partial",
+            "reason": "Oracle error breakdown and downstream trials useful; perception/contact/whole-arm restrictions and taskwise failures limit proxy generality."
+          }
+        ],
+        "success_checks": [
+          "Dense cost field unlocks classical motion optimization."
+        ],
+        "failure_checks": [
+          "Optimizing field need not satisfy unrestricted language; proxy guarantee cannot be invented."
+        ],
+        "evidence_ids": [
+          "E002",
+          "E016",
+          "E018",
+          "E022",
+          "E023"
+        ],
+        "reason": "Main-level object transformation supported. C00/C21/C27 not assigned; no forced child or mandatory theorem for an explicitly empirical approximation."
+      }
+    ]
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "planner_composes_code_and_policies",
+        "sub": "K105",
+        "version": "2026-10-21 frozen cards",
+        "fit": "partial-to-strong",
+        "condition_checks": [
+          {
+            "id": "S1",
+            "status": "partial",
+            "reason": "Same LLM primitive variant, but exact prompt/example and equal-call accounting absent."
+          },
+          {
+            "id": "S2",
+            "status": "partial",
+            "reason": "RGB-D metric voxel APIs, no calibration-error stress study."
+          },
+          {
+            "id": "S3",
+            "status": "partial",
+            "reason": "Geometric cost/constraints used; no full-arm external pre-execution safety gate."
+          },
+          {
+            "id": "F1",
+            "status": "partial",
+            "reason": "MPC feedback present; contact-rich tasks still require learned dynamics or pushing primitive."
+          },
+          {
+            "id": "F7",
+            "status": "absent",
+            "reason": "Hardware quantitative per-task10 trials, not qualitative only."
+          }
+        ],
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E005",
+          "E006",
+          "E009",
+          "E018",
+          "E021"
+        ]
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": null,
+      "domain_namespace": "embodied",
+      "domain_main": "planner_composes_code_and_policies",
+      "domain_sub": "K105",
+      "operation_correspondence": "Python composes calls to perception/geometry and array construction; map objectives bind classical planner/controller.",
+      "necessary_conditions_and_differences": "Code-program boundary fits K105, but no notebook-like agent state/recovery loop shown and no solver→LLM candidate repair established.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E005",
+        "E020"
+      ]
+    },
+    {
+      "rs_main": "reframe_as_solvable_object",
+      "rs_sub": null,
+      "domain_namespace": "embodied",
+      "domain_main": "planner_composes_code_and_policies",
+      "domain_sub": "K105",
+      "operation_correspondence": "Language phase → dense spatial costs → trajectory optimizer.",
+      "necessary_conditions_and_differences": "Equivalence only approximate; geometric proxy and reliable RGB-D/perception must preserve intended task enough in tested regime.",
+      "evidence_ids": [
+        "E002",
+        "E016",
+        "E018"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Improvement attributed to spatial code/map harness.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same-GPT-4 primitive comparison and learned-map alternative meaningful; exact prompts absent and no full cost-equivalent comparison.",
+      "evidence_ids": [
+        "E004",
+        "E008",
+        "E021"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "LLM and motion-planner components credited.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "LLM+primitive/U-Net+MP comparisons and oracle error analysis separate broad components; map weights and5Hz vs open-loop not individually toggled.",
+      "evidence_ids": [
+        "E005",
+        "E007",
+        "E016"
+      ],
+      "score_item": [
+        "M",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "General LLM/VLM harness capability claimed.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Main embodied results use GPT-4; no weaker/alternative LLM matched embodied study in fixed full main+appendix.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": [
+        "E.holdout",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Hardware and simulation performance improvements claimed.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "10 trials/task/condition and20 episodes/task;3-seed errors for contact learning only. Main rates lack across-seed uncertainty.",
+      "evidence_ids": [
+        "E009",
+        "E011",
+        "E013"
+      ],
+      "score_item": [
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Efficient contact learning and control robustness claimed.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "5Hz control and online interaction times vs12h cap given; all LMP calls/tokens/runtime/reset/failure costs not priced.",
+      "evidence_ids": [
+        "E005",
+        "E014",
+        "E015"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Open-set generalization and training-free scope.",
+      "applicable": true,
+      "status": "unknown",
+      "reason": "Authors define seen/unseen attributes, but exact manual prompt/examples are external and not available to audit overlap. Do not convert missing evidence to author omission.",
+      "evidence_ids": [
+        "E004",
+        "E012",
+        "E019",
+        "E021"
+      ],
+      "score_item": [
+        "X",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E16",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Success/constraint satisfaction and disturbances central.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Simulation component error breakdown and per-task hardware rates exist; physical success tolerance and disturbance severity not fully specified.",
+      "evidence_ids": [
+        "E009",
+        "E016",
+        "E017",
+        "E024"
+      ],
+      "score_item": [
+        "E.measurement",
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Real manipulation success claimed.",
+      "applicable": true,
+      "status": "met",
+      "reason": "Five tasks,static/disturbed,ten trials each method/cell; aggregate100 trials/method across conditions, not100/task.",
+      "evidence_ids": [
+        "E008",
+        "E009"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E20",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "applies_when": "Metric RGB-D geometry supports planner.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Calibrated world-coordinate APIs and voxel↔cm conversion provided, but depth-noise/calibration perturbations not separately tested.",
+      "evidence_ids": [
+        "E020",
+        "E024"
+      ],
+      "score_item": [
+        "X",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "applies_when": "Primitive vs map and prior vs no-prior comparisons.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Motion/control and no-prior time cap partly disclosed; full preprocessing, prompt size, perception, failed runs and online sampling compute not equalized.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E014",
+        "E015"
+      ],
+      "score_item": [
+        "E.cost",
+        "E.causality"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Spatial value-map composition synthesizes robust everyday trajectories beyond sequential primitive calls.",
+      "setting": "Real Franka tabletop,five representative tasks,static and preselected disturbances.",
+      "baseline_control": "Variant of Code as Policies with move/rotate/velocity/gripper primitives; same broad perception/control suite but exact prompt parity unknown.",
+      "budgets": "10 trials per task×condition×method;20Hz RGB-D and5Hz replanning; no complete LLM-call/wall-clock budget.",
+      "selection_vs_test": "Representative tasks chosen by authors; prompt-example exposure to these tasks not auditable without linked artifacts.",
+      "result_denominator": "VoxPoser44/50 static,35/50 disturbed; primitive12/50 static,0/50 disturbed. Task cells have10 trials.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E008",
+        "E009",
+        "E021",
+        "E024"
+      ],
+      "counterevidence": [
+        "Success thresholds/constraint tolerances and disturbance magnitude not fully operationalized; perception remains primary failure; whole-arm coverage absent; pushing still engineered."
+      ],
+      "alternative_explanations": [
+        "Replanning,representation,planner and prompt examples changed together, not solely language semantic understanding."
+      ],
+      "allowed_conclusion": "Strong author-reported aggregate feasibility/robustness within specified setup; not a universal primitive-free or safety-certified manipulation harness."
+    },
+    {
+      "claim_id": "C2",
+      "text": "VoxPoser generalizes to unseen instructions and attributes.",
+      "setting": "13 custom SAPIEN tasks,2766 instruction pool,seen/unseen attribute lists.",
+      "baseline_control": "U-Net+motion planner and LLM+primitive variants.",
+      "budgets": "20 episodes per task/result entry,not2766 evaluation trials; supervised baseline has training data,LLM has pretrained knowledge and examples.",
+      "selection_vs_test": "Authors say unseen instructions/attributes absent from prompts/training; exact prompt payload unavailable,development overlap not audited.",
+      "result_denominator": "Table2 unseen categories favor method in aggregate; per-task Table4 includes unseen move55% vs primitive60%,grasp40% vs70%.",
+      "evidence_ids": [
+        "E010",
+        "E011",
+        "E012",
+        "E022",
+        "E023"
+      ],
+      "counterevidence": [
+        "Not every task superior; same narrow colored-block/table setting; exact unseen-to-prompt separation unresolved."
+      ],
+      "alternative_explanations": [
+        "Foundation-model semantics and prompt reference distribution rather than generalization of the map mechanism alone."
+      ],
+      "allowed_conclusion": "Author-reported aggregate held-out language/attribute success, not independently certified construction-unseen physical transfer."
+    },
+    {
+      "claim_id": "C3",
+      "text": "Zero-shot trajectories provide useful priors for efficient online dynamics learning.",
+      "setting": "Simulated door/window/fridge contact tasks with task-local MLP.",
+      "baseline_control": "Zero-shot,no-prior exploration,prior-guided exploration.",
+      "budgets": "Three seeds;prior interaction times~142/137/71 sec vs no-prior>12h learning cap; entire model/optimization cost not counted as interaction time.",
+      "selection_vs_test": "Online data/model from same task; no independent later task/body retained-gain evaluation.",
+      "result_denominator": "Table3 eventual success88.3±1.67%,80.0±2.9%,91.7±4.4%;seed error reported,complete evaluation numerator per trained model not explicit in text.",
+      "evidence_ids": [
+        "E013",
+        "E014",
+        "E015",
+        "E026",
+        "E027"
+      ],
+      "counterevidence": [
+        "Zero-shot contact success6.7/3.3/18.3%;requires task dynamics training,not equally general zero-shot manipulation."
+      ],
+      "alternative_explanations": [
+        "Localized exploration near an informed prior vs full-action random search; no stronger geometric/contact prior control."
+      ],
+      "allowed_conclusion": "Efficient task-local dynamics acquisition under this exploration comparison; not persistent self-improving code or cross-task retained skill evidence."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "evidence_level_reason": "Counted real manipulation and simulator closed-loop execution. Prompt-conditioned instruction/attribute splits reported but exact prompts unavailable; construction-unseen harness transfer not independently established.",
+    "claim_support": "unresolved",
+    "strongest_supported_claim": "Author-reported real and simulated aggregate gains are consistent with observation-grounded spatial objectives plus MPC, with a separate local dynamics-learning benefit. Exact example-conditioned execution/holdout recipe is unresolved; broad primitive-free claim is qualified by pushing primitive and end-effector scope.",
+    "unresolved": [
+      "Critical A.6 prompt/example payloads absent from fixed material; X unknown.",
+      "Original nearest-neighbor fulltexts,operational success tolerances,all-cost equivalence and development-overlap audit."
+    ],
+    "reproduction": "None; external links and paper code not accessed/executed."
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete primitive-acquisition and high-frequency grounding bottleneck with code-policy/cost-map lineage; independent closest originals absent and residual contact bottleneck remains.",
+      "evidence_ids": [
+        "E001",
+        "E025"
+      ],
+      "counterevidence_ids": [
+        "E006",
+        "E018"
+      ],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Explicit voxel proxy plus planner and fresh-observation MPC explains spatial composition and disturbance robustness; task cost approximation,geometry and retained primitive limit fully general fit.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E020"
+      ],
+      "counterevidence_ids": [
+        "E006",
+        "E018"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "Exact5–20-shot LMP prompts/example identities and selection determine generated code/map behavior and cannot be audited from A.6 external URLs alone. Main API/loop is described, but key execution evidence missing; needs_evidence,not not_reported0.",
+      "evidence_ids": [
+        "E004",
+        "E019",
+        "E021"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "Full fixed main §§3–5 and Appendix A.1–A.6;A.6 only linked prompt inventory,offline external bodies unavailable;no network supplementation."
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Per-task real denominators and simulation episodes strong, but physical task success tolerances and disturbance schedules/magnitudes not fully defined; apply v2 undefined-success ceiling<=2 despite multiple trials. Oracle component analysis is separate from deployment truth.",
+        "evidence_ids": [
+          "E008",
+          "E009",
+          "E011",
+          "E016"
+        ],
+        "counterevidence_ids": [
+          "E024"
+        ],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Same-LLM primitive variant,learned-map comparator,oracle component breakdown and prior/no-prior study substantially probe mechanism; prompt parity,planner/replanning bundle and weak no-prior alternatives leave room.",
+        "evidence_ids": [
+          "E008",
+          "E015",
+          "E016"
+        ],
+        "counterevidence_ids": [
+          "E004",
+          "E006",
+          "E022",
+          "E023"
+        ],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Explicit unseen language/attribute lists and multiple real tasks offer relevant scope; exact prompt examples/development exposure unavailable and no unseen body/independent scene-set transfer certified.",
+        "evidence_ids": [
+          "E010",
+          "E011",
+          "E012"
+        ],
+        "counterevidence_ids": [
+          "E004",
+          "E021"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Main tables provide10-trial hardware and20-episode task denominators;3-seed error bars for contact study and qualitative/aggregate error breakdown. No repeated main-run seed variance or complete quantitative failure denominator table.",
+        "evidence_ids": [
+          "E009",
+          "E011",
+          "E013",
+          "E016"
+        ],
+        "counterevidence_ids": [
+          "E017"
+        ],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Control frequencies and actual online interaction-learning times are partially informative, with12h cap disclosure; no complete all-LMP/model/token/wall-clock/reset accounting or matched-call tests.",
+        "evidence_ids": [
+          "E005",
+          "E014",
+          "E015"
+        ],
+        "counterevidence_ids": [
+          "E004",
+          "E019"
+        ],
+        "search_scope": []
+      }
+    }
+  },
+  "status": "needs_evidence",
+  "reason": "Full article and available appendices read, but A.6 references exact manually engineered5–20-shot prompts only through external URLs absent from the common fixed offline input. Keep substantive analysis and seven ratings; X unknown, point score null with deterministic interval. Coordinator notified; no one-seat private supplementation.",
+  "provenance": {
+    "input_hash": "6ada20ee8469fdb754ac03c2e1662a77e7841a64631f74bf69943a6a1bc81674",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + anchors v2 (3ececdd11cc3d144)",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": {
+      "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+    },
+    "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T03:04:05.066471+00:00",
+    "notes": [
+      "phase=production; anchors_version=v2 (3ececdd11cc3d144); independent sol initial review, no other-seat/aggregate outputs read.",
+      "Model identity from existing session context; no probing or reconfiguration. Session ID/receipt unavailable in task-local supplied metadata; null is not a missing scientific-evidence blocker.",
+      "expectations_hash 由总控提供，内容未读; exact hash checked locally only. Expectation substance comes from authorized embedded domain main cards, not unread private profile.",
+      "Offline fixed materials only. All empirical results below are author reports; no paper code run and no reproduction claimed."
+    ]
+  },
+  "score": {
+    "raw": null,
+    "display": null,
+    "lower": 51.25,
+    "upper": 71.25,
+    "coverage": 0.8,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  }
+}

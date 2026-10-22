@@ -1,0 +1,1263 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p002",
+ "attempt_id": "a1",
+ "seat": "opus55",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2304.11477",
+  "paper_id": "2304.11477",
+  "title": "LLM+P: Empowering Large Language Models with Optimal Planning Proficiency",
+  "version": "2304.11477v3",
+  "claim_type": "system_method",
+  "central_claim": "LLM+P turns a natural-language planning problem into a PDDL problem file with a GPT-4 one-shot prompt, solves it with a classical planner (Fast Downward), and translates the plan back to natural language; LLM+P is able to provide optimal solutions for most problems while LLMs on their own fail to provide even feasible plans for most problems, and it is demonstrated on a real-robot tidy-up task.",
+  "scope_decision": "in_scope (B-leaning, offline evidence): LLM front end + classical planner as a robot task-planning harness; open-loop symbolic evaluation plus one real-robot demonstration."
+ },
+ "preliminary_judgment": "Written after reading the fixed text, before opening this paper's seat records: system_method; 7 IPC domains x 20 tasks, GPT-4 temperature 0, one response; LLM+P optimal 64/140 (45.7%), feasible 97/140 (69.3%) vs direct GPT-4 ~17% correct; no-context LLM+P 0%; domain PDDL given only to LLM+P; single robot route-cost demo (22 vs 31). 'Optimal for most' unsupported. Expected offline, scoped; in scope via robot framing and R01 pattern.",
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Abstract; local text line 6",
+   "quote": "we find that LLM+P is able to provide optimal solutions for most problems, while LLMs fail to provide even feasible plans for most problems.\\footnote{The code and results",
+   "support_explanation": "Author's original majority-optimal claim retained for comparison with table arithmetic.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "II PDDL background; local text line 12",
+   "quote": "The problem PDDL file provides a list of objects to ground the domain, the problem’s initial state s^{init} and goal conditions \\mathcal{S}^{G} . There exists a rich set of symbolic planners that implement efficient search algorithms to solve planning problems formalized in PDDL. In this work, we aim to take a natural language prompt which describes the init",
+   "support_explanation": "Formal problem artifact explicitly separates object/init/goal specification from transition model/domain.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "III-A; local text line 15",
+   "quote": "the generated file appears to have the correct PDDL syntax but uses a made-up predicate (empty) and misses the initial condition that b1 is on the table. An Example PDDL Problem F",
+   "support_explanation": "Syntactic validity alone does not guarantee semantic correctness; missing initial conditions remain.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V-A; local text line 21",
+   "quote": "seven robot planning domains borrowed from past International Planning Competitions and 20 automatically generated tasks for each domain [ 67 ] . Below is a list of the planni",
+   "support_explanation": "140 formal robot-planning tasks across7 domains; robotic planning plus real demo supports scope B, not broad closed-loop online evidence.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V-B; local text line 21",
+   "quote": "We set the temperature to 0 , and use the top probability response. As a result, the response returned from the LLM is deterministic. Once a text PDDL response is generated, we feed it into the fast-downward planner and try both aliases seq-opt-fdss-1 (guaranteed optimal) and lama (not guaranteed optimal) with a maximum search time of 200 seconds. We report the success rate of the optimal alias, and for the domains that time out, we show the success rate of the sub-optimal alias in parentheses. For the baseline methods, we manually count the number of optimal plans, and report the number of correct plans in parentheses (if there are any sub-optimal plans). We also evaluate a recent LLM-based approach for deliberate reasoning called Tree of Thoughts [ 68 ] , referred to as LLM-as-P (ToT) . We adapt the ",
+   "support_explanation": "One deterministic response, Fast Downward optimal/suboptimal aliases,200s limit and separate feasible/optimal reporting.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V-C Table I; local text line 21",
+   "quote": "Domain Success Rate % LLM - LLM LLM ToT LLM+P - LLM+P Barman 0 0 0 0 20 (100) Blocksworld 20 15 (30) 0 (5) 0 90 Floortile 0 0 0 0 0 Grippers 25 (60) 35 (50) 10 (20) 0 95 (100) Storage 0 0 (25) 0 0 85 Termes 0 0 0 0 20 Tyreworld 5 15 0 0 10 (90) TABLE I : Success rate % of applying LLM-as-P without ",
+   "support_explanation": "Optimal rates20/90/0/95/85/20/10 average45.7%; parentheses are feasible fallback rates, not optimality.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V-C findings; local text line 21",
+   "quote": "Most failed cases are due to mis-specified problem files, such as missing one of the initial conditions (e.g. leaving the tiles disconnected in Floortile ), causing the planning problem to be unsolvable. 2. Without the context (i.e., an example problem and its corresponding problem PDDL), we observe that LLMs fail to produce correct problem PDDL files. Therefore, the context is importan",
+   "support_explanation": "Formal translation errors and one-shot no-context failures; solver soundness conditional on a correct formal model.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V-D / Fig2; local text line 21",
+   "quote": "with a total cost of 22. Fig. 2 shows the optimal plan found by LLM+P . Parts of the prompt and the generated PDDL are shown below. LLM-as-P outputs a sub-optimal plan which takes the bottle to the pantry first and travels back for the soup can, with a total cost of 31. Tidy-Up Problem PDDL Generated by LLM+P Problem",
+   "support_explanation": "Single robot tidy-up example route cost22 vs direct plan31; not model runtime cost or repeated robot success.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "VI Conclusion; local text line 24",
+   "quote": "reducing LLM+P ’s dependency on information by humans, potentially involving finetuning.\n",
+   "support_explanation": "Human-supplied information remains an acknowledged assumption rather than an autonomously learned symbolic world model.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Abstract",
+   "quote": "we find that LLM+P is able to provide optimal solutions for most problems, while LLMs fail to provide even feasible plans for most problems",
+   "support_explanation": "Central claim, including 'most problems'.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Abstract",
+   "quote": "However, so far, LLMs cannot reliably solve long-horizon planning problems.",
+   "support_explanation": "Author gap.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Abstract",
+   "quote": "classical planners, once a problem is given in a formatted way, can use efficient search algorithms to quickly identify correct, or even optimal, plans",
+   "support_explanation": "Comparative-advantage rationale for delegation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec IV-B",
+   "quote": "They either use prompting or fine-tuning to make LLMs capable of solving PDDL planning problems.",
+   "support_explanation": "Nearest neighbours [47-57] are dismissed in one sentence without naming results.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec IV-C",
+   "quote": "However, the SayCan dataset has a limited scope, as it contains only three predefined actions.",
+   "support_explanation": "Distinction from the concurrent LLM+PDDL work [66]; comparison is verbal only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec III-C",
+   "quote": "we assume that for each problem domain, a human expert can provide a domain description (i.e. action preconditions and effects) that will be fixed for all problem instances that happen in that domain.",
+   "support_explanation": "Hand-written domain PDDL is an input; the LLM only writes the problem file.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec III-C",
+   "quote": "A simple problem description in natural language and its corresponding problem PDDL file are also provided.",
+   "support_explanation": "A human-provided (description, problem PDDL) example is the in-context conditioning.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec III-C",
+   "quote": "A robot knows when to trigger LLM+P based on its conversation with a human user.",
+   "support_explanation": "Routing/trigger is assumed, not solved; limitation repeated in Sec I.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec III-C",
+   "quote": "In the end, the LLM translates the PDDL plan back into the natural language to finish up the LLM+P pipeline.",
+   "support_explanation": "Back-translation is part of the pipeline but is never evaluated; there is no execution interface description.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-A",
+   "quote": "We present seven robot planning domains borrowed from past International Planning Competitions and 20 automatically generated tasks for each domain [ 67 ] .",
+   "support_explanation": "Benchmark: 7 public IPC domains x 20 generated tasks = 140 tasks.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-A",
+   "quote": "For each problem P , P comes with a natural language description and a ground-truth problem PDDL file.",
+   "support_explanation": "Ground-truth PDDL exists; how the NL descriptions were produced (templated or written) is not stated.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-A",
+   "quote": "Each domain also includes an example problem description, a corresponding PDDL file, and a plan description, used as context in various approaches.",
+   "support_explanation": "Baseline context is an example plan; only LLM+P gets the formal domain file.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-B",
+   "quote": "We leverage the gpt-4 model provided by OpenAI for all experiments. We set the temperature to 0 , and use the top probability response.",
+   "support_explanation": "Single deterministic GPT-4 run; no variance is possible or reported.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-B",
+   "quote": "we feed it into the fast-downward planner and try both aliases seq-opt-fdss-1 (guaranteed optimal) and lama (not guaranteed optimal) with a maximum search time of 200 seconds.",
+   "support_explanation": "Solver configuration and the only budget statement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-B",
+   "quote": "For the baseline methods, we manually count the number of optimal plans, and report the number of correct plans in parentheses (if there are any sub-optimal plans).",
+   "support_explanation": "Baseline success is hand-counted (no stated plan validator); LLM+P success is whether the planner returns an optimal plan.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Table I",
+   "quote": "Barman 0 0 0 0 20 (100) Blocksworld 20 15 (30) 0 (5) 0 90 Floortile 0 0 0 0 0 Grippers 25 (60) 35 (50) 10 (20) 0 95 (100) Storage 0 0 (25) 0 0 85 Termes 0 0 0 0 20 Tyreworld 5 15 0 0 10 (90)",
+   "support_explanation": "Columns: LLM-as-P without context, LLM-as-P, LLM-as-P (ToT), LLM+P without context, LLM+P (optimal %, correct % in parentheses). LLM+P optimal over 7 domains: 20, 90, 0, 95, 85, 20, 10 (unweighted mean 45.7%); with lama-feasible: 100, 90, 0, 100, 85, 20, 90 (69.3%); LLM-as-P with context: optimal 9.3%, correct 17.1% (our computation from the table).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-C Findings (LLM+P)",
+   "quote": "The proposed LLM+P produces an optimal plan for the majority of problems.",
+   "support_explanation": "Text claim; the table shows optimal plans in under half of the 140 tasks and in only 3 of 7 domains at 85% or more.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-C Findings (LLM+P)",
+   "quote": "Most failed cases are due to mis-specified problem files, such as missing one of the initial conditions (e.g. leaving the tiles disconnected in Floortile ), causing the planning problem to be unsolvable.",
+   "support_explanation": "Failures are in the LLM translation step and are only described, not counted; no repair loop exists.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-C Findings (LLM+P)",
+   "quote": "Without the context (i.e., an example problem and its corresponding problem PDDL), we observe that LLMs fail to produce correct problem PDDL files.",
+   "support_explanation": "Context ablation: LLM+P without context scores 0 in every domain; conditioning is load-bearing.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-C Findings (LLM-as-P)",
+   "quote": "In most cases, LLM-as-P fails in the same way with or without the example plan as context.",
+   "support_explanation": "Baseline gets the example plan but no formal domain definition: information asymmetry with LLM+P, which receives the expert domain PDDL.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-C Findings (LLM-as-P)",
+   "quote": "LLM-as-P (ToT) times out in most cases due to the large number of LLM calls, so it is not suitable for solving long-horizon problems.",
+   "support_explanation": "Only cost-related observation: ToT call count and 200 s limit; no times, calls or tokens reported.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-D",
+   "quote": "We verify that LLM+P can efficiently solve realistic service robot problems by deploying it on a real robot tasked with tidying up a home.",
+   "support_explanation": "Single qualitative robot scenario; robot platform, executor and success are not described.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-D",
+   "quote": "LLM-as-P outputs a sub-optimal plan which takes the bottle to the pantry first and travels back for the soup can, with a total cost of 31.",
+   "support_explanation": "Demo compares plan costs (22 vs 31) for one problem, not execution outcomes.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec I",
+   "quote": "In this paper, we do not ask the LLM to recognize that it has been posed a prompt that is suitable for processing using the proposed LLM+P pipeline.",
+   "support_explanation": "Authors' stated limitation on routing.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "Sec V-C Findings (LLM-as-P)",
+   "quote": "We observe that though LLM-as-P provides a plan in natural language for every problem, most of these plans are not feasible.",
+   "support_explanation": "Baseline failure mode (cannot reason about preconditions).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V-B; line 21",
+   "quote": "We report the success rate of the optimal alias, and for the domains that time out, we show the success rate of the sub-optimal alias in parentheses.",
+   "support_explanation": "Fixes Table I semantics: unparenthesised LLM+P values are optimal-alias successes; parentheses are lama (not guaranteed optimal) feasibility. Optimal: 4+18+0+19+17+4+2 = 64/140 (45.7%); feasible incl. fallback: 20+18+0+20+17+4+18 = 97/140 (69.3%).",
+   "kind": "our_inference"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "III-C; line 15",
+   "quote": "The LLM+P method is directly applicable as a natural language interface for giving tasks to robot systems.",
+   "support_explanation": "Robot task planning is the explicit application (scope).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "V intro question 4; line 21",
+   "quote": "Can LLM+P help make service robots more efficient on realistic tasks? (Yes)",
+   "support_explanation": "One of the four experimental questions is about service robots; the robot demo answers it with a single route-cost example.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E004",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "locator": "I Introduction; line 9",
+   "quote": "this general methodology can be applied to any class of problems for which we have a sound and complete solver",
+   "support_explanation": "The method is general (not robot-specific); counter-consideration for scope.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Problem-file writer: GPT-4 translates a natural-language problem into a PDDL problem file given a human-written domain and one (description, problem PDDL) example.",
+   "information": "Sees the natural-language problem and one worked example; the domain PDDL (predicates, action preconditions/effects) is supplied by a human expert to the planner and is task-agnostic; ground-truth problem PDDL is not shown.",
+   "operation": "One-shot in-context translation at temperature 0; single attempt per task.",
+   "output": "Problem PDDL file (objects, init, goal, optional metric).",
+   "conditions": "Domain file and example exist for each domain; whether to invoke the pipeline is assumed known.",
+   "feedback": "none (no planner-failure feedback to the LLM)",
+   "selection_rule": "not_applicable (single sample; no repair loop)",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "With context LLM+P solves 90% Blocksworld, 95% Grippers, 85% Storage; without context 0% in all domains.",
+   "failure_boundary": "Missing initial conditions (Floortile 0%), hard spatial domains (Termes 20%, Barman 20% optimal), translation errors undetected.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E007",
+    "son55:E013",
+    "son55:E016",
+    "son55:E018",
+    "son55:E019"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Delegated planning and read-out: Fast Downward solves the generated problem and the LLM re-expresses the plan in natural language.",
+   "information": "Planner sees domain file and generated problem file; LLM sees the PDDL plan.",
+   "operation": "Run seq-opt-fdss-1 (optimal) or lama (suboptimal) for up to 200 s; back-translate the resulting plan.",
+   "output": "Optimal or feasible plan text; for the robot demo an 'optimal tidy-up plan' of cost 22.",
+   "conditions": "Time limit 200 s; sound/complete planner returns a plan only if the problem file is consistent.",
+   "feedback": "planner result consumed once",
+   "selection_rule": "not_applicable (optimal alias reported, lama as fallback in parentheses)",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "Plans are optimal when the problem file is correct (soundness of the planner); demo cost 22 vs 31 for LLM-as-P.",
+   "failure_boundary": "Planner timeouts; the back-translation step and execution on a robot are not evaluated.",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E014",
+    "son55:E016",
+    "son55:E022",
+    "son55:E023"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "LLMs are fluent but cannot reliably produce correct or optimal long-horizon plans; classical planners are sound and complete but need formal input.",
+  "checked_gap": "Real and supported within the paper: LLM-as-P (with or without an example) is feasible on only about 17% of tasks and optimal on about 9% (our computation from Table I) and ToT times out. The closest competitors (prompting/fine-tuning for PDDL, concurrent [66]) are cited by number only and not compared.",
+  "lineage": [
+   "LLM planners (Huang et al., SayCan, Vemprala et al.) -> LLM + external tools (calculators, ToolFormer) -> concurrent LLM+PDDL on the SayCan dataset [66] -> LLM+P (problem translation + off-the-shelf optimal planner)"
+  ],
+  "closest_adjacent": "Concurrent LLM+PDDL work [66] and prompting/fine-tuning works [47-57] are named without results; direct comparison is only against LLM-as-P and Tree-of-Thoughts.",
+  "residue": "Getting verifiably optimal long-horizon plans from natural-language task descriptions without the LLM doing the search.",
+  "stakes": "Plan optimality and feasibility on combinatorial robot task domains (plan cost 22 vs 31 in the demo).",
+  "method_response": "Restrict the LLM to translation into PDDL with a one-shot example and hand the search to a sound planner.",
+  "remaining_gap": "Human-written domain PDDL and example, translation errors undetected (no repair loop), routing between LLM+P and plain chat left to future work, three domains below 25% optimal, and no closed-loop robot execution evidence.",
+  "current_relevance": "Not assessed from later work; no later paper in the pinned local set bears on it.",
+  "evidence_ids": [
+   "son55:E002",
+   "son55:E003",
+   "son55:E004",
+   "son55:E005",
+   "son55:E006",
+   "son55:E016",
+   "son55:E018",
+   "son55:E024"
+  ],
+  "unresolved": [
+   "Neighbour methods are cited without results, so the lineage position is taken from the paper's text only."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "adapt_via_conditioning"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": "C25 step1 responsibility boundary at the comparative-advantage seam: yes (LLM = language-to-formal translation, planner = search). Step2 typed machine-checkable artifact: yes (PDDL problem file). Step3 close the loop with the solver's verifiable output: partial (planner accepts or fails but nothing is fed back to repair the file). Step4 ablate the verification/solver step to the baseline: partial (LLM-as-P vs LLM+P; no variant with the domain text given to the LLM). Step5 cost accounting: absent (only a 200 s cap; ToT timeouts noted).",
+    "success_failure_checks": "Success: boundary at solver seam - met; typed verifiable handoff - met; feedback from obtainable signals - unmet (no loop). Failure: cost of the delegated solver unmeasured - present; failure: tuned to single benchmark family - unknown (7 IPC domains with per-domain context); failure: only marginal over end-to-end baseline - absent.",
+    "evidence_ids": [
+     "son55:E003",
+     "son55:E006",
+     "son55:E007",
+     "son55:E014",
+     "son55:E016",
+     "son55:E020"
+    ],
+    "reason": "The paper executes the textbook decompose-and-delegate move: the LLM writes a formal artifact and a sound planner computes the plan; it lacks the verification-feedback closure and cost accounting the sub-card emphasises.",
+    "aggregate_note": "Adopted from son55 with fit lowered to partial: steps 1-2 executed, step 3 (solver feedback into construction) and step 5 (cost) absent."
+   },
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": "C03 step1 canonical format: yes (the one-shot (description, problem PDDL) pair is the schema). Step2 substrate: a single human example per domain. Step3 no upstream tuning: yes. Step4 held-out categories: absent (same 7 public domains). Step5 simpler comparison: the no-context ablation shows the example is load-bearing.",
+    "success_failure_checks": "Success: conditioning toggled on/off - met (0% without context in all domains); failure: no contamination/data-overlap audit for public IPC domains - present.",
+    "evidence_ids": [
+     "son55:E007",
+     "son55:E019"
+    ],
+    "reason": "The in-context example is an essential, separately demonstrated operation, not just scaffolding, so it is recorded as a supporting match with partial fit.",
+    "aggregate_note": "Adopted as supporting; C03 replaced by null (no upstream phase or reference substrate)."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "LLM writes a formal problem, a sound classical planner searches; one-shot context is a separately ablated supporting operation.",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "Formal artifact routed to a sound solver; no verification-feedback repair loop."
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "Feasible plans for 97/140, optimal 64/140; Floortile 0%; no closed-loop robot evidence."
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01",
+    "version": "board-induced 2026-10-21 (taxonomy hash daf38e57)",
+    "fit": "good",
+    "condition_checks": [
+     {
+      "cond_id": "llm_symbolic_solver_planning.S1",
+      "kind": "success",
+      "status": "partial",
+      "evidence_ids": [
+       "son55:E016",
+       "son55:E020"
+      ],
+      "note": "Solver vs LLM-only planning with GPT-4 fixed, but the baseline lacks the expert domain file, so the solver step is not isolated from the formal domain information."
+     },
+     {
+      "cond_id": "llm_symbolic_solver_planning.S2",
+      "kind": "success",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E018"
+      ],
+      "note": "No planner-failure feedback to the LLM; no repair channel to ablate."
+     },
+     {
+      "cond_id": "llm_symbolic_solver_planning.S3",
+      "kind": "success",
+      "status": "unmet",
+      "evidence_ids": [
+       "son55:E013"
+      ],
+      "note": "No checkers and a single backbone (GPT-4)."
+     },
+     {
+      "cond_id": "llm_symbolic_solver_planning.S4",
+      "kind": "success",
+      "status": "partial",
+      "evidence_ids": [
+       "son55:E016",
+       "son55:E021"
+      ],
+      "note": "Compared with LLM-as-P and Tree-of-Thoughts; no other LLM+PDDL method and no planning time."
+     },
+     {
+      "cond_id": "llm_symbolic_solver_planning.F1",
+      "kind": "failure",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E006",
+       "son55:E007"
+      ],
+      "note": "Hand-written domain PDDL and example; symbolic, fully specified problems; plans open loop."
+     },
+     {
+      "cond_id": "llm_symbolic_solver_planning.F3",
+      "kind": "failure",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E021"
+      ],
+      "note": "Planning/LLM cost unpriced."
+     },
+     {
+      "cond_id": "llm_symbolic_solver_planning.F5",
+      "kind": "failure",
+      "status": "met",
+      "evidence_ids": [
+       "son55:E010",
+       "son55:E013"
+      ],
+      "note": "20 tasks per domain, one deterministic run."
+     }
+    ],
+    "evidence_ids": [
+     "son55:E006",
+     "son55:E016",
+     "son55:E018",
+     "son55:E020"
+    ]
+   }
+  ],
+  "unassigned": [
+   "Back-translation of the plan to natural language and the real-robot hand-off (no execution interface described)."
+  ],
+  "revision_proposals": [
+   "Pending, not applied: R01 text lists LLM+P-type single-pass translation as the cheapest variant; note that the original LLM+P has no repair loop and relies on an expert domain file (2304.11477), which sharpens R01 condition S2/F1 wording."
+  ],
+  "aggregate_note": "Both seats R01; confirmed. son55's pending R01 wording proposal retained."
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01"
+   },
+   "operation_correspondence": "A frozen LLM writes a PDDL problem and a classical planner (Fast Downward) searches; the plan is rendered back for the robot or user.",
+   "conditions_and_differences": "R01 includes repair from solver failures and compilation to skills; LLM+P is single-pass, with an expert-written domain and no execution compiler.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E014",
+    "son55:E018"
+   ]
+  },
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01"
+   },
+   "operation_correspondence": "The one-shot (description, PDDL) example conditions the model to emit solver-ready files; without it the pipeline fails everywhere.",
+   "conditions_and_differences": "R01 does not require a specific conditioning form; here the example is mandatory and human-supplied per domain.",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E019"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "a claim that a harness rather than the model raises success",
+   "applicable": true,
+   "status": "met",
+   "reason": "GPT-4 held fixed; LLM-as-P with/without context and Tree-of-Thoughts are alternative organisations on the same 140 tasks.",
+   "evidence_ids": [
+    "son55:E013",
+    "son55:E016"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": null,
+    "son55": "met"
+   },
+   "aggregate_reason": "son55-only; accepted: GPT-4 fixed, alternative organisations on the same 140 tasks (information asymmetry handled under E02/causality)."
+  },
+  {
+   "id": "E02",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+    "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Fixed GPT4 direct, ToT and no-context controls demonstrate usefulness of structured context/solver system; human-domain knowledge, representation and solver additions not fully independently toggled.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E006",
+    "sol:E007",
+    "sol:E009",
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "a claim that a harness component helps in general",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Only GPT-4.",
+   "evidence_ids": [
+    "son55:E013"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": null,
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55-only; accepted: only GPT-4."
+  },
+  {
+   "id": "E04",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+    "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset."
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "20 generated instances/domain and domain failure rates, but one deterministic model response each; no repeated settings, paired uncertainty or randomized template study.",
+   "evidence_ids": [
+    "sol:E004",
+    "sol:E005",
+    "sol:E006",
+    "sol:E007",
+    "son55:E013",
+    "son55:E016"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Single deterministic run."
+  },
+  {
+   "id": "E05",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+    "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "200s classical/ToT search cap disclosed; robot route cost22 vs31 is objective value, not end-to-end tokens, latency, USD or human modeling cost.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E008",
+    "sol:E009",
+    "son55:E014",
+    "son55:E021"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "No cost figures."
+  },
+  {
+   "id": "E08",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+    "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Generated instances and example/domain context disclosed; no independent template/domain holdout or foundation-model exposure audit; abstract full state assumed.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E004",
+    "sol:E005",
+    "sol:E009",
+    "son55:E010"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "No overlap/contamination statement."
+  },
+  {
+   "id": "E17",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+    "- **E17 (dataset, common_practice).** Evaluate harness optimization, skill libraries, memory and replay cards on held-out tasks or episodes disjoint from the search, mining or validation set, and report overfitting across iterations. Gains on recurring tasks with ground-truth feedback do not show generalization. — _applies when_ a claim that a self-improving harness, skill library, playbook or experience memory improves performance."
+   ],
+   "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance.",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No self-improving harness, learned experience memory or mined retained library; do not require iterative retention evidence of static planning translation.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E005",
+    "sol:E009"
+   ],
+   "score_item": [
+    "X",
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "not_applicable",
+    "son55": null
+   },
+   "aggregate_reason": "sol-only; accepted: no self-improving harness or retained library."
+  },
+  {
+   "id": "E19",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+    "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Robot tidy-up route-cost demonstration has no repeated per-task physical success counts; supports an illustration, not transfer reliability.",
+   "evidence_ids": [
+    "sol:E008",
+    "son55:E022",
+    "son55:E023"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "a comparison between harnesses with the model fixed",
+   "applicable": true,
+   "status": "partial",
+   "reason": "A 200 s limit applies to both the planner and ToT; LLM-as-P has no stated cap and call counts are not disclosed.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E021"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": null,
+    "son55": "partial"
+   },
+   "aggregate_reason": "son55-only; accepted: 200 s cap shared by planner and ToT; LLM-as-P cap and call counts not stated."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "LLM+P gives optimal solutions for most problems, while LLMs alone fail to give even feasible plans for most problems.",
+   "setting": "Seven IPC robot-planning domains x 20 generated tasks (140), GPT-4 temperature 0, Fast Downward 200 s",
+   "baseline_control": "LLM-as-P (with and without example), Tree-of-Thoughts, LLM+P without context",
+   "selection_vs_test": "One example per domain is the context; no stated tuning, no held-out split.",
+   "result_denominator": "LLM+P optimal-alias successes 64/140 (45.7%); feasible incl. lama fallback 97/140 (69.3%); LLM-as-P with context optimal 13/140 (9.3%), correct 24/140 (17.1%); one deterministic response per task",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E010",
+    "son55:E013",
+    "son55:E014",
+    "son55:E015",
+    "son55:E016",
+    "son55:E017",
+    "agg:E001"
+   ],
+   "counterevidence": [
+    "optimal for under half of the tasks and 3 of 7 domains",
+    "baseline lacks the formal domain file",
+    "baseline success hand-counted"
+   ],
+   "allowed_conclusion": "With an expert domain file and one worked example, GPT-4 + Fast Downward yields feasible plans for about two thirds and confirmed-optimal plans for under half of 140 generated tasks, far above direct GPT-4 planning; 'optimal for most problems' is not supported by Table I."
+  },
+  {
+   "claim_id": "C2",
+   "text": "The in-context example is crucial for LLM+P.",
+   "setting": "same benchmark",
+   "baseline_control": "LLM+P without context",
+   "selection_vs_test": "n/a",
+   "result_denominator": "0% in all seven domains without context",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E019"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "A worked (description, problem PDDL) example is necessary for GPT-4 to produce solvable problem files in these domains."
+  },
+  {
+   "claim_id": "C3",
+   "text": "LLM+P helps service robots on realistic tasks.",
+   "setting": "One real-robot tidy-up scenario (platform unspecified)",
+   "baseline_control": "LLM-as-P plan",
+   "selection_vs_test": "n/a",
+   "result_denominator": "Plan cost 22 (LLM+P) vs 31 (LLM-as-P); no execution trials",
+   "evidence_ids": [
+    "son55:E022",
+    "son55:E023"
+   ],
+   "counterevidence": [
+    "qualitative single scenario"
+   ],
+   "allowed_conclusion": "For one hand-built problem the generated plan is shorter than the LLM-only plan; no robot execution success is measured."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "offline",
+  "evidence_level_reason": "Quantitative results are open-loop symbolic plan outcomes; the robot demonstration is one qualitative scenario without trial counts.",
+  "claim_support": "scoped",
+  "author_claim_preserved": "LLM+P turns a natural-language planning problem into a PDDL problem file with a GPT-4 one-shot prompt, solves it with a classical planner (Fast Downward), and translates the plan back to natural language; LLM+P is able to provide optimal solutions for most problems while LLMs on their own fail to provide even feasible plans for most problems, and it is demonstrated on a real-robot tidy-up task.",
+  "strongest_supported_claim": "Given an expert-written domain file and one worked example per domain, GPT-4 translation plus Fast Downward returns feasible plans for 97/140 and confirmed-optimal plans for 64/140 generated tasks across seven IPC robot-planning domains (Floortile 0%), versus about 17% correct for direct GPT-4 planning; the example is indispensable. 'Optimal for most problems' and closed-loop robot performance are not shown.",
+  "unresolved": [
+   "Baseline information asymmetry (domain file only for LLM+P)",
+   "whether LLM+P plans were validated against ground-truth problem PDDL",
+   "back-translation quality and robot execution"
+  ],
+  "reproduction": "author_report only; percentages recomputed by us from Table I only"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Clear, important gap (LLM long-horizon planning unreliable; sound solvers need formal input) with the baseline failure measured on the same benchmark; neighbours ([47-57], concurrent [66]) cited without results.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E003",
+    "son55:E004",
+    "son55:E005",
+    "sol:E003"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Translation-not-planning is a well-fitted seam; the solver guarantees correctness conditional on the problem file; context/no-context gives a distinguishable prediction. Translation correctness is unchecked and the expert domain file carries much of the burden.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E006",
+    "son55:E007",
+    "son55:E018",
+    "son55:E019"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both 3; confirmed. Pipeline, model, temperature, planner aliases, time limit and assumptions are stated. Not 4: provenance of NL descriptions, full prompts and robot execution interface absent; no retry flow.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E009",
+    "son55:E011",
+    "son55:E013",
+    "son55:E014"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed, with an added validator note. One deterministic response per task, 20 tasks per domain, hand-counted baselines, one qualitative robot scenario; in addition the text never states that LLM+P plans were validated against the ground-truth problem PDDL, so a mistranslated but solvable problem could be counted as success (validator gap).",
+    "evidence_ids": [
+     "son55:E011",
+     "son55:E015",
+     "son55:E016",
+     "sol:E005",
+     "agg:E001"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed. Same-GPT-4 comparisons (direct, with/without example, ToT) and a no-context ablation, but only LLM+P receives the expert domain file, so solver delegation is not separated from added formal knowledge; single backbone.",
+    "evidence_ids": [
+     "son55:E012",
+     "son55:E016",
+     "son55:E019",
+     "son55:E020"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed. One example per domain, generated instances, no described tuning; public IPC domains with unexamined pretraining exposure; robot demo a single case.",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E022",
+     "sol:E004"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both 1; confirmed. Single deterministic run per task, no variance/CI, translation failures described not counted.",
+    "evidence_ids": [
+     "son55:E013",
+     "son55:E016",
+     "son55:E018"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Resolved toward sol (son55 1). The call budget is inferable from the design (one translation and one back-translation call, temperature 0) and the 200 s search cap is shared by the planner and ToT; the human-written domain file is an extra information channel given only to LLM+P and left unpriced; no times/tokens. This is the anchor-2 instance (call budget inferable, extra channel unpriced).",
+    "evidence_ids": [
+     "son55:E014",
+     "son55:E021",
+     "sol:E005",
+     "son55:E006"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "resolutions": [
+  {
+   "field_path": "status / scope (out_of_scope?)",
+   "sol_value": "reviewed (in scope, scope-B framing)",
+   "son55_value": "reviewed (in scope; out_of_scope flagged as defensible)",
+   "decision": "same_supported_fact",
+   "final_value": "in_scope; evidence_level offline",
+   "reason": "EVIDENCE excludes general LLM work that only mentions robots in passing. LLM+P makes robot task planning its explicit application (agg:E002), evaluates on seven IPC robot-planning domains, poses a service-robot question (agg:E003) and executes a plan on a real robot; its LLM-to-PDDL-to-solver loop is the canonical instance of the in-domain R01 harness pattern. The method is general (agg:E004), but the right place to record the missing closed-loop embodiment is evidence_level=offline and the E ratings, not exclusion (exclusion would turn an evidence weakness into a scope verdict). Anchor precedent 2 (no frontier LLM / human teacher) does not apply.",
+   "evidence_ids": [
+    "agg:E002",
+    "agg:E003",
+    "agg:E004",
+    "sol:E004",
+    "son55:E022"
+   ],
+   "score_impact": "paper stays scored"
+  },
+  {
+   "field_path": "assessment.claim_support (optimal for most)",
+   "sol_value": "scoped (45.7% optimal recomputed)",
+   "son55_value": "scoped (45.7% optimal recomputed)",
+   "decision": "same_supported_fact",
+   "final_value": "scoped; sub-claim 'optimal for most problems' unsupported by Table I (64/140 confirmed optimal); 'correct for most' supported (97/140) conditional on an expert domain file and one example",
+   "reason": "Table I semantics fixed by V-B (agg:E001). Lama-fallback plans may sometimes be optimal, but the paper does not verify this, so 'optimal for most' is unsupported rather than proven false; the feasible-plan majority holds. Per-domain majority-optimal holds in 3 of 7 domains.",
+   "evidence_ids": [
+    "agg:E001",
+    "sol:E006",
+    "son55:E016",
+    "son55:E017"
+   ],
+   "score_impact": "none on ratings; constrains strongest_supported_claim"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    null
+   ],
+   "son55_value": [
+    "rs:C25",
+    "rs:C03"
+   ],
+   "decision": "revised",
+   "final_value": {
+    "primary": "decompose_and_delegate/rs:C25 (partial)",
+    "supporting": "adapt_via_conditioning/sub null"
+   },
+   "reason": "C25 is the only child of decompose_and_delegate and names exactly this move (a formal domain/world model emitted by the LLM and routed to a classical planner); LLM+P executes steps 1-2 fully and lacks step 3 (no solver-feedback repair) and step 5 (cost): a partial tactical match recorded with missing steps, not 'no applicable sub-card' (consistent with ProgPrompt/DEPS in this batch). Supporting adapt_via_conditioning adopted from son55 because the one-shot (NL, PDDL) context is a separately ablated, load-bearing operation (0% in every domain without it); its sub is null because C03 requires an upstream schema-parsing phase or a reference substrate, and LLM+P has one hand-written example per domain.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E007",
+    "son55:E018",
+    "son55:E019",
+    "sol:E002"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Anchor-2 instance: inferable call budget, shared search cap, unpriced extra knowledge channel.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E021",
+    "son55:E006"
+   ],
+   "score_impact": "+1.25 raw vs son55"
+  },
+  {
+   "field_path": "expectations.E04.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "Single deterministic run; no repeats, CIs or paired tests.",
+   "evidence_ids": [
+    "son55:E013"
+   ],
+   "score_impact": "consistent with statistics=1"
+  },
+  {
+   "field_path": "expectations.E05.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No planning time, calls, tokens or USD; the cap is credited under E.cost.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E021"
+   ],
+   "score_impact": "none beyond E.cost"
+  },
+  {
+   "field_path": "expectations.E08.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No statement on development overlap or on GPT-4 exposure to the public IPC domains/generators.",
+   "evidence_ids": [
+    "son55:E010"
+   ],
+   "score_impact": "none (holdout 2 in both seats)"
+  },
+  {
+   "field_path": "score.display",
+   "sol_value": 62.5,
+   "son55_value": 61.3,
+   "decision": "revised",
+   "final_value": 62.5,
+   "reason": "Recomputed from final ratings (raw 62.5).",
+   "evidence_ids": [],
+   "score_impact": "display only"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "field_path": "ratings.E.measurement reason / signatures",
+   "seats_value": "son55: 'LLM+P success is whether the planner returns an optimal plan'; sol: formal optimality is not NL-task truth. Neither noted that validation of plans against the ground-truth problem PDDL is not described.",
+   "correction": "Recorded as a validator gap under E.measurement and in assessment.unresolved; rating stays 2 (already the 'validator gap' band).",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E015",
+    "agg:E001"
+   ],
+   "score_impact": "none",
+   "type": "shared_omission"
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "status": "reviewed",
+ "status_reason": "Complete fixed text read; scope confirmed in; all substantive differences resolved; eight items resolved.",
+ "provenance": {
+  "input_hash": "2b0190dafe2244e68da9e68a9434358ea9f4f6e9750509ab7d6fbb98b9e68638",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_taxonomy_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "seat_card_hash_notes": {
+   "sol": {
+    "domain_cards_hash": "60e8948f2033bcdf44cbc892aa3c9b1b4904cb8e98b6b18927e463a6b72f399a",
+    "expectations_hash": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+    "method": "canonical hash of selected card files / embedded expectation blocks"
+   },
+   "son55": {
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+    "method": "sha256(taxonomy.json) / sha256(cat patterns/main/*.md)"
+   },
+   "assessment": "Different hashing methods over the same card set, not different inputs; son55 domain hash equals run manifest domain_taxonomy hash. Same input_hash and material sha256 in both seats."
+  },
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "timestamp": "2026-10-22",
+  "anchoring_disclosure": "conflicts.json (which lists both seats' raw scores and item diffs) was opened before the papers were read; for each paper the full text was then read and a preliminary evidence judgment formed before that paper's seat records were opened. This is an aggregate review with two seat inputs, not a third blind review or human gold."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2304.11477v3",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2304.11477.txt",
+   "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+   "sections_read": [
+    "complete supplied html-full extraction (all sections and appendices present in the file)"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "note": "Figures are captions only in the extraction; no figure values used unless restated in text."
+  }
+ ],
+ "input_seat_hashes": {
+  "sol": "d34502b567c5d2c7e3a95eaec66c99ba36133eb598da61c44ad4763e7aa2f721",
+  "son55": "df3999e544eff1fbac601fbf0f6b393ebac2bd03901098f9a142c7d7e77801a2"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session_id": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_session_note": "Subagent cannot read its own session id or receipt; none fabricated, no probing.",
+ "score": {
+  "raw": 62.5,
+  "display": 62.5,
+  "lower": 62.5,
+  "upper": 62.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ecost)/4; display=python round(raw,1); raw is authoritative",
+  "designation": "production-under-anchors-v2"
+ },
+ "final_record_hash": "4cc69271f145652767baf8bbbd91801cf14528791aeedf53ad28238b85c03326"
+}

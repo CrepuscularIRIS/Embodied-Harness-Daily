@@ -1,0 +1,48 @@
+{
+ "batch_id": "p010",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2401.03388",
+   "paper_id": "2401.03388",
+   "version": "2401.03388v1",
+   "title": "LLMs for Robotic Object Disambiguation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2401.03388.txt",
+   "material_sha256": "cd85f3cdfc0ea6c3169e6d54bbd9dd56877aff884f3fa6a141dc1c10f694a0c8"
+  },
+  {
+   "paper_key": "2401.12202",
+   "paper_id": "2401.12202",
+   "version": "2401.12202v2",
+   "title": "OK-Robot: What Really Matters in Integrating Open-Knowledge Models for Robotics",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2401.12202.txt",
+   "material_sha256": "d2b762687e347f12b0dfdb934dad51558d1a3f0f6fcfbad53e98e4f34a8bf940"
+  },
+  {
+   "paper_key": "2401.12963",
+   "paper_id": "2401.12963",
+   "version": "2401.12963v2",
+   "title": "AutoRT: Embodied Foundation Models for Large Scale Orchestration of Robotic Agents",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2401.12963.txt",
+   "material_sha256": "9d0357cc3032a885b7ba893e1fbc76f53773c0c6348c9d06e22945dc2d60c82c"
+  },
+  {
+   "paper_key": "2402.08546",
+   "paper_id": "2402.08546",
+   "version": "2402.08546v3",
+   "title": "Grounding LLMs For Robot Task Planning Using Closed-loop State Feedback",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2402.08546.txt",
+   "material_sha256": "8ad61e2e87e4616bb6a3728aaabea6518d815660c4c935d5957dc19016a24bb3"
+  },
+  {
+   "paper_key": "2402.10670",
+   "paper_id": "2402.10670",
+   "version": "2402.10670v2",
+   "title": "OpenFMNav: Towards Open-Set Zero-Shot Object Navigation via Vision-Language Foundation Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2402.10670.txt",
+   "material_sha256": "a8ac664e8f5c579291b6a74be4bb25d9724e82ef0f74a36183d04f3eba78c848"
+  }
+ ],
+ "input_hash": "abf4a21311dac92ad087b347f798e421fd238865aee1e7e5116840f881ae5ae7"
+}

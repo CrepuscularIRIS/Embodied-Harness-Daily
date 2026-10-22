@@ -1,0 +1,692 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p006",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2309.09969",
+    "paper_id": "2309.09969",
+    "version": "2309.09969v3",
+    "title": "Prompt a Robot to Walk with Large Language Models",
+    "claim_type": "system_method",
+    "central_claim": "Frozen GPT-4 directly produces low-level walking joint targets from normalized historical observations/actions and control descriptions, without task-specific LLM finetuning, across robots/terrains/simulators."
+  },
+  "provenance": {
+    "input_hash": "682d488acfee84cba361bc0fc1f9b301936e28dff782dff94fbc993c9550e37d",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "ea0dbf7a09dc8c79cc460737cd6a9d6259c0392a8cfd39115b5065ddc30ad5f8",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T03:00:04.317107+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; production-under-anchors-v2. Model identity supplied by dispatch, not probed. session_id/receipt_ref unavailable to this internal worker. domain_cards_hash binds frozen taxonomy; domain_conditions_hash and expectations_sources bind condition/card text. No network, paper-code execution, old scores or other-seat records read. Run manifest read only as fixed input provenance; no outcome artifacts read.",
+    "anchors_hash": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+    "expectations_hash_method": "SHA256 of UTF-8 sorted compact JSON mapping main-card relative paths to file SHA256; expectations are embedded, not a standalone file.",
+    "expectations_sources": {
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "patterns/main/multi_robot_llm_coordination.md": "ce9425dd38f7e565a53c44d48316957c901a4abde65a1ad77152cfc051fc94b2",
+      "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121"
+    }
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2309.09969v3",
+      "version": "2309.09969v3",
+      "sha256": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.09969.txt",
+      "sections_read": [
+        "Abstract",
+        "I INTRODUCTION",
+        "II Related Work",
+        "III Method",
+        "IV Results",
+        "V Discussion",
+        "VI Conclusions"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "rendering_limitations": "All fixed main-text methods, experiments and discussion read. Text-only figures contain captions, not pixels. Exact figure-only prompt templates and plot heights not asserted read; conclusions use prose and transcribed tables. No appended appendix section is asserted present."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§III-A; fixed text L15",
+      "quote": "We do one-time initialization of the prompt based on an existing controller, which could be either model-based or learning-based.",
+      "kind": "author_report",
+      "support_explanation": "Existing-controller behavior initializes the LLM context; no data-free gait learning."
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§III-B; fixed text L15",
+      "quote": "we use a linear transformation to map all the potential numeric values into non-negative integers ranging from 0 to 200",
+      "kind": "author_report",
+      "support_explanation": "Concrete numerical observation/action schema."
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§I Fig 2 caption; fixed text L9",
+      "quote": "The LLM outputs normalized target joint positions that are then tracked by a PD controller.",
+      "kind": "author_report",
+      "support_explanation": "Continuous targets plus external tracking; not semantic skill selection."
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§IV-C; fixed text L18",
+      "quote": "each trial lasts for 10 seconds, and we have 5 trials for each experiment.",
+      "kind": "author_report",
+      "support_explanation": "Counted description-prompt trials with defined horizon; not denominators for every experiment."
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§IV-D; fixed text L18",
+      "quote": "only actions were provided, which essentially amounts to an open-loop control. This form of control was insufficient for successfully making the robot walk",
+      "kind": "author_report",
+      "support_explanation": "Open-loop ablation supports feedback dependence, not physical-understanding inference."
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§IV-E; fixed text L18",
+      "quote": "Following the same approach, we train a 10 Hz RL policy for initialization.",
+      "kind": "author_report",
+      "support_explanation": "Separate ANYmal initializer; not direct transfer of a single policy/context."
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§V-D; fixed text L21",
+      "quote": "our prompt design inevitably becomes biased toward this policy.",
+      "kind": "author_report",
+      "support_explanation": "Prompt-development dependence on behavior policy explicitly admitted."
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§V-D; fixed text L21",
+      "quote": "we have to pause the simulation to wait for the output of GPT-4.",
+      "kind": "author_report",
+      "support_explanation": "10Hz means simulated control time, not actual real-time capability."
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§V-D; fixed text L21",
+      "quote": "roughly costed \\$2,000 US dollars for all the OpenAI API calls.",
+      "kind": "author_report",
+      "support_explanation": "Aggregate API price, not per-setting runtime/failed-run price."
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8",
+      "locator": "§IV Table I; fixed text L18",
+      "quote": "Success Rate(↑) [%] 0.0 0.0 0.6 0.2 0.6",
+      "kind": "author_report",
+      "support_explanation": "Readable normalization table has conflicting percent header and fractional-looking values. Preserve ambiguity."
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S01",
+      "object": "Frozen text LLM walking feedback policy",
+      "information": "Proprioceptive/sensor values and action history; RL/model-based controller initializer; descriptions of joint order, control and task.",
+      "operation": "Map numerical inputs/targets to 0–200 integers, condition GPT-4 on 50-step history, denormalize targets, track with PD and append next actual observation.",
+      "output": "Joint-position target at 10Hz simulated update rate; PD 200Hz",
+      "conditions": "Simulator pauses during inference; robot-specific suitable initializer and fragile prompt.",
+      "feedback": "Next actual sensor state/action enters sliding history.",
+      "selection_rule": "Latest history replaces initializer; no candidate acceptance, verifier or harness optimizer.",
+      "selection_data": "Current episode plus designer-provided few-shot/initializer data; no automatically retained harness changes.",
+      "persistence": "Episode context only; frozen LLM and fixed designer schema.",
+      "later_use": "Next step sees updated 50-step trajectory.",
+      "claimed_effect": "Short-horizon walking without GPT-4 finetuning.",
+      "failure_boundary": "No real-time physical deployment; initialization bias, prompt fragility, missing full cross-robot counts.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E007",
+        "E008"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "LLMs typically do high-level planning or need robot-specific training; test whether a frozen language model can directly drive dynamic feedback walking.",
+    "checked_gap": "Low-level numerical interface is a concrete residual distinct from high-level reward/contact planning; independent fulltexts of neighbors not supplied.",
+    "lineage/closest_adjacent": [
+      {
+        "name": "Robot-specialized GPT [47]",
+        "version": "author-cited in fixed 2309.09969v3 §II; original not fixed",
+        "relationship": "Specialized robot training versus frozen off-the-shelf GPT-4."
+      },
+      {
+        "name": "LLM pattern-machine cartpole [26]",
+        "version": "author-cited §II",
+        "relationship": "Return-conditioned iterative policy improvement versus single-initialized feedback context."
+      },
+      {
+        "name": "PPO walking initializer",
+        "version": "paper §IV-A/E",
+        "relationship": "Critical source controller, not eliminated by no-LLM-finetuning."
+      }
+    ],
+    "residue": "Ground an unchanged text model into numeric feedback actions.",
+    "stakes": "Capability probe, not replacement for fast robot control stacks.",
+    "method_response": "Numerical normalization, task/control descriptions, recent action/state history and external PD.",
+    "remaining_gap": "No cheap periodic replay/nearest-history controller, strong real-time alternative, or isolated physical-understanding test.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E007",
+      "E008"
+    ],
+    "unresolved": [
+      "No independent neighbor originals; no priority conclusion.",
+      "Fig 3 exact prompt and plots Fig 5–7 absent as pixels. Main chain/Table I support scoped review, not exact template reproduction."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "adapt_via_conditioning",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "adapt_via_conditioning",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "operational parent, no exact sub-tactic",
+        "tactic_steps_checked": [
+          "1: Unified numeric/history format conditions an unchanged GPT-4.",
+          "2: Reference is one initializer trajectory, not a broad task-family corpus.",
+          "3: No upstream schema training/shared-space transfer claimed.",
+          "4: No category-disjoint test; ANYmal initializer newly trained.",
+          "5: Description, history and normalization varied; simple replay/nearest-history alternative absent."
+        ],
+        "success/failure_checks": [
+          "Parent frozen-conditioning operation present.",
+          "C03 broad substrate/category-holdout conditions not met; sub=null.",
+          "An upstream training phase is not demanded of an explicitly frozen-model proposal; record mismatch, not fabricated method flaw.",
+          "No cross-task accepted harness edits; do not call this retained self-improvement."
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E005",
+          "E007"
+        ],
+        "reason": "RS conditioning becomes text-normalized sensor/action history driving continuous low-level targets through a PD controller. No exact embodied sub-card fits: K104 semantic skills, image targets and code tools are different operations."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "RS conditioning becomes text-normalized sensor/action history driving continuous low-level targets through a PD controller. No exact embodied sub-card fits: K104 semantic skills, image targets and code tools are different operations.",
+    "executes_pattern": true,
+    "resolves_problem": false,
+    "resolves_problem_reason": "Operational execution and partial comparative gain do not close the residual gap or establish broad transfer."
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": null,
+        "version": "embodied-agent-harness/v1",
+        "fit": "main-only",
+        "condition_checks": [
+          {
+            "id": "S1",
+            "status": "partial",
+            "reason": "Same-GPT-4 description/history/normalization ablations; exact plot heights unavailable.",
+            "evidence_ids": [
+              "E002",
+              "E004",
+              "E005",
+              "E010"
+            ]
+          },
+          {
+            "id": "S2",
+            "status": "partial",
+            "reason": "Observation feedback present, but simulator pauses for inference.",
+            "evidence_ids": [
+              "E003",
+              "E008"
+            ]
+          },
+          {
+            "id": "S4",
+            "status": "not_applicable",
+            "reason": "Continuous setpoints, not deterministic semantic skill vocabulary.",
+            "evidence_ids": [
+              "E003"
+            ]
+          },
+          {
+            "id": "F7",
+            "status": "met",
+            "reason": "Latency ceiling/cost explicitly disclosed.",
+            "evidence_ids": [
+              "E008",
+              "E009"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E005",
+          "E007"
+        ],
+        "reason": "RS conditioning becomes text-normalized sensor/action history driving continuous low-level targets through a PD controller. No exact embodied sub-card fits: K104 semantic skills, image targets and code tools are different operations."
+      }
+    ],
+    "unassigned": [
+      "Continuous normalized joint targets through PD lack an exact current sub-card; do not force K104."
+    ],
+    "revision_proposals": [
+      {
+        "status": "case proposal only; no card edited",
+        "operation": "Normalized numerical observation/action history conditions frozen LLM low-level feedback targets.",
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003"
+        ]
+      }
+    ]
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "adapt_via_conditioning",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": null
+      },
+      "operation_correspondence": "RS conditioning becomes text-normalized sensor/action history driving continuous low-level targets through a PD controller. No exact embodied sub-card fits: K104 semantic skills, image targets and code tools are different operations.",
+      "necessary_conditions_and_differences": "Parent RS research-operation fit does not imply execution of all sub-tactic conditions. Embodied match depends on the paper’s actual inputs, executor and feedback. Domain-card exemplars are structural references, never independent evidence of this paper’s quality.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E005",
+        "E007"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Harness organization rather than only backbone claimed to improve embodied success.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same-backbone prompt variants, but no simple replay/nearest-history feedback baseline.",
+      "evidence_ids": [
+        "E001",
+        "E005"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "A specific component is credited with the gain.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Descriptions, history, normalization varied; initialization bias and plot-only numeric details remain.",
+      "evidence_ids": [
+        "E002",
+        "E004",
+        "E005",
+        "E007",
+        "E010"
+      ],
+      "score_item": "E.causality"
+    },
+    {
+      "id": "E03",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Interface benefit claimed across backbone capability.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Authors tried other models but no complete equivalent protocol/results for weaker backbones.",
+      "evidence_ids": [
+        "E005"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Practicality or efficiency claim.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Tokens, $2000 global price and slow inference disclosed; no per-run costs/latency distribution.",
+      "evidence_ids": [
+        "E008",
+        "E009"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Generalization/benchmark contamination boundary.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Prompt developed against initializer; separate ANYmal RL training, no structural holdout.",
+      "evidence_ids": [
+        "E001",
+        "E006",
+        "E007"
+      ],
+      "score_item": "E.holdout"
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Matched-budget harness/interface claim.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Control rates fixed but context/token budget varies; pause needed for API.",
+      "evidence_ids": [
+        "E002",
+        "E008",
+        "E009"
+      ],
+      "score_item": "E.cost"
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Success rates compared across stochastic task runs.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Five 10-second prompt trials, no main uncertainty estimates or complete per-robot counts.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": "E.statistics"
+    },
+    {
+      "id": "E06",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "VLN-CE benchmark-specific protocol.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Walking is not VLN-CE.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Endpoint completion/stop or goal attainment.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Walking survival/fall, not target navigation/stop, is evaluated.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E20",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#reviewer-expectations"
+      ],
+      "applies_when": "Metric-depth/backprojection requirement.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No metric-depth/backprojection tool.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ],
+      "score_item": "X"
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1",
+      "source_strength": "common_practice; reading-derived, not reviews of this paper",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#reviewer-expectations"
+      ],
+      "applies_when": "Physical embodiment-transfer claim.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Experiments limited to simulation; physical deployment not reported.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": "E.holdout"
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C01",
+      "text": "Frozen GPT-4 functions as dynamic walking feedback controller.",
+      "setting": "A1/MuJoCo, 10Hz simulated target updates with PD 200Hz.",
+      "baseline/control": "Description/history/observation/normalization variants; no cheap replay alternative.",
+      "selection_vs_test": "Prompt developed using particular RL initializer; no separate tuning/test episodes.",
+      "result/denominator": "Five trials/10-second description study; Table I extends to 20 seconds: NWT .137/.086/.700/.504/.721, success entries 0/0/.6/.2/.6 with ambiguous [%] label.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E010"
+      ],
+      "counterevidence": "Trajectory divergence from RL does not isolate physics understanding; simulation paused; table-unit ambiguity retained.",
+      "allowed_conclusion": "Feasibility of this short simulated feedback pipeline, not gait learning from text alone."
+    },
+    {
+      "claim_id": "C02",
+      "text": "Generalization across robots and simulators.",
+      "setting": "A1/MuJoCo and ANYmal/Isaac Gym.",
+      "baseline/control": "No unchanged initializer/context cross-robot test.",
+      "selection_vs_test": "New robot-specific 10Hz RL initializer.",
+      "result/denominator": "ANYmal snapshots without trial denominator.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E008"
+      ],
+      "counterevidence": "Initializer retraining and unknown counts prevent transfer-level classification.",
+      "allowed_conclusion": "Recipe instantiated on two simulated robots; no counted transfer or real-time physical success."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Authors report short-horizon simulated closed-loop walking from a frozen GPT-4 numerical-history prompt, controller-derived initializer and PD tracking; counted prompt ablations support feasibility, not real-time or count-based cross-embodiment transfer.",
+    "unresolved": [
+      "Simulator paused; no hardware.",
+      "New ANYmal initializer, unknown complete denominators.",
+      "Exact prompt figure/plot values not read; ambiguous percent header preserved.",
+      "No simple trajectory-replay baseline or independent physical-understanding test."
+    ],
+    "our_reproduction": false
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Specific low-level frozen-LLM gap; adjacent originals not independently fixed.",
+      "evidence_ids": [
+        "E001",
+        "E007"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Normalization/history/PD chain responds to grounding problem, but cheaper replay is not distinguished.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003"
+      ],
+      "counterevidence_ids": [
+        "E007"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Interface, history and frequencies specified; fragility and speed limitations honest; exact template unavailable.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E007",
+        "E008"
+      ],
+      "counterevidence_ids": [
+        "E007",
+        "E008"
+      ],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Counted prompt trials/horizon; other terrain/robot counts incomplete and table units ambiguous. Anchors v2 cap 2.",
+        "evidence_ids": [
+          "E004",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Useful open-loop/normalization/description variants; initializer bias and no simple controller confound mechanism.",
+        "evidence_ids": [
+          "E001",
+          "E005",
+          "E007"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Same walking behavior and development initializer; new ANYmal RL policy is not structural holdout.",
+        "evidence_ids": [
+          "E006",
+          "E007"
+        ],
+        "counterevidence_ids": [
+          "E006",
+          "E007"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Small repeated prompt study, no CIs/variances; rating 2, not strong statistical reliability.",
+        "evidence_ids": [
+          "E004"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Token sizes, global dollar cost and speed constraint; no per-run failed/success accounting.",
+        "evidence_ids": [
+          "E008",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 62.5,
+    "display": 62.5,
+    "lower": 62.5,
+    "upper": 62.5,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Fixed main-text methods, experiments and discussion read. Figure-only prompt/plot incompleteness disclosed and does not erase directly readable methods/tables. No paper code executed."
+}

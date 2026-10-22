@@ -1,0 +1,48 @@
+{
+ "batch_id": "p012",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2403.13801",
+   "paper_id": "2403.13801",
+   "version": "2403.13801v2",
+   "title": "Natural Language as Policies: Reasoning for Coordinate-Level Embodied Control with LLMs",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2403.13801.txt",
+   "material_sha256": "95804d5d01195363d739d6fe4abee2c990af609abacaa31f2722d4aa4174d56d"
+  },
+  {
+   "paper_key": "2403.17334",
+   "paper_id": "2403.17334",
+   "version": "2403.17334v1",
+   "title": "OVER-NAV: Elevating Iterative Vision-and-Language Navigation with Open-Vocabulary Detection and StructurEd Representation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2403.17334.txt",
+   "material_sha256": "11b2ef871306fe2f80d3a1f2c0638e5ba3d648e154f629b9b295a17e8c6c0f0c"
+  },
+  {
+   "paper_key": "2404.04619",
+   "paper_id": "2404.04619",
+   "version": "2404.04619v1",
+   "title": "Do We Really Need a Complex Agent System? Distill Embodied Agent into a Single Model",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2404.04619.txt",
+   "material_sha256": "ef32ab115027c75b8fa2486ca90addad910ecdcdc766134cf123fc008e67ddb2"
+  },
+  {
+   "paper_key": "2404.06413",
+   "paper_id": "2404.06413",
+   "version": "2404.06413v2",
+   "title": "Foundation Models to the Rescue: Deadlock Resolution in Connected Multi-Robot Systems",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2404.06413.txt",
+   "material_sha256": "c66fec8e01e80d63c4b94d69ae55b46c641ba72977b0deadc21b5e862d30c234"
+  },
+  {
+   "paper_key": "2404.06645",
+   "paper_id": "2404.06645",
+   "version": "2404.06645v1",
+   "title": "GenCHiP: Generating Robot Policy Code for High-Precision and Contact-Rich Manipulation Tasks",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2404.06645.txt",
+   "material_sha256": "976cb3b43f687556b72a69f0b26ad60af6e10666a80eeedbf9b58b0d6492d60a"
+  }
+ ],
+ "input_hash": "4a32bce145664101c555af76d61c66317a98f4cbc52e1d5b2f0fd06051ea6bac"
+}

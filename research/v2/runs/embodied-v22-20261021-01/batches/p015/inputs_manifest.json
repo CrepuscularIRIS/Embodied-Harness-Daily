@@ -1,0 +1,48 @@
+{
+ "batch_id": "p015",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2407.00632",
+   "paper_id": "2407.00632",
+   "version": "2407.00632v1",
+   "title": "CAMON: Cooperative Agents for Multi-Object Navigation with LLM-based Conversations",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2407.00632.txt",
+   "material_sha256": "9f2756c9c266b60aa57fafdbcf7f6f86f7bc72fdb0174ff84acc7138b7ec30af"
+  },
+  {
+   "paper_key": "2407.10031",
+   "paper_id": "2407.10031",
+   "version": "2407.10031v2",
+   "title": "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2407.10031.txt",
+   "material_sha256": "c1890f7b8d9df85fb1528c1682b5645d2ee680838287a50de2204a78c1bd5415"
+  },
+  {
+   "paper_key": "2409.01652",
+   "paper_id": "2409.01652",
+   "version": "2409.01652v2",
+   "title": "ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.01652.txt",
+   "material_sha256": "5fbd99c54c6a1d45b9bfb891cdf4fb99e562a782983c9f0f356c5259e4461b14"
+  },
+  {
+   "paper_key": "2409.04837",
+   "paper_id": "2409.04837",
+   "version": "2409.04837v2",
+   "title": "Context-Aware Replanning with Pre-explored Semantic Map for Object Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.04837.txt",
+   "material_sha256": "7ea63f1bdba0bf460bef44024bfa9c5c3e1e81442e34c2d7b49068b3a245beed"
+  },
+  {
+   "paper_key": "2409.10906",
+   "paper_id": "2409.10906",
+   "version": "2409.10906v1",
+   "title": "Multi-Floor Zero-Shot Object Navigation Policy",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.10906.txt",
+   "material_sha256": "055447e017023e1e83661a2c0c8c38f52c04ca543ff00b58b4e5dd2542d8a9c1"
+  }
+ ],
+ "input_hash": "1d8c80fdf0173c9929686451d21f627a32d24a7487f97cc8905fca924c69f6d1"
+}

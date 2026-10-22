@@ -1,0 +1,210 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p006",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "phase": "production",
+ "anchors_version": "v2 (3ececdd11cc3d144)",
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_id": null,
+ "receipt_ref": null,
+ "session_note": "worker 无法自取 session id；总控可从调度记录补",
+ "input_hash": "682d488acfee84cba361bc0fc1f9b301936e28dff782dff94fbc993c9550e37d",
+ "assigned": 5,
+ "reviewed": 4,
+ "needs_fulltext": 0,
+ "needs_evidence": 1,
+ "out_of_scope": 0,
+ "outside_taxonomy": 0,
+ "scored": 4,
+ "schema_errors": 0,
+ "schema_error_detail": [],
+ "checks": [
+  "paper_key 集合与 inputs_manifest 完全一致",
+  "material sha256 与 manifest 一致",
+  "所有 evidence quote 为材料中连续原文（机械匹配，语义未代替）",
+  "原卡 sub 均 rs: 前缀且父类合法(PARENTS.tsv)",
+  "领域 namespace=embodied、匹配 <=3、sub 父类合法(taxonomy.json)",
+  "unknown 无分；score 机械重算与记录一致"
+ ],
+ "blockers": [
+  {
+   "paper_key": "2309.09919",
+   "issue": "材料缺附录 A-F（提示词、示例任务、CaP 实现、NL→LTL 细节）；E.cost 判 unknown，score=null(L=57.5,U=62.5,coverage=0.95)，status=needs_evidence",
+   "request": "请总控补附录并重新固定两席一致的输入包"
+  }
+ ],
+ "notes": [
+  "contamination：未读另一席结果、aggregate、其他批次、archive、assignments.jsonl、旧分数；无污染事件",
+  "2309.09969 为收录范围边缘（LLM 作低层关节控制器，harness 仅提示+PD），按送审清单处理为 in-scope，领域卡 unassigned，已在 revision_proposals 记录",
+  "2309.10062 Table I 值与 6/8/14/8 分母不一致、2309.10103 头条 +50.4% 无法追溯且 L4 反例，均已写入 claims"
+ ],
+ "per_paper": [
+  {
+   "paper_key": "2309.04077",
+   "title": "SayNav: Grounding Large Language Models for Dynamic Planning to Navigation in New Environments",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "score_raw": 58.75,
+   "score_display": 58.8,
+   "lower": 58.75,
+   "upper": 58.75,
+   "coverage": 1.0,
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     null,
+     "primary"
+    ],
+    [
+     "adapt_via_conditioning",
+     null,
+     "supporting"
+    ]
+   ],
+   "domain_matches": [
+    [
+     "observe_act_interface",
+     "K104",
+     "moderate-strong"
+    ],
+    [
+     "harness_memory_skill_reuse",
+     "K301",
+     "partial"
+    ]
+   ],
+   "summary": "在含仿真提供分割图的 ProcTHOR 多房间仿真中，LLM+增量场景图+IL 点目标低层在 132 个 episode 上 SR(60-64%) 高于作者自建的 GT 坐标 PointNav 基线(56%)，SPL 更低；未隔离 LLM 本身的贡献，未与已发表方法比较，真机无计数。"
+  },
+  {
+   "paper_key": "2309.09919",
+   "title": "Plug in the Safety Chip: Enforcing Constraints for LLM-driven Robot Agents",
+   "status": "needs_evidence",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "score_raw": null,
+   "score_display": null,
+   "lower": 57.5,
+   "upper": 62.5,
+   "coverage": 0.95,
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     "rs:C25",
+     "primary"
+    ]
+   ],
+   "domain_matches": [
+    [
+     "external_verification_control",
+     "K201",
+     "strong"
+    ],
+    [
+     "llm_symbolic_solver_planning",
+     "R01",
+     "partial"
+    ]
+   ],
+   "summary": "在专家校验的 LTL 与仿真给出的完美命题真值前提下，自动机屏蔽+LLM 解释回灌使 GPT-4 代理在 20 个 VirtualHome 任务与小规模 Spot 演示中满足所写约束且保持完成率；该安全率由同一自动机度量，近乎构造性；未消融屏蔽/解释各自贡献。"
+  },
+  {
+   "paper_key": "2309.09969",
+   "title": "Prompt a Robot to Walk with Large Language Models",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "score_raw": 55.0,
+   "score_display": 55.0,
+   "lower": 55.0,
+   "upper": 55.0,
+   "coverage": 1.0,
+   "rs_primary": "adapt_via_conditioning",
+   "rs_matches": [
+    [
+     "adapt_via_conditioning",
+     null,
+     "primary"
+    ]
+   ],
+   "domain_matches": "unassigned",
+   "summary": "在 MuJoCo 的 A1 四足上，温度 0 的 GPT-4 在 RL 种子提示与完整描述下，10Hz 输出目标关节位置经 PD 跟踪可在 5 次试验中约 3 次维持行走；组件消融显示描述提示与历史重要；仅仿真、单机器人有计数，ANYmal 与崎岖地形为定性。"
+  },
+  {
+   "paper_key": "2309.10062",
+   "title": "SMART-LLM: Smart Multi-Agent Robot Task Planning using Large Language Models",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "score_raw": 60.0,
+   "score_display": 60.0,
+   "lower": 60.0,
+   "upper": 60.0,
+   "coverage": 1.0,
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     null,
+     "primary"
+    ],
+    [
+     "adapt_via_conditioning",
+     null,
+     "supporting"
+    ]
+   ],
+   "domain_matches": [
+    [
+     "multi_robot_llm_coordination",
+     "R03",
+     "partial"
+    ]
+   ],
+   "summary": "在作者自建的 36 任务 AI2-THOR 仿真基准上，三段 Pythonic few-shot 提示的 LLM 分解+分配在组队约束任务上优于随机与规则分配基线（同一 GPT-4 分解），复杂类约 0.5-0.7 成功率且不稳定；后端对比与消融表明提示组件与较强 LLM 有贡献；真机与泛化主张无计数证据。"
+  },
+  {
+   "paper_key": "2309.10103",
+   "title": "Reasoning about the Unseen for Efficient Outdoor Object Navigation",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "score_raw": 51.25,
+   "score_display": 51.2,
+   "lower": 51.25,
+   "upper": 51.25,
+   "coverage": 1.0,
+   "rs_primary": "decompose_and_delegate",
+   "rs_matches": [
+    [
+     "decompose_and_delegate",
+     null,
+     "primary"
+    ]
+   ],
+   "domain_matches": [
+    [
+     "observe_act_interface",
+     "K109",
+     "moderate"
+    ],
+    [
+     "observe_act_interface",
+     "R07",
+     "partial"
+    ]
+   ],
+   "summary": "在作者设置的 AirSim 室外无人机仿真中，LLM-RRT 想象-评估的探索策略显著优于朴素 LLM-as-Eval（SR 0.51 vs 0.06），相对 LLM-MCTS 的 SR 提升很小（0.51 vs 0.47，L4 反而不优），主要优势体现在作者自定义的计算感知指标 CASR；真机四足结果缺试验计数；+50.4% 无法复现。"
+  }
+ ]
+}

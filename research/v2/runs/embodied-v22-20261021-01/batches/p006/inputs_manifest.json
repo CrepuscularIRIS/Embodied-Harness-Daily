@@ -1,0 +1,48 @@
+{
+ "batch_id": "p006",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2309.04077",
+   "paper_id": "2309.04077",
+   "version": "2309.04077v4",
+   "title": "SayNav: Grounding Large Language Models for Dynamic Planning to Navigation in New Environments",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.04077.txt",
+   "material_sha256": "f618fda11ac4f7f4d8aecc794533417d1418e29781bf2289fd33dff39ed3259f"
+  },
+  {
+   "paper_key": "2309.09919",
+   "paper_id": "2309.09919",
+   "version": "2309.09919v3",
+   "title": "Plug in the Safety Chip: Enforcing Constraints for LLM-driven Robot Agents",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.09919.txt",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b"
+  },
+  {
+   "paper_key": "2309.09969",
+   "paper_id": "2309.09969",
+   "version": "2309.09969v3",
+   "title": "Prompt a Robot to Walk with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.09969.txt",
+   "material_sha256": "4c6598c6b2fdaadb0bd0933512fc69c7d7b4f5e4b140687b2712aa0d82cee8d8"
+  },
+  {
+   "paper_key": "2309.10062",
+   "paper_id": "2309.10062",
+   "version": "2309.10062v2",
+   "title": "SMART-LLM: Smart Multi-Agent Robot Task Planning using Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.10062.txt",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec"
+  },
+  {
+   "paper_key": "2309.10103",
+   "paper_id": "2309.10103",
+   "version": "2309.10103v2",
+   "title": "Reasoning about the Unseen for Efficient Outdoor Object Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2309.10103.txt",
+   "material_sha256": "22c50e15edc45bf11ca51b2a12c0d0f1c9d236d44ed42e494856d29b8c7f029f"
+  }
+ ],
+ "input_hash": "682d488acfee84cba361bc0fc1f9b301936e28dff782dff94fbc993c9550e37d"
+}

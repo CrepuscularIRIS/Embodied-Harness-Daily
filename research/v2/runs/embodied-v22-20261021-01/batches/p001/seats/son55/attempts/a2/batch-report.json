@@ -1,0 +1,39 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "report_type": "seat_batch_report",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a2",
+ "seat": "son55",
+ "assigned": 1,
+ "reviewed": 1,
+ "needs_fulltext": 0,
+ "needs_evidence": 0,
+ "outside_taxonomy": 0,
+ "outside_taxonomy_rate": 0.0,
+ "out_of_scope": 0,
+ "schema_errors": 0,
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_refs": null,
+ "session_refs_reason": "内部 Subagent 未暴露 session id/receipt",
+ "supersedes": "a1 (needs_fulltext)",
+ "anchors_version": "v2",
+ "phase": "production",
+ "timestamp": "2026-10-22T02:41:27Z",
+ "papers": [
+  {
+   "paper_key": "2209.07753",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "score_raw": 65.0,
+   "score_display": 65.0,
+   "rs_primary": "decompose_and_delegate",
+   "domain_match": "embodied/K105"
+  }
+ ],
+ "summary": "2209.07753 Code as Policies v4 (PDF 全文含附录)：system_method，online/scoped；G3 M3 X3 Em2 Ec2 Eh3 Es2 Ek1 → raw 65.0；主要扣分点为仿真脚本化感知/特权通道、无方差/成本、真机无计数、层级增益归因混杂。",
+ "notes": "本席单席初评，不代表 dual_reviewed；自查通过(引用存在、quote 连续匹配、原卡父类、命名空间、算分复算)。"
+}

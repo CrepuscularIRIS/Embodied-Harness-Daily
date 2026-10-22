@@ -1,0 +1,1472 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p002",
+ "attempt_id": "a1",
+ "seat": "opus55",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2303.03480",
+  "paper_id": "2303.03480",
+  "title": "Can an Embodied Agent Find Your \"Cat-shaped Mug\"? LLM-Guided Exploration for Zero-Shot Object Navigation",
+  "version": "2303.03480v2",
+  "claim_type": "system_method",
+  "central_claim": "LGX (Language-guided Exploration) combines GPT-3 commonsense decisions about where to explore, taken from detector object labels or image captions, with GLIP open-vocabulary grounding to solve language-driven zero-shot object navigation (L-ZSON): state-of-the-art RoboTHOR results (over 27% SR improvement over OWL CoW), a study of prompt strategies, and the first real-world L-ZSON evaluation on a TurtleBot.",
+  "scope_decision": "in_scope (borderline): frozen GPT-3 chooses exploration targets from detector labels inside a navigation loop with GLIP stop gate and ROS motion, in RoboTHOR and on a TurtleBot 2."
+ },
+ "preliminary_judgment": "Written after reading the fixed text, before opening this paper's seat records: system_method; RoboTHOR val 1800 episodes single run; LGX 35.0 vs GoW 33.2 vs OWL-CoW 27.5 (quoted): LLM adds +1.8, grounder swap +5.7; G_th tuned on the reported set; target-in-view criterion; prompt study on best/worst subset; real world 54.2/27.8/6.9 without counts and staged phase-2 LLM inputs; no cost. Expected online, scoped, weak holdout/statistics.",
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Abstract; local text line 6",
+   "quote": "We achieve state-of-the-art zero-shot object navigation results on RoboTHOR with a success rate (SR) improvement of over 27% over the current baseline of the OWL-ViT CLIP on Wheels (OWL CoW). Furthermore, we study the usage of LLMs for robot navigation and present an analysis",
+   "support_explanation": "Original comparative claim; percentage is relative to OWL-CoW, not isolated LLM gain.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "III-A; local text line 15",
+   "quote": "we first extract contextual cues from the scene in the form of object labels or scene captions. Either of these cues are then used to devise a prompt asking the LLM about which how the agent should proceed to explore the environment. The LLM uses its commonsense knowledge about object relationships in the environment to provide the agent with a direction or object for it to move towards. Simultaneously, we use a Vision-Language model, GLIP [ 17 ] to obtain a target object grounding s",
+   "support_explanation": "Scene-to-text context conditions frozen LLM direction/object choices; no task-specific retraining.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "III-A; local text line 15",
+   "quote": "An episode is rendered successful if the target object is in the agent’s view while performing rotate-in-place.",
+   "support_explanation": "Explicit visual target criterion, not a conventional distance-arrival guarantee.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "V-A; local text line 21",
+   "quote": "It contains 1800 validation episodes with 15 validation environments. 12 different goal object categories are present. Each exploratory turn carries out the scene understanding procedure described earlier in sections III-B and III-C . For each episode, we run LGX for n_{r} exploratory turns or until it detects the target object above the G_{th} threshold. These constraints form the STOP condition. n_{r} is set to 5, given the small environments in RoboTHOR, where the target object is usually within 10 meters of the spawning point. G_{th} is set to 0.85 for RoboTHOR after ablation experiments described in Table I . The exploratory distance e_{d} described in III-D is set to 5 m, ensuring significant changes to the scenery in RoboTHOR after motion. G_{th} SR (%) SPL (%) ",
+   "support_explanation": "Simulation episode denominator and5-turn/5m/threshold0.85 settings; same validation suite used for threshold development.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table III; local text line 21",
+   "quote": "GLIP on Wheels (FBE + GLIP) 33.2 20.3 LGX (BLIP \\rightarrow LLM + GLIP) 28.46 13.5 LGX (YOLO \\rightarrow LLM + GLIP) 35.0 21.9 TABLE III : RoboTHOR Results: Observe the improvement in Success Rate (SR) and SPL on both our approaches over the current SOTAs, CoW and OWL. Fig. 5 : The c",
+   "support_explanation": "Detector-controlled baseline33.2 vs YOLO-LGX35, while BLIP-LGX28.46; most OWL-CoW gain is not isolated LLM exploration.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "V-D/E, Fig6 and Table V; local text line 21",
+   "quote": "When the goal object was present in the scene, GLIP accurately detected it 87.5% of the time. Conversely, when the goal object was not present in the scene, GLIP falsely detected it 8.3% of the time. Approach (Navigation Decision + Grounding) Success-Rate (%) \\uparrow Random + GLIP 6.9 GLIP-on-Wheels (GOW) 27.8 LGX (YOLO \\rightarrow LLM + GLIP) 54.2 TABLE V : In our real-world experimentation, our model significantly outperformed both random and GLIP-on-Wheels baselines. While all three methods utilize GLIP for target object detection, neither of the baselines integrates the scene context i",
+   "support_explanation": "Real detector false positives8.3 and three-method SRs; no explicit per-target trial denominator.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "V-E; local text line 21",
+   "quote": "The success case occurs 54.2% of the time and is a result of the robot agent successfully navigating from the starting room into the hallway, then into the room that contains the target, before detecting the target with GLIP. In a Phase 1 failure case, the agent does not enter the hallway as the LLM believes one of the objects in the starting scene likely will lead to the target",
+   "support_explanation": "Physical success requires hallway, correct room and GLIP detection; controlled two-phase setup rather than unrestricted deployment.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "VI Conclusion; local text line 24",
+   "quote": "Our method still includes a number of failure cases, especially when the LLM incorrectly localizes the target object. Future work should explore varying the context fed to the LLM by filtering the list of objects detected or providing a history of visited objects. Similarly, exploration of which objects produced an outsized eff",
+   "support_explanation": "Residual semantic localization failure and missing visited-history limitation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "V-C; local text line 15",
+   "quote": "We then use the simulator as a ground truth to identify if the target actually lies in front of the agent, thus determining our success case. If GLIP does not find the target, we continue the LLM-based exploration. At each step, we first orie",
+   "support_explanation": "Measured simulator success is checked externally, not equated with GLIP self-declared detection.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Abstract",
+   "quote": "We achieve state-of-the-art zero-shot object navigation results on RoboTHOR with a success rate (SR) improvement of over 27% over the current baseline of the OWL-ViT CLIP on Wheels (OWL CoW).",
+   "support_explanation": "Central quantitative claim.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec I",
+   "quote": "Common approaches to solving Object Goal Navigation are based on fully supervised learning [ 4 , 13 ] , which is not practical for an agent that is expected to detect arbitrarily described objects and perform consistently in dynamic real-world environments.",
+   "support_explanation": "Author gap statement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec II-B",
+   "quote": "They obtain a baseline for this task using OWL-ViT, a finetuned vision transformer for object grounding, and frontier-based exploration (FBE) [ 32 ] .",
+   "support_explanation": "Closest neighbour: CoW / OWL-CoW (FBE + CLIP or OWL-ViT).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec VII-A",
+   "quote": "An uninformed exploration approach such as Frontier Based Exploration (FBE) can be inefficient, since the assumption of a static environment does not exist, causing the agent to re-explore regions that it has already seen.",
+   "support_explanation": "Exploration-side motivation; asserted, not quantified in simulation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec II-D",
+   "quote": "In contrast, our work uses an LLM as a prior not for planning, but rather to explore an unseen environment to predict the direction that the robot needs to take without requiring a map.",
+   "support_explanation": "Distinction from LLM-planning neighbours (SayCan, Huang et al.); LM-Nav / VLMaps are described but not compared.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec III-B",
+   "quote": "For object detection, we use YOLO [ 51 ] , which contains common household classes, while BLIP [ 52 ] gives us image captions.",
+   "support_explanation": "Perception front-end for the LLM prompt: closed-set YOLO labels or BLIP captions.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec III-C",
+   "quote": "When the LLM output does not follow these expected outcomes, the agent chooses a random direction.",
+   "support_explanation": "Invalid-output fallback; PSR measures how often it triggers.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec III-B",
+   "quote": "We use RTABMAP [ 53 ] that uses visual correspondences along with depth information from the standard costmap_2d ROS package [ 54 ] , to compute the costmap.",
+   "support_explanation": "A costmap is built and a random point in the facing direction is chosen, while Sec VII-A calls the exploration 'mapless'.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec III-D",
+   "quote": "We then use the simulator as a ground truth to identify if the target actually lies in front of the agent, thus determining our success case.",
+   "support_explanation": "Success = target in view when GLIP fires, judged by simulator truth; not the standard stop-near-goal ObjectNav criterion.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec III-B",
+   "quote": "For selecting G_{th} , we ablate with various threshold values in an environment, picking the one with the highest success rate (refer Table I ).",
+   "support_explanation": "Stop threshold is selected by success rate on the RoboTHOR validation set that is also the reporting set.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table I",
+   "quote": "0.85 35.0 21.9",
+   "support_explanation": "The tuned threshold row (SR 35.0, SPL 21.9) equals the headline LGX numbers of Table III.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-A",
+   "quote": "It contains 1800 validation episodes with 15 validation environments. 12 different goal object categories are present.",
+   "support_explanation": "Simulation denominator: 1800 validation episodes; no separate test split.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table III",
+   "quote": "LGX (YOLO \\rightarrow LLM + GLIP) 35.0 21.9",
+   "support_explanation": "LGX (YOLO->LLM) SR 35.0 / SPL 21.9.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table III",
+   "quote": "GLIP on Wheels (FBE + GLIP) 33.2 20.3",
+   "support_explanation": "GoW (frontier exploration + GLIP, no LLM) SR 33.2 / SPL 20.3: the LLM adds +1.8 SR and +1.6 SPL; most of the gain over OWL-CoW is the grounding model.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table III",
+   "quote": "OWL-CoW (FBE + OWL-VIT) [ 3 ] 27.5 17.2",
+   "support_explanation": "OWL-CoW baseline SR 27.5 / SPL 17.2 (cited from the original paper [3]); 35.0 vs 27.5 is +7.5 points, +27% relative.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table III",
+   "quote": "LGX (BLIP \\rightarrow LLM + GLIP) 28.46 13.5",
+   "support_explanation": "The caption-based LGX variant is below GoW on both metrics.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-B",
+   "quote": "This is also an ablation of our method without our LLM-based exploration mechanism.",
+   "support_explanation": "GoW is the ablation that isolates the LLM exploration; only run in simulation and once.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-C",
+   "quote": "This can be attributed to our improved LLM-based exploration scheme on top of using GLIP for target grounding.",
+   "support_explanation": "Authors attribute the +1.8 SR over GoW to LLM exploration without variance testing.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-A Prompt Selection Setup",
+   "quote": "We run each of the 7 prompts described in the previous section on a subset of the 500 best and worst performing episodes.",
+   "support_explanation": "Prompt study runs on a selected subset (best/worst episodes), not a random sample.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-D",
+   "quote": "We believe that the insignificant performance differences in task SR, despite large changes in PSR, is another indicator of RoboTHOR providing a skewed basis for this type of context dependent, intelligent exploration of the scene.",
+   "support_explanation": "Authors concede that RoboTHOR is a weak testbed for the LLM-exploration mechanism; prompt SR range is 28.1-33.8.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-D",
+   "quote": "the natural language-based prompts from BLIP perform worse relative to the object-based prompts despite a perfect PSR",
+   "support_explanation": "Object-label prompts outperform caption prompts.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-A Real World / Fig 4 caption",
+   "quote": "We pass a set of common objects for each room as shown in Table II as input to the LLM in LGX.",
+   "support_explanation": "In the real-world phase-2 test the LLM input is a staged object set per room, not live detections, so perception is partly bypassed.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Table V",
+   "quote": "Random + GLIP 6.9 GLIP-on-Wheels (GOW) 27.8 LGX (YOLO \\rightarrow LLM + GLIP) 54.2",
+   "support_explanation": "Real-world two-phase success: random 6.9, GoW 27.8, LGX 54.2. Percentages imply denominators such as 72 trials (39/72, 20/72, 5/72) but counts are never stated.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Fig 6 caption",
+   "quote": "When the goal object was present in the scene, GLIP accurately detected it 87.5% of the time. Conversely, when the goal object was not present in the scene, GLIP falsely detected it 8.3% of the time.",
+   "support_explanation": "Partial audit of the grounding/stop verifier in the real world (rates without counts).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-E",
+   "quote": "This occurred 20.8% of the time with our method.",
+   "support_explanation": "Phase-2 failure share (wrong room); success 54.2%, so Phase-1 failure is about 25%.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec VI",
+   "quote": "Future work should explore varying the context fed to the LLM by filtering the list of objects detected or providing a history of visited objects.",
+   "support_explanation": "No memory or history in the exploration loop; the LLM sees the current rotation only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec II-B",
+   "quote": "To explore the environment, we incorporate GPT-3 [ 22 ] , an LLM, to make navigational decisions.",
+   "support_explanation": "LLM identified only as 'GPT-3'; engine, temperature and decoding are not stated anywhere in the pinned text.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec I",
+   "quote": "To the best of our knowledge, ours is the first approach to evaluate the performance of L-ZSON methods in the real world.",
+   "support_explanation": "Author-claimed novelty of the real-world evaluation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-A",
+   "quote": "is set to 5, given the small environments in RoboTHOR",
+   "support_explanation": "Exploration-turn budget n_r = 5, matched to environment size; baseline budgets are not stated.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E030",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "Sec V-A Metrics",
+   "quote": "A valid LLM response is when it chooses either an object detected by the agent or a direction for navigation",
+   "support_explanation": "Prompt Success Rate (PSR) definition; PSR varies 52.3-100 across prompts while SR varies little.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "V-A Table I caption; line 21",
+   "quote": "TABLE I : Ablations on G_{th} on the RoboThor Validation Set",
+   "support_explanation": "The stop threshold is selected on the same RoboTHOR validation set whose SR is the headline (row 0.85 = 35.0/21.9 = Table III LGX row).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "VII-A Exploration; line 27",
+   "quote": "Unlike FBE which relies on selecting frontiers in free space, our LLM-based exploration is mapless",
+   "support_explanation": "Contrasts with III-B/III-D, where an RTABMAP costmap is built and a waypoint is sampled on it; the 'mapless' description is inconsistent with the implemented loop (bears on M/X).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "origin": "aggregate",
+   "material_id": "M1",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "locator": "III-C; line 15",
+   "quote": "The LLM output upon using the YOLO + LLM approach gives us an object from O to navigate towards.",
+   "support_explanation": "The LLM only selects among closed-set YOLO labels (or one of four directions); it never sees the free-form target in the image, which GLIP handles.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Exploration decision module: GPT-3 chooses which detected object (or which of four directions) to head towards.",
+   "information": "After a 360-degree rotate-in-place, the LLM sees a text prompt with YOLO class labels (or BLIP captions per 90 degrees) and the target description; it does not see the map, history or the images themselves.",
+   "operation": "Prompt template 'You are controlling a home robot ... Which object from {O} should the robot go towards?' (7 prompt variants studied); the answer reorients the robot, a random cost-map point 5 m ahead is picked and move_base drives there; invalid answers trigger a random direction.",
+   "output": "Heading / sub-goal for a ROS navigation stack.",
+   "conditions": "RGB-D rotation each step, n_r = 5 turns in RoboTHOR, closed-set detector classes.",
+   "feedback": "none from the LLM's own earlier choices (no memory)",
+   "selection_rule": "not_applicable (single LLM answer; random fallback)",
+   "persistence": "none",
+   "later_use": "not_applicable",
+   "claimed_effect": "+1.8 SR / +1.6 SPL over GLIP-on-Wheels in simulation; 54.2% vs 27.8% in the staged real-world test.",
+   "failure_boundary": "LLM associates a target with the wrong co-occurring object (desk/Red Bull can, jacket/desk); loops with caption prompts; RoboTHOR weak testbed (authors).",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E007",
+    "son55:E008",
+    "son55:E014",
+    "son55:E020",
+    "son55:E026",
+    "son55:E027"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Open-vocabulary grounding and stop gate: GLIP run on every rotation image with the free-form target phrase.",
+   "information": "RGB images and the language target; GLIP confidence threshold G_th = 0.85.",
+   "operation": "Stop and declare the target found when GLIP confidence exceeds G_th; otherwise continue exploring up to n_r turns.",
+   "output": "STOP signal; success judged by simulator truth that the target is in view.",
+   "conditions": "Threshold chosen by SR on the validation split that is reported; detector chosen after comparing several detectors qualitatively (Fig 8).",
+   "feedback": "GLIP confidence",
+   "selection_rule": "threshold G_th picked by maximum SR (Table I)",
+   "persistence": "none",
+   "later_use": "not_applicable",
+   "claimed_effect": "GoW (GLIP only) 33.2 SR vs OWL-CoW 27.5 SR, i.e. grounding model change explains most of the headline gain.",
+   "failure_boundary": "GLIP false negatives for stevia packets, false positives for Red Bull can in real-world tests (Fig 6-7).",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E010",
+    "son55:E011",
+    "son55:E014",
+    "son55:E015",
+    "son55:E024"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "L-ZSON needs navigation to uniquely described objects in unseen environments; supervised ObjectNav does not cover free-form language; FBE exploration is uninformed; no L-ZSON method had been evaluated in the real world.",
+  "checked_gap": "Grounding gap supported (OWL-CoW 27.5 vs GLIP-based GoW 33.2 on the same exploration policy). Exploration gap is asserted: the LLM adds only +1.8 SR over GoW in simulation and the authors concede RoboTHOR is a skewed basis for it. Real-world gap is a genuine contribution but the real test is staged.",
+  "lineage": [
+   "CoW (FBE + CLIP) and OWL-CoW (FBE + OWL-ViT) [3] -> GLIP-on-Wheels (FBE + GLIP, authors' ablation) -> LGX (LLM-chosen direction/object + GLIP); LLM planners (Huang et al., SayCan) and LM-Nav / VLMaps are described as different roles and not compared"
+  ],
+  "closest_adjacent": "CoW / OWL-CoW numbers are quoted from [3]; GoW is re-run by the authors. No empirical comparison with other LLM navigation systems (LM-Nav, VLMaps, ZSON).",
+  "residue": "Whether commonsense co-occurrence from a closed-set label list improves exploration efficiency over frontier exploration once the grounding model is controlled.",
+  "stakes": "Navigation to uncommon objects in new homes (SR/SPL on RoboTHOR; two-room real course).",
+  "method_response": "LLM chooses among detected labels or four directions each step; GLIP supplies grounding and the stop test.",
+  "remaining_gap": "LLM benefit small and single-run in simulation; no history; closed-set YOLO labels limit the LLM's view of unique objects; real-world evidence staged and without trial counts.",
+  "current_relevance": "Not assessed from later work; no later paper in the pinned local set bears on it.",
+  "evidence_ids": [
+   "son55:E002",
+   "son55:E003",
+   "son55:E004",
+   "son55:E005",
+   "son55:E014",
+   "son55:E015",
+   "son55:E020"
+  ],
+  "unresolved": [
+   "Whether baseline numbers from [3] share the same success criterion as the view-based criterion used here.",
+   "LLM engine and decoding settings are not stated."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "adapt_via_conditioning",
+  "supporting": [
+   "decompose_and_delegate"
+  ],
+  "matches": [
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "moderate main only",
+    "tactic_steps_checked": [
+     "Main: new language target plus current object/caption context conditions frozen GPT3 decisions without per-task updates",
+     "C03 step1: common scene/target schema present",
+     "C03 steps2–3: no broad reference bank, task-agnostic parser training or shared-space instance retrieval reported",
+     "C03 step4: validation environments described as unseen to task-specific training, but harness tuning shares evaluation split",
+     "C03 step5: detector-matched simple frontier baseline included, no clear isolated advantage for BLIP branch"
+    ],
+    "success_checks": [
+     {
+      "condition": "inference-only task/context adaptation",
+      "status": "met",
+      "evidence_ids": [
+       "sol:E002"
+      ]
+     },
+     {
+      "condition": "structural uncontaminated holdout",
+      "status": "unmet",
+      "evidence_ids": [
+       "sol:E004"
+      ]
+     }
+    ],
+    "failure_checks": [
+     {
+      "condition": "single-benchmark manually chosen conditioning",
+      "status": "partial",
+      "evidence_ids": [
+       "sol:E004",
+       "sol:E007"
+      ]
+     },
+     {
+      "condition": "no unique gain against cheap baseline",
+      "status": "partial",
+      "evidence_ids": [
+       "sol:E005"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E002",
+     "sol:E004",
+     "sol:E005",
+     "sol:E008"
+    ],
+    "reason": "The changing target/scene is expressed as conditioning to the frozen planner. C03 is deliberately null: no broad reference substrate or learned schema interpreter; do not force the entire sub-tactic from the word prompt. Classical navigation alone is not an additional sound formal delegation research contribution.",
+    "aggregate_note": "Adopted from sol; sub null confirmed."
+   },
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": "Main-card signature: split ObjectNav into sequential decision making (LLM over detector labels), target grounding/stopping (GLIP) and motion (costmap + move_base), joined by object lists and headings. C25 step2 typed machine-checkable artifact: partial (object label or direction, with a random fallback when invalid). Step3 close the loop with a verifiable signal: absent for the LLM (no checker on its choice; GLIP is a stop test). Step4 ablate the loop: partial (GoW). Step5 cost: absent.",
+    "success_failure_checks": "Success: boundary at the comparative-advantage seam - partial (LLM commonsense vs detector grounding). Success: load-bearing mechanism ablated to a named baseline - partial (GoW, +1.8 SR). Failure: cost of delegated components unmeasured - present; failure: only marginal over unified/simple baseline - present (GoW 33.2 vs LGX 35.0).",
+    "evidence_ids": [
+     "son55:E005",
+     "son55:E006",
+     "son55:E009",
+     "son55:E014",
+     "son55:E017"
+    ],
+    "reason": "The decomposition into LLM decision / GLIP grounding / navigation stack is the actual operation; sub-card C25 requires a sound solver or verifiable artifact closing the loop, which is absent, so the sub is left null.",
+    "aggregate_note": "Adopted from son55 as supporting (decomposition inherited from CoW, executed here); sub null confirmed."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "Differentiating operation = frozen-LLM exploration choice conditioned on scene labels and a free-form target; the inherited exploration/grounding/motion split is supporting.",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "Conditioning executed; no structural holdout, no conditioning-specific win over the detector-matched frontier baseline beyond +1.8 SR."
+  },
+  "resolves_problem": {
+   "value": "no",
+   "reason": "Exploration gap not shown closed: +1.8 SR single run with tuned threshold; authors concede RoboTHOR cannot expose it."
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "version": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+    "fit": "partial semantic-choice interface",
+    "condition_checks": [
+     {
+      "condition": "semantic object/direction mapped to executor",
+      "status": "met"
+     },
+     {
+      "condition": "legal-output handling",
+      "status": "partial",
+      "reason": "Invalid outputs fall back to random exploration, not schema-guaranteed actions."
+     }
+    ],
+    "evidence_ids": [
+     "sol:E002",
+     "sol:E004",
+     "sol:E008"
+    ]
+   },
+   {
+    "main": "observe_act_interface",
+    "sub": "K109",
+    "version": "dea4052b3e5c60709cd0ddbef317afc34cdd68b54f5b72757c13cd2d3828274d",
+    "fit": "strong for BLIP branch only",
+    "condition_checks": [
+     {
+      "condition": "separate vision-language model produces text",
+      "status": "met",
+      "reason": "BLIP captions condition GPT3."
+     },
+     {
+      "condition": "converter gain isolated",
+      "status": "unmet",
+      "reason": "BLIP branch28.46 is weaker than YOLO35 and GLIP-frontier33.2; no raw-image matched loop."
+     }
+    ],
+    "evidence_ids": [
+     "sol:E002",
+     "sol:E005"
+    ]
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K202",
+    "version": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+    "fit": "partial completion monitor",
+    "condition_checks": [
+     {
+      "condition": "external detection stops execution loop",
+      "status": "met"
+     },
+     {
+      "condition": "calibrated completion and handback",
+      "status": "partial",
+      "reason": "Threshold validated on evaluation set; false positives exist. No claimed LLM-proposal safety gate."
+     }
+    ],
+    "evidence_ids": [
+     "sol:E003",
+     "sol:E004",
+     "sol:E006",
+     "sol:E009"
+    ]
+   }
+  ],
+  "unassigned": [
+   "Using an LLM's commonsense about object co-occurrence as a search prior over detected labels (closest R07, which has the harness build candidates from geometry and the model choose; here candidates are the detector labels and no geometry is used)."
+  ],
+  "revision_proposals": [
+   "Pending, not applied: single-paper observation of an 'LLM as semantic search prior over detected labels' sub-pattern (2303.03480); needs a second independent paper before candidate_pattern."
+  ],
+  "aggregate_note": "K104/K109 agreed by both seats; K202 partial from sol."
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "LLM chooses object/direction, ROS navigation executes grounded waypoint.",
+   "necessary_conditions_and_differences": "Not fixed motion-token vocabulary; semantic candidates are scene dependent and low-level reliability remains assumed.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E004",
+    "sol:E008"
+   ]
+  },
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K109"
+   },
+   "operation_correspondence": "BLIP image captions become planner observations; YOLO label variant is a different sensor interface.",
+   "necessary_conditions_and_differences": "Best reported LGX uses object detector labels, not evidence that the VLM-caption interface is superior.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E005"
+   ]
+  },
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K202"
+   },
+   "operation_correspondence": "GLIP confidence or5-turn cap terminates exploration; missing target triggers next decision.",
+   "necessary_conditions_and_differences": "Not K201 proposal checking: detector autonomously stops rather than checking an LLM STOP request. Proxy is target-in-view, not arrival-distance verification.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E004",
+    "sol:E006",
+    "sol:E009"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K109"
+   },
+   "operation_correspondence": "Separate frozen perception models turn images into labels/captions for the LLM; a third model (GLIP) decides when to stop; ROS executes motion.",
+   "conditions_and_differences": "Decomposition inherited from CoW; no verification of the LLM choice.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E009",
+    "son55:E016"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations",
+    "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success."
+   ],
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success.",
+   "applicable": true,
+   "status": "met",
+   "reason": "GLIP-on-Wheels detector-matched frontier and random alternatives exist; interpret35 vs33.2 rather than all35 vs27.5 as LLM effect.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E006",
+    "son55:E014",
+    "son55:E015",
+    "son55:E017"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "met",
+    "son55": "partial"
+   },
+   "aggregate_reason": "GoW (same grounder, frontier exploration) is an alternative loop on the same 1800 episodes; budget parity is handled under E22 (unknown)."
+  },
+  {
+   "id": "E02",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations",
+    "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+   ],
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Detector and exploration alternatives expose component confound; no paired repeated significance for1.8pp and no full loop/memory/termination isolation.",
+   "evidence_ids": [
+    "sol:E004",
+    "sol:E005",
+    "sol:E006",
+    "son55:E014",
+    "son55:E015",
+    "son55:E017",
+    "son55:E021"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "a claim that a harness component helps in general",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "A single LLM (GPT-3, engine unstated) is used.",
+   "evidence_ids": [
+    "son55:E027"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": null,
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55-only; accepted: single LLM, engine unstated."
+  },
+  {
+   "id": "E04",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset."
+   ],
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "1800 simulator episodes but no repeated-seed uncertainty or paired CIs; real percentages omit definitive per-target trial counts.",
+   "evidence_ids": [
+    "sol:E004",
+    "sol:E006",
+    "sol:E007",
+    "son55:E013",
+    "son55:E014",
+    "son55:E020"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E05",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations",
+    "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+   ],
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "5 exploration turns and5m steps define cap, but no tokens/call latency/financial cost of GPT3+perception+navigation.",
+   "evidence_ids": [
+    "sol:E004",
+    "son55:E029"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "No calls/tokens/latency/USD."
+  },
+  {
+   "id": "E06",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations",
+    "- **E06 (dataset, common_practice).** For a VLN-CE harness, report SR, SPL, OSR and NE on R2R-CE val_unseen, either on the shared 100-episode zero-shot subset or the full split. State which one, and do not mix subset results with full-split numbers of trained methods as if they were matched. — _applies when_ an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent."
+   ],
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Paper is RoboTHOR described-instance ObjectNav, not R2R-CE instruction following. Use stated RoboTHOR SR/SPL and explicit in-view criterion; requiring later R2R-CE splits would change its task rather than validate it.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E004",
+    "sol:E005"
+   ],
+   "score_item": [
+    "E.measurement"
+   ],
+   "seat_status": {
+    "sol": "challenged_with_evidence",
+    "son55": null
+   },
+   "aggregate_reason": "Dataset clause not applicable to RoboTHOR; comparability clause partially violated (quoted baselines, criterion equivalence unknown)."
+  },
+  {
+   "id": "E08",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations",
+    "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Validation threshold sweep and prompt subset analysis disclosed, but same set used for final headline; no clean tuning/test separation or pretraining audit.",
+   "evidence_ids": [
+    "sol:E004",
+    "son55:E010",
+    "son55:E011",
+    "son55:E012"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E16",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check."
+   ],
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Physical phase1/phase2 localization failures and detector false positives disclosed; full reached-vs-wrong-stop and repeated-task distributions absent.",
+   "evidence_ids": [
+    "sol:E006",
+    "sol:E007",
+    "sol:E008",
+    "son55:E009",
+    "son55:E024",
+    "son55:E025"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E19",
+   "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+   "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+   ],
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Physical SR and phase failure rates given; exact trial counts not stated and staged room/object task not independent broad transfer evidence.",
+   "evidence_ids": [
+    "sol:E006",
+    "sol:E007",
+    "son55:E022",
+    "son55:E023",
+    "son55:E024"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both seats agree; Opus confirmed against the fixed text."
+  },
+  {
+   "id": "E20",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md"
+   ],
+   "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "Depth feeds only an obstacle-avoidance cost map; stop and target decisions use RGB-based GLIP, not depth.",
+   "evidence_ids": [
+    "son55:E008"
+   ],
+   "score_item": [
+    "E.measurement"
+   ],
+   "seat_status": {
+    "sol": null,
+    "son55": "not_applicable"
+   },
+   "aggregate_reason": "son55-only; accepted: depth feeds only obstacle costmap."
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "a comparison between harnesses with the model fixed",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "n_r = 5 exploration turns for LGX; baseline step/turn budgets and how GoW/FBE are budgeted are not stated.",
+   "evidence_ids": [
+    "son55:E029"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": null,
+    "son55": "unknown"
+   },
+   "aggregate_reason": "son55-only; accepted: comparator budgets not stated."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "LGX improves RoboTHOR zero-shot object navigation SR by over 27% relative to OWL CoW.",
+   "setting": "RoboTHOR validation, 1800 episodes, 15 environments, 12 categories; view-based success judged by simulator truth",
+   "baseline_control": "CoW and OWL-CoW (numbers from [3]), GLIP-on-Wheels (authors' run)",
+   "selection_vs_test": "G_th = 0.85 selected by SR on the same validation split (Table I row equals the headline row); n_r set by environment size; prompt study on 500 best/worst episodes.",
+   "result_denominator": "LGX (YOLO->LLM) SR 35.0 / SPL 21.9; GoW 33.2 / 20.3; OWL-CoW 27.5 / 17.2; CoW 15.2 / 9.7; LGX (BLIP->LLM) 28.46 / 13.5; one run each",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E010",
+    "son55:E011",
+    "son55:E012",
+    "son55:E013",
+    "son55:E014",
+    "son55:E015",
+    "son55:E016",
+    "agg:E001"
+   ],
+   "counterevidence": [
+    "the relative gain is +7.5 points of which 5.7 come from swapping the grounder to GLIP",
+    "threshold tuned on the evaluation split",
+    "possible criterion mismatch with baselines quoted from [3]"
+   ],
+   "allowed_conclusion": "A GLIP-based pipeline with LLM-chosen headings reaches SR 35.0 on RoboTHOR validation, +27% relative to the quoted OWL-CoW number; the LLM-specific contribution is +1.8 SR/+1.6 SPL on one run with a tuned stop threshold."
+  },
+  {
+   "claim_id": "C2",
+   "text": "LLM commonsense improves exploration decisions and prompt design matters.",
+   "setting": "Seven prompt variants on a subset of 500 best/worst episodes; YOLO vs BLIP front-ends",
+   "baseline_control": "GoW; random direction only in the real world",
+   "selection_vs_test": "prompt study on selected episodes of the same validation split",
+   "result_denominator": "SR 28.1-33.8 across prompts while PSR ranges 52.3-100; one run",
+   "evidence_ids": [
+    "son55:E017",
+    "son55:E018",
+    "son55:E019",
+    "son55:E020",
+    "son55:E021",
+    "son55:E030"
+   ],
+   "counterevidence": [
+    "authors state RoboTHOR is a skewed basis for this",
+    "caption variant below GoW"
+   ],
+   "allowed_conclusion": "Object-label prompts work better than caption prompts; prompt wording changes validity rate (PSR) much more than success."
+  },
+  {
+   "claim_id": "C3",
+   "text": "LGX works in the real world and beats GLIP-on-Wheels and random exploration.",
+   "setting": "TurtleBot 2, two-phase course (room -> hallway -> correct room), four rooms with staged target and common objects",
+   "baseline_control": "Random + GLIP, GLIP-on-Wheels",
+   "selection_vs_test": "scenario designed by the authors; LLM input per room staged from Table II",
+   "result_denominator": "54.2% vs 27.8% vs 6.9% (counts not reported; percentages imply about 72 trials); 20.8% Phase-2 failure; GLIP TP 87.5%, FP 8.3%",
+   "evidence_ids": [
+    "son55:E022",
+    "son55:E023",
+    "son55:E024",
+    "son55:E025",
+    "son55:E028"
+   ],
+   "counterevidence": [
+    "staged LLM inputs",
+    "no counts",
+    "authors' own scenario",
+    "LLM chooses only among closed-set labels; phase-2 inputs hand-specified"
+   ],
+   "allowed_conclusion": "In a staged two-room course LGX chose the right route more often than frontier-style and random baselines; not a measure of general L-ZSON success."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop RoboTHOR success judged by simulator truth; real-robot results lack trial counts and use staged LLM inputs; threshold tuned on the reported split. No transfer.",
+  "claim_support": "scoped",
+  "author_claim_preserved": "LGX (Language-guided Exploration) combines GPT-3 commonsense decisions about where to explore, taken from detector object labels or image captions, with GLIP open-vocabulary grounding to solve language-driven zero-shot object navigation (L-ZSON): state-of-the-art RoboTHOR results (over 27% SR improvement over OWL CoW), a study of prompt strategies, and the first real-world L-ZSON evaluation on a TurtleBot.",
+  "strongest_supported_claim": "On RoboTHOR validation (1800 episodes, one run), swapping the grounder to GLIP gives most of the improvement over OWL-CoW (27.5 -> 33.2 SR), and adding GPT-3 heading selection over YOLO labels adds a further +1.8 SR/+1.6 SPL with a stop threshold tuned on that same split; the claim that LLM-guided exploration explains the 27% gain is not supported.",
+  "unresolved": [
+   "Success-criterion equivalence with quoted CoW baselines",
+   "LLM engine and decoding",
+   "real-world trial counts"
+  ],
+  "reproduction": "author_report only; no reproduction by us"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Resolved toward son55 (sol 3). The grounding gap is real and supported (OWL-CoW 27.5 -> GoW 33.2 with the same frontier exploration), but the paper's own contribution is the exploration gap, which is asserted rather than located: GoW already reaches 33.2, LM-Nav/VLMaps/ZSON are described not compared, and the authors concede RoboTHOR is a skewed basis for context-dependent exploration. Anchor 2: real limitation, incomplete residual.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E004",
+    "son55:E005",
+    "son55:E014",
+    "son55:E015",
+    "son55:E020"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Resolved toward son55 (sol 3). Concrete mechanism (rotate, YOLO labels, LLM picks a label/direction, GLIP stops) with a commonsense co-occurrence rationale and a distinguishable prediction vs frontier exploration, but key assumptions are thin: the LLM chooses only among closed-set labels (agg:E003), has no visit history (loops reported), invalid outputs fall back to a random direction, and the 'mapless' rationale conflicts with the costmap step (agg:E002). Anchor 2: mechanism with partial causal story, weak key assumptions.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E007",
+    "son55:E008",
+    "son55:E026",
+    "agg:E002",
+    "agg:E003"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Resolved toward son55 (sol 3). Main steps and prompts are given, but conditions needed to reproduce or bound the result are missing: GPT-3 engine/decoding, YOLO-branch rotation resolution, GoW/FBE budgets and threshold, whether quoted CoW numbers share the target-in-view success criterion, and the real-world phase-2 LLM input is a staged object list rather than live detections. Anchor 2: main steps described, key conditions unclear.",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E022",
+    "son55:E027",
+    "son55:E029",
+    "sol:E003"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed. Simulator-truth target-in-view success over 1800 episodes, but the criterion differs from stop-near-goal ObjectNav, CoW/OWL-CoW numbers are quoted from [3], and real-world denominators are unstated.",
+    "evidence_ids": [
+     "sol:E003",
+     "son55:E009",
+     "son55:E012",
+     "son55:E015",
+     "son55:E023"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both 2; confirmed. GoW isolates the LLM exploration with the grounder fixed: +1.8 SR / +1.6 SPL, single run with a threshold tuned on the same set; BLIP variant below GoW; the abstract's 27% is mostly the grounder swap (27.5 -> 33.2).",
+    "evidence_ids": [
+     "son55:E014",
+     "son55:E015",
+     "son55:E016",
+     "son55:E017",
+     "son55:E018"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both 1; confirmed. Stop threshold chosen on the reported validation split (agg:E001), prompt study on best/worst episodes of that split, no separate test set, staged real-world inputs.",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E011",
+     "son55:E019",
+     "son55:E022",
+     "agg:E001"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both 1; confirmed. Single run, no variance/CI, 'no significant difference' without a test; real-world phase failure shares and GLIP FP/FN without counts.",
+    "evidence_ids": [
+     "son55:E013",
+     "son55:E020",
+     "son55:E024",
+     "son55:E025"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Revised (sol 2, son55 0/not_reported). Not not_reported: the exploration cap (n_r = 5 turns, e_d = 5 m) bounds LGX at five LLM queries per episode, which is applicable partial budget evidence (son55:E029, sol:E004). Not 2: unlike the anchor-2 instance and DEPS in this batch, the comparators' budgets (FBE/GoW steps, thresholds) are not stated, so budget fairness cannot be judged, and no call/latency/time figures exist. Placed at 1 on the anchor scale for these reasons, not by averaging the seats.",
+    "evidence_ids": [
+     "son55:E029",
+     "sol:E004"
+    ],
+    "counterevidence_ids": [
+     "son55:E027"
+    ],
+    "search_scope": []
+   }
+  }
+ },
+ "resolutions": [
+  {
+   "field_path": "ratings.G",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "Exploration residual (the paper's own contribution) not located; grounder residual is inherited from the detector swap.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E020"
+   ],
+   "score_impact": "-3.75 raw vs sol"
+  },
+  {
+   "field_path": "ratings.M",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "Closed-set label choice, no history, random fallback, 'mapless' inconsistency.",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E026",
+    "agg:E002",
+    "agg:E003"
+   ],
+   "score_impact": "-5.0 raw vs sol"
+  },
+  {
+   "field_path": "ratings.X",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "Engine/decoding, baseline budgets and success-criterion equivalence unknown; staged real-world inputs.",
+   "evidence_ids": [
+    "son55:E022",
+    "son55:E027",
+    "son55:E029"
+   ],
+   "score_impact": "-5.0 raw vs sol"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 2,
+   "son55_value": 0,
+   "decision": "revised",
+   "final_value": 1,
+   "reason": "Turn cap is partial budget evidence (rules out not_reported); missing comparator budgets rule out the anchor-2 band. See rating reason.",
+   "evidence_ids": [
+    "son55:E029",
+    "sol:E004"
+   ],
+   "score_impact": "+1.25 raw vs son55, -1.25 vs sol"
+  },
+  {
+   "field_path": "rs_pattern.primary",
+   "sol_value": "adapt_via_conditioning",
+   "son55_value": "decompose_and_delegate",
+   "decision": "sol",
+   "final_value": "adapt_via_conditioning",
+   "reason": "The exploration/grounding/motion decomposition is inherited unchanged from CoW/GoW (the closest neighbours run the same split), so it is not the paper's differentiating operation. What LGX changes is the exploration decision: a new free-form target plus current scene labels are expressed as prompt conditioning to a frozen LLM, solved at inference without training (sol:E002, agg:E003). The decomposition is executed and structures the stop gate, so decompose_and_delegate is kept as supporting with sub_id null (C25 needs a verifiable artifact closing the loop; the LLM choice has no checker).",
+   "evidence_ids": [
+    "sol:E002",
+    "son55:E003",
+    "son55:E017",
+    "agg:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    null
+   ],
+   "son55_value": [
+    null
+   ],
+   "decision": "same_supported_fact",
+   "final_value": {
+    "primary_sub": null,
+    "supporting": "decompose_and_delegate/sub null"
+   },
+   "reason": "Both seats leave the sub null for their chosen card: C03 needs an upstream schema-parsing phase or reference substrate (absent); C25 needs verification closure (absent).",
+   "evidence_ids": [
+    "sol:E002",
+    "son55:E007"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "K104",
+    "K109",
+    "K202"
+   ],
+   "son55_value": [
+    "K109",
+    "K104"
+   ],
+   "decision": "revised",
+   "final_value": [
+    "K104",
+    "K109",
+    "K202"
+   ],
+   "reason": "K104 and K109 agreed. K202 kept from sol as partial: GLIP confidence acts as a completion monitor that ends exploration and each 5 m step hands control back to the LLM decision; not K201 (no LLM proposal is gated). son55's unassigned 'LLM as semantic search prior over detected labels' and its pending proposal are retained.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E009",
+    "son55:E009"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E05.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No calls/tokens/latency/USD; only the turn cap (credited in E.cost).",
+   "evidence_ids": [
+    "son55:E029"
+   ],
+   "score_impact": "none beyond E.cost"
+  },
+  {
+   "field_path": "expectations.E06.status",
+   "sol_value": "challenged_with_evidence",
+   "son55_value": null,
+   "decision": "revised",
+   "final_value": "partial",
+   "reason": "The R2R-CE split requirement does not fit RoboTHOR ObjectNav (sol's challenge accepted), but the expectation's 'do not mix incomparable numbers' part applies: CoW/OWL-CoW numbers are quoted from [3] while LGX uses a target-in-view criterion whose equivalence is not shown.",
+   "evidence_ids": [
+    "sol:E003",
+    "son55:E009",
+    "son55:E015"
+   ],
+   "score_impact": "consistent with E.measurement=2"
+  },
+  {
+   "field_path": "score.display",
+   "sol_value": 60.0,
+   "son55_value": 43.8,
+   "decision": "revised",
+   "final_value": 45.0,
+   "reason": "Recomputed from final ratings (raw 45.0).",
+   "evidence_ids": [],
+   "score_impact": "display only"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "field_path": "assessment.claim_support / headline attribution",
+   "seats_value": "Both scoped and both attribute most of the 27% to the GLIP swap.",
+   "correction": "Confirmed; added that the LLM only chooses among closed-set YOLO labels (agg:E003) and that the paper's 'mapless' exploration claim conflicts with its costmap step (agg:E002). Scope answered: in scope as a navigation harness with perception tools and an external stop gate, borderline because the LLM's role is a single label choice.",
+   "evidence_ids": [
+    "agg:E002",
+    "agg:E003",
+    "son55:E014"
+   ],
+   "score_impact": "supports M=2",
+   "type": "shared_omission"
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "status": "reviewed",
+ "status_reason": "Complete fixed text read; all substantive differences resolved; eight items resolved.",
+ "provenance": {
+  "input_hash": "2b0190dafe2244e68da9e68a9434358ea9f4f6e9750509ab7d6fbb98b9e68638",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_taxonomy_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "seat_card_hash_notes": {
+   "sol": {
+    "domain_cards_hash": "60e8948f2033bcdf44cbc892aa3c9b1b4904cb8e98b6b18927e463a6b72f399a",
+    "expectations_hash": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+    "method": "canonical hash of selected card files / embedded expectation blocks"
+   },
+   "son55": {
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+    "method": "sha256(taxonomy.json) / sha256(cat patterns/main/*.md)"
+   },
+   "assessment": "Different hashing methods over the same card set, not different inputs; son55 domain hash equals run manifest domain_taxonomy hash. Same input_hash and material sha256 in both seats."
+  },
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "timestamp": "2026-10-22",
+  "anchoring_disclosure": "conflicts.json (which lists both seats' raw scores and item diffs) was opened before the papers were read; for each paper the full text was then read and a preliminary evidence judgment formed before that paper's seat records were opened. This is an aggregate review with two seat inputs, not a third blind review or human gold."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2303.03480v2",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2303.03480.txt",
+   "sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30",
+   "sections_read": [
+    "complete supplied html-full extraction (all sections and appendices present in the file)"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "note": "Figures are captions only in the extraction; no figure values used unless restated in text."
+  }
+ ],
+ "input_seat_hashes": {
+  "sol": "c4f936661c85f9abb6bd63885125d64274179200c5ae2d6456d2b3275a05f12b",
+  "son55": "f96516c0b2af943abe697078d96deadea09c4a057aa67e535b60fd929c649d99"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session_id": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_session_note": "Subagent cannot read its own session id or receipt; none fabricated, no probing.",
+ "score": {
+  "raw": 45.0,
+  "display": 45.0,
+  "lower": 45.0,
+  "upper": 45.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ecost)/4; display=python round(raw,1); raw is authoritative",
+  "designation": "production-under-anchors-v2"
+ },
+ "final_record_hash": "c6c7223d19362cdc998708e6b23ffdd920e5297ac695a336554d807cc4269151"
+}

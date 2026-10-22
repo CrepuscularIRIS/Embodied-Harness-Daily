@@ -1,0 +1,940 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2201.07207",
+  "paper_id": "2201.07207",
+  "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents",
+  "version": "2201.07207v2",
+  "claim_type": "system_method",
+  "central_claim": "Pre-trained LLMs can decompose high-level household tasks into mid-level plans without training; a frozen-model inference procedure (semantic translation to admissible actions + step-wise autoregressive correction + retrieval of the most similar demonstration) raises VirtualHome plan executability from about 18% to 79% at a measurable cost in human-judged correctness."
+ },
+ "provenance": {
+  "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": {
+   "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+   "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+  },
+  "expectations_hash": null,
+  "expectations_hash_reason": "no independent expectations file in repo (profile/expectations.json absent); E01-E22 read as transcribed in patterns/main/*.md, covered by domain_cards_hash.overview/conditions",
+  "anchors_hash": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "session_id_reason": "subagent cannot read its own session id; no receipt available to the worker",
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T01:50:00Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; production-under-anchors-v2, not a frozen rubric; blind seat: sol outputs / aggregate / calibration / archive / old scores not read"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/pdf/2201.07207v2",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2201.07207.txt",
+   "sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Evaluation Framework",
+    "3 Method",
+    "4 Results",
+    "5 Analysis and Discussions",
+    "6 Related Works",
+    "7 Conclusion, Limitations & Future Work",
+    "Appendix A.1-A.5"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "status": "reviewed",
+ "status_reason": "full text with appendix A.1-A.5 read; in-scope but borderline (plan-level LLM harness for a simulated household humanoid agent; no low-level control, no observation loop)",
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "locator": "Abstract",
+   "quote": "they can effectively decompose high-level tasks into mid-level plans without any further training",
+   "support_explanation": "central observation: frozen LLMs plan at mid level with no training",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "locator": "1 Introduction",
+   "quote": "we improve executability of action plans from 18% to 79%",
+   "support_explanation": "headline claim of the procedure",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "locator": "1 Introduction",
+   "quote": "we enumerate all admissible actions and map the model",
+   "support_explanation": "operation 1: semantic translation of generated phrases to the admissible action set",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "locator": "3.3 Autoregressive Trajectory Correction",
+   "quote": "we can instead interleave plan generation and action translation to allow for automatic trajectory correction",
+   "support_explanation": "operation 2: step-wise interleave; the translated action conditions later steps",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "locator": "3.4 Dynamic Example Selection",
+   "quote": "we propose to select the most similar task T and its example plan E from the demonstration set to be used as the example in the prompt",
+   "support_explanation": "operation 3: retrieval-selected one-shot example",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "locator": "2.1 Evaluated Tasks",
+   "quote": "There are 292 distinct high-level tasks in the knowledge base, from which we randomly sample 88 held-out tasks for evaluation.",
+   "support_explanation": "evaluation set and denominator; demo set 204 tasks",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "locator": "4 Results Table 1",
+   "quote": "Vanilla Codex 12B 18.07% 16.97% 64.87% (5.41%)",
+   "support_explanation": "baseline: executability 18.07, LCS 16.97, human correctness 64.87",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "locator": "4 Results Table 1",
+   "quote": "Translated Codex 12B 78.57% 24.72% 54.88% (5.90%)",
+   "support_explanation": "method: executability 78.57, correctness drops to 54.88",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "locator": "4 Results Table 1",
+   "quote": "Vanilla GPT-3 175B 7.79% 17.82% 77.86% (6.42%)",
+   "support_explanation": "baseline GPT-3 175B: executability 7.79, correctness 77.86",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "locator": "4 Results Table 1",
+   "quote": "Translated GPT-3 175B 73.05% 24.09% 66.13% (8.38%)",
+   "support_explanation": "method GPT-3 175B: executability 73.05, correctness 66.13",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "locator": "4 Results Table 1",
+   "quote": "Fine-tuned GPT-3 13B 66.07% 34.08% 64.92% (5.96%)",
+   "support_explanation": "supervised baseline: executability 66.07, LCS 34.08 (higher than method), correctness 64.92",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "locator": "5.1 Table 2",
+   "quote": "Translated Codex 12B 78.57% 24.72% - w/o Action Translation 31.49% 22.53% - w/o Dynamic Example 50.86% 22.84% - w/o Trajectory Correction 55.19% 24.43%",
+   "support_explanation": "leave-one-out ablation, same planner LM and tasks",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "locator": "4 Results, Sampling from LMs",
+   "quote": "To select the best run for each method, we rank the runs by the sum of LCS and executability, each normalized by human-expert scores.",
+   "support_explanation": "best-run selection uses the same 88 evaluation tasks (hyperparameter search on evaluation set)",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "locator": "7 Limitations, Mid-Level Grounding",
+   "quote": "we assume there is a low-level controller that can execute these mid-level actions",
+   "support_explanation": "no low-level control; plan-level only",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "locator": "7 Limitations, Ignorant of Environment Context",
+   "quote": "We do not incorporate observation context or feedback into our models.",
+   "support_explanation": "open-loop, no observation",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "locator": "2.2 Metrics",
+   "quote": "Executability measures whether an action plan can be correctly parsed and satisfies the common-sense constraints of the environment.",
+   "support_explanation": "executability = environment precondition/syntax check, not task completion",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "locator": "4.3",
+   "quote": "the programs are deemed less correct by humans compared to their vanilla counterparts",
+   "support_explanation": "authors concede the executability-correctness trade-off",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "locator": "4.1",
+   "quote": "we ask 10 human annotators to determine",
+   "support_explanation": "correctness judged by 10 MTurk raters on plan text",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "locator": "3.1",
+   "quote": "repetitive trial-and-error is equivalent to probing the environment for privileged information, which should not be considered viable in our setting",
+   "support_explanation": "single-sample protocol; no env feedback or trial-and-error",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "locator": "4.3",
+   "quote": "leaving minor computation overhead for our procedure over the baseline methods at inference time",
+   "support_explanation": "only qualitative cost statement",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "locator": "4.2",
+   "quote": "the majority of these executable plans are produced by ignoring the queried task and repeating the given example of a different task",
+   "support_explanation": "small-model executability is spurious; shows executability alone is gameable",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "locator": "5.2",
+   "quote": "Human-written plans are 100% executable, of which 65.91% are deemed correct.",
+   "support_explanation": "human reference ceiling for the combined metric",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "locator": "6 Related Works",
+   "quote": "relevant works [ 38 , 25 ] rely on human-annotated data and perform supervised training from scratch",
+   "support_explanation": "lineage: supervised VirtualHome baselines",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "locator": "6 Related Works",
+   "quote": "Concurrent work by Li et al. [24] validates similar hypothesis that LMs contain rich actionable knowledge.",
+   "support_explanation": "closest concurrent neighbor: fine-tuned GPT-2",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "locator": "5.3 Table 3",
+   "quote": "Avg. GloVe embeddings - 46.92% 9.71%",
+   "support_explanation": "Translation LM choice matters: GloVe far below Sentence-BERT/RoBERTa",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "locator": "5.5 Table 7",
+   "quote": "Translated Codex 12B 78.57% 7.13 Translated GPT-3 175B 73.05% 7.36 Human 100.00% 9.66",
+   "support_explanation": "program-length check: gain is not from very short programs",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "locator": "Appendix A.1",
+   "quote": "For each evaluated method, we perform grid search over the following hyperparameters",
+   "support_explanation": "per-method hyperparameter search (all methods), sampling grid",
+   "kind": "author_report",
+   "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc"
+  }
+ ],
+ "scope_note": "borderline: embodied agent in VirtualHome with LLM + external admissible-action projection (harness-like), but plan is open-loop and low-level controller is assumed; kept in scope because LLM planning with an action gate for an embodied simulator is the object of the radar's interface/verification cards",
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Planner-LM output stream for VirtualHome: free-form step phrases mapped to the 47,522-step admissible bank (42 atomic actions x allowed arguments)",
+   "information": "task name + one example plan in natural-language templates; no observation, no environment feedback, no gradients; admissible action bank enumerated offline",
+   "operation": "sample k single-step phrases from Planning LM; score each admissible action a_e by cosine(Translation-LM embedding) + beta * mean token log-prob; append argmax to prompt; repeat",
+   "output": "sequence of admissible actions (executable VirtualHome program)",
+   "conditions": "action space enumerable; one instance per object class; low-level controller assumed",
+   "feedback": "none from environment; only embedding similarity score",
+   "selection_rule": "argmax over a_e of max_a C + beta*P; early termination if best score < epsilon or >50% zero-length samples",
+   "selection_data": "no data; epsilon/beta/k/temperature grid-searched on the 88 evaluation tasks (E013, E027)",
+   "persistence": "none across tasks; translated actions persist only inside the current prompt",
+   "later_use": "conditions later steps of the same plan only",
+   "claimed_effect": "executability 18.07->78.57 (Codex 12B), 7.79->73.05 (GPT-3 175B)",
+   "failure_boundary": "compounded instructions mapped poorly; premature termination; expressivity limits of VirtualHome; correctness drop",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E012",
+    "E017"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Prompt example for the Planning LM",
+   "information": "204-task demonstration set with plans (the 88 evaluation tasks excluded)",
+   "operation": "embed task names with the Translation LM; pick the nearest demonstration; prepend as the single example",
+   "output": "per-query one-shot prompt",
+   "conditions": "a demo set covering similar tasks",
+   "feedback": "none",
+   "selection_rule": "max cosine similarity of task names",
+   "selection_data": "demonstration set only",
+   "persistence": "demo set fixed",
+   "later_use": "each query re-retrieves",
+   "claimed_effect": "removing it drops Codex executability 78.57->50.86 (Table 2)",
+   "failure_boundary": "no analysis of coverage/similarity sensitivity of the demo set",
+   "evidence_ids": [
+    "E005",
+    "E012"
+   ]
+  }
+ ],
+ "retention_trace": {
+  "applicable": false,
+  "reason": "static inference-time planning procedure; no candidate-change selection or persisted harness state across tasks (demo set is fixed input)"
+ },
+ "gap": {
+  "author_gap": "plans produced naively by LLMs often cannot map precisely to admissible actions; prior work needed explicit step-by-step supervision",
+  "checked_gap": "confirmed by the paper's own Table 1: vanilla GPT-3 175B executability 7.79%, Codex 12B 18.07% (E007, E009); bottleneck is grounding of free-form output, with smaller models only appearing executable by copying the prompt example (E021)",
+  "lineage": {
+   "ancestors": [
+    "supervised VirtualHome program synthesis (Puig et al.; LSTM, LCS 34% with step-by-step instructions)",
+    "GPT-3/Codex few-shot prompting"
+   ],
+   "closest_adjacent": [
+    {
+     "item": "Li et al. concurrent GPT-2 fine-tuning in VirtualHome",
+     "source": "2201.07207v2 Sec 6 (E024)",
+     "note": "cited only, not read"
+    },
+    {
+     "item": "SayCan 2204.01691v2 (concurrent, grounds by value functions, real robot)",
+     "source": "pinned batch p001 material",
+     "note": "cites this paper as Huang et al. and treats it as the Generative baseline"
+    }
+   ],
+   "method_note": "closeness judged only from pinned local texts; no external search performed, so absence of other neighbors is not evidence of novelty"
+  },
+  "residue": "executability gain is bought with a correctness drop (Codex 64.87->54.88); no observation or failure feedback; mid-level grounding only; evaluation set doubles as hyperparameter-selection set",
+  "stakes": "whether LLM world knowledge can be turned into executable embodied plans without domain training",
+  "method_response": "translation+step-wise correction directly targets inadmissible output; dynamic example targets environment-specific assumptions (e.g. ordering pizza)",
+  "remaining_gap": "correct and executable plans remain far below humans (Fig. 4 text: gap to 65.91%); grounding to sensorimotor level and environment state is explicitly left out (E014, E015)",
+  "evidence_ids": [
+   "E002",
+   "E007",
+   "E009",
+   "E014",
+   "E015",
+   "E021",
+   "E022",
+   "E023",
+   "E024"
+  ],
+  "unresolved": [
+   "whether the approach transfers beyond VirtualHome (untested)",
+   "pretraining contamination of GPT-3/Codex with VirtualHome-style plans (not discussed)"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "adapt_via_conditioning",
+  "supporting": [
+   "decompose_and_delegate"
+  ],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": "rs:C03",
+    "namespace": "rs",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "step1 canonical conditioning schema: executed (task-name + natural-language action templates, A.4)",
+     "step2 reference substrate: executed (204-task demo set, nearest-neighbor retrieval)",
+     "step3 upstream tuning: not executed; the card's skip-tuning variant (retrieve nearest reference instances) applies",
+     "step4 category-level holdout and contamination audit: not executed (instance-level random 88-task split; no overlap audit)",
+     "step5 cheaper baseline under equal budget: partial (fixed-example vanilla; fine-tuned GPT-3 13B; no longer-context/NN-only baseline)"
+    ],
+    "success_failure_checks": [
+     "ablation toggling the conditioning signal: met (w/o Dynamic Example 78.57->50.86, Table 2)",
+     "structural/category holdout: unmet",
+     "contamination audit before zero-shot claim: unmet/unknown"
+    ],
+    "evidence_ids": [
+     "E001",
+     "E005",
+     "E006",
+     "E012"
+    ],
+    "reason": "the actual operation is frozen-model use with an in-context, retrieval-selected demonstration and a prompt conditioned on translated actions; it fits the C03 retrieval sub-move but not its trained-schema core"
+   },
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": null,
+    "namespace": "rs",
+    "role": "supporting",
+    "fit": "weak",
+    "tactic_steps_checked": [
+     "C25 step2 typed machine-checkable artifact: partial (admissible VirtualHome action is a typed artifact)",
+     "C25 step3 close loop with solver verifiable output: not executed (no execution feedback in generation)",
+     "C25 step4 ablate verification step: partly (action-translation ablation)"
+    ],
+    "success_failure_checks": [
+     "solver is sound: unmet (embedding-similarity projection is a soft learned mapper)"
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E012",
+     "E015"
+    ],
+    "reason": "needed for the distinct projection operation; sub C25 not assigned because the card's load-bearing move (verifier-closed loop) is absent"
+   }
+  ],
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "conditioning/retrieval and an external projection are executed, but without a trained schema, category holdout or verifier closure",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E012"
+   ]
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "executability gap is largely closed (73-79%) but correctness regresses and tasks are still short of the human-level combined metric",
+   "evidence_ids": [
+    "E008",
+    "E010",
+    "E017",
+    "E022"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "version": "domain:embodied taxonomy sha256 daf38e57",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "id": "observe_act_interface.S4",
+      "polarity": "success",
+      "status": "partial",
+      "note": "model output restricted to a 42-verb x object vocabulary via projection, but the executor below the vocabulary is only assumed (E014) so reliability over executor is untested",
+      "evidence_ids": [
+       "E003",
+       "E014"
+      ]
+     },
+     {
+      "id": "observe_act_interface.F4",
+      "polarity": "failure",
+      "status": "unmet",
+      "note": "components are toggled one at a time (Table 2), so the interface-bundle failure is not present",
+      "evidence_ids": [
+       "E012"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E014"
+    ]
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K201",
+    "fit": "weak",
+    "condition_checks": [
+     {
+      "id": "external_verification_control.S1",
+      "polarity": "success",
+      "status": "partial",
+      "note": "a cheap checker exists (similarity threshold epsilon rejecting inadmissible steps) but it checks vocabulary closeness, not action validity against state",
+      "evidence_ids": [
+       "E004"
+      ]
+     },
+     {
+      "id": "external_verification_control.F1",
+      "polarity": "failure",
+      "status": "met",
+      "note": "the checker is a weak proxy: correctness drops while executability rises",
+      "evidence_ids": [
+       "E017"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E004",
+     "E017"
+    ]
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": [
+   {
+    "type": "none_actionable",
+    "note": "retrieval-selected one-shot demonstration has no embodied card; single paper, so no candidate_pattern proposal (needs >=2 independent full-text papers)"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": "rs:C03",
+   "domain": {
+    "namespace": "embodied",
+    "main": null,
+    "sub": null
+   },
+   "operation_correspondence": "retrieval of nearest demonstration into the prompt has no matching embodied domain card; recorded as unassigned for this operation",
+   "necessary_conditions_and_differences": "domain cards K1xx-K8xx concern interfaces, verification, memory and training; none covers in-context example selection",
+   "evidence_ids": [
+    "E005",
+    "E012"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "free-form model output is projected onto a fixed discrete action vocabulary (47,522 steps) each step, as in K104's restriction of output to a semantic vocabulary",
+   "necessary_conditions_and_differences": "K104 assumes a reliable executor under the vocabulary and a vocabulary imposed at decode time; here the projection is post-hoc per step with a similarity threshold, and the executor is assumed, not built or tested",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E014"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K201"
+   },
+   "operation_correspondence": "reject-or-dispatch of a proposal by a cheap checker (epsilon threshold terminates instead of mapping to a faulty action)",
+   "necessary_conditions_and_differences": "K201 requires a checker whose pass condition correlates with task success; the similarity check does not use environment state and the reject path ends the plan rather than returning structured feedback",
+   "evidence_ids": [
+    "E004",
+    "E017"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "patterns/main (profile/expectations.json absent)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "claim that a harness raises embodied success over another loop",
+   "applicable": true,
+   "status": "partial",
+   "reason": "compared against vanilla prompting and a fine-tuned GPT-3 13B on the same tasks, but no alternative harness; fine-tuned baseline has higher LCS",
+   "evidence_ids": [
+    "E007",
+    "E011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "claim that a component causes the gain",
+   "applicable": true,
+   "status": "met",
+   "reason": "leave-one-out ablation of translation, dynamic example and trajectory correction with the planner LM fixed",
+   "evidence_ids": [
+    "E012"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "claim a component helps in general",
+   "applicable": true,
+   "status": "met",
+   "reason": "effect shown for Codex 12B and GPT-3 175B (and a spread of smaller LMs in vanilla form)",
+   "evidence_ids": [
+    "E008",
+    "E010"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "success-rate comparisons",
+   "applicable": true,
+   "status": "partial",
+   "reason": "SEM over 10 annotators for correctness and averages over 3 prompt examples; no CI/variance for executability, best-run selection reported",
+   "evidence_ids": [
+    "E007",
+    "E013",
+    "E018"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "claim a harness is better or more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "only a qualitative 'minor computation overhead'; k-sample step-wise generation cost not quantified",
+   "evidence_ids": [
+    "E020"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "frontier-model benchmark claim",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "hyperparameters chosen by evaluation-set score; no pretraining-contamination discussion",
+   "evidence_ids": [
+    "E013",
+    "E027"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "success claim with a stop/termination rule",
+   "applicable": true,
+   "status": "partial",
+   "reason": "qualitative failure causes (compound instructions, early termination) and a small-model copy-the-example failure analysis, no per-endpoint counts",
+   "evidence_ids": [
+    "E017",
+    "E021"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md"
+   ],
+   "applies_when": "physical robot transfer claim",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "simulation-only plan-level study; no robot transfer claim is made",
+   "evidence_ids": [
+    "E014"
+   ],
+   "score_item": null
+  },
+  {
+   "id": "E22",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md"
+   ],
+   "applies_when": "harness vs harness at fixed model",
+   "applicable": true,
+   "status": "partial",
+   "reason": "same hyperparameter grid and one-sample protocol for all methods (E019, E027), but call counts differ (step-wise k samples) and are not reported",
+   "evidence_ids": [
+    "E019",
+    "E027"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "large LMs produce plausible, human-rated-correct plans for high-level tasks without training",
+   "setting": "VirtualHome, 88 held-out tasks, 10 MTurk raters, one fixed example",
+   "baseline_control": "human-written plans (70.05%)",
+   "selection_vs_test": "hyperparameters/best run chosen on the same 88 tasks",
+   "result": "Vanilla GPT-3 175B correctness 77.86% (SEM 6.42) vs human 70.05%; executability 7.79%",
+   "evidence_ids": [
+    "E009",
+    "E018",
+    "E022"
+   ],
+   "counterevidence": [
+    "human plans are limited by environment expressivity (only 70% judged complete)",
+    "correctness is rater judgment of plan text, not execution"
+   ],
+   "allowed_conclusion": "plan-level plausibility as judged by crowd raters"
+  },
+  {
+   "claim_id": "C2",
+   "text": "translation + step-wise correction + dynamic example raise executability without training",
+   "setting": "same",
+   "baseline_control": "Vanilla LM with fixed example; fine-tuned GPT-3 13B",
+   "selection_vs_test": "as above",
+   "result": "Codex 12B 18.07->78.57; GPT-3 175B 7.79->73.05; fine-tuned GPT-3 13B 66.07",
+   "evidence_ids": [
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011"
+   ],
+   "counterevidence": [
+    "human correctness falls 64.87->54.88 (Codex) and 77.86->66.13 (GPT-3)",
+    "fine-tuned GPT-3 13B has higher LCS (34.08 vs 24.72) at comparable correctness"
+   ],
+   "allowed_conclusion": "executability (environment precondition validity) improves strongly; semantic correctness regresses"
+  },
+  {
+   "claim_id": "C3",
+   "text": "each of the three components contributes",
+   "setting": "ablation on Codex 12B and GPT-3 175B",
+   "baseline_control": "full method",
+   "selection_vs_test": "same 88 tasks",
+   "result": "w/o Action Translation 31.49; w/o Dynamic Example 50.86; w/o Trajectory Correction 55.19 (Codex)",
+   "evidence_ids": [
+    "E012"
+   ],
+   "counterevidence": [
+    "correctness not reported for ablated variants",
+    "GPT-3 w/o trajectory correction raises LCS slightly (24.98 vs 24.09)"
+   ],
+   "allowed_conclusion": "all three help executability; translation is the largest"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "offline",
+  "evidence_level_reason": "plans are generated open-loop; executability is a simulator precondition check and correctness is crowd judgment of plan text; no task-success measured by execution (EVIDENCE: offline = plan text scoring / static action accuracy)",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "In VirtualHome, with frozen Codex/GPT-3 and no training, a translation-projected, step-wise, retrieval-prompted procedure makes plans far more executable (about 18->79 and 8->73) at a measured loss of human-judged correctness",
+  "author_claim_kept": "extracting actionable knowledge for embodied agents without training",
+  "unresolved": [
+   "task success under execution",
+   "transfer beyond VirtualHome",
+   "contamination",
+   "cost"
+  ],
+  "reproduction": "all numbers are author-reported; nothing was run by us"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "specific, sourced bottleneck (inadmissible free-form output) with nearest neighbors named (supervised VirtualHome work, concurrent fine-tuned GPT-2) and honest residue (correctness drop, mid-level only); SayCan-style value grounding and observation feedback are absent so the nearest-neighbor comparison is incomplete",
+   "evidence_ids": [
+    "E002",
+    "E007",
+    "E009",
+    "E021",
+    "E023",
+    "E024"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "each operation targets a named failure (non-admissible phrasing, compounded steps, ambiguity of environment conventions) and ablation/embedding-choice results give distinguishable predictions; assumptions (enumerable action set, single instance per class, low-level controller) are stated but the soft-similarity check is only a weak proxy for validity",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E012",
+    "E025"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Algorithm 1, templates (A.4), grids (A.1) and prompts make the chain reconstructable; conditions and failure boundary (compound instructions, premature stop, no observation, no controller) are explicit; no persistence/selection to trace; beta/epsilon values chosen on the evaluation tasks",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E013",
+    "E014",
+    "E015",
+    "E027"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "executability has an environment-defined verifier and complete denominators (88 tasks x 7 scenes); correctness uses 10 raters with SEM and a human-plan reference; metrics are matched to the plan-level claim. Not closed-loop task success (that is carried by evidence_level=offline, not double-counted); LCS is an imperfect proxy; per-task numbers not shown",
+    "evidence_ids": [
+     "E006",
+     "E016",
+     "E018",
+     "E022"
+    ],
+    "counterevidence_ids": [
+     "E021"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "leave-one-out ablations, Translation-LM swap (GloVe 46.92 vs SBERT/RoBERTa 73-79), program-length control and the repeat-the-example diagnostic address shortcuts; correctness not reported for ablations; fine-tuned GPT-3 13B is competitive on LCS and executability 66%",
+    "evidence_ids": [
+     "E012",
+     "E025",
+     "E026",
+     "E021"
+    ],
+    "counterevidence_ids": [
+     "E011"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "88 tasks are held out from the demo set, but the best run and sampling hyperparameters are selected by score on those same tasks and all scenes are the same simulator; no unseen environment, no pretraining-overlap audit",
+    "evidence_ids": [
+     "E006",
+     "E013"
+    ],
+    "counterevidence_ids": [
+     "E027"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "denominators are given and correctness has SEM across annotators, fixed-example baselines average three prompts; executability has no variance/CI and failure analysis is qualitative",
+    "evidence_ids": [
+     "E007",
+     "E018",
+     "E013"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "only a qualitative 'minor computation overhead'; no call/token/latency counts, though all methods share the same one-sample protocol and hyperparameter grid",
+    "evidence_ids": [
+     "E020",
+     "E019"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": 68.75,
+  "display": 68.8,
+  "lower": 68.75,
+  "upper": 68.75,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}

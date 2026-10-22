@@ -1,0 +1,770 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p003",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2305.11176",
+    "paper_id": "2305.11176",
+    "title": "Instruct2Act: Mapping Multi-modality Instructions to Robotic Actions with Large Language Model",
+    "version": "2305.11176v3",
+    "claim_type": "system_method",
+    "central_claim": "Instruct2Act is a general-purpose robotic framework that maps multimodal instructions to executable perception-and-action Python with LLMs and foundation-model APIs, attaining competitive performance on six VIMABench meta-tasks without task-specific model training."
+  },
+  "provenance": {
+    "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "53e9d5618195e7f916265b5fd008e8c646465f741b40f4e20ce48c163b83400e",
+    "expectations_hash": "02156273b8a00c1cd040912c091d79f871d1e492b3643dd16953a1bc4aa5d7c7",
+    "asset_hash_scheme": "SHA256(canonical JSON relative-path -> SHA256(file bytes), sort_keys UTF8 ensure_ascii=false compact)",
+    "domain_card_assets": {
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+      "patterns/sub/K105.md": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b",
+      "research/patterns/conditions.json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "research/patterns/taxonomy.json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e"
+    },
+    "expectation_assets": {
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825"
+    },
+    "rs_assets": {
+      "research/reference/researchstudio-15-31/MANIFEST.tsv": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "research/reference/researchstudio-15-31/PARENTS.tsv": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+      "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+      "research/reference/researchstudio-15-31/ideation-patterns/unify_into_shared_representation.md": "ebba3230237271e37d5280030ad147493deed2605fe53f5324f3ebb70f1d599c"
+    },
+    "expectations_note": "Expectations are embedded in fixed main cards; no standalone expectations asset. Historical reviewer expectations are source-derived checks, not evidence of this paper's review outcome.",
+    "model_type": "sonnet",
+    "model_type_description": "sonnet type overlay gpt-6.1-sol (6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "actual_model_basis": "Assigned runtime identity; no model probing or reconfiguration.",
+    "session_id": null,
+    "receipt_ref": null,
+    "session_receipt_unavailable_reason": "No independently available subagent session ID/receipt in assigned runtime; not fabricated or probed.",
+    "timestamp": "2026-10-22T02:22:32.665625+00:00",
+    "phase": "production",
+    "anchors_version": "v2",
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "score_regime": "production-under-anchors-v2",
+    "formally_frozen": false,
+    "downstream_restriction": "Not for formal ranking/Reel before further user confirmation.",
+    "blindness": "Only assigned manifest/materials, fixed rules/cards and designated anchors read; no other-seat, aggregate, old scores or outcome labels read."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2305.11176v3",
+      "version": "2305.11176v3",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.11176.txt",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sections_read": [
+        "Abstract; Introduction; Related Work",
+        "Methods Sec 3.1–3.3: framework, prompts, perception processing",
+        "Experiments Sec 4: tasks, implementation, Tables 1–3, ablations, limitations",
+        "Conclusion",
+        "Appendix A.1–A.5: prompts, processing, pointing, task descriptions, prompt ablations"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "extraction_limits": "Full supplied text including appendices read. No external videos, code, or linked pages retrieved.",
+      "completeness_basis": "Methods, experimental protocol/results, limitations and end of supplied appendices inspected; completeness is text-material completeness, not independent verification of figures or software."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Abstract; extracted-text L6; character 757",
+      "quote": "the Segment Anything Model (SAM) accurately locates candidate objects, and CLIP classifies them.",
+      "support_explanation": "The perception foundation models and their separate roles are explicit; this is API orchestration, not a newly trained visuomotor policy.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 3 framework; extracted-text L15; character 11356",
+      "quote": "are stored in an environment cache",
+      "support_explanation": "Images and image-to-robot transformations cross the model/controller seam through a shared cache; calibration is an assumption.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 3 multimodal instructions; extracted-text L15; character 19144",
+      "quote": "We then use the Hungarian algorithm to determine the correspondences between the target scene image and the currently observed images.",
+      "support_explanation": "Scene rearrangement delegates assignment to a classical solver; other tasks use SAM/CLIP and primitives.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 4 implementation; extracted-text L18; character 22430",
+      "quote": "Task success rates were evaluated on 150 instances for each of the six meta-tasks, with three random seeds selected per meta-task to obtain average success rates.",
+      "support_explanation": "Denominators and seed averaging are given; this is author-reported simulation evaluation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 4 implementation; extracted-text L18; character 22593",
+      "quote": "The VIMABench simulator determined task success if the final states matched the configurations outlined in the instructions.",
+      "support_explanation": "Success is judged by environment state rather than an unaudited LLM completion label.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 4 implementation; extracted-text L18; character 22786",
+      "quote": "we directly used the experiment results of different baselines",
+      "support_explanation": "Published VIMA-family baselines were reused, not rerun in a fully matched harness/model/budget design.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 4 processing ablation; extracted-text L18; character 27956",
+      "quote": "Mask post-processing directly boosts the success rate to 83.0",
+      "support_explanation": "The perception cleanup is quantitatively load-bearing; it is not evidence that every prompt/code design choice is causal.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 4 limitations; extracted-text L18; character 32469",
+      "quote": "A notable drawback of Instruct2Act is its high computational cost",
+      "support_explanation": "Practicality is explicitly limited; no end-to-end token/latency/dollar budget is established.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Sec 4 limitations; extracted-text L18; character 32968",
+      "quote": "we have only tested our method in a simulation environment so far",
+      "support_explanation": "Real-world deployment is future work, not counted transfer evidence.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+      "locator": "2305.11176v3; Table 1, L1; extracted-text L18; character 24387",
+      "quote": "Ours-Multi 91.3 81.4 98.2 78.5 72.0 85.2 84.4",
+      "support_explanation": "Six-task SR vector and mean 84.4; do not describe it as uniformly superior to VIMA, whose L1 mean also equals 84.4.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "LLM policy program over perception and action APIs",
+      "information": "Instruction text/image crops or goal image, task image/cache and predefined image-to-robot transforms; prompt contains imports, API definitions and complete in-context examples. No raw motor learning or observed on-policy student update.",
+      "operation": "Generate Python that invokes SAM/CLIP retrieval, computes object locations/scene assignment and composes available pick-and-place commands.",
+      "output": "Executable program and sequence of primitive robot calls.",
+      "conditions": "Stable API names, sufficiently accurate SAM masks/CLIP discrimination, calibrated image-to-robot mapping and primitive coverage.",
+      "feedback": "Environment execution and final-state success used for evaluation; no demonstrated autonomous program-rewrite/acceptance loop.",
+      "selection_rule": "not_applicable: static harness, not improvement search; the in-context template is author-designed.",
+      "selection_data": "Six VIMABench meta-tasks for evaluation; prompt-development overlap not independently audited.",
+      "persistence": "Static prompts/API library and task cache; no claimed learned growing skill repository.",
+      "later_use": "Reuse the same interfaces and prompt scaffold on task instances; no retained-improvement claim.",
+      "claimed_effect": "Training-free multimodal manipulation with competitive task SR.",
+      "failure_boundary": "Limited pick-and-place primitives; high cost and simulation only; failed perception and grounding propagate into action.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E009",
+        "E010"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Perception interface preprocessing and mask cleanup",
+      "information": "Scene images and SAM candidate masks; simulator-generated task descriptions assist language instruction construction, not a proven non-privileged physical scene pipeline.",
+      "operation": "Preprocess image; filter size, apply morphology and NMS to masks; use CLIP features to retrieve targets.",
+      "output": "Cleaner object candidates for policy code.",
+      "conditions": "Object size thresholds and preprocessing remain appropriate to the VIMABench visual regime.",
+      "feedback": "Task success under processing-module ablation.",
+      "selection_rule": "not_applicable: fixed pipeline choices; ablation reports variants rather than online admission.",
+      "selection_data": "Reported L1–L3 task evaluation; no independent prompt-search validation split established.",
+      "persistence": "Fixed processing code, no episodic learning.",
+      "later_use": "Every subsequent perception API invocation.",
+      "claimed_effect": "No processing mean 51.0%, mask-only 83.0%, full 84.1% in processing study; not interchangeable with Table 1 L1 mean.",
+      "failure_boundary": "Image-only processing 50.0%; improvements mostly carried by mask cleanup, not proof of general architectural novelty.",
+      "evidence_ids": [
+        "E001",
+        "E007"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Language-only robot code interfaces and separately trained task-specific visuomotor pipelines do not directly offer one flexible multimodal instruction-to-action interface.",
+    "checked_gap": "A concrete interface bottleneck is demonstrated: visual candidate errors substantially lower SR and scene-goal instructions require grounding plus assignment; training-free code composition is plausible but not wholly new.",
+    "lineage": [
+      {
+        "method": "Code-as-Policies / Visual Programming / VIMA",
+        "source": "2305.11176v3 Related Work and Sec 4, paper-local citations only",
+        "version": "Adjacent source versions not independently supplied",
+        "relationship": "Executable policy API composition precedes this work; VIMA supplies multimodal task suite and published comparisons."
+      }
+    ],
+    "closest_adjacent": [
+      {
+        "method": "Code-as-Policies",
+        "source_version": "As described in 2305.11176v3",
+        "solved": "LLM code composition over robot APIs",
+        "residual": "Visual/multimodal instruction grounding through foundation models and robust object candidates."
+      },
+      {
+        "method": "VIMA",
+        "source_version": "As cited in 2305.11176v3; original baseline versions not independently fixed",
+        "solved": "Multimodal prompting for trained manipulation",
+        "residual": "Training-free modular alternative; not established superior average L1 success."
+      }
+    ],
+    "residue": "Accurate perception and instruction-object correspondence, rather than absence of an LLM planner alone.",
+    "stakes": "Wrong masks/identities lead to wrong physical targets and long-horizon failures.",
+    "method_response": "Move visual grounding into SAM/CLIP APIs and perform geometric/assignment operations in executable code; cleanup candidates before calling actions.",
+    "remaining_gap": "No closed-loop physical deployment; arbitrary contact skills, prompt sensitivity, compute practicality and isolated code-composition advantage remain open.",
+    "evidence_ids": [
+      "E001",
+      "E003",
+      "E006",
+      "E007",
+      "E008",
+      "E009",
+      "E010"
+    ],
+    "unresolved": [
+      "No network novelty search; nearest-neighbor original full texts/versions absent from fixed input. G is not a comprehensive novelty verdict."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [
+      "unify_into_shared_representation"
+    ],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "strong parent, subcard not fully instantiated",
+        "tactic_steps_checked": [
+          "Identify perception/assignment/control seams: present.",
+          "Structured handoff: Python and API arguments present.",
+          "Execution-to-program correction during construction: not demonstrated; hence rs:C25 deliberately null.",
+          "Ablation: mask processing tested; decomposition/prompt mechanism not isolated.",
+          "Cost and cross-domain validation: incomplete."
+        ],
+        "success_failure_checks": [
+          {
+            "id": "RS-S typed handoff",
+            "status": "met",
+            "reason": "Executable code carries the handoff, but execution validity is not full semantic correctness.",
+            "evidence_ids": [
+              "E001",
+              "E002",
+              "E003"
+            ]
+          },
+          {
+            "id": "RS-S single load-bearing mechanism",
+            "status": "partial",
+            "reason": "Mask cleanup helps strongly; no matched code-composition/prompt ablation.",
+            "evidence_ids": [
+              "E007",
+              "E006"
+            ]
+          },
+          {
+            "id": "RS-F solver/assembly cost",
+            "status": "partial",
+            "reason": "Cost limitation disclosed, unpriced.",
+            "evidence_ids": [
+              "E008"
+            ]
+          },
+          {
+            "id": "RS-S reusable capital",
+            "status": "not_applicable",
+            "reason": "Static system does not claim skill accumulation.",
+            "evidence_ids": [
+              "E009"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E007"
+        ],
+        "reason": "Routes distinct subtasks to foundation models, assignment solver and robot primitives; C25 requires verification-feedback closure beyond simply executing a one-shot program."
+      },
+      {
+        "main_id": "unify_into_shared_representation",
+        "sub_id": null,
+        "role": "supporting",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          "Language/image queries use shared CLIP features.",
+          "One retrieval interface supports different instruction modalities.",
+          "No new tokenizer/projection or shared-substrate training; C18 not forced.",
+          "Breadth: six simulated meta-tasks; no cross-domain evidence."
+        ],
+        "success_failure_checks": [
+          {
+            "id": "RS-F off-the-shelf assembly",
+            "status": "partial",
+            "reason": "SAM/CLIP integration is concrete but the shared space is inherited, not independently established as a new mechanism.",
+            "evidence_ids": [
+              "E001",
+              "E010"
+            ]
+          },
+          {
+            "id": "RS-S isolate unification",
+            "status": "unmet",
+            "reason": "Processing ablation is not a shared-space vs separate-modality control.",
+            "evidence_ids": [
+              "E007",
+              "E006"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E003",
+          "E010"
+        ],
+        "reason": "Shared CLIP retrieval is a distinct multimodal operation; not all uniform-objective or learned-bridge conditions of C18 apply."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Original 15+31 reviewed before domain mapping. Decomposition is primary, multimodal retrieval sharing supports it; no manufactured supervisory signal or persistent self-improvement invented.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "planner_composes_code_and_policies",
+        "sub": "K105",
+        "fit": "partial",
+        "condition_checks": [
+          {
+            "id": "S2 calibrated geometry",
+            "status": "partial",
+            "reason": "Predefined transforms and cache exist; calibration robustness and low-level contact remain constrained.",
+            "evidence_ids": [
+              "E002",
+              "E009"
+            ]
+          },
+          {
+            "id": "S1 matched code-composition budget",
+            "status": "unmet",
+            "reason": "Published baselines are reused; code vs tool composition not matched.",
+            "evidence_ids": [
+              "E006"
+            ]
+          },
+          {
+            "id": "F2 mechanism isolation",
+            "status": "partial",
+            "reason": "Processing isolated; prompt hierarchy and code-interface contribution not quantitatively isolated.",
+            "evidence_ids": [
+              "E007",
+              "E006"
+            ]
+          },
+          {
+            "id": "F7 physical claim",
+            "status": "not_applicable",
+            "reason": "Authors explicitly have simulation-only tests.",
+            "evidence_ids": [
+              "E009"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E007"
+        ],
+        "reason": "Code composes perception/geometry/primitives; modern coding-runtime cells, selective observation return and trial repair in K105 are not all demonstrated.",
+        "namespace": "embodied",
+        "version": "embodied-agent-harness/v1 + board-induced 2026-10-21"
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": null,
+      "domain_namespace": "embodied",
+      "domain_main": "planner_composes_code_and_policies",
+      "domain_sub": "K105",
+      "operation_correspondence": "LLM-emitted executable artifacts route SAM/CLIP, matching and primitive commands to specialist components.",
+      "necessary_conditions_and_differences": "Calibrated coordinate transform and covered primitives required; no evidence for a C25 verify-and-revise loop or K105 modern persistent coding runtime.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003"
+      ]
+    },
+    {
+      "rs_main": "unify_into_shared_representation",
+      "rs_sub": null,
+      "domain_namespace": "embodied",
+      "domain_main": "planner_composes_code_and_policies",
+      "domain_sub": "K105",
+      "operation_correspondence": "Code calls the same CLIP-based object retrieval for language/image inputs before geometric action.",
+      "necessary_conditions_and_differences": "Inherited shared features, not newly trained substrate; domain code card only partly covers multimodal retrieval.",
+      "evidence_ids": [
+        "E001",
+        "E003"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Same model, episodes and alternative harness.",
+      "applies_when": "Harness success improvement.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "VIMA results are borrowed; not a same-model causal harness control.",
+      "evidence_ids": [
+        "E006",
+        "E010"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Toggle claimed components one at a time.",
+      "applies_when": "Specific component benefit.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Processing variants quantify mask contribution; prompt/code architecture mainly qualitative.",
+      "evidence_ids": [
+        "E007"
+      ],
+      "score_item": [
+        "X",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "At least two backbones of different strength.",
+      "applies_when": "Generic harness/tool claim.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "LLaMA-Adapter example uses only 40 Task-01 trials with retry/filter changes; not matched full six-task rerun.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": [
+        "E.causality",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Calls/tokens/latency/dollars including failed episodes.",
+      "applies_when": "Practical alternative.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "3090Ti and explicit computational-cost warning do not quantify full runtime cost.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E07",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Compare modern perturbation suites and frozen VLAs.",
+      "applies_when": "Claim to beat end-to-end VLAs.",
+      "applicable": true,
+      "status": "challenged_with_evidence",
+      "reason": "Specific LIBERO-PRO/pi0.5-era recipes postdate this 2023 paper; do not impose future availability. Relevant contemporaneous VIMA comparison is present but reused and equal in L1 mean.",
+      "evidence_ids": [
+        "E006",
+        "E010"
+      ],
+      "score_item": [
+        "G",
+        "E.causality",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Count real-robot trials.",
+      "applies_when": "Physical transfer claim.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Only simulation tested and physical deployment explicitly future work.",
+      "evidence_ids": [
+        "E009"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Match interaction and GPU/call budgets.",
+      "applies_when": "Harness/baseline comparison.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Borrowed trained baselines and multimodel inference have no common end-to-end budget accounting.",
+      "evidence_ids": [
+        "E006",
+        "E008"
+      ],
+      "score_item": [
+        "E.cost",
+        "E.causality"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Competitive multimodal instruction-to-action performance without task-specific training.",
+      "setting": "Six VIMABench meta-tasks, first three generalization levels; PyBullet.",
+      "baseline_control": "Published VIMA/Gato/Flamingo-style results; Table 1 VIMA-20M mean 84.4 equals Ours-Multi mean 84.4.",
+      "selection_vs_test": "Evaluation instances/seeds stated; no independent prompt-development-overlap audit; no success-driven persistent optimization.",
+      "result_denominator": "150 instances/meta-task; three seeds/meta-task. L1 Ours-Multi [91.3,81.4,98.2,78.5,72.0,85.2], mean84.4. Not uniformly higher across tasks.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E006",
+        "E010"
+      ],
+      "counterevidence": [
+        "Published baselines not rerun with equal models/budgets.",
+        "No real robot tests."
+      ],
+      "allowed_conclusion": "A competitive modular simulation baseline, not an autonomous universal robot or an isolated causal win for the LLM interface."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Perception processing improves robustness.",
+      "setting": "Processing-module ablation across reported VIMABench settings.",
+      "baseline_control": "No processing, image-only, mask-only and both.",
+      "selection_vs_test": "Static module ablation; no separate selection/test proof for hyperparameters.",
+      "result_denominator": "Reported means 51.0 none,50.0 image-only,83.0 mask-only,84.1 both; general evaluation protocol supplies 150 instances and3 seeds/meta-task. No task-level variance/CI given.",
+      "evidence_ids": [
+        "E004",
+        "E007"
+      ],
+      "counterevidence": [
+        "Small extra gain from image preprocessing; no proof that hierarchical prompting or shared representation is the dominant cause."
+      ],
+      "allowed_conclusion": "Mask cleanup is a major measured contributor in this simulator."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported environment-scored simulation supports training-free code/API multimodal manipulation and a large mask-processing effect on six meta-tasks. Original general-purpose positioning remains broader than physical skill/latency/generalization evidence.",
+    "unresolved": [
+      "Prompt-development/test overlap and proprietary-model pretraining contamination unverified.",
+      "Original adjacent papers not separately version-bound.",
+      "No independent reproduction; no physical transfer or retained/self-improver claim."
+    ]
+  },
+  "ratings": {
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Environment defines final-state success with explicit instance/seed counts; outcomes are meaningful simulation SR. Multiple modalities and processing tables are not fully accompanied by task-level uncertainty or broader verifier checks.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Processing ablation isolates a real contributor; reused baseline results and qualitative prompt ablation do not isolate the proposed overall interface from stronger models/information/budget.",
+        "evidence_ids": [
+          "E006",
+          "E007"
+        ],
+        "counterevidence_ids": [
+          "E010"
+        ],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "L1–L3 generalization is tested within one task suite, but task-description construction and prompt-development overlap are not audited; no physical transfer under anchors v2.",
+        "evidence_ids": [
+          "E004",
+          "E009"
+        ],
+        "counterevidence_ids": [
+          "E006"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Three random seeds and 150-instance task samples are explicit; main tables give means without corresponding run variance/CI or a systematic failure denominator decomposition.",
+        "evidence_ids": [
+          "E004",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Hardware and high-cost limitation are disclosed, but no full calls/tokens/latency/dollars or budget-matched baseline accounting. This is weak positive disclosure, not unknown material.",
+        "evidence_ids": [
+          "E008",
+          "E006"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    },
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Specific multimodal grounding/interface bottleneck and contemporaneous neighbors are identifiable; independent nearest-neighbor source/version checking and generality remain limited.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E006",
+        "E007"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Composable code plus specialist perception/assignment fits the instruction-grounding problem; inherited visual semantics, fixed transforms and primitive coverage constrain explanation.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003"
+      ],
+      "counterevidence_ids": [
+        "E009"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Static operation chain, imports/APIs/examples and preprocessing can be reconstructed; no autonomous revision or safety/robust calibration evidence is invented.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E007"
+      ],
+      "counterevidence_ids": [
+        "E008",
+        "E009"
+      ],
+      "search_scope": []
+    }
+  },
+  "score": {
+    "raw": 66.25,
+    "display": 66.2,
+    "lower": 66.25,
+    "upper": 66.25,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Full fixed text reviewed; original claims preserved. Production initial score is conditional on anchors v2, not formal calibration/final ranking.",
+  "scope": {
+    "in_scope": true,
+    "category": "A",
+    "reason": "Frontier LLM generates executable perception/action programs controlling a simulated robot arm in closed-loop task execution."
+  },
+  "audit_status": "pending",
+  "audit_note": "Independent initial seat review; source-quote/identity/hash/parent/arithmetic checks passed, not aggregate acceptance or reproduction."
+}

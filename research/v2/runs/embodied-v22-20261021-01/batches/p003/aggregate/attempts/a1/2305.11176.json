@@ -1,0 +1,1391 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p003",
+ "attempt_id": "a1",
+ "seat": "opus55",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2305.11176",
+  "paper_id": "2305.11176",
+  "title": "Instruct2Act: Mapping Multi-modality Instructions to Robotic Actions with Large Language Model",
+  "version": "2305.11176v3",
+  "claim_type": "system_method",
+  "central_claim": "Instruct2Act uses an LLM to generate Python programs that call SAM/CLIP and robot primitives to map multi-modality instructions to actions, and this zero-shot approach outperforms many learning-based policies in several tasks (comparable average to VIMA on VIMABench).",
+  "scope_decision": "in_scope (A): an LLM writes Python that composes SAM/CLIP perception and pick-and-place primitives to control a simulated tabletop arm in VIMABench, closed loop."
+ },
+ "preliminary_judgment": "Written after reading the fixed text, before opening this paper's seat records: system_method; VIMABench 6 meta-tasks, 150 instances x 3 seeds, simulator final-state success; baselines (VIMA/Gato/Flamingo/DT) copied from the VIMA paper rather than rerun; no same-LLM alternative harness (CaP) although the gap is framed against CaP; in-context examples cover all evaluated task families; processing ablation (51.0 -> 83.0 -> 84.1) on the same tasks; L2/L3 values figure-only; regeneration on interpreter errors not counted; means only; cost acknowledged but unquantified. Expected online, scoped; G weak to moderate, E.causality weak.",
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Abstract; extracted-text L6; character 757",
+   "quote": "the Segment Anything Model (SAM) accurately locates candidate objects, and CLIP classifies them.",
+   "support_explanation": "The perception foundation models and their separate roles are explicit; this is API orchestration, not a newly trained visuomotor policy.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 3 framework; extracted-text L15; character 11356",
+   "quote": "are stored in an environment cache",
+   "support_explanation": "Images and image-to-robot transformations cross the model/controller seam through a shared cache; calibration is an assumption.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 3 multimodal instructions; extracted-text L15; character 19144",
+   "quote": "We then use the Hungarian algorithm to determine the correspondences between the target scene image and the currently observed images.",
+   "support_explanation": "Scene rearrangement delegates assignment to a classical solver; other tasks use SAM/CLIP and primitives.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 4 implementation; extracted-text L18; character 22430",
+   "quote": "Task success rates were evaluated on 150 instances for each of the six meta-tasks, with three random seeds selected per meta-task to obtain average success rates.",
+   "support_explanation": "Denominators and seed averaging are given; this is author-reported simulation evaluation.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 4 implementation; extracted-text L18; character 22593",
+   "quote": "The VIMABench simulator determined task success if the final states matched the configurations outlined in the instructions.",
+   "support_explanation": "Success is judged by environment state rather than an unaudited LLM completion label.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 4 implementation; extracted-text L18; character 22786",
+   "quote": "we directly used the experiment results of different baselines",
+   "support_explanation": "Published VIMA-family baselines were reused, not rerun in a fully matched harness/model/budget design.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 4 processing ablation; extracted-text L18; character 27956",
+   "quote": "Mask post-processing directly boosts the success rate to 83.0",
+   "support_explanation": "The perception cleanup is quantitatively load-bearing; it is not evidence that every prompt/code design choice is causal.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 4 limitations; extracted-text L18; character 32469",
+   "quote": "A notable drawback of Instruct2Act is its high computational cost",
+   "support_explanation": "Practicality is explicitly limited; no end-to-end token/latency/dollar budget is established.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Sec 4 limitations; extracted-text L18; character 32968",
+   "quote": "we have only tested our method in a simulation environment so far",
+   "support_explanation": "Real-world deployment is future work, not counted transfer evidence.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "material_id": "M1",
+   "material_hash": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "2305.11176v3; Table 1, L1; extracted-text L18; character 24387",
+   "quote": "Ours-Multi 91.3 81.4 98.2 78.5 72.0 85.2 84.4",
+   "support_explanation": "Six-task SR vector and mean 84.4; do not describe it as uniformly superior to VIMA, whose L1 mean also equals 84.4.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Abstract",
+   "quote": "Instruct2Act employs the LLM model to generate Python programs that constitute a comprehensive perception, planning, and action loop for robotic tasks",
+   "support_explanation": "Central operation: LLM emits a Python program that closes perception-planning-action.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Abstract",
+   "quote": "our zero-shot method outperformed many state-of-the-art learning-based policies in several tasks",
+   "support_explanation": "Author headline claim (zero-shot vs learned policies), scope 'several tasks'.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 1",
+   "quote": "it is restricted to what the perception APIs can provide and struggle to interpret longer and more complex commands due to the high precision requirements of the code",
+   "support_explanation": "Author-stated limitation of the nearest neighbour Code-as-Policies (CaP); asserted, not tested in the paper.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.1",
+   "quote": "final input is a sequence of code APIs, usage examples, and task instructions",
+   "support_explanation": "No fine-tuning; the interface is a prompt of API definitions + in-context examples.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.2",
+   "quote": "we provide full-logical code examples invoking different modules",
+   "support_explanation": "Examples are whole programs for each task family, not only function-level usage.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.2",
+   "quote": "we design a prompt that provides coverage for all tasks and has fewer in-context examples",
+   "support_explanation": "Prompt examples cover all evaluated task families: development/evaluation overlap at task level.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.3",
+   "quote": "SAM outputs masks for all potential objects in the input image, based on which object crops",
+   "support_explanation": "Perception path: SAM masks -> crops -> CLIP features.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.3",
+   "quote": "we apply a gray threshold filter followed by a morphological closing operation to fill up small holes before sending the image to the SAM",
+   "support_explanation": "Hand-built image pre-processing inserted between the foundation model and the downstream task.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.4",
+   "quote": "We design a unified retrieval system that utilizes different types of queries to ensure the use of a unified architecture for both types of inputs",
+   "support_explanation": "Text/image/pointing queries all resolved by one CLIP-similarity retrieval over mask crops.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "Task success rates were evaluated on 150 instances for each of the six meta-tasks, with three random seeds selected per meta-task to obtain average success rates",
+   "support_explanation": "Evaluation denominator: 150 instances x 6 meta-tasks, 3 seeds, mean only.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "The VIMABench simulator determined task success if the final states matched the configurations outlined in the instructions",
+   "support_explanation": "Success is judged by simulator state (environment truth), not by a learned judge.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "we directly used the experiment results of different baselines from [ 15 ]",
+   "support_explanation": "Baselines are copied from the VIMA paper, not re-run by the authors; no CaP baseline appears.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Table 1",
+   "quote": "VIMA-20M 100 100 100 99.5 59.5 47.5 84.4 Ours-Multi 91.3 81.4 98.2 78.5 72.0 85.2 84.4",
+   "support_explanation": "L1 per-task results: equal average (84.4) to VIMA-20M; lower on tasks 01-04, higher on 05 and 17.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "for tasks that require multiple steps to complete, such as Task 05 and Task 17, our Instruct2Act outperforms the previous SOTA by a significant margin",
+   "support_explanation": "Author reading of the Table 1 contrast.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "The results from (a-c) show that our method consistently achieved positive results across all levels and various tasks",
+   "support_explanation": "L2/L3 generalization claim; numbers are only in Fig 5 (image), so only the author's sentence is readable.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.4",
+   "quote": "Mask post-processing directly boosts the success rate to 83.0",
+   "support_explanation": "Ablation of processing modules: mask post-processing dominates (51.0 -> 83.0).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Table 2",
+   "quote": "70.4 34.6 88.6 41.7 15.9 54.7 51.0",
+   "support_explanation": "Row with no processing modules: average 51.0 across 3 levels.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Table 2",
+   "quote": "91.6 80.8 97.8 78.4 69.1 87.2 84.1",
+   "support_explanation": "Row with both processing modules: average 84.1 across 3 levels.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.4",
+   "quote": "using only image pre-processing leads to no improvement in performance and may even cause degradation in some tasks",
+   "support_explanation": "Component-level toggle shows image pre-processing alone does not help.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Table 5",
+   "quote": "Task 01 Direct More Trail Naive Filtering SR(%) 72.5 77.5 85.5",
+   "support_explanation": "Second (open-source) LLM only on Task 01, 40 instances; error-triggered regeneration helps.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.2",
+   "quote": "the Python Interpreter can detect these errors and inform us to generate new code",
+   "support_explanation": "Only automatic feedback: interpreter exceptions trigger regeneration; no task-level verifier.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Tables 3-4",
+   "quote": "SR(%) 75.1 82.7 84.1 Parameters(M) 93.7 312.3 641.1",
+   "support_explanation": "SAM backbone ablation with parameter counts (the only cost-like figure).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.4 Limitations",
+   "quote": "A notable drawback of Instruct2Act is its high computational cost, as it employs several foundation models to accomplish robotic tasks",
+   "support_explanation": "Cost acknowledged qualitatively, not measured.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.4 Limitations",
+   "quote": "we have only tested our method in a simulation environment so far",
+   "support_explanation": "No real-robot evidence.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "Code generation was performed using ChatGPT with the text-davinci-003 engine",
+   "support_explanation": "Headline LLM is a single closed API model; contamination/dev overlap not discussed.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "App A.3 Table 6",
+   "quote": "Pointing-Language Enhanced Instruction 90.7 98.0",
+   "support_explanation": "Pointing mode evaluated on Task 01/03 with one seed.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.4 Limitations",
+   "quote": "our method is presently limited by the basic action primitives provided in the chosen VIMABench, such as Pick and Place",
+   "support_explanation": "Action space is two suction pick/place primitives; no contact-rich control.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.3",
+   "quote": "Additionally, we directly used the experiment results of different baselines from [ 15 ] .",
+   "support_explanation": "Baselines copied, not rerun.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 4.2",
+   "quote": "the Python Interpreter can detect these errors and inform us to generate new code",
+   "support_explanation": "Undisclosed regeneration budget.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "locator": "Sec 3.2",
+   "quote": "In contrast to [ 12 ] , we design a prompt that provides coverage for all tasks and has fewer in-context examples.",
+   "support_explanation": "Prompt covers the evaluated task families.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "LLM-written Python program main() composed of perception APIs (SAM, ImageCrop, CLIPRetrieval, Pixel2Loc) and action APIs (PickPlace, RearrangeActions, DistractorActions) executed by RobotExecution",
+   "information": "top-view RGB image, text or multimodal instruction (image crops cached in environment cache C), API definitions + 5 full-program in-context examples + BOUNDS; no simulator state for the agent; no training or fine-tuning",
+   "operation": "LLM maps instruction to an executable program that calls foundation-model APIs and primitives",
+   "output": "pick/place action list sent to the low-level controller",
+   "conditions": "calibrated image-to-robot transform, boundary clamping, two suction primitives, tabletop scenes",
+   "feedback": "interpreter exceptions only (regenerate); no task-level success feedback inside an episode",
+   "selection_rule_or_data": "none: single program per instruction; error-triggered regeneration used in the LLaMA-Adapter experiment",
+   "persistence": "environment cache C holds image crops and coordinate transforms within an episode; nothing persists across tasks",
+   "later_use": "not_applicable (static harness)",
+   "claimed_effect": "VIMABench L1 average 84.4% equals VIMA-20M; better on multi-step Task 05 and Task 17",
+   "failure_boundary": "high compute, only pick/place, simulation only; contact feedback absent",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E004",
+    "son55:E005",
+    "son55:E013",
+    "son55:E021",
+    "son55:E027"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "pre/post-processing modules wrapped around zero-shot SAM output",
+   "information": "raw top-view image and SAM masks",
+   "operation": "gray-threshold + closing before SAM; size filter, opening and NMS after SAM",
+   "output": "cleaner masks/crops for CLIP retrieval",
+   "conditions": "tabletop with cast shadows, hand-set thresholds ('pre-defined parameters ... lack tuning')",
+   "feedback": "none",
+   "selection_rule_or_data": "hand-chosen parameters, tuning data not stated",
+   "persistence": "static",
+   "later_use": "not_applicable",
+   "claimed_effect": "average SR 51.0 -> 84.1 across 3 levels",
+   "failure_boundary": "image pre-processing alone gives no gain; parameters suboptimal by the authors' own account",
+   "evidence_ids": [
+    "son55:E008",
+    "son55:E016",
+    "son55:E017",
+    "son55:E018",
+    "son55:E019"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "modality manager mapping pure-language, language-visual and pointing instructions to one CLIP retrieval",
+   "information": "instruction text or image crops/scene images, cursor clicks (pointing mode)",
+   "operation": "embed query with CLIP text or image encoder, match against mask-crop features; Hungarian matching for scene-level goals",
+   "output": "selected object indices passed to PickPlace",
+   "conditions": "VIMABench prompt formats; placeholder strings completed by the LLM",
+   "feedback": "none",
+   "selection_rule_or_data": "argmax similarity / Hungarian assignment",
+   "persistence": "static",
+   "later_use": "not_applicable",
+   "claimed_effect": "multi-modal prompts generally outperform single-modal prompts",
+   "failure_boundary": "single-modal results given for only 3 of 6 tasks",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E013",
+    "son55:E026"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "CaP-style policy code is restricted by the perception APIs and struggles with long/complex commands; no general system covers multi-modality instructions without training.",
+  "checked_gap": "The CaP limitation is asserted, but no CaP (or any LLM-code) baseline is run; the only baselines are trained policies copied from VIMA. What is verified is that an LLM+SAM+CLIP program can reach the VIMA-20M average on six VIMABench tasks.",
+  "lineage": [
+   "Code as Policies / VISPROG / ViperGPT (LLM writes programs over APIs) -> Instruct2Act (robot-hierarchy API prompt, SAM+CLIP perception, multimodal retrieval, processing modules)",
+   "CLIPort / Perceiver-Actor / VIMA (trained instruction-conditioned manipulation policies) = the compared class"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "Code as Policies (CaP)",
+    "pinned_source": false,
+    "solved": "LLM writes robot policy code from in-context examples",
+    "unsolved_per_authors": "limited by perception APIs, long complex commands",
+    "tested_here": false
+   },
+   {
+    "name": "VIMA",
+    "pinned_source": false,
+    "solved": "trained multimodal-prompt policy; 84.4 L1 average",
+    "unsolved_per_authors": "needs 20M-parameter training",
+    "tested_here": "numbers copied, not re-run"
+   }
+  ],
+  "residue": "Whether LLM-composed programs beat other LLM-code harnesses, and how much of the success comes from the hand-tailored prompt examples and processing modules versus the LLM, is not separated.",
+  "stakes": "Training-free language/vision-conditioned manipulation; foundation-model upgrades could transfer for free.",
+  "method_response": "Provide a robot-hierarchy API prompt with whole-program examples, bolt on perception post-processing, and route all instruction modalities through CLIP retrieval.",
+  "remaining_gap": "Compute cost, only pick/place primitives, simulation only (authors); no CaP comparison, no real robot, no seed variance (ours).",
+  "evidence_ids": [
+   "son55:E003",
+   "son55:E012",
+   "son55:E013",
+   "son55:E023",
+   "son55:E024",
+   "son55:E027"
+  ],
+  "unresolved": "Neighbour papers (CaP, VISPROG, VIMA) are not pinned in the batch materials, so lineage rests on this paper's own citations; empty retrieval does not prove novelty.",
+  "aggregate_note": "son55 gap retained: the CaP limitation is asserted, not tested; what is verified is parity with VIMA-20M on six L1 tasks."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "unify_into_shared_representation"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": {
+     "1_responsibility_boundary": "yes: LLM kept to composing the program; SAM/CLIP/primitives own perception and motion",
+     "2_typed_artifact": "yes: executable Python over a fixed API, the Python main() is the handoff object",
+     "3_verification_closure": "weak: only interpreter exceptions; no checker grades the intermediate program or the outcome",
+     "4_ablation_of_load_bearing_step": "partial: processing modules and prompt elements ablated; the LLM-vs-no-LLM program step is not",
+     "5_cost_and_transfer": "cost acknowledged but unmeasured; one benchmark"
+    },
+    "success_checks": [
+     "boundary drawn at comparative-advantage seam (met)",
+     "typed handoff (met)"
+    ],
+    "failure_checks": [
+     "assembly of off-the-shelf parts without isolated load-bearing mechanism (present)",
+     "templates tuned to one benchmark (present: prompt covers all evaluated tasks)",
+     "solver/foundation-model cost unmeasured (present)"
+    ],
+    "evidence_ids": [
+     "son55:E001",
+     "son55:E004",
+     "son55:E005",
+     "son55:E006",
+     "son55:E021",
+     "son55:E023"
+    ],
+    "reason": "The paper's operation is exactly an LLM emitting an executable program that delegates perception and motion to foundation models/primitives; it differs from sibling-less C25 only in lacking a verification loop.",
+    "aggregate_note": "sub rs:C25 kept (son55; sol null). C25 is the only sub under decompose_and_delegate; the paper executes its first two steps (responsibility boundary; executable typed artifact routed to perception models, a sound assignment solver (Hungarian matching, sol:E003) and primitives), and closure is minimal (regeneration on interpreter exceptions). Fit is partial, not absent, which is consistent with the C25 assignment for ProgPrompt (2209.11302) in p002."
+   },
+   {
+    "main_id": "unify_into_shared_representation",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "weak-partial",
+    "tactic_steps_checked": {
+     "shared_space": "text, image-crop and pointing queries are all routed to off-the-shelf CLIP-space retrieval",
+     "C18_manufactured_substrate": "absent: no tokenizer/serializer/projection is built; CLIP is used as is",
+     "ablation_of_unification": "absent"
+    },
+    "success_failure_checks": [
+     "interface earned rather than borrowed (unmet: C18 failure mode \"off-the-shelf encoder swapped in\")"
+    ],
+    "evidence_ids": [
+     "son55:E009",
+     "son55:E026",
+     "sol:E001"
+    ],
+    "reason": "The modality manager is a separately claimed contribution and maps heterogeneous instruction modalities into one space, so the main card supports. sub_id null (sol): C18's tactic is manufacturing the substrate, which the paper does not do; son55 itself notes \"no substrate is manufactured\"."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "Primary C25 (partial), supporting unify_into_shared_representation without a sub card.",
+  "executes_pattern": "partial (C25 delegation executed; verification closure absent)",
+  "resolves_problem": "not_shown: the claimed CaP limitation is neither tested nor shown closed; evidence only shows parity with VIMA-20M on six tasks"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "status is about the card condition; for failure-mode (F) items 'unmet' means the failure mode is present",
+  "matches": [
+   {
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105",
+    "version": "embodied-agent-harness/v1 (frozen 2026-10-21 build)",
+    "fit": "partial",
+    "executes_pattern": "partial: one pre-planned main() per instruction composing perception and motion primitives; no code cells, no local retry/branching loop, no observations returned mid-program",
+    "resolves_problem": "not_shown",
+    "condition_checks": [
+     {
+      "condition_id": "planner_composes_code_and_policies:S1",
+      "status": "unmet",
+      "reason": "no matched call-budget comparison of code composition against another interface",
+      "evidence_ids": [
+       "son55:E012"
+      ]
+     },
+     {
+      "condition_id": "planner_composes_code_and_policies:S2",
+      "status": "partial",
+      "reason": "known image-to-robot transform and boundary clamping over a top-view camera support a minimal calibrated library, but no depth/geometry library is claimed",
+      "evidence_ids": [
+       "son55:E004",
+       "son55:E027"
+      ]
+     },
+     {
+      "condition_id": "planner_composes_code_and_policies:F2",
+      "status": "unmet",
+      "reason": "failure present: composition, hand-built processing modules and prompt templates are not separated from the LLM's contribution",
+      "evidence_ids": [
+       "son55:E006",
+       "son55:E016"
+      ]
+     },
+     {
+      "condition_id": "planner_composes_code_and_policies:F7",
+      "status": "unmet",
+      "reason": "failure present in the weaker sense: no real-world evidence at all",
+      "evidence_ids": [
+       "son55:E024"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E001",
+     "son55:E004",
+     "son55:E005",
+     "son55:E021"
+    ]
+   }
+  ],
+  "unassigned": [
+   "perception pre/post-processing around SAM (no matching domain card)"
+  ],
+  "revision_proposals": [],
+  "aggregate_note": "Both seats: planner_composes_code_and_policies/K105 (partial: one pre-planned main() per instruction, no cell-wise retries or returned observations). son55's unassigned note on SAM pre/post-processing kept."
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105"
+   },
+   "operation_correspondence": "C25 executable artifact routed to sound/specialist solvers <-> K105 frozen planner writes code composing perception (SAM/CLIP), geometry (Pixel2Loc, Hungarian matching) and pick-place primitives.",
+   "necessary_conditions_and_differences": "Single-shot program per instruction; closure only through interpreter exceptions; no selectively returned observations.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E003",
+    "son55:E001",
+    "son55:E021"
+   ]
+  },
+  {
+   "rs_main": "unify_into_shared_representation",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105"
+   },
+   "operation_correspondence": "Shared CLIP retrieval space is the perception tool the program calls for every instruction modality.",
+   "necessary_conditions_and_differences": "No manufactured substrate; off-the-shelf encoder.",
+   "evidence_ids": [
+    "son55:E009"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations",
+    "patterns/main/harness_self_optimization.md#Reviewer-expectations"
+   ],
+   "requirement": "Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness.",
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No alternative harness (e.g. CaP) with the same LLM; the baselines are trained policies whose numbers are copied from VIMA.",
+   "evidence_ids": [
+    "son55:E012",
+    "agg:E001"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Resolved toward son55 (sol partial): borrowed trained-policy numbers are not an alternative harness on the same episodes."
+  },
+  {
+   "id": "E02",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/external_verification_control.md#Reviewer-expectations"
+   ],
+   "requirement": "Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions.",
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Processing modules toggled one at a time; the LLM program step and modality manager are not.",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E017",
+    "son55:E018"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both partial; confirmed."
+  },
+  {
+   "id": "E03",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#Reviewer-expectations",
+    "patterns/main/observe_act_interface.md#Reviewer-expectations"
+   ],
+   "requirement": "Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student.",
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "A second LLM (LLaMA-Adapter) appears only on Task 01 with 40 instances; no strong-vs-weak sweep.",
+   "evidence_ids": [
+    "son55:E020"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both partial; score item E.causality (son55; sol also listed E.holdout)."
+  },
+  {
+   "id": "E04",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "reproducibility, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/external_verification_control.md#Reviewer-expectations"
+   ],
+   "requirement": "Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise.",
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Three seeds x 150 instances, means only; no variance or paired statistics.",
+   "evidence_ids": [
+    "son55:E010"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "not_listed",
+    "son55": "partial"
+   },
+   "aggregate_reason": "son55 partial; sol did not list it. Accepted."
+  },
+  {
+   "id": "E05",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "metric, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations",
+    "patterns/main/harness_native_rl.md#Reviewer-expectations"
+   ],
+   "requirement": "Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task.",
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Cost acknowledged as high, with no quantities.",
+   "evidence_ids": [
+    "son55:E023"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Both unmet; confirmed."
+  },
+  {
+   "id": "E07",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "baseline, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/offline_harness_distillation.md#Reviewer-expectations"
+   ],
+   "requirement": "For a tabletop manipulation harness or student, evaluate on LIBERO-PRO position/task perturbations, possibly with RoboTwin 2.0 or RoboCasa365. Compare against frozen VLAs (pi0.5, OpenVLA or OpenVLA-OFT) and agentic coding or VLA-steering baselines (2603.22435#s3, 2607.08448#s1).",
+   "applies_when": "an empirical claim that an agentic manipulation harness or harness-distilled student beats end-to-end VLAs.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "The paper claims to outperform learning-based end-to-end policies and compares with VIMA/DT/Gato/Flamingo on VIMABench, using copied numbers. The 2023 benchmark choice is not penalised (later suites did not exist); the unmatched copied comparison is what keeps this partial.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E013"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "challenged_with_evidence",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Resolved toward son55 (sol challenged_with_evidence): the expectation applies to the claim and is partly met, not refuted."
+  },
+  {
+   "id": "E08",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "reproducibility, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations",
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations"
+   ],
+   "requirement": "State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol.",
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Prompt examples cover all evaluated task families, and no contamination or development-overlap statement is made.",
+   "evidence_ids": [
+    "son55:E006",
+    "agg:E003"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "not_listed",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 unmet; sol did not list it. Accepted."
+  },
+  {
+   "id": "E16",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "metric, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations"
+   ],
+   "requirement": "Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers.",
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No failure decomposition (selection vs grasp vs code error).",
+   "evidence_ids": [
+    "son55:E019"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "not_listed",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 unmet; sol did not list it. Accepted."
+  },
+  {
+   "id": "E19",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "other, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/external_verification_control.md#Reviewer-expectations"
+   ],
+   "requirement": "Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims.",
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "Simulation only; no physical claim.",
+   "evidence_ids": [
+    "son55:E024"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "not_applicable",
+    "son55": "not_applicable"
+   },
+   "aggregate_reason": "Both not_applicable; confirmed."
+  },
+  {
+   "id": "E22",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "reproducibility, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations"
+   ],
+   "requirement": "Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences.",
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Tool-bundle comparisons with the LLM fixed (processing, SAM/CLIP sizes) do not disclose the regeneration-on-error budget, and borrowed baselines have no common budget accounting.",
+   "evidence_ids": [
+    "son55:E021",
+    "agg:E002"
+   ],
+   "score_item": [
+    "E.cost",
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "unmet",
+    "son55": "unknown"
+   },
+   "aggregate_reason": "Resolved toward sol (son55 unknown): the material is complete and the budget is not reported, so the status is unmet, not unknown."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "An LLM that writes Python programs over SAM/CLIP/pick-place APIs achieves training-free multimodal-instruction manipulation competitive with learned policies.",
+   "setting": "VIMABench (PyBullet), 6 meta-tasks, L1; text-davinci-003; SAM-H + CLIP-H",
+   "baseline_control": "DT-20M, Gato-20M, Flamingo-20M, VIMA-20M numbers copied from VIMA paper; no LLM-code baseline",
+   "selection_vs_test": "prompt examples cover all six evaluated task families; no separate selection split",
+   "result_denominator": "150 instances x 3 seeds per meta-task; L1 average 84.4 vs 84.4 (VIMA); task-wise 91.3/81.4/98.2/78.5/72.0/85.2",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E011",
+    "son55:E012",
+    "son55:E013"
+   ],
+   "counterevidence": [
+    "son55:E006"
+   ],
+   "allowed_conclusion": "On six VIMABench L1 tasks the program-writing harness matches VIMA-20M's average (lower on 4 tasks, higher on 2); superiority over learned policies is not established."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Processing modules make zero-shot SAM usable for grasping.",
+   "setting": "same benchmark, average over 3 levels",
+   "baseline_control": "own ablation rows",
+   "selection_vs_test": "same tasks",
+   "result_denominator": "51.0 -> 83.0 (mask post) -> 84.1 (both); image-only 50.0",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E017",
+    "son55:E018",
+    "son55:E019"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Mask post-processing carries almost all of the perception gain; image pre-processing alone does nothing."
+  },
+  {
+   "claim_id": "C3",
+   "text": "The approach generalizes to L2 (combinatorial) and L3 (novel object) levels with small fluctuation.",
+   "setting": "VIMABench L2/L3",
+   "baseline_control": "baselines in Fig 5",
+   "selection_vs_test": "L4 novel-task level not evaluated",
+   "result_denominator": "numbers only in Fig 5 (image); text asserts 'positive results across all levels'",
+   "evidence_ids": [
+    "son55:E015"
+   ],
+   "counterevidence": [
+    "son55:E006"
+   ],
+   "allowed_conclusion": "Author-reported only; cannot be audited from the fixed text."
+  },
+  {
+   "claim_id": "C4",
+   "text": "General-purpose, flexible system usable with open-source LLMs and human intervention.",
+   "setting": "Task 01 with LLaMA-Adapter (40 instances); qualitative prompts",
+   "baseline_control": "none",
+   "selection_vs_test": "n/a",
+   "result_denominator": "72.5 / 77.5 / 85.5 on 40 instances",
+   "evidence_ids": [
+    "son55:E020",
+    "son55:E021"
+   ],
+   "counterevidence": [
+    "son55:E024",
+    "son55:E027"
+   ],
+   "allowed_conclusion": "Anecdotal for flexibility; no evidence of a general-purpose system beyond pick/place tabletop simulation."
+  }
+ ],
+ "claims_aggregate_note": "son55 claims C1-C4 retained; C3 (L2/L3) is author-reported only and not scored.",
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop simulator-judged success with counts. The harness prompt was built for the evaluated task families, there is no new embodiment/simulator and no real robot, so it is not transfer (EVIDENCE rule 2).",
+  "claim_support": "scoped",
+  "author_claim_preserved": "Instruct2Act uses an LLM to generate Python programs that call SAM/CLIP and robot primitives to map multi-modality instructions to actions, and this zero-shot approach outperforms many learning-based policies in several tasks (comparable average to VIMA on VIMABench).",
+  "strongest_supported_claim": "On six VIMABench L1 tasks (PyBullet) an LLM program harness over SAM/CLIP/pick-place reaches the same 84.4% average as the trained VIMA-20M (baseline numbers copied), with mask post-processing worth +32 points; superiority, L2/L3 retention, generality and low cost are not established.",
+  "not_claimable": [
+   "better than Code-as-Policies",
+   "L2/L3 numbers",
+   "real-robot transfer",
+   "cost-efficiency",
+   "reproduced by us (no reproduction performed)"
+  ],
+  "retention": "not_applicable: static harness, no selection or persistence claim",
+  "unresolved": [
+   "L2/L3 per-task numbers exist only in Fig 5 (not scored)",
+   "number of regenerations after interpreter errors not reported"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Resolved toward son55 (sol 3). The limitation of CaP (bounded by its perception APIs, weak on long/complex commands) is real and sourced, and the target (training-free multimodal-instruction manipulation) is clear. But the gap is never tested against CaP or any LLM-code neighbour; the only comparison is with trained policies copied from VIMA (agg:E001). The claimed residual (\"generate decision-making actions that reduce the error rate\", unlike CaP) is not made checkable, so per the G anchor the neighbour comparison and residual are incomplete -> 2.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E012",
+    "son55:E027",
+    "agg:E001"
+   ],
+   "counterevidence_ids": [
+    "son55:E023"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. The mechanism is concrete and reconstructible (LLM writes main() over SAM/CLIP retrieval, Hungarian matching, Pixel2Loc and PickPlace) and has a causal story for perception failures (shadows, holes, duplicate masks) that the processing ablation matches. Not 4: the central prediction against CaP is never tested, and the in-context examples nearly template the evaluated programs.",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E007",
+    "son55:E008",
+    "son55:E016",
+    "son55:E019",
+    "sol:E003"
+   ],
+   "counterevidence_ids": [
+    "son55:E006"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Full prompt, API hierarchy, processing steps, pointing mode and retrieval are specified (App A.1-A.3), so the chain is rebuildable. The processing thresholds, the regeneration-on-exception policy and its count, and the image-to-robot transform are not given, and there is no failure or hand-back handling.",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E005",
+    "son55:E008",
+    "son55:E009",
+    "son55:E021"
+   ],
+   "counterevidence_ids": [
+    "son55:E023"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Both seats 3; confirmed. Simulator-judged final-state success with an explicit protocol (150 instances per meta-task, three seeds) and per-task L1 numbers for six tasks. Not 4: L2/L3 values are figure-only (Table 2 averages over levels), single-modal results cover 3/6 tasks, the LLaMA-Adapter result uses 40 instances, the baselines are copied rather than measured under this protocol, and the regeneration-on-error attempts behind each success are not counted (agg:E002).",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E011",
+     "son55:E013",
+     "sol:E004",
+     "sol:E005"
+    ],
+    "counterevidence_ids": [
+     "son55:E015",
+     "agg:E002"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2; confirmed. One-at-a-time processing toggles (51.0 -> 50.0 / 83.0 / 84.1) and SAM/CLIP size sweeps hold the LLM fixed. But there is no CaP or other LLM-code harness, no LLM-free fixed-template program, and the prompt covers every evaluated task family (agg:E003); \"prompt + SAM + CLIP template\" remains a strong alternative explanation for the parity with VIMA.",
+    "evidence_ids": [
+     "son55:E016",
+     "son55:E017",
+     "son55:E018",
+     "son55:E022"
+    ],
+    "counterevidence_ids": [
+     "son55:E006",
+     "son55:E012",
+     "agg:E001"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2; confirmed. VIMABench L2/L3 are held-out placements/objects relative to VIMA's training, but for this harness the prompt was written to cover the same task families (EVIDENCE rule 2), L4 novel tasks are excluded, contamination is not discussed, and the L2/L3 numbers cannot be audited from text.",
+    "evidence_ids": [
+     "son55:E015",
+     "son55:E025"
+    ],
+    "counterevidence_ids": [
+     "son55:E006",
+     "agg:E003"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2; confirmed. Three seeds x 150 instances support the means; no variance/CI, no paired statistics and no failure breakdown.",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E020"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 4.3",
+     "Sec 4.4",
+     "App A"
+    ]
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Both seats 1; confirmed. High computational cost is acknowledged in Limitations; no calls, tokens, latency, GPU-hours or regeneration counts; no matched-budget comparison.",
+    "evidence_ids": [
+     "son55:E023",
+     "sol:E008"
+    ],
+    "counterevidence_ids": [
+     "agg:E002"
+    ],
+    "search_scope": [
+     "Sec 4",
+     "Limitations",
+     "App A"
+    ]
+   }
+  }
+ },
+ "resolutions": [
+  {
+   "field_path": "rs_pattern.matches[primary].sub_id",
+   "sol_value": null,
+   "son55_value": "rs:C25",
+   "decision": "son55",
+   "final_value": "rs:C25",
+   "reason": "Executable typed artifact routed to specialist/sound solvers with minimal error-triggered closure is a partial C25 execution, not an absence; consistent with p002 ProgPrompt.",
+   "evidence_ids": [
+    "sol:E003",
+    "son55:E021"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.matches[supporting].sub_id",
+   "sol_value": null,
+   "son55_value": "rs:C18",
+   "decision": "sol",
+   "final_value": null,
+   "reason": "C18's tactic is manufacturing the substrate (tokenizer/serializer/projector); an off-the-shelf CLIP space is C18's own failure mode, not an instance.",
+   "evidence_ids": [
+    "son55:E009"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.G",
+   "sol_value": 3,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "See ratings.G: the stated CaP residual is never compared, so the neighbour comparison and residual are incomplete.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E012",
+    "agg:E001"
+   ],
+   "score_impact": "-3.75 raw vs sol"
+  },
+  {
+   "field_path": "score.raw",
+   "sol_value": 66.25,
+   "son55_value": 62.5,
+   "decision": "revised",
+   "final_value": 62.5,
+   "reason": "Recomputed from final ratings (G2 M3 X3 Em3 Ec2 Eh2 Es2 Ecost1); equals son55 because G is the only rating difference.",
+   "evidence_ids": [],
+   "score_impact": "final 62.5"
+  },
+  {
+   "field_path": "expectations.E01",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No same-model alternative harness.",
+   "evidence_ids": [
+    "son55:E012"
+   ],
+   "score_impact": "none (supports E.causality 2)"
+  },
+  {
+   "field_path": "expectations.E03.score_item",
+   "sol_value": [
+    "E.causality",
+    "E.holdout"
+   ],
+   "son55_value": "E.causality",
+   "decision": "son55",
+   "final_value": [
+    "E.causality"
+   ],
+   "reason": "Attribution across backbones.",
+   "evidence_ids": [
+    "son55:E020"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E07",
+   "sol_value": "challenged_with_evidence",
+   "son55_value": "partial",
+   "decision": "son55",
+   "final_value": "partial",
+   "reason": "Applies (beats-learned-policies claim); the contemporaneous comparison exists but is copied.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E013"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E22",
+   "sol_value": "unmet",
+   "son55_value": "unknown",
+   "decision": "sol",
+   "final_value": "unmet",
+   "reason": "Complete material without budget disclosure means not reported, not unknown.",
+   "evidence_ids": [
+    "son55:E021"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E04 / E08 / E16",
+   "sol_value": "not_listed",
+   "son55_value": {
+    "E04": "partial",
+    "E08": "unmet",
+    "E16": "unmet"
+   },
+   "decision": "son55",
+   "final_value": {
+    "E04": "partial",
+    "E08": "unmet",
+    "E16": "unmet"
+   },
+   "reason": "All apply to this benchmark claim by a frontier-model harness.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E010"
+   ],
+   "score_impact": "none"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SEC-1",
+   "field_path": "budget / measurement conditions",
+   "seats_value": "son55 cites regeneration on interpreter errors only under X; sol omits it; neither treats it as an undisclosed extra-attempt budget",
+   "correction": "Recorded agg:E002 as counterevidence under E.measurement and E.cost and as E22 evidence: each success may include an unreported number of regenerations.",
+   "evidence_ids": [
+    "agg:E002",
+    "son55:E021"
+   ],
+   "score_impact": "none (E.measurement 3 and E.cost 1 kept)",
+   "type": "shared_omission"
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "status": "reviewed",
+ "status_reason": "Complete fixed text with appendices read; seat versions/material/input hashes identical; all substantive differences resolved; eight items resolved with no unknown.",
+ "provenance": {
+  "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_taxonomy_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "94402475c6b103c1d85daf3ea983ce60284aa9e6e8621d1f46bf9522ce33fc01",
+  "expectations_hash_method": "sha256 of canonical JSON of E01-E22 definitions parsed from patterns/main/*.md",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "conflicts_json_sha256": "4b07047182d45e6b1674d10bd21cc4085ea12b516f0897a7575905773ce9166a",
+  "seat_card_hash_notes": {
+   "sol": {
+    "domain_cards_hash": "53e9d5618195e7f916265b5fd008e8c646465f741b40f4e20ce48c163b83400e",
+    "expectations_hash": "02156273b8a00c1cd040912c091d79f871d1e492b3643dd16953a1bc4aa5d7c7"
+   },
+   "son55": {
+    "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e;conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1;overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+    "expectations_hash": null
+   }
+  },
+  "seat_models": {
+   "sol": "sonnet / gpt-6.1-sol",
+   "son55": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5) / claude-sonnet-5-5[1m]"
+  },
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "timestamp": "2026-10-22",
+  "anchoring_disclosure": "conflicts.json (which lists both seats' raw scores and item diffs) was opened before the papers were read; each paper's full fixed text was then read and a preliminary evidence judgment formed before that paper's seat records were opened. This is an aggregate review with two seat inputs, not a third blind review or human gold."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2305.11176v3",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.11176.txt",
+   "sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8",
+   "sections_read": [
+    "complete supplied html-full extraction (all sections and appendices present in the file)"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "note": "Figures are captions only in the extraction; figure-only values are not scored."
+  }
+ ],
+ "input_seat_hashes": {
+  "sol": "d564ed098ebe3efcda0793a9e5861f36bc02b2eccd9bad7438d09b374dc3279d",
+  "son55": "50eec9fefeafbd5fbf50e61914f730db189b5685ca9d846dea6220fd91095f0f"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session_id": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_session_note": "Subagent cannot read its own session id or receipt; none fabricated, no probing.",
+ "score": {
+  "raw": 62.5,
+  "display": 62.5,
+  "lower": 62.5,
+  "upper": 62.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ecost)/4; display=python round(raw,1); raw is authoritative",
+  "designation": "production-under-anchors-v2",
+  "seat_raw": {
+   "sol": 66.25,
+   "son55": 62.5
+  }
+ },
+ "final_record_hash": "deb83750aa2c044fb2265af01b74369c2447f0f3b7166556300ba275acff8cf5"
+}

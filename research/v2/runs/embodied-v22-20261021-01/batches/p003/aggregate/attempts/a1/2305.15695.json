@@ -1,0 +1,1575 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p003",
+ "attempt_id": "a1",
+ "seat": "opus55",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2305.15695",
+  "paper_id": "2305.15695",
+  "title": "Asking Before Acting: Gather Information in Embodied Decision Making with Language Models",
+  "version": "2305.15695v2",
+  "claim_type": "system_method",
+  "central_claim": "Asking Before Acting (ABA) lets an LLM agent proactively query external information sources in natural language while acting in embodied environments, improving performance and efficiency over baseline LLM agents across text-based household, robot-arm and real-world open-domain tasks; ABA-FT (finetuning on reformulated question metadata) gives further gains, especially on tasks baselines struggle with.",
+  "scope_decision": "in_scope (borderline): frozen/finetuned LLM agents (Vicuna-7B, GPT-3.5, GPT-4) with an ask action, evaluated closed loop in ALFWorld (text household with aligned embodied worlds) and on a simulated Ravens UR5e arm; the informant and the Ravens captioner read simulator ground truth (privileged); the real-world part is human-executed and is not counted as embodied evidence."
+ },
+ "preliminary_judgment": "Written after reading the fixed text, before opening this paper's seat records: system_method (+ ABA-FT component training); ALFWorld ID/OOD success over 5 (Vicuna) / 3 (GPT-3.5) seeds with sd, same backbone/K/scoring as ReAct; the informant (Vicuna-7B) reads ground-truth placements (72.5% on 40 questions) and ReAct gets no equivalent channel, so the gain bundles information access with asking; Ambiguous/Multiround figure-only; Ravens 20 trials/setting with captions from simulator coordinates; real world human-executed, no counts. Expected online, scoped; causality and holdout limited by the privileged channel; original-card fit doubtful (no sound solver).",
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Sec 3 ABA-FT; extracted-text L15; character 18556",
+   "quote": "we intentionally corrupt the expert policy by randomly injecting noisy actions with probability p",
+   "support_explanation": "Training uses corrupted expert trajectories, not demonstrated autonomous on-policy teacher improvement.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Appendix E; extracted-text L39; character 63904",
+   "quote": "we use LoRA",
+   "support_explanation": "Fine-tuning is a separate extension from frozen in-context ABA; 1500 ambiguous and500 multiround trajectories, r16, LR1e-5.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Table 1; extracted-text L18; character 22948",
+   "quote": "ABA / G35 mean of 3",
+   "support_explanation": "Main GPT3.5 results average three seeds; full table reports ABA84±3/85±4 vs ReAct64±1/65±2 ID/OOD.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Appendix C; extracted-text L33; character 59879",
+   "quote": "72.5\\pm 9.7",
+   "support_explanation": "Eight scenarios × five questions audit of simulated human model; answer noise is material.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Sec 4.2; extracted-text L18; character 31560",
+   "quote": "For each trail, the placement of objects are randomly sampled. We report the average success rate across 20 trails for each setting.",
+   "support_explanation": "Robot-arm simulation random-placement evaluation has20 trials per setting, not unspecified qualitative videos.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Appendix J; extracted-text L54; character 102177",
+   "quote": "Currently the module can access the simulator information and label the object type and its ground truth coordinates.",
+   "support_explanation": "Ravens captions include privileged object types/coordinates, not demonstrated sensor-only recognition.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Sec 4.3; extracted-text L18; character 33407",
+   "quote": "However, the lack of a versatile embodied robot makes it hard to autonomously follow the plan proposed by the algorithm. Therefore, we ablate the plan proposal and execution by asking a human volunteer to strictly follow the proposed plan and interact with the world.",
+   "support_explanation": "Physical section is human-executed plan interaction, not autonomous physical robot transfer.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Appendix L; extracted-text L60; character 134112",
+   "quote": "Statistics data on the average number of questions asked in successful episodes",
+   "support_explanation": "Questions1.1/1.39/2.53 are success-conditioned and exclude failures; not full-system cost.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "M1",
+   "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "2305.15695v2; Sec 4 baseline and appendices; extracted-text L18; character 22287",
+   "quote": "ReAct",
+   "support_explanation": "Baseline name grounds paper-local lineage; original ReAct source/version is not independently supplied.",
+   "kind": "author_report",
+   "origin": "sol",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Abstract",
+   "quote": "we propose \\textit{Asking Before Acting} (ABA), a method that empowers the agent to proactively inquire with external sources for pertinent information using natural language during their interactions within the environment",
+   "support_explanation": "Central operation: an ask action to external information sources.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Abstract",
+   "quote": "we show that LLM agents encounter challenges in efficiently gathering essential information, leading to suboptimal performance",
+   "support_explanation": "Author gap: information gathering in unfamiliar environments.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 3.1",
+   "quote": "are augmented with answers and questions respectively",
+   "support_explanation": "Formal operation: state/action spaces are augmented with answers/questions.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 3.2.1",
+   "quote": "We term the identification procedure, i.e., why we posing such questions, as the metadata of the questions",
+   "support_explanation": "ICL examples prepend manually labelled 'metadata' (rationale for asking) to each question.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 3.3",
+   "quote": "via another language model which is instructed to respond to questions based on the provided information",
+   "support_explanation": "The information source is an LLM 'human model' H, not a human.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 3.3",
+   "quote": "we extract the information about the object placement from the simulator and transform it into a descriptive paragraph",
+   "support_explanation": "H is fed simulator ground truth (privileged object placement) to answer; ReAct has no such channel.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App C",
+   "quote": "We test across 8 randomly sampled scenarios in ALFWorld with 5 questions each",
+   "support_explanation": "Human-model accuracy check: 40 questions only.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App C",
+   "quote": "Human Model 80 80 80 80 60 60 80 60 72.5\\pm 9.7",
+   "support_explanation": "H answers wrongly about 27.5% of the time (Vicuna-7B).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "The mean performance of ABA with GPT-3.5 is higher than the max performance of BUTLER in 12 out of 14 scenarios",
+   "support_explanation": "Headline ALFWorld comparison with the IL baseline (BUTLER best-of-8 vs ABA mean).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "ABA also outperforms ReAct in all scenarios",
+   "support_explanation": "Same backbone, same K=2 examples, same action scoring: ReAct vs ABA.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Table 1",
+   "quote": "ReAct / V7B mean of 5 ID 9\\pm 7 8\\pm 4 9\\pm 3 4\\pm 5 9\\pm 8 4\\pm 4 7\\pm 3",
+   "support_explanation": "ReAct with Vicuna-7B reaches 7% overall (ID), showing a very weak baseline.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Table 1",
+   "quote": "ABA / G35 mean of 3 ID \\bm{86\\pm 6} \\bm{79\\pm 7} \\bm{79\\pm 2} {73\\pm 4} \\bm{81\\pm 11} \\bm{98\\pm 2} \\bm{84\\pm 3} OOD \\bm{83\\pm 4} \\bm{78\\pm 6} \\bm{92\\pm 2} \\bm{81\\pm 14} {85\\pm 6} \\bm{84\\pm 7} \\bm{85\\pm 4}",
+   "support_explanation": "ABA with GPT-3.5: 84 ID / 85 OOD overall, mean +- std over 3 seeds.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Table 1 text",
+   "quote": "ABA achieves more than 40 % performance gain compared to ReAct",
+   "support_explanation": "Gain is larger for the smaller backbone (Vicuna-7B) than for GPT-3.5 (~20%).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Table 2",
+   "quote": "Length [Succ] 18.2\\pm 9.7 11.5\\pm 3.3 Length [All] 29.3\\pm 17.1 16.9\\pm 13.8 # Actions 13.1\\pm 8.3 6.3\\pm 2.6",
+   "support_explanation": "Efficiency: fewer steps and physical actions despite the extra ask action.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App B",
+   "quote": "For a fair comparison, we use the same scoring method to select actions for both our method and ReAct",
+   "support_explanation": "Action-scoring is matched between ABA and ReAct.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "For Ambiguous ALFWorld, we adjust the task descriptions and reward functions to introduce ambiguity",
+   "support_explanation": "Authors built the ambiguous variant so that only asking resolves the task (by construction).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App D",
+   "quote": "But in this modified setting, the task is only deemed completed when a specific mug is put on the shelf",
+   "support_explanation": "Success requires the specific object known only via the answer: ReAct cannot obtain this by design.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "we find that both ABA and ABA-FT consistently exhibit superior performance, while ReAct fails to complete the task in most scenarios",
+   "support_explanation": "Ambiguous/Multiround results are shown only in Fig 2 (image); text sentence is the only readable evidence.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App E",
+   "quote": "we design a rule-based policy according to the PDDL planning trajectories provided along with the environment",
+   "support_explanation": "ABA-FT data comes from a privileged rule-based expert using PDDL and ground-truth state, with templated questions.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App E",
+   "quote": "randomly inserting noisy actions at probability p=0.2",
+   "support_explanation": "Noise injected into expert data; corrupted actions masked from the loss.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App E",
+   "quote": "we use LoRA ( Hu et al., 2021 ) with r=16 and a learning rate of 1e-5",
+   "support_explanation": "ABA-FT training recipe (3000 / 6000 steps) is reported.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "we only use 1500 and 500 trajectories to finetune one model for all the tasks for each environment",
+   "support_explanation": "ABA-FT data scale: 1500 / 500 trajectories.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.2",
+   "quote": "average success rate across 20 trails for each setting",
+   "support_explanation": "Robot-arm tasks: 20 trials per setting, GPT-4 backbone, no CI.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Fig 3",
+   "quote": "ReAct 65 70 55 95 35 5 30 ABA \\bm{85} \\bm{85} \\bm{90} \\bm{100} \\bm{95} \\bm{90} \\bm{90}",
+   "support_explanation": "Robot-arm results per configuration (x=3,4,5; y=2,3,4; x=4,y=3).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App J",
+   "quote": "Currently the module can access the simulator information and label the object type and its ground truth coordinates",
+   "support_explanation": "Robot-arm observation captioner is oracle (privileged perception) for both arms of the comparison.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.3",
+   "quote": "we ablate the plan proposal and execution by asking a human volunteer to strictly follow the proposed plan and interact with the world",
+   "support_explanation": "Real-world scenarios have no robot; a human executes the plan.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 6",
+   "quote": "in real world experiments, we currently use a perfect controller",
+   "support_explanation": "Authors concede the real-world part uses a perfect controller.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App F",
+   "quote": "it fails to provide the correct answer (e.g., Obs 5,7,9,11)",
+   "support_explanation": "Failure case: H gives wrong/uninformative answers and the agent stalls.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App F",
+   "quote": "As shown in Figure 5 , the agent wrongly assume that the eggs in the garbagecan cannot be used to finish the task",
+   "support_explanation": "Failure case analysis is qualitative (two cases).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E030",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App L",
+   "quote": "# Questions ALFWorld 1.1 ALFWorld with ambiguous tasks 1.39 Multiround ALFWorld 2.53",
+   "support_explanation": "Average number of questions asked in successful episodes (human burden proxy).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E031",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App G",
+   "quote": "This requires a specical treatment to the data and we explicitly implement this for clarity",
+   "support_explanation": "Multiround 'don't re-ask' behaviour is hand-implemented (explicit self-query) rather than emergent.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E032",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 2",
+   "quote": "we are the pioneers in addressing the challenge of enabling information gathering for embodied decision-making with LLM agents",
+   "support_explanation": "Priority claim; neighbours cited but not compared.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E033",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 5.2",
+   "quote": "engages humans in active scene description",
+   "support_explanation": "Closest neighbour (Huang et al. 2022b, Inner Monologue) described; no head-to-head run.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E034",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "For ReAct and ABA, we use K=2 in-context examples",
+   "support_explanation": "Matched number of in-context examples between ABA and ReAct.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E035",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App B",
+   "quote": "It also got stuck in loops",
+   "support_explanation": "Qualitative ReAct failure trajectory (hallucinated 'found' statements, loops).",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "son55:E036",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Table 1 text",
+   "quote": "BUTLER ( Shridhar et al., 2021 ) is an imitation learning based method without LLM",
+   "support_explanation": "BUTLER is the trained non-LLM baseline; its best-of-8 numbers are copied from its paper.",
+   "kind": "author_report",
+   "origin": "son55"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.1",
+   "quote": "For ReAct and ABA, we report the performance mean and standard deviation across 5 seeds for Vicuna-7B ( Chiang et al., 2023 ) and 3 seeds for GPT-3.5 ( Ouyang et al., 2022 ) API.",
+   "support_explanation": "Seeds and sd exist for ALFWorld; no CI/test.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 3.3",
+   "quote": "To incorporate prior knowledge about the environment, we extract the information about the object placement from the simulator and transform it into a descriptive paragraph.",
+   "support_explanation": "Informant built from simulator ground truth: privileged channel available only to ABA.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.2",
+   "quote": "We report the average success rate across 20 trails for each setting.",
+   "support_explanation": "Ravens denominator; no variance.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E004",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "App J",
+   "quote": "Currently the module can access the simulator information and label the object type and its ground truth coordinates.",
+   "support_explanation": "Ravens observations are privileged simulator state.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E005",
+   "origin": "opus55_aggregate",
+   "material_id": "M1",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "locator": "Sec 4.3",
+   "quote": "Therefore, we ablate the plan proposal and execution by asking a human volunteer to strictly follow the proposed plan and interact with the world.",
+   "support_explanation": "Real-world part has no robot execution.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "an ask action added to an LLM agent's action space (think/ask/act) in ALFWorld and Ravens robot-arm tasks",
+   "information": "text observations (ALFWorld) or oracle captions with ground-truth coordinates (robot arm); instruction; K=2 (ALFWorld) or K=1 manually written in-context trajectories with metadata/ask steps; answers from H (LLM given simulator ground-truth object placement)",
+   "operation": "LLM emits a rationale ('metadata') then a natural-language question; H answers; the answer is appended to the history and used to choose the next action",
+   "output": "environment actions (go to / take / move_to coordinates) after one or more asks",
+   "conditions": "an answerer exists, is cheap and mostly right (72.5% on a 40-question check); ambiguity or hidden object locations are present",
+   "feedback": "H's answer text; environment feedback",
+   "selection_rule_or_data": "none; the model decides when to ask via in-context examples (Multiround adds an explicit self-query 'have I seen X' step)",
+   "persistence": "history within the episode; Multiround keeps knowledge across tasks inside one room",
+   "later_use": "agent re-reads earlier answers/observations through the self-query when a later task needs the object",
+   "claimed_effect": "higher success and shorter trajectories than ReAct with the same backbone",
+   "failure_boundary": "H errors or uninformative answers stall the agent; agent can wrongly conclude an object is unusable",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E003",
+    "son55:E004",
+    "son55:E005",
+    "son55:E006",
+    "son55:E008",
+    "son55:E028",
+    "son55:E031"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "ABA-FT: Vicuna-7B LoRA finetuned on D_QA (ask-or-not QA about 'have you seen X') and D_pi (policy with corrupted actions masked)",
+   "information": "expert (privileged) PDDL trajectories and simulator ground truth produce templated questions and CoT; student sees only its own observations and the answers",
+   "operation": "teacher-forced SFT of one LLM for all tasks of an environment variant",
+   "output": "a student that asks and acts without ICL examples",
+   "conditions": "expert policy can be written from PDDL/ground truth; 1500 (Ambiguous) / 500 (Multiround) trajectories",
+   "feedback": "none online (no on-policy correction)",
+   "selection_rule_or_data": "noise injected with p=0.2 and masked out of the policy loss",
+   "persistence": "LoRA weights",
+   "later_use": "used in the Ambiguous / Multiround evaluation",
+   "claimed_effect": "ABA-FT > ABA, especially in long-horizon Multiround",
+   "failure_boundary": "numbers only in Fig 2 (image)",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E020",
+    "son55:E021",
+    "son55:E022",
+    "son55:E018"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Frontier-model agents deployed in unfamiliar environments or with vague instructions explore inefficiently and fail; humans ask peers instead.",
+  "checked_gap": "ReAct's qualitative failure (loops, hallucinated finds) and its collapse as the number of required answers grows (robot arm 95% -> 5%) support an information-gathering problem in this setting; but the baseline never receives the oracle information ABA is allowed to ask for.",
+  "lineage": [
+   "ReAct / SayCan / Inner Monologue (LLM agents with think/act, scene feedback) -> ABA (open-domain natural-language querying as an action, metadata ICL, FT)",
+   "NAV/IL ask-for-oracle-action work (Nguyen & Daume, Singh et al.) = what ABA replaces with free-form language"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "Inner Monologue (Huang et al. 2022b)",
+    "pinned_source": false,
+    "solved": "engages humans for scene, task or preference descriptions",
+    "unsolved_per_authors": "restricted question types",
+    "tested_here": false
+   },
+   {
+    "name": "Ren et al. 2023 (concurrent)",
+    "pinned_source": false,
+    "solved": "explicit uncertainty module to trigger asking",
+    "unsolved_per_authors": "ABA integrates asking end-to-end",
+    "tested_here": false
+   }
+  ],
+  "residue": "How much of the gain comes from learning when/what to ask (the metadata mechanism) versus simply having an oracle channel is not separated; a prompt-given-all-information or exhaustive-exploration control is absent.",
+  "stakes": "Efficiency and success of embodied LLM agents when instructions are ambiguous or the environment is unknown.",
+  "method_response": "Treat asking as a first-class action, teach its rationale via metadata examples or finetuning, and answer with an external information source.",
+  "remaining_gap": "Reliability of the answerer (72.5%), real robot execution (human/perfect controller), over-asking cost, and uncertainty about when to stop asking (authors + ours).",
+  "evidence_ids": [
+   "son55:E002",
+   "son55:E008",
+   "son55:E024",
+   "son55:E026",
+   "son55:E027",
+   "son55:E032",
+   "son55:E033"
+  ],
+  "unresolved": "Neighbour papers are not pinned; 'pioneers' priority claim cannot be checked from the materials.",
+  "aggregate_note": "son55 gap retained: the residual (asking policy vs oracle information) is not separated because no information-matched baseline exists."
+ },
+ "rs_pattern": {
+  "primary": null,
+  "supporting": [],
+  "matches": [],
+  "outside_taxonomy": true,
+  "reason": "Resolved toward son55. The operation adds a natural-language ask action to an LLM agent, backed by an external information source (an LLM given simulator ground truth), and teaches when to ask through rationale-augmented examples or SFT. decompose_and_delegate/C25 needs a sound external solver or mechanically checkable oracle, typed machine-checkable handoffs and closure through verifiable output, and its success condition excludes privileged external supervision. Here the \"solver\" is a 72.5%-accurate LLM playing a human, the handoff is free-form prose, and the answers are privileged facts rather than solver output; sol's own checks mark these partial or failing. assumption_audit_and_pivot (guarantees/defences; proof/security sub-cards), reframe_as_solvable_object (no solver imported from the Contextual-MDP restatement) and adapt_via_conditioning/C03 (no conditioning substrate or category holdout) also do not fit. outside_taxonomy is recorded without forcing a label, and the paper is fully evaluated.",
+  "checked_cards": [
+   "decompose_and_delegate/rs:C25",
+   "assumption_audit_and_pivot",
+   "reframe_as_solvable_object",
+   "adapt_via_conditioning/rs:C03"
+  ],
+  "executes_pattern": "not_applicable",
+  "resolves_problem": "not_applicable"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "status is about the card condition; for failure-mode (F) items 'unmet' means the failure mode is present",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K108",
+    "version": "embodied-agent-harness/v1 (frozen 2026-10-21 build)",
+    "fit": "partial",
+    "executes_pattern": "partial: ask is an optional call beside environment actions that the model chooses to use; the tool is an information source, not perception/navigation/MCP",
+    "resolves_problem": "not_shown (gain measured with an oracle-informed channel)",
+    "condition_checks": [
+     {
+      "condition_id": "observe_act_interface:S5",
+      "status": "partial",
+      "reason": "effects reported per backbone (Vicuna-7B, GPT-3.5, GPT-4) and gains are larger for the weaker model; harness correctness not separately verified",
+      "evidence_ids": [
+       "son55:E013",
+       "son55:E012",
+       "son55:E023"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F5",
+      "status": "unmet",
+      "reason": "failure present: tool value depends on backbone (+40% for 7B vs ~+20% for GPT-3.5)",
+      "evidence_ids": [
+       "son55:E013"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F4",
+      "status": "unmet",
+      "reason": "failure present: ask, metadata prompting, the Multiround self-query and the oracle H are changed together; components are not toggled",
+      "evidence_ids": [
+       "son55:E004",
+       "son55:E031"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E001",
+     "son55:E003",
+     "son55:E010"
+    ]
+   },
+   {
+    "main": "privileged_teacher_supervision",
+    "sub": "K505",
+    "version": "embodied-agent-harness/v1 (frozen 2026-10-21 build)",
+    "fit": "partial",
+    "executes_pattern": "partial (ABA-FT only): a rule-based privileged expert from PDDL and ground-truth state emits templated questions, reasoning and actions; the student LoRA model is trained to output reasoning then ask/act",
+    "resolves_problem": "not_shown (ABA-FT numbers are in a figure; no identifiability check of privileged-derived questions)",
+    "condition_checks": [
+     {
+      "condition_id": "K505:when_it_works",
+      "status": "partial",
+      "reason": "labels derivable from simulator ground truth and short horizons hold; teacher uses templates in the student's action vocabulary",
+      "evidence_ids": [
+       "son55:E019",
+       "son55:E020"
+      ]
+     },
+     {
+      "condition_id": "K505:when_it_fails",
+      "status": "unmet",
+      "reason": "failure present: no check that templated privileged questions are identifiable from student observations, and no on-policy correction",
+      "evidence_ids": [
+       "son55:E019",
+       "son55:E022"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E019",
+     "son55:E020",
+     "son55:E021",
+     "son55:E022"
+    ]
+   }
+  ],
+  "unassigned": [
+   "free-form ask action backed by an external (human/LLM) information source - a candidate for a new interface card if more papers share it"
+  ],
+  "revision_proposals": [
+   "candidate sub-pattern: 'external information source as an optional ask action' (single paper so far; do not edit cards in-batch)"
+  ],
+  "aggregate_note": "Resolved toward son55: observe_act_interface/K108 (ask is an optional extra call beside environment actions, chosen by the model; partial because the tool is an information source, not perception/navigation/MCP) and privileged_teacher_supervision/K505 for ABA-FT only (rule-based PDDL/ground-truth expert emitting templated questions, reasoning and actions in the student's vocabulary; the identifiability check is missing). sol matched the same main card with a null sub; K108 is the closer sub. The proposal for an \"external information source as optional ask action\" card stays pending (single paper)."
+ },
+ "pattern_mapping": [],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations",
+    "patterns/main/harness_self_optimization.md#Reviewer-expectations"
+   ],
+   "requirement": "Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness.",
+   "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "ReAct with the same backbone, K and scoring is a real alternative loop, but it lacks the information channel that ABA receives, so the comparison does not isolate the harness.",
+   "evidence_ids": [
+    "son55:E015",
+    "son55:E034"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "met",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Resolved toward son55 (sol met)."
+  },
+  {
+   "id": "E02",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/external_verification_control.md#Reviewer-expectations"
+   ],
+   "requirement": "Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions.",
+   "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Ask vs no-ask and ABA vs ABA-FT are single additions; the metadata rationale, QA reformulation, noise masking and informant quality are not toggled.",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E018"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Resolved toward sol (son55 unmet): the two single-add contrasts exist, the named sub-components are not isolated."
+  },
+  {
+   "id": "E03",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#Reviewer-expectations",
+    "patterns/main/observe_act_interface.md#Reviewer-expectations"
+   ],
+   "requirement": "Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student.",
+   "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student.",
+   "applicable": true,
+   "status": "met",
+   "reason": "Vicuna-7B, GPT-3.5 and GPT-4 backbones; the ask gain is larger for the weak model (+40 vs about +20 points).",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E012",
+    "son55:E013"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "met",
+    "son55": "met"
+   },
+   "aggregate_reason": "Both met; score item set to E.causality (son55) instead of sol's E.holdout."
+  },
+  {
+   "id": "E04",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "reproducibility, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/external_verification_control.md#Reviewer-expectations"
+   ],
+   "requirement": "Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise.",
+   "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Mean+-sd over 5/3 seeds for ALFWorld; 20 trials without CI for Ravens; no paired tests.",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E023"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "not_listed",
+    "son55": "partial"
+   },
+   "aggregate_reason": "son55 partial; sol did not list it. Accepted."
+  },
+  {
+   "id": "E05",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "metric, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations",
+    "patterns/main/harness_native_rl.md#Reviewer-expectations"
+   ],
+   "requirement": "Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task.",
+   "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Lengths, actions and questions reported; tokens, latency, USD and finetuning compute are not.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E030"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both partial; confirmed."
+  },
+  {
+   "id": "E06",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "dataset, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer-expectations",
+    "patterns/main/sample_verify_select.md#Reviewer-expectations"
+   ],
+   "requirement": "For a VLN-CE harness, report SR, SPL, OSR and NE on R2R-CE val_unseen, either on the shared 100-episode zero-shot subset or the full split. State which one, and do not mix subset results with full-split numbers of trained methods as if they were matched.",
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent.",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "ALFWorld/Ravens/human scenarios, not a VLN-CE/ObjectNav claim.",
+   "evidence_ids": [],
+   "score_item": [
+    "E.measurement"
+   ],
+   "seat_status": {
+    "sol": "not_applicable",
+    "son55": "not_listed"
+   },
+   "aggregate_reason": "sol not_applicable; son55 not listed. Accepted."
+  },
+  {
+   "id": "E08",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "reproducibility, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations",
+    "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations"
+   ],
+   "requirement": "State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol.",
+   "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "The oracle informant and the simulator-reading captioner are disclosed, so the privileged execution conditions are stated; contamination and development overlap of the hand-written examples are not.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E025"
+   ],
+   "score_item": [
+    "E.holdout",
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "Resolved toward sol (son55 unmet): E08 asks for both caveats and one is disclosed."
+  },
+  {
+   "id": "E12",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "ablation, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/on_policy_distillation_objectives.md#Reviewer-expectations",
+    "patterns/main/privileged_teacher_supervision.md#Reviewer-expectations"
+   ],
+   "requirement": "When teacher supervision uses information the student cannot observe (harness state, memory, simulator ground truth, next frame), ablate the content of that privileged channel and check what the student can recover from its own observations. In the readings, some privileged channels give no gain over SFT or have negative utility.",
+   "applies_when": "a student trained from a privileged or harness-richer teacher and deployed with less information.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "ABA-FT labels come from a rule-based expert using PDDL trajectories and simulator ground truth, with templated questions; the content of this privileged channel is not ablated, and there is no check of what the student can infer from its own observations.",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "not_listed",
+    "son55": "not_listed"
+   },
+   "aggregate_reason": "Omitted by both seats (SEC-2)."
+  },
+  {
+   "id": "E16",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "metric, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations"
+   ],
+   "requirement": "Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers.",
+   "applies_when": "an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Failure cases analysed qualitatively; no counted endpoint breakdown.",
+   "evidence_ids": [
+    "son55:E028",
+    "son55:E029"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both partial; confirmed."
+  },
+  {
+   "id": "E19",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "other, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/code_policy_trial_revision.md#Reviewer-expectations",
+    "patterns/main/external_verification_control.md#Reviewer-expectations"
+   ],
+   "requirement": "Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims.",
+   "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "The real-world part is claimed as embodied practical value, but a human volunteer executes the plan (a \"perfect controller\") and there are no trial counts.",
+   "evidence_ids": [
+    "son55:E026",
+    "son55:E027",
+    "agg:E005"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "seat_status": {
+    "sol": "not_listed",
+    "son55": "unmet"
+   },
+   "aggregate_reason": "son55 unmet; sol did not list it. Accepted as applicable because the abstract claims real-world embodied tasks."
+  },
+  {
+   "id": "E20",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "other, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "patterns/main/observe_act_interface.md#Reviewer-expectations"
+   ],
+   "requirement": "State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested.",
+   "applies_when": "a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No depth tool; the captioner returns ground-truth coordinates (privilege scored separately).",
+   "evidence_ids": [],
+   "score_item": [
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "not_applicable",
+    "son55": "not_listed"
+   },
+   "aggregate_reason": "sol not_applicable; son55 not listed. Accepted."
+  },
+  {
+   "id": "E22",
+   "version": "patterns/main E01-E22 defs sha256:94402475c6b103c1",
+   "source_strength": "reproducibility, common_practice; literature-derived, not an actual reviewer quotation",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer-expectations",
+    "patterns/main/harness_effect_evaluation.md#Reviewer-expectations"
+   ],
+   "requirement": "Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences.",
+   "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Same K and action scoring; token/call budgets not reported while ABA adds ask steps and one informant call per question.",
+   "evidence_ids": [
+    "son55:E015",
+    "son55:E034"
+   ],
+   "score_item": [
+    "E.cost",
+    "E.causality"
+   ],
+   "seat_status": {
+    "sol": "partial",
+    "son55": "partial"
+   },
+   "aggregate_reason": "Both partial; confirmed."
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "ABA improves success and efficiency over baseline LLM agents in ALFWorld.",
+   "setting": "ALFWorld ID/OOD, Vicuna-7B (5 seeds) and GPT-3.5 (3 seeds), K=2",
+   "baseline_control": "ReAct (same LLM/K/scoring), BUTLER (IL, best-of-8, 10^5 trajectories per task)",
+   "selection_vs_test": "ID and OOD splits of ALFWorld; in-context examples hand-written by the authors (source scenes not stated)",
+   "result_denominator": "ABA/G35 84 ID, 85 OOD vs ReAct/G35 64 ID, 65 OOD; ABA/V7B 56/48 vs ReAct 7/6; 6.3 vs 13.1 physical actions",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E010",
+    "son55:E011",
+    "son55:E012",
+    "son55:E013",
+    "son55:E014"
+   ],
+   "counterevidence": [
+    "son55:E006",
+    "son55:E008"
+   ],
+   "allowed_conclusion": "With an LLM-played informant given ground-truth placement, asking raises ALFWorld success by ~20 (GPT-3.5) to ~40+ (Vicuna) points over ReAct and shortens trajectories; the gain bundles the oracle information."
+  },
+  {
+   "claim_id": "C2",
+   "text": "ABA and ABA-FT handle ambiguity and multi-round memory; FT helps long horizons.",
+   "setting": "author-built Ambiguous/Multiround ALFWorld",
+   "baseline_control": "ReAct",
+   "selection_vs_test": "variants designed so that asking is necessary; ID/OOD legends in Fig 2",
+   "result_denominator": "figure only",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E017",
+    "son55:E018",
+    "son55:E022"
+   ],
+   "counterevidence": [
+    "son55:E031"
+   ],
+   "allowed_conclusion": "Author-reported, favourable by construction, numbers unreadable from the text."
+  },
+  {
+   "claim_id": "C3",
+   "text": "ABA controls low-level pick-and-place by reasoning from language answers.",
+   "setting": "Ravens UR5e simulation, numeric coordinates, GPT-4, oracle caption module",
+   "baseline_control": "ReAct",
+   "selection_vs_test": "random placements per trial; per-task prompts",
+   "result_denominator": "20 trials per setting; ABA 85-100% vs ReAct 5-95%, worst at y=4 (90 vs 5)",
+   "evidence_ids": [
+    "son55:E023",
+    "son55:E024",
+    "son55:E025"
+   ],
+   "counterevidence": [
+    "son55:E025"
+   ],
+   "allowed_conclusion": "In oracle-perception simulation with a stated question budget, asking beats trial-and-error on three block-placement task families."
+  },
+  {
+   "claim_id": "C4",
+   "text": "ABA works in real-world open-domain image-based embodied tasks.",
+   "setting": "3 qualitative scenarios, InstructBLIP captions + GPT-4, human executes",
+   "baseline_control": "none",
+   "selection_vs_test": "n/a",
+   "result_denominator": "three trajectories shown, no counts",
+   "evidence_ids": [
+    "son55:E026",
+    "son55:E027"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Qualitative demonstration of grounded question generation only; no embodied execution evidence."
+  }
+ ],
+ "claims_aggregate_note": "son55 claims C1-C4 retained; C2 (Ambiguous/Multiround) and C4 (real world) carry no scored numbers.",
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop, simulator-judged success in ALFWorld and the Ravens UR5e simulator. Not transfer: the Ravens perception and the informant are privileged (EVIDENCE rule 3, anchor precedent 1), examples are hand-made per environment (rule 2), and the real-world part has no robot and no trial counts (rule 1).",
+  "claim_support": "scoped",
+  "author_claim_preserved": "ABA lets an LLM agent proactively query external sources in natural language while acting, giving substantial advantages in performance and efficiency over baseline LLM agents in text-based household, robot-arm and real-world open-domain embodied tasks; ABA-FT gives further gains, especially where baselines struggle.",
+  "strongest_supported_claim": "In ALFWorld and a Ravens block-placement simulator, an LLM agent given an ask action and an LLM informant that holds the ground-truth object layout beats a no-ask ReAct with the same backbone and examples on success and trajectory length; the gain cannot be attributed to the metadata/learning mechanism and does not extend to real robots.",
+  "not_claimable": [
+   "advantage over a baseline that is given the same information",
+   "value of the metadata mechanism",
+   "real-robot transfer",
+   "robustness to a 72.5%-accurate human"
+  ],
+  "retention": "not_applicable: ABA-FT is a static finetune; no retained-improvement claim",
+  "unresolved": [
+   "Ambiguous/Multiround numbers are figure-only (not scored)",
+   "ALFWorld ID/OOD episode counts not stated in the text"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Concrete gap: LLM agents with underspecified instructions or unknown object locations explore inefficiently, and ReAct's failure profile (loops, hallucinated finds, 95%->5% as required answers grow) is observable. Not 4: the nearest language-asking neighbours (Inner Monologue's human scene/preference queries, uncertainty-triggered asking) are named but not run, and the \"pioneers\" framing overreaches.",
+   "evidence_ids": [
+    "son55:E002",
+    "son55:E032",
+    "son55:E033",
+    "son55:E035",
+    "son55:E024"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Asking as a first-class action, rationale metadata in examples and QA-reformulated finetuning are tied to the gap and predict fewer physical actions and ask-before-explore behaviour. Key assumption weak: the answerer is reliable (72.5% on 40 questions) and holds ground-truth placements. The metadata rationale is never contrasted with plain asking.",
+   "evidence_ids": [
+    "son55:E001",
+    "son55:E003",
+    "son55:E004",
+    "son55:E005",
+    "son55:E008"
+   ],
+   "counterevidence_ids": [
+    "son55:E006",
+    "son55:E028"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3; confirmed. Interaction format, informant prompt, ABA-FT data recipe (rule-based PDDL/GT expert, noise p=0.2 masked, LoRA r=16, steps, 1500/500 trajectories) and the Ravens setup are given in appendices. Not 4: full ABA prompts and action-scoring details are shown only through examples, Multiround self-query behaviour is hand-implemented, and the Ravens captioner reads simulator coordinates.",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E020",
+    "son55:E021",
+    "son55:E022",
+    "son55:E031",
+    "sol:E006"
+   ],
+   "counterevidence_ids": [
+    "son55:E025"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Resolved toward sol (son55 3). ALFWorld and Ravens success is simulator-judged, with seed means+-sd and 20 trials per Ravens setting. But the anchor v2 clause \"criterion exists but denominators incomplete (some results with trial counts, some without) -> 2\" applies: ALFWorld ID/OOD episode counts are not stated in the text, the Ambiguous/Multiround results (half of the ABA-FT claim) are figure-only, the real-world claim has no counts and is human-executed, and BUTLER's numbers are copied best-of-8.",
+    "evidence_ids": [
+     "son55:E011",
+     "son55:E012",
+     "son55:E023",
+     "son55:E024",
+     "agg:E001",
+     "agg:E003"
+    ],
+    "counterevidence_ids": [
+     "son55:E018",
+     "son55:E026",
+     "agg:E005"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2; confirmed. ReAct vs ABA uses the same backbone, K=2 examples and action scoring, but only ABA gets an informant whose paragraph is built from simulator ground truth (agg:E002); there is no ReAct-with-the-same-information or exhaustive-exploration control. Metadata and QA reformulation are not ablated, and the variants are built so that asking is required.",
+    "evidence_ids": [
+     "son55:E010",
+     "son55:E015",
+     "son55:E034"
+    ],
+    "counterevidence_ids": [
+     "son55:E006",
+     "son55:E016",
+     "son55:E017",
+     "agg:E002"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2; confirmed. The ALFWorld OOD split keeps the gain, but examples are hand-written per environment, the informant knows the ground-truth layout of every evaluation room, Ravens uses oracle captions (anchor precedent 1: privileged channel -> holdout deduction, no transfer), no new embodiment/simulator is held out, and the real-world part is not an embodied trial.",
+    "evidence_ids": [
+     "son55:E012",
+     "son55:E023"
+    ],
+    "counterevidence_ids": [
+     "son55:E025",
+     "son55:E026",
+     "son55:E027",
+     "agg:E002",
+     "agg:E004"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 3; corrected to 2 (SEC-1). Seeds with sd for ALFWorld and efficiency, 20 trials without variance for Ravens, figure-only variants, no CI/paired tests, failures only qualitative (App F/G). Anchor v2 precedent 2209.11302: variance present but no CI and no failure decomposition -> 2, not 3.",
+    "evidence_ids": [
+     "son55:E011",
+     "son55:E012",
+     "son55:E014",
+     "son55:E023",
+     "agg:E001"
+    ],
+    "counterevidence_ids": [
+     "son55:E029"
+    ],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Resolved toward son55 (sol 1). Trajectory length including ask/think steps, physical action counts and questions per successful episode are reported, so the call budget can be inferred; the informant channel and tokens/latency/USD/finetuning compute are not priced. Anchor: call budget inferable but privileged channel unpriced (PhysMem) -> 2.",
+    "evidence_ids": [
+     "son55:E014",
+     "son55:E030",
+     "son55:E022",
+     "son55:E021"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 4",
+     "App A",
+     "App E",
+     "App L"
+    ]
+   }
+  }
+ },
+ "resolutions": [
+  {
+   "field_path": "rs_pattern.primary",
+   "sol_value": "decompose_and_delegate",
+   "son55_value": null,
+   "decision": "son55",
+   "final_value": null,
+   "reason": "See rs_pattern.reason: C25/decompose_and_delegate needs a sound solver or checkable oracle, typed artifacts and non-privileged closure signals; none holds here, and sol's own checks mark these partial or failing.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E008"
+   ],
+   "score_impact": "none (pattern match is not scored)"
+  },
+  {
+   "field_path": "rs_pattern.outside_taxonomy",
+   "sol_value": false,
+   "son55_value": true,
+   "decision": "son55",
+   "final_value": true,
+   "reason": "Follows from the primary decision; PATTERN_PROTOCOL allows no-match, and the paper is still fully evaluated.",
+   "evidence_ids": [
+    "son55:E003"
+   ],
+   "score_impact": "none; batch outside_taxonomy ratio 1/5"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    "rs:C25"
+   ],
+   "son55_value": [],
+   "decision": "son55",
+   "final_value": [],
+   "reason": "No primary card, so no sub card.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "ratings.E.measurement",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Anchor v2 incomplete-denominator clause: ALFWorld split sizes unstated, variants figure-only, real-world claim uncounted.",
+   "evidence_ids": [
+    "son55:E018",
+    "son55:E026",
+    "agg:E001"
+   ],
+   "score_impact": "-3.75 raw vs son55"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 1,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "Lengths including ask steps and questions per episode make the call budget inferable; the informant is unpriced -> PhysMem anchor 2.",
+   "evidence_ids": [
+    "son55:E014",
+    "son55:E030"
+   ],
+   "score_impact": "+1.25 raw vs sol"
+  },
+  {
+   "field_path": "score.raw",
+   "sol_value": 63.75,
+   "son55_value": 68.75,
+   "decision": "revised",
+   "final_value": 63.75,
+   "reason": "Recomputed from final ratings (G3 M3 X3 Em2 Ec2 Eh2 Es2 Ecost2). It equals sol's total, but item by item it differs from both seats (E.cost from son55, E.statistics corrected for both).",
+   "evidence_ids": [],
+   "score_impact": "final 63.75"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "observe_act_interface/null"
+   ],
+   "son55_value": [
+    "observe_act_interface/K108",
+    "privileged_teacher_supervision/K505"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "observe_act_interface/K108",
+    "privileged_teacher_supervision/K505"
+   ],
+   "reason": "K108 (optional extra call chosen by the model) fits the ask operation more closely than a bare main card; K505 fits the separate ABA-FT data operation.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "pattern_mapping",
+   "sol_value": "C25 -> observe_act_interface/null",
+   "son55_value": [],
+   "decision": "son55",
+   "final_value": [],
+   "reason": "No original card, so there is no original-to-domain mapping; the domain operations are documented in domain_pattern.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E01",
+   "sol_value": "met",
+   "son55_value": "partial",
+   "decision": "son55",
+   "final_value": "partial",
+   "reason": "The alternative loop exists but is not information-matched.",
+   "evidence_ids": [
+    "son55:E015"
+   ],
+   "score_impact": "none (supports E.causality 2)"
+  },
+  {
+   "field_path": "expectations.E02",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "Single-add contrasts exist (ask vs no-ask, ABA vs ABA-FT); the named sub-components are not toggled.",
+   "evidence_ids": [
+    "son55:E018"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E03.score_item",
+   "sol_value": [
+    "E.holdout"
+   ],
+   "son55_value": "E.causality",
+   "decision": "son55",
+   "final_value": [
+    "E.causality"
+   ],
+   "reason": "Backbone dependence of a tool effect is an attribution question.",
+   "evidence_ids": [
+    "son55:E013"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E08",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "Privileged execution conditions are disclosed; contamination/overlap are not.",
+   "evidence_ids": [
+    "son55:E006",
+    "son55:E025"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E04 / E19",
+   "sol_value": "not_listed",
+   "son55_value": {
+    "E04": "partial",
+    "E19": "unmet"
+   },
+   "decision": "son55",
+   "final_value": {
+    "E04": "partial",
+    "E19": "unmet"
+   },
+   "reason": "Both apply (success-rate comparisons; real-world embodied claim).",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E026"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E06 / E20",
+   "sol_value": "not_applicable",
+   "son55_value": "not_listed",
+   "decision": "sol",
+   "final_value": "not_applicable",
+   "reason": "Out of the expectations' applies_when.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "paper.scope_decision",
+   "sol_value": "in_scope (A)",
+   "son55_value": "in_scope, borderline (thin harness, privileged informant/captioner, no robot in real world)",
+   "decision": "same_supported_fact",
+   "final_value": "in_scope (borderline)",
+   "reason": "A frontier-LLM agent loop is evaluated closed loop in ALFWorld (cf. DEPS ALFWorld) and on a simulated UR5e arm; the privileged channels are scored in E and the human-executed part is excluded from evidence.",
+   "evidence_ids": [
+    "son55:E023",
+    "son55:E025",
+    "son55:E026"
+   ],
+   "score_impact": "none"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SEC-1",
+   "field_path": "ratings.E.statistics",
+   "seats_value": "both 3",
+   "correction": "2: variance present for ALFWorld only, no CI/paired tests, failures qualitative; anchor v2 precedent 2209.11302 sets this profile at 2, not 3.",
+   "evidence_ids": [
+    "son55:E011",
+    "son55:E023",
+    "son55:E029",
+    "agg:E001"
+   ],
+   "score_impact": "-1.25 raw vs both seats",
+   "type": "shared_error"
+  },
+  {
+   "id": "SEC-2",
+   "field_path": "expectations (E12 missing)",
+   "seats_value": "neither seat evaluated E12 although ABA-FT is trained from a ground-truth rule expert",
+   "correction": "Added E12 unmet (privileged-channel content not ablated; no identifiability check), consistent with the K505 failure condition son55 recorded.",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_impact": "none (E.causality already 2)",
+   "type": "shared_omission"
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "status": "reviewed",
+ "status_reason": "Complete fixed text with appendices read; seat versions/material/input hashes identical; all substantive differences resolved; eight items resolved with no unknown.",
+ "provenance": {
+  "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_taxonomy_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "94402475c6b103c1d85daf3ea983ce60284aa9e6e8621d1f46bf9522ce33fc01",
+  "expectations_hash_method": "sha256 of canonical JSON of E01-E22 definitions parsed from patterns/main/*.md",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "conflicts_json_sha256": "4b07047182d45e6b1674d10bd21cc4085ea12b516f0897a7575905773ce9166a",
+  "seat_card_hash_notes": {
+   "sol": {
+    "domain_cards_hash": "9a72d5e21f5b54c6b91a81ae94092247a52865c93b9061b3f28b92f77e6fa90b",
+    "expectations_hash": "e906455d1c14bb6477a47f2e4d4691396086c0ed0e83b15bdf3664d8b45f81e4"
+   },
+   "son55": {
+    "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e;conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1;overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+    "expectations_hash": null
+   }
+  },
+  "seat_models": {
+   "sol": "sonnet / gpt-6.1-sol",
+   "son55": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5) / claude-sonnet-5-5[1m]"
+  },
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "timestamp": "2026-10-22",
+  "anchoring_disclosure": "conflicts.json (which lists both seats' raw scores and item diffs) was opened before the papers were read; each paper's full fixed text was then read and a preliminary evidence judgment formed before that paper's seat records were opened. This is an aggregate review with two seat inputs, not a third blind review or human gold."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2305.15695v2",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.15695.txt",
+   "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+   "sections_read": [
+    "complete supplied html-full extraction (all sections and appendices present in the file)"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "note": "Figures are captions only in the extraction; figure-only values are not scored."
+  }
+ ],
+ "input_seat_hashes": {
+  "sol": "4b57a6dd723ff21d98b890310c8b74d0716ee1658f0699698632341cd514af0e",
+  "son55": "a397e93778a6e4ab2459b7bfbefc864b6a2c1ed814ab0ec342c7417db77f811b"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session_id": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_session_note": "Subagent cannot read its own session id or receipt; none fabricated, no probing.",
+ "score": {
+  "raw": 63.75,
+  "display": 63.8,
+  "lower": 63.75,
+  "upper": 63.75,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ecost)/4; display=python round(raw,1); raw is authoritative",
+  "designation": "production-under-anchors-v2",
+  "seat_raw": {
+   "sol": 63.75,
+   "son55": 68.75
+  }
+ },
+ "final_record_hash": "d9f40add57528b5dce2b1229b8af10029a5906ca674874e43b5cbb2aa9bf44be"
+}

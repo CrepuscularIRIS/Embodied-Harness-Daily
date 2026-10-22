@@ -1,4 +1,4 @@
-# EH Radar — Embodied Harness
+# Embodied-Harness-Daily（原 EH Radar — Embodied Harness）
 
 前沿 LLM/VLM 或 coding agent 通过工具、冻结 VLA/技能、感知原语、记忆、验证和执行控制组成 harness，控制机械臂、移动操作、导航、无人机或人形机器人；也包括 harness 教师轨迹蒸馏、on-policy 纠正、harness 内 RL、自我优化及其评测。无 harness/教师闭环的纯 VLA、GUI 和非具身 RSI 不在本项目范围内。
 
@@ -50,7 +50,7 @@ Grok 找候选并写 inbox → 本地核对来源/去重/入库 → Claude Code 
 - 原有 `research/screen.jsonl`、`research/patterns/assignments.jsonl` 是历史分档/适配线索，不能直接代替新的判断。
 - 建议 CC 安装 Open Scientist，支持 gap 诊断、模式/期望维护与独立审阅；日常评审使用冻结资产，缺口才返回研究循环。
 - `make check` 只做离线结构检查。旧 `make score` / `make board` 和旧脚本入口会明确拒绝运行。
-- inherited arXiv digest 的关键词相关性分数不属于论文质量分数，见 [digest 用法](docs/digest-pipeline.md)。
+- inherited arXiv digest 的关键词相关性分数不属于论文质量分数，见 [digest 用法](archive/2026-10-21-reset/docs/digest-pipeline.md)。
 
 ## Related awesome lists
 

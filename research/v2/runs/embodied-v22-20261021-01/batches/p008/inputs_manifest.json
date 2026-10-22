@@ -1,0 +1,48 @@
+{
+ "batch_id": "p008",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2310.15127",
+   "paper_id": "2310.15127",
+   "version": "2310.15127v2",
+   "title": "Open-Ended Instructable Embodied Agents with Memory-Augmented Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2310.15127.txt",
+   "material_sha256": "91624e80e4d8c62388ba71fc2aaf85e3821435138b72aa79757333bd8c43ca4e"
+  },
+  {
+   "paper_key": "2310.17555",
+   "paper_id": "2310.17555",
+   "version": "2310.17555v1",
+   "title": "Interactive Robot Learning from Verbal Correction",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2310.17555.txt",
+   "material_sha256": "4542973e4e952d9f46f7e70e7e9527a26932d2a8f1a3626203bd843d8d5b2af7"
+  },
+  {
+   "paper_key": "2311.01403",
+   "paper_id": "2311.01403",
+   "version": "2311.01403v1",
+   "title": "REAL: Resilience and Adaptation using Large Language Models on Autonomous Aerial Robots",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2311.01403.txt",
+   "material_sha256": "bd161d24a027b05b941446acb0f23e907ef9ecad6304a574673755172de04523"
+  },
+  {
+   "paper_key": "2311.10678",
+   "paper_id": "2311.10678",
+   "version": "2311.10678v2",
+   "title": "Distilling and Retrieving Generalizable Knowledge for Robot Manipulation via Language Corrections",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2311.10678.txt",
+   "material_sha256": "43baa9317214b9095e4032d69528911e178469c3745173c8827e7b0617dfd457"
+  },
+  {
+   "paper_key": "2311.11183",
+   "paper_id": "2311.11183",
+   "version": "2311.11183v3",
+   "title": "Deploying and Evaluating LLMs to Program Service Mobile Robots",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2311.11183.txt",
+   "material_sha256": "94c8f9a72a2039f7a1f14ff422a30f1b744dd58ef73d781eab1662b64444e3f3"
+  }
+ ],
+ "input_hash": "232f36de279e96d96488419a5f0604417cc91fe5514c0a2ded4247739182e984"
+}

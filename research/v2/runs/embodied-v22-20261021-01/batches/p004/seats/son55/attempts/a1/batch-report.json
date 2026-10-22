@@ -1,0 +1,220 @@
+{
+ "schema_version": "radar-review-v2.2-batch-report",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p004",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "phase": "production",
+ "anchors_version": "v2 (3ececdd11cc3d144)",
+ "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+ "actual_model": "claude-sonnet-5-5[1m]",
+ "session_id": null,
+ "receipt_ref": null,
+ "session_note": "not obtainable from inside the subagent",
+ "input_hash": "62c71ee30d00fbd8b32f833b62dbd15e6ad9979a417096b150a0681c29c0fa93",
+ "counts": {
+  "assigned": 5,
+  "reviewed": 4,
+  "needs_fulltext": 1,
+  "needs_evidence": 0,
+  "out_of_scope": 0,
+  "outside_taxonomy_rs_layer": 1,
+  "outside_taxonomy_rate": 0.2,
+  "domain_unassigned": 0,
+  "schema_errors": 0,
+  "scored_complete": 4,
+  "score_null_with_interval": 1
+ },
+ "outside_taxonomy_note": "rs-layer outside_taxonomy=1/5 (2306.17840); below 30% warning threshold",
+ "schema_errors": [],
+ "self_checks": [
+  "file set equals inputs_manifest paper_keys (5/5)",
+  "material sha256 matches manifest for all five (sha256sum run)",
+  "all evidence quotes found verbatim (whitespace-normalised) in the pinned materials",
+  "rs: sub ids have legal parents per PARENTS.tsv; domain ids exist in taxonomy.json with namespace=embodied, <=3 matches",
+  "unknown items carry no rating; not_reported items have rating 0 and non-empty search_scope",
+  "scores recomputed from ratings; raw not rounded"
+ ],
+ "contamination": "none: no other seat, aggregate, other batch, archive or assignments.jsonl read",
+ "blockers": [
+  {
+   "paper_key": "2307.01928",
+   "kind": "needs_fulltext",
+   "detail": "Pinned material has the main text only; Appendix A1-A10 (prompts, proofs, scenario distributions, bimanual/per-setting results, GPT-3.5 baseline analysis) is absent. E.measurement and E.statistics left unknown (provisional 2 each); score null, lower 66.25, upper 86.25, coverage 0.80. If the controller re-pins with the appendix, both seats need the same pack and a new attempt."
+  }
+ ],
+ "notes": [
+  "expectations_hash null: no standalone expectations file (E01-E22 embedded in patterns/main/*.md)",
+  "2306.17840 and 2306.17582 evidence_level/claim_type judgement calls are flagged in assessment.* for Opus review (Statler real-robot sim-to-real clause; ChatGPT claim_type system_method vs evaluation_resource)",
+  "display rounding is half-up (2307.00329 raw 71.25 -> 71.3); check_batch.py uses Python round() which gives 71.2 for the display only"
+ ],
+ "papers": [
+  {
+   "paper_key": "2306.15724",
+   "title": "REFLECT: Summarizing Robot Experiences for Failure Explanation and Correction",
+   "version": "2306.15724v4",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 62.5,
+   "score_display": 62.5,
+   "lower": 62.5,
+   "upper": 62.5,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E_measurement": 2,
+    "E_causality": 3,
+    "E_holdout": 2,
+    "E_statistics": 1,
+    "E_cost": 0
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "unify_into_shared_representation",
+   "rs_subs": [
+    "rs:C18"
+   ],
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K109"
+   ],
+   "summary": "Hierarchical multisensory-to-text summary + progressive LLM failure explanation; gains over in-house ablations in sim (ground-truth perception), real planning-failure rows tie; no variance/cost."
+  },
+  {
+   "paper_key": "2306.17582",
+   "title": "ChatGPT for Robotics: Design Principles and Model Abilities",
+   "version": "2306.17582v2",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 30.0,
+   "score_display": 30.0,
+   "lower": 30.0,
+   "upper": 30.0,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 2,
+    "M": 2,
+    "X": 2,
+    "E_measurement": 0,
+    "E_causality": 1,
+    "E_holdout": 0,
+    "E_statistics": 0,
+    "E_cost": 0
+   },
+   "evidence_level": "offline",
+   "claim_support": "scoped",
+   "rs_primary": "adapt_via_conditioning",
+   "rs_subs": [
+    "rs:C03",
+    "rs:C25"
+   ],
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K105",
+    "K104"
+   ],
+   "summary": "Prompt/API-library design principles with qualitative transcripts and a PromptCraft platform; no success rates, controls, holdout, variance or cost."
+  },
+  {
+   "paper_key": "2306.17840",
+   "title": "Statler: State-Maintaining Language Models for Embodied Reasoning",
+   "version": "2306.17840v4",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 65.0,
+   "score_display": 65.0,
+   "lower": 65.0,
+   "upper": 65.0,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E_measurement": 2,
+    "E_causality": 3,
+    "E_holdout": 2,
+    "E_statistics": 2,
+    "E_cost": 1
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": null,
+   "rs_subs": [],
+   "rs_outside_taxonomy": true,
+   "domain_matches": [
+    "K301"
+   ],
+   "summary": "LLM-maintained world-state reader/writer; completes 40-55% of hard history episodes vs 0% for CaP (n=20/domain, 10 real); prompt-sensitivity and cost caveats; outside original-card taxonomy."
+  },
+  {
+   "paper_key": "2307.00329",
+   "title": "DoReMi: Grounding Language Model by Detecting and Recovering from Plan-Execution Misalignment",
+   "version": "2307.00329v4",
+   "status": "reviewed",
+   "claim_type": "system_method",
+   "score_raw": 71.25,
+   "score_display": 71.3,
+   "lower": 71.25,
+   "upper": 71.25,
+   "coverage": 1.0,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E_measurement": 3,
+    "E_causality": 3,
+    "E_holdout": 2,
+    "E_statistics": 3,
+    "E_cost": 2
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_subs": [
+    "rs:C25"
+   ],
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K202"
+   ],
+   "summary": "Planner-authored constraints + continuous VLM monitor with abort/replan; strong sim results with 4x12-episode repeats vs SayCan/CLIPort/IM/IM-Oracle; real humanoid has no trial counts; mechanisms bundled."
+  },
+  {
+   "paper_key": "2307.01928",
+   "title": "Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners",
+   "version": "2307.01928v2",
+   "status": "needs_fulltext",
+   "claim_type": "system_method",
+   "score_raw": null,
+   "score_display": null,
+   "lower": 66.25,
+   "upper": 86.25,
+   "coverage": 0.8,
+   "ratings": {
+    "G": 4,
+    "M": 4,
+    "X": 3,
+    "E_measurement": null,
+    "E_causality": 3,
+    "E_holdout": 2,
+    "E_statistics": null,
+    "E_cost": 3
+   },
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "reframe_as_solvable_object",
+   "rs_subs": [
+    "rs:C00",
+    "rs:C19"
+   ],
+   "rs_outside_taxonomy": false,
+   "domain_matches": [
+    "K201"
+   ],
+   "summary": "Conformal-prediction gate over MCQA option scores with human hand-back and sequence-level calibration; 4/4 on gap/method; appendix absent from pinned material so E.measurement and E.statistics unknown, score null (L 66.25, U 86.25)."
+  }
+ ],
+ "timestamp": "2026-10-22T02:24:44+00:00"
+}

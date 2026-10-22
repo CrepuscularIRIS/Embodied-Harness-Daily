@@ -1,0 +1,874 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p001",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2201.07207",
+    "paper_id": "2201.07207",
+    "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents",
+    "version": "2201.07207v2",
+    "claim_type": "system_method",
+    "central_claim": "Large pretrained language models contain actionable knowledge for diverse high-level activities without additional domain training; semantic action translation, dynamic example retrieval and interleaved trajectory correction can make their plans executable in embodied environments."
+  },
+  "provenance": {
+    "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "0f9e90179cca637227f34fd72bb78de4365c82b39430b93e0e9775de2e55cc42",
+    "expectations_hash": "f2b30256da73535ceb775213a0fd83d61196d05d58689d31c0f963419a474ba1",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T01:54:41.598112+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144), phase=production; production-under-anchors-v2. Rubric is not formally frozen; no formal ranking or Reel authorization. Session ID and receipt_ref are unavailable from this worker invocation; an inherited transcript path is not treated as an invocation receipt. No network, paper-code execution, or peer conclusions used.",
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "score_qualification": "production-under-anchors-v2",
+    "domain_cards_binding": {
+      "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping relative card paths to file SHA256",
+      "files": {
+        "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+        "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+        "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+        "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+        "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+        "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+      },
+      "taxonomy_sha256": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "conditions_sha256": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+    },
+    "expectations_binding": {
+      "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping paths to exact expectation lines: domain main-card lines beginning - **E; original RS main-card lines under Reviewer expectations. All source lines are included, not only applicable ones.",
+      "sources": {
+        "patterns/main/observe_act_interface.md": [
+          "- **Extra tools are optional and checked per backbone.** Tools are added beside primitives rather than replacing them, harness parse/coordinate/feedback correctness is verified before comparison, and effects are reported per model: optional hybrid tools raise the strongest model 82.3 -> 85.7 SR at 0.59x calls, while imposed waypoints lift weak models (5 -> 43 SR) and move strong ones by <=2 points (2607.26148#s2, 2608.03327#s1).",
+          "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success.",
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E03 (ablation, common_practice).** Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student. — _applies when_ a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student.",
+          "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+          "- **E06 (dataset, common_practice).** For a VLN-CE harness, report SR, SPL, OSR and NE on R2R-CE val_unseen, either on the shared 100-episode zero-shot subset or the full split. State which one, and do not mix subset results with full-split numbers of trained methods as if they were matched. — _applies when_ an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent.",
+          "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+          "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+          "- **E20 (other, common_practice).** State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested. — _applies when_ a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+          "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        ],
+        "patterns/main/external_verification_control.md": [
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+          "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+          "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+          "- **E20 (other, common_practice).** State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested. — _applies when_ a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+          "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        ],
+        "patterns/main/llm_symbolic_solver_planning.md": [
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+          "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+          "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+          "- **E17 (dataset, common_practice).** Evaluate harness optimization, skill libraries, memory and replay cards on held-out tasks or episodes disjoint from the search, mining or validation set, and report overfitting across iterations. Gains on recurring tasks with ground-truth feedback do not show generalization. — _applies when_ a claim that a self-improving harness, skill library, playbook or experience memory improves performance.",
+          "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+        ],
+        "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": [
+          "- **Run an ablation that isolates the conditioning signal — comparing instruction, format, or retrieval conditioning against the same multitask training without it — to prove the gain comes from conditioning and not merely from broader exposure.** _(source: both)_",
+          "- **Provide a contamination or data-overlap analysis between the adaptation tasks and the held-out evaluation set before any genuine held-out or zero-shot generalization claim is accepted.** _(source: both)_",
+          "- **Compare against the obvious cheaper alternative — longer input context, nearest-neighbor lookup, or plain multitask fine-tuning — so the unique value of the conditioning or retrieval is established rather than assumed.** _(source: reject_reviews)_",
+          "- **Justify each component of a multi-module conditioning pipeline with ablations that isolate its contribution; shallow ablations over interacting components are treated as insufficient.** _(source: both)_",
+          "- **Demonstrate that the recipe is generic across multiple tasks or domains and explain how the conditioning signal is obtained without a manual, per-task search.** _(source: reject_reviews)_",
+          "- **Characterize sensitivity to the quality and coverage of the conditioning source — the demonstration or retrieval database — and to the distributional gap between that source and the test domain.** _(source: both)_"
+        ],
+        "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": [
+          "- **Report the cost of the added structure — token and API budget, number of model or solver calls, and solver latency — rather than only end-task accuracy.** _(source: both)_",
+          "- **Provide ablations that isolate each component's marginal contribution, and especially show the claimed load-bearing step is what drives the gains rather than extra data or compute.** _(source: both)_",
+          "- **Disclose the exact prompts and implementation details so the decomposed pipeline is reproducible and the results are not suspected prompt-engineering artifacts.** _(source: both)_",
+          "- **Demonstrate generalization beyond a single narrow benchmark or domain, ideally with cross-domain or real-world tasks rather than templates specific to one dataset.** _(source: both)_",
+          "- **Compare fairly against simpler unified or end-to-end baselines and against concurrent decomposition methods, clarifying precisely what is novel relative to them.** _(source: both)_",
+          "- **Justify that the decomposition targets a genuine structural bottleneck — ideally evidenced by an empirical diagnostic linking a sub-task to the final outcome — instead of imposing structure for its own sake.** _(source: both)_"
+        ]
+      },
+      "source_file_sha256": {
+        "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+        "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+        "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": "b5aac2a729f2c46ae2a7a593823115fec9749da30477c6aeb75a2c36325f085b",
+        "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd"
+      }
+    },
+    "protocol_hashes": {
+      "pattern_protocol": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+      "batch_contract": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+      "worksheet": "b0ca3ac92a458c934894aee62c88d6de8ab53901047326e0c8abdfd1a0d3219e",
+      "evidence": "612b7df7eec04add15b47c9316206fee7f572d824a03143fb82bdfcc5aab3ce2",
+      "evidence_schema": "b7dd7fa66ce5d3eb4a87e13f65fdb7d9ac69b9a268bb84474049274f9f65b8cb",
+      "rs_parents": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b"
+    },
+    "reference_hashes_verified": true,
+    "validation_note": "Same open attempt; initial exact-quote assertion stopped before LM-Nav write because a Python string escaped \\bar as backspace. Fixed by using a short continuous literal quote. First two atomic records were preserved; no missing-material conclusion or score was derived from that tooling error."
+  },
+  "materials": [
+    {
+      "material_id": "M001",
+      "paper_id": "2201.07207",
+      "version": "2201.07207v2",
+      "url": "https://arxiv.org/html/2201.07207v2",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2201.07207.txt",
+      "sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "sections_read": [
+        "Abstract",
+        "Sections 1–7",
+        "Appendix A.1–A.5"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 2, data split; local text L12",
+      "quote": "The remaining 204 tasks are used as demonstration set",
+      "support_explanation": "A reference bank is separated from 88 held-out activity names, not from all possible pretraining exposure.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 4.3; local text L18",
+      "quote": "We first create a bank of all allowed 47522 action steps in the environment",
+      "support_explanation": "The concrete semantic action vocabulary is enumerable and embeddings can be precomputed.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Table 1; local text L18",
+      "quote": "Translated Codex 12B 78.57% 24.72% 54.88% (5.90%) Translated GPT-3 175B 73.05% 24.09% 66.13% (8.38%)",
+      "support_explanation": "Translation yields high executability, but correctness does not rise in parallel.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Table 2, Codex rows; local text L21",
+      "quote": "- w/o Action Translation 31.49% 22.53% - w/o Dynamic Example 50.86% 22.84% - w/o Trajectory Correction 55.19% 24.43%",
+      "support_explanation": "Fixed-backbone component removal makes the mechanism load-bearing on executability.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 4, sampling; local text L18",
+      "quote": "To select the best run for each method, we rank the runs by the sum of LCS and executability, each normalized by human-expert scores.",
+      "support_explanation": "Selection is outcome-guided; the package does not establish a distinct independent post-selection test.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 4, Table 1 caption; local text L18",
+      "quote": "For correctness measure, standard error of the mean across 10 human annotators is reported in the parenthesis.",
+      "support_explanation": "Human-rating uncertainty is quantified, not repeat-run policy uncertainty.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 7, limitations; local text L27",
+      "quote": "We do not incorporate observation context or feedback into our models.",
+      "support_explanation": "This is static plan grounding, not an observation-conditioned online robot loop.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 5.2; local text L21",
+      "quote": "We deem an action plan to be correct if 70% or more human annotators decide it is correct.",
+      "support_explanation": "A declared human criterion is distinct from simulator executability.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 5.4; local text L21",
+      "quote": "we only show results reported in Puig et al. [38] as a crude reference.",
+      "support_explanation": "Prior supervised LSTM results have nonmatched splits and cannot close a causal comparison.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 4.3; local text L18",
+      "quote": "First, we find Translation LM is poor at mapping compounded instructions to a succinct admissible action",
+      "support_explanation": "Explicit boundary: valid vocabulary projection can distort semantics.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 4.3; local text L18",
+      "quote": "For better computational efficiency, we pre-compute the embeddings for all allowed actions",
+      "support_explanation": "Some computational structure is disclosed but no comprehensive per-solved-task actual cost.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M001",
+      "material_sha256": "c7e352536380435197502e523d11626906ee8c2bb62a768386733c8e7680d7dc",
+      "locator": "Section 5.1; local text L21",
+      "quote": "We perform ablation studies for the three components of our proposed procedure, described in Section 3.2 , 3.3 , and 3.4 respectively.",
+      "support_explanation": "The complete methods and algorithm specify translation, retrieved example and interleaved correction.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S01",
+      "object": "Free-form LLM action output versus executable semantic actions",
+      "information": "High-level task, admissible action bank, pretrained sentence embeddings; no current scene observations.",
+      "operation": "Embed generated step; rank legal action strings using similarity and LM likelihood; replace free-form step and append translated step to the next planning context.",
+      "output": "Syntactically admissible VirtualHome action sequence.",
+      "conditions": "42 atomic actions, allowed object arguments and sufficient semantic embedding similarity.",
+      "feedback": "Translated previous actions, not environmental success/failure.",
+      "selection_rule/data": "Candidate samples selected by similarity plus beta-scaled mean log probability; epsilon/empty-generation stopping; development settings in Appendix A.1.",
+      "persistence": "Static harness design and per-episode context; no accepted cross-task optimizer change is claimed.",
+      "later_use": "Fixed components are reused on tasks; within-episode context is read by subsequent planner calls. This is not measured retained self-improvement.",
+      "claimed_effect": "Higher executability without planner finetuning.",
+      "failure_boundary": "Compounded commands, incomplete environment vocabulary and early stopping can preserve validity while losing task correctness.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E007",
+        "E010",
+        "E012"
+      ]
+    },
+    {
+      "sig_id": "S02",
+      "object": "Fixed few-shot example versus task-adaptive retrieval",
+      "information": "204 demonstration task names and scripts, frozen embedding similarity; 88 task-name evaluation set.",
+      "operation": "Retrieve a nearby demonstration and condition the planner on it.",
+      "output": "Task-specific example in a common task-to-program prompt.",
+      "conditions": "Relevant retrievable reference tasks; no claim of online library mining.",
+      "feedback": "No cross-task acceptance feedback.",
+      "selection_rule/data": "Nearest task embedding; global sampling choices ranked by LCS and executability.",
+      "persistence": "Static harness design and per-episode context; no accepted cross-task optimizer change is claimed.",
+      "later_use": "Fixed components are reused on tasks; within-episode context is read by subsequent planner calls. This is not measured retained self-improvement.",
+      "claimed_effect": "Improve extraction of executable multi-step programs.",
+      "failure_boundary": "Does not establish unseen-category transfer or contamination-free independent tuning.",
+      "evidence_ids": [
+        "E001",
+        "E004",
+        "E005"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Existing LLM knowledge extraction and language grounding do not yield executable plans for diverse high-level human activities without additional training.",
+    "checked_gap": "Same-model vanilla generations are often semantically plausible but not executable; projection sharply improves executability while reducing human correctness. The residual is executable-and-correct planning, not merely legal syntax.",
+    "lineage/closest_adjacent": [
+      {
+        "source": "2201.07207v2 Sections 2, 5.4, 6; fixed local M001",
+        "method": "VirtualHome human scripts and supervised instruction-to-program LSTM; generic pretrained LM prompting.",
+        "source_verification": "Paper-reported lineage only for the original VirtualHome/LSTM work; its separate primary text and exact original version were not in the fixed input. No claim of exhaustive priority verification."
+      }
+    ],
+    "residue": "Free-form world knowledge does not automatically obey an embodied action vocabulary or preconditions.",
+    "stakes": "An apparently correct plan cannot be acted on; a merely executable short plan can fail the intended activity.",
+    "method_response": "Translate to admissible actions, retrieve task-relevant examples and interleave corrected actions into generation.",
+    "remaining_gap": "No environmental observation/feedback, no physical low-level controller validation, and a substantial correctness/executability tradeoff.",
+    "evidence_ids": [
+      "E003",
+      "E004",
+      "E007",
+      "E008",
+      "E009",
+      "E010"
+    ],
+    "unresolved": [
+      "Exact independent source versions/priority of prior supervised methods are not fixed here.",
+      "Hyperparameter-selection versus final-test independence is not established."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "adapt_via_conditioning",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "adapt_via_conditioning",
+        "sub_id": "rs:C03",
+        "role": "primary",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          {
+            "condition": "C03 steps 1–3: canonical prompt and reference substrate",
+            "status": "met",
+            "reason": "Task/program prompts and the 204-task reference bank are used at inference; no new task-specific planner weights.",
+            "evidence_ids": [
+              "E001",
+              "E002",
+              "E012"
+            ]
+          },
+          {
+            "condition": "C03 step 4: held-out task categories and contamination",
+            "status": "partial",
+            "reason": "88 activity names are held out from the reference bank, but category-disjoint or pretraining-disjoint testing is not established; outcome-based setting selection remains.",
+            "evidence_ids": [
+              "E001",
+              "E005"
+            ]
+          },
+          {
+            "condition": "C03 step 5: cheaper conditioning controls",
+            "status": "partial",
+            "reason": "Dynamic-example and other leave-one-out controls exist; independently selected matched-token alternatives are not established.",
+            "evidence_ids": [
+              "E004",
+              "E005"
+            ]
+          }
+        ],
+        "success_checks": [
+          {
+            "condition": "Isolate conditioning with backbone fixed",
+            "status": "met",
+            "reason": "Two large planners and component removals are reported.",
+            "evidence_ids": [
+              "E003",
+              "E004"
+            ]
+          },
+          {
+            "condition": "Reference quality/sensitivity",
+            "status": "partial",
+            "reason": "Embedding alternatives and compounded-command failures expose substrate sensitivity, but not universal task coverage.",
+            "evidence_ids": [
+              "E010",
+              "E012"
+            ]
+          }
+        ],
+        "failure_checks": [
+          {
+            "condition": "Contamination and overclaiming failure",
+            "status": "partial",
+            "reason": "Unseen activity names do not establish an independent, observation-grounded deployment test.",
+            "evidence_ids": [
+              "E001",
+              "E005",
+              "E007"
+            ]
+          },
+          {
+            "condition": "Upstream schema learning required by one branch",
+            "status": "not_applicable",
+            "reason": "The card explicitly permits direct reference-substrate transfer; this paper does not claim to train a context interpreter.",
+            "evidence_ids": [
+              "E001",
+              "E012"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E003",
+          "E004",
+          "E005",
+          "E007"
+        ],
+        "reason": "The model stays frozen while retrieved reference examples and corrected action context condition its answer. C03 fits the retrieval-substrate branch, not its upstream schema-training branch.",
+        "card_path": "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md",
+        "subcard_path": "research/reference/researchstudio-15-31/ideation-sub-patterns/C03.md"
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "The model stays frozen while retrieved reference examples and corrected action context condition its answer. C03 fits the retrieval-substrate branch, not its upstream schema-training branch.",
+    "executes_pattern": {
+      "status": "partial",
+      "reason": "The model stays frozen while retrieved reference examples and corrected action context condition its answer. C03 fits the retrieval-substrate branch, not its upstream schema-training branch.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E004",
+        "E005",
+        "E007"
+      ]
+    },
+    "resolves_problem": {
+      "status": "partial",
+      "reason": "Reported gains address the stated bottleneck only within measured settings; residual failures and untested deployment conditions remain.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E004",
+        "E005",
+        "E007"
+      ]
+    }
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "K104",
+        "version": "embodied-agent-harness/v1 (frozen cards; 2026-10-21 snapshot)",
+        "fit": "partial",
+        "condition_checks": [
+          {
+            "condition": "observe_act_interface.S4 semantic vocabulary",
+            "status": "met",
+            "reason": "Translation ends in fixed semantic actions understood by VirtualHome.",
+            "evidence_ids": [
+              "E002"
+            ]
+          },
+          {
+            "condition": "observe_act_interface.S1 component isolation",
+            "status": "met",
+            "reason": "Translation, retrieval and trajectory correction are removed separately.",
+            "evidence_ids": [
+              "E004"
+            ]
+          },
+          {
+            "condition": "K104 executor reliability and embodiment boundary",
+            "status": "partial",
+            "reason": "The simulator checks action executability; no physical controller or online visual grounding is claimed.",
+            "evidence_ids": [
+              "E007"
+            ]
+          },
+          {
+            "condition": "observe_act_interface.F4/F7 bundling and overlap",
+            "status": "partial",
+            "reason": "Component tests reduce bundling, but development selection is outcome-guided.",
+            "evidence_ids": [
+              "E004",
+              "E005"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E004",
+          "E007"
+        ],
+        "reason": "Semantic vocabulary/executor handoff fits; non-advancing observation tools and online recovery variants are not instantiated.",
+        "card_hashes": {
+          "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50"
+        }
+      }
+    ],
+    "unassigned": false,
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "adapt_via_conditioning",
+      "rs_sub": "rs:C03",
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "K104"
+      },
+      "operation_correspondence": "Task-conditioned reference retrieval supplies a frozen planner; translation turns its output into a finite executable interface.",
+      "necessary_conditions_and_differences": "C03 concerns conditioning substrate; K104 concerns output/executor compatibility. Neither entails online scene feedback or retained learning.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E007"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success."
+        }
+      ],
+      "applies_when": "Harness rather than backbone success gain.",
+      "applicable": true,
+      "status": "met",
+      "reason": "Vanilla and translated planners are compared on the same activity set with each backbone fixed.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+        }
+      ],
+      "applies_when": "Individual translation/retrieval/correction contribution.",
+      "applicable": true,
+      "status": "met",
+      "reason": "Three one-at-a-time component removals are reported.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": [
+        "X",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E03 (ablation, common_practice).** Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student. — _applies when_ a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student."
+        }
+      ],
+      "applies_when": "Generality of a frozen-planner interface effect.",
+      "applicable": true,
+      "status": "met",
+      "reason": "Codex 12B and GPT-3 175B both have complete and ablated variants.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+        }
+      ],
+      "applies_when": "Practicality of translation harness.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Action-bank precomputation and sample grids are specified, but actual latency/tokens/USD and failed-trial costs are not fully accounted.",
+      "evidence_ids": [
+        "E005",
+        "E011"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+        }
+      ],
+      "applies_when": "Zero-shot pretrained-model evaluation.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Reference/evaluation task split is explicit; outcome-guided best-run selection and upstream contamination remain caveats.",
+      "evidence_ids": [
+        "E001",
+        "E005"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E16",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check."
+        }
+      ],
+      "applies_when": "Embodied task completion rather than mere syntax.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Compounded mapping and premature termination failures are described; no closed-loop endpoint/retry audit is available.",
+      "evidence_ids": [
+        "E007",
+        "E010"
+      ],
+      "score_item": [
+        "E.measurement",
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot 2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/observe_act_interface.md",
+          "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+          "embedded_text": "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        }
+      ],
+      "applies_when": "Comparison between action-generation interfaces.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Shared planners and sampling grids help comparability, but no matched token/wall-clock budget for retrieval and translation is established.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E011"
+      ],
+      "score_item": [
+        "E.cost",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "rs:adapt_via_conditioning:isolation",
+      "version": "ResearchStudio15+31 frozen RS_MANIFEST sha256=3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "source_strength": "corpus-derived original ResearchStudio review expectation; transferred check, not an actual review of this paper",
+      "source_refs": [
+        {
+          "path": "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md",
+          "sha256": "b5aac2a729f2c46ae2a7a593823115fec9749da30477c6aeb75a2c36325f085b",
+          "embedded_text": "- **Run an ablation that isolates the conditioning signal — comparing instruction, format, or retrieval conditioning against the same multitask training without it — to prove the gain comes from conditioning and not merely from broader exposure.** _(source: both)_"
+        }
+      ],
+      "applies_when": "The claimed frozen-model conditioning or delegated pipeline changes task performance; transfer only the stated control principle, not a requirement to perform irrelevant multitask training.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same-planner component comparisons provide conditioning evidence, but equal-information/extra-context and interaction controls are not exhaustive.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "rs:adapt_via_conditioning:overlap",
+      "version": "ResearchStudio15+31 frozen RS_MANIFEST sha256=3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "source_strength": "corpus-derived original ResearchStudio review expectation; transferred check, not an actual review of this paper",
+      "source_refs": [
+        {
+          "path": "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md",
+          "sha256": "b5aac2a729f2c46ae2a7a593823115fec9749da30477c6aeb75a2c36325f085b",
+          "embedded_text": "- **Provide a contamination or data-overlap analysis between the adaptation tasks and the held-out evaluation set before any genuine held-out or zero-shot generalization claim is accepted.** _(source: both)_"
+        }
+      ],
+      "applies_when": "The claimed frozen-model conditioning or delegated pipeline changes task performance; transfer only the stated control principle, not a requirement to perform irrelevant multitask training.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Reference/task splits or novel behaviors are visible; pretraining overlap, task selection and construction-unseen evaluation are not fully controlled.",
+      "evidence_ids": [
+        "E001",
+        "E005"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C01",
+      "text": "Large pretrained language models contain actionable knowledge for diverse high-level activities without additional domain training; semantic action translation, dynamic example retrieval and interleaved trajectory correction can make their plans executable in embodied environments.",
+      "setting": "Codex12B/GPT-3 175B; 88 activity names, seven VirtualHome scenes; 47,522 allowed action strings.",
+      "baseline/control": "Vanilla generation; Table 2 component removals; fine-tuned GPT-3 baseline separately.",
+      "selection_vs_test": "204 reference tasks; best sampled configuration selected using LCS+executability, independent validation split not established.",
+      "result/denominator": "Codex executable18.07→78.57%; correctness64.87→54.88%. GPT-3 executable7.79→73.05%; correctness77.86→66.13%. Correctness judged by ten annotators; mean/SEM.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006"
+      ],
+      "counterevidence": "Executable is not equivalent to correct; no observation feedback, and pretrained exposure is unauditable.",
+      "allowed_conclusion": "Strong evidence for improving static program executability in this simulator interface, not general autonomous embodied success."
+    },
+    {
+      "claim_id": "C02",
+      "text": "Extracted plans contain actionable knowledge rather than merely reproducing valid syntax.",
+      "setting": "Human correctness plus VirtualHome checks.",
+      "baseline/control": "Vanilla and human plans.",
+      "selection_vs_test": "Same selected plan outputs, not new independent online test.",
+      "result/denominator": "Joint correct/executable analysis uses ≥70% annotator approval; human joint reference65.91%.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E008",
+        "E010"
+      ],
+      "counterevidence": "Some correctness is lost during projection; vocabulary expressivity and early stops remain.",
+      "allowed_conclusion": "There is a measurable but incomplete bridge from text knowledge to executable activities."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "offline",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported static VirtualHome program executability rises substantially through translation/retrieval/interleaving on the evaluated activity set; the evidence does not establish observation-conditioned closed-loop robot task success.",
+    "unresolved": [
+      "Post-selection independent test performance.",
+      "Primary-source historical closest-neighbor version checks beyond M001.",
+      "Pretraining overlap and actual inference cost."
+    ],
+    "reproduction": "No reproduction or paper-code execution was performed."
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "A concrete executable-versus-plausible bottleneck and observed cost are documented; the closest supervised comparison is explicitly crude and its independent source/split is not fixed.",
+      "evidence_ids": [
+        "E003",
+        "E007",
+        "E009"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Translation and retrieved conditioning target a real interface mismatch with reconstructible predictions; embedding similarity need not preserve task semantics and ignores scene state.",
+      "evidence_ids": [
+        "E002",
+        "E004",
+        "E007",
+        "E010"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Static generation/translation/retrieval/stopping is reconstructible with ablations and explicit boundaries; no retained loop is required. Scope remains a semantic action interface rather than a full environmental feedback controller.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E004",
+        "E012"
+      ],
+      "counterevidence_ids": [
+        "E007",
+        "E010"
+      ],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Executability and human semantic correctness have explicit checks and a joint criterion, but are static proxies rather than environment-observed closed-loop completion.",
+        "evidence_ids": [
+          "E003",
+          "E006",
+          "E008"
+        ],
+        "counterevidence_ids": [
+          "E007"
+        ],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Fixed-backbone leave-one-out tests across two planners support mechanism attribution; outcome-driven configuration selection and unmatched inference costs prevent a fully controlled causal claim.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E011"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "88 activity names are separated from 204 demonstrations, yet the best runs are selected on evaluation-style metrics without a clearly separate post-selection test; model-pretraining overlap is unknown.",
+        "evidence_ids": [
+          "E001",
+          "E005"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Ten-annotator SEM and multiple prompt examples quantify parts of uncertainty, but do not supply repeated independent policy trials or CIs for executability and its failures.",
+        "evidence_ids": [
+          "E005",
+          "E006",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Precomputation and sampling structure are reported, giving limited computational visibility, but no realized episode/solved-task latency, token or financial accounting. Complete Section 4/Appendix A.1 search found grids rather than a matched actual-cost comparison.",
+        "evidence_ids": [
+          "E005",
+          "E011"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 65.0,
+    "display": 65.0,
+    "lower": 65.0,
+    "upper": 65.0,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "qualification": "production-under-anchors-v2"
+  },
+  "status": "reviewed",
+  "reason": "Reviewed complete provided methods/results/Appendix A package; scoped offline contribution, with all eight ratings resolved under anchors v2. Scores are provisional production-under-anchors-v2, not ranking/Reel approval."
+}

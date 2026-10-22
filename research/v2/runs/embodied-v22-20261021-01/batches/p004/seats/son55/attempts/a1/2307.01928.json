@@ -1,0 +1,848 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p004",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2307.01928",
+  "paper_id": "2307.01928",
+  "title": "Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners",
+  "version": "2307.01928v2",
+  "claim_type": "system_method",
+  "central_claim": "KnowNo aligns LLM planner uncertainty via conformal prediction so robots know when they do not know and ask for help, giving statistical task-completion guarantees while minimizing human help (10-24% less help than baselines)."
+ },
+ "provenance": {
+  "input_hash": "62c71ee30d00fbd8b32f833b62dbd15e6ad9979a417096b150a0681c29c0fa93",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "expectations_hash": null,
+  "expectations_note": "no standalone expectations file; E01-E22 are embedded in patterns/main/*.md",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T02:24:06+00:00",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; session_id/receipt_ref not obtainable from inside the subagent -> null"
+ },
+ "materials": [
+  {
+   "material_id": "M-2307.01928",
+   "url": "https://arxiv.org/html/2307.01928v2",
+   "sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Overview",
+    "3 Calibrating LLM Confidence with CP (3.1-3.3)",
+    "4 Experiments (4.1-4.3)",
+    "5 Related Work",
+    "6 Discussion"
+   ],
+   "complete": false,
+   "missing_sections": [
+    "Appendix A1-A10 (prompts Fig. A1, proofs A2, multiple-acceptable-options A3-A4, bimanual A5, scenario distributions A7, A9 raw-probability baseline, A10 per-setting results)"
+   ],
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2307.01928.txt"
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Abstract",
+   "quote": "KnowNo builds on the theory of conformal prediction to provide statistical guarantees on task completion while minimizing human help in complex multi-step planning settings",
+   "support_explanation": "Author central claim.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 1",
+   "quote": "Prior work in language-based planning either does not seek such clarifications [ 1 ] or does so via extensive prompting [ 2 ] , which requires careful prompt engineering to prevent the robot from excessively relying on seeking assistance.",
+   "support_explanation": "Author gap / nearest neighbours.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 1",
+   "quote": "We collectively refer to these sufficiency and minimality conditions as uncertainty alignment .",
+   "support_explanation": "Formalized desiderata: calibrated confidence and minimal help.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 2",
+   "quote": "This eliminates plans that the LLM considers unlikely and reduces the problem of next-step prediction down to a single next-token prediction",
+   "support_explanation": "MCQA reformulation giving normalized scores.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 3.2",
+   "quote": "Otherwise, we deem the LLM uncertain over possible actions and trigger human help.",
+   "support_explanation": "Decision rule: non-singleton set -> ask human.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 3.3",
+   "quote": "Here, we present a novel extension of CP to multi-step settings that tackles this challenge.",
+   "support_explanation": "Multi-step sequence-level calibration.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 3.3",
+   "quote": "Thus, the i.i.d. assumption for the coverage guarantee is no longer valid.",
+   "support_explanation": "Assumption pivot motivating sequence-level calibration.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 3.2",
+   "quote": "The proof immediately follows from the fact that under the assumption of accurate human help, the robot fails only when the prediction set does not contain the true label",
+   "support_explanation": "Guarantee is about plan-level coverage given faithful human help.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 4",
+   "quote": "Labeling the calibration data takes about 4 hours (for 400 examples) in the multi-step setting and 1.5 hours in single-step settings.",
+   "support_explanation": "Calibration labeling cost.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 4",
+   "quote": "For experiments here, we assume that the human faithfully provides help.",
+   "support_explanation": "Simulated/assumed faithful human.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Fig 3 caption",
+   "quote": "200 trials are run for each method/setting.",
+   "support_explanation": "Sim denominator.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 4.2",
+   "quote": "Then we run 50 trials for both methods in hardware.",
+   "support_explanation": "Hardware multi-step denominator.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Table 1",
+   "quote": "KnowNo 0.75 0.76 0.74 1.72 0.58 0.92 Simple Set 0.58 0.76 0.72 2.04 0.72 1.00 No Help - 0.41 0.38 - 0 0",
+   "support_explanation": "Hardware multi-step results at matched plan success.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Table 2",
+   "quote": "KnowNo PaLM-2L 0.85 0.87 0.76 2.22 0.67 Simple Set PaLM-2L 0.76 0.87 0.75 2.38 0.81",
+   "support_explanation": "Mobile manipulation: plan 0.87 vs task 0.76; help 0.67 vs 0.81; trial count not in main text.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Table 1 caption",
+   "quote": "Plan success rate is fixed between KnowNo and Simple Set for comparing the other metrics.",
+   "support_explanation": "Matched-success comparison.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 4.2",
+   "quote": "Table 1 shows that KnowNo reduces the human help rate by 14% step-wise and 8% trial-wise, while also reducing the average prediction set size.",
+   "support_explanation": "Reported help reduction.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 6",
+   "quote": "The primary limitation of our work is that the task completion guarantee assumes environments (objects) are fully grounded in the text input to the LLM, and the actions proposed by the LLM planner can be executed successfully.",
+   "support_explanation": "Scope limits.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 6",
+   "quote": "Another limitation is that, for the task guarantee to hold, the human needs to faithfully provide help when the robot needs it.",
+   "support_explanation": "Scope limit: human fidelity.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 4.1",
+   "quote": "Ensemble Set can perform well but is computationally expensive.",
+   "support_explanation": "Cost remark on baseline.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 4.3",
+   "quote": "we find that it exhibits significant MCQA bias towards options D and E and against A and B, affecting the overall performance.",
+   "support_explanation": "GPT-3.5 variant biased; guarantee still met.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M-2307.01928",
+   "material_sha256": "f9c12fce7283880198ce4a6d02e3944dfed9e0d472c26e9afc0b71ca99f3b3b6",
+   "locator": "Sec 5",
+   "quote": "To the best of our knowledge, this work is the first to employ CP for language-based planning.",
+   "support_explanation": "Novelty claim (not independently searched).",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "LLM next-step planner converted to multiple-choice (4 generated options + 'none listed'); option probabilities as scores; conformal threshold q-hat from N=400 labelled calibration scenarios",
+   "information": "Calibration set with human-labelled correct option(s); at test time observation text (detector or oracle), instruction, few-shot examples; no ground truth at test",
+   "operation": "include options with score >= 1-q-hat; singleton -> execute; otherwise present the set to a human who picks or halts",
+   "output": "action or help request",
+   "conditions": "i.i.d. scenarios from calibration distribution; environment grounded in text; low-level executor works; human faithful",
+   "feedback": "human choice among the set",
+   "selection_rule_data": "CP quantile with dataset-conditional guarantee, delta=0.01; thresholds fixed after calibration",
+   "persistence": "calibrated threshold persists for new scenarios from the same distribution",
+   "later_use": "all test scenarios",
+   "claimed_effect": "task success at user level 1-eps with 10-24% less help than baselines",
+   "failure_boundary": "distribution shift, ungrounded perception, low-level failure, unfaithful human",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E009",
+    "E017",
+    "E018",
+    "E010"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "sequence-level calibration for multi-step planning (min score over steps) with causal reconstruction of the set",
+   "information": "Sequences of contexts generated under correct previous actions",
+   "operation": "calibrate on sequences, apply per step causally; guarantee over whole horizon",
+   "output": "per-step sets with sequence-level coverage",
+   "conditions": "coverage under correct prior actions; human help keeps trajectory on the true path",
+   "feedback": "human help",
+   "selection_rule_data": "min-score nonconformity",
+   "persistence": "same threshold",
+   "later_use": "all steps",
+   "claimed_effect": "trial-level success matches target in hardware",
+   "failure_boundary": "trajectory-level assumption; trials n=50",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E008",
+    "E013",
+    "E012"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "LLM planners hallucinate and instructions are ambiguous; prior ask-for-help methods use ad hoc prompting without statistical guarantees or minimal-help guarantees.",
+  "checked_gap": "Specific and formalized as two desiderata (calibrated confidence, minimal help); contrasted with ensemble and prompt-based baselines run in the paper and with CP-in-robotics work cited. Prior-work versions are not pinned locally and appendix details are missing, so the 'first CP for language planning' claim is not independently verified.",
+  "lineage_closest_adjacent": [
+   {
+    "name": "SayCan (ref 1)",
+    "source": "cited in paper text (not fetched)",
+    "version_status": "unpinned",
+    "solved": "LLM planning grounded by affordances",
+    "unsolved": "asking for clarification"
+   },
+   {
+    "name": "Prompt-based ask-for-help (ref 2, Inner Monologue-style)",
+    "source": "cited and approximated by Binary/Prompt Set baselines",
+    "version_status": "in-paper baseline",
+    "solved": "clarification via prompting",
+    "unsolved": "statistical guarantee, controllable help"
+   },
+   {
+    "name": "Conformal prediction in robotics (refs 48-51)",
+    "source": "cited in paper text (not fetched)",
+    "version_status": "unpinned",
+    "solved": "CP for fault detection, trajectories, dynamic planning",
+    "unsolved": "CP for language planning over multi-step horizons"
+   }
+  ],
+  "residue": "Perception uncertainty, low-level execution failure, human error, distribution shift, reduced help rate rather than set size.",
+  "stakes": "Confidently wrong or ambiguous actions can be unsafe (e.g. metal bowl in microwave); help rate is the cost of autonomy.",
+  "method_response": "MCQA-based scores plus CP threshold to decide act vs ask, with sequence-level extension for multi-step.",
+  "remaining_gap": "Stated limitations: grounded-environment assumption, executable actions, faithful human.",
+  "evidence_ids": [
+   "E002",
+   "E003",
+   "E021",
+   "E017",
+   "E018"
+  ],
+  "unresolved": [
+   "Appendix A1-A10 absent from pinned material (prompts, scenario distributions, proofs, bimanual and per-setting results, GPT-3.5 baseline analysis).",
+   "Novelty/lineage not independently searched."
+  ]
+ },
+ "rs_pattern": {
+  "primary": "reframe_as_solvable_object",
+  "supporting": [
+   "assumption_audit_and_pivot"
+  ],
+  "matches": [
+   {
+    "main_id": "reframe_as_solvable_object",
+    "sub_id": "rs:C00",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "1 pin the opaque target as a precise quantity: executed (uncertainty alignment as calibrated confidence + minimal help)",
+     "2 map onto a well-understood object with mature guarantees: executed (MCQA + conformal prediction sets)",
+     "3 fix unit of analysis and constraint: executed (option labels as atoms, score from next-token probability)",
+     "4 tractability trick: executed (one quantile on 400 labelled scenarios)",
+     "5 certify fidelity by proof or intervention: partially (coverage proposition proved; plan-level not task-level success)"
+    ],
+    "success_failure_checks": [
+     "correspondence theorem ties reframed object to original: met for plan-level coverage given faithful help",
+     "faithfulness validated independently: partial (hardware task success below plan success)",
+     "mechanical wrapper of existing solver without new identifying structure: sequence-level extension adds structure, single-step is a direct application"
+    ],
+    "evidence_ids": [
+     "E001",
+     "E004",
+     "E008",
+     "E013",
+     "E014"
+    ],
+    "reason": "C00 recasts 'how uncertain is a prediction' as a measurement over a well-studied object certified by a soundness proof; this paper additionally turns it into a decision rule (ask or act), so the fit is partial."
+   },
+   {
+    "main_id": "assumption_audit_and_pivot",
+    "sub_id": "rs:C19",
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "1 locate convenience assumption inside certificate: executed (i.i.d. contexts)",
+     "2 name weaker sufficient property: executed (sequence-level exchangeability via lifted sequences)",
+     "3 re-derive certificate: executed (Claim 1, Prop 2)",
+     "4 credit precedent and obstacle: partial (prior CP robotics works contrasted)",
+     "5 stress-test in regime where assumption fails: partial (50-trial hardware)"
+    ],
+    "success_failure_checks": [
+     "relaxed condition holds in real setting: partial",
+     "tightness/lower bound: unknown"
+    ],
+    "evidence_ids": [
+     "E006",
+     "E007",
+     "E008"
+    ],
+    "reason": "Multi-step extension is a distinct operation from the single-step reframe; C19 describes relaxing independence in a statistical certificate, which is what sequence-level calibration does. Proof details are in the missing appendix."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "Both candidates read in full; fits are partial because the paper applies an existing tool (CP) to LLM planning and the proof text for Claim 1/Prop 2 is in the missing appendix.",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "Reframe and certificate steps executed; proofs deferred to missing appendix."
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "Closes calibrated-ask-for-help at the plan level under stated assumptions; perception and execution uncertainty remain."
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main_id": "external_verification_control",
+    "sub_id": "K201",
+    "version": "embodied-agent-harness/v1",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "condition_id": "external_verification_control.S1",
+      "kind": "S",
+      "status": "partial",
+      "note": "Cheap external gate on LLM proposals, but the gate uses the LLM's own token probabilities plus a calibrated threshold"
+     },
+     {
+      "condition_id": "external_verification_control.F1",
+      "kind": "F",
+      "status": "present",
+      "note": "Gate guarantees plan-level correctness only; task success is lower (0.74 vs 0.76 plan hardware multi-step; 0.76 vs 0.87 mobile manipulation)"
+     },
+     {
+      "condition_id": "external_verification_control.F3",
+      "kind": "F",
+      "status": "absent",
+      "note": "No Help and Simple Set isolate the gate's contribution"
+     },
+     {
+      "condition_id": "external_verification_control.F2",
+      "kind": "F",
+      "status": "unknown",
+      "note": "Perception detector errors not modelled in the guarantee"
+     }
+    ],
+    "evidence_ids": [
+     "E005",
+     "E008",
+     "E013",
+     "E014",
+     "E017"
+    ],
+    "reason": "Gate-then-dispatch semantics match K201 (non-singleton sets are routed to a human instead of rejected with feedback); human hand-back is not in the card."
+   }
+  ],
+  "unassigned": [
+   {
+    "operation": "calibrated uncertainty set with sequence-level conformal guarantee and human hand-back when the set is not a singleton",
+    "nearest_cards": [
+     "K201",
+     "R06 (sample/verify; here no argmax and the set is returned to a human)"
+    ],
+    "reason": "No card for statistically calibrated ask-for-help."
+   }
+  ],
+  "revision_proposals": [
+   {
+    "kind": "candidate_case",
+    "title": "Calibrated conformal gate on LLM planner proposals with human hand-back",
+    "support": "single paper (2307.01928)",
+    "parent_hint": "external_verification_control"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "reframe_as_solvable_object",
+   "rs_sub": "rs:C00",
+   "domain_namespace": "embodied",
+   "domain_main": "external_verification_control",
+   "domain_sub": "K201",
+   "operation_correspondence": "Uncertainty measurement object (conformal set) used as an external gate that dispatches or routes to a human.",
+   "necessary_conditions_and_differences": "K201 gates with a cheap checker of action validity; KnowNo's checker is calibrated LLM confidence, with a coverage guarantee but plan-level scope; no structured rejection feedback.",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E008"
+   ]
+  },
+  {
+   "rs_main": "assumption_audit_and_pivot",
+   "rs_sub": "rs:C19",
+   "domain_namespace": "embodied",
+   "domain_main": "external_verification_control",
+   "domain_sub": "K201",
+   "operation_correspondence": "Sequence-level calibration keeps the gate's guarantee valid across a multi-step horizon.",
+   "necessary_conditions_and_differences": "Not a card property; K201 has no multi-step guarantee.",
+   "evidence_ids": [
+    "E006",
+    "E007"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a harness rather than the model raises success",
+   "applicable": true,
+   "status": "met",
+   "reason": "Same PaLM-2L scores across Simple Set, Ensemble, Prompt Set, Binary, No Help and KnowNo on identical scenarios.",
+   "evidence_ids": [
+    "E011",
+    "E015"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a component causes the improvement",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Gate type isolated (CP vs cumulative threshold on the same scores); MCQA, sequence-level calibration and the 'none listed' option not individually ablated in the visible text.",
+   "evidence_ids": [
+    "E015",
+    "E004"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a component helps in general",
+   "applicable": true,
+   "status": "met",
+   "reason": "PaLM-2L, PaLM-2L-IF and GPT-3.5 give coverage near target; hardware only PaLM-2L.",
+   "evidence_ids": [
+    "E020"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "any success-rate comparison",
+   "applicable": true,
+   "status": "partial",
+   "reason": "200 sim trials and 50 hardware trials per method; no CI/variance across calibration draws or seeds visible; mobile-manipulation n not stated in main text.",
+   "evidence_ids": [
+    "E011",
+    "E012",
+    "E014"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a harness is more practical",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Help rate and set size are the primary costs and reported; calibration labeling hours reported; LLM calls/latency not; ensemble cost noted qualitatively.",
+   "evidence_ids": [
+    "E016",
+    "E009",
+    "E019"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a benchmark claim with development-overlap risk",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Calibration and test are separate samples from the same distribution (as CP requires); distribution shift untested; LLM contamination not discussed; scenario construction is in missing Appendix A7.",
+   "evidence_ids": [
+    "E009",
+    "E017"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "an embodied agent's success claim with a gate",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Plan success vs task success distinguished on hardware; no breakdown of wrongful singleton vs unnecessary asks by endpoint.",
+   "evidence_ids": [
+    "E013",
+    "E014"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim of transfer to a physical robot",
+   "applicable": true,
+   "status": "partial",
+   "reason": "UR5 multi-step n=50 with counts; mobile manipulator trials not stated in the main text; bimanual in appendix.",
+   "evidence_ids": [
+    "E012",
+    "E014"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#Reviewer expectations",
+    "patterns/main/observe_act_interface.md#Reviewer expectations"
+   ],
+   "applies_when": "a comparison at matched budget",
+   "applicable": true,
+   "status": "met",
+   "reason": "Plan success fixed between KnowNo and Simple Set before comparing help and set size.",
+   "evidence_ids": [
+    "E015"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "KnowNo achieves the user-specified task completion level while minimizing human help.",
+   "setting": "PyBullet tabletop (attribute, numeric, spatial ambiguity), eps=0.15; PaLM-2L",
+   "baseline_control": "Simple Set, Ensemble Set, Prompt Set, Binary, No Help",
+   "selection_vs_test": "N=400 calibration scenarios per setting; test trials separate",
+   "result_denominator": "200 trials per method/setting; success measured against labelled correct option with assumed faithful human, i.e. mostly empirical coverage",
+   "evidence_ids": [
+    "E011",
+    "E008",
+    "E010"
+   ],
+   "counterevidence": [
+    "E010",
+    "E008"
+   ],
+   "allowed_conclusion": "Empirical coverage tracks target in simulation, which the theory guarantees under the assumptions."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Help is reduced by 10-24% vs baselines at equal success.",
+   "setting": "sim and two hardware setups",
+   "baseline_control": "Simple Set at matched plan success",
+   "selection_vs_test": "Simple Set epsilon tuned in simulation to match plan error",
+   "result_denominator": "Hardware multi-step: step help 0.58 vs 0.72, trial help 0.92 vs 1.00 (n=50); mobile manipulation 0.67 vs 0.81 (n not stated)",
+   "evidence_ids": [
+    "E013",
+    "E014",
+    "E016",
+    "E015"
+   ],
+   "counterevidence": [
+    "E014"
+   ],
+   "allowed_conclusion": "Supported in these hardware tasks; task success is below plan success on the mobile manipulator."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Guarantee holds across LLMs.",
+   "setting": "PaLM-2L, PaLM-2L-IF, GPT-3.5 (text-davinci-003), simulation only for the latter two",
+   "baseline_control": "n/a",
+   "selection_vs_test": "n/a",
+   "result_denominator": "not in main text",
+   "evidence_ids": [
+    "E020"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Directionally supported; numbers in missing appendix."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Simulated tabletop trials with a simulated faithful human and label-based success, plus hardware UR5 (n=50) and mobile manipulator with plan and task success; no transfer credit because tasks/distributions were built for the method. Evidence level provisional because the appendix is missing.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "Under i.i.d. calibration/test scenarios, a grounded environment and a faithful human, conformal sets over LLM option scores hit the target plan-level success and use 8-14% less hardware help (up to 24% in simulation) than a cumulative-threshold baseline at matched success; task-level success on hardware is lower and perception/execution uncertainty is outside the guarantee.",
+  "unresolved": [
+   "appendix-dependent details (A1-A10)",
+   "hardware n for mobile manipulation",
+   "distribution shift robustness",
+   "proofs and baselines' tuning not inspected"
+  ],
+  "reproduction_note": "Author-reported; not reproduced."
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Specific, safety-relevant bottleneck formalized as two desiderata with named nearest approaches (ensembles, prompt-based ask-for-help, CP in robotics), run as baselines, and explicit residual limits; lineage only partly pinned.",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E017",
+    "E018"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Mechanism and assumptions are reconstructable (MCQA scores, CP quantile, sequence-level extension, dataset-conditional guarantee) and yield distinguishable predictions (coverage at target; fewer asks than cumulative thresholds); assumptions stated.",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E008",
+    "E006",
+    "E017"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Operation chain, calibration size, delta and labeling cost are stated; information permissions clear; missing visible prompts, scenario distributions and proof details (appendix), and human-help simulation protocol.",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E009",
+    "E017",
+    "E010"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "Hardware plan/task success are reported, but sim success is label-coverage with a simulated faithful human, mobile-manipulation and bimanual trial counts and success verification are outside the visible text (appendix missing). Cannot grade denominators without it.",
+    "evidence_ids": [
+     "E011",
+     "E012",
+     "E013",
+     "E014",
+     "E010"
+    ],
+    "counterevidence_ids": [
+     "E010"
+    ],
+    "search_scope": [
+     "Sec 1-6 main text read in full",
+     "appendix A1-A10 not present in pinned material"
+    ],
+    "provisional_rating_if_main_text_were_complete": 2
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "CP vs cumulative-threshold gate on identical scores, matched-success comparison, ensemble/prompt baselines, three LLMs; MCQA, 'none listed' option and sequence-level calibration are not ablated in the visible text; hardware epsilon for the baseline tuned in simulation.",
+    "evidence_ids": [
+     "E015",
+     "E013",
+     "E014",
+     "E020"
+    ],
+    "counterevidence_ids": [
+     "E010"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Calibration/test separation is built in, but test distribution equals calibration distribution authored for each ambiguity; no shift test; LLM contamination undiscussed; guarantee scope stated.",
+    "evidence_ids": [
+     "E009",
+     "E017"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "200 sim and 50 hardware trials per method are stated, but no variance across calibration draws and mobile-manipulation/bimanual n are not in the visible text; appendix would settle.",
+    "evidence_ids": [
+     "E011",
+     "E012"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 1-6 main text read in full",
+     "appendix A1-A10 not present in pinned material"
+    ],
+    "provisional_rating_if_main_text_were_complete": 2
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Help rate and set size are measured at matched success, calibration labeling hours are reported, ensemble cost noted; LLM calls/latency on hardware not.",
+    "evidence_ids": [
+     "E016",
+     "E009",
+     "E019",
+     "E015"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "score": {
+  "raw": null,
+  "display": null,
+  "lower": 66.25,
+  "upper": 86.25,
+  "coverage": 0.8,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ecost)/4; unknown items counted 0 for lower and 4 for upper; raw/display null while any unknown"
+ },
+ "status": "needs_fulltext",
+ "status_reason": "Pinned material contains the main text only; Appendix A1-A10 (prompts, proofs, scenario distributions, extra hardware/bimanual results, per-setting results) is referenced throughout but absent. E.measurement and E.statistics left unknown (provisional 2 each if the appendix does not change the picture); other six items rated from the main text. Request: re-pin the input pack with the appendix for both seats."
+}

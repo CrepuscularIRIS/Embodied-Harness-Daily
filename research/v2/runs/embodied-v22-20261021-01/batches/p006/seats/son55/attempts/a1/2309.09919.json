@@ -1,0 +1,833 @@
+{
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p006",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2309.09919",
+  "paper_id": "2309.09919",
+  "title": "Plug in the Safety Chip: Enforcing Constraints for LLM-driven Robot Agents",
+  "version": "2309.09919v3",
+  "claim_type": "system_method",
+  "central_claim": "可插拔、可查询的 LTL 安全约束模块（NL→LTL 编码、违规推理与解释、不安全动作剪枝）能让 LLM 机器人代理严格遵守安全约束，并随约束复杂度扩展，在 VirtualHome 与真机 Spot 上验证。"
+ },
+ "provenance": {
+  "input_hash": "682d488acfee84cba361bc0fc1f9b301936e28dff782dff94fbc993c9550e37d",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T02:51:57Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; session_id/receipt_ref not self-obtainable by worker (null); expectations_hash = sha256 of concatenated patterns/main/*.md (expectations embedded there, no standalone file); domain_cards_hash = sha256(research/patterns/taxonomy.json); patterns/overview.md sha256=2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf."
+ },
+ "materials": [
+  {
+   "material_id": "M-2309.09919",
+   "url": "https://arxiv.org/pdf/2309.09919v3",
+   "sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Works",
+    "III Method (A-F)",
+    "IV Experiments (A-D, Tables I-II)",
+    "V Robot Demo (A-B)",
+    "VI Conclusion"
+   ],
+   "complete": false,
+   "missing_sections": [
+    "Appendix A-F（完整示例、NL→LTL 细节、Base/CaP 实现、示例任务、查询提示词）：正文多处引用，材料包未包含"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "Abstract",
+   "quote": "we propose a queryable safety constraint module based on linear temporal logic (LTL) that simultaneously enables natural language (NL) to temporal constraints encoding, safety violation reasoning and explaining, and unsafe action pruning",
+   "support_explanation": "中心主张：LTL 安全约束模块（NL→LTL、违规解释、不安全动作剪枝）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "Abstract",
+   "quote": "our system strictly adheres to the safety constraints and scales well with complex safety constraints",
+   "support_explanation": "作者结论：\"严格遵守\"并\"可扩展\"。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§III-B",
+   "quote": "The representation is then verified by the human for correctness.",
+   "support_explanation": "LTL 须由人工专家校验，是保证的前提。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§III-E",
+   "quote": "causing the agent to likely choose an action within the same distribution of the masked unsafe action since its distribution remains unchanged",
+   "support_explanation": "作者论证仅屏蔽不够，需要 reprompt 解释（未做 mask-only 消融）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§III-E",
+   "quote": "assuming we have perfect truth value functions and transition model, any violation of the safety constraints can be detected in advance",
+   "support_explanation": "保证依赖完美命题真值函数与转移模型。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-A",
+   "quote": "During the experiment, we access the simulator for information such as locations and states of objects for truth values.",
+   "support_explanation": "实验中命题真值来自仿真器特权状态。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-A",
+   "quote": "We adopted 20 household tasks from two environments",
+   "support_explanation": "评测任务 20 个。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-A",
+   "quote": "Task difficulty is controlled as each task is accompanied by an in-context example that has the exact ground truth action sequence with only the goal specification paraphrased",
+   "support_explanation": "每个任务的上下文示例含精确 GT 动作序列，只改写目标，任务难度被人为压低。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-C",
+   "quote": "if ever the agent violates the safety constraints and enters an invalid state specified by the automaton",
+   "support_explanation": "安全率由同一自动机判定：与强制执行用同一个检查器（循环验证）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-D Table I",
+   "quote": "Base Model 90% 38% 94% 30% NL Constraints 100% 56% 100% 56% NL Constraints ∗ 100% 54% 96% 62%",
+   "support_explanation": "VirtualHome 基线：成功/安全率（Four Room、Mobile Manipulation）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-D Table I",
+   "quote": "Safety Chip 76% 84% 88% 94% Safety Chip ∗ 98% 100% 98% 100%",
+   "support_explanation": "Safety Chip（未校验 LTL）成功 76/88、安全 84/94；专家校验后 98/100、98/100。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-D",
+   "quote": "even without expert verification, there is still a large margin over the other baselines, though the success rate is affected because of the mistranslated safety constraints",
+   "support_explanation": "误翻译使成功率下降：人工校验是性能前提。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-D",
+   "quote": "we observed that the success rate of Base Model is lower than the other two agents that have access to the safety constraints",
+   "support_explanation": "作者自陈约束提供有用信息，基线间信息量不同。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§V-A",
+   "quote": "each task is run twice, and the temperature of the LLM is set to zero",
+   "support_explanation": "真机每任务仅运行两次，温度 0，无方差。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§V-A",
+   "quote": "we assume no mistranslation in LTL formulas verified by the experts and no mechanical failure in the experiment",
+   "support_explanation": "真机实验假设翻译无误且无机械故障。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§V-B Table II",
+   "quote": "Code as Policies 53% 55% NL Constraints 98% 34% Safety Chip 98% 100%",
+   "support_explanation": "真机：成功率/安全率，分母未给。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§V-B",
+   "quote": "When the number of constraints surpasses five, we observe a drastic decrease in the safety rate for the two baselines: NL Constraints achieves 0%, and Code as Policies achieves 40%.",
+   "support_explanation": "约束超过五条时基线安全率骤降，支撑\"可扩展\"。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§V-B",
+   "quote": "three task abortion tests with safety constraints contradicting the task itself are conducted",
+   "support_explanation": "矛盾约束下中止测试仅 3 次。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§II-B",
+   "quote": "Huang et al. [24] has touched on the safety topic by providing a neural network-based safety module in parallel with affordance and human preference modules together as scoring functions",
+   "support_explanation": "最近邻之一：SayCan 式 NN 安全模块。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§III-D",
+   "quote": "give the user detailed feedback about what constraints are violated",
+   "support_explanation": "最近邻 Raman et al. 的 LTL 违规反馈做法；无定量对比。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§III-D",
+   "quote": "LTL lacks expressivity as compared to natural language",
+   "support_explanation": "LTL 表达力局限。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§III-C",
+   "quote": "The noteworthy distinction is that our translation module relies solely on in-context learning and necessitates no fine-tuning",
+   "support_explanation": "NL→LTL 翻译仅靠上下文学习（基于 Lang2LTL）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV",
+   "quote": "to test the hypothesis that our safety chip approach can reduce the frequency of safety constraint violations without decreasing the frequency of task completion relative to the base models without a safety chip",
+   "support_explanation": "预先陈述的假设：降低违规且不降低完成率。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§IV-A",
+   "quote": "detailed example tasks could be found in Appendix -E",
+   "support_explanation": "附录 A-F（提示词、示例任务、CaP 实现）被引用但不在材料包内。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M-2309.09919",
+   "material_sha256": "2adcabc4fabf3769628a59cdb7ac93e53f400adb0ac3d576f1a4ec6bfca9fa1b",
+   "locator": "§I",
+   "quote": "although actually meeting those standards is beyond the scope of this work",
+   "support_explanation": "ISO 61508 合规不在本文范围。",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "位于 LLM 代理与执行器之间的安全约束监控器：LTL 自动机+查询系统",
+   "information": "人工 NL 安全约束→经 Lang2LTL 式上下文翻译成 LTL→人工校验→组合成自动机；每步由仿真器特权状态给出命题真值（假设完美真值函数）；LLM 代理本身只见提示",
+   "operation": "把代理提议动作推进自动机；若会进入不可接受状态则屏蔽；查询系统（GPT-4）依据约束、违规动作、状态变化生成违规原因，作为错误信息附到提示后让代理重新生成动作",
+   "output": "放行动作或\"拒绝+自然语言原因\"",
+   "conditions": "约束为 LTL 可表达的 avoidance/trigger 模式；命题词表预定义；人工专家可校验公式",
+   "feedback": "违规解释文本回灌提示（reprompt）",
+   "selection_rule": "确定性：自动机接受性；解释生成不参与判定",
+   "persistence": "自动机状态在 episode 内随命题真值推进；约束库跨任务可复用",
+   "later_use": "后续每一步重复监控",
+   "claimed_effect": "专家校验 LTL 下安全率 100%，成功率不降（98%）",
+   "failure_boundary": "误翻译；真值函数不完美；LTL 表达力；矛盾约束需中止；约束 >5 时基线崩溃但本法仅在小样本验证",
+   "evidence_ids": [
+    "E001",
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E009",
+    "E011"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "NL 约束→LTL 翻译与人工核验流程",
+   "information": "预定义词表；参照表达抽取→接地到命题→提升语句→公式→回代",
+   "operation": "仅靠上下文学习的模块化翻译，约束按 AND 组合",
+   "output": "LTL 公式（供人工校验）",
+   "conditions": "约束是基础片段的合取；有懂 LTL 的专家",
+   "feedback": "专家校验",
+   "selection_rule": "专家接受/修改",
+   "persistence": "公式库",
+   "later_use": "自动机构造",
+   "claimed_effect": "验证比重写 LTL 更容易",
+   "failure_boundary": "未校验时误翻译使成功率下降（76% vs 98%）",
+   "evidence_ids": [
+    "E003",
+    "E012",
+    "E022"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "LLM 代理概率性、难以稳定遵守安全约束，约束变复杂时更差且会分散原任务；现有代理依赖预训练 affordance 反馈模块，难以泛化/按用户偏好定制；\"don'ts\" 研究不足。",
+  "checked_gap": "正文基线结果支持该 gap：NL 约束基线安全率仅 54-62%，真机约束>5 时降至 0%（E010,E017）。最近邻已列：SayCan 式 NN 安全模块、Vemprala 代码+仿真+人审、PDDL 方法、Raman 等 LTL 反馈、Lang2LTL（E019,E020）；但与这些近邻无定量对比。",
+  "lineage_closest_adjacent": {
+   "lineage": "运行时验证/LTL 监控（Kress-Gazit, Raman 等）+ Lang2LTL（NL→LTL）+ SayCan/LLM-Planner 代理 → 本文把 LTL 自动机作为外挂安全门并用 LLM 解释回灌",
+   "closest": [
+    "Raman et al. LTL 反馈 [37] (文中引用，原文未固定)",
+    "Lang2LTL [35] (文中引用，原文未固定)",
+    "Huang et al. [24] 神经网络安全模块 (文中引用，原文未固定)"
+   ],
+   "source_version": "转述自 2309.09919v3 §II；未取得近邻原文"
+  },
+  "residue": "形式化可验证的约束执行与 LLM 灵活性如何结合；runtime 违规发生后如何让 LLM 重新规划而不陷入同一分布。",
+  "stakes": "工业/医护场景的安全合规（ISO 61508 类）；违规一次即不可接受。",
+  "method_response": "LTL 自动机做确定性判定+屏蔽；LLM 仅负责解释与重生成；专家校验保障公式正确。",
+  "remaining_gap": "保证依赖完美真值函数与专家校验；词表预定义；无 mask-only/去解释消融；成本未知；真机规模极小；与 Raman 式 LTL 反馈基线无对比。",
+  "evidence_ids": [
+   "E003",
+   "E005",
+   "E010",
+   "E017",
+   "E019",
+   "E020",
+   "E021"
+  ],
+  "unresolved": [
+   "reprompt 解释相对 mask-only 的增益",
+   "真机试验分母",
+   "附录中的提示与成本信息"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "strong-moderate",
+    "tactic_steps_checked": "C25 tactic：LLM 输出可机检的中间产物(LTL 公式/违规状态变化)→路由到 sound 机制(自动机)→用其可验证输出闭环(屏蔽+解释回灌，在构建过程中而非事后)——执行(step1 接缝清楚:LLM 翻译/解释，自动机判定；step2 产物为形式化 LTL；step3 违规判定在生成中闭环)。step4 承重机制消融：未做(mask-only vs reprompt 缺)；step5 成本：未报。",
+    "success_failure_checks": "success：typed 可验证中间产物(met)；闭环信号可得(partial：真值来自仿真特权)；单一承重机制消融(unmet)。failure：成本未测(命中)；仅小基准手写(partial：20 任务+2 真机任务)；marginal 胜过统一基线(未命中：安全率差距大，但基线信息量不同)。",
+    "evidence_ids": [
+     "E001",
+     "E003",
+     "E004",
+     "E005",
+     "E009",
+     "E011",
+     "E017"
+    ],
+    "reason": "操作确为将 LLM 与形式化自动机分工并闭环，而非仅提及；C25 的\"可机检中间产物+solver 闭环\"在此成立。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "主操作=LLM 生成形式化约束+确定性自动机裁决+违规解释回灌，对应分解委托。",
+  "executes_pattern": {
+   "value": "yes",
+   "reason": "形式化中间产物、sound 裁决、在线闭环回灌均实际执行；缺少承重机制消融与成本。"
+  },
+  "resolves_problem": {
+   "value": "scoped",
+   "reason": "在专家校验 LTL+完美真值的前提下，约束被满足由构造保证；对\"LLM 不可靠\"问题的关闭仅限于所表达的约束，且安全率由同一自动机度量。"
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "external_verification_control",
+    "sub": "K201",
+    "version": "radar-patterns-2026-10-21 (K201 from embodied-agent-harness/v1)",
+    "fit": "strong",
+    "condition_checks": [
+     {
+      "item": "廉价外部检查器在执行前把提议当请求，拒绝时给结构化反馈",
+      "status": "met",
+      "note": "自动机推进→屏蔽→违规解释回灌"
+     },
+     {
+      "item": "检查器不使用评测 oracle",
+      "status": "unmet",
+      "note": "评测的安全率由同一自动机判定，真值来自仿真特权（E006,E009）；与 K201 \"checker 不使用评测 oracle\" 相悖，属循环验证"
+     },
+     {
+      "item": "检查器作为成功的弱代理(failure)",
+      "status": "challenged_with_evidence",
+      "note": "检查器只覆盖所写约束；对任务成功无代理意义，作者度量了成功率(76-98%)"
+     },
+     {
+      "item": "门的单独贡献被隔离",
+      "status": "unmet",
+      "note": "未消融 mask vs reprompt vs 查询系统"
+     }
+    ],
+    "evidence_ids": [
+     "E004",
+     "E006",
+     "E009",
+     "E011"
+    ]
+   },
+   {
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01",
+    "version": "radar-patterns-2026-10-21 (R01 board-induced)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "item": "LLM 写形式化模型，solver 计算/检查/剪枝",
+      "status": "partial",
+      "note": "LLM 写的是约束(LTL)而非规划问题；自动机检查/剪枝，规划仍由 LLM 做"
+     },
+     {
+      "item": "solver 失败回灌修复",
+      "status": "met",
+      "note": "违规解释回灌重新生成"
+     },
+     {
+      "item": "人工校验承担流程",
+      "status": "met",
+      "note": "专家校验 LTL 是前提且未量化其代价(R01 failure: human repair)"
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E022",
+     "E004"
+    ]
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K201"
+   },
+   "operation_correspondence": "C25 的\"LLM 产出机检产物→sound 机制裁决→闭环修正\"在此对应 K201 的\"提议即请求，外部检查器放行/拒绝并回灌结构化反馈\"：形式化约束=可机检产物，自动机=检查器，违规解释=反馈。",
+   "necessary_conditions_and_differences": "K201 要求检查器不用评测 oracle；此处评测与执行共用自动机且真值特权，K201 条件部分不成立。",
+   "evidence_ids": [
+    "E001",
+    "E004",
+    "E006",
+    "E009"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01"
+   },
+   "operation_correspondence": "LLM 写形式化模型(LTL)，符号机制检查/剪枝并反馈修复。",
+   "necessary_conditions_and_differences": "R01 的 solver 负责产生/剪枝规划本身；此处只裁决约束，规划仍由 LLM 做，匹配仅 partial。",
+   "evidence_ids": [
+    "E003",
+    "E022"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "profile/expectations.json (patterns/main/external_verification_control.md etc.)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E01"
+   ],
+   "applies_when": "主张 harness 提升闭环成功/安全",
+   "applicable": true,
+   "status": "partial",
+   "reason": "同一 GPT-4 骨干下对比 Base/NL Constraints/Safety Chip（真机加 CaP）；但替代 harness（如 Raman 式 LTL 反馈、mask-only）缺失，且各臂信息量不同。",
+   "evidence_ids": [
+    "E010",
+    "E011",
+    "E013",
+    "E016"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#E02"
+   ],
+   "applies_when": "主张具体 harness 组件造成提升",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "屏蔽、违规解释、查询系统未一次一项切换；\"mask 不够\"仅为论证（E004）。",
+   "evidence_ids": [
+    "E004"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#E04"
+   ],
+   "applies_when": "成功率对比",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "VirtualHome 运行次数未明示，无方差；真机每任务两次、温度 0。",
+   "evidence_ids": [
+    "E014"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E05"
+   ],
+   "applies_when": "主张更好/更实用",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "正文无 token/调用/时延；附录 A-F 不在材料包，不能断言 not_reported。",
+   "evidence_ids": [
+    "E024"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E08"
+   ],
+   "applies_when": "前沿模型主张的污染/开发重叠",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "任务/约束是否在开发中用过、提示是否按任务调过，未在正文说明；示例任务在附录。",
+   "evidence_ids": [
+    "E008",
+    "E024"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#E16"
+   ],
+   "applies_when": "具身成功主张",
+   "applicable": true,
+   "status": "partial",
+   "reason": "区分了\"成功但不安全/安全但失败\"，并归因误翻译；无按终点/卡死的分解。",
+   "evidence_ids": [
+    "E009",
+    "E012"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/external_verification_control.md#E19"
+   ],
+   "applies_when": "真机主张",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "真机仅有百分比，试验次数（每任务两次）与每任务计数不清，且假设无误翻译/无机械故障。",
+   "evidence_ids": [
+    "E014",
+    "E015",
+    "E016"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E22",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E22"
+   ],
+   "applies_when": "同模型预算对比",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "温度 0、GPT-4-0613 同后端，但调用/回合上限与重生成次数未披露。",
+   "evidence_ids": [
+    "E014"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "rs:decompose_and_delegate#RE-ablation",
+   "version": "ResearchStudio 15+31",
+   "source_strength": "both (Oral/Reject induced)",
+   "source_refs": [
+    "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md"
+   ],
+   "applies_when": "分解/委托型方法",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "未证明\"哪一个机制承重\"(自动机屏蔽 vs 解释回灌)；与 NL Constraints 的对比同时改变信息通路。",
+   "evidence_ids": [
+    "E004",
+    "E013"
+   ],
+   "score_item": "E.causality"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "专家校验 LTL 后 Safety Chip 在两组 VirtualHome 实验中安全率 100%，成功率 98%，显著高于 NL 约束(54-62%)与基线(30-38%)",
+   "setting": "VirtualHome，20 家居任务，每任务 1-5 条约束；GPT-4-0613",
+   "baseline_control": "同一 GPT-4 基础代理：无约束 Base、NL 约束、专家重写 NL 约束",
+   "selection_vs_test": "无开发/测试划分说明；每个任务附带含精确 GT 动作序列的示例",
+   "result_denominator": "分母（运行次数）未在正文给出；表中为\"平均\"值",
+   "evidence_ids": [
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011"
+   ],
+   "counterevidence": "安全率由同一自动机判定且真值来自仿真特权，100% 近似构造性结果；基线信息通路不同(E013)；示例含 GT 序列",
+   "allowed_conclusion": "在公式正确且命题真值完美时，所执行动作前缀满足所写约束，且不损伤完成率；不能推出更一般的\"LLM 代理安全\""
+  },
+  {
+   "claim_id": "C2",
+   "text": "未经专家校验时 Safety Chip 安全率 84%/94%，成功率 76%/88%",
+   "setting": "同上，翻译结果直接使用",
+   "baseline_control": "同上",
+   "selection_vs_test": "同上",
+   "result_denominator": "同上",
+   "evidence_ids": [
+    "E011",
+    "E012"
+   ],
+   "counterevidence": "无",
+   "allowed_conclusion": "误翻译直接损害成功率与安全率，专家校验是性能前提"
+  },
+  {
+   "claim_id": "C3",
+   "text": "真机 Spot：Safety Chip 成功 98%、安全 100%，NL 约束安全 34%，CaP 55%",
+   "setting": "作者搭建的室内环境，23 个物体，两个任务各 10 条约束，逐步增加",
+   "baseline_control": "NL Constraints、Code as Policies(CaP 无法闭环重提示)",
+   "selection_vs_test": "N/A",
+   "result_denominator": "每任务运行两次，温度 0；表中百分比对应的试验数不清",
+   "evidence_ids": [
+    "E014",
+    "E015",
+    "E016",
+    "E017",
+    "E018"
+   ],
+   "counterevidence": "假设无误翻译/无机械故障；CaP 与 NL 基线反馈能力不同",
+   "allowed_conclusion": "小规模真机演示显示与基线差距；不构成有计数的 transfer 证据"
+  },
+  {
+   "claim_id": "C4",
+   "text": "可随约束复杂度扩展",
+   "setting": "真机约束 >5",
+   "baseline_control": "NL Constraints 0%、CaP 40% 安全率",
+   "selection_vs_test": "N/A",
+   "result_denominator": "极少次数",
+   "evidence_ids": [
+    "E017"
+   ],
+   "counterevidence": "Safety Chip 在>5 条约束下的单独分母未单列",
+   "allowed_conclusion": "scoped：基线随约束数量崩溃，Safety Chip 在所测范围内未崩溃"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在专家校验的 LTL 与仿真给出的完美命题真值前提下，自动机屏蔽+LLM 解释回灌使 GPT-4 代理在 20 个 VirtualHome 任务与小规模 Spot 演示中满足所写约束且保持完成率；该安全率由同一自动机度量，近乎构造性；未消融屏蔽/解释各自贡献。",
+  "unresolved": [
+   "附录缺失：提示词、示例任务、成本",
+   "真机试验分母",
+   "mask-only/去解释消融"
+  ],
+  "note": "作者结果，非我们复现；材料缺附录 A-F。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Gap（LLM 概率性违反约束、约束增多时崩溃、依赖预训练 affordance）有基线结果直接支撑，近邻（SayCan 安全模块、Lang2LTL、Raman LTL 反馈、Vemprala）具体。扣分：无与 Raman 式 LTL 反馈等近邻的定量对比，残余价值（reprompt 相对 mask）未验证。",
+   "evidence_ids": [
+    "E010",
+    "E017",
+    "E019",
+    "E020"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "LLM 做翻译/解释、自动机做裁决的分工与保证来源（LTL 可验证、验证比书写容易）论证清楚，假设（完美真值、专家校验、预定义词表、LTL 表达力）被明确陈述。扣分：reprompt 增量仅为论证，LTL 表达力受限。",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E021"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作链（翻译→校验→自动机→屏蔽→查询解释→重生成）、信息权限（真值特权）与失败边界可重建。扣分：提示词与细节在附录，材料缺失；真值函数实现未写。",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E005",
+    "E006",
+    "E024"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "闭环由仿真/真机执行判定，成功率与安全率均定义；但安全率由同一自动机判定且真值特权（循环度量），分母（运行数）未在正文给出，真机试验数不清。",
+    "evidence_ids": [
+     "E006",
+     "E009",
+     "E011",
+     "E014",
+     "E016"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "同骨干对比 Base/NL/Safety Chip，并有未校验变体显示误翻译影响；但各臂信息通路不同，屏蔽/解释/查询系统未分离，基线对比含 CaP 差异实现。",
+    "evidence_ids": [
+     "E010",
+     "E011",
+     "E012",
+     "E013"
+    ],
+    "counterevidence_ids": [
+     "E004"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "每任务示例含精确 GT 动作序列、仅改写目标；无开发/测试任务划分说明；真机环境与任务由作者自设，且假设无误翻译。",
+    "evidence_ids": [
+     "E008",
+     "E015"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "无方差/置信区间；真机每任务两次、温度 0；失败仅定性归因于误翻译，无终点/类别分解。",
+    "evidence_ids": [
+     "E014",
+     "E012"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "正文无成本信息，但附录 A-F 不在材料包内，不能断言 not_reported；按 anchors 先例 5 记 unknown 并挂 needs_evidence。",
+    "evidence_ids": [
+     "E024"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": {
+  "value": "needs_evidence",
+  "reason": "正文方法/实验完整，其余七项已判定；附录 A-F（提示词、示例任务、CaP 实现）在 3 个 III/IV/V 小节被引用但不在材料包，E.cost 无法判 not_reported，故 unknown→score=null(L/U/coverage 已给)。请总控补附录并重新固定输入包（须两席一致）。"
+ },
+ "score": {
+  "raw": null,
+  "display": null,
+  "lower": 57.5,
+  "upper": 62.5,
+  "coverage": 0.95,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "schema_version": "radar-review-v2.2"
+}

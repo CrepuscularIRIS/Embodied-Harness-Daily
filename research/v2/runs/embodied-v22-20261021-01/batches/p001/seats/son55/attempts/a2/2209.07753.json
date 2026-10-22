@@ -1,0 +1,1546 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a2",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2209.07753",
+  "paper_id": "2209.07753",
+  "title": "Code as Policies: Language Model Programs for Embodied Control",
+  "version": "2209.07753v4",
+  "claim_type": "system_method",
+  "central_claim": "代码生成 LLM 仅靠 few-shot 提示(无额外训练)即可被重新用作机器人策略代码的作者：把写成注释的自然语言指令翻译为可直接 exec 的 Python 程序(LMP)，程序处理感知输出(开放词表检测器等)并参数化控制原语 API，可表达反应式策略(阻抗控制等)与路点策略(视觉 pick-and-place、轨迹控制)，具备空间-几何推理、对新指令泛化、对模糊描述(如‘更快’)给出精确数值的行为常识，并在多个真实机器人平台上演示；层级代码生成(递归定义未定义函数)可写出更复杂的代码，在 HumanEval 以 39.8% P@1 刷新 SOTA；另提供机器人代码生成基准与泛化/规模消融。(Abstract; Sec. I contributions i–iv)"
+ },
+ "provenance": {
+  "input_hash": "90db5e3a15a4f5856f9394b3424a7f50e1c2d1ffd8bdbff86e04eef58984f593",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2 (production)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_hash": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+  "pattern_overview_hash": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": null,
+  "expectations_hash_reason": "无独立 expectations 文件(期望内嵌于 patterns/main/*.md，见 anchors v2 遗留项)；本记录引用 planner_composes_code_and_policies.md sha256 c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_receipt_reason": "内部 Subagent 运行未向 worker 暴露 session id/receipt",
+  "timestamp": "2026-10-22T02:41:27Z",
+  "supersedes": "a1 (needs_fulltext)",
+  "notes": "anchors_version=v2; phase=production; attempt=a2 (material re-pinned PDF, arXiv 2209.07753v4 PDF text with appendices A–M, sha256 f765a37d…); supersedes=a1(needs_fulltext). 盲评自述：未读另一席、aggregate/、任何 a1 attempt、其他批次、archive/、旧分数、calibration/ 其他文件、联网；仅 ls 目录名(seats/son55/attempts 下见 a1/a2；batches/p001 下见 aggregate 与 conflicts.json 文件名，未打开)。从总控 inputs_manifest 与任务指令得知 a1 状态为 needs_fulltext(无分数)，据此不构成污染。另读取了总控 check_batch.py(仅用于确认记录格式)。材料为 PDF 抽取文本：表格被拉平、图 3/4/6/7 为图像无数值，表值取自可连续核对的 Table III/IV 与 Table VI 汇总行。近邻文献(SayCan、Inner Monologue 等)原文未固定，谱系据本文自述，空检索不证明新颖。"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/pdf/2209.07753v4",
+   "sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.07753_pdf.txt",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Work",
+    "III Method (A–D)",
+    "IV Experiments (A–E)",
+    "V Discussion and Limitations",
+    "References",
+    "Appendix A–M (含 Tables IV–VI、提示/API 清单、仿真划分)"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. I Introduction; txt:L57",
+   "quote": "additional data and retraining – ergo the data burden persists,",
+   "support_explanation": "作者 gap：每增加一种技能/grounding 方式都需额外数据与再训练，数据负担只是转移到技能获取。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. I Introduction; txt:L49",
+   "quote": "prevents the LLMs from directly influencing the perception-action",
+   "support_explanation": "作者 gap：‘LLM 规划 + 固定技能集’的抽象阻止 LLM 直接影响感知-动作反馈回路。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Abstract; txt:L11",
+   "quote": "LLMs can be re-purposed to write robot policy code, given natural",
+   "support_explanation": "作者中心主张：代码生成 LLM 可被重新用于写机器人策略代码。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Abstract; txt:L28",
+   "quote": "multiple real robot platforms. Central to our approach is prompting",
+   "support_explanation": "摘要宣称在多个真实机器人平台上演示；后文量化只限仿真(见 E027)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. I contributions; txt:L190",
+   "quote": "code-gen that improves state-of-the-art on both robotics and",
+   "support_explanation": "贡献(ii)：层级代码生成在机器人与通用代码生成上刷新 SOTA(HumanEval 39.8% P@1)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. III Method; txt:L307",
+   "quote": "ensuring there are no import statements, special variables that",
+   "support_explanation": "执行前静态检查：禁止 import、以 __ 开头的特殊变量、exec/eval 调用，再以受限 globals 调用 exec。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. III-C; txt:L476",
+   "quote": "functions that do not exist in the given scope.",
+   "support_explanation": "层级函数生成：解析生成代码的 AST，找出作用域内不存在的函数，交给函数生成 LMP 递归(深度优先)补全。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. III-B; txt:L338",
+   "quote": "temperature 0 (i.e., deterministic greedy token decoding). Here,",
+   "support_explanation": "全部实验默认 OpenAI code-davinci-002、temperature 0，贪心单次生成。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D Table III; txt:L655",
+   "quote": "TABLE III: Success rates over task families with 50 trials per task.",
+   "support_explanation": "Table III 题注：每任务 50 次试验；数值见 Table III/VI(PDF 抽取为拉平文本，单元格逐值取自表内)。CaP: SA/SI Long-Horizon 97.20、Spatial-Geometric 89.30；UA/SI 97.60、73.33；UA/UI 80.00、62.00。CLIPort: 78.80/97.33；36.80/0.00；0.00/0.01。NL planner: 86.40/N/A；88.00/N/A；64.00/N/A。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L750",
+   "quote": "prompted LLM planner using natural language instead of code.",
+   "support_explanation": "基线(ii)：few-shot 提示的自然语言 LLM planner；所用 LLM、提示、动作空间在本文中未详述。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L749",
+   "quote": "via imitation learning on 30k demonstrations, and (ii) few-shot",
+   "support_explanation": "基线(i)：CLIPort 用 30k 演示模仿学习训练，仅从像素/语言输入。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L746",
+   "quote": "appear in the prompts or be trained on (in the case of supervised",
+   "support_explanation": "seen/unseen 定义：seen 指指令模板或属性值可出现在提示中(或监督基线训练中)；unseen 则被排除。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. K; txt:L1661",
+   "quote": "and their locations, via a scripted object detector, as well as a",
+   "support_explanation": "仿真中 CaP 通过脚本化物体检测器(即仿真真值物体列表与位置)和脚本化 pick-and-place 原语工作：隔离语言→代码层，感知与低层执行为理想化/特权。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. K; txt:L1765",
+   "quote": "oracle information from the simulation to stop the policy when",
+   "support_explanation": "CLIPort 另有‘oracle termination’变体：用仿真成功信息停止策略；无 oracle 版本固定跑 10 个动作后判定。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L756",
+   "quote": "performance degrades significantly, while LLM-based methods",
+   "support_explanation": "作者结论：unseen 属性下 CLIPort 显著退化而基于 LLM 的方法性能相近。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L760",
+   "quote": "are not applicable for tasks that require precise numerical",
+   "support_explanation": "作者称 NL planner 不适用于需要精确数值空间几何推理的任务，故 Table III 对 Spatial-Geometric 为 N/A(缺基线，而非基线失败)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L754",
+   "quote": "instructions, despite only few-shot prompted with one example",
+   "support_explanation": "CaP 每个任务只有一个示例 rollout 的 few-shot 提示。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. C Table IV; txt:L1106",
+   "quote": "TABLE IV: Using code for spatial-geometric reasoning yields higher success rate",
+   "support_explanation": "代码 vs 自然语言推理：28 道物体选择 + 23 道位置选择(1 cm 容差)；Vanilla 39/30/35，CoT 68/48/58，LMP 96/100/98(物体/位置/总)。51 题，一题约 2–3.6 个百分点。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-A; txt:L617",
+   "quote": "37 function generation",
+   "support_explanation": "RoboCodeGen 基准仅 37 道函数生成题，单元测试判定。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-A Table I; txt:L556",
+   "quote": "TABLE I: Hierarchical code-generation solves more problems in RoboCodeGen",
+   "support_explanation": "Table I(列序 GPT-3 6.7B、175B、Codex cushman、davinci)：Flat 3/68/54/81，Hierarchical 5/84/57/95。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. D; txt:L1242",
+   "quote": "but of which both Flat CodeGen variants got 44% success, while",
+   "support_explanation": "HumanEval 中触发层级生成的题目上，两种 flat 变体 44%，Hier 56%。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. D; txt:L1241",
+   "quote": "questions in HumanEval, 6.5% led to hierarchical code generation,",
+   "support_explanation": "164 题中仅 6.5%(约 10–11 题)真正触发层级生成。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. D Table V; txt:L1190",
+   "quote": "TABLE V: Hierarchical code generation also performs better (in % pass rates)",
+   "support_explanation": "我们的推断：Table V 贪心 Flat Prompts 50.6 → Hier 53.0，差 2.4pp×164≈4 题；而触发层级生成的子集仅约 11 题、44%→56%(≈+1 题)。故 HumanEval 增益大部分来自未触发层级生成的题目，更像提示词差异，而非层级机制本身。此推断依赖 6.5% 与 44/56% 的口径，作者未做显著性检验。",
+   "kind": "our_inference"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-A; txt:L640",
+   "quote": "two davinci models, and not cushman, suggesting that a certain",
+   "support_explanation": "层级生成的收益仅出现在两个 davinci 模型上，cushman 无收益。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. D; txt:L1239",
+   "quote": "works use code-davinci-001, but the relative improvements",
+   "support_explanation": "SOTA 对比含模型版本混杂：本文用 code-davinci-002，此前工作用 -001；同模型的对照是 Flat Prompts(P@1 36.6 → 39.8)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. D; txt:L1245",
+   "quote": "sampling multiple solutions is not practical for LMPs, which need",
+   "support_explanation": "LMP 须零次尝试执行，不采样多解、不做单元测试选择：无候选生成/选择环节。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV intro; txt:L552",
+   "quote": "system using CaP is limited to a constrained set of simulated tasks",
+   "support_explanation": "作者自述：机器人系统的定量评测仅限仿真任务；IV-B、IV-C、IV-E 仅展示支持的指令范围，无定量评测。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-B; txt:L712",
+   "quote": "successful on-robot executions of unseen language commands are",
+   "support_explanation": "真机部分只展示‘成功的’执行示例，无试验次数、成功率、失败案例。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. G; txt:L1357",
+   "quote": "could still be improved, and many real-world failures could be",
+   "support_explanation": "作者承认许多真实世界失败源于检测不准；提示词也需要为 VLM 工程化。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E030",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. F; txt:L1394",
+   "quote": "require actually tuning the gains based on execution feedback,",
+   "support_explanation": "作者承认：根据执行反馈调参(闭环修正)‘当前方法不支持’。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E031",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. A; txt:L1014",
+   "quote": "our experience this yielded inconsistent results (not always able to",
+   "support_explanation": "作者试过用 LLM 代码编辑 API 修 bug，结果不一致，因此实验中未采用：无生成后修复回路。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E032",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. V; txt:L797",
+   "quote": "feasible, and we cannot tell if a response will be correct a priori.",
+   "support_explanation": "局限：假定指令可行，且无法事先判断响应是否正确。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E033",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. V; txt:L787",
+   "quote": "CaP today are restricted by the scope of (i) what the perception",
+   "support_explanation": "局限：受限于感知 API 能描述的内容与可用控制原语；对更长/更复杂或不同抽象层级的指令困难。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E034",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. III-A; txt:L330",
+   "quote": "responses to the prompt, allowing later instructions to refer back",
+   "support_explanation": "LMP session：把新指令与响应逐步追加到提示中，使后续指令能引用此前指令(如‘undo’)——会话内上下文，无跨会话保存。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E035",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. J; txt:L1630",
+   "quote": "by explicitly record variables (in this case, the robot’s past",
+   "support_explanation": "移动操作示例：把机器人历史位置等变量记录在 Python 执行作用域中，作‘短期记忆’。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E036",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. M; txt:L1778",
+   "quote": "is brittle with existing LLMs and cannot reliably adapt to APIs",
+   "support_explanation": "跨本体(依 API 不同产生不同计划)能力脆弱，无法可靠适应差异很大的 API。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E037",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. A; txt:L972",
+   "quote": "It is very important for prompts to contain code that has no bugs.",
+   "support_explanation": "提示词质量决定可靠性；需要提示工程(命名、类型暗示、import 格式)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E038",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. K; txt:L1759",
+   "quote": "performed per task, each with sampled attributes and initial scene",
+   "support_explanation": "每任务 50 次试验，各次采样属性与初始场景配置；LLM 贪心解码，随机性仅来自场景采样。无方差/置信区间。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E039",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. V; txt:L774",
+   "quote": "CaP generalizes at a specific layer in the robot stack:",
+   "support_explanation": "作者界定的作用层：解释自然语言→处理感知输出→参数化低维控制原语输入；适用于感知与控制已分解的系统。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E040",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. K Table VI; txt:L1782",
+   "quote": "TABLE VI: Detailed simulation tabletop manipulation success rate (%) across different task scenarios.",
+   "support_explanation": "Table VI 给出逐任务数值，PDF 抽取为拉平文本，行列对应需谨慎。总计(Total/LH/SG)：CaP SA-SI 94.3/97.2/89.3，UA-SI 88.5/97.6/73.3，UA-UI 71.0/80.0/62.0；CLIPort(oracle termination) SA-SI 85.8/78.8/97.3，UA-SI 23.0/36.8/0.0；无 oracle 33.0/18.4/57.3，5.5/8.8/0.0；NL planner 总分 86.4、88.0、64.0。CLIPort UA/UI 的 SG 单元格 Table III 为 0.01，Table VI 抽取中可见 1.3，无法判定对应关系，本记录以 Table III 为准。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E041",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. II Related Work; txt:L226",
+   "quote": "incorporating outputs from success detectors or other visual language models",
+   "support_explanation": "作者自述最近邻 Inner Monologue：引入成功检测器/VLM 反馈并重规划；但实验未复现该方法，NL planner 基线不含此反馈。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E042",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. II; txt:L242",
+   "quote": "plans generated by prior works assume there exists a skill that",
+   "support_explanation": "作者对比：既有 LLM 规划假设存在对应每步的预定义技能(如‘move a bit right’)。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E043",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. IV-D; txt:L739",
+   "quote": "We define 6 new tasks",
+   "support_explanation": "作者自行新增 6 个 spatial-geometric 任务(并参与 seen/unseen 划分)，另继承 8 个 long-horizon 任务。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E044",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. F; txt:L1379",
+   "quote": "The controller is functional in that it can control a UR5e",
+   "support_explanation": "CartPole PD / 末端阻抗控制演示：功能可用但简化(无科氏/重力补偿)，无试验计数。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E045",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "App. K; txt:L1764",
+   "quote": "To improve CLIPort performance, we use a variant that uses",
+   "support_explanation": "我们的推断：Table III 中 CLIPort 的 LH 78.80、SG 97.33 与 Table VI 的 oracle-termination 列 78.8/97.3 一致，说明主表 CLIPort 为使用仿真成功信息停止的变体(对基线有利)；与 CaP 的脚本化感知(对 CaP 有利)方向相反，两者信息通道均非对等。",
+   "kind": "our_inference"
+  },
+  {
+   "evidence_id": "E046",
+   "material_id": "M1",
+   "material_sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+   "locator": "Sec. I; txt:L200",
+   "quote": "additional results, videos, and code at code-as-policies.github.io",
+   "support_explanation": "领域提示词全文托管在外部网站(App. 仅内联节选)，本批材料不含这些外部提示全文：对仿真任务提示的 few-shot 示例数量/内容只能部分重建。",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "SIG1",
+   "object": "语言指令→机器人策略接口：冻结的 code-davinci-002，每次调用以 Hints(import/类型提示) + few-shot 指令注释→代码示例作提示，输出 Python 策略代码，经 exec 直接在机器人/仿真上执行。基线：只能在预定义技能中编排的 NL planner [14][16-18]；监督训练的 CLIPort。",
+   "information": "LLM 仅见文本：对象名列表(objs=[...])、API 签名/示例、会话内先前指令与响应；不看图像、不见执行结果或成功信号。运行期代码通过感知 API(真机 MDETR/ViLD；仿真为脚本化检测器真值)读取状态。仿真中位置/物体列表与 pick-place 原语均为特权/理想化。",
+   "operation": "把自然语言命令(注释)补全为含 if/while/for、NumPy/Shapely 调用、感知 API 查询与控制原语参数化的 Python 代码；LMP 可嵌套(parse_obj、parse_position 等)；输出即策略。",
+   "output": "可立即执行的反应式/路点策略代码，调用 put_first_on_second、set_velocity、goto/pick/place、draw 等原语。",
+   "conditions": "需要感知与控制已分解、有语义命名清晰的 API；提示须无 bug、命名一致；指令须可行；所用 LLM 能力须达到 davinci 级(层级生成收益亦依赖该点)。",
+   "feedback": "运行期反馈只在生成代码内部(如 while not detect_object(...))通过感知 API 读取；不存在把执行结果/错误回传给 LLM 修订代码的外环(作者弃用 code-edit，且称不支持根据执行反馈调参)。",
+   "selection_rule": "not_applicable：单次贪心生成(T=0)，无候选采样/选择/拒绝；作者明言多采样对 LMP 不实用。",
+   "persistence": "仅会话内：新指令/响应追加到提示，生成函数与变量保留在 Python 执行作用域(‘short-term memory’)；无跨会话保存、验证或淘汰。",
+   "later_use": "同一会话内后续指令可引用先前指令/变量(如‘undo that’‘do that again rotated’)。",
+   "claimed_effect": "Table III：CaP 对 CLIPort/NL planner 在 unseen 属性/指令下保持高成功率；Table IV：代码推理 98% vs CoT 58% vs vanilla 35%。",
+   "failure_boundary": "感知 API 描述范围、控制原语集合、长/抽象层级不同的指令、无法预判正确性、提示 bug、检测错误导致真实世界失败、跨本体脆弱、无执行反馈修正。",
+   "retention_note": "不适用：静态 harness 设计，无自我改进/留存主张；不编造 retained 闭环。",
+   "evidence_ids": [
+    "E003",
+    "E006",
+    "E008",
+    "E012",
+    "E013",
+    "E026",
+    "E030",
+    "E031",
+    "E034",
+    "E035",
+    "E037",
+    "E039",
+    "E033",
+    "E032"
+   ]
+  },
+  {
+   "sig_id": "SIG2",
+   "object": "生成程序中未定义的函数调用(层级代码生成)；基线：flat 单层生成。",
+   "information": "函数生成 LMP 看到函数名/注释与已有 API，不看执行结果；提示中示例允许调用尚未定义的函数(如 get_mean)。",
+   "operation": "解析生成代码的 AST，找出作用域内不存在的函数名，调用专门的函数生成 LMP 为其写实现，对新函数体重复，深度优先递归。",
+   "output": "补全的函数定义加入作用域，主程序即可执行。",
+   "conditions": "需要足够强的代码模型(收益只出现于 davinci)；需要语义清晰的函数名使 LLM 能推断其行为。",
+   "feedback": "无：不运行单元测试或执行校验后再补全。",
+   "selection_rule": "not_applicable：无候选选择；贪心解码。",
+   "persistence": "生成函数在会话作用域中累积，可被后续 LMP 复用；无跨会话库、无验证与评审。",
+   "later_use": "后续 LMP 和提示可直接引用已生成函数。",
+   "claimed_effect": "RoboCodeGen davinci 81→95、GPT-3 175B 68→84；HumanEval 贪心 Flat Prompt 50.6→Hier 53.0，P@1 36.6→39.8。",
+   "failure_boundary": "cushman 无收益；HumanEval 仅约 6.5% 题触发；增益归因受提示差异与模型版本混杂(E023,E025)。",
+   "retention_note": "函数累积为会话内上下文，作者仅称‘可累积’，未评估累积库的复用收益；不构成 retained 主张。",
+   "evidence_ids": [
+    "E007",
+    "E020",
+    "E021",
+    "E022",
+    "E023",
+    "E024",
+    "E025"
+   ]
+  },
+  {
+   "sig_id": "SIG3",
+   "object": "LMP 执行前的静态安全检查。",
+   "information": "仅检查生成代码文本。",
+   "operation": "拒绝含 import 语句、以 __ 开头的特殊变量、exec/eval 调用的代码，其余在受限 globals(仅暴露 API) 下 exec。",
+   "output": "允许/拒绝执行；未描述拒绝后向 LLM 返回结构化反馈。",
+   "conditions": "仅限制可调用范围，不检查动作可达性/碰撞/任务正确性。",
+   "feedback": "未描述。",
+   "selection_rule": "静态规则拒绝，非基于任务成功信号。",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "无定量主张。",
+   "failure_boundary": "不提供运动安全、可达性或正确性保证(E032)。",
+   "retention_note": "不适用。",
+   "evidence_ids": [
+    "E006",
+    "E032"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "既有 LLM+机器人工作把 LLM 限在‘规划预定义技能序列’的抽象层，LLM 无法直接影响感知-动作反馈回路，难以泛化反馈形式(‘看到橙子时放下’)、表达控制常识(‘更快’)与空间关系(‘向左一点’)；每个新技能/grounding 方式需额外数据与再训练(E001,E002,E042)。",
+  "checked_gap": "部分核实：(a) 数值空间推理缺口有作者自己的证据——NL planner 不适用于 spatial-geometric 任务(E016)，代码推理 98 vs vanilla 35/CoT 58(E018)；(b) 监督基线 CLIPort 对 unseen 属性/指令显著退化(E015,E009)。但‘预定义技能需再训练’与‘无法影响反馈回路’主要靠相关工作叙述与定性例子，实验中的 NL planner 基线是作者自建、未详述，未复现带价值函数的 SayCan 或带成功检测器反馈的 Inner Monologue(E041,E010)，故最近邻缺口只被部分检验。",
+  "lineage": [
+   {
+    "from": "Huang et al. 2022 LLM zero-shot planner (arXiv:2201.07207, ref [14])",
+    "to": "SayCan (arXiv:2204.01691, [17]) / Socratic Models (arXiv:2204.00598, [16])",
+    "change": "文本计划 + 技能可行性加权 / VLM 替代感知信息",
+    "source_version": "仅据本文 Related Work 与参考文献表自述；非本地固定原文"
+   },
+   {
+    "from": "SayCan/Socratic",
+    "to": "Inner Monologue (arXiv:2207.05608, [18])",
+    "change": "成功检测器/VLM 反馈重规划",
+    "source_version": "同上"
+   },
+   {
+    "from": "Codex 代码补全 (arXiv:2107.03374, [1]) + 程序合成策略 (Trivedi et al. NeurIPS 2021, [51]) + CLIPort ([36])",
+    "to": "本文：代码即策略，直接参数化感知/控制 API",
+    "change": "把 LLM 输出从‘技能序列’提升为含控制流/数值的可执行策略",
+    "source_version": "同上"
+   }
+  ],
+  "closest_adjacent": [
+   {
+    "name": "SayCan [17]",
+    "solved": "用价值函数把 LLM 计划 grounding 到固定技能集",
+    "not_solved": "新技能需训练；无数值空间参数化；无程序化反馈回路(据本文描述)",
+    "source_version": "未固定，仅据本文自述"
+   },
+   {
+    "name": "Inner Monologue [18]",
+    "solved": "成功检测器/VLM 反馈下的闭环重规划(E041)",
+    "not_solved": "仍为技能级计划；是否能表达数值空间关系，本文未做对比实验",
+    "source_version": "未固定，仅据本文自述"
+   },
+   {
+    "name": "Socratic Models [16]",
+    "solved": "VLM 把感知信息替换进提示后生成计划，调用语言条件策略",
+    "not_solved": "无直接策略代码；技能原语需预定义",
+    "source_version": "未固定，仅据本文自述"
+   },
+   {
+    "name": "CLIPort [36]",
+    "solved": "监督的语言条件像素到动作策略",
+    "not_solved": "unseen 属性/指令泛化差(E015)",
+    "source_version": "本文复现并训练(30k 演示)，细节在 [36]"
+   }
+  ],
+  "residue": "需要精确数值/几何参数、组合新指令、读写反馈回路但技能库没有对应原子技能的语言指令；NL planner 与端到端 CLIPort 在 unseen 条件下失败或不适用(E009,E016)。",
+  "stakes": "每个新技能/新 grounding 方式的数据与再训练成本(E001)；可观察代价：Table III 中 unseen 条件下 CLIPort 0–37% vs CaP 62–98%。",
+  "method_response": "让 LLM 写代码：控制流表达反馈，NumPy/Shapely 完成数值与几何，API 参数化原语，层级函数生成降低单次提示所需示例复杂度(E003,E007,E039)。",
+  "remaining_gap": "感知 API 范围与控制原语集合限制、长/不同抽象指令、无法预判正确性、无执行反馈修正、真实感知误差未量化、跨本体脆弱、成本未报告(E030,E032,E033,E029,E036)。与 Inner Monologue 类反馈方法的相对优劣未检验。",
+  "evidence_ids": [
+   "E001",
+   "E002",
+   "E009",
+   "E010",
+   "E015",
+   "E016",
+   "E018",
+   "E029",
+   "E030",
+   "E032",
+   "E033",
+   "E036",
+   "E041",
+   "E042"
+  ],
+  "unresolved": [
+   "CaP 的优势在对手带成功检测器反馈(Inner Monologue)或真实技能价值函数(SayCan)时是否保持，本文无直接对比；近邻原文未在本批固定，不能据空缺证明新颖性。",
+   "NL planner 基线所用 LLM、提示与动作空间未详述，是否与 CaP 同模型/同信息不可核。"
+  ],
+  "current_relevance": "后续工作不用于否定发表时的问题位置；本记录未检索发表后的论文。"
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "adapt_via_conditioning"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": 1,
+      "status": "executed",
+      "note": "边界清楚：LLM 只做指令解释/程序组合；精确数值与几何交给 Python/NumPy/Shapely，感知交检测器，动作交控制原语(E039,E018)。"
+     },
+     {
+      "step": 2,
+      "status": "executed",
+      "note": "跨边界制品是可执行 Python 代码，API 命名/类型暗示约束其形式(E037)；但除静态 lint 外不被验证器检查(E006)。"
+     },
+     {
+      "step": 3,
+      "status": "missing",
+      "note": "未用求解器/执行结果的可验证输出闭环回传 LLM 修订；code-edit 弃用，不支持执行反馈调参(E031,E030)。运行期反馈仅在生成代码内部。"
+     },
+     {
+      "step": 4,
+      "status": "partial",
+      "note": "有 code vs NL(Table IV/III) 与 flat vs hierarchical(Table I/V) 的对照；无对 Hints/Examples/会话上下文的消融，机器人任务上未消融层级生成(E018,E020,E023)。"
+     },
+     {
+      "step": 5,
+      "status": "partial",
+      "note": "披露了仿真用脚本化感知/原语(特权通道，E013)；未报告调用数/延迟/token 成本；提示依赖领域定制。"
+     }
+    ],
+    "success_checks": [
+     {
+      "item": "学习模型与求解器边界划在能力接缝处",
+      "status": "met",
+      "evidence_ids": [
+       "E039",
+       "E018"
+      ]
+     },
+     {
+      "item": "每个 handoff 带类型化、可外部验证的制品",
+      "status": "partial",
+      "evidence_ids": [
+       "E006",
+       "E037"
+      ]
+     },
+     {
+      "item": "单一承重机制经消融回落到已知基线",
+      "status": "partial",
+      "evidence_ids": [
+       "E018",
+       "E020",
+       "E023"
+      ]
+     },
+     {
+      "item": "基线失败被命名为结构性原因并直接针对",
+      "status": "met",
+      "evidence_ids": [
+       "E002",
+       "E042",
+       "E016"
+      ]
+     },
+     {
+      "item": "中间副产物积累为可复用资产",
+      "status": "partial",
+      "evidence_ids": [
+       "E007",
+       "E034"
+      ]
+     },
+     {
+      "item": "闭环反馈由系统可获得信号驱动",
+      "status": "unmet",
+      "evidence_ids": [
+       "E030",
+       "E031"
+      ]
+     }
+    ],
+    "failure_checks": [
+     {
+      "item": "组装现成部件且无组件移除可区分",
+      "status": "partial",
+      "evidence_ids": [
+       "E018",
+       "E020"
+      ]
+     },
+     {
+      "item": "路由/提示针对单一窄基准定制且缺迁移证据",
+      "status": "partial",
+      "evidence_ids": [
+       "E027",
+       "E028",
+       "E046"
+      ]
+     },
+     {
+      "item": "求解器代价/调用数未度量",
+      "status": "exhibited",
+      "evidence_ids": [
+       "E026"
+      ]
+     },
+     {
+      "item": "缺隔离机制与额外数据/更强骨干等混杂的消融",
+      "status": "partial",
+      "evidence_ids": [
+       "E010",
+       "E013",
+       "E025"
+      ]
+     },
+     {
+      "item": "自改进循环依赖外部模型未验证中间监督",
+      "status": "not_applicable",
+      "evidence_ids": []
+     },
+     {
+      "item": "分解系统仅略优于更简单的统一端到端基线",
+      "status": "not_exhibited",
+      "evidence_ids": [
+       "E009"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E006",
+     "E007",
+     "E018",
+     "E030",
+     "E031",
+     "E039"
+    ],
+    "reason": "论文实际执行的是‘语言模型输出可执行程序，由 Python 解释器/数值库/检测器/控制原语承担精确计算与执行’，对应 decompose_and_delegate 定义与签名；C25 为该父类唯一子卡(singleton)，步骤 1–2 执行、步骤 3 缺失(无验证输出闭环)，故 fit=partial，不因术语相近提升。"
+   },
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "step": "C03 not used",
+      "status": "sub_null",
+      "note": "C03 的核心是上游训练/检索基底使模型学会解析统一格式；CaP 未做任何上游训练，条件化完全依赖冻结 Codex 的预训练与手写 Hints/Examples，故不选 C03。"
+     }
+    ],
+    "success_checks": [
+     {
+      "item": "以整类任务/属性留出使泛化主张可证伪",
+      "status": "met",
+      "evidence_ids": [
+       "E012",
+       "E043"
+      ]
+     },
+     {
+      "item": "条件通道作为一等输入被训练",
+      "status": "not_applicable",
+      "evidence_ids": []
+     },
+     {
+      "item": "在朴素替代失效区间获胜并刻画该区间",
+      "status": "met",
+      "evidence_ids": [
+       "E015",
+       "E009"
+      ]
+     },
+     {
+      "item": "机制隔离消融(去掉条件信号)",
+      "status": "unmet",
+      "evidence_ids": [
+       "E017"
+      ]
+     }
+    ],
+    "failure_checks": [
+     {
+      "item": "宣称无需适配，但训练数据与评测域重叠且基线未获同等信息",
+      "status": "partial",
+      "evidence_ids": [
+       "E013",
+       "E014"
+      ]
+     },
+     {
+      "item": "无污染/数据重叠审计",
+      "status": "exhibited",
+      "evidence_ids": [
+       "E046"
+      ]
+     },
+     {
+      "item": "与更便宜条件化替代(更长上下文、最近邻检索)对比",
+      "status": "unknown",
+      "evidence_ids": []
+     }
+    ],
+    "evidence_ids": [
+     "E003",
+     "E012",
+     "E015",
+     "E017",
+     "E043"
+    ],
+    "reason": "第二个真实操作：以 few-shot 示例 + Hints 把新指令表达成条件、推理时求解、无任何参数更新，并用 seen/unseen 指令与属性划分对照监督策略；与第一张卡操作不同(提示条件化 vs 程序委托)，故作 supporting。不选子卡的原因见 tactic_steps_checked。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "在原 15 主卡中可识别；未选 reframe_as_solvable_object(无对应定理/同构对象)、structural_prior_encoding(先验为库调用而非构造式编码)等，因其操作与论文实际执行不符。",
+  "executes_pattern": {
+   "decompose_and_delegate": "partial（程序制品+委托执行，缺验证闭环）",
+   "adapt_via_conditioning": "partial（few-shot 条件化+类别留出，缺条件消融与污染审计）"
+  },
+  "resolves_problem": {
+   "claimed_by_authors": "无需为每个新技能/grounding 方式额外数据与再训练即可泛化",
+   "assessment": "scoped",
+   "reason": "仿真(脚本化感知与原语)中 unseen 指令/属性下仍保持 71–98% 并优于 CLIPort 与 NL planner(E009,E040)，支持‘在已有可靠感知与原语的前提下无需再训练’；真机仅定性示例、感知误差与失败未量化(E027,E028,E029)，不能声称问题已在真实系统中关闭。",
+   "evidence_ids": [
+    "E009",
+    "E040",
+    "E027",
+    "E028",
+    "E029"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105",
+    "version": "patterns/overview.md@2bc4cdeb;taxonomy@daf38e57;K105.md@5e8cbcc6",
+    "fit": "good",
+    "condition_checks": [
+     {
+      "cond_id": "S1",
+      "kind": "success",
+      "status": "partial",
+      "note": "同任务下 code vs NL planner 有对照，但 NL 基线模型/提示未详述且无 LLM 调用数/token 预算对照。",
+      "evidence_ids": [
+       "E010",
+       "E018",
+       "E026"
+      ]
+     },
+     {
+      "cond_id": "S2",
+      "kind": "success",
+      "status": "partial",
+      "note": "以已知校准的最小几何库(NumPy/Shapely+注册相机变换)工作，但只有仿真脚本化感知的定量成功率，无真机成功率。",
+      "evidence_ids": [
+       "E013",
+       "E029"
+      ]
+     },
+     {
+      "cond_id": "S3",
+      "kind": "success",
+      "status": "unmet",
+      "note": "仅 import/exec/dunder 静态 lint，无运动学/碰撞/MuJoCo 类校验，无回放修复。",
+      "evidence_ids": [
+       "E006",
+       "E031"
+      ]
+     },
+     {
+      "cond_id": "S4",
+      "kind": "success",
+      "status": "not_applicable",
+      "note": "无 VLA；冻结技能为脚本化原语。",
+      "evidence_ids": []
+     },
+     {
+      "cond_id": "S5",
+      "kind": "success",
+      "status": "not_applicable",
+      "note": "未训练被调用的工具策略。",
+      "evidence_ids": []
+     },
+     {
+      "cond_id": "F1",
+      "kind": "failure",
+      "status": "unknown",
+      "note": "接触通过原语内置触点检测；未按任务分解失败，未观察不等于避免。",
+      "evidence_ids": [
+       "E027"
+      ]
+     },
+     {
+      "cond_id": "F2",
+      "kind": "failure",
+      "status": "partial",
+      "note": "组合(代码)、会话持久状态、选择性反馈未分离消融；无预算耗尽式终止问题(单次生成)。",
+      "evidence_ids": [
+       "E034",
+       "E035"
+      ]
+     },
+     {
+      "cond_id": "F3",
+      "kind": "failure",
+      "status": "partial",
+      "note": "代码生成基准上模型间差异巨大(GPT-3 6.7B 3–5 vs davinci 81–95)；机器人任务仅评一个骨干，骨干摆动未检验。",
+      "evidence_ids": [
+       "E020",
+       "E024"
+      ]
+     },
+     {
+      "cond_id": "F4",
+      "kind": "failure",
+      "status": "not_applicable",
+      "note": "无学习型工具策略。",
+      "evidence_ids": []
+     },
+     {
+      "cond_id": "F5",
+      "kind": "failure",
+      "status": "not_applicable",
+      "note": "无冻结 VLA。",
+      "evidence_ids": []
+     },
+     {
+      "cond_id": "F6",
+      "kind": "failure",
+      "status": "exhibited",
+      "note": "作者承认原语集合限制能力范围。",
+      "evidence_ids": [
+       "E033"
+      ]
+     },
+     {
+      "cond_id": "F7",
+      "kind": "failure",
+      "status": "exhibited",
+      "note": "真机证据为定性示例，无试验计数。",
+      "evidence_ids": [
+       "E027",
+       "E028"
+      ]
+     }
+    ],
+    "status_vocab_note": "success: met/partial/unmet/unknown/not_applicable；failure: exhibited/partial/not_exhibited/unknown/not_applicable（not_exhibited 不等于已避免，除非有检验）",
+    "evidence_ids": [
+     "E003",
+     "E006",
+     "E007",
+     "E013",
+     "E027",
+     "E028",
+     "E033",
+     "E034"
+    ],
+    "reason": "冻结 LLM 写代码，组合感知/几何/运动原语，分支与循环在程序内完成，与 K105 操作一致；差别：K105 成员是编码运行时中的 agent(多 cell、可迭代、可读返回观测)，CaP 是单次贪心生成、无执行反馈回传的程序。K105 来源为 2026 论文，不引用本文(已 grep patterns/research/cards 无 2209.07753)，故不存在来源循环。"
+   }
+  ],
+  "unassigned": [
+   {
+    "operation": "AST 驱动的递归未定义函数展开(SIG2)",
+    "reason": "K105 涉及跨 cell 保留 helper，但无 AST 驱动的深度优先补全；仅单篇全文，不足以成为 candidate_pattern。"
+   },
+   {
+    "operation": "静态 lint 拒绝 import/exec/eval/dunder (SIG3)",
+    "reason": "K201 要求带结构化反馈的外部检查(参数/溯源/可达性等)；本文 lint 仅是沙箱卫生，无反馈、无任务语义检查，未强塞。"
+   },
+   {
+    "operation": "会话内提示追加 + 作用域变量作短期记忆",
+    "reason": "K301/K302 针对有界上下文重建与跨 episode 笔记；本文仅简单追加提示，无检索或总结，弱匹配不指派。"
+   }
+  ],
+  "revision_proposals": [
+   {
+    "id": "RP-2209.07753-1",
+    "target": "K105 contrasts/information access",
+    "proposal": "补充对照：无执行反馈的单次 few-shot 代码策略(本文式)与编码运行时迭代 agent 的区别；pending，单论文来源，未核，不影响本次评分。",
+    "status": "pending_unchecked"
+   }
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain_namespace": "embodied",
+   "domain_main": "planner_composes_code_and_policies",
+   "domain_sub": "K105",
+   "operation_correspondence": "原卡：模型产出结构化可执行制品，由解释器/库/原语承担精确计算；领域卡：冻结规划器写代码组合感知、几何与运动原语。对应对象均为‘可执行程序作为 LLM 与原语库之间的接口’。",
+   "conditions_or_differences": "差异：C25 要求用求解器输出闭环验证，K105 成员在运行时迭代并读取返回观测；CaP 两者都缺(单次生成)。K105 只对应 C25 的 handoff 部分。",
+   "evidence_ids": [
+    "E003",
+    "E006",
+    "E030",
+    "E031"
+   ]
+  },
+  {
+   "rs_main": "adapt_via_conditioning",
+   "rs_sub": null,
+   "domain_namespace": "embodied",
+   "domain_main": "planner_composes_code_and_policies",
+   "domain_sub": "K105",
+   "operation_correspondence": "原卡：用示例/格式条件化冻结模型，无参数更新；领域卡 K105 未规定条件化来源，但 CaP 的 Hints+Examples 决定了生成代码的 API 使用。",
+   "conditions_or_differences": "K105 卡内无 few-shot 提示条件的条目，映射仅为部分对应；不构成条件满足依据。",
+   "evidence_ids": [
+    "E012",
+    "E017",
+    "E037"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "同骨干下与至少一种替代 harness 在同批 episode 比较",
+   "applies_when": "主张 harness(而非模型)提升成功",
+   "applicable": true,
+   "status": "partial",
+   "reason": "有 NL planner 基线(同批任务)，但骨干/提示未详述，未复现 SayCan/Inner Monologue 类 harness；CLIPort 为不同范式。",
+   "evidence_ids": [
+    "E010",
+    "E041",
+    "E009"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "对 harness 组件做逐一开关消融",
+   "applies_when": "主张具体组件导致提升",
+   "applicable": true,
+   "status": "partial",
+   "reason": "仅有 flat vs hierarchical(代码生成基准)与 code vs NL；未对 Hints/Examples/会话上下文/感知 API 做开关；机器人任务未消融层级。",
+   "evidence_ids": [
+    "E020",
+    "E018",
+    "E023"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "报告至少两种强度骨干下的 harness 效应",
+   "applies_when": "主张 harness/工具普遍有益",
+   "applicable": true,
+   "status": "partial",
+   "reason": "代码基准上有 4 个 LLM(层级收益只在 davinci)；机器人评测仅 code-davinci-002。",
+   "evidence_ids": [
+    "E020",
+    "E024",
+    "E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "报告重复运行方差与配对任务级统计",
+   "applies_when": "任何成功率比较",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "每任务 50 次采样场景，单次贪心；无方差、置信区间、种子、配对检验；全文检索 variance/confidence/seed/std 为空。",
+   "evidence_ids": [
+    "E038",
+    "E009"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "报告成本(调用数/token/延迟/美元)",
+   "applies_when": "主张 harness 更优/更实用",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "全文未报告 LLM 调用数、token、延迟、成本；嵌套 LMP 与函数生成的调用量不可估。",
+   "evidence_ids": [
+    "E026",
+    "E007"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E07",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "LIBERO-PRO 等较新桌面基准",
+   "applies_when": "对 VLA/agent 的 2026 基准主张",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "2022 论文，主张针对语言指令仿真桌面操作对 CLIPort，该基准不存在；不据此扣分，也不删评分轴。",
+   "evidence_ids": [
+    "E009"
+   ],
+   "score_item": null
+  },
+  {
+   "id": "E08",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "披露污染与开发重叠",
+   "applies_when": "前沿模型 harness 的基准主张",
+   "applicable": true,
+   "status": "partial",
+   "reason": "seen/unseen 在提示内外划分且披露(E012)，但未披露提示开发是否看过 unseen 任务，也无 Codex 预训练对 HumanEval/RoboCodeGen 的污染审计。",
+   "evidence_ids": [
+    "E012",
+    "E043",
+    "E046"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E19",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "真机主张需逐任务试验数与成功率",
+   "applies_when": "主张迁移到物理机器人",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "摘要宣称多真实平台，但作者自述定量评测限于仿真，真机仅成功示例，无计数。",
+   "evidence_ids": [
+    "E004",
+    "E027",
+    "E028"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "patterns/main/planner_composes_code_and_policies.md@c950ce86 (expectations.json not separately present; per anchors v2 legacy note)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#reviewer-expectations"
+   ],
+   "requirement": "harness/接口比较的匹配交互预算",
+   "applies_when": "模型固定下的 harness/接口比较",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "未披露 NL planner 的调用预算、提示长度；CaP 与 CLIPort 的信息/数据预算显著不对称(30k 演示 vs 单示例)。",
+   "evidence_ids": [
+    "E011",
+    "E017",
+    "E010"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "PEND-1",
+   "version": "self-derived",
+   "source_strength": "pending_unsourced",
+   "source_refs": [],
+   "requirement": "在仿真用理想感知评估的 LLM 代码策略，应报告真实检测器下的退化(检测错误条件化性能)",
+   "applies_when": "仿真评测使用脚本化感知而主张迁移到真实感知时",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "本文未提供；仅作者自述真实失败多源于检测不准。待独立来源确认前不入共识，不参与评分映射。",
+   "evidence_ids": [
+    "E013",
+    "E029"
+   ],
+   "score_item": null
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "CaP 在仿真桌面语言指令操作中不弱于监督 CLIPort，在 unseen 属性/指令下显著更优，并优于自然语言 planner (Table III)",
+   "setting": "UR5e+Robotiq 2F85，10 块/10 碗；继承 8 个 long-horizon + 新增 6 个 spatial-geometric 任务(E043)；seen/unseen 指令与属性划分(E012)；脚本化感知与 pick-place 原语(E013)；code-davinci-002 贪心(E008)；每任务 50 次(E038)",
+   "baseline_control": "CLIPort 30k 演示(主表为 oracle-termination 变体，E045)；few-shot NL planner(模型/提示未详述，仅覆盖 LH，E010,E016)",
+   "selection_vs_test": "‘seen’项可入提示；unseen 项被排除于提示。提示开发是否参照 unseen 任务未说明；Codex 预训练污染未审计",
+   "result": "LH(CLIPort/NL/CaP)：SA-SI 78.80/86.40/97.20；UA-SI 36.80/88.00/97.60；UA-UI 0.00/64.00/80.00。SG(CLIPort/CaP)：97.33/89.30；0.00/73.33；0.01/62.00。分母：每任务 50 次，SA-SI 8 任务、UA-SI 8 任务、UA-UI 6 任务；无方差",
+   "evidence_ids": [
+    "E009",
+    "E040",
+    "E012",
+    "E013",
+    "E038",
+    "E043"
+   ],
+   "counterevidence": "CaP 在 seen SG 上低于 CLIPort(89.3 vs 97.3)；CaP 获脚本化感知/原语(特权)，CLIPort 另有 oracle 终止——信息通道非对等(E013,E045)；NL planner 未覆盖 SG；无方差(E038)",
+   "allowed_conclusion": "在理想化感知/原语的仿真桌面中，few-shot 冻结 code-davinci-002 贪心代码策略对该基准的 unseen 指令/属性保持 62–98% 并优于所比 CLIPort 和作者自建 NL planner；不能外推到真实感知/真机或更强/带反馈的 planner。"
+  },
+  {
+   "claim_id": "C2",
+   "text": "代码比自然语言(vanilla/CoT)更适合数值空间几何推理 (Table IV)",
+   "setting": "28 道物体选择 + 23 道位置选择，位置给在上下文中，答案须在 1 cm 内",
+   "baseline_control": "Vanilla 与 CoT 自然语言推理，同一 LLM(App. 未明确型号)",
+   "selection_vs_test": "基准由作者设计；CoT 示例由作者编写",
+   "result": "Vanilla 39/30/35，CoT 68/48/58，LMP 96/100/98(物体/位置/总)；51 题",
+   "evidence_ids": [
+    "E018"
+   ],
+   "counterevidence": "题量小(一题≈2–3.6pp)；无方差；CoT 与 LMP 提示的投入对等性未知",
+   "allowed_conclusion": "在该 51 题基准上，让 LLM 输出调用 Python/NumPy 的代码，在精确数值空间选择上明显优于其自然语言 CoT；作者也承认二者可结合。"
+  },
+  {
+   "claim_id": "C3",
+   "text": "层级代码生成提升代码生成(RoboCodeGen 与 HumanEval)，HumanEval 39.8% P@1 刷新 SOTA",
+   "setting": "RoboCodeGen 37 题；HumanEval 164 题；Flat/Flat Prompt/Hier 三种；贪心及 P@1/10/100",
+   "baseline_control": "Flat CodeGen(No Prompt / Flat Prompts)；SOTA 比较对象 code-davinci-001/PaLM Coder",
+   "selection_vs_test": "测试即基准；层级提示与 flat 提示内容不同",
+   "result": "RoboCodeGen davinci 81→95，GPT-3 175B 68→84，cushman 54→57，6.7B 3→5；HumanEval 贪心 45.7(无提示)/50.6/53.0，P@1 34.9/36.6/39.8，P@10 75.1/77.6/80.6，P@100 90.9/93.3/95.7；仅 ~6.5% 题触发层级，44%→56%",
+   "evidence_ids": [
+    "E005",
+    "E020",
+    "E021",
+    "E022",
+    "E023",
+    "E024",
+    "E025"
+   ],
+   "counterevidence": "SOTA 含模型版本混杂(E025)；提示差异混杂(E023)；增益多在未触发层级的题；cushman 无收益(E024)；37 题粒度；无显著性检验",
+   "allowed_conclusion": "在同一模型(code-davinci-002)下，层级提示+生成相对 flat 提示对照给出 +3.2pp P@1 和 RoboCodeGen davinci +14pp(≈5 题)；归因于层级机制本身证据不足；非具身闭环证据。"
+  },
+  {
+   "claim_id": "C4",
+   "text": "在多个真实机器人平台(UR5e 桌面、白板绘图、移动操作)上展示可用",
+   "setting": "真机 UR5e+MDETR；Everyday Robots+ViLD；指令序列见 App. H–J",
+   "baseline_control": "无",
+   "selection_vs_test": "展示的指令序列无开发/测试区分",
+   "result": "仅成功示例，无试验数、成功率、失败(E028)；作者自述无定量评测(E027)",
+   "evidence_ids": [
+    "E004",
+    "E027",
+    "E028",
+    "E029",
+    "E044"
+   ],
+   "counterevidence": "许多真实失败源于检测不准(E029)",
+   "allowed_conclusion": "存在性演示：这些平台上能通过该接口完成作者选择的若干指令；不是性能或可靠性证据。"
+  },
+  {
+   "claim_id": "C5",
+   "text": "CaP 遵循规模定律——更大模型更好",
+   "setting": "RoboCodeGen 四个 LLM",
+   "baseline_control": "同族不同规模",
+   "selection_vs_test": "同基准",
+   "result": "GPT-3 6.7B 3 → 175B 68；cushman 54 → davinci 81(flat)",
+   "evidence_ids": [
+    "E020",
+    "E024"
+   ],
+   "counterevidence": "每族仅 2 个规模；Codex 规模未公开；37 题",
+   "allowed_conclusion": "在 37 题代码基准上同族更大模型更好；不构成‘定律’，也未在机器人任务上测规模。"
+  },
+  {
+   "claim_id": "C6",
+   "text": "LMP 可零样本生成简单反应式控制器(CartPole PD、末端阻抗)",
+   "setting": "App. F，PyBullet UR5e / Gym CartPole",
+   "baseline_control": "无",
+   "selection_vs_test": "提示中函数签名含提示信息",
+   "result": "定性：功能可用但简化、无调参(E044)",
+   "evidence_ids": [
+    "E044",
+    "E030"
+   ],
+   "counterevidence": "提示需含方向/PD 提示才有效(App. F)",
+   "allowed_conclusion": "玩具环境的存在性例子；无计数。"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在脚本化感知与脚本化 pick-and-place 的仿真桌面环境中，few-shot 提示的冻结 code-davinci-002 以贪心解码生成的 Python 策略代码，在作者设定的 seen/unseen 指令与属性划分下取得 94.3/88.5/71.0 的总成功率(每任务 50 次)，在 unseen 条件下优于所比 CLIPort(30k 演示)与作者自建 NL planner；代码形式在 51 题数值空间选择上优于自然语言 CoT。该证据为作者报告，不是我们复现。",
+  "author_claim_preserved": "见 paper.central_claim；多真实平台与 SOTA 主张未改窄重算。",
+  "not_supported": [
+   "真机成功率/可靠性(无试验计数)",
+   "层级机制的因果增益(提示与模型版本混杂)",
+   "与带反馈的最近邻 planner 的相对优势",
+   "真实感知下的成功率",
+   "成本/延迟可行性",
+   "跨本体(App. M 自述脆弱)"
+  ],
+  "evidence_level_reason": "仿真闭环、环境判定成功、每任务 50 次→online；开发/提示用过的任务不能当留出，真机无计数、非构建期未用的本体/仿真器的闭环定量成功，故不给 transfer(EVIDENCE 规则 1,2；先例：特权感知不给 transfer)。",
+  "retention": {
+   "retained": false,
+   "improver": false,
+   "online": true,
+   "transfer": false,
+   "note": "静态设计，无留存/自改进主张"
+  },
+  "unresolved": [
+   "NL planner 基线细节",
+   "近邻反馈 planner 对比",
+   "提示开发是否接触 unseen 任务",
+   "Codex 预训练污染",
+   "Table III 与 Table VI 个别单元格(CLIPort UA/UI SG 0.01 vs 抽取 1.3)对应不清",
+   "HumanEval 增益来源"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "作者 gap 具体且有来源：既有 LLM 规划把 LLM 限在预定义技能序列、无法影响感知-动作反馈回路，新技能/新 grounding 需数据与再训练(E001,E002,E042)；有自证的数值空间缺口(NL planner 不适用于 SG 任务 E016；代码 98 vs CoT 58 vs vanilla 35 E018)。扣分：实验用的 NL planner 是自建基线，未复现带价值函数的 SayCan 或带成功检测器反馈的 Inner Monologue(E041,E010)；近邻原文未在本批固定，只能据论文自述刻画谱系；残余缺口(感知 API/原语/长指令/无正确性先验 E033,E032)边界较清楚。介于 2 与 4 之间，判 3。",
+   "evidence_ids": [
+    "E001",
+    "E002",
+    "E016",
+    "E018",
+    "E032",
+    "E033",
+    "E042"
+   ],
+   "counterevidence_ids": [
+    "E010",
+    "E041"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作与问题对应：代码表达控制流反馈、NumPy/Shapely 做数值几何、API 参数化原语、层级函数生成降低示例复杂度(E003,E007,E039)，能提出与朴素替代可区分的预测并被检验(数值空间任务 NL 失效，E018,E016)。扣分：为何冻结 LLM 仅凭提示就能可靠使用 API 缺少解释，关键假设(感知正确、指令可行、提示无 bug)仅在局限中陈述(E032,E037)；层级机制对机器人任务的作用未被机制性检验。",
+   "evidence_ids": [
+    "E003",
+    "E007",
+    "E016",
+    "E018",
+    "E039"
+   ],
+   "counterevidence_ids": [
+    "E032",
+    "E037",
+    "E023"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "操作链可重建：提示由 Hints+Examples 构成、受限 exec 流程、会话追加、AST 驱动函数生成、各域 API 清单与部分内联提示(E006,E007,E034,E035)；信息权限清楚(LLM 仅见文本)，贪心解码(E008)，作者界定了作用层与失败边界(E039,E033,E036,E030)。扣分：仿真任务提示全文在外部网站、不在本批材料(E046)，NL 基线配置缺；运行时异常处理、拒绝后的处置未描述；无留存/选择环节(静态设计，不扣)。",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E008",
+    "E034",
+    "E035",
+    "E036",
+    "E039",
+    "E033",
+    "E030"
+   ],
+   "counterevidence_ids": [
+    "E046",
+    "E031"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "依 anchors v2：成功判据未定义/部分特权的闭环结果≤2。仿真有闭环成功判定与逐任务 50 次分母(E009,E038)，代码基准有单元测试(E019)，但各任务成功判据未在文本中定义(继承自先前工作)，感知与原语为脚本化真值(E013)，CLIPort 主表用 oracle 终止变体(E014,E045)，真机无计数(E027,E028)，Table III 与 VI 个别单元格不可对齐(E040)。",
+    "evidence_ids": [
+     "E009",
+     "E038",
+     "E013",
+     "E014",
+     "E019",
+     "E040",
+     "E045"
+    ],
+    "counterevidence_ids": [
+     "E027",
+     "E028"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "对照有价值但混杂未分离：code vs NL(同类任务，Table IV 有 CoT)是较好的受控对照(E018)；但 NL planner 基线模型/提示未详述(E010)、CaP 与 CLIPort 信息通道不对等(E013,E045)、层级 vs flat 的提示不同且模型版本混杂(E023,E025)、HumanEval 增益多在未触发层级的题(E022,E023)；机器人任务上无对 Hints/Examples/会话/感知的消融；seen 任务的提示示例与测试同模板(E017)。",
+    "evidence_ids": [
+     "E010",
+     "E011",
+     "E018",
+     "E021",
+     "E022",
+     "E023",
+     "E025",
+     "E017"
+    ],
+    "counterevidence_ids": [
+     "E013",
+     "E023",
+     "E025",
+     "E045"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "结构性留出：整类指令模板与属性值不在提示中、且监督基线同样排除(E012,E043)，CaP 在 UA/SI 88.5、UA/UI 71.0 保持较高(E040)，CLIPort 崩溃(E015)。扣分：同仿真器、同机器人、同原语，不是未见本体/场景；提示开发是否参照 unseen 任务未说明；未审计 Codex 预训练对测试任务/HumanEval 的污染(E046 说明提示外置、无审计)；真机无计数。介于 2 与 4，判 3。",
+    "evidence_ids": [
+     "E012",
+     "E015",
+     "E040",
+     "E043"
+    ],
+    "counterevidence_ids": [
+     "E027",
+     "E028",
+     "E044"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "依 anchors v2：有试验数但无方差/CI 为 1–2。每任务 50 次采样场景、逐任务数值齐全(E038,E009)，但无方差/置信区间/种子/配对检验，失败不分解，代码基准 37 题无 CI，HumanEval 无显著性检验(E023)；贪心解码使随机性仅来自场景。取 2(上沿)。",
+    "evidence_ids": [
+     "E009",
+     "E038",
+     "E040"
+    ],
+    "counterevidence_ids": [
+     "E023"
+    ],
+    "search_scope": [
+     "全文正文 Sec. I–V 与参考文献",
+     "附录 A–M 全部文字与 Tables IV–VI",
+     "检索词: variance, confidence interval, std, seed, token(成本义), latency, wall, cost, number of calls, contamination, leak, memoriz"
+    ]
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "数据预算披露但不对等(CLIPort 30k 演示 vs CaP 每任务单示例，E011,E017)，NL planner 预算未说明；LLM 调用数/token/延迟/金额全文未报告(嵌套 LMP 与函数生成调用不可估，E026)；多采样被明确排除故无采样成本膨胀但也无成本披露。低于 anchors 中‘调用预算可推算’的 2，判 1(非 not_reported，因有部分预算信息)。",
+    "evidence_ids": [
+     "E011",
+     "E017",
+     "E026"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "全文正文 Sec. I–V 与参考文献",
+     "附录 A–M 全部文字与 Tables IV–VI",
+     "检索词: variance, confidence interval, std, seed, token(成本义), latency, wall, cost, number of calls, contamination, leak, memoriz"
+    ]
+   }
+  }
+ },
+ "score": {
+  "raw": 65.0,
+  "display": 65.0,
+  "lower": 65.0,
+  "upper": 65.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4",
+  "ratings_used": {
+   "G": 3,
+   "M": 3,
+   "X": 3,
+   "E.measurement": 2,
+   "E.causality": 2,
+   "E.holdout": 3,
+   "E.statistics": 2,
+   "E.cost": 1
+  },
+  "weights": {
+   "G": 15,
+   "M": 20,
+   "X": 20,
+   "E.measurement": 15,
+   "E.causality": 10,
+   "E.holdout": 10,
+   "E.statistics": 5,
+   "E.cost": 5
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "完整 v4 PDF 文本(含附录 A–M)已固定并核对 sha256；八项均已判定，无 unknown。分数为 production-under-anchors-v2，draft_uncalibrated，不用于正式排名。"
+}

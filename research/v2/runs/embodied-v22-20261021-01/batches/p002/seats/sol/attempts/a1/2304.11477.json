@@ -1,0 +1,674 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p002",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2304.11477",
+    "paper_id": "2304.11477",
+    "title": "LLM+P: Empowering Large Language Models with Optimal Planning Proficiency",
+    "version": "2304.11477v3",
+    "claim_type": "system_method",
+    "central_claim": "LLM+P combines an LLM translator and a classical planner to return correct or optimal long-horizon plans, providing optimal solutions for most benchmark problems where direct LLMs fail even to produce feasible plans, and improving service-robot planning efficiency."
+  },
+  "provenance": {
+    "input_hash": "2b0190dafe2244e68da9e68a9434358ea9f4f6e9750509ab7d6fbb98b9e68638",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "60e8948f2033bcdf44cbc892aa3c9b1b4904cb8e98b6b18927e463a6b72f399a",
+    "expectations_hash": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T01:55:47.536600+00:00",
+    "notes": [
+      "anchors_version=v2 (3ececdd11cc3d144), phase=production",
+      "production-under-anchors-v2; rubric remains draft_uncalibrated; not eligible for formal rankings or Reel without further user confirmation",
+      "Session/receipt identifiers are not available as authoritative invocation metadata; no probing performed.",
+      "Independent initial review; no other seat, aggregate, archive, old score or Reel read. Source texts treated as data; no network, paper code execution or git operations.",
+      "All results are author reports, not our reproduction.",
+      "domain_cards_hash = SHA256(canonical UTF-8 JSON of sorted selected relative path -> file SHA256); expectations_hash = SHA256(canonical JSON of selected main-card embedded Reviewer expectations blocks). Structural reference only; no outcome labels, no score points for matches.",
+      "Nearest-neighbor versions are bounded to their descriptions in the fixed reviewed paper; external originals were not available/read. No exhaustive novelty claim.",
+      "Review records may cite contemporary practice as diagnostic questions, not demand later-created systems of historical papers."
+    ],
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "domain_card_sources": {
+      "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+      "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+      "patterns/sub/K105.md": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b",
+      "patterns/sub/K109.md": "dea4052b3e5c60709cd0ddbef317afc34cdd68b54f5b72757c13cd2d3828274d",
+      "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+      "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+      "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+    },
+    "expectation_source_files": [
+      "patterns/main/external_verification_control.md",
+      "patterns/main/llm_symbolic_solver_planning.md",
+      "patterns/main/observe_act_interface.md",
+      "patterns/main/planner_composes_code_and_policies.md"
+    ]
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2304.11477v3",
+      "version": "2304.11477v3",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2304.11477.txt",
+      "sections_read": [
+        "Abstract",
+        "I Introduction",
+        "II Background including PDDL planning formulation",
+        "III Method and complete PDDL examples",
+        "IV Related Work",
+        "V-A benchmark domains",
+        "V-B setup/ToT/timeouts",
+        "V-C Table I and failure analysis",
+        "V-D robot tidy-up demonstration and Fig2",
+        "VI Conclusion; no appendix in supplied html-full"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "note": "Complete supplied html-full extraction read, including all supplied appendices; extraction tables flattened. No code/reproduction performed."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "Abstract; local text line 6",
+      "quote": "we find that LLM+P is able to provide optimal solutions for most problems, while LLMs fail to provide even feasible plans for most problems.\\footnote{The code and results",
+      "support_explanation": "Author's original majority-optimal claim retained for comparison with table arithmetic.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "II PDDL background; local text line 12",
+      "quote": "The problem PDDL file provides a list of objects to ground the domain, the problem’s initial state s^{init} and goal conditions \\mathcal{S}^{G} . There exists a rich set of symbolic planners that implement efficient search algorithms to solve planning problems formalized in PDDL. In this work, we aim to take a natural language prompt which describes the init",
+      "support_explanation": "Formal problem artifact explicitly separates object/init/goal specification from transition model/domain.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "III-A; local text line 15",
+      "quote": "the generated file appears to have the correct PDDL syntax but uses a made-up predicate (empty) and misses the initial condition that b1 is on the table. An Example PDDL Problem F",
+      "support_explanation": "Syntactic validity alone does not guarantee semantic correctness; missing initial conditions remain.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "V-A; local text line 21",
+      "quote": "seven robot planning domains borrowed from past International Planning Competitions and 20 automatically generated tasks for each domain [ 67 ] . Below is a list of the planni",
+      "support_explanation": "140 formal robot-planning tasks across7 domains; robotic planning plus real demo supports scope B, not broad closed-loop online evidence.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "V-B; local text line 21",
+      "quote": "We set the temperature to 0 , and use the top probability response. As a result, the response returned from the LLM is deterministic. Once a text PDDL response is generated, we feed it into the fast-downward planner and try both aliases seq-opt-fdss-1 (guaranteed optimal) and lama (not guaranteed optimal) with a maximum search time of 200 seconds. We report the success rate of the optimal alias, and for the domains that time out, we show the success rate of the sub-optimal alias in parentheses. For the baseline methods, we manually count the number of optimal plans, and report the number of correct plans in parentheses (if there are any sub-optimal plans). We also evaluate a recent LLM-based approach for deliberate reasoning called Tree of Thoughts [ 68 ] , referred to as LLM-as-P (ToT) . We adapt the ",
+      "support_explanation": "One deterministic response, Fast Downward optimal/suboptimal aliases,200s limit and separate feasible/optimal reporting.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "V-C Table I; local text line 21",
+      "quote": "Domain Success Rate % LLM - LLM LLM ToT LLM+P - LLM+P Barman 0 0 0 0 20 (100) Blocksworld 20 15 (30) 0 (5) 0 90 Floortile 0 0 0 0 0 Grippers 25 (60) 35 (50) 10 (20) 0 95 (100) Storage 0 0 (25) 0 0 85 Termes 0 0 0 0 20 Tyreworld 5 15 0 0 10 (90) TABLE I : Success rate % of applying LLM-as-P without ",
+      "support_explanation": "Optimal rates20/90/0/95/85/20/10 average45.7%; parentheses are feasible fallback rates, not optimality.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "V-C findings; local text line 21",
+      "quote": "Most failed cases are due to mis-specified problem files, such as missing one of the initial conditions (e.g. leaving the tiles disconnected in Floortile ), causing the planning problem to be unsolvable. 2. Without the context (i.e., an example problem and its corresponding problem PDDL), we observe that LLMs fail to produce correct problem PDDL files. Therefore, the context is importan",
+      "support_explanation": "Formal translation errors and one-shot no-context failures; solver soundness conditional on a correct formal model.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "V-D / Fig2; local text line 21",
+      "quote": "with a total cost of 22. Fig. 2 shows the optimal plan found by LLM+P . Parts of the prompt and the generated PDDL are shown below. LLM-as-P outputs a sub-optimal plan which takes the bottle to the pantry first and travels back for the soup can, with a total cost of 31. Tidy-Up Problem PDDL Generated by LLM+P Problem",
+      "support_explanation": "Single robot tidy-up example route cost22 vs direct plan31; not model runtime cost or repeated robot success.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab",
+      "locator": "VI Conclusion; local text line 24",
+      "quote": "reducing LLM+P ’s dependency on information by humans, potentially involving finetuning.\n",
+      "support_explanation": "Human-supplied information remains an acknowledged assumption rather than an autonomously learned symbolic world model.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S01",
+      "object": "LLM attempting combinatorial action sequencing directly",
+      "information": "Natural-language problem, expert-written PDDL domain specifying preconditions/effects, one paired NL/problem-PDDL example; abstracted state rather than online raw sensor grounding.",
+      "operation": "Frozen GPT4 translates problem into PDDL; Fast Downward computes a plan; LLM translates returned plan back to language.",
+      "output": "Solver-computed formal plan and natural-language rendering.",
+      "conditions": "Handwritten domain and generated init/goal facts must faithfully model real task; solver optimality refers to that formal model/cost, not physical semantics.",
+      "feedback": "Solver reports feasibility/timeout; no demonstrated iterative LLM repair or closed-loop physical execution-failure replanning.",
+      "selection_rule": "Try optimal alias then disclosed feasible fallback;200s search; one temperature0 generated PDDL response.",
+      "data": "7 IPC robot-planning domains ×20 generated tasks, one contextual pair/domain as described; direct-LLM and no-context controls.",
+      "persistence": "Fixed domain/example and planner software; no retained library, self-improvement or online parameter updates.",
+      "later_use": "New instances reuse domain and example; no learned correction accumulated across problems.",
+      "claimed_effect": "More correct/optimal plans than direct GPT4 and ToT; one shorter robot tidy-up route.",
+      "failure_boundary": "Missing facts, fake predicates and disconnected states; no solution in Floortile; human formal domain and state abstraction carry competence.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007",
+        "E008",
+        "E009"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "LLMs cannot reliably solve long-horizon plans, whereas classical search can solve formally specified planning instances.",
+    "checked_gap": "Formal problem construction is separable from combinatorial search, but already sits in classical planning/tool-augmentation lineage. The empirical residual is whether a pretrained translator plus example yields solver-usable problem files, not a new optimal planning algorithm.",
+    "lineage": [
+      {
+        "method": "STRIPS/Shakey, HTN/PRODIGY, PDDL classical planning, LLM direct/CoT/ToT planning and external tool augmentation",
+        "source_version": "2304.11477v3 II/IV/V descriptions; external original versions not independently fixed/read"
+      }
+    ],
+    "closest_adjacent": "Existing PDDL planners already guarantee model-conditional plan properties; LLM+P adds the natural-language-to-problem front end. Compared with direct language planning, human domain knowledge and formal solver are added together.",
+    "residue": "Plausible fluent action lists violate preconditions; correct formal models remain expensive and semantically error-prone to construct.",
+    "stakes": "Infeasible or unnecessarily costly robot plans cannot be rescued by fluency.",
+    "method_response": "Confine GPT4 to translation with example/domain context and delegate search to Fast Downward.",
+    "remaining_gap": "No sound semantic translation, automated domain discovery, general method-trigger detection, execution-failure repair or repeated robot reliability; majority-optimal headline not supported by Table I as equally weighted140 tasks.",
+    "unresolved": [
+      "External novelty/first-framework claim not independently verified.",
+      "Physical route-cost example does not establish end-to-end execution trial success."
+    ],
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E004",
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E009"
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": null,
+        "role": "primary",
+        "fit": "strong main; C25 incomplete so no sub assignment",
+        "tactic_steps_checked": [
+          "1: identify translation vs combinatorial-search responsibility boundary",
+          "2: PDDL problem is typed/checkable intermediate",
+          "3: classical solver computes complete plan, but no in-construction solver-feedback repair loop is demonstrated",
+          "4: direct-LLM and no-context controls exist; no isolated semantic-verification/revision step",
+          "5:200s solver limits disclosed, overall inference/human-domain cost absent"
+        ],
+        "success_checks": [
+          {
+            "condition": "solver at comparative-advantage seam",
+            "status": "met",
+            "evidence_ids": [
+              "E002",
+              "E005"
+            ]
+          },
+          {
+            "condition": "typed intermediate",
+            "status": "met",
+            "evidence_ids": [
+              "E002",
+              "E003"
+            ]
+          },
+          {
+            "condition": "semantically trustworthy handoff",
+            "status": "partial",
+            "evidence_ids": [
+              "E003",
+              "E007"
+            ]
+          }
+        ],
+        "failure_checks": [
+          {
+            "condition": "advisory formal artifact without repair closure",
+            "status": "partial",
+            "reason": "Solver result is load-bearing but a wrong model can pass syntactic checks; no corrective feedback into construction."
+          },
+          {
+            "condition": "human-domain and cost assumptions",
+            "status": "partial",
+            "evidence_ids": [
+              "E005",
+              "E009"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E005",
+          "E006",
+          "E007",
+          "E009"
+        ],
+        "reason": "Classical solver delegation exactly matches parent operation. C25 requires feedback used during construction/correction rather than only final solver output; absent here, so null instead of forcing its strongest tactical signature. No second reformulation card needed for the same operation."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "PDDL translation→classical search is a clear comparative-advantage decomposition. Parent fit is separate from C25 feedback-closure requirements and from semantic correctness.",
+    "executes_pattern": true,
+    "resolves_problem": false,
+    "resolution_reason": "Conditional formal planning works on a substantial subset, but semantic translation and closed-loop robotic reliability remain unresolved; optimality is not majority of all140 tasks in Table I."
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "llm_symbolic_solver_planning",
+        "sub": "R01",
+        "version": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127",
+        "fit": "strong translator/solver core, partial full loop",
+        "condition_checks": [
+          {
+            "condition": "LLM emits formal model, solver computes plan",
+            "status": "met"
+          },
+          {
+            "condition": "handwritten reliable domain/state abstraction",
+            "status": "met",
+            "reason": "Important enabling assumption, not autonomously learned."
+          },
+          {
+            "condition": "solver failure returned for bounded repair",
+            "status": "unmet",
+            "reason": "No reported iterative repair channel."
+          },
+          {
+            "condition": "physical closed-loop failure replanning",
+            "status": "unmet"
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E005",
+          "E007",
+          "E008",
+          "E009"
+        ]
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": null,
+      "domain": {
+        "namespace": "embodied",
+        "main": "llm_symbolic_solver_planning",
+        "sub": "R01"
+      },
+      "operation_correspondence": "GPT4 emits PDDL problem, Fast Downward searches, GPT4 translates plan to language and one robot demo executes it.",
+      "necessary_conditions_and_differences": "R01 includes later solver-failure repair mechanisms; this paper instantiates its open-loop core only. Formal feasibility/optimality is not truth of NL task or deployment outcome.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E007",
+        "E008",
+        "E009"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+        "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+      ],
+      "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Fixed GPT4 direct, ToT and no-context controls demonstrate usefulness of structured context/solver system; human-domain knowledge, representation and solver additions not fully independently toggled.",
+      "evidence_ids": [
+        "E005",
+        "E006",
+        "E007",
+        "E009"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+        "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset."
+      ],
+      "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "20 generated instances/domain and domain failure rates, but one deterministic model response each; no repeated settings, paired uncertainty or randomized template study.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E006",
+        "E007"
+      ],
+      "score_item": [
+        "E.measurement",
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+        "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+      ],
+      "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "200s classical/ToT search cap disclosed; robot route cost22 vs31 is objective value, not end-to-end tokens, latency, USD or human modeling cost.",
+      "evidence_ids": [
+        "E005",
+        "E008",
+        "E009"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+        "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+      ],
+      "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Generated instances and example/domain context disclosed; no independent template/domain holdout or foundation-model exposure audit; abstract full state assumed.",
+      "evidence_ids": [
+        "E002",
+        "E004",
+        "E005",
+        "E009"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E17",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+        "- **E17 (dataset, common_practice).** Evaluate harness optimization, skill libraries, memory and replay cards on held-out tasks or episodes disjoint from the search, mining or validation set, and report overfitting across iterations. Gains on recurring tasks with ground-truth feedback do not show generalization. — _applies when_ a claim that a self-improving harness, skill library, playbook or experience memory improves performance."
+      ],
+      "applies_when": "a claim that a self-improving harness, skill library, playbook or experience memory improves performance.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No self-improving harness, learned experience memory or mined retained library; do not require iterative retention evidence of static planning translation.",
+      "evidence_ids": [
+        "E002",
+        "E005",
+        "E009"
+      ],
+      "score_item": [
+        "X",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/llm_symbolic_solver_planning.md#Reviewer-expectations",
+        "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+      ],
+      "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Robot tidy-up route-cost demonstration has no repeated per-task physical success counts; supports an illustration, not transfer reliability.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": [
+        "E.measurement",
+        "E.holdout"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Optimal solutions for most benchmark problems.",
+      "setting": "140 generated tasks in7 IPC robot-planning domains, GPT4 temp0,200s search",
+      "baseline/control": "Same GPT4 direct with/without example, ToT, LLM+P with/without PDDL context; expert formal domain remains additional structure",
+      "data_budget": "20 tasks/domain; one deterministic PDDL response; optimal seq-opt-fdss-1 with lama feasible fallback",
+      "selection_vs_test": "Example drawn from same domain family; held-out generated instances but no excluded-domain/template split or pretraining audit",
+      "result": "Optimal rates20,90,0,95,85,20,10%; equal20 denominators yield64/140=45.7%, not majority. Including displayed feasible fallback rates yields97/140=69.3%, a different claim.",
+      "denominator": "7×20=140 formal instances, one response each; our arithmetic from author's Table I, not a reproduction",
+      "counterevidence": "Floortile0, Termes20 and Tyreworld10 optimal; translation failures. Parenthesized100/100/90 fallback rows are feasible, not necessarily optimal.",
+      "allowed_conclusion": "Formal planning substantially improves feasible/optimal instance outcomes vs direct LLM in several domains; majority-optimal across all140 is not substantiated by Table I.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "text": "Improves realistic service-robot planning efficiency.",
+      "setting": "One tidy-up scenario with explicit distances, one gripper and supplied symbolic state",
+      "baseline/control": "LLM-as-P route31 vs LLM+P22",
+      "data_budget": "One demonstrated scenario, no repeated execution-success study",
+      "selection_vs_test": "Illustrative construction; no independent physical holdout",
+      "result": "Shorter formal route under supplied model/cost, shown on robot",
+      "denominator": "One illustrated task; no repeated physical trial n",
+      "counterevidence": "Metric is modeled route cost, not measured runtime or general task reliability; human/domain/state assumptions unchanged.",
+      "allowed_conclusion": "A model-conditional cost advantage can be instantiated in a robot example; not broad closed-loop efficient robot transfer.",
+      "evidence_ids": [
+        "E008",
+        "E009"
+      ]
+    }
+  ],
+  "assessment": {
+    "evidence_level": "offline",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Scope-B robot-planning harness: author-reported GPT4 PDDL translation plus Fast Downward improves model-conditional formal plan success over direct language planning on several domains. One robot demonstration illustrates route-cost benefit; no repeated closed-loop robot evaluation. Table I supports45.7% optimal across140 equally weighted tasks, not majority-optimal.",
+    "unresolved": [
+      "Majority-optimal abstract/findings wording conflicts with Table I arithmetic unless a narrower successful-subset denominator is specified; preserve original claim rather than silently repair it.",
+      "Human-written domain and full symbolic state do not guarantee natural-language semantics or real-world validity.",
+      "No solver-feedback semantic repair or physical failure-replanning experiment.",
+      "No repeated robot trial denominator or total inference/human-modeling cost.",
+      "No formal transfer label granted merely for multiple symbolic domains and one robot demo."
+    ],
+    "reproduction": "not performed; author_report only"
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Important precondition/reasoning bottleneck and translator/search seam clearly located in classical planning lineage; first-framework priority and adjacent originals not independently verified.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E007"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Delegating search directly addresses long-horizon sequencing and gives model-conditional optimality, but semantic translation and human domain assumptions prevent guarantees about original task.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E007",
+        "E009"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "PDDL/context→solver→language flow, aliases, fallback and timeout reconstructable; no invented repair/persistence, but errors remain unchecked at semantic/physical boundary.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005",
+        "E007",
+        "E009"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Explicit formal criterion,140-instance denominator and optimal/feasible distinction; all deterministic one-pass outcomes and single robot illustration imply anchors-v2 measurement ceiling2. Majority-optimal arithmetic weakens headline, not all observed gains.",
+        "evidence_ids": [
+          "E001",
+          "E004",
+          "E005",
+          "E006",
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Same-model direct/no-context/ToT comparisons show system utility, but expert domain, intermediate representation and solver jointly change; no semantic-validation isolation or matched total compute.",
+        "evidence_ids": [
+          "E005",
+          "E006",
+          "E007",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Multiple domain families and generated instances extend coverage, but examples/domain knowledge shared within family, no untouched domain/template construction holdout and no counted real transfer.",
+        "evidence_ids": [
+          "E002",
+          "E004",
+          "E008",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Per-domain20-instance rates and translation failure categories exist, but a single temperature0 response and one robot example lack repeat uncertainty/paired tests; narrow descriptive statistical evidence.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E006",
+          "E007",
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "200s search cap also applied to ToT; formal robot route objective reported separately. Total GPT tokens/latency and manual modeling not priced, so incomplete budget fairness.",
+        "evidence_ids": [
+          "E005",
+          "E008",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 62.5,
+    "display": 62.5,
+    "lower": 62.5,
+    "upper": 62.5,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "designation": "production-under-anchors-v2"
+  },
+  "status": "reviewed",
+  "reason": "Fixed material read and eight items resolved under authorized anchors v2. Scoped author claim preserved; unreported controls are evidence limitations, not missing fulltext.",
+  "audit_status": "pending",
+  "audit_note": "Local structure/quote/arithmetic checks passed; independent aggregation and semantic audit still required."
+}

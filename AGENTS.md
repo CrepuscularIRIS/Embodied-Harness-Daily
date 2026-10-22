@@ -16,7 +16,7 @@
 - `make check`：离线卡片与语法检查。
 - `python3 research/ingest.py inbox/<batch>.jsonl`：本地将新的 arXiv ID 入库，不会评审质量；已有 ID 的版本更新需单独核对。
 - `docs/agents/GROK_PROMPT.md`、`LOCAL_SCORING_PROMPT.md`、`REEL_PROMPT.md` 为现行提示词。
-- `main.py`、`src/`、`skills/arxiv-fetch/` 是继承的候选抓取工具，使用说明在 `docs/digest-pipeline.md`；不是质量评审入口。
+- `main.py`、`src/`、`skills/arxiv-fetch/` 是继承的候选抓取工具，使用说明在 `archive/2026-10-21-reset/docs/digest-pipeline.md`；不是质量评审入口。
 - `skills/arxiv-fetch/` 必须可独立复制，不能引入 `src/` 或仓库根依赖。插件版本仍以 `.claude-plugin/plugin.json` 为准。
 
 ## 必须遵守

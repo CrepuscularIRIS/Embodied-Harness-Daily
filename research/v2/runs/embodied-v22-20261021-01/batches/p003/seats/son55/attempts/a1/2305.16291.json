@@ -1,0 +1,1078 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p003",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2305.16291",
+  "paper_id": "2305.16291",
+  "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+  "version": "2305.16291v2",
+  "claim_type": "system_method",
+  "central_claim": "Voyager, an LLM-powered embodied lifelong-learning agent in Minecraft, combines an automatic curriculum, an ever-growing executable skill library and iterative prompting with environment feedback, execution errors and self-verification, and substantially outperforms prior LLM agents without parameter updates.",
+  "scope": {
+   "in_scope": true,
+   "borderline": true,
+   "note": "Embodied agent in a 3D game world (MineDojo/Mineflayer), frozen GPT-4 harness with code-as-action, skill library and verification; the body is a virtual avatar driven via a high-level API with perception/sensorimotor control explicitly out of scope. Reviewed as in scope under the domain overview ('controls a robot, a navigating agent or a simulator'); aggregator may reverse to out_of_scope (EVIDENCE lists robot/nav/UAV simulators)."
+  }
+ },
+ "provenance": {
+  "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + calibration/anchors.md v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e;conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1;overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": null,
+  "expectations_hash_note": "no standalone expectations file; E01-E22 are embedded in patterns/main/*.md; sha256 of sorted concatenation of patterns/**/*.md = 1fee48bd586e041dc71fa533aecfaf821056baaf9f69f940240a6d350b48ed43 (worker-computed)",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_receipt_note": "internal Subagent cannot read its own session id or receipt; not probed per run instructions",
+  "timestamp": "2026-10-22T02:27:17Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; blind seat son55, no other-seat or aggregate material read"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2305.16291v2",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.16291.txt",
+   "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "format": "FULLTEXT html-full (abstract, body, appendix; figure/image content not in text)",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Method",
+    "3 Experiments (3.1-3.5)",
+    "4 Limitations",
+    "5 Related work",
+    "6-7",
+    "Appendix A.1-A.6",
+    "Appendix B.1-B.4"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "non_text_content_unavailable": [
+    "Fig 1, 7, 8, 9 (curves/maps)",
+    "Fig A.1-A.4"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Abstract",
+   "quote": "Voyager, the first LLM-powered embodied lifelong learning agent in Minecraft that continuously explores the world, acquires diverse skills, and makes novel discoveries without human intervention",
+   "support_explanation": "Central claim as written by the authors.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Abstract",
+   "quote": "an ever-growing skill library of executable code for storing and retrieving complex behaviors, and 3) a new iterative prompting mechanism",
+   "support_explanation": "Names the two load-bearing mechanisms: skill library and iterative prompting (with curriculum as the third).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 1",
+   "quote": "these agents are not lifelong learners that can progressively acquire, update, accumulate, and transfer knowledge over extended time spans",
+   "support_explanation": "Author gap: existing LLM agents do not accumulate skills.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.2",
+   "quote": "because we rely on the high-level Mineflayer [ 52 ] API to control the agent",
+   "support_explanation": "The body is controlled through a high-level API (pathfinding, mining, crafting), not motor control.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.2",
+   "quote": "pushing the limits of GPT-4 for lifelong embodied agent learning, rather than solving the 3D perception or sensorimotor control problems",
+   "support_explanation": "Authors place perception and sensorimotor control out of scope: relevant to the EH Radar scope flag.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Fig 4 caption",
+   "quote": "Each time GPT-4 generates and verifies a new skill, we add it to the skill library, represented by a vector database",
+   "support_explanation": "Retention rule: add on verification; storage is a vector DB keyed by description embedding.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 2.2",
+   "quote": "we perform querying to identify the top-5 relevant skills",
+   "support_explanation": "Later use: top-5 retrieval into the code-generation prompt.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 2.3",
+   "quote": "If the agent gets stuck after 4 rounds of code generation, then we query the curriculum for another task",
+   "support_explanation": "Local retry budget of 4 rounds before moving on.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 2.3",
+   "quote": "we instantiate another GPT-4 agent for self-verification",
+   "support_explanation": "Selection signal is an LLM critic, not a hand-coded or environment success checker.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App B.1",
+   "quote": "we incorporate many bot.chat() into Mineflayer functions to provide abundant environment feedback and implement various condition checks along with try-catch exceptions",
+   "support_explanation": "Environment feedback channel is engineered by the authors and shared with baselines.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.2",
+   "quote": "These methods are originally designed only for NLP tasks without embodiment, therefore we have to re-interpret them to be executable in MineDojo and compatible with our experimental setting",
+   "support_explanation": "Baselines (ReAct, Reflexion, AutoGPT) are re-implementations by the authors.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App B.2",
+   "quote": "ReAct undergoes one round of code generation from scratch, followed by three rounds of code refinement",
+   "support_explanation": "Baseline loop design is authors' adaptation.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.1",
+   "quote": "We run three trials for each method",
+   "support_explanation": "Three runs per method (the stated reason for small denominators).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.3",
+   "quote": "discovering 63 unique items within 160 prompting iterations",
+   "support_explanation": "Exploration headline (3.3x claimed vs baselines); budget unit is prompting iterations.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.3",
+   "quote": "Voyager is the only one to unlock the diamond level of the tech tree",
+   "support_explanation": "Tech-tree result: diamond level reached in 1/3 runs only (Table 1 shows 102 iterations, 1/3).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Table 1 caption",
+   "quote": "Fractions indicate the number of successful trials out of three total runs",
+   "support_explanation": "Denominator of the tech-tree table.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.3",
+   "quote": "reset it to a newly instantiated world, and test it with unseen tasks",
+   "support_explanation": "Zero-shot generalization setup: new world, four unseen tasks, empty inventory.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Table 2 caption",
+   "quote": "0/3 means the method fails to solve the task within the maximal prompting iterations (50)",
+   "support_explanation": "Zero-shot table denominators: 3 attempts per task, 50-iteration cap.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.3",
+   "quote": "gives a boost to AutoGPT",
+   "support_explanation": "The learned library also helps AutoGPT (plug-and-play), partial evidence for library causality.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.4",
+   "quote": "if the curriculum is replaced with a random one",
+   "support_explanation": "Curriculum ablation (random/manual) reported as percentage drops in the discovered-item count.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.4",
+   "quote": "Self-verification is the most important among all the feedback types",
+   "support_explanation": "Feedback-type ablation; critic matters most.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.4",
+   "quote": "Voyager w/o skill library exhibits a tendency to plateau in the later stages",
+   "support_explanation": "Skill library ablation (also Table 1: no diamond without library).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.4",
+   "quote": "GPT-4 significantly outperforms GPT-3.5 in code generation",
+   "support_explanation": "Backbone dependence: the harness result is tied to GPT-4.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 4",
+   "quote": "Occasionally, self-verification module may also fail, such as not recognizing spider string as a success signal of beating a spider",
+   "support_explanation": "Critic false negatives; qualitative.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 4",
+   "quote": "The automatic curriculum occasionally proposes unachievable tasks",
+   "support_explanation": "Curriculum hallucination; qualitative.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 4",
+   "quote": "The GPT-4 API incurs significant costs.",
+   "support_explanation": "Cost acknowledged; no token or dollar figures.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App B.4.4",
+   "quote": "We conduct an evaluation of our skill retrieval (309 samples in total)",
+   "support_explanation": "Skill retrieval accuracy measured on 309 samples.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Table A.4",
+   "quote": "Top-1 Acc Top-2 Acc Top-3 Acc Top-4 Acc Top-5 Acc 80.2\\pm 3.0 89.3\\pm 1.8 93.2\\pm 0.7 95.2\\pm 1.8 96.5\\pm 0.3",
+   "support_explanation": "Retrieval accuracy; top-5 96.5%.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App B.4.5",
+   "quote": "We additionally run new experiments with gpt-4-0613 and find that the performance is roughly the same",
+   "support_explanation": "Model-version robustness check, figure only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E030",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App A.3.2",
+   "quote": "In practice, using a wiki knowledge base is optional since GPT-3.5 already possesses a good understanding of Minecraft game mechanics",
+   "support_explanation": "GPT's prior Minecraft knowledge is substantial; contamination/prior knowledge not controlled.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E031",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App A.3.4 Prompt 1",
+   "quote": "Tasks that require information beyond the player",
+   "support_explanation": "Curriculum prompt forbids tasks that cannot be verified from player state, which keeps the critic usable (design that favours verification).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E032",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "App B.2",
+   "quote": "If three consecutive subgoals do not result in acquiring a new item, we replan by rerunning the task decomposition",
+   "support_explanation": "AutoGPT baseline rule written by the authors.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E033",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 3.5",
+   "quote": "Voyager does not currently support visual perception",
+   "support_explanation": "No visual perception; text state only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E034",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Sec 7",
+   "quote": "its application to physical robots would require additional attention",
+   "support_explanation": "Authors disclaim physical-robot applicability.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E035",
+   "material_id": "M1",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+   "locator": "Table 2",
+   "quote": "AutoGPT [ 28 ] w/ Our Skill Library 39",
+   "support_explanation": "Row anchor for the library-transfer experiment (successes 1/3, 1/3, 0/3, 2/3).",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "an LLM-driven code-as-action loop in Minecraft: curriculum agent proposes a task, action agent writes Mineflayer JavaScript, critic agent verifies",
+   "information": "text agent state (inventory, equipment, nearby blocks/entities, biome, time, health, position), chat-log environment feedback, interpreter errors, critic critique, top-5 retrieved skills; no pixels",
+   "operation": "propose -> retrieve -> generate code -> execute -> feedback (errors, chat log, critic) -> regenerate up to 4 rounds",
+   "output": "executable JavaScript skill and task outcome",
+   "conditions": "GPT-4 code quality, high-level control API, tasks verifiable from player state",
+   "feedback": "environment chat log, execution errors, GPT-4 critic success/critique",
+   "selection_rule_or_data": "accept when the GPT-4 critic returns success; give up after 4 rounds and mark task failed",
+   "persistence": "skill library (vector DB: embedding of GPT-3.5 description -> program), completed/failed task lists",
+   "later_use": "top-5 skills retrieved by embedding of task plan + environment feedback for every later task and in the new world",
+   "claimed_effect": "3.3x unique items, 2.3x distance, 15.3x/8.5x/6.4x faster tech-tree milestones; solves four unseen tasks in a new world in 3/3 runs",
+   "failure_boundary": "critic false negatives, curriculum hallucination, GPT-4 cost, no visual perception",
+   "evidence_ids": [
+    "E004",
+    "E006",
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E014",
+    "E017",
+    "E024",
+    "E025",
+    "E033"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "automatic curriculum (GPT-4 proposes the next task from progress + state, GPT-3.5 self-asks/answers questions)",
+   "information": "state, completed and failed task lists, optional wiki retrieval",
+   "operation": "LLM-generated bottom-up task stream maximizing diversity",
+   "output": "one-line task",
+   "conditions": "warm-up schedule releases state fields gradually",
+   "feedback": "completed/failed lists",
+   "selection_rule_or_data": "tasks must be verifiable from player status",
+   "persistence": "task lists",
+   "later_use": "drives subsequent iterations",
+   "claimed_effect": "random curriculum loses 93% of discovered items",
+   "failure_boundary": "proposes non-existent items",
+   "evidence_ids": [
+    "E020",
+    "E025",
+    "E031"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Prior LLM agents (ReAct, Reflexion, AutoGPT, Inner Monologue, CaP) and RL/IL agents do not accumulate, update and transfer skills over long horizons in an open-ended world.",
+  "checked_gap": "In the re-implemented baselines, ReAct/Reflexion make almost no progress (0/3 on every tech-tree level) and AutoGPT stalls before diamond; Voyager without the library also plateaus. The re-implementations are authored by the Voyager team and are not independent published Minecraft agents (DEPS, Plan4MC, DECKARD are tabulated but not run).",
+  "lineage": [
+   "CaP / ProgPrompt (code as policy) + ReAct / Reflexion (feedback loops) + AutoGPT (task decomposition) -> Voyager (curriculum + verified skill library + iterative prompting)",
+   "Minecraft low-level controllers (VPT, DreamerV3) are orthogonal; high-level planners (DEPS, Plan4MC, DECKARD) are the nearest Minecraft lineage"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "AutoGPT (re-implemented)",
+    "pinned_source": false,
+    "solved": "subgoal decomposition with ReAct loop",
+    "unsolved_per_authors": "no library, verification or curriculum",
+    "tested_here": true
+   },
+   {
+    "name": "DEPS / Plan4MC / DECKARD",
+    "pinned_source": false,
+    "solved": "LLM planning in Minecraft",
+    "unsolved_per_authors": "no automatic curriculum, skill library or iterative planning (Table A.2)",
+    "tested_here": false
+   }
+  ],
+  "residue": "No ablation against an independently implemented Minecraft LLM planner; the benefit of the library versus GPT-4's own Minecraft knowledge is not isolated.",
+  "stakes": "Gradient-free lifelong skill accumulation by a black-box LLM; relevance to robots is asserted, not shown.",
+  "method_response": "Add a self-proposed curriculum, a verified code skill library, and feedback-driven code repair.",
+  "remaining_gap": "GPT-4 cost, critic/curriculum errors, no visual perception (authors); no embodied-robot evidence, only 3 trials per cell (ours).",
+  "evidence_ids": [
+   "E003",
+   "E011",
+   "E015",
+   "E022",
+   "E026",
+   "E030",
+   "E005"
+  ],
+  "unresolved": "Neighbour papers not pinned; whether DEPS-class planners would close the gap is unknown."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "adapt_via_conditioning"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial-strong",
+    "tactic_steps_checked": {
+     "1_responsibility_boundary": "yes: LLM writes code, Mineflayer/game executes; control and crafting are exact",
+     "2_typed_artifact": "yes: executable JavaScript skills with reusable-function guidelines",
+     "3_verification_closure": "partial: execution errors and chat log are external signals applied during construction; success is judged by an LLM critic (self-evaluation) rather than an external oracle",
+     "4_ablation": "yes: self-verification, execution errors, environment feedback, skill library toggled; figure-only magnitudes",
+     "5_cost": "cost acknowledged, unpriced; Minecraft-specific prompts and APIs"
+    },
+    "success_checks": [
+     "feedback driven by obtainable signals (met)",
+     "by-products accumulated into reusable library (met - the card's own Oral lesson)"
+    ],
+    "failure_checks": [
+     "no ablation vs strong independent baselines (present)",
+     "benchmark-tailored prompts (present)",
+     "cost unmeasured (present)"
+    ],
+    "evidence_ids": [
+     "E002",
+     "E006",
+     "E008",
+     "E009",
+     "E010",
+     "E021",
+     "E022",
+     "E026"
+    ],
+    "reason": "Executable program is the load-bearing intermediate artifact; interpreter and game state feed repairs; verified programs are kept as reusable capital."
+   },
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "partial",
+    "tactic_steps_checked": {
+     "conditioning_substrate": "retrieved skills (top-5) and feedback form the conditioning for a new task, no weight update",
+     "holdout_by_category": "new world with unseen tasks; not category-level exclusion"
+    },
+    "success_checks": [
+     "no per-task parameter updates (met)"
+    ],
+    "failure_checks": [
+     "obvious cheaper baseline (longer context / no-retrieval) only partly tested via w/o-library"
+    ],
+    "evidence_ids": [
+     "E007",
+     "E017",
+     "E019",
+     "E028"
+    ],
+    "reason": "Retrieval-conditioned in-context code generation is a distinct operation from the repair loop (cross-task reuse) so it is kept as supporting; C03 is not selected because it requires an upstream tuning/format-learning phase absent here."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": null,
+  "executes_pattern": "yes for C25 delegation; partial for conditioning (no category holdout)",
+  "resolves_problem": "partial: skill accumulation is shown in Minecraft over 3 runs; accumulation and transfer in general are not shown"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "status is about the card condition; for failure-mode (F) items 'unmet' means the failure mode is present",
+  "matches": [
+   {
+    "main": "harness_memory_skill_reuse",
+    "sub": "K303",
+    "version": "embodied-agent-harness/v1 (frozen 2026-10-21 build)",
+    "fit": "partial",
+    "executes_pattern": "yes in structure: skills extracted from successful executions, verified, stored and exposed at run time; differs in that the library grows online, is verified by an LLM critic, has no consolidation/review model, and is not frozen before evaluation",
+    "resolves_problem": "partial",
+    "condition_checks": [
+     {
+      "condition_id": "harness_memory_skill_reuse:S4",
+      "status": "partial",
+      "reason": "model fixed (GPT-4) across library on/off; new-world tasks differ from the lifelong world but the same simulator/task family and 3 runs",
+      "evidence_ids": [
+       "E017",
+       "E018",
+       "E019",
+       "E022"
+      ]
+     },
+     {
+      "condition_id": "harness_memory_skill_reuse:F1",
+      "status": "partial",
+      "reason": "tech-tree curves use a library built in the same runs by design (lifelong); the zero-shot table is the intended held-out test, but which library/run supplies it is not stated",
+      "evidence_ids": [
+       "E015",
+       "E017"
+      ]
+     },
+     {
+      "condition_id": "harness_memory_skill_reuse:F4",
+      "status": "unknown",
+      "reason": "critic false positives that would store wrong skills are not measured; only false negatives are mentioned",
+      "evidence_ids": [
+       "E024"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E006",
+     "E007",
+     "E009",
+     "E022"
+    ]
+   },
+   {
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105",
+    "version": "embodied-agent-harness/v1 (frozen 2026-10-21 build)",
+    "fit": "partial",
+    "executes_pattern": "partial: frozen LLM writes code over control primitives and retries with returned feedback (up to 4 rounds); persistent helpers are via the library",
+    "resolves_problem": "not_shown",
+    "condition_checks": [
+     {
+      "condition_id": "planner_composes_code_and_policies:S1",
+      "status": "partial",
+      "reason": "same GPT-4, equal prompting-iteration caps across methods, but iterations are not equal in tokens or calls",
+      "evidence_ids": [
+       "E011",
+       "E012",
+       "E014"
+      ]
+     },
+     {
+      "condition_id": "planner_composes_code_and_policies:F2",
+      "status": "partial",
+      "reason": "composition, persistent state and selective feedback are ablated one at a time, but magnitudes are figure-only and baselines are adapted",
+      "evidence_ids": [
+       "E020",
+       "E021",
+       "E022"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E004",
+     "E008",
+     "E010"
+    ]
+   }
+  ],
+  "unassigned": [
+   "LLM-proposed automatic curriculum (task-level self-generation) - no domain card"
+  ],
+  "revision_proposals": [
+   "note for K303: online-growing library verified by LLM critic (Voyager-style) as a variant to the frozen-library definition; do not edit cards in-batch"
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "harness_memory_skill_reuse",
+    "sub": "K303"
+   },
+   "operation_correspondence": "rs: solver by-products redirected into a validated reusable library; embodied: verified programs stored as a retrievable skill library",
+   "necessary_conditions_or_differences": "K303 expects a frozen library and an editor/reviewer; Voyager's library is self-growing and critic-gated",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E009"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105"
+   },
+   "operation_correspondence": "rs: executable artifact routed to an interpreter with feedback; embodied: code over primitive APIs executed with local retries",
+   "necessary_conditions_or_differences": "K105 emphasises coding runtimes and requested observations; Voyager uses a prompt loop with a 4-round cap",
+   "evidence_ids": [
+    "E004",
+    "E008",
+    "E010"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E01"
+   ],
+   "applies_when": "a claim that a harness (not the model) raises embodied success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "ReAct, Reflexion and AutoGPT are run with GPT-4 under the same iteration cap, but they are authors' adaptations, not independent published harnesses.",
+   "evidence_ids": [
+    "E011",
+    "E012",
+    "E015"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#E02"
+   ],
+   "applies_when": "a claim that a specific component (skill library, verifier, feedback) causes the improvement",
+   "applicable": true,
+   "status": "met",
+   "reason": "Curriculum, skill library, environment feedback, execution errors, self-verification and the backbone are each ablated one at a time with the rest fixed (magnitudes in Fig 9, percentages in text).",
+   "evidence_ids": [
+    "E020",
+    "E021",
+    "E022",
+    "E023"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#E03"
+   ],
+   "applies_when": "a claim that a component helps in general",
+   "applicable": true,
+   "status": "partial",
+   "reason": "GPT-3.5 vs GPT-4 for code generation and GPT-4-0314 vs 0613 only; the library helps AutoGPT as well; no weak-vs-strong sweep of the harness itself.",
+   "evidence_ids": [
+    "E023",
+    "E029",
+    "E019"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#E04"
+   ],
+   "applies_when": "any success-rate comparison",
+   "applicable": true,
+   "status": "partial",
+   "reason": "3 runs per method with +- on iteration counts and fractions out of 3; no paired statistics or intervals.",
+   "evidence_ids": [
+    "E013",
+    "E016",
+    "E018"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E05"
+   ],
+   "applies_when": "a claim that a harness is better or more practical",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Budget is prompting iterations; GPT-4 cost is acknowledged (15x GPT-3.5) but calls/tokens/USD per iteration are not reported.",
+   "evidence_ids": [
+    "E014",
+    "E026"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E08"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No discussion of GPT-4's Minecraft knowledge or contamination; the curriculum and task list are partly designed with Minecraft knowledge, and the optional wiki retrieval is stated as unnecessary because GPT already knows the game.",
+   "evidence_ids": [
+    "E030",
+    "E031"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E16"
+   ],
+   "applies_when": "an embodied agent's success claim, especially with a completion check",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Critic false negatives and curriculum hallucination are named qualitatively; no counts of false completions, wrong skills stored, or stuck runs.",
+   "evidence_ids": [
+    "E024",
+    "E025"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E17",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#E17"
+   ],
+   "applies_when": "a claim that a skill library or memory improves performance",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Zero-shot tasks in a new world are the held-out test with 3 attempts each; no overfitting analysis across iterations and the library source run is unspecified.",
+   "evidence_ids": [
+    "E017",
+    "E018",
+    "E019"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E19",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E19"
+   ],
+   "applies_when": "a claim of transfer to a physical robot",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No physical-robot claim; the authors say robot deployment needs further work.",
+   "evidence_ids": [
+    "E034"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E22",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E22"
+   ],
+   "applies_when": "a comparison between harnesses at fixed model",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Iteration caps are equal (160 / 50) but per-iteration model calls differ across methods (curriculum, critic, retrieval, GPT-3.5 helpers).",
+   "evidence_ids": [
+    "E012",
+    "E014",
+    "E032"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Voyager obtains 3.3x more unique items, travels 2.3x longer and reaches tech-tree milestones up to 15.3x faster than prior SOTA.",
+   "setting": "MineDojo/Mineflayer, GPT-4-0314, 160 prompting iterations, 3 runs per method",
+   "baseline_control": "ReAct, Reflexion, AutoGPT re-implemented by the authors with the same GPT-4 and feedback channels",
+   "selection_vs_test": "no separate selection split; metric is count of unique inventory items and iteration to milestone",
+   "result_denominator": "63 unique items in 160 iterations; milestones in 3/3 runs up to iron, diamond 1/3 (102 iterations); baselines 0/3 (ReAct, Reflexion) and no diamond (AutoGPT)",
+   "evidence_ids": [
+    "E011",
+    "E012",
+    "E013",
+    "E014",
+    "E015",
+    "E016"
+   ],
+   "counterevidence": [
+    "E011",
+    "E030"
+   ],
+   "allowed_conclusion": "Against three authors-adapted NLP agents, the full harness progresses much further in a 3-run Minecraft exploration benchmark; 'prior SOTA' is not an independent Minecraft agent."
+  },
+  {
+   "claim_id": "C2",
+   "text": "The learned skill library lets Voyager solve novel tasks in a new world from scratch, and also helps other methods.",
+   "setting": "new Minecraft world, four unseen tasks (diamond pickaxe, golden sword, lava bucket, compass), 50 iterations, 3 attempts",
+   "baseline_control": "ReAct, Reflexion, AutoGPT, AutoGPT with Voyager's library, Voyager without library",
+   "selection_vs_test": "fresh world and empty inventory; library from earlier lifelong learning (which run unspecified)",
+   "result_denominator": "Voyager 3/3 on all four; w/o library 2/3, 3/3, 3/3, 3/3; AutoGPT+library 1/3, 1/3, 0/3, 2/3; others 0/3",
+   "evidence_ids": [
+    "E017",
+    "E018",
+    "E019",
+    "E035"
+   ],
+   "counterevidence": [
+    "E005"
+   ],
+   "allowed_conclusion": "Within Minecraft, retrieved verified skills speed up and rescue unseen tech-tree tasks over 3 attempts; 'w/o library' still succeeds in 11/12 attempts so the margin is in iterations."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Each component (curriculum, library, feedback types, self-verification, GPT-4) is critical.",
+   "setting": "ablation on exploration (discovered items)",
+   "baseline_control": "ablated Voyager variants",
+   "selection_vs_test": "same environment",
+   "result_denominator": "percent drops stated in text (e.g. random curriculum -93%, no self-verification -73%, GPT-3.5 5.7x fewer); curves in Fig 9",
+   "evidence_ids": [
+    "E020",
+    "E021",
+    "E022",
+    "E023"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Supported for the discovered-item metric with three runs and GPT-4; not shown for other metrics or models."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "closed-loop Minecraft runs with inventory-state success and run counts; fresh-world test is the same simulator/avatar and task family with 3 attempts and a library from the authors' own lifelong run -> not transfer (needs unseen embodiment/simulator or sim-to-real; EVIDENCE rules 1-2)",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "In a 3-run Minecraft study with GPT-4, a curriculum + critic-gated skill library + execution-feedback loop reaches far more items and milestones than authors-adapted ReAct/Reflexion/AutoGPT, and the stored skills let a fresh-world run finish four unseen tech-tree tasks in 3/3 attempts (w/o library 11/12); component ablations support the roles of curriculum, verification and library.",
+  "author_claim_kept": "first LLM-powered embodied lifelong learning agent; lifelong learning alleviating catastrophic forgetting; superior to prior SOTA.",
+  "retention": {
+   "task_improvement": "supported within Minecraft: full system vs adapted baselines (Table 1)",
+   "retained_improvement": "supported but small-N: library on/off in Table 1 (diamond 1/3 vs 0/3, iron 21 vs 29 iterations) and Table 2 (AutoGPT+library boost; Voyager 19/18/21/18 vs 36/30/27/26 iterations)",
+   "improver_improvement": "not_applicable: no meta-improvement of the loop itself",
+   "trace": {
+    "before": "empty library, curriculum from scratch",
+    "proposed_change": "GPT-4 code for a curriculum task (<=4 rounds of repair)",
+    "selection_rule": "GPT-4 critic returns success from player state; no ground-truth check; give up -> failed-task list",
+    "persisted_change": "program + GPT-3.5 description embedding in a vector DB",
+    "later_tasks": "top-5 retrieval for every later task and for the four unseen tasks in a new world",
+    "measured_gain": "Table 1/2 and Fig 9 ablation; forgetting is not measured"
+   }
+  },
+  "not_claimable": [
+   "alleviates catastrophic forgetting (no test)",
+   "superiority over independent Minecraft planners (not run)",
+   "transfer to robots",
+   "cost-efficiency",
+   "reproduced by us"
+  ],
+  "unresolved": [
+   "Fig 9 and Fig 1 values are figure-only; percentages come from text",
+   "which lifelong run supplies the library in Table 2",
+   "scope flag: virtual avatar via high-level API, no robot body",
+   "critic false positives not measured"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Specific, important bottleneck (no accumulation/transfer of skills in LLM agents) with a clear lineage and a stated system-level comparison table; but the strongest Minecraft neighbours are not run, the diagnostic of baseline failure is tied to authors' re-implementations, and the remaining gap for embodied robotics (perception, sensorimotor) is excluded by design.",
+   "evidence_ids": [
+    "E003",
+    "E005",
+    "E011",
+    "E015",
+    "E030"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "Sec 1",
+    "Sec 3.2",
+    "App A.6"
+   ]
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Operation, information (text state only), selection rule (critic success) and persistence (embedding-keyed library) are reconstructible, rest on a stated assumption (GPT-4 can write verifiable code and tasks must be verifiable from player state), and yield distinguishable predictions that the ablations then test (random curriculum, no library, no verification).",
+   "evidence_ids": [
+    "E002",
+    "E006",
+    "E007",
+    "E009",
+    "E031"
+   ],
+   "counterevidence_ids": [
+    "E024",
+    "E025"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Full prompts, API list, pseudo-code, hyper-parameters (4 rounds, top-5, temperatures, warm-up schedule) and retention chain are given; failure modes and applicability limits (GPT-4, no vision, hallucinated items/fuel) are stated; library conflict handling and the exact run supplying the library are the only gaps.",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E008",
+    "E010",
+    "E024",
+    "E025",
+    "E033"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Inventory-state results in a live simulator with 3 runs per method, fractions out of 3 and +- on iterations; but metrics are items/iterations rather than a fixed success rate, budgets are in prompting iterations, curves are figure-only and 3 runs is small.",
+    "evidence_ids": [
+     "E013",
+     "E014",
+     "E015",
+     "E016",
+     "E018"
+    ],
+    "counterevidence_ids": [
+     "E011"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "One-at-a-time ablations of curriculum, library, three feedback types and the backbone with GPT-4 fixed, plus the library helping AutoGPT; baselines are authors-adapted and unequal in per-iteration calls, GPT-4's prior Minecraft knowledge is not controlled, and magnitudes are mostly figure-only.",
+    "evidence_ids": [
+     "E019",
+     "E020",
+     "E021",
+     "E022",
+     "E023"
+    ],
+    "counterevidence_ids": [
+     "E011",
+     "E030"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Fresh world, empty inventory and four unseen tasks give a real held-out test where baselines fail and the library helps; same simulator, embodiment and task family, 3 attempts, library provenance unstated, and no contamination analysis.",
+    "evidence_ids": [
+     "E017",
+     "E018",
+     "E019",
+     "E035"
+    ],
+    "counterevidence_ids": [
+     "E030"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Three runs per cell with +- on iteration counts and a 309-sample retrieval evaluation; no intervals or tests, tiny N, and failure causes are qualitative.",
+    "evidence_ids": [
+     "E013",
+     "E016",
+     "E027",
+     "E028"
+    ],
+    "counterevidence_ids": [
+     "E024"
+    ],
+    "search_scope": [
+     "Sec 3",
+     "Sec 4",
+     "App B"
+    ]
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Budgets are equalised by prompting-iteration caps and GPT-4's 15x price is acknowledged, but tokens, calls per iteration (curriculum, critic, GPT-3.5 helpers, embeddings), latency and dollars are not reported.",
+    "evidence_ids": [
+     "E012",
+     "E014",
+     "E026"
+    ],
+    "counterevidence_ids": [
+     "E032"
+    ],
+    "search_scope": [
+     "Sec 3",
+     "Sec 4",
+     "App A",
+     "App B"
+    ]
+   }
+  }
+ },
+ "score": {
+  "raw": 82.5,
+  "display": 82.5,
+  "lower": 82.5,
+  "upper": 82.5,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": "reviewed",
+ "status_reason": "Full text incl. appendices read; scored under the broad domain scope reading with the scope question flagged for aggregation."
+}

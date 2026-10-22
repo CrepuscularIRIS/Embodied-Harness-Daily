@@ -1,0 +1,181 @@
+{
+ "batch_id": "p003",
+ "attempt": "a1",
+ "generated": "controller",
+ "papers": [
+  {
+   "paper_key": "2305.11176",
+   "n_diffs": 3,
+   "diffs": [
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      null,
+      null
+     ],
+     "son55": [
+      "rs:C25",
+      "rs:C18"
+     ]
+    },
+    {
+     "field": "rating.G",
+     "sol": 3,
+     "son55": 2
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 66.25,
+     "son55": 62.5,
+     "abs_diff": 3.75
+    }
+   ]
+  },
+  {
+   "paper_key": "2305.15695",
+   "n_diffs": 6,
+   "diffs": [
+    {
+     "field": "rs_pattern.primary",
+     "sol": "decompose_and_delegate",
+     "son55": null
+    },
+    {
+     "field": "rs_pattern.outside_taxonomy",
+     "sol": false,
+     "son55": true
+    },
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      "rs:C25"
+     ],
+     "son55": []
+    },
+    {
+     "field": "rating.E.measurement",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.cost",
+     "sol": 1,
+     "son55": 2
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 63.75,
+     "son55": 68.75,
+     "abs_diff": 5.0
+    }
+   ]
+  },
+  {
+   "paper_key": "2305.16291",
+   "n_diffs": 7,
+   "diffs": [
+    {
+     "field": "rs_pattern.sub_ids",
+     "sol": [
+      "rs:C25",
+      "rs:C03"
+     ],
+     "son55": [
+      "rs:C25",
+      null
+     ]
+    },
+    {
+     "field": "rating.M",
+     "sol": 3,
+     "son55": 4
+    },
+    {
+     "field": "rating.X",
+     "sol": 3,
+     "son55": 4
+    },
+    {
+     "field": "rating.E.measurement",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.holdout",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.statistics",
+     "sol": 3,
+     "son55": 2
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 67.5,
+     "son55": 82.5,
+     "abs_diff": 15.0
+    }
+   ]
+  },
+  {
+   "paper_key": "2305.16986",
+   "n_diffs": 2,
+   "diffs": [
+    {
+     "field": "rating.E.measurement",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 57.5,
+     "son55": 61.25,
+     "abs_diff": 3.75
+    }
+   ]
+  },
+  {
+   "paper_key": "2306.08647",
+   "n_diffs": 7,
+   "diffs": [
+    {
+     "field": "rating.G",
+     "sol": 3,
+     "son55": 4
+    },
+    {
+     "field": "rating.M",
+     "sol": 3,
+     "son55": 4
+    },
+    {
+     "field": "rating.X",
+     "sol": 3,
+     "son55": 4
+    },
+    {
+     "field": "rating.E.measurement",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "rating.E.holdout",
+     "sol": 2,
+     "son55": 1
+    },
+    {
+     "field": "rating.E.statistics",
+     "sol": 2,
+     "son55": 3
+    },
+    {
+     "field": "score.raw_diff",
+     "sol": 62.5,
+     "son55": 78.75,
+     "abs_diff": 16.25
+    }
+   ]
+  }
+ ]
+}

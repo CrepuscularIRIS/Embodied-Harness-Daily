@@ -1,0 +1,949 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p003",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2306.08647",
+  "paper_id": "2306.08647",
+  "title": "Language to Rewards for Robotic Skill Synthesis",
+  "version": "2306.08647v2",
+  "claim_type": "system_method",
+  "central_claim": "Using LLMs to define reward parameters that a real-time optimiser (MuJoCo MPC) turns into motion, via a Motion Descriptor and Reward Coder, enables interactive synthesis of diverse locomotion and manipulation skills; it reliably tackles 90% of 17 designed tasks versus 50% for a primitive-skill Code-as-Policies baseline.",
+  "scope": {
+   "in_scope": true,
+   "note": "Frozen GPT-4 harness (reward translator + MPC controller) driving a quadruped, a dexterous manipulator and a real mobile manipulator: in scope (A type)."
+  }
+ },
+ "provenance": {
+  "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + calibration/anchors.md v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e;conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1;overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": null,
+  "expectations_hash_note": "no standalone expectations file; E01-E22 are embedded in patterns/main/*.md; sha256 of sorted concatenation of patterns/**/*.md = 1fee48bd586e041dc71fa533aecfaf821056baaf9f69f940240a6d350b48ed43 (worker-computed)",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_receipt_note": "internal Subagent cannot read its own session id or receipt; not probed per run instructions",
+  "timestamp": "2026-10-22T02:27:17Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; blind seat son55, no other-seat or aggregate material read"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2306.08647v2",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2306.08647.txt",
+   "sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "format": "FULLTEXT html-full (abstract, body, appendix; figure/image content not in text)",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 Grounding Language to Actions Using Rewards",
+    "4 Experiments (4.1-4.6)",
+    "5 Discussion",
+    "Appendix A.1-A.9"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "non_text_content_unavailable": [
+    "Fig 1-9 (dataflow, results, real-robot images)"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Abstract",
+   "quote": "we introduce a new paradigm that harnesses this realization by utilizing LLMs to define reward parameters that can be optimized and accomplish variety of robotic tasks",
+   "support_explanation": "Central operation: LLM defines reward parameters, an optimizer produces motion.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Abstract",
+   "quote": "We demonstrate that our proposed method reliably tackles 90% of the designed tasks, while a baseline using primitive skills as the interface with Code-as-policies achieves 50% of the tasks.",
+   "support_explanation": "Headline claim; the 90% is a pass-rate metric (see E011).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Abstract",
+   "quote": "existing efforts in applying LLMs to robotics have largely treated LLMs as semantic planners or relied on human-engineered control primitives to interface with the robot",
+   "support_explanation": "Author gap with the nearest class (CaP-style primitive interfaces).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 1",
+   "quote": "the expression of these methods are bottlenecked by the breadth of the available primitives",
+   "support_explanation": "Stated bottleneck: breadth of hand-engineered primitives.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 3.2",
+   "quote": "we decompose the problem of language to reward into two stages: motion description and reward coding task",
+   "support_explanation": "Two LLM stages: Motion Descriptor then Reward Coder.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 3.2",
+   "quote": "we design a template that describes common movements of a robot",
+   "support_explanation": "The Motion Descriptor fills a hand-designed template per morphology.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 3.3",
+   "quote": "we use iLQG for legged locomotion tasks, while use Predictive Sampling for manipulation tasks in this work",
+   "support_explanation": "Sound optimiser (MuJoCo MPC) executes: iLQG or Predictive Sampling by embodiment.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 3.1",
+   "quote": "In this work, we use a set of generic and simple residual terms, and leverage the power of LLMs to compose different terms to generate complex behaviors.",
+   "support_explanation": "The reward API is a fixed, hand-designed set of residual terms; the LLM sets parameters and weights.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.2",
+   "quote": "Code-as-Policies [ 3 ] where the LLM generates a plan for the robot motion using a set of pre-defined robot primitive skills instead of reward functions",
+   "support_explanation": "Baseline definition: primitives designed by the authors (App A.3).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.4",
+   "quote": "For each task and method considered, we generate 10 responses from Reward Translator, each evaluated in MJPC for 50 times",
+   "support_explanation": "Evaluation design: 10 LLM samples x 50 controller runs per task and method.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.4",
+   "quote": "if we generate N pieces of code for each task and pick the best performing one",
+   "support_explanation": "Pass-rate metric selects the best-performing code using task success (oracle selection); the 90% headline rests on this metric.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.4",
+   "quote": "Our proposed approach achieves significantly higher success rate for 11/17 task categories and comparable performance for the rest tasks",
+   "support_explanation": "Per-task comparison (Fig 4/8/9 images) summarised in text.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.4",
+   "quote": "fails to generalize to novel low-level skills",
+   "support_explanation": "CaP succeeds on tasks expressible by its primitives; fails on novel low-level skills.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.4",
+   "quote": "when asked to open a drawer, the Reward Coder only baseline often forget to task the robot hand to get closer to the drawer handle",
+   "support_explanation": "Ablation of the Motion Descriptor: failures on tasks needing multi-step reasoning.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.2",
+   "quote": "an ablation of our approach that only uses Reward Coder without having access to the Motion Descriptor",
+   "support_explanation": "Definition of the ablation baseline.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "App A.2 Table 2",
+   "quote": "Open the drawer Open the drawer. The drawer needs to be pulled fully open.",
+   "support_explanation": "Task success criteria are listed per task, some qualitative (e.g. 'Robot face towards East').",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.3",
+   "quote": "We design nine tasks for the quadruped robot and eight tasks for the dexterous manipulator",
+   "support_explanation": "Seventeen author-designed tasks; the reward terms and templates were designed with them.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "App A.7",
+   "quote": "We can see that for most tasks Motion Controller achieves near perfect success rate as long as the right reward is provided",
+   "support_explanation": "Failure attribution: the translator, not the controller, drives most variance.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "App A.7",
+   "quote": "Motion Controller shows more variance in performance",
+   "support_explanation": "Dynamic or precise tasks (biped standing, upright banana) show controller variance.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.5",
+   "quote": "We showcase two examples where we teach the robot to perform complex tasks through multiple rounds of interactions.",
+   "support_explanation": "Interactive correction by a human is demonstrated, not scored.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.6",
+   "quote": "We implement a version of our method onto a mobile manipulator, and tested it on nonprehensile manipulation tasks in the real world.",
+   "support_explanation": "Real-robot test described without trial counts.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.6",
+   "quote": "In simulation, we have access to the ground-truth state for objects in the scene.",
+   "support_explanation": "Privileged object state in simulation; real world uses F-VLM detection + point cloud + AprilTag.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.6",
+   "quote": "We demonstrate sim-to-real transfer on two tasks: object pushing and object grasping.",
+   "support_explanation": "Real-world claim limited to two tasks, qualitative.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.6",
+   "quote": "For rollouts please refer to the supplementary video/website",
+   "support_explanation": "Real-world evidence is video, not counted trials.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.6",
+   "quote": "we design a regularization residual term specific to encourage steady and stable robot movements when applying our system to the real robot",
+   "support_explanation": "Real-world deployment needs a hand-added sim2real term.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 4.1",
+   "quote": "In all experiments we use GPT-4 as the underlying LLM module",
+   "support_explanation": "Single backbone.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 5 Limitations",
+   "quote": "we currently design templates of motion descriptions for each type of robot morphology, which requires manual work",
+   "support_explanation": "Per-morphology manual templates.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 5 Limitations",
+   "quote": "we currently use pre-defined reward terms whose weights and parameters are modulated by the LLMs",
+   "support_explanation": "Fixed reward-term vocabulary; time-varying rewards unsupported.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 2",
+   "quote": "these works receive reward values of rollouts when training RL policies, which requires a large number of queries to LLMs during training",
+   "support_explanation": "Nearest alternative (LLM as reward) and why it costs more queries; not run.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E030",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "App A.3",
+   "quote": "For the quadruped robot, we use the following three primitive skills",
+   "support_explanation": "CaP baseline primitives (head_towards, walk, set_joint_poses) for the quadruped.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E031",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "App A.6",
+   "quote": "For each term we select the weights for them to have about the same magnitude.",
+   "support_explanation": "Weights hand-set; sensitivity not studied.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E032",
+   "material_id": "M1",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc",
+   "locator": "Sec 5 Limitations",
+   "quote": "it can be challenging to design tasks that are not easily described in language",
+   "support_explanation": "Stated scope limit.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Reward Translator (Motion Descriptor LLM -> Reward Coder LLM) emitting calls to a fixed reward API that set parameters and weights of predefined residual terms, optimised by MuJoCo MPC",
+   "information": "user instruction (multi-turn), per-morphology motion template, reward API docs with one example, object positions (ground truth in simulation; F-VLM + point cloud + AprilTag on the real robot)",
+   "operation": "LLM stage 1 fills a motion-description template; stage 2 writes reward code; MPC (iLQG or Predictive Sampling) optimises actions in receding horizon",
+   "output": "joint-level motion executed in simulation or on a mobile manipulator",
+   "conditions": "generic residual terms cover the task; templates exist for the morphology; fast MPC; GPT-4",
+   "feedback": "human watches the real-time result and issues language corrections; no automatic verifier or solver-failure loop",
+   "selection_rule_or_data": "evaluation picks best-performing generated code by task success (pass@N); interactive use lets the human choose",
+   "persistence": "none beyond the dialogue; reset_reward() for new tasks",
+   "later_use": "not_applicable (no retained improvement claim)",
+   "claimed_effect": "solves 90% of 17 tasks (best-of-N) vs 50% for the primitive CaP; stable per-sample success on 11/17 categories; real pushing and grasping",
+   "failure_boundary": "controller variance on dynamic/precise tasks; language-only task specification; fixed reward vocabulary; real-world needs regularisation",
+   "evidence_ids": [
+    "E001",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E010",
+    "E011",
+    "E020",
+    "E022",
+    "E027",
+    "E028"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "real-robot instantiation (mobile manipulator, nonprehensile pushing and grasping)",
+   "information": "F-VLM open-vocabulary detection, point-cloud 3D box, AprilTag table pose; sim2real regularisation reward",
+   "operation": "reuse the translator with estimated object boxes as simulated state",
+   "output": "pushing and grasping motions",
+   "conditions": "state estimation adequate, jerky motions regularised",
+   "feedback": "human viewing",
+   "selection_rule_or_data": "not stated",
+   "persistence": "none",
+   "later_use": "not_applicable",
+   "claimed_effect": "complex manipulation emerges through the interactive system",
+   "failure_boundary": "no trial counts",
+   "evidence_ids": [
+    "E021",
+    "E022",
+    "E023",
+    "E024",
+    "E025"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "LLM robot interfaces rely on semantic planning or hand-engineered primitives, so expressiveness is bottlenecked by primitive breadth; low-level actions are hardware-specific and under-represented in LLM training data.",
+  "checked_gap": "Against a CaP baseline using authors-designed primitives, the reward interface solves more tasks in simulation (11/17 categories significantly higher, others comparable; 90% vs 50% best-of-N). The reward vocabulary and morphology templates are themselves hand-engineered, so the primitive bottleneck is relocated rather than removed.",
+  "lineage": [
+   "Code as Policies / SayCan (LLM over primitives) and learned language-to-reward models -> Language to Rewards (LLM-defined reward parameters + real-time MPC)",
+   "LLM-as-reward-function in RL (per-rollout queries) and AutoRL (no language interface) = neighbours on the reward side"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "Code as Policies",
+    "pinned_source": false,
+    "solved": "composition of existing primitives",
+    "unsolved_per_authors": "novel low-level skills, primitive breadth",
+    "tested_here": true
+   },
+   {
+    "name": "LLM-as-reward (Kwon et al., Hu & Sadigh)",
+    "pinned_source": false,
+    "solved": "intent-aligned rewards for RL",
+    "unsolved_per_authors": "large number of LLM queries per training",
+    "tested_here": false
+   },
+   {
+    "name": "language-conditioned learned reward models",
+    "pinned_source": false,
+    "solved": "pushing, drawer opening",
+    "unsolved_per_authors": "need language-labelled data",
+    "tested_here": false
+   }
+  ],
+  "residue": "Dependence on per-morphology templates and a predefined residual set; ground-truth state in simulation; time-varying rewards unsupported.",
+  "stakes": "Data-free, interactive synthesis of dynamic locomotion and dexterous manipulation skills from language.",
+  "method_response": "Use rewards as the interface, split translation into template-filling and reward coding, and let MJPC compute actions online.",
+  "remaining_gap": "Template/term engineering, language-only specs, real-world evidence (authors); no per-sample reliability numbers in text, no counted real trials (ours).",
+  "evidence_ids": [
+   "E003",
+   "E004",
+   "E009",
+   "E012",
+   "E013",
+   "E027",
+   "E028",
+   "E029"
+  ],
+  "unresolved": "Neighbour papers not pinned; whether the gain comes from MPC or the reward interface (versus CaP with a comparable optimiser) is untested."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial-strong",
+    "tactic_steps_checked": {
+     "1_responsibility_boundary": "yes: LLM kept to describing motion and writing reward parameters; MJPC owns exact optimisation of actions",
+     "2_typed_artifact": "yes: constrained reward-API code over predefined residual terms (schema-limited, executable)",
+     "3_verification_closure": "weak: no automatic checker; human observation closes the loop in interactive use; best-of-N selection uses task success only in evaluation",
+     "4_ablation": "partial: Reward-Coder-only ablation and CaP baseline; solver step (MPC) not ablated against another controller",
+     "5_cost": "solver/LLM cost unreported; two embodiments plus a qualitative real robot"
+    },
+    "success_checks": [
+     "boundary at comparative-advantage seam (met)",
+     "typed handoff (met)"
+    ],
+    "failure_checks": [
+     "routing/templates hand-tailored per morphology and task set (present)",
+     "cost unmeasured (present)",
+     "ablation isolating MPC vs reward interface (absent)"
+    ],
+    "evidence_ids": [
+     "E003",
+     "E004",
+     "E005",
+     "E006",
+     "E007",
+     "E008",
+     "E014",
+     "E027"
+    ],
+    "reason": "Structured reward artifact is the handoff to a sound optimiser; two-stage LLM decomposition with a template is the load-bearing step (Reward-Coder-only fails on reasoning tasks)."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": null,
+  "executes_pattern": "yes for the delegation boundary and artifact; partial for verification closure",
+  "resolves_problem": "partial: tasks beyond the baseline's primitives are solved in simulation, but the primitive bottleneck is replaced by a hand-designed reward vocabulary and templates"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "status is about the card condition; for failure-mode (F) items 'unmet' means the failure mode is present",
+  "matches": [
+   {
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01",
+    "version": "board-induced 2026-10-21",
+    "fit": "partial",
+    "executes_pattern": "partial: frozen LLM writes a formal task specification (reward-term code) and a classical optimiser (MPC) computes the motion; solver-failure feedback and compilation to skills are absent, a human closes the loop",
+    "resolves_problem": "partial",
+    "condition_checks": [
+     {
+      "condition_id": "llm_symbolic_solver_planning:S1",
+      "status": "partial",
+      "reason": "Reward-Coder-only and CaP are compared, but the solver step is not replaced by direct LLM output or another controller with the model fixed",
+      "evidence_ids": [
+       "E009",
+       "E014",
+       "E015"
+      ]
+     },
+     {
+      "condition_id": "llm_symbolic_solver_planning:S2",
+      "status": "unmet",
+      "reason": "no solver failure signal returns to the LLM; the user supplies corrections",
+      "evidence_ids": [
+       "E020"
+      ]
+     },
+     {
+      "condition_id": "llm_symbolic_solver_planning:F1",
+      "status": "unmet",
+      "reason": "failure present: hand-written reward vocabulary, templates and ground-truth state in simulation are given to the translator",
+      "evidence_ids": [
+       "E008",
+       "E022",
+       "E027"
+      ]
+     },
+     {
+      "condition_id": "llm_symbolic_solver_planning:F3",
+      "status": "unmet",
+      "reason": "failure present: LLM calls and MPC compute are unpriced",
+      "evidence_ids": [
+       "E010"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E001",
+     "E005",
+     "E007",
+     "E008"
+    ]
+   }
+  ],
+  "unassigned": [
+   "reward-parameter modulation as the interface (not a PDDL/SMT model) - nearest card R01 only by analogy",
+   "interactive language correction of rewards"
+  ],
+  "revision_proposals": [
+   "note for R01 boundary: continuous reward specification handed to an optimiser (MPC) versus discrete formal models; do not edit cards in-batch"
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "llm_symbolic_solver_planning",
+    "sub": "R01"
+   },
+   "operation_correspondence": "rs: learned model emits a structured artifact for a sound solver; embodied: LLM emits reward specification for MJPC/classical optimiser",
+   "necessary_conditions_or_differences": "R01 expects PDDL/SMT-type discrete models and solver-failure repair; here the artifact is continuous reward parameters and repair is human-driven",
+   "evidence_ids": [
+    "E005",
+    "E007",
+    "E008",
+    "E020"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E01"
+   ],
+   "applies_when": "a claim that a harness (not the model) raises embodied success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Same GPT-4 with a CaP primitive interface and a Reward-Coder-only loop are compared; the CaP primitives and prompts are authored by the proposers and no independent harness is used.",
+   "evidence_ids": [
+    "E009",
+    "E015",
+    "E030"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#E02"
+   ],
+   "applies_when": "a claim that a specific harness component causes the gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Motion Descriptor toggled (Reward-Coder-only); reward interface vs primitive interface swapped; MPC, templates and predefined reward terms are not individually toggled.",
+   "evidence_ids": [
+    "E014",
+    "E015",
+    "E009"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E03"
+   ],
+   "applies_when": "a claim that a tool helps in general",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "GPT-4 is the only LLM in all experiments.",
+   "evidence_ids": [
+    "E026"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#E04"
+   ],
+   "applies_when": "any success-rate comparison",
+   "applicable": true,
+   "status": "partial",
+   "reason": "10 translator samples x 50 controller runs per task and method, per-sample distributions shown in figures, but no intervals or paired statistics in the text.",
+   "evidence_ids": [
+    "E010",
+    "E018"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#E05"
+   ],
+   "applies_when": "a claim that a harness is more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No LLM-call, token, latency or MPC compute figures.",
+   "evidence_ids": [
+    "E010"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#E08"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Tasks, templates, reward vocabulary and prompts were co-designed by the authors, with simulator ground-truth state; no development-overlap or contamination statement.",
+   "evidence_ids": [
+    "E017",
+    "E022",
+    "E008"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E16"
+   ],
+   "applies_when": "an embodied agent's success claim",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Failure attributed to translator versus controller (near-perfect controller given right reward; variance on dynamic tasks) but not counted by endpoint.",
+   "evidence_ids": [
+    "E018",
+    "E019"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/llm_symbolic_solver_planning.md#E19"
+   ],
+   "applies_when": "a claim of transfer to a physical robot",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Real-robot pushing and grasping are shown by video with no trial counts or success rates.",
+   "evidence_ids": [
+    "E021",
+    "E023",
+    "E024"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E22",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E22"
+   ],
+   "applies_when": "a comparison between harnesses at fixed model",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Ten samples per task for every method with GPT-4; wall-clock and MPC compute are not matched or reported.",
+   "evidence_ids": [
+    "E010",
+    "E026"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Using LLM-defined reward parameters with MJPC tackles 90% of 17 designed tasks while CaP with primitive skills achieves 50%.",
+   "setting": "MuJoCo MPC, quadruped (9 tasks) and 27-DoF dexterous manipulator (8 tasks), GPT-4",
+   "baseline_control": "Reward-Coder-only, CaP with authors-designed primitives",
+   "selection_vs_test": "pass-rate metric picks the best-performing generated code per task using task success; tasks, templates and reward terms co-designed",
+   "result_denominator": "10 LLM responses x 50 MPC runs per task and method; headline fractions 15-16/17 vs 8-9/17 from the abstract percentages; per-sample numbers in Fig 4/8/9 (images)",
+   "evidence_ids": [
+    "E002",
+    "E009",
+    "E010",
+    "E011",
+    "E012",
+    "E017"
+   ],
+   "counterevidence": [
+    "E011",
+    "E017",
+    "E022"
+   ],
+   "allowed_conclusion": "With oracle selection among 10 reward programs, the reward interface covers more of the authors' 17 simulated tasks than a primitive-based CaP; per-sample reliability and independence from co-design are not readable."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Structured motion description is needed for reliable reward coding.",
+   "setting": "same tasks",
+   "baseline_control": "Reward-Coder-only",
+   "selection_vs_test": "same",
+   "result_denominator": "pass-rate curves and failure examples; text gives the drawer-opening failure",
+   "evidence_ids": [
+    "E005",
+    "E014",
+    "E015"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Supported in direction for reasoning-heavy tasks; magnitudes figure-only."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Complex real-robot skills such as non-prehensile pushing emerge from the interactive system.",
+   "setting": "mobile manipulator, F-VLM + point cloud state estimation, sim2real regularisation",
+   "baseline_control": "none",
+   "selection_vs_test": "n/a",
+   "result_denominator": "video only",
+   "evidence_ids": [
+    "E021",
+    "E023",
+    "E024",
+    "E025"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Existence demonstration of pushing and grasping on one real platform without counts."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "closed-loop simulation with state-based success on two embodiments; real-robot part has no trial counts; harness (templates, reward terms, prompts) built per embodiment on the same tasks. A reading of the cross-embodiment clause (arm + quadruped) could argue transfer, but EVIDENCE rule 2 caps development-task gains at online.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "In simulation on 17 author-designed tasks, a GPT-4 translator writing reward-term parameters for MJPC solves more tasks than a primitive-based CaP baseline when the best of 10 generated programs is taken, with a structured motion description helping reasoning-heavy tasks; per-sample reliability, generality and real-robot success are not established.",
+  "author_claim_kept": "The method reliably tackles 90% of tasks vs 50% for CaP and works on a real robot arm.",
+  "retention": "not_applicable: no retained-improvement or self-revision claim; interactive corrections are per-session",
+  "not_claimable": [
+   "90% as a deployable per-sample success rate",
+   "real-robot reliability",
+   "independence from co-designed templates and reward terms",
+   "cost-efficiency",
+   "reproduced by us"
+  ],
+  "unresolved": [
+   "Figures 4/8/9 carry the per-sample numbers",
+   "real-world trial counts absent",
+   "temperature and sampling settings of the 10 responses not stated",
+   "whether CaP's weaker controller rather than its interface explains the gap"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Specific, sourced bottleneck (primitive breadth, hardware-specific actions) with a clear lineage (CaP, language-conditioned reward models, LLM-as-reward, AutoRL), a tested nearest neighbour (CaP) and an explicit residual (templates, language-only spec, fixed reward terms).",
+   "evidence_ids": [
+    "E003",
+    "E004",
+    "E009",
+    "E013",
+    "E027",
+    "E028",
+    "E029"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "Abstract",
+    "Sec 1",
+    "Sec 2",
+    "Sec 5"
+   ]
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Operation, information (ground-truth state in sim, estimated boxes on hardware), assumptions (generic residuals, fast MPC, GPT-4) and the reason for the two-stage split are reconstructible and give distinguishable predictions (Reward-Coder-only forgets approach terms; CaP stalls beyond primitives) that the results then probe.",
+   "evidence_ids": [
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E014",
+    "E013"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Full prompts, API, templates, reward-term tables and weights, planner choice per embodiment, sim2real regularisation and state-estimation pipeline are given; failures and limits (templates, language-only, fixed terms, controller variance) are stated; LLM sampling parameters and MJPC settings are the missing details.",
+   "evidence_ids": [
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E018",
+    "E019",
+    "E025",
+    "E027",
+    "E031"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Simulator-state success criteria per task (Table 1/2) with 10 x 50 runs per task and method and failure attribution to translator vs controller; but headline uses an oracle best-of-N pass rate, several criteria are qualitative, per-task numbers are figure-only and the real-world part has no counts.",
+    "evidence_ids": [
+     "E010",
+     "E011",
+     "E016",
+     "E018"
+    ],
+    "counterevidence_ids": [
+     "E024"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Reward-Coder-only and CaP controls with the same GPT-4 give relevant contrasts, but the CaP primitives and prompts are the authors', the comparison confounds interface with controller (MPC vs primitive executor), reward terms were designed alongside the tasks, only one LLM is used and no solver ablation exists.",
+    "evidence_ids": [
+     "E009",
+     "E014",
+     "E015",
+     "E013"
+    ],
+    "counterevidence_ids": [
+     "E017",
+     "E026",
+     "E030"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "No held-out tasks: the 17 tasks, templates, reward vocabulary and prompts were co-designed; the real-robot demonstration is qualitative without counts, so it cannot serve as retained-gain evidence; contamination of GPT-4 is not discussed.",
+    "evidence_ids": [
+     "E017",
+     "E021",
+     "E024"
+    ],
+    "counterevidence_ids": [
+     "E022"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "A repeated design (10 samples x 50 runs per task) exposes both translator and controller variance, the pass-rate curve summarises stability, and failures are attributed qualitatively; no intervals or paired tests in the text and numbers are figure-only.",
+    "evidence_ids": [
+     "E010",
+     "E011",
+     "E018",
+     "E019"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 4.4",
+     "App A.7"
+    ]
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Equal sample counts across methods are the only budget control; LLM calls, tokens, MPC compute and latency are not reported, and cost is not discussed as a limitation.",
+    "evidence_ids": [
+     "E010"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 4",
+     "Sec 5",
+     "App A"
+    ]
+   }
+  }
+ },
+ "score": {
+  "raw": 78.75,
+  "display": 78.8,
+  "lower": 78.75,
+  "upper": 78.75,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": "reviewed",
+ "status_reason": "Full text incl. appendices read; figure-only per-sample results kept as unresolved."
+}

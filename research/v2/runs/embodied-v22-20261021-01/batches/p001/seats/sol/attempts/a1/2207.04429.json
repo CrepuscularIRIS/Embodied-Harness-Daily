@@ -1,0 +1,875 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p001",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2207.04429",
+    "paper_id": "2207.04429",
+    "title": "LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action",
+    "version": "2207.04429v2",
+    "claim_type": "system_method",
+    "central_claim": "LM-Nav composes large pretrained language, vision and navigation models without target-environment finetuning or language-labelled navigation data, allowing a mobile robot to follow free-form textual instructions over long distances in novel outdoor settings."
+  },
+  "provenance": {
+    "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "0f9e90179cca637227f34fd72bb78de4365c82b39430b93e0e9775de2e55cc42",
+    "expectations_hash": "f2b30256da73535ceb775213a0fd83d61196d05d58689d31c0f963419a474ba1",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T02:03:11.947575+00:00",
+    "notes": "anchors_version=v2 (3ececdd11cc3d144), phase=production; production-under-anchors-v2. Rubric is not formally frozen; no formal ranking or Reel authorization. Session ID and receipt_ref are unavailable from this worker invocation; an inherited transcript path is not treated as an invocation receipt. No network, paper-code execution, or peer conclusions used.",
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "score_qualification": "production-under-anchors-v2",
+    "domain_cards_binding": {
+      "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping relative card paths to file SHA256",
+      "files": {
+        "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+        "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+        "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+        "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+        "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+        "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+      },
+      "taxonomy_sha256": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "conditions_sha256": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+    },
+    "expectations_binding": {
+      "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping paths to exact expectation lines: domain main-card lines beginning - **E; original RS main-card lines under Reviewer expectations. All source lines are included, not only applicable ones.",
+      "sources": {
+        "patterns/main/observe_act_interface.md": [
+          "- **Extra tools are optional and checked per backbone.** Tools are added beside primitives rather than replacing them, harness parse/coordinate/feedback correctness is verified before comparison, and effects are reported per model: optional hybrid tools raise the strongest model 82.3 -> 85.7 SR at 0.59x calls, while imposed waypoints lift weak models (5 -> 43 SR) and move strong ones by <=2 points (2607.26148#s2, 2608.03327#s1).",
+          "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success.",
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E03 (ablation, common_practice).** Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student. — _applies when_ a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student.",
+          "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+          "- **E06 (dataset, common_practice).** For a VLN-CE harness, report SR, SPL, OSR and NE on R2R-CE val_unseen, either on the shared 100-episode zero-shot subset or the full split. State which one, and do not mix subset results with full-split numbers of trained methods as if they were matched. — _applies when_ an empirical claim about a zero-shot or harness-based VLN-CE / ObjectNav agent.",
+          "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+          "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+          "- **E20 (other, common_practice).** State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested. — _applies when_ a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+          "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        ],
+        "patterns/main/external_verification_control.md": [
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+          "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check.",
+          "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+          "- **E20 (other, common_practice).** State the depth assumption behind depth-based perception tools (pixel depth queries, back-projection, stop checks): whether depth is metric and calibrated, and whether behaviour under non-metric or scene-dependent depth was tested. — _applies when_ a harness whose tools or gates convert depth readings into distances, targets or stop decisions.",
+          "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+        ],
+        "patterns/main/llm_symbolic_solver_planning.md": [
+          "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+          "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+          "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+          "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+          "- **E17 (dataset, common_practice).** Evaluate harness optimization, skill libraries, memory and replay cards on held-out tasks or episodes disjoint from the search, mining or validation set, and report overfitting across iterations. Gains on recurring tasks with ground-truth feedback do not show generalization. — _applies when_ a claim that a self-improving harness, skill library, playbook or experience memory improves performance.",
+          "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+        ],
+        "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": [
+          "- **Run an ablation that isolates the conditioning signal — comparing instruction, format, or retrieval conditioning against the same multitask training without it — to prove the gain comes from conditioning and not merely from broader exposure.** _(source: both)_",
+          "- **Provide a contamination or data-overlap analysis between the adaptation tasks and the held-out evaluation set before any genuine held-out or zero-shot generalization claim is accepted.** _(source: both)_",
+          "- **Compare against the obvious cheaper alternative — longer input context, nearest-neighbor lookup, or plain multitask fine-tuning — so the unique value of the conditioning or retrieval is established rather than assumed.** _(source: reject_reviews)_",
+          "- **Justify each component of a multi-module conditioning pipeline with ablations that isolate its contribution; shallow ablations over interacting components are treated as insufficient.** _(source: both)_",
+          "- **Demonstrate that the recipe is generic across multiple tasks or domains and explain how the conditioning signal is obtained without a manual, per-task search.** _(source: reject_reviews)_",
+          "- **Characterize sensitivity to the quality and coverage of the conditioning source — the demonstration or retrieval database — and to the distributional gap between that source and the test domain.** _(source: both)_"
+        ],
+        "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": [
+          "- **Report the cost of the added structure — token and API budget, number of model or solver calls, and solver latency — rather than only end-task accuracy.** _(source: both)_",
+          "- **Provide ablations that isolate each component's marginal contribution, and especially show the claimed load-bearing step is what drives the gains rather than extra data or compute.** _(source: both)_",
+          "- **Disclose the exact prompts and implementation details so the decomposed pipeline is reproducible and the results are not suspected prompt-engineering artifacts.** _(source: both)_",
+          "- **Demonstrate generalization beyond a single narrow benchmark or domain, ideally with cross-domain or real-world tasks rather than templates specific to one dataset.** _(source: both)_",
+          "- **Compare fairly against simpler unified or end-to-end baselines and against concurrent decomposition methods, clarifying precisely what is novel relative to them.** _(source: both)_",
+          "- **Justify that the decomposition targets a genuine structural bottleneck — ideally evidenced by an empirical diagnostic linking a sub-task to the final outcome — instead of imposing structure for its own sake.** _(source: both)_"
+        ]
+      },
+      "source_file_sha256": {
+        "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+        "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+        "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+        "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": "b5aac2a729f2c46ae2a7a593823115fec9749da30477c6aeb75a2c36325f085b",
+        "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd"
+      }
+    },
+    "protocol_hashes": {
+      "pattern_protocol": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+      "batch_contract": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+      "worksheet": "b0ca3ac92a458c934894aee62c88d6de8ab53901047326e0c8abdfd1a0d3219e",
+      "evidence": "612b7df7eec04add15b47c9316206fee7f572d824a03143fb82bdfcc5aab3ce2",
+      "evidence_schema": "b7dd7fa66ce5d3eb4a87e13f65fdb7d9ac69b9a268bb84474049274f9f65b8cb",
+      "rs_parents": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b"
+    },
+    "reference_hashes_verified": true,
+    "validation_note": "Same open attempt; initial exact-quote assertion stopped before LM-Nav write because a Python string escaped \\bar as backspace. Fixed by using a short continuous literal quote. First two atomic records were preserved; no missing-material conclusion or score was derived from that tooling error."
+  },
+  "materials": [
+    {
+      "material_id": "M001",
+      "paper_id": "2207.04429",
+      "version": "2207.04429v2",
+      "url": "https://arxiv.org/html/2207.04429v2",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2207.04429.txt",
+      "sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "sections_read": [
+        "Abstract",
+        "Sections1–6",
+        "AppendicesA–E"
+      ],
+      "complete": true,
+      "missing_sections": []
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5; local text L21",
+      "quote": "For all experiments, the weights of LLM , VLM , and VNM are frozen",
+      "support_explanation": "No parameter finetuning is not no target-environment map collection.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.2; local text L21",
+      "quote": "we first construct the graph by manually driving the robot and collecting image and GPS observations.",
+      "support_explanation": "Target-site traversal constructs the harness map before evaluation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.2; local text L21",
+      "quote": "We tested our system on 20 queries",
+      "support_explanation": "Twenty instruction experiments, not a large repeated-trial suite.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.3 narrative; local text L21",
+      "quote": "LM-Nav can consistently follow the instructions in 85% of the experiments",
+      "support_explanation": "Preserve the headline and its discrepancy with net-success table rows.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Table1; local text L21",
+      "quote": "EnvSmall-10 0.8 0.96 0.1 0.9 LM-Nav (Ours) EnvLarge-10 0.8 0.89 0 0.8",
+      "support_explanation": "Net-success rows both0.8 versus narrative85%; planning0.9/0.8 averages85%. That reconciliation is plausible but not asserted as fact.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Table4; local text L21",
+      "quote": "Max Likelihood 0.6 0.69 0.2 0.17 LM-Nav (Ours) 0.9 0.80 0.8 0.99",
+      "support_explanation": "Joint reachability-aware search improves planning over landmark-likelihood-only selection.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.3; local text L21",
+      "quote": "counts the average number of human interventions required per experiment, due to unsafe maneuvers",
+      "support_explanation": "Disengagement is distinct from instruction completion.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section6; local text L24",
+      "quote": "LM-Nav only focuses on the landmarks and disregards any verbs or other commands",
+      "support_explanation": "Free-form command interpretation is narrower than arbitrary instruction following.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section4.4; local text L18",
+      "quote": "we employ dynamic programming.",
+      "support_explanation": "Frozen model outputs feed precise graph-objective optimization, not unconstrained direct motion commands.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.1; local text L21",
+      "quote": "The LLM and VLM queries are pre-computed on a remote workstation",
+      "support_explanation": "Offboard construction/query costs differ from onboard execution.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.4; local text L21",
+      "quote": "We report the detection successful if any of the top 3 predictions adhere to the contents of the image.",
+      "support_explanation": "The100-image/30-landmark metric is permissive, not a strict grounded path-success oracle.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.2; local text L21",
+      "quote": "the overhead image and spatial localization of the landmarks is not available to the robot",
+      "support_explanation": "Do not treat visualization-only overhead imagery as planner input.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "locator": "Section5.3; local text L21",
+      "quote": "we report the average efficiency over successful experiments.",
+      "support_explanation": "Efficiency is conditioned on success and cannot substitute for unconditional task success.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "M001",
+      "material_sha256": "061e1f39838b4f072aa1ba878419b10d816964350f894dfdb44ece6c999db3bb",
+      "quote": "GPS-Nav (No VNM ) EnvSmall-10 0.23 0.93 0.75 0.9",
+      "locator": "Table1; local text L21",
+      "support_explanation": "Execution ablation: GPS-only net success0.23,efficiency0.93,interventions0.75,planning0.9; interventions and success denominator details remain limited.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S01",
+      "object": "Text instruction versus landmark/graph routing",
+      "information": "GPT-3 sees instruction/examples; CLIP scores landmarks against stored robot images; navigation distances, GPS and temporal links build a graph. Overhead imagery is not robot input.",
+      "operation": "Extract ordered landmarks; optimize CLIP grounding minus route distance using dynamic programming/Dijkstra.",
+      "output": "A landmark-respecting path of image nodes.",
+      "conditions": "Landmarks present/recognizable; graph connectivity and distance estimates reflect traversability.",
+      "feedback": "CLIP/navigation scores constrain construction, not execution-failure feedback to the LLM.",
+      "selection_rule/data": "Graph objective trades landmark likelihood against travel distance and preserves order; likelihood-only control drops reachability.",
+      "persistence": "Static harness design and per-episode context; no accepted cross-task optimizer change is claimed.",
+      "later_use": "Fixed components are reused on tasks; within-episode context is read by subsequent planner calls. This is not measured retained self-improvement.",
+      "claimed_effect": "Better valid/efficient route selection than independent landmark detection.",
+      "failure_boundary": "Hard landmarks, lighting and ignored verbs can invalidate instructions.",
+      "evidence_ids": [
+        "E002",
+        "E006",
+        "E008",
+        "E009",
+        "E011",
+        "E012"
+      ]
+    },
+    {
+      "sig_id": "S02",
+      "object": "Image path versus long physical traversal",
+      "information": "Frozen ViNG-style goal-conditioned policy; front RGB,GPS,odometry/IMU; precomputed offboard route.",
+      "operation": "Execute image subgoals onboard; compare against naive GPS-directed controller.",
+      "output": "Jackal traversal up to800m with intervention and efficiency records.",
+      "conditions": "Previously manually mapped target environment; outdoor Jackal-specific controller.",
+      "feedback": "Visual feedback in low-level navigation; human safety disengagement.",
+      "selection_rule/data": "Static solver path, not persistent accepted policy revision.",
+      "persistence": "Static harness design and per-episode context; no accepted cross-task optimizer change is claimed.",
+      "later_use": "Fixed components are reused on tasks; within-episode context is read by subsequent planner calls. This is not measured retained self-improvement.",
+      "claimed_effect": "Follow landmark-defined routes over6km cumulative travel.",
+      "failure_boundary": "No arbitrary instruction recovery, broad embodiment transfer or fully specified arrival tolerance.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E005",
+        "E007",
+        "E010"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Language-free self-supervised navigation policies cannot interpret free-form instructions; pretrained text/vision models cannot execute safe traversals.",
+    "checked_gap": "The explicit seam connects ordered language landmarks to traversability-aware paths; removing reachability reduces planning validity/efficiency, while GPS-only execution fails on obstacles.",
+    "lineage/closest_adjacent": [
+      {
+        "source": "2207.04429v2 Sections2–4/AppendixB; M001",
+        "method": "ViNG image-goal navigation, GPT-3 extraction and CLIP retrieval.",
+        "source_verification": "Component lineage inspected through this primary paper; separate original ViNG/CLIP source versions were not supplied."
+      },
+      {
+        "source": "2204.01691v2; shared fixed input9dbf3652350942188f1b32e9458872e0716cb0e683ae64010e9b19ecfe9a39af",
+        "method": "Language usefulness plus robot affordance selection.",
+        "source_verification": "Read directly in batch; LM-Nav instead optimizes ordered landmark graph routes. Fixed source versions are not a proof of historical priority."
+      }
+    ],
+    "residue": "Linguistic landmark likelihood alone ignores route connectivity and long-range traversability.",
+    "stakes": "Wrong routes or unsafe direct motions despite correct landmark recognition.",
+    "method_response": "Joint grounding/route objective plus image-goal navigation.",
+    "remaining_gap": "Requires target-site mapping, reliable visible landmarks and a particular outdoor navigator; ignores verbs and nuanced constraints.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E006",
+      "E007",
+      "E008",
+      "E009"
+    ],
+    "unresolved": [
+      "Independent source-version audit of ViNG predecessor.",
+      "Narrative85% versus Table1 net0.8/0.8.",
+      "Arrival threshold, per-query repeats and graph temporal-threshold discrepancy."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          {
+            "condition": "C25 steps1–2 structured boundary",
+            "status": "met",
+            "reason": "Ordered landmarks and graph nodes distinguish language, visual, solver and control roles.",
+            "evidence_ids": [
+              "E002",
+              "E009"
+            ]
+          },
+          {
+            "condition": "C25 step3 solver closure",
+            "status": "partial",
+            "reason": "Optimization checks supplied estimates/objective, not the truth of all landmarks; no LLM repair on failure.",
+            "evidence_ids": [
+              "E006",
+              "E008",
+              "E009"
+            ]
+          },
+          {
+            "condition": "C25 step4 isolate mechanism",
+            "status": "met",
+            "reason": "Removing reachability sharply reduces planning success.",
+            "evidence_ids": [
+              "E006"
+            ]
+          },
+          {
+            "condition": "C25 step5 cost/generalization",
+            "status": "partial",
+            "reason": "Long real traversals are demonstrated; mapping and remote queries are constructed per site and not fully costed.",
+            "evidence_ids": [
+              "E002",
+              "E003",
+              "E010"
+            ]
+          }
+        ],
+        "success_checks": [
+          {
+            "condition": "Soundness seam",
+            "status": "partial",
+            "reason": "Exact graph optimization is conditional on imperfect perception and connectivity estimates.",
+            "evidence_ids": [
+              "E006",
+              "E009",
+              "E011"
+            ]
+          },
+          {
+            "condition": "Removable load-bearing mechanism",
+            "status": "met",
+            "reason": "Likelihood-only control isolates the joint path objective.",
+            "evidence_ids": [
+              "E006"
+            ]
+          }
+        ],
+        "failure_checks": [
+          {
+            "condition": "Off-the-shelf assembly boundary",
+            "status": "partial",
+            "reason": "Explicit objective is a concrete integration insight; not every component is essential under equal-budget complete reruns.",
+            "evidence_ids": [
+              "E006",
+              "E011"
+            ]
+          },
+          {
+            "condition": "Hand-tailored/privileged substrate",
+            "status": "partial",
+            "reason": "Target map from manual RGB/GPS; overhead imagery is only visualization.",
+            "evidence_ids": [
+              "E002",
+              "E012"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E006",
+          "E008",
+          "E009",
+          "E010"
+        ],
+        "reason": "GPT-3 extracts landmarks, CLIP grounds them, the graph solver owns ordered routing and the policy executes. C25 is partial: solver-consumable artifacts are present, but physical execution failures do not repair the language extraction.",
+        "card_path": "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md",
+        "subcard_path": "research/reference/researchstudio-15-31/ideation-sub-patterns/C25.md"
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "GPT-3 extracts landmarks, CLIP grounds them, the graph solver owns ordered routing and the policy executes. C25 is partial: solver-consumable artifacts are present, but physical execution failures do not repair the language extraction.",
+    "executes_pattern": {
+      "status": "partial",
+      "reason": "GPT-3 extracts landmarks, CLIP grounds them, the graph solver owns ordered routing and the policy executes. C25 is partial: solver-consumable artifacts are present, but physical execution failures do not repair the language extraction.",
+      "evidence_ids": [
+        "E002",
+        "E006",
+        "E008",
+        "E009",
+        "E010"
+      ]
+    },
+    "resolves_problem": {
+      "status": "partial",
+      "reason": "Reported gains address the bottleneck within measured settings; residual failures and untested deployment conditions remain.",
+      "evidence_ids": [
+        "E002",
+        "E006",
+        "E008",
+        "E009",
+        "E010"
+      ]
+    }
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [],
+    "unassigned": true,
+    "reason": "R01/llm_symbolic_solver_planning was read but not forced: GPT-3 emits landmarks, not a formal domain/problem model; the harness constructs graph/objective and no solver-failure-to-LLM repair is shown. K104 is also inexact because landmarks are open-vocabulary, not fixed semantic actions. Frozen LLM–VLM–VNM route composition has no sufficiently close existing subcard.",
+    "candidate_checks": [
+      {
+        "main": "llm_symbolic_solver_planning",
+        "sub": "R01",
+        "version": "board-induced2026-10-21",
+        "fit": "weak/not assigned",
+        "condition_checks": [
+          {
+            "condition": "S1 solver ablation",
+            "status": "met",
+            "reason": "Joint objective is ablated.",
+            "evidence_ids": [
+              "E006"
+            ]
+          },
+          {
+            "condition": "S2 repair feedback",
+            "status": "unmet",
+            "reason": "No solver-failure-driven LLM repair.",
+            "evidence_ids": [
+              "E009"
+            ]
+          },
+          {
+            "condition": "F1 supplied state/domain",
+            "status": "partial",
+            "reason": "Manual mapping supplies estimated image/GPS structure, not an LLM-written formal model.",
+            "evidence_ids": [
+              "E002",
+              "E012"
+            ]
+          },
+          {
+            "condition": "F3/F5 small single-run and unpriced cost",
+            "status": "partial",
+            "reason": "20 queries and remote precomputation without complete cost.",
+            "evidence_ids": [
+              "E003",
+              "E010"
+            ]
+          }
+        ],
+        "card_hashes": {
+          "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+          "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+        }
+      }
+    ],
+    "revision_proposals": [
+      {
+        "status": "pending; no card edited",
+        "proposal": "Consider a frozen multimodel landmark-grounding/graph-routing subpattern only after broader fixed-source support.",
+        "evidence_ids": [
+          "E002",
+          "E006",
+          "E009"
+        ]
+      }
+    ]
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": null,
+        "sub": null
+      },
+      "operation_correspondence": "Learned extraction/grounding feed precise route optimization and image-goal execution.",
+      "necessary_conditions_and_differences": "R01 needs LLM-written formal task models and solver-driven repair; absent conditions prevent an assignment based only on the word solver.",
+      "evidence_ids": [
+        "E002",
+        "E006",
+        "E009"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E02",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/llm_symbolic_solver_planning.md",
+          "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+          "embedded_text": "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+        }
+      ],
+      "applies_when": "Solver/interface contribution.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Likelihood-only/VNM controls are strong; LLM/VLM alternatives mainly use component benchmarks rather than matched-budget full robot reruns.",
+      "evidence_ids": [
+        "E006",
+        "E011"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/llm_symbolic_solver_planning.md",
+          "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+          "embedded_text": "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset."
+        }
+      ],
+      "applies_when": "Success rates on fixed instructions.",
+      "applicable": true,
+      "status": "unmet",
+      "reason": "Twenty queries without per-query repeats/CIs;85% headline is internally ambiguous. Full Section5/AppendicesC–E inspected.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E005"
+      ],
+      "score_item": [
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/llm_symbolic_solver_planning.md",
+          "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+          "embedded_text": "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+        }
+      ],
+      "applies_when": "Practical delegated computation.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Remote/onboard split is explicit; calls/tokens/map acquisition time/USD not jointly measured.",
+      "evidence_ids": [
+        "E002",
+        "E010"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/llm_symbolic_solver_planning.md",
+          "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+          "embedded_text": "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+        }
+      ],
+      "applies_when": "Training-free/novel environment claim.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Frozen weights and manual target mapping are disclosed; novel-for-pretraining is not construction-unseen harness evaluation.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+      "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+      "source_refs": [
+        {
+          "path": "patterns/main/llm_symbolic_solver_planning.md",
+          "sha256": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+          "embedded_text": "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+        }
+      ],
+      "applies_when": "Physical navigation beyond qualitative demos.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "20 physical experiments in two10-query environments are counted; complete per-query outcomes and arrival tolerance are absent.",
+      "evidence_ids": [
+        "E003",
+        "E005",
+        "E007"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "rs:decompose_and_delegate:added_cost",
+      "version": "ResearchStudio15+31 frozen RS_MANIFEST sha256=3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "source_strength": "corpus-derived original ResearchStudio review expectation; transferred check, not an actual review of this paper",
+      "source_refs": [
+        {
+          "path": "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md",
+          "sha256": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+          "embedded_text": "- **Report the cost of the added structure — token and API budget, number of model or solver calls, and solver latency — rather than only end-task accuracy.** _(source: both)_"
+        }
+      ],
+      "applies_when": "The claimed frozen-model conditioning or delegated pipeline changes task performance; transfer only the stated control principle, not a requirement to perform irrelevant multitask training.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Cost-bearing components are described, but complete model/solver/human cost and equal-budget alternatives are not measured.",
+      "evidence_ids": [
+        "E002",
+        "E009",
+        "E010"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "rs:decompose_and_delegate:component_isolation",
+      "version": "ResearchStudio15+31 frozen RS_MANIFEST sha256=3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "source_strength": "corpus-derived original ResearchStudio review expectation; transferred check, not an actual review of this paper",
+      "source_refs": [
+        {
+          "path": "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md",
+          "sha256": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+          "embedded_text": "- **Provide ablations that isolate each component's marginal contribution, and especially show the claimed load-bearing step is what drives the gains rather than extra data or compute.** _(source: both)_"
+        }
+      ],
+      "applies_when": "The claimed frozen-model conditioning or delegated pipeline changes task performance; transfer only the stated control principle, not a requirement to perform irrelevant multitask training.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Load-bearing controls exist, but full-system executed alternatives or complete per-component same-budget reruns remain incomplete.",
+      "evidence_ids": [
+        "E006",
+        "E011",
+        "E014"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C01",
+      "text": "LM-Nav composes large pretrained language, vision and navigation models without target-environment finetuning or language-labelled navigation data, allowing a mobile robot to follow free-form textual instructions over long distances in novel outdoor settings.",
+      "setting": "GPT-3/CLIP/ViNG frozen; Jackal outdoors;2maps,20queries,over6km cumulative,goals up to800m.",
+      "baseline/control": "GPS-Nav removes learned local navigation; likelihood-only removes graph reachability. GPS-Nav Table1 small-site net0.23 versus LM-Nav0.8; intervention0.75 versus0.1.",
+      "selection_vs_test": "Target-site graph built through manual RGB/GPS traversal before instruction evaluation; no parameter finetuning.",
+      "result/denominator": "Narrative85%; Table1 net0.8/0.8,planning0.9/0.8 across two10-query environments; efficiency0.96/0.89,interventions0.1/0.0. Efficiency averaged on successful experiments.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E007",
+        "E013",
+        "E014"
+      ],
+      "counterevidence": "No silent identification of85% with net success; arrival criterion and repeated trials incomplete.",
+      "allowed_conclusion": "Counted physical frozen-model composition on previously mapped landmark routes, not universal commands or construction-unseen transfer."
+    },
+    {
+      "claim_id": "C02",
+      "text": "Joint visual matching and navigational affordances produce feasible efficient paths.",
+      "setting": "Same graphs and20 prompts, ordered landmark objective.",
+      "baseline/control": "Maximum-likelihood landmark selection.",
+      "selection_vs_test": "Same evaluation routes, not separate held-out planner-selection benchmark.",
+      "result/denominator": "Planning0.6→0.9 small,0.2→0.8 large; planning efficiency0.69→0.80 and0.17→0.99. CLIP87% retrieval uses permissive top3 over100images/30labels.",
+      "evidence_ids": [
+        "E006",
+        "E009",
+        "E011"
+      ],
+      "counterevidence": "Graph/perception estimates remain fallible; intended-path validity is narrower than full instruction semantics.",
+      "allowed_conclusion": "Reachability-aware objective is load-bearing on these route-planning tasks."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported physical traversals and solver ablations support frozen multimodel navigation for landmark routes in sites traversed for map construction. Universal instruction semantics, construction-unseen transfer and exact physical85% headline are not established.",
+    "unresolved": [
+      "Narrative/table net-success discrepancy preserved.",
+      "No quantitative arrival threshold or repeated per-query uncertainty.",
+      "AppendixB temporal-link prose versus algorithm; AppendixA stated three versus displayed two examples. These are reconstruction issues, not proof of failure."
+    ],
+    "reproduction": "No reproduction or paper-code execution."
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Specific language-navigation seam and reachability residual with measured ablation costs; separate fixed predecessor versions are not available for exhaustive neighbor audit.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E008",
+        "E009"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 4,
+      "reason": "Ordered landmarks, image grounding and traversal distances feed an explicit objective and reconstructible dynamic-programming solver. Removing connectivity makes a precise, tested prediction; this is mechanism fit, not guaranteed perception.",
+      "evidence_ids": [
+        "E002",
+        "E006",
+        "E009"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Pipeline, permissions and boundaries mostly explicit, including target mapping and no overhead input. Threshold/example-count discrepancies limit exact reconstruction. No retained self-improvement is needed for this static harness.",
+      "evidence_ids": [
+        "E002",
+        "E008",
+        "E009",
+        "E010",
+        "E012"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Counted traversals, route validity, efficiency and interventions are readable; arrival threshold/per-query denominators incomplete and85% differs from table net success. v2 cap2.",
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E005",
+          "E007",
+          "E013"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Same-graph solver ablation and VNM removal isolate load-bearing steps; alternatives are not all complete equal-budget robot reruns and retrieval metric is permissive.",
+        "evidence_ids": [
+          "E006",
+          "E009",
+          "E011",
+          "E014"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Frozen components encounter new deployment sites, but site observations construct the graph/harness before evaluation; no construction-unseen retained-benefit split.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "20 experiments and failure descriptions, but no independent per-query repeats/variance/CIs. Component counts cannot supply full-system uncertainty.",
+        "evidence_ids": [
+          "E003",
+          "E005",
+          "E007",
+          "E011"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Offboard precomputation/onboard VNM split specified; actual API calls/tokens/latency/USD and map acquisition cost not measured. Methods/evaluation/AppendicesA–E inspected.",
+        "evidence_ids": [
+          "E002",
+          "E009",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 68.75,
+    "display": 68.8,
+    "lower": 68.75,
+    "upper": 68.75,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "qualification": "production-under-anchors-v2"
+  },
+  "status": "reviewed",
+  "reason": "Complete methods/results/AppendicesA–E reviewed. Online scoped evidence, not transfer; preserve numerical/reconstruction inconsistencies. Domain unassigned is a fit decision, not outside the original taxonomy. Provisional production-under-anchors-v2."
+}

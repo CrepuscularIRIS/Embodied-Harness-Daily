@@ -1,0 +1,48 @@
+{
+ "batch_id": "p009",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2311.13373",
+   "paper_id": "2311.13373",
+   "version": "2311.13373v6",
+   "title": "Large Language Model as a Policy Teacher for Training Reinforcement Learning Agents",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2311.13373.txt",
+   "material_sha256": "32b5cd520e6d812c78b6712f52357eed48105134bba24ac063ffb0ae125efb7b"
+  },
+  {
+   "paper_key": "2311.15033",
+   "paper_id": "2311.15033",
+   "version": "2311.15033v1",
+   "title": "Agent as Cerebrum, Controller as Cerebellum: Implementing an Embodied LMM-based Agent on Drones",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2311.15033.txt",
+   "material_sha256": "703e2d07a20f51d6aad0039581597caedd5390fb3a54b6165a266982f815d715"
+  },
+  {
+   "paper_key": "2312.03275",
+   "paper_id": "2312.03275",
+   "version": "2312.03275v1",
+   "title": "VLFM: Vision-Language Frontier Maps for Zero-Shot Semantic Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2312.03275.txt",
+   "material_sha256": "d23b9643cb93d897cffb966504b061af4b2464e262fb97bf7d1ab0c31c282fb0"
+  },
+  {
+   "paper_key": "2312.09348",
+   "paper_id": "2312.09348",
+   "version": "2312.09348v1",
+   "title": "LLM-MARS: Large Language Model for Behavior Tree Generation and NLP-enhanced Dialogue in Multi-Agent Robot Systems",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2312.09348.txt",
+   "material_sha256": "4674a20fc408361f4425ff6fe88e5105fbf0e879a9315fb230930b159b14ee17"
+  },
+  {
+   "paper_key": "2401.02695",
+   "paper_id": "2401.02695",
+   "version": "2401.02695v2",
+   "title": "VoroNav: Voronoi-based Zero-shot Object Navigation with Large Language Model",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2401.02695.txt",
+   "material_sha256": "2f1a40b9faaf28f9aace3e70b24674646a687d240a3dad11627bf2f0b7754405"
+  }
+ ],
+ "input_hash": "4e5558f3cbf3e7f2e1c8767a1bef610c1310eec3f5d42801ba871a94c0885613"
+}

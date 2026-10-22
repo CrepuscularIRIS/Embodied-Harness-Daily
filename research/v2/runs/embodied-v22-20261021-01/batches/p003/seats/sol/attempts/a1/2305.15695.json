@@ -1,0 +1,762 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p003",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2305.15695",
+    "paper_id": "2305.15695",
+    "title": "Asking Before Acting: Gather Information in Embodied Decision Making with Language Models",
+    "version": "2305.15695v2",
+    "claim_type": "system_method",
+    "central_claim": "Asking Before Acting equips LLM embodied agents with an explicit information-gathering/questioning ability and finetuning to improve decision-making efficiency and success in unfamiliar or ambiguous environments, with simulated and real-world demonstrations."
+  },
+  "provenance": {
+    "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "9a72d5e21f5b54c6b91a81ae94092247a52865c93b9061b3f28b92f77e6fa90b",
+    "expectations_hash": "e906455d1c14bb6477a47f2e4d4691396086c0ed0e83b15bdf3664d8b45f81e4",
+    "asset_hash_scheme": "SHA256(canonical JSON relative-path -> SHA256(file bytes), sort_keys UTF8 ensure_ascii=false compact)",
+    "domain_card_assets": {
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "research/patterns/conditions.json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "research/patterns/taxonomy.json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e"
+    },
+    "expectation_assets": {
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7"
+    },
+    "rs_assets": {
+      "research/reference/researchstudio-15-31/MANIFEST.tsv": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "research/reference/researchstudio-15-31/PARENTS.tsv": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+      "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+      "research/reference/researchstudio-15-31/ideation-sub-patterns/C25.md": "ced46168bbcc6ab1aeaf9a242b47631d6076097bd8758c08560c3faa888da4ff"
+    },
+    "expectations_note": "Expectations are embedded in fixed main cards; no standalone expectations asset. Historical reviewer expectations are source-derived checks, not evidence of this paper's review outcome.",
+    "model_type": "sonnet",
+    "model_type_description": "sonnet type overlay gpt-6.1-sol (6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "actual_model_basis": "Assigned runtime identity; no model probing or reconfiguration.",
+    "session_id": null,
+    "receipt_ref": null,
+    "session_receipt_unavailable_reason": "No independently available subagent session ID/receipt in assigned runtime; not fabricated or probed.",
+    "timestamp": "2026-10-22T02:29:12.037315+00:00",
+    "phase": "production",
+    "anchors_version": "v2",
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "score_regime": "production-under-anchors-v2",
+    "formally_frozen": false,
+    "downstream_restriction": "Not for formal ranking/Reel before further user confirmation.",
+    "blindness": "Only assigned manifest/materials, fixed rules/cards and designated anchors read; no other-seat, aggregate, old scores or outcome labels read."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2305.15695v2",
+      "version": "2305.15695v2",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.15695.txt",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sections_read": [
+        "Abstract and introduction",
+        "Related work",
+        "Sec 3 ABA and ABA-FT methods",
+        "Sec 4.1 ALFWorld and variants, tables/figures",
+        "Sec 4.2 Ravens arm simulation",
+        "Sec 4.3 human-executed real-world scenes",
+        "Limitations/conclusion",
+        "Appendices A–L including oracle audit, training, full trajectories and asking statistics"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "extraction_limits": "Full supplied text including appendices read. No external videos, code, or linked pages retrieved.",
+      "completeness_basis": "Methods, experimental protocol/results, limitations and end of supplied appendices inspected; completeness is text-material completeness, not independent verification of figures or software."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Sec 3 ABA-FT; extracted-text L15; character 18556",
+      "quote": "we intentionally corrupt the expert policy by randomly injecting noisy actions with probability p",
+      "support_explanation": "Training uses corrupted expert trajectories, not demonstrated autonomous on-policy teacher improvement.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Appendix E; extracted-text L39; character 63904",
+      "quote": "we use LoRA",
+      "support_explanation": "Fine-tuning is a separate extension from frozen in-context ABA; 1500 ambiguous and500 multiround trajectories, r16, LR1e-5.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Table 1; extracted-text L18; character 22948",
+      "quote": "ABA / G35 mean of 3",
+      "support_explanation": "Main GPT3.5 results average three seeds; full table reports ABA84±3/85±4 vs ReAct64±1/65±2 ID/OOD.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Appendix C; extracted-text L33; character 59879",
+      "quote": "72.5\\pm 9.7",
+      "support_explanation": "Eight scenarios × five questions audit of simulated human model; answer noise is material.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Sec 4.2; extracted-text L18; character 31560",
+      "quote": "For each trail, the placement of objects are randomly sampled. We report the average success rate across 20 trails for each setting.",
+      "support_explanation": "Robot-arm simulation random-placement evaluation has20 trials per setting, not unspecified qualitative videos.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Appendix J; extracted-text L54; character 102177",
+      "quote": "Currently the module can access the simulator information and label the object type and its ground truth coordinates.",
+      "support_explanation": "Ravens captions include privileged object types/coordinates, not demonstrated sensor-only recognition.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Sec 4.3; extracted-text L18; character 33407",
+      "quote": "However, the lack of a versatile embodied robot makes it hard to autonomously follow the plan proposed by the algorithm. Therefore, we ablate the plan proposal and execution by asking a human volunteer to strictly follow the proposed plan and interact with the world.",
+      "support_explanation": "Physical section is human-executed plan interaction, not autonomous physical robot transfer.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Appendix L; extracted-text L60; character 134112",
+      "quote": "Statistics data on the average number of questions asked in successful episodes",
+      "support_explanation": "Questions1.1/1.39/2.53 are success-conditioned and exclude failures; not full-system cost.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d",
+      "locator": "2305.15695v2; Sec 4 baseline and appendices; extracted-text L18; character 22287",
+      "quote": "ReAct",
+      "support_explanation": "Baseline name grounds paper-local lineage; original ReAct source/version is not independently supplied.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Augmented ask/act interface over a language planner",
+      "information": "Observation history, task and two in-context examples in main ALFWorld; human-model oracle receives privileged object-placement descriptions unavailable to agent initially. Ravens caption module also uses ground-truth types/coordinates.",
+      "operation": "Planner reasons, chooses an environment action or natural-language question, appends returned answer to history and continues.",
+      "output": "Question/action trajectory and environment execution.",
+      "conditions": "Helpful accessible question-answerer, correct answers, sufficient question/action budget, executable action semantics.",
+      "feedback": "Oracle answers and environment transitions; not a sound semantic verifier.",
+      "selection_rule": "not_applicable: no persistent improvement-admission mechanism; episode action choice only.",
+      "selection_data": "ALFWorld ID/OOD and ambiguity/multiround tasks; arm randomized placements; human scenarios.",
+      "persistence": "Within-episode history; no claim of growing reusable skills.",
+      "later_use": "Next decision in the same task.",
+      "claimed_effect": "Better partial-information and ambiguous-task success by explicitly gathering needed information.",
+      "failure_boundary": "Oracle mistakes, repeated questions and assumptions; privileged captions/oracle limit transfer.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E007"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "ABA-FT supervised asking-policy extension",
+      "information": "Rule/PDDL expert, ground truth and noisy expert trajectories; not a demonstrated frontier-agent generated teacher dataset.",
+      "operation": "Convert trajectories to QA and imitation datasets; mask intentionally injected noisy actions; LoRA fine-tune Vicuna.",
+      "output": "Fine-tuned question/action policy.",
+      "conditions": "Expert coverage, useful noise distribution and QA labeling.",
+      "feedback": "Supervised labels and training loss; interactive test trajectories evaluated afterward.",
+      "selection_rule": "not_applicable: training optimization, not a persistent harness-selection loop.",
+      "selection_data": "1500 ambiguous and500 multiround training trajectories; exact unseen layout/ambiguity split follows supplied protocol, not independently audited.",
+      "persistence": "Model parameters, distinct from fixed-model ABA-IC.",
+      "later_use": "ALFWorld variants at test.",
+      "claimed_effect": "More stable long-horizon asking than in-context examples alone.",
+      "failure_boundary": "No demonstrated on-policy frontier harness distillation; noisy oracle remains; human physical execution not robot transfer.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E004",
+        "E007"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Act-only and reasoning-action planners inefficiently search when observations lack needed facts or instructions omit preferences.",
+    "checked_gap": "Explicit querying addresses partial observability; privileged answer availability is part of the solution, not eliminated uncertainty for free.",
+    "lineage": [
+      {
+        "method": "ReAct / BUTLER / clarification agents",
+        "source": "2305.15695v2 related work and Sec4",
+        "version": "Paper-local citations; original full texts not supplied",
+        "relationship": "Reason/action trajectories and expert imitation precede ask-action augmentation."
+      }
+    ],
+    "closest_adjacent": [
+      {
+        "method": "ReAct",
+        "solved": "Interleaves reasoning and environment actions",
+        "residual": "No native question action to access missing task/world information.",
+        "source_version": "As described in assigned v2"
+      },
+      {
+        "method": "BUTLER",
+        "solved": "Imitation policy on ALFWorld",
+        "residual": "Author-designed oracle questioning and ambiguous/multiround objectives.",
+        "source_version": "Paper-local description; best-of8 reported rather than matched means."
+      }
+    ],
+    "residue": "When and what to ask, rather than exhaustive exploratory action; learning robust ask behavior over long horizons.",
+    "stakes": "Missing object locations/preferences cost actions or make success impossible.",
+    "method_response": "Add question action, answer-as-observation and QA plus noise-masked imitation fine-tuning.",
+    "remaining_gap": "Reliable available human/oracle, actual physical robot perception/execution, equal information budgets and training distribution robustness.",
+    "unresolved": [
+      "No external novelty search or independent adjacent-version verification."
+    ],
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E004",
+      "E006",
+      "E007"
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          "Identify missing-information subproblem separate from physical actions.",
+          "Dispatch natural-language question to a human-model oracle; append answer as an observation.",
+          "Execute subsequent actions and react to returns.",
+          "Structured interaction artifact exists but oracle answers are not machine-checkable proofs; limited C25 semantic-verification fit.",
+          "Compare ReAct, model strengths, ambiguous/multiround settings and noisy-trajectory fine-tuning; total budget not fully matched."
+        ],
+        "success_failure_checks": [
+          {
+            "id": "RS-S explicit seam",
+            "status": "met",
+            "reason": "Question/answer isolates information gathering from acting.",
+            "evidence_ids": [
+              "E003",
+              "E005"
+            ]
+          },
+          {
+            "id": "RS-S verifiable feedback",
+            "status": "partial",
+            "reason": "Environment responds, but oracle audit72.5±9.7 and simulator privilege undermine a sound verifier.",
+            "evidence_ids": [
+              "E004",
+              "E006"
+            ]
+          },
+          {
+            "id": "RS-F extra-information confound",
+            "status": "partial",
+            "reason": "ABA obtains an oracle channel absent from ReAct; pragmatic interface result, not proof of intrinsic reasoning improvement.",
+            "evidence_ids": [
+              "E003",
+              "E006"
+            ]
+          },
+          {
+            "id": "RS-F pipeline cost",
+            "status": "partial",
+            "reason": "Question counts success-conditioned; no full oracle cost.",
+            "evidence_ids": [
+              "E008"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E003",
+          "E004",
+          "E005",
+          "E006"
+        ],
+        "reason": "Fits delegated information-solving and interleaved feedback; C25 only partial because a fallible human-model response is not a formal verification result."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Primary operation is asking a separate solver for missing facts then acting; no taxonomy expansion or self-supervised distillation label for noisy expert imitation.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": null,
+        "fit": "strong main; no exact sub",
+        "condition_checks": [
+          {
+            "id": "S1 fixed-backbone swap",
+            "status": "met",
+            "reason": "ReAct/ABA share each backbone; oracle channel is the actual interface intervention.",
+            "evidence_ids": [
+              "E003"
+            ]
+          },
+          {
+            "id": "S4 reliable executor",
+            "status": "partial",
+            "reason": "Ravens primitives execute but captions privileged; real plans executed by volunteer.",
+            "evidence_ids": [
+              "E005",
+              "E006",
+              "E007"
+            ]
+          },
+          {
+            "id": "F6 privileged channel",
+            "status": "present",
+            "reason": "Simulator oracle and object coordinates load-bearing.",
+            "evidence_ids": [
+              "E004",
+              "E006"
+            ]
+          },
+          {
+            "id": "F interface bundle",
+            "status": "partial",
+            "reason": "Fine-tuning/noise/QA ablation not fully separates interaction effects.",
+            "evidence_ids": [
+              "E001",
+              "E002"
+            ]
+          }
+        ],
+        "reason": "Ask is an additional information tool; main-card observation/action design fits. No core image-to-text VLM, protocol-level ROS or calibrated depth subcard forced.",
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E006"
+        ],
+        "namespace": "embodied",
+        "version": "embodied-agent-harness/v1 + board-induced 2026-10-21"
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain_namespace": "embodied",
+      "domain_main": "observe_act_interface",
+      "domain_sub": null,
+      "operation_correspondence": "Question delegates missing-world/task facts; answer changes next action while the agent remains in the environment.",
+      "necessary_conditions_and_differences": "A cooperative fallible oracle is assumed, not verified ground-truth sensor feedback; no exact embodied subcard for ask-action augmentation.",
+      "evidence_ids": [
+        "E003",
+        "E004",
+        "E006"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Same-backbone alternative on same tasks",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "met",
+      "reason": "ReAct vs ABA paired by model/task family; Vicuna5 and GPT3.5 3 seeds. Asking grants extra information, so causal interpretation is interface-plus-information, not reasoning alone.",
+      "evidence_ids": [
+        "E003",
+        "E009"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Single-component toggles",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Ask-action effect compared; prompt/reasoning/QA/noisy training and oracle access not fully factored.",
+      "evidence_ids": [
+        "E001",
+        "E003"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Different backbone strengths",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "met",
+      "reason": "Vicuna7B and GPT3.5 main study, GPT4 arm; not a claim that the same advantage transfers to every student.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E005"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Full cost including failed trials",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Episode/action lengths discussed; Appendix L asks count only successful runs, no full token/time/dollar bill.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E06",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "VLN-CE full/specified split metrics",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "ALFWorld/Ravens/human scenarios, not VLN-CE benchmark.",
+      "evidence_ids": [
+        "E005"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Privilege and development caveats",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Oracle and simulator caption access are described; external model contamination and development/test overlap unverified.",
+      "evidence_ids": [
+        "E006"
+      ],
+      "score_item": [
+        "E.holdout",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E16",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Endpoint and repeat failure decomposition",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Oracle audit plus repetitive questions/assumptions and examples; not every failure endpoint has a full denominator.",
+      "evidence_ids": [
+        "E004",
+        "E007"
+      ],
+      "score_item": [
+        "E.statistics",
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E20",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Calibrated depth assumption",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Ground-truth object coordinates rather than a tested metric-depth tool. Privileged-state limitation is assessed separately.",
+      "evidence_ids": [
+        "E006"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer expectations"
+      ],
+      "requirement": "Matched total interaction budgets",
+      "applies_when": "Applicable observation/action interface claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "K=2 main prompt examples and episode steps disclosed, but extra oracle information/compute and success-only ask counts are not a fully equal total budget.",
+      "evidence_ids": [
+        "E003",
+        "E008"
+      ],
+      "score_item": [
+        "E.causality",
+        "E.cost"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Asking improves embodied task performance.",
+      "setting": "ALFWorld ID/OOD, ambiguous and multiround variants; V7B and G35.",
+      "baseline_control": "ReAct same model/K2 main; BUTLER best-of8 is not comparable to mean3/5.",
+      "selection_vs_test": "Rule/expert-generated training only for ABA-FT variants; main in-context tests not an improvement-selection search. Oracle has privileged placement data.",
+      "result_denominator": "G35 three seeds: all-task ReAct64±1 ID/65±2 OOD vs ABA84±3/85±4; Vicuna five seeds. Simulator task success explicit; exact per-variant episode denominators not uniformly enumerated in supplied prose.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004"
+      ],
+      "counterevidence": [
+        "Additional information access vs baseline is part of treatment.",
+        "Oracle answer audit is imperfect; model pretraining/test contamination unverified."
+      ],
+      "allowed_conclusion": "An oracle-enabled ask/act interface improves these simulated tasks, not a universally robust autonomous planner."
+    },
+    {
+      "claim_id": "C2",
+      "text": "Information gathering helps robot-arm tasks.",
+      "setting": "Ravens, UR5e suction; three task families and restricted-question settings.",
+      "baseline_control": "GPT4 ReAct/ABA,20 randomly placed trials/setting.",
+      "selection_vs_test": "No retained skill selection; goal inference after y−1 answers tests use of task facts.",
+      "result_denominator": "20/setting; figure ABA85/85/90,100/95/90,90 vs ReAct65/70/55,95/35/5,30 across seven settings. No per-setting CI.",
+      "evidence_ids": [
+        "E005",
+        "E006"
+      ],
+      "counterevidence": [
+        "Hand-built captioner reads simulator types/coordinates; oracle carries additional facts."
+      ],
+      "allowed_conclusion": "Controlled simulation supports value of querying under privileged scene descriptions, not sensor-to-actuator transfer."
+    },
+    {
+      "claim_id": "C3",
+      "text": "Real-world applicability.",
+      "setting": "Three household scenarios following one demonstration.",
+      "baseline_control": "Qualitative human-volunteer plan execution; no autonomous robot baseline.",
+      "selection_vs_test": "Three scenarios, not independent repeated robot trials.",
+      "result_denominator": "Reported completion in three illustrated scenarios; not robot SR/variance.",
+      "evidence_ids": [
+        "E007"
+      ],
+      "counterevidence": [
+        "Human supplies physical embodiment and strict instruction execution."
+      ],
+      "allowed_conclusion": "Human-in-the-loop planning illustration only; no autonomous physical transfer."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Simulated language/arm agents benefit from explicit questioning when a privileged, usually helpful answerer exists. Physical demonstrations test human-executed plans, not autonomous robots.",
+    "unresolved": [
+      "Oracle/sensor fidelity and comprehensive repeat/failure costs.",
+      "Original adjacent source versions and pretraining contamination unavailable."
+    ]
+  },
+  "ratings": {
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Task definitions and20 arm trials are explicit; not every language-variant/real scenario supplies complete episode denominators and repeat uncertainty; human execution cannot count robot SR.",
+        "evidence_ids": [
+          "E003",
+          "E005",
+          "E007"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Same-model ReAct comparisons and multiple settings support interface treatment; added privileged facts, training factors and unequal oracle compute leave mechanism confounds.",
+        "evidence_ids": [
+          "E003",
+          "E005"
+        ],
+        "counterevidence_ids": [
+          "E004",
+          "E006"
+        ],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "ID/OOD and multiple task forms are tested; simulator oracle/caption privilege and human execution block transfer rating under anchors v2.",
+        "evidence_ids": [
+          "E003",
+          "E005"
+        ],
+        "counterevidence_ids": [
+          "E006",
+          "E007"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Main experiments use3/5 seeds with SD, randomized arm placements, oracle error audit and qualitative failure categories; not every endpoint has full paired CI.",
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E005"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Episode length and success-only question averages disclosed; full failed-task/oracle/token/time budget absent.",
+        "evidence_ids": [
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    },
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Missing-information bottleneck and ReAct lineage concrete; exact external novelty not independently checked.",
+      "evidence_ids": [
+        "E003",
+        "E004"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Ask/answer/action directly handles ambiguity; dependence on a helpful privileged oracle limits causal explanation and transfer.",
+      "evidence_ids": [
+        "E003",
+        "E005"
+      ],
+      "counterevidence_ids": [
+        "E004",
+        "E006"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Question traces, noisy-expert masking, LoRA hyperparameters and simulator implementation are specified; real execution is human and no autonomous correction learning is established.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E006"
+      ],
+      "counterevidence_ids": [
+        "E007"
+      ],
+      "search_scope": []
+    }
+  },
+  "score": {
+    "raw": 63.75,
+    "display": 63.8,
+    "lower": 63.75,
+    "upper": 63.75,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Complete fixed text and appendices reviewed; extra information privileges and human physical execution retained as boundaries.",
+  "scope": {
+    "in_scope": true,
+    "category": "A",
+    "reason": "Frontier LLM ask/action harness controls Ravens simulated arm and embodied language tasks; human-only physical subsection is not the sole basis for inclusion."
+  },
+  "audit_status": "pending",
+  "audit_note": "Independent initial seat review; source-quote/identity/hash/parent/arithmetic checks passed, not aggregate acceptance or reproduction."
+}

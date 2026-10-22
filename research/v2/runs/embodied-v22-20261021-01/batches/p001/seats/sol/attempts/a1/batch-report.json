@@ -1,0 +1,120 @@
+{
+  "schema_version": "radar-review-batch-report-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p001",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "phase": "production",
+  "anchors_version": "v2",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "score_qualification": "production-under-anchors-v2",
+  "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+  "assigned": 5,
+  "reviewed": 4,
+  "scored": 4,
+  "needs_fulltext": 1,
+  "needs_evidence": 0,
+  "out_of_scope": 0,
+  "outside_taxonomy": 0,
+  "outside_taxonomy_unassessed": 1,
+  "domain_unassigned": 1,
+  "domain_unassessed": 1,
+  "schema_errors": 0,
+  "validation": {
+    "result": "passed",
+    "checks": [
+      "Exact assigned ID/title/version set",
+      "Required record/rating keys and nested structure",
+      "Fixed protocol/card/expectation/material SHA256 bindings",
+      "Every quote is continuous literal source text; material IDs and evidence references resolve",
+      "Original main IDs and C00–C30 parents; domain namespace/parent legality",
+      "One primary/at most2supporting; at most3domain matches",
+      "Eight rating states/integers, unknown intervals and deterministic weighted scores",
+      "No missing fulltext receives a point score",
+      "Atomic per-paper JSON parse/replace and no temporary files"
+    ],
+    "limits": "Ad hoc contract checks, not an official v2 validator or proof of semantic/scientific correctness. Controller/aggregate must independently inspect core evidence and conflicts."
+  },
+  "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+  "actual_model": "gpt-6.1-sol",
+  "session_id": null,
+  "receipt_ref": null,
+  "provenance_note": "anchors_version=v2 (3ececdd11cc3d144), phase=production; production-under-anchors-v2. Rubric is not formally frozen; no formal ranking or Reel authorization. Session ID and receipt_ref are unavailable from this worker invocation; an inherited transcript path is not treated as an invocation receipt. No network, paper-code execution, or peer conclusions used.",
+  "timestamp": "2026-10-22T02:07:41.446923+00:00",
+  "papers": [
+    {
+      "paper_key": "2201.07207",
+      "version": "2201.07207v2",
+      "status": "reviewed",
+      "raw": 65.0,
+      "display": 65.0,
+      "summary": "Reviewed complete provided methods/results/Appendix A package; scoped offline contribution, with all eight ratings resolved under anchors v2. Scores are provisional production-under-anchors-v2, not ranking/Reel approval.",
+      "file_sha256": "3ffab3de222332cb178e54da9168ab8ea3e847a9b3283b4d5b6976ec8c540b55"
+    },
+    {
+      "paper_key": "2204.01691",
+      "version": "2204.01691v2",
+      "status": "reviewed",
+      "raw": 62.5,
+      "display": 62.5,
+      "summary": "Complete methods/results/Appendices A–E reviewed. Online evidence supports the scoped kitchen harness, not a construction-unseen transfer label; partial denominators and missing executed controls limit E. Provisional production-under-anchors-v2 only.",
+      "file_sha256": "e5079f51cde09d6e8745e861d559cff9ed5841fce4c4cf28cbf95c2c1824ddf8"
+    },
+    {
+      "paper_key": "2207.04429",
+      "version": "2207.04429v2",
+      "status": "reviewed",
+      "raw": 68.75,
+      "display": 68.8,
+      "summary": "Complete methods/results/AppendicesA–E reviewed. Online scoped evidence, not transfer; preserve numerical/reconstruction inconsistencies. Domain unassigned is a fit decision, not outside the original taxonomy. Provisional production-under-anchors-v2.",
+      "file_sha256": "44e204adfdef405cc0bca27c30a81d786e73d2e4d93929c78072ef31f4c71c7e"
+    },
+    {
+      "paper_key": "2207.05608",
+      "version": "2207.05608v1",
+      "status": "reviewed",
+      "raw": 70.0,
+      "display": 70.0,
+      "summary": "Complete methods/results/AppendicesA–D reviewed with direct SayCan comparison. Online scoped evidence; no promotion of assisted/cross-implementation results to construction-unseen transfer or of emergence anecdotes to reliable capability. Provisional production-under-anchors-v2.",
+      "file_sha256": "895f6d57ea922322cbcf745735e330253d1936e81cacd1d577bd2879b17187ef"
+    },
+    {
+      "paper_key": "2209.07753",
+      "version": "2209.07753v4",
+      "status": "needs_fulltext",
+      "raw": null,
+      "display": null,
+      "summary": "Concrete clipped-package blocker despite html-full header: provided text ends after main SectionsI–V/acknowledgments while it repeatedly references absent AppendicesA–M for prompts, controllers, evaluation protocols and simulation splits. Controller should fix a complete v4 shared package; no independent browsing or unilateral supplement. All eight unknown, raw/display null, interval0–100,coverage0. No adverse scientific inference from unavailable material.",
+      "file_sha256": "55d9571c53969e3c642e1a49f40a9f3d159aa3a858727b6a6552291fcca1a1e5"
+    }
+  ],
+  "blockers": [
+    {
+      "paper_key": "2209.07753",
+      "status": "needs_fulltext",
+      "missing_sections": [
+        "AppendicesA–M: full prompts/generated outputs referenced in main text",
+        "AppendicesD/E: HumanEval/RoboCodeGen protocol",
+        "AppendixF: low-level controller details",
+        "AppendicesH/I/J: robot-domain prompts/examples",
+        "AppendixK: simulation tasks/splits/protocol and relevant supplementary evidence"
+      ],
+      "action": "Controller to obtain/fix complete v4 shared input; bind changed materials in a new attempt, do not patch this completed attempt."
+    }
+  ],
+  "caveats": [
+    "Rubric still draft_uncalibrated, not formally frozen; no formal ranking/Reel authorization.",
+    "LM-Nav table/narrative and implementation discrepancies, plus Inner Monologue physical-noise discrepancy, preserved in individual records.",
+    "Unprovided primary predecessors are explicitly unresolved lineage rather than invented independent verification."
+  ],
+  "blind_review": {
+    "peer_results_read": false,
+    "aggregate_results_read": false,
+    "old_scores_read": false,
+    "network_used": false,
+    "paper_code_executed": false,
+    "contamination": false
+  },
+  "tooling_note": "An exact-quote escape assertion interrupted initial construction after two atomic records; corrected literal quoting and validated all five. No unfinished paper or failed invocation is counted as reviewed.",
+  "attempt_status": "completed"
+}

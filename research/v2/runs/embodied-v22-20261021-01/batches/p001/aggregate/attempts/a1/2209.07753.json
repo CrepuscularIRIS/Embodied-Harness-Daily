@@ -1,0 +1,811 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a1",
+ "seat": "aggregate",
+ "record_role": "opus_aggregate_final",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2209.07753",
+  "paper_id": "2209.07753",
+  "title": "Code as Policies: Language Model Programs for Embodied Control",
+  "version": "2209.07753v4",
+  "claim_type": "system_method",
+  "central_claim": "Code as Policies uses pretrained code-generating language models to synthesize executable robot policy programs from language, recursively defining helper functions and composing perception/control APIs with precise computation and feedback, enabling generalization across instructions and embodied domains.",
+  "central_claim_son55_wording": "Code-writing LLMs, few-shot prompted with hints and instruction-to-code examples, can write robot policy code (perception-conditioned feedback loops, geometric reasoning with NumPy/Shapely, parameterized control primitives) executed directly on robots; hierarchical code generation (recursively defining undefined functions) improves code generation benchmarks and robot tasks without training."
+ },
+ "provenance": {
+  "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+  "seat_input_hashes_equal": true,
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "0f9e90179cca637227f34fd72bb78de4365c82b39430b93e0e9775de2e55cc42",
+  "domain_cards_binding_sol": {
+   "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping relative card paths to file SHA256",
+   "files": {
+    "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+    "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+    "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+    "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+    "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+    "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+    "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+   },
+   "taxonomy_sha256": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "conditions_sha256": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+  },
+  "domain_cards_hash_son55": {
+   "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+   "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+  },
+  "expectations_hash": "f2b30256da73535ceb775213a0fd83d61196d05d58689d31c0f963419a474ba1",
+  "expectations_hash_note": "sol computed a binding over expectation lines embedded in cards; son55 recorded null (no standalone expectations file). Same card files; not a material difference.",
+  "protocol_hashes": {
+   "pattern_protocol": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+   "batch_contract": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+   "worksheet": "b0ca3ac92a458c934894aee62c88d6de8ab53901047326e0c8abdfd1a0d3219e",
+   "evidence": "612b7df7eec04add15b47c9316206fee7f572d824a03143fb82bdfcc5aab3ce2",
+   "evidence_schema": "b7dd7fa66ce5d3eb4a87e13f65fdb7d9ac69b9a268bb84474049274f9f65b8cb",
+   "rs_parents": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b"
+  },
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "session_id_reason": "aggregate subagent cannot read its own session id; no receipt available to the worker",
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T02:27:56.060173+00:00",
+  "phase": "production",
+  "score_qualification": "production-under-anchors-v2",
+  "seat_model_types": {
+   "sol": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+   "son55": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)"
+  },
+  "notes": "anchors v2 binding (3ececdd11cc3d144); needs_fulltext disposition; no score."
+ },
+ "input_seat_hashes": {
+  "sol": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2209.07753.json",
+   "sha256": "55d9571c53969e3c642e1a49f40a9f3d159aa3a858727b6a6552291fcca1a1e5"
+  },
+  "son55": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2209.07753.json",
+   "sha256": "df954965590bfd842584dcb583ef86bc3f8777096d93d0389af4ed604fabc209"
+  }
+ },
+ "seat_integrity": {
+  "same_version": true,
+  "same_material_sha": true,
+  "material_sha_matches_manifest": true,
+  "same_input_hash": true,
+  "both_seats_present": true,
+  "seat_fields_correct": true,
+  "blind_contamination_observed": false
+ },
+ "materials": [
+  {
+   "material_id": "sol:M001",
+   "paper_id": "2209.07753",
+   "version": "2209.07753v4",
+   "url": "https://arxiv.org/html/2209.07753v4",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.07753.txt",
+   "sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "sections_read": [
+    "Abstract",
+    "SectionsI–V",
+    "Acknowledgments"
+   ],
+   "complete": false,
+   "missing_sections": [
+    "AppendicesA–M: full prompts/generated outputs referenced in main text",
+    "AppendicesD/E: HumanEval/RoboCodeGen protocol",
+    "AppendixF: low-level controller details",
+    "AppendicesH/I/J: robot-domain prompts/examples",
+    "AppendixK: simulation tasks/splits/protocol and relevant supplementary evidence"
+   ]
+  },
+  {
+   "material_id": "son55:M1",
+   "url": "https://arxiv.org/pdf/2209.07753v4",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.07753.txt",
+   "sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Work",
+    "III Method (III-A..III-D)",
+    "IV Experiments (IV-A..IV-E)",
+    "V Discussion and Limitations"
+   ],
+   "complete": false,
+   "missing_sections": [
+    "Appendix -A prompt engineering details",
+    "Appendix -B1..-B5 full prompts (language reasoning, first-party libraries, parse_obj, composition)",
+    "Appendix -C code vs natural-language reasoning comparison",
+    "Appendix -D HumanEval details",
+    "Appendix -E RoboCodeGen examples and generalization-type breakdown (-E2)",
+    "Appendix -F cartpole / impedance controller experiments",
+    "Appendix -H drawing prompts and examples; -I tabletop examples; -J mobile-manipulation prompts",
+    "Appendix -K simulated tabletop task and attribute definitions, success criteria and seen/unseen splits",
+    "Appendix -L multilingual; -M cross-embodiment",
+    "References section"
+   ]
+  },
+  {
+   "material_id": "M-2209.07753",
+   "paper_id": "2209.07753",
+   "version": "2209.07753v4",
+   "url": "https://arxiv.org/abs/2209.07753v4",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.07753.txt",
+   "sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "sections_read": [
+    "Abstract",
+    "Sections I-V",
+    "Acknowledgements"
+   ],
+   "complete": false,
+   "missing_sections": [
+    "AppendicesA–M: full prompts/generated outputs referenced in main text",
+    "AppendicesD/E: HumanEval/RoboCodeGen protocol",
+    "AppendicesH/I/J: robot-domain prompts/examples",
+    "Appendix -A prompt engineering details",
+    "Appendix -B1..-B5 full prompts (language reasoning, first-party libraries, parse_obj, composition)",
+    "Appendix -C code vs natural-language reasoning comparison",
+    "Appendix -D HumanEval details",
+    "Appendix -E RoboCodeGen examples and generalization-type breakdown (-E2)",
+    "Appendix -F cartpole / impedance controller experiments",
+    "Appendix -H drawing prompts and examples; -I tabletop examples; -J mobile-manipulation prompts",
+    "Appendix -K simulated tabletop task and attribute definitions, success criteria and seen/unseen splits",
+    "Appendix -L multilingual; -M cross-embodiment",
+    "AppendixF: low-level controller details",
+    "AppendixK: simulation tasks/splits/protocol and relevant supplementary evidence",
+    "References section"
+   ],
+   "note": "aggregate read of the same fixed material used by both seats"
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "sol:M001",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "locator": "SectionI; local text L9",
+   "quote": "Full prompts and generated outputs are in the Appendix",
+   "support_explanation": "Necessary implementation material is explicitly delegated to appendices absent from the local package.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "son55:M1",
+   "locator": "Abstract",
+   "quote": "This paper presents code as policies: a robot-centric formulation of language model generated programs (LMPs) that can represent reactive policies (e.g., impedance controllers), as well as waypoint-based policies",
+   "support_explanation": "central claim",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "son55:M1",
+   "locator": "I Introduction",
+   "quote": "While promising, this abstraction prevents the LLMs from directly influencing the perception-action feedback loop",
+   "support_explanation": "author gap",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "son55:M1",
+   "locator": "III Method",
+   "quote": "To execute an LMP, we first check that it is safe to run by ensuring there are no import statements, special variables that begin with __ , or calls to exec and eval .",
+   "support_explanation": "execution and static safety check",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "son55:M1",
+   "locator": "III-C",
+   "quote": "Function generation can be implemented by parsing the code generated by an LMP, locating yet-to-be-defined functions, and calling another LMP specialized in function-generation to create those functions.",
+   "support_explanation": "hierarchical code generation mechanism",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "son55:M1",
+   "locator": "III-A",
+   "quote": "Prompts to generate LMPs contain two elements: 1. Hints",
+   "support_explanation": "prompt = hints + instruction-code examples",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "son55:M1",
+   "locator": "IV Experiments",
+   "quote": "quantitative evaluations of a robot system using CaP is limited to a constrained set of simulated tasks in IV-D",
+   "support_explanation": "author states real-robot evaluation is not quantitative",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "son55:M1",
+   "locator": "IV-D Table III",
+   "quote": "Success rates over task families with 50 trials per task.",
+   "support_explanation": "simulation denominator: 50 trials per task",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "son55:M1",
+   "locator": "IV-D Table III",
+   "quote": "UA UI Long-Horizon 0.00 64.00 80.00 UA UI Spatial-Geometric 0.01 N/A 62.00",
+   "support_explanation": "unseen attributes and instructions: CLIPort 0.00/0.01, NL planner 64.00/N/A, CaP 80.00/62.00",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "son55:M1",
+   "locator": "IV-D Table III",
+   "quote": "SA SI Long-Horizon 78.80 86.40 97.20",
+   "support_explanation": "seen: CLIPort 78.80, NL planner 86.40, CaP 97.20",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "son55:M1",
+   "locator": "IV-D",
+   "quote": "We consider two baselines: (i) language-conditioned multi-task CLIPort [ 36 ] policies trained via imitation learning on 30k demonstrations, and (ii) few-shot prompted LLM planner using natural language instead of code.",
+   "support_explanation": "baselines",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "son55:M1",
+   "locator": "IV-D",
+   "quote": "We split the task instructions (I) and the attributes (A) into",
+   "support_explanation": "seen/unseen split defined in main text; definitions in the missing Appendix -K",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "son55:M1",
+   "locator": "V Discussion and Limitations",
+   "quote": "Our approach also assumes all given instructions are feasible, and we cannot tell if a response will be correct a priori.",
+   "support_explanation": "no verification of generated code a priori",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "son55:M1",
+   "locator": "IV-A Table II",
+   "quote": "Flat 45.7 34.9 75.1 90.9 Hierarchical 53.0 39.8 80.6 95.7",
+   "support_explanation": "HumanEval: hierarchical vs flat",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "son55:M1",
+   "locator": "IV-A Table I",
+   "quote": "Flat 3 68 54 81 Hierarchical 5 84 57 95",
+   "support_explanation": "RoboCodeGen: hierarchical vs flat across four LLMs",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "son55:M1",
+   "locator": "I Introduction",
+   "quote": "Full prompts and generated outputs are in the Appendix, which can be found along with additional results, videos, and code at code-as-policies.github.io",
+   "support_explanation": "appendix is referenced but not part of the pinned material",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "son55:M1",
+   "locator": "III-B",
+   "quote": "All examples and experiments in this paper, unless otherwise stated, use OpenAI Codex code-davinci-002 with temperature 0",
+   "support_explanation": "model and decoding",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "son55:M1",
+   "locator": "V",
+   "quote": "Only a handful of named primitive parameters can be adjusted without over-saturating the prompts.",
+   "support_explanation": "author-stated residue",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "son55:M1",
+   "locator": "II Related Work",
+   "quote": "Inner Monologue [ 18 ] expands LLM planning by incorporating outputs from success detectors or other visual language models and uses their feedback to re-plan.",
+   "support_explanation": "nearest neighbor with feedback",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "son55:M1",
+   "locator": "IV-D",
+   "quote": "CaP compares competitively to the supervised CLIPort baseline on tasks with seen attributes and instructions, despite only few-shot prompted with one example rollout for each task.",
+   "support_explanation": "baseline comparison claim",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "son55:M1",
+   "locator": "IV-D",
+   "quote": "Moreover, the natural-language planners [ 14 , 17 , 16 , 18 ] are not applicable for tasks that require precise numerical spatial-geometric reasoning.",
+   "support_explanation": "NL planner marked N/A on spatial-geometric tasks",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "son55:M1",
+   "locator": "IV-B",
+   "quote": "Examples of successful on-robot executions of unseen language commands are in Fig. 2 c.",
+   "support_explanation": "real robot shown by examples only",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "son55:M1",
+   "locator": "II Related Work",
+   "quote": "Our approach (CaP) not only leverages logic structures to specify feedback loops, but it also parameterizes (and write parts of) low-level control primitives.",
+   "support_explanation": "difference to planners that need a predefined skill per step",
+   "kind": "author_report",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "material_id": "M-2209.07753",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "locator": "Section IV (opening)",
+   "quote": "The Appendix also contains the prompt and responses for all experiments.",
+   "support_explanation": "Prompts and generated programs for every experiment live in the absent appendix.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "material_id": "M-2209.07753",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "locator": "Section IV-D",
+   "quote": "More details in Appendix -K .",
+   "support_explanation": "Simulated task definitions, attributes and seen/unseen splits behind Table III are deferred to the absent Appendix K.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "material_id": "M-2209.07753",
+   "material_sha256": "604c0ab3dc46b569980fe94dbcbfcf0356d853af148daae32a78ab6f8769681b",
+   "locator": "Section IV (opening)",
+   "quote": "Additional experiments can be found in the Appendix",
+   "support_explanation": "Further experiments (cartpole, impedance control) are only in the appendix.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [],
+ "gap": {},
+ "rs_pattern": {
+  "primary": null,
+  "supporting": [],
+  "matches": [],
+  "outside_taxonomy": null,
+  "reason": "Deferred: 15+31 identification must be done on the complete fixed package (prompts and API definitions are in the absent appendix). son55's main-text identification is kept only under provisional_reference."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [],
+  "unassigned": null,
+  "reason": "Deferred with the rs layer.",
+  "revision_proposals": []
+ },
+ "pattern_mapping": [],
+ "expectations": [],
+ "claims": [],
+ "assessment": {
+  "evidence_level": null,
+  "claim_support": "unresolved",
+  "strongest_supported_claim": null,
+  "unresolved": [
+   "AppendicesA–M: full prompts/generated outputs referenced in main text",
+   "AppendicesD/E: HumanEval/RoboCodeGen protocol",
+   "AppendicesH/I/J: robot-domain prompts/examples",
+   "Appendix -A prompt engineering details",
+   "Appendix -B1..-B5 full prompts (language reasoning, first-party libraries, parse_obj, composition)",
+   "Appendix -C code vs natural-language reasoning comparison",
+   "Appendix -D HumanEval details",
+   "Appendix -E RoboCodeGen examples and generalization-type breakdown (-E2)",
+   "Appendix -F cartpole / impedance controller experiments",
+   "Appendix -H drawing prompts and examples; -I tabletop examples; -J mobile-manipulation prompts",
+   "Appendix -K simulated tabletop task and attribute definitions, success criteria and seen/unseen splits",
+   "Appendix -L multilingual; -M cross-embodiment",
+   "AppendixF: low-level controller details",
+   "AppendixK: simulation tasks/splits/protocol and relevant supplementary evidence",
+   "References section"
+  ],
+  "reproduction": "No reproduction or paper-code execution."
+ },
+ "ratings": {
+  "G": {
+   "status": "unknown",
+   "rating": null,
+   "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E002"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "Abstract",
+    "Sections I-V (fixed main text)",
+    "Appendices A-M: absent from fixed material"
+   ]
+  },
+  "M": {
+   "status": "unknown",
+   "rating": null,
+   "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E002"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "Abstract",
+    "Sections I-V (fixed main text)",
+    "Appendices A-M: absent from fixed material"
+   ]
+  },
+  "X": {
+   "status": "unknown",
+   "rating": null,
+   "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E002"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "Abstract",
+    "Sections I-V (fixed main text)",
+    "Appendices A-M: absent from fixed material"
+   ]
+  },
+  "E": {
+   "measurement": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+    "evidence_ids": [
+     "agg:E001",
+     "agg:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Abstract",
+     "Sections I-V (fixed main text)",
+     "Appendices A-M: absent from fixed material"
+    ]
+   },
+   "causality": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+    "evidence_ids": [
+     "agg:E001",
+     "agg:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Abstract",
+     "Sections I-V (fixed main text)",
+     "Appendices A-M: absent from fixed material"
+    ]
+   },
+   "holdout": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+    "evidence_ids": [
+     "agg:E001",
+     "agg:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Abstract",
+     "Sections I-V (fixed main text)",
+     "Appendices A-M: absent from fixed material"
+    ]
+   },
+   "statistics": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+    "evidence_ids": [
+     "agg:E001",
+     "agg:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Abstract",
+     "Sections I-V (fixed main text)",
+     "Appendices A-M: absent from fixed material"
+    ]
+   },
+   "cost": {
+    "status": "unknown",
+    "rating": null,
+    "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+    "evidence_ids": [
+     "agg:E001",
+     "agg:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Abstract",
+     "Sections I-V (fixed main text)",
+     "Appendices A-M: absent from fixed material"
+    ]
+   }
+  }
+ },
+ "status": "needs_fulltext",
+ "reason": "needs_fulltext: the fixed material ends after Section V; Appendices A-M (prompts and responses, Appendix C code-vs-NL comparison, D/E benchmark details, F controllers, H/I/J robot-domain prompts, K simulated task definitions/success criteria/seen-unseen splits, L/M) and references are absent although the main text defers these details to them. Unavailable material is not not_reported; no point score.",
+ "provisional_reference": {
+  "not_for_index": true,
+  "note": "Main-text-only readings from son55, retained for the next attempt's reviewers to see what the appendix could change. Not part of this record's judgment, not scored, not indexed.",
+  "son55_main_text_only_provisional": {
+   "note": "NOT for index or ranking; documents what a main-text-only reading would suggest so the controller/aggregator can judge whether the appendix can change it",
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": "unknown (prompts absent)",
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 3,
+    "E.statistics": 1,
+    "E.cost": "unknown"
+   },
+   "conditional_raw_if_X=3_and_cost=0": 65.0,
+   "reasons": {
+    "G": "concrete gap with named neighbors, residue stated",
+    "M": "executable-artifact delegation fits the gap but no verification closure",
+    "E.measurement": "criterion undefined in main text, real robots uncounted",
+    "E.causality": "baselines CLIPort and NL planner plus flat-vs-hierarchical, no component toggles on robots",
+    "E.holdout": "structured seen/unseen split with retained gains but contents unverifiable",
+    "E.statistics": "50 trials per task, no variance"
+   }
+  },
+  "son55_provisional_evidence_level": "online",
+  "son55_provisional_rs_pattern": {
+   "primary": "decompose_and_delegate",
+   "supporting": [
+    "adapt_via_conditioning"
+   ],
+   "outside_taxonomy": false,
+   "matches": [
+    {
+     "main_id": "decompose_and_delegate",
+     "sub_id": "rs:C25",
+     "namespace": "rs",
+     "role": "primary",
+     "fit": "partial",
+     "tactic_steps_checked": [
+      "step1 boundary: executed (LLM writes; interpreter, detectors and primitives execute)",
+      "step2 executable typed artifact: executed (Python program)",
+      "step3 close loop with verifiable output: not executed (no execution feedback to the generator)",
+      "step4 ablate load-bearing step: partial (hierarchical vs flat only on code benchmarks)",
+      "step5 cost accounting: unknown (appendix absent)"
+     ],
+     "success_failure_checks": [
+      "typed verifiable handoff: partial (executable but unchecked a priori)",
+      "single-benchmark prompt hack: unknown (prompts not in pinned material)",
+      "no cost reporting: unknown"
+     ],
+     "evidence_ids": [
+      "son55:E001",
+      "son55:E003",
+      "son55:E004",
+      "son55:E012",
+      "son55:E013"
+     ],
+     "reason": "executable program as load-bearing intermediate artifact routed to interpreter and perception/control modules; verification closure missing"
+    },
+    {
+     "main_id": "adapt_via_conditioning",
+     "sub_id": null,
+     "namespace": "rs",
+     "role": "supporting",
+     "fit": "partial",
+     "tactic_steps_checked": [
+      "conditioning schema (hints + instruction-code examples): executed",
+      "category-level holdout: partial (seen/unseen attributes and instructions; definitions in missing appendix)",
+      "cheaper baseline under equal budget: partial (NL planner few-shot)"
+     ],
+     "success_failure_checks": [
+      "conditioning toggled: unknown",
+      "contamination audit: unknown"
+     ],
+     "evidence_ids": [
+      "son55:E005",
+      "son55:E011",
+      "son55:E010"
+     ],
+     "reason": "few-shot prompt conditioning is a distinct operation from decomposition; sub C03 not assigned because there is no retrieval or trained schema"
+    }
+   ],
+   "executes_pattern": {
+    "value": "partial",
+    "reason": "executable-artifact delegation executed, no verifier closure",
+    "evidence_ids": [
+     "son55:E003",
+     "son55:E012"
+    ]
+   },
+   "resolves_problem": {
+    "value": "unresolved",
+    "reason": "real-robot results are not quantitative and simulation task definitions are in the missing appendix",
+    "evidence_ids": [
+     "son55:E006",
+     "son55:E011"
+    ]
+   }
+  },
+  "son55_provisional_claim_support": "scoped"
+ },
+ "material_request": {
+  "request": "Supply the complete 2209.07753v4 text including Appendices A-M and references.",
+  "suggested_path": "Download https://arxiv.org/pdf/2209.07753v4, extract full text (appendices included) into research/fulltext/review-runs/embodied-v22-20261021-01/materials/ as a new file (e.g. 2209.07753.pdf.txt, gitignored), record its sha256 in a new batch input manifest, then open new seat attempts (both sol and son55, e.g. a2) and a new aggregate attempt that explicitly supersedes this a1 record.",
+  "blocking_fields": [
+   "all eight ratings",
+   "rs_pattern",
+   "domain_pattern",
+   "expectations",
+   "evidence_level",
+   "claim_support"
+  ],
+  "owner": "controller (aggregate does not browse or supplement materials)"
+ },
+ "score": {
+  "raw": null,
+  "display": null,
+  "lower": 0.0,
+  "upper": 100.0,
+  "coverage": 0.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4; display=python round(raw,1); raw authoritative",
+  "qualification": "production-under-anchors-v2"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_review": {
+  "initial_evidence_judgment": "Read before seat outputs: the fixed text is main-text only. Table III's simulated tasks, attributes, success criteria and seen/unseen split, the prompts, the code-vs-NL comparison and the controller experiments are all deferred to Appendices A-M, which are absent. Real-robot domains (IV-B/C/E) are explicitly non-quantitative. Material is incomplete for every scoring item; needs_fulltext.",
+  "core_checks": {
+   "central_claim_support": "unresolved (material incomplete)",
+   "retained_online_transfer_labels": "not assigned",
+   "selection_vs_test": "seen/unseen definitions in absent Appendix K"
+  },
+  "seat_integrity_notes": "Same version/material/input hash; both seats independently set needs_fulltext with all eight ratings unknown and score null. sol left rs_pattern empty; son55 gave a provisional identification. Neither is a version mismatch or contamination."
+ },
+ "resolutions": [
+  {
+   "field_path": "assessment.evidence_level",
+   "sol_value": null,
+   "son55_value": "online",
+   "decision": "sol",
+   "final_value": null,
+   "reason": "needs_fulltext records leave analysis fields empty (BATCH_CONTRACT); son55's 'online' is explicitly main-text-only provisional and is retained under provisional_reference, not indexed.",
+   "evidence_ids": [
+    "agg:E002",
+    "son55:E007",
+    "son55:E011"
+   ],
+   "score_impact": "none (score null)"
+  },
+  {
+   "field_path": "rs_pattern.primary",
+   "sol_value": null,
+   "son55_value": "decompose_and_delegate",
+   "decision": "sol",
+   "final_value": null,
+   "reason": "Identification deferred to the complete package; prompts/API definitions that determine fit are in the absent appendix.",
+   "evidence_ids": [
+    "agg:E001"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.outside_taxonomy",
+   "sol_value": null,
+   "son55_value": false,
+   "decision": "sol",
+   "final_value": null,
+   "reason": "Deferred with primary.",
+   "evidence_ids": [
+    "agg:E001"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [],
+   "son55_value": [
+    "rs:C25",
+    null
+   ],
+   "decision": "sol",
+   "final_value": [],
+   "reason": "Deferred with primary.",
+   "evidence_ids": [
+    "agg:E001"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "status / ratings (all eight unknown) / score",
+   "sol_value": "needs_fulltext; unknown x8; raw null",
+   "son55_value": "needs_fulltext; unknown x8; raw null",
+   "decision": "same_supported_fact",
+   "final_value": "needs_fulltext; unknown x8; raw null; L=0, U=100, coverage=0",
+   "reason": "Both seats and the aggregate confirm the absent appendices carry the evaluation protocol.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E002",
+    "agg:E003"
+   ],
+   "score_impact": "none"
+  }
+ ],
+ "shared_error_corrections": [],
+ "aggregate_status": "needs_fulltext",
+ "aggregate_status_reason": "Fixed material lacks Appendices A-M that hold prompts, task/success definitions and splits; re-pin the input package and re-dispatch both seats.",
+ "final_record_hash": "3c687a425fe37718afee0f4b6f0cc26aa4cc73ea5539cf38062a134523f2f6b4"
+}

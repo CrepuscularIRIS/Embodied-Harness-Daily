@@ -1,0 +1,770 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p002",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2302.01560",
+    "paper_id": "2302.01560",
+    "title": "Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents",
+    "version": "2302.01560v3",
+    "claim_type": "system_method",
+    "central_claim": "DEPS integrates event-triggered execution descriptions, LLM explanations and replanning with a trained horizon-based selector, robustly accomplishes more than70 open-world tasks and nearly doubles overall success versus LLM planner baselines with the same goal-conditioned controller."
+  },
+  "provenance": {
+    "input_hash": "2b0190dafe2244e68da9e68a9434358ea9f4f6e9750509ab7d6fbb98b9e68638",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "60e8948f2033bcdf44cbc892aa3c9b1b4904cb8e98b6b18927e463a6b72f399a",
+    "expectations_hash": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T01:51:13.085706+00:00",
+    "notes": [
+      "anchors_version=v2 (3ececdd11cc3d144), phase=production",
+      "production-under-anchors-v2; rubric remains draft_uncalibrated; not eligible for formal rankings or Reel without further user confirmation",
+      "Session/receipt identifiers are not available as authoritative invocation metadata; no probing performed.",
+      "Independent initial review; no other seat, aggregate, archive, old score or Reel read. Source texts treated as data; no network, paper code execution or git operations.",
+      "All results are author reports, not our reproduction.",
+      "domain_cards_hash = SHA256(canonical UTF-8 JSON of sorted selected relative path -> file SHA256); expectations_hash = SHA256(canonical JSON of selected main-card embedded Reviewer expectations blocks). Structural reference only; no outcome labels, no score points for matches.",
+      "Nearest-neighbor versions are bounded to their descriptions in the fixed reviewed paper; external originals were not available/read. No exhaustive novelty claim.",
+      "Review records may cite contemporary practice as diagnostic questions, not demand later-created systems of historical papers."
+    ],
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "domain_card_sources": {
+      "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+      "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+      "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+      "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+      "patterns/sub/K105.md": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b",
+      "patterns/sub/K109.md": "dea4052b3e5c60709cd0ddbef317afc34cdd68b54f5b72757c13cd2d3828274d",
+      "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+      "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+      "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+    },
+    "expectation_source_files": [
+      "patterns/main/external_verification_control.md",
+      "patterns/main/llm_symbolic_solver_planning.md",
+      "patterns/main/observe_act_interface.md",
+      "patterns/main/planner_composes_code_and_policies.md"
+    ]
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2302.01560v3",
+      "version": "2302.01560v3",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2302.01560.txt",
+      "sections_read": [
+        "Abstract",
+        "1 Introduction",
+        "2 Background",
+        "3 Method incl Descriptor/Explainer/Planner/Selector",
+        "4 Experiments including Tables 1–5 and ablations",
+        "5 Related Work",
+        "6 Limitations/Conclusion",
+        "Appendix A ALFWorld and Tabletop, Tables 6–8",
+        "Appendix B task catalog Tables 9–16",
+        "Appendix C controller, selector, models, Table 19",
+        "Appendix D baselines",
+        "Appendix E diamond oracle/controller study",
+        "Appendix F full per-task results",
+        "Appendix G all prompts",
+        "Appendix H full execution dialogue; initial truncated read completed by reading lines44–58"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "note": "Complete supplied html-full extraction read, including all supplied appendices; extraction tables flattened. No code/reproduction performed."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "Abstract; local text line 6",
+      "quote": "DEPS facilitates better error correction on initial LLM-generated $\\textit{plan}$ by integrating $\\textit{description}$ of the plan execution process and providing self-$\\textit{explanation}$ of feedback when encountering failures during the extended planning phases. Furthermore, it includes a goal $\\textit{selector}$, which is a trainable module that ranks parallel candidate sub-goals based on the estimated steps of completion, consequently refining the initial plan. Our experiments mark the milestone of the first zero-shot multi-task agent that can robustly accomplish 70+ Minecraft tasks and nearly double the overall performances. Further testing rev",
+      "support_explanation": "Original system claim includes correction plus learned selector; frozen planner does not imply all modules training-free.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "3.1; local text line 15",
+      "quote": "our agent (DEPS) consists of an event-triggered D escriptor, a Large Language Model (LLM) as E xplainer and P lanner, a goal S elector based on horizon prediction and a goal-conditioned controller. In the following, we use Minecraft as a running example to better elaborate our agent. Note that DEPS can be directly applied to other (non-)open-ended tasks. We take a large language model (LLM) as a zero-shot planner of the agent to complete t",
+      "support_explanation": "Descriptor, explainer, planner, horizon selector and controller form an explicit local execution loop.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "3.2; local text line 15",
+      "quote": "inventory information, biome) as final event-level description d_{t} as demonstrated in Figure 2 . Notably, we also treat the LLM as an explainer to explain why the previous plans P_{t-1} failed. Specifically, by analyzing the current state from description d_{t} and precondition of current goal g_{t} , the explainer can identify the reason why the current goal cannot be executed successfully. As shown in Figure 2 , the r",
+      "support_explanation": "Plan-related descriptions expose symbolic game information, not only deployable visual perception.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "4.2; local text line 18",
+      "quote": "Every task is executed 30 times and the average results in Minedojo [ 10 ] for every meta task are listed in Table 2 . Our approach achieves the best performance with all meta tasks. As the complexity of the task increases from MT1-MT8, the planner usually needs to give more accurate task steps (i.e., longer goal sequence) to achieve the final task. Therefore the success rate of all agents decreases with the reasoning steps increasing. Starting from MT6, almost all exist",
+      "support_explanation": "Repeated simulation trials per task; scope is the author's task catalog, not merely a success showcase.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "Table 2; local text line 18",
+      "quote": "DEP 75.70 \\pm 10.4 66.13 \\pm 13.4 45.69 \\pm 16.2 43.35 \\pm 20.2 15.93 \\pm 13.9 5.71 \\pm 3.7 4.60 \\pm 7.1 0.50 \\pm 0.5 39.36 DEPS 79.77 \\pm 8.5 79.46 \\pm 10.6 62.40 \\pm 17.9 53.32 \\pm 29.3 29.24 \\pm 27.3 13.80 \\pm 8.0 12.56 \\pm 13.3 0.59 \\pm 0.5 48.56 In addition, selector also greatly improves the final task success rate of the agent (from DEP w/o Selector to DEPS ). Hard meta tasks usually require the completi",
+      "support_explanation": "DEP39.36 vs DEPS48.56 aggregate, dispersions and diamond0.59% reveal strength and boundary.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "4.3 replanning-round ablation; local text line 18",
+      "quote": "The maximum number of rounds for Codex is around 7-8 rounds. 4.3.2 Ablation on Re-Planning Rounds We evaluate our agent on all tasks with increasing maximum rounds of DEPS. The round is defined as a cycle of interactive LLM-based planning with description, explanation, and planning and selecting, i.e., an updated plan. All tasks for every maximum round are executed 30 times and the average success rate is reported in Table 4.3.1 . ",
+      "support_explanation": "Additional rounds are bounded by token capacity; no equal-call explanation-only causal experiment.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "Appendix A.2 / Table 8; local text line 36",
+      "quote": "Table 8: Success rates for various methods across different tasks in Tabletop Manipulation environment. Task CLIPort [ 40 ] +oracle GPT [ 16 ] IM [ 17 ] DEP Assembling Kits 60.0% 60.0% 60.0% 60.0% Towers of Hanoi 100.0% 100.0% 40.0% 100.0% Put Block in Bowl 100.0% 100.0% 82.0% 100.0% Packing Shapes 40.0% 40.0% 60.0% 40.0% Stack Block Pyramid 80.0% 100.0% 40.0% 100.0% Average 76.0% 80.0% 56.4% 80.0%",
+      "support_explanation": "Tabletop task-wise results; GPT and DEP have equal overall80, not universal superiority.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "Appendix C Table 19; local text line 42",
+      "quote": "Table 19: Success rates for different LLMs on Minecraft tasks. Group Codex [ 8 ] GPT-3 [ 5 ] ChatGPT GPT-4 [ 31 ] baseline DEPS baseline DEPS baseline DEPS baseline DEPS MT1 28.6 79.8 27.2 75.4 20.3 70.2 49.2 89.3 MT2 37.1 79.5 42.1 76.3 28.2 68.5 48.3 85.0 MT3 15.1 62.4 7.8 58.7 3.2 50.4 38.04 63.4 MT4 15.9 53.3 6.7 50.2 4.8 47.8 27.0 55.7 MT5 3.2 29.2 2.7 17.2 0.8 16.3 15.7 32.2 MT6 0.5 13.8 0.3 7.9 0.3 6.0 4.9 16.19 MT7 0.6 12.6 0.4 5.3 0.5 5.2 3.1 16.41 The success rate of Vanilla Planner varies on the LLMs. The GPT-4 baseline achieved an initial plan accuracy twice as high as the baselines on other LLMs, demonstrating superior planning ability. After being augmented by Descriptor, Explainer, and Selector, DEPS based on different LLMs showe",
+      "support_explanation": "Within-model DEPS vs vanilla supports multi-backbone effect despite main-table backbone mismatches.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "Appendix B; local text line 39",
+      "quote": "Object item is used as the basis for the successful completion of the task. These objects cannot be obtained directly from the environment, and usually require multiple goals (i.e., reasoning steps) to be constructed. Here we only consider the number of required goal types, and multiple identical goals are unified into 1 reasoning step. Note that the reasoning steps for each ta",
+      "support_explanation": "Task success is an inventory-object condition; catalog construction and goal types define evaluation.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2",
+      "locator": "Limitations; local text line 24",
+      "quote": "First of all, our framework relies on privately-held LLMs like GPT-3 and ChatGPT, which makes it less accessible to those who cannot afford or access the service. However, we’re fully committed to ensuring a more democratized method and will explore using open-sourced models including OPT [ 48 ] and BLOOM [ 38 ] . Another issue is the explicit step-by-step planning in our system. Although it brings us superior performances over the baselines, the planning bottleneck can also prevent our model from being further scaled up. A more appealing approach will be amortizing the planning within an end-to-end trainable goal-conditioned policy, which is worth exploring next. Furthermore, some previous fundamental challenges in planning (e.g., dead ends) may not p",
+      "support_explanation": "Author acknowledges model accessibility, explicit planning bottleneck and untested dead ends.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S01",
+      "object": "Open-loop LLM task plan",
+      "information": "Task command, controller status, symbolic inventory/biome and game-state messages; Minecraft controller also uses visual and auxiliary state inputs.",
+      "operation": "Event descriptor compresses execution failures; LLM explains why failure occurred and revises plan; controller executes translated subgoals.",
+      "output": "Episode-local revised executable goal sequence.",
+      "conditions": "Descriptor must expose relevant failure; LLM explanation must be causally useful; controller must support subgoal and parse its translation.",
+      "feedback": "Inventory/event success or failure prompts diagnosis and replanning until task/round cap.",
+      "selection_rule": "Replace local plan following event-triggered explanation; no accepted persistent harness update.",
+      "data": "Minecraft BC controller on262 goals; examples in Appendix G overlap named evaluation tasks; repeated task episodes with random seeds.",
+      "persistence": "Revised plan and dialogue retained only within current task context.",
+      "later_use": "Subsequent subgoals of same episode; no verified cross-task learning claimed.",
+      "claimed_effect": "Nearly doubled broad-task success and failure recovery.",
+      "failure_boundary": "Privileged symbolic channels, token-capped extra calls, dead ends, hard-task zeros and perception/controller limitations.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E009",
+        "E010"
+      ]
+    },
+    {
+      "sig_id": "S02",
+      "object": "Ordering parallel feasible subgoals",
+      "information": "Current observation and candidate goals with shared preconditions; controller-competence data from successful offline trajectories.",
+      "operation": "Train goal-conditioned horizon predictor on remaining trajectory steps; rank parallel subgoals by predicted execution horizon and select easier/shorter ones.",
+      "output": "Controller-aware ordered goal choice.",
+      "conditions": "Offline horizon labels must predict current controller efficiency; equivalent-precondition candidates must preserve task feasibility.",
+      "feedback": "Observed progress leads to new candidates; selector is a trained component, not online RL or self-generated persistent improvement.",
+      "selection_rule": "Predicted shorter horizon among currently comparable candidate goals.",
+      "data": "Offline successful trajectories; distinct CLIP/MineCLIP/fixed/random selector comparisons; not planning-parameter training-free for whole stack.",
+      "persistence": "Pretrained selector weights, fixed during reported task execution.",
+      "later_use": "Reuse selector across tasks with the same supported controller/domain.",
+      "claimed_effect": "DEP39.36→DEPS48.56 and stronger benefit on long efficiency-sensitive tasks.",
+      "failure_boundary": "No guarantee for unseen controller/task distributions; selector omitted in auxiliary domains.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E005",
+        "E008"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Initial LLM plans contain long-horizon errors and ignore how difficult parallel subgoals are for the actual controller.",
+    "checked_gap": "Error diagnosis and competence-aware ordering are concrete residuals beyond feedback-only planning. However, the authors' broad suggestion that all earlier plans assume correctness is too strong: Inner Monologue already performs feedback-based planning.",
+    "lineage": [
+      {
+        "method": "Vanilla LLM planning, ProgPrompt/CaP program plans, Inner Monologue feedback, SayCan affordance weighting; learned goal-conditioned controllers",
+        "source_version": "2302.01560v3 Sec5/Appendix D descriptions; original adjacent versions not independently read/fixed here"
+      }
+    ],
+    "closest_adjacent": "Inner Monologue supplies environment feedback; CaP and ProgPrompt structure plans. Residual proposed distinction is explicit failure explanation and horizon-ranked parallel goals, not feedback or decomposition in general.",
+    "residue": "Feedback alone need not correct the right causal error; plausible ordering may waste limited episode horizon.",
+    "stakes": "Controller failures and inefficient ordering compound in long multi-goal tasks.",
+    "method_response": "Descriptor→explain→revise loop plus offline-trained horizon selector.",
+    "remaining_gap": "Explanation content not isolated from extra compute; main baseline models differ; symbolic game-state channel and demonstration overlap limit generalization; hardest tasks remain rarely solved.",
+    "unresolved": [
+      "Catalog prose says71 tasks whereas numbered catalog extends beyond it; exact unique aggregate denominator not reconstructed from flattened extraction.",
+      "No independent external novelty audit; no physical-robot transfer evidence."
+    ],
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E004",
+      "E005",
+      "E006",
+      "E007",
+      "E008",
+      "E009",
+      "E010"
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong main, partial verification tactic",
+        "tactic_steps_checked": [
+          "1: separate language plan repair, learned efficiency estimate and controller execution",
+          "2: Python-like structured goal calls translated to supported controller goals",
+          "3: inventory/event results drive in-place correction during task construction",
+          "4: DEP/DEPS and selector/replan ablations; explanation-vs-budget confound not removed",
+          "5: caps and multiple environments reported; no full inference cost, deployable nonprivileged loop untested"
+        ],
+        "success_checks": [
+          {
+            "condition": "feedback applied during construction",
+            "status": "met",
+            "evidence_ids": [
+              "E002",
+              "E003",
+              "E006"
+            ]
+          },
+          {
+            "condition": "load-bearing selector toggle",
+            "status": "met",
+            "evidence_ids": [
+              "E005"
+            ]
+          },
+          {
+            "condition": "sound or independently verified handoffs",
+            "status": "partial",
+            "reason": "Controller is learned and explanation is not an external causal verifier."
+          }
+        ],
+        "failure_checks": [
+          {
+            "condition": "extra compute/backbone confounds",
+            "status": "partial",
+            "evidence_ids": [
+              "E006",
+              "E008"
+            ]
+          },
+          {
+            "condition": "privileged feedback limits transfer",
+            "status": "unmet",
+            "evidence_ids": [
+              "E003"
+            ]
+          },
+          {
+            "condition": "uniform robust performance",
+            "status": "unmet",
+            "evidence_ids": [
+              "E005",
+              "E007"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E003",
+          "E005",
+          "E006",
+          "E008"
+        ],
+        "reason": "Structured goals plus execution-event verify/revise fit C25, including its allowed model revision loop. This is not a sound symbolic search pipeline, and only part of strongest conditions are met; no redundant adaptation label for generic prompts."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Language diagnosis and learned horizon ordering are delegated around an executable controller with mid-episode correction. Self-supervision/retained-improvement labels would invent an unreported learning loop.",
+    "executes_pattern": true,
+    "resolves_problem": false,
+    "resolution_reason": "Average closed-loop gains do not resolve causal diagnosis, controller failure, nonprivileged deployment or uniform robust long-horizon completion."
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "observe_act_interface",
+        "sub": "K104",
+        "version": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+        "fit": "strong semantic interface",
+        "condition_checks": [
+          {
+            "condition": "supported semantic goals mapped to executor",
+            "status": "met"
+          },
+          {
+            "condition": "dependable executor coverage",
+            "status": "partial",
+            "reason": "Hard tasks depend on BC competence, oracle-controller diamond contrast is large."
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E005"
+        ]
+      },
+      {
+        "main": "external_verification_control",
+        "sub": "K202",
+        "version": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+        "fit": "strong local monitor handback",
+        "condition_checks": [
+          {
+            "condition": "event-triggered failure/success handback",
+            "status": "met"
+          },
+          {
+            "condition": "nonprivileged transferable detector",
+            "status": "unmet",
+            "reason": "Inventory/biome/game state gives privileged descriptors."
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E006",
+          "E009"
+        ]
+      }
+    ],
+    "unassigned": [
+      {
+        "operation": "Offline-trained horizon selector reorders parallel same-precondition goals",
+        "reason": "Important separate signature preserved without forcing a code-composition/VLA/RL/self-improvement card; no new taxonomy edited."
+      }
+    ],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "observe_act_interface",
+        "sub": "K104"
+      },
+      "operation_correspondence": "Python-like goal calls are parsed/translated into262-controller-goal vocabulary.",
+      "necessary_conditions_and_differences": "Task-goal semantics rather than fixed motion tokens; no robot geometric fidelity claim.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E005"
+      ]
+    },
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain": {
+        "namespace": "embodied",
+        "main": "external_verification_control",
+        "sub": "K202"
+      },
+      "operation_correspondence": "Controller events trigger descriptor, explanation and planner suffix revision.",
+      "necessary_conditions_and_differences": "No calibrated VLA progress head; game-state event channels are not transferable robot perception.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E006",
+        "E009"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations",
+        "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success."
+      ],
+      "applies_when": "a claim that a harness (rather than the model) raises embodied or agentic success.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Fixed controller and DEP/DEPS help; main GPT/CoT/IM vs PP/CaP/ours use different backbones. Appendix C supplies within-model vanilla/DEPS comparisons.",
+      "evidence_ids": [
+        "E005",
+        "E008"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer-expectations",
+        "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+      ],
+      "applies_when": "a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Selector variants and replanning-round sweeps exist; explanation content is not isolated against equal-call same-context correction.",
+      "evidence_ids": [
+        "E005",
+        "E006"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations",
+        "- **E03 (ablation, common_practice).** Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student. — _applies when_ a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student."
+      ],
+      "applies_when": "a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student.",
+      "applicable": true,
+      "status": "met",
+      "reason": "Appendix C Table19 tests vanilla/DEPS across Codex/GPT3/ChatGPT/GPT4; this is multi-backbone support, not token fairness.",
+      "evidence_ids": [
+        "E008"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer-expectations",
+        "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset."
+      ],
+      "applies_when": "any success-rate comparison between harnesses, models or training recipes on a fixed task subset.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "30 task trials, meta-category dispersions and per-task rates provided; uncertainty aggregation and unique catalog denominator not fully reconciled, no paired significance test.",
+      "evidence_ids": [
+        "E004",
+        "E005",
+        "E009"
+      ],
+      "score_item": [
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations",
+        "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+      ],
+      "applies_when": "a benchmark claim by a frontier-model harness, or ablations run under non-standard execution.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Game-state inputs, pretrained controller, prompts and task lists disclosed, but prompt/evaluation task overlap, no category exclusion and unknown foundation contamination limit held-out/zero-shot meaning.",
+      "evidence_ids": [
+        "E003",
+        "E009"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer-expectations",
+        "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+      ],
+      "applies_when": "a comparison between harnesses, interfaces or tool bundles with the model fixed.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Environment step caps and token-driven7–8 rounds disclosed; increasing rounds consumes extra model computation and no equal-call explanation control.",
+      "evidence_ids": [
+        "E006"
+      ],
+      "score_item": [
+        "E.cost",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/observe_act_interface.md#Reviewer-expectations",
+        "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+      ],
+      "applies_when": "a claim that a harness, interface or distilled student is better or more practical than an alternative.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Round/token capacity and step limits are inferable, but no total tokens/latency/USD including failed attempts and controller/selector training.",
+      "evidence_ids": [
+        "E006",
+        "E010"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "08e56740bd773dc5383852098d181cf99bca273058baa5761fb96dc0d248fe39",
+      "source_strength": "common_practice; literature-derived, not an actual reviewer quotation",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer-expectations",
+        "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+      ],
+      "applies_when": "a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle.",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "Tabletop/ALFWorld experiments are simulation, not repeated physical robot deployment.",
+      "evidence_ids": [
+        "E007"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Nearly doubles overall success and robustly solves70+ tasks.",
+      "setting": "Minecraft/MineDojo with same BC controller, random worlds/spawns and task-dependent step caps",
+      "baseline/control": "GPT15.42, PP16.88, CoT18.89, IM21.64, CaP25.77, DEP39.36, DEPS48.56; main backbones not all matched",
+      "data_budget": "≥30 trials/task; BC controller262 goals; more model rounds than vanilla; prompt demonstrations include evaluated task names",
+      "selection_vs_test": "No strict excluded task-category development holdout; random worlds are not independent harness-design/test separation",
+      "result": "DEPS48.56 aggregate vs CaP25.77; selector adds9.20pp over DEP; diamond0.59% and several hard per-task zeros.",
+      "denominator": "30 executions/task stated; catalog task-count discrepancy71 vs numbering through76 unresolved",
+      "counterevidence": "Main backbone mismatch; hardest tasks not robust; inventory/GPS-like symbolic channels; explanation tokens unbalanced.",
+      "allowed_conclusion": "Strong average author-reported simulated gains with these tools/controllers; neither every task robustly solved nor explanation itself causally isolated.",
+      "evidence_ids": [
+        "E001",
+        "E003",
+        "E004",
+        "E005",
+        "E006",
+        "E008",
+        "E009"
+      ]
+    },
+    {
+      "claim_id": "C2",
+      "text": "General interactive planning recipe extends beyond Minecraft.",
+      "setting": "ALFWorld and CLIPort tabletop simulation auxiliary studies",
+      "baseline/control": "ALFWorld DEP76 vs GPT10/GPT+replan52/IM30; tabletop DEP80 equals GPT80; different per-domain LLMs and selector omitted",
+      "data_budget": "ALFWorld10 tasks×5 trials; tabletop5 seen CLIPort tasks×5 seeds",
+      "selection_vs_test": "Domain-specific prompts/descriptors; tabletop tasks from training task families, not structural holdout",
+      "result": "Improvement in ALFWorld but no GPT advantage in tabletop; PickTwo ALFWorld task remains zero.",
+      "denominator": "Small auxiliary suites and5 trials/task",
+      "counterevidence": "No single unchanged harness/model/controller crossing domains; no real robot evidence.",
+      "allowed_conclusion": "Interactive recipe instantiates in multiple simulators, not measured generic transfer of a frozen full harness.",
+      "evidence_ids": [
+        "E007",
+        "E008"
+      ]
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Under author-reported game-state feedback and a fixed BC controller, DEPS improves aggregate Minecraft task completion, with additional horizon-selection gains and repeated trials. Auxiliary ALFWorld supports the recipe, but tabletop equals GPT and hardest Minecraft tasks remain near zero.",
+    "unresolved": [
+      "Exact task-catalog unique denominator and some appendix prompt labels inconsistent.",
+      "Explanation benefit not separated from extra rounds/tokens.",
+      "Symbolic descriptor privilege and prompt-task overlap prevent a transfer/true unseen-category label.",
+      "Main-table backbone confounds partly addressed by Appendix C, not by budget matching.",
+      "Meta-category dispersions are not automatically per-seed uncertainty or paired confidence tests."
+    ],
+    "reproduction": "not performed; author_report only"
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Two specific structural bottlenecks, plan repair and controller-aware ordering, are important; nearest feedback work already covers part of claimed gap and broader lineage not independently fixed.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E005",
+        "E010"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Event diagnosis and horizon ranking make distinguishable predictions and align with failure/efficiency; explanations and offline horizon fidelity remain hypotheses under privileged state.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E005"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Descriptor/explainer/planner/controller and fixed-selector chain reconstructable, full prompts present; task/prompt bookkeeping and deployable information conditions limit complete execution assurance.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E006",
+        "E009",
+        "E010"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Inventory goal criteria, repeated trials and environment task rates support closed-loop outcomes; privileged symbolic state and catalog discrepancies keep middle-band rather than unqualified verifier/transfer evidence.",
+        "evidence_ids": [
+          "E003",
+          "E004",
+          "E005",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Fixed-controller DEP/DEPS and Appendix19 within-model comparisons support contribution, but backbone, extra-replan-compute and non-isolated explanation remain material alternatives.",
+        "evidence_ids": [
+          "E005",
+          "E006",
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Random world seeds and auxiliary domains add breadth but evaluated task names occur in prompts, selectors/controllers/domain prompts differ and symbolic channels are privileged; no clean held-out category/body gain.",
+        "evidence_ids": [
+          "E003",
+          "E007",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Repeated30 trials/task plus dispersions and full per-task rates expose hard-task zeros. Catalog/uncertainty aggregation and absence of paired CI prevent4.",
+        "evidence_ids": [
+          "E004",
+          "E005",
+          "E009"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 1,
+        "reason": "Step and approximate token-driven round caps disclose a rough budget boundary, but added LLM and selector/controller cost not priced and explanation comparison not budget matched.",
+        "evidence_ids": [
+          "E006",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    }
+  },
+  "score": {
+    "raw": 61.25,
+    "display": 61.2,
+    "lower": 61.25,
+    "upper": 61.25,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "designation": "production-under-anchors-v2"
+  },
+  "status": "reviewed",
+  "reason": "Fixed material read and eight items resolved under authorized anchors v2. Scoped author claim preserved; unreported controls are evidence limitations, not missing fulltext.",
+  "audit_status": "pending",
+  "audit_note": "Local structure/quote/arithmetic checks passed; independent aggregation and semantic audit still required."
+}

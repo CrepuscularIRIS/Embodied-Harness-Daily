@@ -1,0 +1,294 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p001",
+  "attempt_id": "a2",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2209.07753",
+    "paper_id": "2209.07753",
+    "title": "Code as Policies: Language Model Programs for Embodied Control",
+    "version": "2209.07753v4",
+    "claim_type": "system_method",
+    "central_claim": "Few-shot prompted code-writing LLMs can generate executable robot policies that compose perception and control APIs, reason spatially and geometrically, generalize to new instructions and express reactive control without additional model training; recursively generating undefined functions improves robotics-themed and general code generation. Multiple real robot platforms demonstrate the formulation."
+  },
+  "provenance": {
+    "input_hash": "90db5e3a15a4f5856f9394b3424a7f50e1c2d1ffd8bdbff86e04eef58984f593",
+    "rubric_version": "SCORE_SPEC v2.2; production-under-anchors-v2; not formally frozen",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+    "expectations_hash": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+    "domain_conditions_hash": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+    "domain_cards_hash_basis": "Pinned taxonomy SHA-256; applicable main and sub card hashes additionally recorded below.",
+    "expectations_hash_basis": "SHA-256 of patterns/main/planner_composes_code_and_policies.md, containing the applicable E01/E02/E03/E05/E07/E19/E22 expectation texts; no independent expectations file supplied.",
+    "applicable_card_hashes": {
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+      "patterns/sub/K105.md": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b"
+    },
+    "anchors_hash": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "unavailable_provenance_reason": "Internal subagent context supplies model identity but no stable session identifier or receipt reference; no model probing performed.",
+    "timestamp": "2026-10-21",
+    "notes": "anchors_version=v2; phase=production; attempt=a2 (material re-pinned PDF); supersedes=a1(needs_fulltext). Independent fresh review: no a1 record, other-seat record, aggregate, other batch, archive or old score read. Offline only; no paper code executed. Prior disposition is supplied by assignment/manifest, not read from the prior attempt."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/pdf/2209.07753v4",
+      "version": "2209.07753v4",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.07753_pdf.txt",
+      "sha256": "f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665",
+      "sections_read": ["Abstract", "I Introduction", "II Related Work", "III Method A-D", "IV Experiments A-E", "V Discussion and Limitations", "References", "Appendix A Prompt Engineering", "Appendix B Method Section Prompts", "Appendix C Reasoning with Code vs. Natural Language", "Appendix D HumanEval", "Appendix E Robot Code-Generation Benchmark", "Appendix F Reactive Controllers", "Appendix G Visual Language Models", "Appendix H Whiteboard Drawing", "Appendix I Real-World Tabletop", "Appendix J Mobile Robot", "Appendix K Simulation Tabletop, Table VI", "Appendix L Additional Capabilities", "Appendix M Cross Embodiment"],
+      "complete": true,
+      "missing_sections": [],
+      "notes": "Verified text SHA-256 against the re-pinned input manifest. PDF extraction contains all appendices, but multi-column tables/code have reading-order artifacts. H-K enumerate API contracts and prompt URLs, not all linked domain-specific prompt contents; external links were not fetched. K defines task templates, attribute splits, repetitions and termination controls, but does not spell out numerical per-task simulator success tolerances. These are reporting/verification limitations of this fixed document, not an absent appendix."
+    }
+  ],
+  "evidence": [
+    {"evidence_id":"E001","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Abstract, opening","quote":"LLMs can take in new commands and autonomously\nre-compose API calls to generate new policy code respectively.","support_explanation":"Author's instruction-to-executable-policy generalization claim, not a claim of autonomous policy improvement across evaluated episodes.","kind":"author_report"},
+    {"evidence_id":"E002","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"I Introduction, fixed-skill bottleneck","quote":"incorporating each new skill (and mode of grounding) requires\nadditional data and retraining","support_explanation":"Motivates composing feedback and continuous primitive parameters rather than choosing only among pretrained skill names.","kind":"author_report"},
+    {"evidence_id":"E003","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"II Related Work, nearest adjacent systems","quote":"Inner Monologue [18]\nexpands LLM planning by incorporating outputs from success detectors or other visual language models and uses their feedback to\nre-plan.","support_explanation":"Author acknowledges adjacent feedback-aware LLM planning. The residual is not simply adding feedback; CaP exposes numerical policy logic and perception-to-control computation. This is the focal paper's account, not independent inspection of Inner Monologue's original version.","kind":"author_report"},
+    {"evidence_id":"E004","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"III Method, execution scope and checks","quote":"ensuring there are no import statements, special variables that\nbegin with __, or calls to exec and eval.","support_explanation":"A textual/code-execution restriction precedes Python execution. This is not a robot motion-validity checker or proof of a secure sandbox.","kind":"author_report"},
+    {"evidence_id":"E005","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"III A, LMP session","quote":"an\nLMP \"session\" by incrementally appending new instructions and\nresponses to the prompt","support_explanation":"Within-session linguistic context persists; subsequent instructions can refer to earlier actions. No cross-task success-filtered learning protocol is thereby established.","kind":"author_report"},
+    {"evidence_id":"E006","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"III B, default model and decoding","quote":"use OpenAI Codex code-davinci-002 with\ntemperature 0","support_explanation":"Default frozen code-writing backbone and deterministic greedy decoding; HumanEval sampling is an explicitly different protocol.","kind":"author_report"},
+    {"evidence_id":"E007","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"III C, hierarchical function generation","quote":"We use the functiongenerating LMP to write these undefined functions and add them\nto the scope. This procedure is repeated on the generated function\nbody, hierarchically creating new functions in a depth-first manner.","support_explanation":"Inspectable recursion and persistence in execution scope, driven by unresolved function names rather than execution-quality feedback or an acceptance test.","kind":"author_report"},
+    {"evidence_id":"E008","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"IV Experiments, quantitative versus qualitative scope","quote":"quantitative evaluations of a robot\nsystem using CaP is limited to a constrained set of simulated tasks\nin IV-D","support_explanation":"Explicitly prevents turning real-robot demonstrations into counted success/transfer evidence.","kind":"author_report"},
+    {"evidence_id":"E009","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"IV A, RoboCodeGen evaluation","quote":"our\nevaluation metric is the percentage of the generated code that\npasses human-written unit tests.","support_explanation":"Offline code correctness is grounded by unit tests; the benchmark contains 37 functions and compares flat/hierarchical generation across four API-accessible models (Table I), not 37 closed-loop robot tasks.","kind":"author_report"},
+    {"evidence_id":"E010","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"IV D and Table III, task families and results","quote":"Success rates over task families with 50 trials per task.","support_explanation":"Table III reports CaP long-horizon/spatial-geometric SR: SA-SI 97.20/89.30, UA-SI 97.60/73.33, UA-UI 80.00/62.00 percent. NL planner long-horizon 86.40/88.00/64.00; spatial-geometric marked N/A, not a measured zero. Table VI supplies detailed rows and oracle/no-oracle CLIPort distinction.","kind":"author_report"},
+    {"evidence_id":"E011","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"IV D, baseline data and prompting","quote":"CLIPort [36] policies trained\nvia imitation learning on 30k demonstrations","support_explanation":"CLIPort comparison has a different data, representation and perception regime; end-to-end versus modular comparison is not a clean code-only causal ablation.","kind":"author_report"},
+    {"evidence_id":"E012","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"V Discussion and Limitations","quote":"Our approach also assumes all given instructions are\nfeasible, and we cannot tell if a response will be correct a priori.","support_explanation":"No universal correctness or feasibility guarantee; generated program execution remains fallible despite lexical checks.","kind":"author_report"},
+    {"evidence_id":"E013","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix A, prompt engineering and code repair","quote":"we did not employ this method in our experiments.","support_explanation":"In context this refers to LLM editing/fixing code, which the authors found inconsistent. Do not fabricate a verifier-guided program-repair or autonomous self-improvement loop.","kind":"author_report"},
+    {"evidence_id":"E014","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix C, spatial reasoning correctness","quote":"An LLM-generated answer for position selection is considered\ncorrect if all coordinates are within 1cm of the ground truth.","support_explanation":"A clear tolerance exists for the offline 23-question position-selection benchmark; it must not be silently copied as the success criterion for closed-loop tabletop manipulation. Other set: 28 object-selection questions; Table IV totals 35/58/98 percent for vanilla/CoT/LMP.","kind":"author_report"},
+    {"evidence_id":"E015","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix D, fairer flat-generation prompt control","quote":"the only difference in the hierarchical prompt is using a\nyet-to-be-defined function get_mean instead of calculating the\nmean directly.","support_explanation":"A same-backbone flat-prompt control reduces the no-prompt confound. Table V: greedy 45.7 no-prompt, 50.6 flat-prompt, 53.0 hierarchical; sampled P@1 34.9/36.6/39.8 percent. It is not an equal-call-budget embodied hierarchy ablation.","kind":"author_report"},
+    {"evidence_id":"E016","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix D, deployment decoding and unavailable unit tests","quote":"sampling multiple solutions is not practical for LMPs, which need\nto perform tasks in a zero-shot manner without engineering prior\nunit tests.","support_explanation":"HumanEval sample-and-test pass rates are not runtime robot candidate selection. Robot programs use the most likely output.","kind":"author_report"},
+    {"evidence_id":"E017","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix F, reactive controller boundary","quote":"require actually tuning the gains based on execution feedback,\nsomething our method does not support at the moment.","support_explanation":"Toy reactive controller generation is not feedback-driven controller optimization; PD hints and near-upright initialization matter.","kind":"author_report"},
+    {"evidence_id":"E018","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix G, real perception calibration and failure","quote":"many real-world failures could be\nattributed to inaccurate detections.","support_explanation":"Real-world MDETR/ViLD plus depth deprojection need pre-registered camera transforms and domain prompt tuning; perception failures are not enumerated as rates.","kind":"author_report"},
+    {"evidence_id":"E019","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix I, identity boundary","quote":"we do not have a good\nway of persisting the identity of duplicate objects across VLM\ndetections.","support_explanation":"Unique-object restriction undercuts claims of general scene memory; context/function persistence does not solve tracking.","kind":"author_report"},
+    {"evidence_id":"E020","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix K, simulation input visibility","quote":"via a scripted object detector","support_explanation":"Quantitative simulation exposes object list and positions via a scripted detector plus pick/place primitive. Treat this as privileged structured perception rather than evidence of robust vision grounding.","kind":"author_report"},
+    {"evidence_id":"E021","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix K, definition of seen instructions/attributes","quote":"the “seen” instructions\nor attributes are permitted to appear in the prompt or used for\ntraining","support_explanation":"K explicitly lists seen eight and unseen six instruction templates and attribute values (e.g. unseen diagonal, farthest, lower directions, held-out colors). This is a within-environment conditioning holdout, not new-embodiment validation.","kind":"author_report"},
+    {"evidence_id":"E022","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix K, trial sampling and CLIPort termination","quote":"A total of 50 trials are\nperformed per task, each with sampled attributes and initial scene\nconfigurations (block and bowl types, numbers, and positions).","support_explanation":"Repeated trials and denominators exist. CLIPort is separately evaluated with ten-action termination and oracle success termination. No confidence intervals, seed variability or numerical task-specific success checker tolerances are given in K/Table VI.","kind":"author_report"},
+    {"evidence_id":"E023","material_id":"M1","material_hash":"f765a37dcd7cb1850994ecf7dca8ccc4e2ef695c94696b58372456e5b0574665","locator":"Appendix M, cross-embodiment caveat","quote":"this ability\nis brittle with existing LLMs and cannot reliably adapt to APIs\nthat are very different.","support_explanation":"Omni/unidirectional API-conditioned code example is not counted closed-loop cross-embodiment transfer.","kind":"author_report"}
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Instruction-to-policy interface: replace a sequence of fixed skill labels with executable Python that processes perceptual outputs and parameterizes low-level APIs.",
+      "information": "Frozen code-davinci-002 sees command comments, hand-authored Hints/Examples and object names; code queries positions/boxes/visibility through domain APIs. Real robot uses MDETR/ViLD plus calibrated depth; quantitative simulation uses scripted object detection and object coordinates. No compact student or teacher-student privilege split.",
+      "operation": "Generate code; check prohibited constructs; execute in API-provided global scope and variable/function local scope; use NumPy/Shapely for geometry and for/while/if for feedback control.",
+      "output": "Executable perception-to-action policy and parameterized primitive calls, not only a prose plan.",
+      "conditions": "Meaningful consistent API names/types, calibrated coordinate frames, adequate primitives, suitable prompt examples and feasible instructions.",
+      "feedback": "Runtime sensor/API values drive generated program branches; execution feedback is not a scored signal for LLM code repair in the evaluated method.",
+      "selection_rule": "Greedy temperature-zero output, lexical restrictions before execution. No success-tested best-of-N policy acceptance gate.",
+      "selection_data": "Manually engineered examples; K defines prompt-eligible versus held-out templates/attributes. No autonomous selection dataset.",
+      "persistence": "Variables/functions in execution scope and optional session prompt history; no evaluated permanent success-filtered skill bank.",
+      "later_use": "Later commands/program calls can reuse prior variables/functions and refer to session history.",
+      "claimed_effect": "Spatial-geometric instruction following and generalization without additional robot-policy model training.",
+      "failure_boundary": "Perception/primitive coverage, ambiguous types, complex instructions, infeasible requests, no a-priori response correctness; no audited motion-validity guarantee.",
+      "evidence_ids": ["E001","E002","E004","E005","E006","E012","E018","E019","E020"]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Flat code generation and undefined helper-function expansion.",
+      "information": "Generated program AST, names already present in scope, function signature/context, few-shot function-generation examples; no unit-test result is exposed as a robot runtime selection signal.",
+      "operation": "Find unresolved function calls in the AST, request their definitions from a function-generating LMP, recursively expand child bodies depth-first and add definitions to scope.",
+      "output": "Hierarchically composed executable policy/function definitions.",
+      "conditions": "Backbone must be competent enough to use abstractions; first-party API conventions and types must be inferable.",
+      "feedback": "Undefined-name detection is syntactic dependency resolution, not reward or behavioral validation.",
+      "selection_rule": "Complete missing definitions using most-likely generation; no verification-guided candidate search demonstrated in deployment.",
+      "selection_data": "Flat/hierarchical prompts with two HumanEval example functions; task-test unit tests are evaluation only.",
+      "persistence": "Generated helpers added to current execution scope.",
+      "later_use": "Parent program and subsequent programs can call these helpers; no isolated longitudinal retained-gain evaluation.",
+      "claimed_effect": "Improved RoboCodeGen and HumanEval correctness, especially productive composition for stronger models.",
+      "failure_boundary": "Smaller model does not uniformly benefit; controller gain tuning and reliable code repair are unsupported.",
+      "evidence_ids": ["E007","E009","E013","E015","E016","E017"]
+    }
+  ],
+  "retained_claim_trace": {
+    "applicable": false,
+    "reason": "Static harness/method claim, not a measured autonomous retained-improvement claim. The text says functions can accumulate and illustrates session history, but does not evaluate selection and retention from scored trials.",
+    "before": "Fixed provided APIs and hand-engineered prompt examples.",
+    "proposed_change": "New command-conditioned policy and recursively generated helper definitions.",
+    "selection_data_rule": "Greedy generation and unresolved-name expansion, not validation-based accept/reject.",
+    "persisted_change": "Current scope/session only; duration beyond session not evaluated.",
+    "later_tasks": "Reuse possible and contextual commands illustrated; no independent retained-gain cohort.",
+    "measured_gain": "Code-generation/within-benchmark task success, not retained or improver improvement.",
+    "evidence_ids": ["E005","E007","E013","E016"]
+  },
+  "gap": {
+    "author_gap": "LLM skill planners inherit a data/retraining burden from fixed low-level skills and cannot freely express new perception-action feedback, continuous parameters or precise spatial relations.",
+    "checked_gap": "Specific and plausible residual at the planner-to-executor boundary: choosing named skills is different from composing code over percepts and numerical control arguments. Acknowledged feedback-aware Inner Monologue means feedback alone is not the gap. Existing perception/control primitives remain required, so CaP reduces but does not eliminate the robot-system engineering/data burden.",
+    "lineage": [
+      {"name":"LLM code completion / Codex","source_version":"2107.03374 (2021), version suffix not established by focal paper","source":"M1 refs [1], III B","relationship":"Supplies pretrained Python generation, not a robot-specific policy learner; original source not independently read here."},
+      {"name":"Language Models as Zero-Shot Planners","source_version":"2201.07207 (2022), exact cited arXiv version unspecified","source":"M1 II/ref [14]","relationship":"Language plans/actions with semantic translation; contextualized only through focal paper."},
+      {"name":"SayCan","source_version":"2204.01691 (2022), exact cited arXiv version unspecified","source":"M1 II/ref [17]","relationship":"Feasibility-weighted selection of pretrained skills; not unrestricted numeric feedback-policy generation."},
+      {"name":"Inner Monologue","source_version":"2207.05608 (2022), exact cited arXiv version unspecified","source":"M1 II/ref [18]","relationship":"Already includes perception/success feedback in replanning; CaP changes policy representation and executable computation."}
+    ],
+    "closest_adjacent": "Socratic Models (2204.00598, exact cited version unspecified), SayCan and Inner Monologue, all described in M1 II; CLIPort (2021) supplies an end-to-end comparison, not a matched architectural ancestor. No exhaustive external novelty search.",
+    "residue": "Pre-existing skill selection and linguistic feedback do not provide arbitrary new numerical perception-to-control code composition.",
+    "stakes": "Avoid new robot demonstrations/training for each compositional skill; precise coordinates and reactive conditions can matter to execution rather than only plan plausibility.",
+    "method_response": "Executable Python delegates exact arithmetic/geometry to libraries and composes perception/control primitives; hierarchical expansion permits additional code complexity within prompt limits.",
+    "remaining_gap": "No proof of safe/feasible behavior, incomplete real-world measurement, fixed primitive/perception limits, manual prompt design and unmeasured runtime overhead.",
+    "evidence_ids": ["E002","E003","E007","E008","E012","E014","E017","E018","E023"],
+    "unresolved": ["Nearest-neighbor source versions and original-method details independently unverified: only focal paper's pinned discussion available within this assignment's reading boundary.","No comprehensive historical novelty search or base-model pretraining contamination audit; these cannot be inferred from missing search hits."]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": ["adapt_via_conditioning"],
+    "matches": [
+      {
+        "main_id":"decompose_and_delegate","sub_id":null,"role":"primary","fit":"strong main-level; sub-tactic not fully instantiated",
+        "tactic_steps_checked":["C25 steps 1-2: numerical/spatial reasoning is delegated through executable Python, with exact arithmetic in interpreter/NumPy rather than prose.","C25 step 3 absent for program construction: generated policies consume perception at runtime, but no solver-verdict-driven mid-construction candidate selection/code correction.","C25 steps 4-5 partial/unmet: flat/hierarchical and language/code comparisons exist; feedback-removal ablation and delegation cost accounting absent. C25 is singleton under this parent, not a sibling to substitute."],
+        "success_checks":["Responsibility boundary and executable handoff are explicit (III, C).","Code-generation ablation supports some benefit; helper reuse is implemented as scope, not proven retained capital."],
+        "failure_checks":["No guarantee that interpreter correctness implies policy correctness or physical safety.","Additional function-generation call budget unmeasured; no validation-feedback closure during construction."],
+        "evidence_ids":["E004","E007","E014","E015","E016"],
+        "reason":"The LLM emits policy programs; an interpreter/libraries compute geometry and primitive APIs enact it. This is actual routing of subproblems, not merely a mention of decomposition. sub_id=null preserves C25's stronger feedback-during-construction requirement, which is not met. Lessons used as checks, not acceptance/citation-based scoring."
+      },
+      {
+        "main_id":"adapt_via_conditioning","sub_id":null,"role":"supporting","fit":"strong main-level; narrower C03 recipe absent",
+        "tactic_steps_checked":["New commands become comment/code conditioning with Hints and few-shot Examples, no per-task parameter update.","C03 steps 1/4 partly analogous: consistent format and explicit UI/UA exclusions exist.","C03 steps 2/3 not the proposed mechanism: no broad new upstream context-interpreter training or shared-space reference alignment/retrieval substrate. Existing Codex pretraining is a dependency, not a newly executed upstream phase.","C03 step 5 partial: simpler NL/flat controls exist, not a matched-budget conditioning-only ablation. C03 is the only sub under this parent."],
+        "success_checks":["No additional task-specific model training; explicit prompt/task split.","Multiple task domains illustrated, but real-world outcomes uncounted."],
+        "failure_checks":["Manual prompt choices and pretraining overlap are not audited.","No conditioning-only causal isolation or robust held-out physical transfer."],
+        "evidence_ids":["E001","E006","E008","E011","E015","E021","E023"],
+        "reason":"Conditioning performs task adaptation at inference and is operationally distinct from the interpreter delegation. Do not force rs:C03 solely because the system uses few-shot prompts. Its unified learned substrate/format tactic is stricter than this direct use of an already pretrained code model."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Two original main signatures fit real operations. Candidate full cards and their singleton C25/C03 tactics read; both sub_ids intentionally null rather than altering original definitions.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "planner_composes_code_and_policies",
+        "sub": "K105",
+        "version": "embodied-agent-harness/v1; frozen local card",
+        "fit": "strong for frozen code composition; partial for modern interactive coding-agent retry/validation affordances",
+        "condition_checks": [
+          {"id":"S1","status":"partial","reason":"Code versus NL and flat versus hierarchy comparisons exist; matched LLM-call/token budget not established.","evidence_ids":["E010","E014","E015"]},
+          {"id":"S2","status":"partial","reason":"Numerical geometry APIs and registered depth transform are described; simulator structured positions simplify perception; calibration/noise robustness not swept.","evidence_ids":["E018","E020"]},
+          {"id":"S3","status":"unmet","reason":"Lexical execution checks do not validate motion feasibility/safety. Feasible instructions are assumed; no MuJoCo/kinematic candidate checks claimed.","evidence_ids":["E004","E012"]},
+          {"id":"S4","status":"not_applicable","reason":"No frozen VLA staged into contact by this method; handwritten pick/place/navigation primitives rather than VLA steering.","evidence_ids":["E020"]},
+          {"id":"S5","status":"not_applicable","reason":"No proposed invocation-aligned compact-tool training or student policy.","evidence_ids":["E006","E020"]},
+          {"id":"F1","status":"partial","reason":"Perception and primitive limitations acknowledged; tight-contact success not tested. No failure-rate claim imported from later card sources.","evidence_ids":["E012","E017","E018"]},
+          {"id":"F2","status":"partial","reason":"Representation/hierarchy controls exist but prompt/history/compute contributions not fully separated; no basis to assert budget exhaustion occurred.","evidence_ids":["E010","E015"]},
+          {"id":"F3","status":"partial","reason":"Four-model offline code-generation results show strength sensitivity; embodied effect measured only with default model.","evidence_ids":["E006","E009"]},
+          {"id":"F4","status":"not_applicable","reason":"No learned navigation-tool addition evaluated across backends.","evidence_ids":["E020"]},
+          {"id":"F5","status":"not_applicable","reason":"No frozen learned VLA accessed with versus without playbook.","evidence_ids":["E020"]},
+          {"id":"F6","status":"partial","reason":"API/perception coverage is a stated bound, but invocation-trained tool data gaps are inapplicable.","evidence_ids":["E012","E019"]},
+          {"id":"F7","status":"met","reason":"Risk present: real-world evidence explicitly qualitative; no robot transfer rate inferred.","evidence_ids":["E008","E023"]}
+        ],
+        "evidence_ids": ["E004","E005","E007","E014","E018","E020"],
+        "executes_pattern": true,
+        "resolves_problem": false
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": ["No asset edited. Candidate distinction for future synthesis: one-shot language-compiled reactive code plus unresolved-name expansion is not the same feedback affordance as execution-diagnostic iterative coding-agent repair; K105 covers both at coarse operation level."]
+  },
+  "pattern_mapping": [
+    {
+      "rs_main":"decompose_and_delegate","rs_sub":null,
+      "domain":{"namespace":"embodied","main":"planner_composes_code_and_policies","sub":"K105"},
+      "operation_correspondence":"LLM translates instructions to executable structured programs; interpreter and geometry libraries compute exact numerical subresults; robot APIs implement actions. This specializes delegation to physical policy composition.",
+      "necessary_conditions_and_differences":"Reliable API contracts/calibration and adequate primitives are required. Interpreter semantics do not verify physical correctness. C25 verifier-guided construction is absent, hence no rs:C25 label; modern K105 diagnostic-retry variants are only partial analogues.",
+      "evidence_ids":["E004","E007","E014","E018","E020"]
+    },
+    {
+      "rs_main":"adapt_via_conditioning","rs_sub":null,
+      "domain":{"namespace":"embodied","main":"planner_composes_code_and_policies","sub":"K105"},
+      "operation_correspondence":"Fixed code model takes task comments/API hints/example code and emits new robot policies with no task-specific weight update; conditioning determines which primitives and numerical logic are composed.",
+      "necessary_conditions_and_differences":"Task-conditioned code inference needs adequate pretrained model and prompt coverage. No new upstream training/shared-space substrate is proposed, so C03's tighter tactic is not asserted. Within-environment UI/UA tests are not quantitative cross-body transfer.",
+      "evidence_ids":["E001","E006","E021","E023"]
+    }
+  ],
+  "expectations": [
+    {"id":"E01","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived; not an actual review of this paper","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E01"],"applies_when":"Harness versus model success attribution","applicable":true,"status":"partial","reason":"Default Codex held fixed in code/NL comparisons and flat/hierarchical code-gen; broad CLIPort comparison changes perception/data/interface and no alternative fully deployable harness under identical episode/call budget is established.","evidence_ids":["E006","E010","E011","E014","E015"],"score_item":["E.causality"]},
+    {"id":"E02","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E02"],"applies_when":"Hierarchy/code representation is claimed to improve performance","applicable":true,"status":"partial","reason":"Flat-prompt HumanEval comparator addresses added prompting and hierarchy; robot task evaluation does not isolate hierarchy, persistence and arithmetic-library use one at a time, nor control added function-generation calls.","evidence_ids":["E007","E014","E015","E016"],"score_item":["M","E.causality"]},
+    {"id":"E03","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E03"],"applies_when":"General effectiveness of hierarchical code generation across model strengths","applicable":true,"status":"partial","reason":"Four-model RoboCodeGen and generalization analysis establish strength-dependence offline; no matched multi-backbone closed-loop robot comparison. No extrapolation to compact students.","evidence_ids":["E006","E009"],"score_item":["X","E.causality","E.holdout"]},
+    {"id":"E05","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E05"],"applies_when":"Practical alternative robot harness and additional hierarchical calls","applicable":true,"status":"unmet","reason":"Complete fixed text gives models, temperatures and evaluation sampling modes, but no measured per-episode LLM calls/tokens/latency/USD including failures. This is absent reporting, not evidence that runtime is cheap.","evidence_ids":["E006","E016"],"score_item":["E.cost"]},
+    {"id":"E07","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived from later systems","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E07"],"applies_when":"Historical agentic manipulation versus end-to-end policy claim; modern named-suite prescription is temporally inapplicable","applicable":true,"status":"partial","reason":"Contemporaneous CLIPort trained on 30k demonstrations is compared, with UI/UA perturbations and oracle/no-oracle termination disclosed. Requiring 2026 LIBERO-PRO/pi0.5 etc of a 2023 version is not applicable; no deduction for absent future baselines. Underlying fair stronger-policy comparison remains confounded by structured perception and training exposure.","evidence_ids":["E010","E011","E020","E021","E022"],"score_item":["G","E.causality","E.holdout"]},
+    {"id":"E19","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E19"],"applies_when":"Demonstration of the system across real robot platforms / embodiment generality","applicable":true,"status":"unmet","reason":"Drawing, manipulation and mobile robot demonstrations lack per-task counted success rates; authors explicitly limit quantitative robot evaluation to simulation. Allows demonstration claim but not quantified real robustness/transfer.","evidence_ids":["E008","E018","E023"],"score_item":["E.measurement","E.holdout","E.statistics"]},
+    {"id":"E22","version":"embodied-agent-harness/v1","source_strength":"common_practice, reading-derived","source_refs":["patterns/main/planner_composes_code_and_policies.md#Reviewer expectations E22"],"applies_when":"Same-model code/NL and hierarchical/flat comparisons","applicable":true,"status":"unmet","reason":"No matched LLM-call/turn/token/time cap for hierarchically generated functions versus flat generation; CLIPort ten-action and oracle stopping are disclosed, but disclosure is not equal interaction budget.","evidence_ids":["E007","E015","E016","E022"],"score_item":["E.causality","E.cost"]}
+  ],
+  "claims": [
+    {
+      "claim_id":"C1","text":"Generated code supports compositional and spatial-geometric robot instruction following without new policy training.",
+      "setting":"Codex code-davinci-002, temperature 0; simulated UR5e tabletop, scripted object list/position access and pick/place API; seen/unseen instruction and attribute groups.",
+      "baseline/control":"CLIPort with 30k demonstrations; NL planner; Table VI explicitly separates oracle and ten-action non-oracle CLIPort. NL spatial-geometric N/A is not a measured failure rate.",
+      "selection_vs_test":"Appendix K lists prompt-eligible templates/attributes and separate UI/UA values. Authors engineer prompts; exact linked simulation prompt texts and development audit not in the PDF. No test-driven self-improvement claimed.",
+      "result/denominator":"50 randomized trials per task template per evaluated scenario. Table III: CaP long-horizon SA-SI/UA-SI/UA-UI =97.2/97.6/80.0%; spatial-geometric =89.3/73.33/62.0%; NL long-horizon =86.4/88.0/64.0%. Table VI UA-UI all-task total=71.0%. Family means are not a single 50-trial denominator; no pooled numerator inferred.",
+      "evidence_ids":["E006","E010","E011","E020","E021","E022"],
+      "counterevidence":["Simulation uses structured scripted detection; CLIPort end-to-end data/perception differs.","Per-task success geometry/tolerances and checker reliability not explicit; no significance intervals.","K prose labels seen task 5 in both family ranges, while Table VI aggregate values align with distinct long-horizon/spatial groups; retain author's reported family means, do not invent pooled counts."],
+      "allowed_conclusion":"Authors report stronger within-environment template/attribute generalization for this modular code interface than these comparators; not robust visual transfer or causal proof that all gains derive from hierarchy."
+    },
+    {
+      "claim_id":"C2","text":"Hierarchical code generation improves robotics-themed and generic code correctness.",
+      "setting":"37 RoboCodeGen functions with human-written tests; four LLMs; 164 HumanEval questions using code-davinci-002.",
+      "baseline/control":"Flat versus hierarchical; Appendix D additionally flat + two flat examples versus hierarchy + corresponding hierarchical examples. Historical code-davinci-001 scores are not same-backbone evidence.",
+      "selection_vs_test":"Greedy T=0 and sampled T=0.8 pass@N modes separate. Human-written tests score offline outputs; not available as a robot deployment policy selector.",
+      "result/denominator":"RoboCodeGen Table I davinci 81->95% over 37 functions; HumanEval Table V greedy 45.7 no-prompt /50.6 flat-prompt /53.0 hierarchical; sampled P@1 34.9/36.6/39.8%. Percentage rounding and pass@ estimators preclude fabricating integer counts from displayed values.",
+      "evidence_ids":["E007","E009","E015","E016"],
+      "counterevidence":["Hierarchical runtime introduces additional function-generation calls without equal-compute accounting.","Small cushman does not benefit uniformly on all generalization categories (IV A/Appendix E).","Offline code correctness does not establish robot-task success or motion safety."],
+      "allowed_conclusion":"Reported code benchmark improvements support a useful decomposition technique on capable code models; no independent reproduction, equal-compute optimality or safety guarantee."
+    },
+    {
+      "claim_id":"C3","text":"Code reasoning is better suited than natural-language reasoning for precise spatial computation.",
+      "setting":"Appendix C, 28 object-selection questions and 23 position-selection questions with provided coordinates; position answers correct within 1cm.",
+      "baseline/control":"Vanilla NL, CoT and executable LMP output.",
+      "selection_vs_test":"Fixed hand-built question sets and example prompts; no independent held-out construction audit or repetitions reported for this static diagnostic.",
+      "result/denominator":"Table IV author-reported object/position/total percentages: vanilla 39/30/35; CoT 68/48/58; LMP 96/100/98. Counts are questions, not physical trials.",
+      "evidence_ids":["E014"],
+      "counterevidence":["Exact external computation and coordinate information are advantages of the proposed representation, not a capacity-matched no-tool model test.","No uncertainty or equal-token accounting; not a closed-loop robotics benchmark."],
+      "allowed_conclusion":"Evidence supports the numerical-computation mechanism in the tested static setting and explains part of the problem fit, not general embodied reasoning superiority."
+    },
+    {
+      "claim_id":"C4","text":"The formulation can instantiate policies across real robots and reactive low-level controllers.",
+      "setting":"UR5e drawing and tabletop manipulation; mobile 7-DoF-arm robot in a kitchen; toy CartPole and PyBullet impedance controller examples.",
+      "baseline/control":"Demonstrations, not paired counted robot baselines. Appendix M compares generated API-conditioned code examples, not evaluated robot transfer.",
+      "selection_vs_test":"Domain-specific APIs/prompts and known geometry; no untouched embodiment/scene evaluation cohort with counted outcomes.",
+      "result/denominator":"Qualitative examples and instruction lists only; no per-task physical success denominator.",
+      "evidence_ids":["E008","E017","E018","E019","E023"],
+      "counterevidence":["Controller gain tuning from execution is unsupported; object detection and unique-identity restrictions persist.","Unfamiliar API adaptation explicitly brittle; demonstrations do not establish transfer level."],
+      "allowed_conclusion":"A multi-platform feasibility demonstration of language-compiled policies, not quantified physical reliability, safe deployment or cross-embodiment transfer."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Author-reported repeated simulated tabletop evaluations support within-environment instruction/attribute generalization of a frozen-Codex executable-code harness with scripted object-position access; offline controlled code benchmarks support hierarchical generation and precise computation. Multi-platform real-robot examples demonstrate feasibility, not counted reliability or transfer. No experiments independently reproduced here.",
+    "unresolved": ["Exact numerical simulator success predicates/tolerances and complete linked domain prompt contents are not in the fixed PDF extraction; Appendix C's 1cm criterion is only for the offline coordinate diagnostic.","Historical adjacent methods independently unverified and pretraining overlap unaudited.","No equal-call/token compute comparison, runtime-cost report, seed uncertainty, quantitative physical transfer or longitudinal retained-gain study."],
+    "reason_not_transfer": "Both physical platforms use tailored APIs/prompts and qualitative demonstrations; simulation UI/UA is the same constructed scene/task environment with scripted structured perception. Anchors v2 prohibit treating privileged symbolic access or uncounted demonstrations as transfer."
+  },
+  "ratings": {
+    "G": {"status":"resolved","rating":3,"reason":"Specific important planner-to-controller expressivity/data bottleneck, with acknowledged nearby feedback-aware planners and explicit residual beyond fixed skills. Original neighbor versions not independently inspected; no exhaustive closest-frontier verification. Hence strong but not fully sourced 4-level lineage.","evidence_ids":["E002","E003","E012"],"counterevidence_ids":["E018","E020"],"search_scope":["M1 I-II, III D, V and references [1],[14],[16]-[18],[36]; no external lookup"]},
+    "M": {"status":"resolved","rating":4,"reason":"Mechanism is reconstructible: task comments and hints -> executable policy -> interpreter/library numerical computation and API actions; AST-driven missing-function recursion cleanly distinguishes hierarchy from flat generation. Predicts advantages on precise arithmetic/productive code, tested separately from effects. Assumptions and static scope versus optimization are explicit; no need for a learning or retained-gain loop for this claim type. This rates logical problem fit, not proof of effect or safety.","evidence_ids":["E004","E005","E006","E007","E014","E015","E016","E017"],"counterevidence_ids":["E012","E019"],"search_scope":["M1 III A-D, V, Appendices A-D,F-K"]},
+    "X": {"status":"resolved","rating":3,"reason":"Execution scope, syntax restrictions, recursion order, sensor/control interfaces and failure boundaries are described; no fictitious verification-based retention. Runtime feasibility/correctness is assumed, lexical checks are not motion validation, and domain-specific full prompt text remains linked rather than embedded. Multi-domain feasibility is shown but API/identity boundaries and model-strength dependence prevent a fully closed operational-boundary 4.","evidence_ids":["E004","E007","E012","E013","E017","E018","E019","E020","E023"],"counterevidence_ids":["E012","E017","E019","E023"],"search_scope":["M1 III, V, Appendices A-B,E-M; applicable K105 main/sub conditions"]},
+    "E": {
+      "measurement": {"status":"resolved","rating":2,"reason":"Repeated simulator task SR has 50/task and detailed rows; offline code tests and Appendix C's 1cm diagnostic criterion are explicit. However K supplies templates and trial protocol, not numerical task-specific simulator success checks/tolerances; no direct checker validation. Physical results are qualitative. Under anchors v2, absent explicit success criterion caps this at 2; offline 1cm tolerance must not be transferred to robot SR.","evidence_ids":["E008","E009","E010","E014","E020","E022"],"counterevidence_ids":["E008","E018"],"search_scope":["M1 IV A-E and Tables I-III; Appendices C-K and Tables IV-VI; searched success/criterion/criteria/tolerance/ground truth/oracle"]},
+      "causality": {"status":"resolved","rating":2,"reason":"Useful same-model NL/code and flat/hierarchical controls, with Appendix D's flat-prompt comparator reducing prompt-presence confounding. But hierarchy also changes calls and prompt style; closed-loop hierarchy, library arithmetic, persistence and structured perception not individually toggled. CLIPort changes data and input regime, and spatial NL tasks are N/A. Strong alternatives remain unseparated.","evidence_ids":["E006","E010","E011","E014","E015","E020","E022"],"counterevidence_ids":["E011","E016","E020"],"search_scope":["M1 IV A,D; Appendices C-E,K and Tables I-VI"]},
+      "holdout": {"status":"resolved","rating":2,"reason":"K enumerates held-out instruction templates/attributes and 50 sampled trials/task, so not merely seen demonstrations. Yet same designed simulator/task family and scripted positional access, no full prompt/development-overlap audit, no pretraining audit or counted unseen-embodiment/physical cohort. Partial support for new instructions, not full broad generalization scope.","evidence_ids":["E008","E020","E021","E022","E023"],"counterevidence_ids":["E018","E019","E020","E023"],"search_scope":["M1 IV D,V; Appendices A,E,G-M; K seen/unseen instruction and attribute lists"]},
+      "statistics": {"status":"resolved","rating":2,"reason":"50 randomized trials per task, task-specific success percentages and oracle/no-oracle endpoint controls are available. No confidence intervals, multi-seed variability, per-repeat outcomes or quantitative failure decomposition. Anchors v2 explicitly place trial counts without variance/CI at 1-2; repeated trials justify 2, not the no-repeat <=1 case.","evidence_ids":["E010","E022"],"counterevidence_ids":["E008","E018"],"search_scope":["M1 IV A-E, Appendices C-K, Tables I-VI; searched seed/variance/standard deviation/confidence/failure"]},
+      "cost": {"status":"not_reported","rating":0,"reason":"Model/temperature and code benchmark sampling settings are reported but no measured episode-level model calls, tokens, latency, wall-clock or monetary cost, including failed runs; no matched interaction/computation budget. Describing an algorithm does not quantify its recursive-call overhead. Complete fixed main paper and A-M searched; absent reporting is not missing fulltext.","evidence_ids":["E006","E007","E016"],"counterevidence_ids":[],"search_scope":["Entire fixed M1 abstract through references and Appendices A-M, particularly III recursion, IV experiments, D sampling, K termination","Case-insensitive search: cost, budget, latency, wall-clock, token, model call, GPU, dollar/USD; token hits concern decoding/context limits, not usage measurements"]}
+    }
+  },
+  "score": {
+    "raw": 66.25,
+    "display": 66.2,
+    "lower": 66.25,
+    "upper": 66.25,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "formula": "(15*3+20*4+20*3+15*2+10*2+10*2+5*2+5*0)/4",
+    "display_rule": "Python round(raw, 1), ties-to-even; no pre-rounding",
+    "interpretation": "production-under-anchors-v2; seat judgment, not accepted_final or formally frozen ranking"
+  },
+  "status": "reviewed",
+  "reason": "Complete pinned v4 PDF main text and Appendices A-M read and hash verified; both pattern layers, applicable conditions/expectations, author-claim/evidence matrix and all eight ratings completed. Reporting gaps are explicitly scoped; no unknown rating or material-completeness blocker. No independent reproduction, transfer, retained improvement or robot safety guarantee asserted.",
+  "short_reason": "Code over perception/control APIs and hierarchical helpers is a clear, well-matched mechanism with meaningful simulated generalization and offline controls. Evidence is limited by structured simulator perception, unspecified numerical robot-task success tolerances, incomplete causal/budget controls and uncounted physical demonstrations; runtime cost is unreported."
+}

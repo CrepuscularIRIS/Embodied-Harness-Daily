@@ -1,0 +1,48 @@
+{
+ "batch_id": "p016",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2409.13682",
+   "paper_id": "2409.13682",
+   "version": "2409.13682v1",
+   "title": "ReMEmbR: Building and Reasoning Over Long-Horizon Spatio-Temporal Memory for Robot Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.13682.txt",
+   "material_sha256": "fa448a463df5e73d9db0109d9e93fa04565d879f2e6feaf3989078513c2cb5c0"
+  },
+  {
+   "paper_key": "2409.15146",
+   "paper_id": "2409.15146",
+   "version": "2409.15146v3",
+   "title": "COHERENT: Collaboration of Heterogeneous Multi-Robot System with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.15146.txt",
+   "material_sha256": "e8fb780cfb2e54a31f6719274284d242bbfe06ec9c70ba75d3f4598faa593f93"
+  },
+  {
+   "paper_key": "2409.18313",
+   "paper_id": "2409.18313",
+   "version": "2409.18313v5",
+   "title": "Embodied-RAG: General Non-parametric Embodied Memory for Retrieval and Generation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.18313.txt",
+   "material_sha256": "1df7fae9abc63a4571e33f6b08cb5a32f2b7c701ee4fd6a164b00705c8b89ed8"
+  },
+  {
+   "paper_key": "2409.18794",
+   "paper_id": "2409.18794",
+   "version": "2409.18794v2",
+   "title": "Open-Nav: Exploring Zero-Shot Vision-and-Language Navigation in Continuous Environment with Open-Source LLMs",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.18794.txt",
+   "material_sha256": "cb34585b99406929eaa4075a83224a86c011d1b1959660849ae962392420483b"
+  },
+  {
+   "paper_key": "2409.19471",
+   "paper_id": "2409.19471",
+   "version": "2409.19471v2",
+   "title": "SELP: Generating Safe and Efficient Task Plans for Robot Agents with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2409.19471.txt",
+   "material_sha256": "4a7249078bec0167f1ad795af6e6a76810ef56cdab7f11e7a69448513ae85c2f"
+  }
+ ],
+ "input_hash": "c44955e2ab64a161261ff6274cb357b3ba2554fddd30cf585b9e4192bfc92cdb"
+}

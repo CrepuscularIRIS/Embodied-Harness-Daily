@@ -1,0 +1,257 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p005",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2308.10141",
+    "paper_id": "2308.10141",
+    "title": "March in Chat: Interactive Prompting for Remote Embodied Referring Expression",
+    "version": "2308.10141v1",
+    "claim_type": "system_method",
+    "central_claim": "MiC combines goal-oriented static planning,room/object-aware CLIP perception and room-change-triggered LLM dynamic planning to improve REVERIE navigation and remote object grounding over pretrained HM3D-DUET."
+  },
+  "materials": [
+    {
+      "sections_read": [
+        "Abstract",
+        "1–7 including main method/evaluation and Tables1–4"
+      ],
+      "complete": false,
+      "missing_sections": [
+        "Supplementary material:HM3D-DUET baseline details explicitly deferred by §4;additional generation results referred to in §5."
+      ],
+      "availability": "Main text only despite html-full header;completeness determined by internal content references,not fetch label.",
+      "material_id": "M1",
+      "url": "https://arxiv.org/abs/2308.10141v1",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2308.10141.txt",
+      "sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "locator": "§4,line18",
+      "quote": "The baseline agent is based on HM3D-DUET [ 10 ] , more details can be found in the supplementary material.",
+      "support_explanation": "Explicit missing supplemental method evidence;absence not a negative result about author reporting.",
+      "kind": "author_report",
+      "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "locator": "§5.3,line21",
+      "quote": "More generation results can be found in the supplementary.",
+      "support_explanation": "Separate supplement reference confirms available main text is not whole claimed evidence package.",
+      "kind": "author_report",
+      "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "locator": "§5.1,line21",
+      "quote": "we use the public GPT-2 [ 31 ] model for in-context learning.",
+      "support_explanation": "Planner frozen GPT2,not trained navigator training-free claim. Descriptive identity only,no numerical evaluation inferred.",
+      "kind": "author_report",
+      "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "locator": "§4.3,line18",
+      "quote": "if the ROASP finds the room has changed",
+      "support_explanation": "Trigger is predicted room change,not arbitrary every-step LLM replanning. Retained for future full review,not scored.",
+      "kind": "author_report",
+      "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8"
+    }
+  ],
+  "signatures": [],
+  "gap": {
+    "author_gap": "Concise REVERIE instructions require adaptive fine-grained plans grounded in large multiroom environments.",
+    "checked_gap": null,
+    "lineage": [],
+    "closest_adjacent": null,
+    "residue": null,
+    "stakes": null,
+    "method_response": null,
+    "remaining_gap": null,
+    "evidence_ids": [
+      "E001",
+      "E002"
+    ],
+    "unresolved": [
+      "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator."
+    ]
+  },
+  "rs_pattern": {
+    "primary": null,
+    "supporting": [],
+    "matches": [],
+    "outside_taxonomy": false,
+    "reason": "Deferred pending required full material;not an outside-taxonomy conclusion.",
+    "executes_pattern": "unresolved",
+    "resolves_problem": "unresolved"
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [],
+    "unassigned": [],
+    "revision_proposals": [],
+    "reason": "Deferred full evidence review,not a taxonomy rejection."
+  },
+  "pattern_mapping": [],
+  "expectations": [],
+  "claims": [],
+  "assessment": {
+    "evidence_level": null,
+    "claim_support": "unresolved",
+    "strongest_supported_claim": null,
+    "unresolved": [
+      "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator."
+    ],
+    "reproduction": "None. Main author-reported results read but deliberately not rated without full supplementary method package."
+  },
+  "ratings": {
+    "G": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+      ]
+    },
+    "M": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+      ]
+    },
+    "X": {
+      "status": "unknown",
+      "rating": null,
+      "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+      "evidence_ids": [
+        "E001",
+        "E002"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": [
+        "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+      ]
+    },
+    "E": {
+      "measurement": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+        ]
+      },
+      "causality": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+        ]
+      },
+      "holdout": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+        ]
+      },
+      "statistics": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+        ]
+      },
+      "cost": {
+        "status": "unknown",
+        "rating": null,
+        "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+        "evidence_ids": [
+          "E001",
+          "E002"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": [
+          "Entire supplied main article §§1–7,all Tables1–4 and available captions;no supplementary appendix supplied in manifest material."
+        ]
+      }
+    }
+  },
+  "status": "needs_fulltext",
+  "reason": "Required supplementary material absent from fixed offline package. Main §4 explicitly delegates HM3D-DUET baseline details to it; §5 also refers additional generation evidence there. Cannot finish full methods/experiments/appendices review. No independent retrieval or paper-code execution; request common fixed supplement through coordinator.",
+  "provenance": {
+    "input_hash": "6ada20ee8469fdb754ac03c2e1662a77e7841a64631f74bf69943a6a1bc81674",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + anchors v2 (3ececdd11cc3d144)",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": {
+      "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+    },
+    "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T03:13:56.478169+00:00",
+    "notes": [
+      "phase=production; anchors_version=v2 (3ececdd11cc3d144); independent sol initial review, no other-seat/aggregate outputs read.",
+      "Model identity from existing session context; no probing or reconfiguration. Session ID/receipt unavailable in task-local supplied metadata; null is not a missing scientific-evidence blocker.",
+      "expectations_hash 由总控提供，内容未读; exact hash checked locally only. Expectation substance comes from authorized embedded domain main cards, not unread private profile.",
+      "Offline fixed materials only. All empirical results below are author reports; no paper code run and no reproduction claimed."
+    ]
+  },
+  "score": {
+    "raw": null,
+    "display": null,
+    "lower": 0.0,
+    "upper": 100.0,
+    "coverage": 0.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  }
+}

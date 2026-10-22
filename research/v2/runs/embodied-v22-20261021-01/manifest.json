@@ -71,5 +71,11 @@
   "dev": 6,
   "holdout": 12
  },
- "dispatch_note": "2026-10-21 用户纠正：haiku type 即 Sonnet 5.5（claude-sonnet-5-5[1m]），全部席位用内部 Subagent type 派发；先前经 claude -p CLI 的尝试已停止作废，无有效产出。"
+ "dispatch_note": "2026-10-21 用户纠正：haiku type 即 Sonnet 5.5（claude-sonnet-5-5[1m]），全部席位用内部 Subagent type 派发；先前经 claude -p CLI 的尝试已停止作废，无有效产出。",
+ "production_authorization": {
+  "date": "2026-10-21",
+  "by": "维护者（用户会话指令）",
+  "scope": "校准两轮未过后继续生产评分（等效 freeze_report 选项 A 的执行面）；rubric 按 anchors v2 (sha256 3ececdd11cc3d144…) 运行，未正式冻结；分数标注 production-under-anchors-v2，不用于正式排名/Reel 直到用户后续确认",
+  "reel": "s001 selection 留档，暂不制作（用户指令）"
+ }
 }

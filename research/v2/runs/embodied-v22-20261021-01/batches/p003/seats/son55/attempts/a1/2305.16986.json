@@ -1,0 +1,920 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p003",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2305.16986",
+  "paper_id": "2305.16986",
+  "title": "NavGPT: Explicit Reasoning in Vision-and-Language Navigation with Large Language Models",
+  "version": "2305.16986v3",
+  "claim_type": "system_method",
+  "central_claim": "NavGPT is a purely LLM-based, zero-shot vision-and-language navigation agent that reads textual descriptions of observations, history and explorable directions and reasons explicitly; it exhibits high-level planning but falls short of trained models on R2R.",
+  "scope": {
+   "in_scope": true,
+   "note": "Frozen GPT-4/3.5 harness with VFM translators controlling a navigating agent in Matterport3D: navigation, in scope."
+  }
+ },
+ "provenance": {
+  "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + calibration/anchors.md v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "taxonomy:daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e;conditions:2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1;overview:2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+  "expectations_hash": null,
+  "expectations_hash_note": "no standalone expectations file; E01-E22 are embedded in patterns/main/*.md; sha256 of sorted concatenation of patterns/**/*.md = 1fee48bd586e041dc71fa533aecfaf821056baaf9f69f940240a6d350b48ed43 (worker-computed)",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_receipt_note": "internal Subagent cannot read its own session id or receipt; not probed per run instructions",
+  "timestamp": "2026-10-22T02:27:17Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; blind seat son55, no other-seat or aggregate material read"
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2305.16986v3",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.16986.txt",
+   "sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "format": "FULLTEXT html-full (abstract, body, appendix; figure/image content not in text)",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 Method (3.1-3.4)",
+    "4 Experiment (4.1-4.3)",
+    "5 Conclusion",
+    "Appendix A-D"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "non_text_content_unavailable": [
+    "Fig 1-17 (architecture, prompts, qualitative examples, failure cases)"
+   ]
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Abstract",
+   "quote": "NavGPT, a purely LLM-based instruction-following navigation agent, to reveal the reasoning capability of GPT models in complex embodied scenes by performing zero-shot sequential action prediction for vision-and-language navigation (VLN)",
+   "support_explanation": "Central claim: zero-shot LLM-only VLN agent revealing reasoning ability.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Abstract",
+   "quote": "we demonstrate NavGPT can explicitly perform high-level planning for navigation",
+   "support_explanation": "Qualitative capability claim (decomposition, landmarks, progress tracking, exception handling).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Abstract",
+   "quote": "Despite the performance of using NavGPT to zero-shot R2R tasks still falling short of trained models",
+   "support_explanation": "Authors concede the performance gap.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 1",
+   "quote": "the reasoning ability of LLMs in navigation is still under-explored",
+   "support_explanation": "Author gap: LLM reasoning in VLN is under-explored.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 2",
+   "quote": "the planning and decision making processes of the agents above are implicit and not accessible",
+   "support_explanation": "Contrast with trained and CLIP-matching VLN agents.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 2",
+   "quote": "The work closest to ours is LGX",
+   "support_explanation": "Closest neighbour named; not run (object navigation, no history memory).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 3.1",
+   "quote": "NavGPT should not fabricate nonexistent IDs",
+   "support_explanation": "Agent chooses among navigable viewpoint IDs of the simulator graph.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 3.2",
+   "quote": "We take visual signals as a foreign language and handle the visual input using different visual foundation models to translate them into natural language",
+   "support_explanation": "Core operation: vision translated to text by BLIP-2/detector so a text-only LLM can act.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 3.2",
+   "quote": "to extract the bounding boxes of objects in each egocentric view",
+   "support_explanation": "Faster-RCNN objects add to the caption channel (trimmed quote of the detector use).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 3.2",
+   "quote": "We also extract the depth information of the center pixel of the object provided by the Matterport3D simulator",
+   "support_explanation": "Object depth comes from the simulator (standard R2R sensing), not an estimator.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 3.4",
+   "quote": "the prompt manager utilizes GPT-3.5 to summarize the observations from viewpoints in the trajectory",
+   "support_explanation": "History is compressed by an LLM summarizer; information loss follows.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 3.3",
+   "quote": "we follow the ReAct paper",
+   "support_explanation": "Thought+Action format: explicit reasoning trace in the history.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4",
+   "quote": "We apply the 783 trajectories in the 11 val unseen environments in all our experiments",
+   "support_explanation": "Evaluation denominator: R2R val-unseen, 783 trajectories.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4",
+   "quote": "We evaluate NavGPT based on GPT-4 [ 40 ] and GPT-3.5 on the R2R-VLN dataset",
+   "support_explanation": "Two backbones; headline with GPT-4.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Table 1",
+   "quote": "NavGPT (Ours) 11.45 6.46 42 34 29",
+   "support_explanation": "NavGPT GPT-4 zero-shot: TL 11.45, NE 6.46, OSR 42, SR 34, SPL 29.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Table 1",
+   "quote": "HAMT [ 6 ] 11.46 2.29 73 66 61",
+   "support_explanation": "Trained comparison: HAMT SR 66.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Table 1",
+   "quote": "DuET (Init. LXMERT [ 52 ] ) 22.03 9.74 7 1 0",
+   "support_explanation": "The 'No Train' control is an untrained supervised model, not a zero-shot LLM baseline.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4.2",
+   "quote": "We suggest the limitations inhibiting the performance of LLMs in solving VLN can be primarily attributed to two factors",
+   "support_explanation": "Author diagnosis: language depiction precision and object tracking.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4.3",
+   "quote": "We randomly picked 1 trajectory from the 72 environment, each is associated with 3 instructions. In total, we sample 216 samples to conduct the ablation study.",
+   "support_explanation": "Ablation split: 216 samples, mixing training-set and val-unseen scenes, GPT-3.5.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Table 2",
+   "quote": "FoV@60, 12 views 1 12.38 9.07 14.35 10.19 6.52 FoV@30, 36 views 2 12.67 8.92 15.28 13.89 9.12 FoV@45, 24 views 3 12.18 8.02 26.39 16.67 13.00",
+   "support_explanation": "Visual granularity ablation (SR 10.19 / 13.89 / 16.67); single run, N=216.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Table 3",
+   "quote": "Baseline 1 16.11 9.83 15.28 11.11 6.92 Baseline + Obj 2 11.07 8.88 23.34 15.97 11.71 Baseline + Obj + Dis 3 12.18 8.02 26.39 16.67 13.00",
+   "support_explanation": "Cumulative stack of object and depth info; SR 11.11 -> 15.97 -> 16.67.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4.3",
+   "quote": "Therefore by adding depth information, the agent has a better understanding of the current position",
+   "support_explanation": "Depth claim is a +0.7 SR (about 1.5 episodes of 216), within noise.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 1",
+   "quote": "the bottleneck of NavGPT lies in the information loss while translating visual signals into natural language and summarizing observations into history",
+   "support_explanation": "Author-stated residual bottleneck.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "App C",
+   "quote": "The lacking a reference substance between viewpoints prevents NavGPT from determining whether it has completed the previous action",
+   "support_explanation": "Failure analysis (qualitative): premature belief of completion.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4.3",
+   "quote": "Once the target viewpoint is visible in sight, they tend to stop immediately",
+   "support_explanation": "Stopping failure noted as the reason to add depth.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4.1",
+   "quote": "As shown in figure 3 , with GPT-4, NavGPT can perform various types of reasoning and high-level planning during navigation",
+   "support_explanation": "Reasoning evidence is qualitative (Fig 3 image), selected examples.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "App D",
+   "quote": "all the experiments are done on the open-source Vision-and-Language Navigation dataset in a simulated environment",
+   "support_explanation": "Simulation only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E028",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4",
+   "quote": "Success Rate (SR), indicating the proportion of navigation episodes where the agent successfully reaches the target location within a 3-meter margin of error",
+   "support_explanation": "Success is judged by simulator geometry (environment truth).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E029",
+   "material_id": "M1",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484",
+   "locator": "Sec 4.3",
+   "quote": "we construct a baseline with GPT-3.5 for its easier access and budget-friendly costs",
+   "support_explanation": "Only mention of budget; no cost numbers.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "text-only LLM navigation agent (GPT-4 / GPT-3.5) in Matterport3D R2R with a prompt manager, navigation-system-principle prompt, history buffer",
+   "information": "instruction; per-direction text descriptions of 24 egocentric views (BLIP-2 captions of 3 elevations, GPT-3.5-summarised), Faster-RCNN objects within 3 m with relative heading and simulator depth, navigable viewpoint IDs with angle/distance from the simulator graph; summarised past observations plus own thoughts and actions",
+   "operation": "per step output Thought then Action (viewpoint ID or stop), ReAct-style",
+   "output": "next viewpoint on the navigation graph; episode ends on stop",
+   "conditions": "discrete navigation graph, ground-truth depth of detected objects, nothing trained for VLN",
+   "feedback": "new observation after moving; no separate verifier",
+   "selection_rule_or_data": "none; LLM decides stop; ablations use GPT-3.5",
+   "persistence": "history buffer with GPT-3.5 summariser inside the episode",
+   "later_use": "history re-read at each step; nothing across episodes",
+   "claimed_effect": "zero-shot R2R val-unseen SR 34 / SPL 29 / OSR 42 / NE 6.46 (GPT-4); explicit planning visible in thoughts",
+   "failure_boundary": "caption information loss, summarisation loss, object tracking, premature stop",
+   "evidence_ids": [
+    "E007",
+    "E008",
+    "E010",
+    "E011",
+    "E012",
+    "E015",
+    "E018",
+    "E023",
+    "E024"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "visual-observation granularity and auxiliary channels (FoV/views, objects, depth)",
+   "information": "same simulator views",
+   "operation": "choose FoV 45 deg / 24 views; add object list; add depth",
+   "output": "language descriptions fed to the LLM",
+   "conditions": "BLIP-2 caption quality depends on FoV",
+   "feedback": "none",
+   "selection_rule_or_data": "chosen on a 216-sample split built from train and val-unseen scenes (GPT-3.5)",
+   "persistence": "static",
+   "later_use": "not_applicable",
+   "claimed_effect": "SR +6.5 over 60-deg variant, +4.9 for objects, +0.7 for depth",
+   "failure_boundary": "tiny N, single run",
+   "evidence_ids": [
+    "E019",
+    "E020",
+    "E021",
+    "E022"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "The reasoning ability of LLMs for embodied navigation is under-explored; trained VLN agents' decisions are implicit and generalize poorly.",
+  "checked_gap": "Reasoning traces are shown for selected examples, and a real performance gap to trained models is measured (SR 34 vs 66). The paper does not test whether the explicit reasoning is what produces the 34, and the LGX neighbour is not run.",
+  "lineage": [
+   "ReAct + visual-captioning pipelines + LLM-as-parser/commonsense for navigation (Shah et al., Zhou et al., LGX) -> NavGPT (end-to-end LLM VLN agent with history and VFM translators)",
+   "supervised VLN (Seq2Seq ... HAMT, DuET) = the trained class used for comparison"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "LGX",
+    "pinned_source": false,
+    "solved": "LLM commonsense for object navigation with GLIP-based stop",
+    "unsolved_per_authors": "no instruction following, no history",
+    "tested_here": false
+   },
+   {
+    "name": "CLIP-based zero-shot VLN (Dorbala et al.)",
+    "pinned_source": false,
+    "solved": "keyphrase matching",
+    "unsolved_per_authors": "implicit decisions",
+    "tested_here": false
+   }
+  ],
+  "residue": "Information lost in turning pixels into text and in summarising history is identified as the bottleneck; the paper does not test remedies beyond FoV, objects and depth.",
+  "stakes": "Zero-shot, inspectable instruction-following navigation without VLN training data.",
+  "method_response": "Translate vision to text with VFMs, give the LLM a ReAct loop with history and a navigation principle prompt, and read the thoughts.",
+  "remaining_gap": "Large gap to trained models; hand-off of visual details; stopping; sim only (authors); no ablation of the reasoning trace or history summariser (ours).",
+  "evidence_ids": [
+   "E003",
+   "E004",
+   "E005",
+   "E006",
+   "E015",
+   "E016",
+   "E018",
+   "E023"
+  ],
+  "unresolved": "Neighbour papers not pinned in the batch materials; empty comparisons do not show novelty."
+ },
+ "rs_pattern": {
+  "primary": "unify_into_shared_representation",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "unify_into_shared_representation",
+    "sub_id": "rs:C18",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": {
+     "1_blocking_assumption": "stated implicitly: visual navigation needs trained multimodal VLN architectures; here a text LLM is applied after translation",
+     "2_interface_artifact": "serialiser = BLIP-2 + detector + GPT-3.5 summariser + prompt manager rendering views as text; semantic validity of the interface is only probed via FoV/object/depth ablations",
+     "3_dominant_recipe_unchanged": "ReAct-style next-token reasoning applied unchanged to navigation",
+     "4_skeptic_baseline": "missing: no caption-only/no-thought baseline, no concatenation vs trained-fusion contrast",
+     "5_capability_vs_specialists": "lags specialists (SR 34 vs 66), so the capability argument rests on interpretability"
+    },
+    "success_checks": [
+     "recipe transferred through a lightweight interface (met)"
+    ],
+    "failure_checks": [
+     "lossy interface (present, authors' own diagnosis)",
+     "unified system below specialists on core metric (present)",
+     "off-the-shelf components assembled without isolating the interface (present)"
+    ],
+    "evidence_ids": [
+     "E008",
+     "E011",
+     "E012",
+     "E015",
+     "E016",
+     "E018",
+     "E020"
+    ],
+    "reason": "Observations from several models are serialised into one language space so that a single LLM does all reasoning; the match is partial because nothing is manufactured or trained."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": null,
+  "executes_pattern": "partial (serialisation executed; unification not isolated by ablation)",
+  "resolves_problem": "not_shown: the under-explored reasoning question is addressed qualitatively; performance gap remains"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "condition_status_semantics": "status is about the card condition; for failure-mode (F) items 'unmet' means the failure mode is present",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K109",
+    "version": "embodied-agent-harness/v1 (frozen 2026-10-21 build)",
+    "fit": "strong",
+    "executes_pattern": "yes: separate frozen VLM/detectors convert images to text (descriptions, objects with depth) for a frozen LLM planner; no pixels reach the planner",
+    "resolves_problem": "not_shown (no raw-image or caption-free comparison)",
+    "condition_checks": [
+     {
+      "condition_id": "observe_act_interface:S6",
+      "status": "unmet",
+      "reason": "image-to-text conversion is not compared with raw images in the same loop; only granularity and object/depth variants of the text are compared",
+      "evidence_ids": [
+       "E020",
+       "E021"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F6",
+      "status": "partial",
+      "reason": "gain is carried by the converters (authors name caption quality as the bottleneck) and no VLM-backbone ablation separates it; depth is simulator ground truth for detected objects, not a privileged symbolic state",
+      "evidence_ids": [
+       "E018",
+       "E010",
+       "E023"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F1",
+      "status": "unmet",
+      "reason": "failure present: premature stop / wrong progress belief are the dominant failures",
+      "evidence_ids": [
+       "E024",
+       "E025"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E008",
+     "E009",
+     "E010",
+     "E011"
+    ]
+   }
+  ],
+  "unassigned": [
+   "history summarisation with an auxiliary LLM (not retrieval-based, so not K301)",
+   "navigable-candidate choice from the simulator graph (standard VLN, not harness-made R07 candidates)"
+  ],
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "unify_into_shared_representation",
+   "rs_sub": "rs:C18",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K109"
+   },
+   "operation_correspondence": "rs: serialise a foreign modality into the surface form of a dominant one for a frozen model; embodied: VFM captions and detections serialise views into text for the LLM planner",
+   "necessary_conditions_or_differences": "K109 additionally asks for a converter-vs-raw-image comparison; C18 asks for a skeptic baseline; neither is run here",
+   "evidence_ids": [
+    "E008",
+    "E011",
+    "E020"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E01"
+   ],
+   "applies_when": "a claim that a harness (not the model) raises embodied success",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No second zero-shot harness with the same LLM (e.g. the LGX-style or CLIP-matching zero-shot baselines) is run; comparisons are to trained models.",
+   "evidence_ids": [
+    "E006",
+    "E016",
+    "E017"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E02"
+   ],
+   "applies_when": "a claim that a harness component causes the gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "FoV, objects and depth studied but as a cumulative stack on 216 samples; reasoning trace, history summariser and navigation principle are not toggled.",
+   "evidence_ids": [
+    "E020",
+    "E021",
+    "E019"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E03"
+   ],
+   "applies_when": "a claim that a tool/harness helps in general",
+   "applicable": true,
+   "status": "partial",
+   "reason": "GPT-4 headline and GPT-3.5 ablations, but the same configuration is not compared across backbones.",
+   "evidence_ids": [
+    "E014",
+    "E019"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#E04"
+   ],
+   "applies_when": "any success-rate comparison on a fixed task subset",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Single run of 783 episodes and single-run ablation on 216; no repeated runs or paired statistics although GPT outputs are stochastic.",
+   "evidence_ids": [
+    "E013",
+    "E019",
+    "E021"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E05"
+   ],
+   "applies_when": "a claim that a harness is more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No calls, tokens, latency or cost; 24-view captioning plus summariser per step implies many calls but none are reported.",
+   "evidence_ids": [
+    "E029"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E06",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E06"
+   ],
+   "applies_when": "an empirical claim about a zero-shot or harness-based VLN agent",
+   "applicable": true,
+   "status": "partial",
+   "reason": "R2R val-unseen full 783 episodes reported with TL/NE/SR/OSR/SPL (R2R, not R2R-CE); trained and zero-shot numbers are labelled by training schema.",
+   "evidence_ids": [
+    "E013",
+    "E015"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E08",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E08"
+   ],
+   "applies_when": "a benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No contamination statement for GPT-4 and R2R/MP3D; ablation split mixes train and val-unseen scenes and design choices were explored on a sample of them.",
+   "evidence_ids": [
+    "E019",
+    "E014"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E16"
+   ],
+   "applies_when": "an embodied navigation agent's success claim",
+   "applicable": true,
+   "status": "partial",
+   "reason": "OSR vs SR (42 vs 34) is reported and failures are described qualitatively (premature stop, summary loss); no counted endpoint breakdown.",
+   "evidence_ids": [
+    "E015",
+    "E024",
+    "E025"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/planner_composes_code_and_policies.md#E19"
+   ],
+   "applies_when": "a claim of transfer to a physical robot",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "Simulation only; no physical-robot claim.",
+   "evidence_ids": [
+    "E027"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E20",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E20"
+   ],
+   "applies_when": "a harness whose tools convert depth readings into distances",
+   "applicable": true,
+   "status": "met",
+   "reason": "Depth is the simulator's centre-pixel depth of detected objects and is stated as such; behaviour under non-metric depth is untested but no depth-estimation tool is claimed.",
+   "evidence_ids": [
+    "E010"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "domain-v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E22"
+   ],
+   "applies_when": "a comparison between harnesses at fixed model",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "No alternative harness is compared, so matched-budget comparison does not arise.",
+   "evidence_ids": [
+    "E016"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "A purely LLM-based agent can do zero-shot VLN on R2R.",
+   "setting": "R2R val-unseen, 783 trajectories, discrete graph, GPT-4, BLIP-2 + Faster-RCNN + GPT-3.5 summariser",
+   "baseline_control": "trained methods (Seq2Seq ... DuET) and an untrained DuET; no zero-shot LLM baseline",
+   "selection_vs_test": "design choices explored on a 216-sample split drawn from train and val-unseen scenes",
+   "result_denominator": "single run: SR 34, SPL 29, OSR 42, NE 6.46, TL 11.45",
+   "evidence_ids": [
+    "E013",
+    "E015",
+    "E016",
+    "E017",
+    "E019"
+   ],
+   "counterevidence": [
+    "E003"
+   ],
+   "allowed_conclusion": "A GPT-4 text-description agent reaches 34% SR on R2R val-unseen in a single run, about half of trained HAMT/DuET, with no training."
+  },
+  {
+   "claim_id": "C2",
+   "text": "NavGPT explicitly performs high-level planning (sub-goals, landmarks, progress tracking, exception handling).",
+   "setting": "selected GPT-4 episodes (Fig 3)",
+   "baseline_control": "none",
+   "selection_vs_test": "examples chosen by authors",
+   "result_denominator": "qualitative",
+   "evidence_ids": [
+    "E002",
+    "E012",
+    "E026"
+   ],
+   "counterevidence": [
+    "E024"
+   ],
+   "allowed_conclusion": "Thoughts show plan-like text in chosen examples; frequency, faithfulness and causal role in success are not measured."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Visual description granularity, object and depth information improve navigation.",
+   "setting": "GPT-3.5, 216 samples, single run",
+   "baseline_control": "own variants",
+   "selection_vs_test": "same samples for choosing and reporting",
+   "result_denominator": "SR 10.19 -> 13.89 -> 16.67 (FoV); 11.11 -> 15.97 -> 16.67 (objects, depth)",
+   "evidence_ids": [
+    "E019",
+    "E020",
+    "E021",
+    "E022"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Directional improvements on a tiny split; the depth increment is within noise (1.5 episodes)."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "closed-loop simulator navigation with geometry-judged success on 783 episodes; one dataset, one simulator, design explored on overlapping scenes -> not transfer",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "A zero-shot GPT-4 agent that sees only BLIP-2/detector text descriptions and a navigable-viewpoint list reaches SR 34 / SPL 29 on 783 R2R val-unseen episodes in one run, well below trained models (SR up to 66); qualitative thoughts look plan-like but their contribution is untested.",
+  "author_claim_kept": "NavGPT can explicitly perform high-level planning and reveals LLM reasoning ability for embodied navigation, while falling short of trained models.",
+  "retention": "not_applicable: static zero-shot harness; the history buffer is within-episode context, not retained improvement",
+  "not_claimable": [
+   "reasoning trace causes the performance",
+   "beats other zero-shot methods",
+   "real-world navigation",
+   "cost-effectiveness"
+  ],
+  "unresolved": [
+   "Fig 3/7/9 prompts and examples are images",
+   "ablation scenes overlap training scenes",
+   "GPT-4 version/date and decoding settings not stated in the text"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Concrete, relevant gap (explicit LLM reasoning in VLN, implicit decisions in trained agents) with named neighbours and an honest residual (information loss, tracking); but neighbours (LGX, CLIP zero-shot) are not compared and the performance gap to trained models is large.",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E006",
+    "E018",
+    "E023"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": [
+    "Sec 1",
+    "Sec 2",
+    "Sec 4.2"
+   ]
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "The text-serialisation + ReAct mechanism is reconstructible and the authors' diagnosis of the bottleneck is consistent with the FoV/object ablations, but the central 'explicit reasoning' prediction is never contrasted with a no-thought or caption-only variant.",
+   "evidence_ids": [
+    "E008",
+    "E011",
+    "E012",
+    "E018",
+    "E020"
+   ],
+   "counterevidence_ids": [
+    "E026"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Pipeline stages, models, FoV, view counts, object radius, depth source and summariser are specified, but the system prompt and history formats live only in figures, GPT version/decoding are not stated, and the stop rule is purely LLM-decided.",
+   "evidence_ids": [
+    "E007",
+    "E008",
+    "E009",
+    "E010",
+    "E011"
+   ],
+   "counterevidence_ids": [
+    "E025"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Standard R2R metrics on the full 783-episode val-unseen set judged by the simulator (SR within 3 m), with OSR and SPL; single run only, GPT-4 stochasticity not addressed, ablations on 216 samples.",
+    "evidence_ids": [
+     "E013",
+     "E015",
+     "E028"
+    ],
+    "counterevidence_ids": [
+     "E019"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "The headline claim about explicit reasoning has no control; the available component studies are a cumulative FoV/object/depth stack on 216 GPT-3.5 samples where increments (esp. +0.7 for depth) sit within one or two episodes, and the only non-training baseline is an untrained supervised model.",
+    "evidence_ids": [
+     "E020",
+     "E021",
+     "E022"
+    ],
+    "counterevidence_ids": [
+     "E017",
+     "E019"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Zero-shot on R2R val-unseen is a held-out environment set for the LLM, but the ablation/design split mixes training and val-unseen scenes, development overlap and GPT-4 contamination are unaddressed, and only one benchmark is used.",
+    "evidence_ids": [
+     "E013",
+     "E014",
+     "E019"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Single run for every number, no variance/CI, no repeated GPT-4 runs, no counted failure breakdown (qualitative failures only).",
+    "evidence_ids": [
+     "E015",
+     "E019",
+     "E024"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 4",
+     "App A-D"
+    ]
+   },
+   "cost": {
+    "status": "not_reported",
+    "rating": 0,
+    "reason": "No model calls, tokens, latency, GPU or dollar cost for the 24-view captioning, summariser and LLM steps, and no budget comparison; only the remark that GPT-3.5 is cheaper to access.",
+    "evidence_ids": [
+     "E029"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec 4",
+     "Sec 4.1-4.3",
+     "Appendix A-D",
+     "Limitations/Conclusion",
+     "Broader Impact"
+    ]
+   }
+  }
+ },
+ "score": {
+  "raw": 61.25,
+  "display": 61.2,
+  "lower": 61.25,
+  "upper": 61.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "status": "reviewed",
+ "status_reason": "Full text incl. appendix read; figure-only prompts/examples noted; cost judged not_reported after searching all sections."
+}

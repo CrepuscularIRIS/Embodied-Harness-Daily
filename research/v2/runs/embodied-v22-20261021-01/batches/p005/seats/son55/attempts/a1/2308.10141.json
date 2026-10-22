@@ -1,0 +1,803 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p005",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2308.10141",
+  "paper_id": "2308.10141",
+  "title": "March in Chat: Interactive Prompting for Remote Embodied Referring Expression",
+  "version": "2308.10141v1",
+  "claim_type": "system_method",
+  "central_claim": "MiC lets a REVERIE agent talk to an LLM on the fly: Goal-Oriented Static Planning (GOSP) names the target object and its likely room, a CLIP-based Room-and-Object Aware Scene Perceiver (ROASP) describes the current room and visible objects, and Scene-Oriented Dynamic Planning (SODP) regenerates step-by-step instructions on room change with retrieved demonstrations; the assembled instruction guides a pretrained HM3D-DUET agent and outperforms the previous state of the art by large margins on SPL and RGSPL."
+ },
+ "provenance": {
+  "input_hash": "6ada20ee8469fdb754ac03c2e1662a77e7841a64631f74bf69943a6a1bc81674",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + anchors v2 (production)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_cards_hash_detail": {
+   "taxonomy_json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "overview_md": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+   "conditions_json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+  },
+  "domain_cards_version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "expectations_version": "embodied-agent-harness/v1 profile/expectations.json E01-E22 (all source_strength=common_practice)",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "session_id_reason": "worker subagent cannot read its own session id; no receipt available inside the run",
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T03:00:12Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; seat=son55; blind to Sol seat/aggregate/other batches. Material M1 sha256 matches inputs_manifest.json. Scope borderline: stated LLM is GPT-2."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2308.10141v1",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2308.10141.txt",
+   "sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related work",
+    "3 Problem setup",
+    "4 Method",
+    "5 Experiment",
+    "6 Conclusions"
+   ],
+   "complete": true,
+   "missing_sections": [
+    "Supplementary material (HM3D-DUET baseline details; extra generation examples) referenced twice but not in pinned html text"
+   ],
+   "complete_scope": "Paper body complete; supplementary file not included in the pinned material. Ratings rely on the main text only.",
+   "figure_only_content": "Fig 3/5/6 prompt templates and examples."
+  }
+ ],
+ "scope_check": {
+  "in_scope": true,
+  "borderline": true,
+  "reason": "Structure fits (LLM planner + CLIP perception feedback guiding an embodied navigation agent) but the stated LLM is GPT-2 (not frontier) and the acting agent is a trained HM3D-DUET policy; kept in scope with a flag so the aggregator can rule out_of_scope. If ruled out_of_scope the record's analysis stands as the conditional score.",
+  "conditional_score_if_scope_kept": "see score"
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Interactive instruction generation for a pretrained REVERIE navigation agent: LLM writes goal and step plans, perceiver feeds back room/object text.",
+   "information": "High-level instruction; ROASP text ('I am in <room>, I can see <objects>' top-3 objects from a closed label set); retrieved FGR2R demonstration; previous steps.",
+   "operation": "GOSP once (target + likely room) -> at each step ROASP -> if predicted room changed, SODP prompts the LLM for the next step instruction and appends it -> agent consumes [HLI, GOSP, SODP] tokens.",
+   "output": "Text instruction W=[W_I, W_G, W_S] for the HM3D-DUET agent.",
+   "conditions": "REVERIE panoramas in Matterport3D; GPT-2 in-context learning; room label vocabulary from MP3D annotations.",
+   "feedback": "Room-type change detected by CLIP triggers re-planning.",
+   "selection_rule": "Nearest-neighbor demonstration by Sentence-BERT cosine similarity; no verifier on LLM output.",
+   "persistence": "Instruction text accumulates within an episode.",
+   "later_use": "Re-read by the agent each step; no cross-episode state.",
+   "claimed_effect": "Test unseen SPL 41.97 vs 38.88 (HM3D-DUET), RGSPL 26.17 vs 22.68; val unseen SPL 43.60 vs 40.49.",
+   "failure_boundary": "Plan relevancy/rationality 2.06/1.93 of 3; closed vocabulary; room-change trigger only.",
+   "evidence_ids": [
+    "M002",
+    "M005",
+    "M006",
+    "M007",
+    "M009",
+    "M010",
+    "M011",
+    "M018"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "REVERIE gives only short high-level instructions; prior LLM planners handle atomic manipulation in small scenes and are static, so large multi-room environments need an environment-aware LLM planner.",
+  "checked_gap": "A real difficulty (high-level instructions) and a named neighbor class, but the premise that LLM world knowledge is the missing ingredient is not isolated from extra text conditioning, and the strongest LLM-planning neighbor is not run.",
+  "lineage": [
+   "R2R/RxR step-by-step VLN -> DUET/HM3D-DUET (REVERIE SOTA)",
+   "LLM planners: Huang et al. 2022, SayCan, Inner Monologue, Song et al. (concurrent, ALFRED)"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "HM3D-DUET",
+    "source_version": "as cited in 2308.10141v1",
+    "solves": "REVERIE navigation and grounding with a trained policy",
+    "remaining": "high-level-instruction ambiguity"
+   },
+   {
+    "name": "Song et al. LLM-Planner",
+    "source_version": "as cited",
+    "solves": "LLM re-planning with detected objects on ALFRED",
+    "remaining": "small scenes, fixed program pattern; not run on REVERIE"
+   }
+  ],
+  "residue": "Plan quality, noisy LLM text, remaining 20+ point navigation gap to human; benefits of LLM versus template text unseparated.",
+  "stakes": "High-level-instruction embodied navigation closer to real use.",
+  "method_response": "Static + dynamic LLM planning conditioned on CLIP room/object text with retrieved demonstrations.",
+  "remaining_gap": "Gains of 1-4 points in single runs; human headroom large (test SR 81.5).",
+  "evidence_ids": [
+   "M003",
+   "M004",
+   "M011",
+   "M021",
+   "M018"
+  ],
+  "unresolved": "Supplement unavailable; GPT-2 identity doubtful; no local pin for concurrent LLM navigation work."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "adapt_via_conditioning"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "responsibility boundary: partial (LLM world-knowledge planning, CLIP perception, trained agent execution)",
+     "typed checkable artifact: unmet (free text instruction, no verifier)",
+     "close loop with solver output: partial (room-change triggers re-query; no check of LLM output)",
+     "ablate the load-bearing step: partial (GOSP/SODP/ROASP toggles, single run, no no-LLM text control)",
+     "cost and breadth: unmet (single benchmark, no LLM cost)"
+    ],
+    "success_failure_checks": [
+     "failure: assembly of off-the-shelf parts (GPT-2, CLIP, Sentence-BERT, DUET): applies",
+     "failure: only marginal over unified baseline: applies (+3.1 SPL)"
+    ],
+    "evidence_ids": [
+     "M002",
+     "M007",
+     "M009",
+     "M010",
+     "M015"
+    ],
+    "reason": "Main-card operation matches (decompose navigation instruction understanding into LLM planning, CLIP perception, and policy execution via text); no sub-card fits because C25 requires a machine-checkable artifact and verifier loop that is absent."
+   },
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "weak",
+    "tactic_steps_checked": [
+     "retrieved nearest demonstration as conditioning without LLM weight updates: met",
+     "category-level holdout of the conditioning bank: unmet",
+     "control against a cheaper conditioning alternative: unmet"
+    ],
+    "success_failure_checks": [
+     "failure: zero-shot claim while trained on evaluation domain: partial (agent trained on REVERIE)"
+    ],
+    "evidence_ids": [
+     "M005",
+     "M006",
+     "M022"
+    ],
+    "reason": "Dynamic demonstration selection is an in-context retrieval step; C03 not selected because the agent, not the frozen LLM, is trained and no conditioning-format training exists."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "RS primary found with partial fit and no sub-card.",
+  "executes_pattern": true,
+  "resolves_problem": "unresolved: gains of 3-4 points, no control that isolates LLM knowledge from text conditioning"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K109",
+    "version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+    "fit": "partial",
+    "operation_match": "A separate frozen VLM (CLIP) turns panoramas into room/object text for the language planner.",
+    "difference": "The text feeds an LLM that writes instructions for a trained policy, not the acting model; closed label vocabulary; no raw-image arm.",
+    "condition_checks": [
+     {
+      "condition_id": "observe_act_interface:S6",
+      "status": "partial",
+      "note": "Dynamic (perceiver text) vs static plans compared; not vs raw images or a no-LLM text arm.",
+      "evidence_ids": [
+       "M016",
+       "M022"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F6",
+      "status": "met",
+      "note": "Converter capability not separated from the LLM's contribution; no CLIP-backbone ablation.",
+      "evidence_ids": [
+       "M007"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F7",
+      "status": "met",
+      "note": "No latency/cost, single runs.",
+      "evidence_ids": [
+       "M014",
+       "M010"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "M007",
+     "M009",
+     "M016"
+    ]
+   }
+  ],
+  "unassigned": [
+   "LLM text -> trained VLN policy interface (partial overlap with R02 trained-hierarchy only in direction; no card).",
+   "Room-change-triggered re-planning of language instructions."
+  ],
+  "revision_proposals": [
+   "None; single paper case."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K109"
+   },
+   "operation_correspondence": "CLIP-derived text is the structured intermediate artifact for the LLM planner.",
+   "necessary_conditions": "Converter vs raw-image comparison (K109 S6); absent.",
+   "differences": "Planner output goes to a trained policy rather than executed code.",
+   "evidence_ids": [
+    "M007",
+    "M009"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E01"
+   ],
+   "applies_when": "claim that a harness raises success over alternatives",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Baseline HM3D-DUET with the same pretrained model, but no alternative LLM-assisted navigation harness on REVERIE.",
+   "evidence_ids": [
+    "M012",
+    "M011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E02"
+   ],
+   "applies_when": "claim that a component causes the gain",
+   "applicable": true,
+   "status": "met",
+   "reason": "GOSP and SODP added one at a time and jointly; static vs dynamic isolates ROASP (single run, val unseen).",
+   "evidence_ids": [
+    "M015",
+    "M016"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E03"
+   ],
+   "applies_when": "claim that a component helps in general",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Only GPT-2 and one agent; no second backbone.",
+   "evidence_ids": [
+    "M002"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E04"
+   ],
+   "applies_when": "success-rate comparison with variance and paired stats",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Single run per configuration, 1-4 point differences, no variance.",
+   "evidence_ids": [
+    "M010",
+    "M015"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E05"
+   ],
+   "applies_when": "claim a harness is practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Only one GPU model and iteration count; no LLM call counts or latency.",
+   "evidence_ids": [
+    "M014"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E08"
+   ],
+   "applies_when": "benchmark claim by a harness",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Checkpoint selected on val unseen which is also reported; test unseen reported; contamination n/a for GPT-2 but demonstration bank derived from R2R training data.",
+   "evidence_ids": [
+    "M013",
+    "M005"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E16"
+   ],
+   "applies_when": "navigation agent's success claim",
+   "applicable": true,
+   "status": "partial",
+   "reason": "OSR and SR both reported (OSR-SR gap), no categorized failures.",
+   "evidence_ids": [
+    "M010",
+    "M021"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E22"
+   ],
+   "applies_when": "comparison of harnesses at matched interaction budget",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "Baseline arm and training budget parity with LLM-augmented training are not described in the main text (supplement missing).",
+   "evidence_ids": [
+    "M012",
+    "M019"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "MiC outperforms the previous SOTA by large margins on REVERIE.",
+   "setting": "REVERIE val unseen and test unseen.",
+   "baseline_control": "HM3D-DUET with the same pretrained model.",
+   "selection_vs_test": "Checkpoint selected on val unseen; test unseen held out.",
+   "result_denominator": "Test: SR 55.74 vs 55.17, SPL 41.97 vs 38.88, RGSPL 26.17 vs 22.68; single run; split sizes not stated.",
+   "evidence_ids": [
+    "M001",
+    "M010",
+    "M011",
+    "M013",
+    "M012"
+   ],
+   "counterevidence": [
+    "M021"
+   ],
+   "allowed_conclusion": "Modest (+0.6 SR, +3.1 SPL, +3.5 RGSPL) single-run improvement on test unseen over the strongest reproduced baseline."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Each planning component and perception feedback contributes.",
+   "setting": "Val unseen ablations.",
+   "baseline_control": "HLI only; static plans.",
+   "selection_vs_test": "val unseen (also used for selection).",
+   "result_denominator": "SPL 40.49 -> 43.60; static 41.74 vs dynamic 42.94.",
+   "evidence_ids": [
+    "M015",
+    "M016",
+    "M022"
+   ],
+   "counterevidence": [
+    "M013"
+   ],
+   "allowed_conclusion": "Ordered gains exist on val unseen in single runs; no control isolates LLM knowledge from extra text."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Dynamic demonstration selection and ROASP improve plan quality.",
+   "setting": "100 tasks, 10 volunteers.",
+   "baseline_control": "w/o dynamic demonstration; w/o ROASP.",
+   "selection_vs_test": "n/a",
+   "result_denominator": "Relevancy 2.06 vs 1.41/1.64; rationality 1.93 vs 1.23/1.55.",
+   "evidence_ids": [
+    "M017",
+    "M018"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Subjective plan quality improves; effect on navigation of dynamic demonstration not measured."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop simulator-judged navigation on the standard REVERIE splits; no real robot or unused embodiment.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "With GPT-2 in-context text plans and CLIP room/object feedback fed to a pretrained HM3D-DUET agent, REVERIE test-unseen SPL/RGSPL rise by about 3.1/3.5 points in a single run; component toggles on val unseen are ordered consistently.",
+  "cannot_claim": "'Large margins', that LLM world knowledge (rather than extra conditioning text) causes the gain, robustness to seeds, any cost viability, generality beyond REVERIE.",
+  "unresolved": [
+   "Supplementary material unavailable",
+   "GPT-2 identity vs plan quality",
+   "How the agent is trained with generated instructions",
+   "Per-split episode counts",
+   "Scope ruling (borderline)"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Genuine difficulty (high-level instructions in large multi-room environments) and cited LLM-planner neighbors, but the nearest LLM-planning neighbor is not run on REVERIE and the residual after the method (large human gap) is not characterized.",
+   "evidence_ids": [
+    "M003",
+    "M004",
+    "M011",
+    "M021"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Goal reasoning, room-aware replanning and retrieved demonstrations form a coherent response with partial ablations; mechanism by which a trained agent exploits the text and the LLM identity/training use are unclear.",
+   "evidence_ids": [
+    "M009",
+    "M005",
+    "M007",
+    "M015",
+    "M016"
+   ],
+   "counterevidence_ids": [
+    "M002"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "Main modules and trigger are described, but demonstration retrieval hyperparameters, how generated instructions enter agent training, max steps, prompt text (figure-only) and baseline details (supplement) are missing; limitations are not discussed.",
+   "evidence_ids": [
+    "M008",
+    "M009",
+    "M014",
+    "M019",
+    "M020",
+    "M023"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Standard simulator-computed SR/SPL/RGS metrics with a defined 3 m success radius, but single run per configuration, per-split episode counts not stated, and results come from one pretrained agent.",
+    "evidence_ids": [
+     "M024",
+     "M010",
+     "M025"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "One-at-a-time GOSP/SODP/ROASP toggles exist, but no control gives the agent the same room/object text without the LLM, no second backbone, no seeds, and dynamic-demonstration value is shown only by human ratings.",
+    "evidence_ids": [
+     "M015",
+     "M016",
+     "M017",
+     "M022"
+    ],
+    "counterevidence_ids": [
+     "M018"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Standard REVERIE val/test unseen houses with gains retained on test unseen (+3.09 SPL), checkpoint chosen on val unseen; same benchmark family only and demonstration bank from R2R training data.",
+    "evidence_ids": [
+     "M010",
+     "M011",
+     "M013",
+     "M005"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Single run, no variance or tests for 1-4 point gains, human study of plan quality has no spread; no failure decomposition beyond OSR and SR.",
+    "evidence_ids": [
+     "M010",
+     "M015",
+     "M017"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Training GPU and iteration count are the only disclosure; no LLM call counts, latency, or matched budgets.",
+    "evidence_ids": [
+     "M014"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Main text complete and scored; supplementary material is referenced but not in the pinned material (ratings rely on the main text), scope flagged borderline (stated LLM is GPT-2).",
+ "evidence": [
+  {
+   "evidence_id": "M001",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Abstract",
+   "quote": "Our MiC model outperforms the previous state-of-the-art by large margins by SPL and RGSPL metrics on the REVERIE benchmark.",
+   "support_explanation": "Author headline claim; test-unseen gains are +3.09 SPL and +3.49 RGSPL in single runs.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M002",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.1 Implementation Details",
+   "quote": "For the LLMs, we use the public GPT-2 [ 31 ] model for in-context learning.",
+   "support_explanation": "The only statement of the LLM identity: GPT-2, not a frontier model; plausibility against the plans shown in Fig 6 is doubtful but unverifiable here.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M003",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 1",
+   "quote": "However, previous works mainly utilize LLMs to plan atomic actions of object manipulation in a very limited space with simple scenes.",
+   "support_explanation": "Author gap: LLM planners not explored for large REVERIE environments.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M004",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 2 LLMs as Embodied Planner",
+   "quote": "These two LLM planners are static, which only generate action plans at the beginning of a task.",
+   "support_explanation": "Author characterization of prior LLM planners; Song et al. (concurrent) is described but not compared.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M005",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4.1.3",
+   "quote": "we choose the training set of the Fine-Grained R2R dataset (FGR2R) [ 15 ] as the demonstration set",
+   "support_explanation": "Retrieval bank for dynamic demonstrations.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M006",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4.1.3",
+   "quote": "both of which are embedded by the Sentence-BERT [ 32 ]",
+   "support_explanation": "Demonstration retrieval by cosine similarity.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M007",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4.2",
+   "quote": "we use CLIP [ 30 ] as the proposed room-and-object aware scene perceiver",
+   "support_explanation": "ROASP is CLIP zero-shot classification over closed room/object label sets.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M008",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4.2",
+   "quote": "the room type labels from the MatterPort3D [ 6 ] semantic annotations",
+   "support_explanation": "Room-label vocabulary taken from Matterport3D annotations (closed vocabulary).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M009",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4.3 Instruction Update",
+   "quote": "Then, a new step-by-step instruction such as “Step 2: go down the stairs” for the next few steps will be generated by the LLM and added to the previous assembled instruction W",
+   "support_explanation": "SODP regenerates plan on predicted room change and appends to previous instructions.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M010",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Table 1",
+   "quote": "MiC 20.64 62.37 56.97 43.60 37.52 28.72 18.11 62.40 55.74 41.97 35.25 26.17",
+   "support_explanation": "MiC val-unseen / test-unseen metrics (TL, OSR, SR, SPL, RGS, RGSPL).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M011",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Table 1",
+   "quote": "HM3D-DUET [ 10 ] - 62.14 55.89 40.85 36.58 26.76 - 62.30 55.17 38.88 32.23 22.68",
+   "support_explanation": "Strongest baseline, same pretrained model: test SPL 38.88, RGSPL 22.68.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M012",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.2",
+   "quote": "Note that MiC shares the same pre-trained model with the HM3D-DUET",
+   "support_explanation": "Matched pretrained agent; gain attributed to the LLM text channel.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M013",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.1 Implementation Details",
+   "quote": "The best model is selected according to performance on the validation unseen split.",
+   "support_explanation": "Checkpoint selection on val unseen, which is also reported in Table 1.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M014",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.1 Implementation Details",
+   "quote": "Our model is trained on a single 3090 GPU for 30,000 iterations.",
+   "support_explanation": "Only compute disclosure; whether training uses LLM-generated instructions is not stated in the main text.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M015",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Table 2",
+   "quote": "HLI(Baseline) 58.02 52.71 40.49 34.93 26.82 HLI+GOSP 59.92 55.28 42.46 37.13 28.24 HLI+SODP 60.72 56.26 42.94 36.80 27.81 HLI+GOSP+SODP 62.37 56.97 43.60 37.52 28.72",
+   "support_explanation": "Component ablation on val unseen, single run: total +3.11 SPL, +1.90 RGSPL.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M016",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Table 3",
+   "quote": "Static 60.24 55.35 41.74 36.30 27.03 Dynamic 60.72 56.26 42.94 36.80 27.81",
+   "support_explanation": "Static vs perception-conditioned dynamic plans: +1.2 SPL.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M017",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.3 Qualitative Analysis",
+   "quote": "We asked 10 volunteers to mark the generated step-by-step instructions",
+   "support_explanation": "Human study of plan quality; relevancy/rationality scores 2.06/1.93 out of 3.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M018",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.3 Table 4",
+   "quote": "Scene-Oriented Dynamic Planning 2.06 1.93",
+   "support_explanation": "Plan quality only moderate; dynamic-demonstration effect shown only through this rating.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M019",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4 intro",
+   "quote": "more details can be found in the supplementary material",
+   "support_explanation": "Baseline agent details are in an unavailable supplement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M020",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.3 Qualitative Analysis",
+   "quote": "More generation results can be found in the supplementary.",
+   "support_explanation": "Additional generated instructions in unavailable supplement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M021",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Table 1",
+   "quote": "Human – – – – – – 21.18 86.83 81.51 53.66 77.84 51.44",
+   "support_explanation": "Human performance (test SR 81.5, SPL 53.7) bounds the headroom.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M022",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.3 The Effect of the ROASP",
+   "quote": "(I) Baseline: The input assembled instruction only contains the given high-level instruction in REVERIE.",
+   "support_explanation": "Baseline arm definition; no arm gives the agent equivalent room/object text without the LLM.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M023",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 4.1",
+   "quote": "A fixed demonstration example is used for GOSP",
+   "support_explanation": "Single fixed demonstration for goal planning; no demonstration sensitivity.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M024",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.1 Evaluation Metrics",
+   "quote": "SR Success Rate measures the ratio of successful tasks, of which the agent’s stop location is less than 3 meters away from the target location.",
+   "support_explanation": "Success definition (3 m radius).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "M025",
+   "material_id": "M1",
+   "material_sha256": "8a7402198935d3e6a9dff90e40f22f990d4b2564578a2c653cc0a559404ee6f8",
+   "locator": "Sec 5.1 Dataset",
+   "quote": "contains 10,567 panoramic images within 90 buildings",
+   "support_explanation": "Dataset scale; per-split episode counts not stated.",
+   "kind": "author_report"
+  }
+ ],
+ "score": {
+  "raw": 55.0,
+  "display": 55.0,
+  "lower": 55.0,
+  "upper": 55.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}

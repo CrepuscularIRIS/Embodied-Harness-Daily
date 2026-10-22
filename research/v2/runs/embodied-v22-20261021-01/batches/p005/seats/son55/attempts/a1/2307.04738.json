@@ -1,0 +1,989 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p005",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2307.04738",
+  "paper_id": "2307.04738",
+  "title": "RoCo: Dialectic Multi-Robot Collaboration with Large Language Models",
+  "version": "2307.04738v1",
+  "claim_type": "system_method",
+  "central_claim": "RoCo: zero-shot multi-robot collaboration where each robot is an LLM agent in a dialog that ends in a sub-task plan, validated by environment feedback (parse, task constraints, IK, collision, waypoints) and re-discussed until valid, then executed through an RRT multi-arm motion planner informed by LLM-proposed 3D waypoints; it reaches high success rates across all six RoCoBench tasks, adapts to task variations, and supports a human-in-the-loop real-robot collaboration.",
+  "claim_type_note": "Also introduces RoCoBench and RoCoBench-Text; self-described method contribution comes first (anchors v2 precedent 3)."
+ },
+ "provenance": {
+  "input_hash": "6ada20ee8469fdb754ac03c2e1662a77e7841a64631f74bf69943a6a1bc81674",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + anchors v2 (production)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_cards_hash_detail": {
+   "taxonomy_json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "overview_md": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+   "conditions_json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+  },
+  "domain_cards_version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "expectations_version": "embodied-agent-harness/v1 profile/expectations.json E01-E22 (all source_strength=common_practice)",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "session_id_reason": "worker subagent cannot read its own session id; no receipt available inside the run",
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T03:00:12Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; seat=son55; blind to Sol seat/aggregate/other batches. Primary material M1 sha256 matches inputs_manifest.json; M2 (pdf supplement) sha256 recorded separately and read for appendix completeness."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2307.04738v1",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2307.04738.txt",
+   "sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "sections_read": [
+    "Abstract",
+    "1-9 main text",
+    "10 RoCoBench",
+    "11 prompting + Algorithm 1",
+    "12 failure + real-world setup",
+    "13 3D grid toy",
+    "14 RoCoBench-Text questions"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "figure_only_content": "Fig 4 (waypoint planning-time comparison), Fig 13 values, Fig 5-6 qualitative; not numerically available."
+  },
+  {
+   "material_id": "M2",
+   "url": "https://arxiv.org/pdf/2307.04738v1",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2307.04738_pdf.txt",
+   "sha256": "330085371f0ded694f7f3e0787d2e590f8e58ff261e833a55dbdfc753a9083b5",
+   "sections_read": [
+    "Full PDF text: main + Sections 10-14 (appendix supplement)"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "role": "supplement; same content as M1 plus PDF layout; no additional numeric tables found"
+  }
+ ],
+ "scope_check": {
+  "in_scope": true,
+  "reason": "GPT-4 agents with environment validators and a motion planner controlling simulated multi-arm manipulation and a real arm; A class."
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Per-robot LLM agents in a round-based dialog that produce a joint sub-task plan, gated by a validation chain before dispatch.",
+   "information": "Each agent sees its own task context, capabilities, current observation (asymmetric), round history, communication instruction and optional plan feedback; Central Plan oracle sees everything.",
+   "operation": "Discuss until the last speaker proposes a plan -> parse, task-constraint, IK, collision (and waypoint) checks -> on failure append reasons and re-discuss up to K attempts -> else skip the round.",
+   "output": "One sub-task (and optional 3D waypoint path) per robot, converted to joint goal configurations.",
+   "conditions": "Simulation with oracle object state; 2-3 robots; real world single robot + human with OWL-ViT scene text.",
+   "feedback": "Structured validator reasons (IK failure, collision, format) plus next observation.",
+   "selection_rule": "First plan passing all validations is executed; at most K re-plans (value not stated).",
+   "persistence": "Round history H (dialog + executed actions) within an episode only.",
+   "later_use": "Appended to subsequent prompts of the same episode.",
+   "claimed_effect": "Success 0.44-0.95 across six tasks vs oracle central planner; removing feedback lowers success on 5/6 tasks.",
+   "failure_boundary": "Factual errors propagate between agents; oracle perception; open-loop execution; every dialog turn costs an LLM call.",
+   "evidence_ids": [
+    "R003",
+    "R004",
+    "R005",
+    "R008",
+    "R010",
+    "R011",
+    "R024"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "LLM-proposed 3D task-space waypoint paths used as intermediate goals for a centralized RRT multi-arm planner.",
+   "information": "Start/goal/obstacle coordinates in task space given to the LLM; waypoints must be IK-solvable, collision-free and evenly spaced.",
+   "operation": "LLM emits waypoints -> validator -> RRT between successive goal configurations.",
+   "output": "Joint-space trajectories.",
+   "conditions": "Tasks with high workspace overlap (Pack Grocery, Move Rope).",
+   "feedback": "Validator verdicts.",
+   "selection_rule": "Validity filter.",
+   "persistence": "not_applicable",
+   "later_use": "not_applicable",
+   "claimed_effect": "Faster planning for placing; no clear benefit for picking (Fig 4 only).",
+   "failure_boundary": "Spatial reasoning degrades with grid size and obstacle count (toy example).",
+   "evidence_ids": [
+    "R013",
+    "R029"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Multi-robot systems need task-specific engineering, high-level allocation with capability awareness and joint-space motion planning; prior LLM-robotics work is single-robot/single-thread.",
+  "checked_gap": "Supported as a gap in published LLM-robotics at the time (single-robot SayCan/Inner Monologue/CaP/TAMP lines). The paper does not test whether dialog is needed: an information-rich centralized LLM planner matches or beats dialog on 4/6 tasks.",
+  "lineage": [
+   "SayCan, Inner Monologue, CaP, TidyBot, Instruct2Act (single robot)",
+   "Text2Motion, AutoTAMP, LLM-GROP (LLM+TAMP)",
+   "Classical multi-arm sampling-based planners (RRT)"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "Inner Monologue (Huang et al. 2022b)",
+    "source_version": "as cited in 2307.04738v1",
+    "solves": "environment feedback in-context planning, single robot",
+    "remaining": "no multi-robot coordination"
+   },
+   {
+    "name": "LLM+TAMP line (Text2Motion, AutoTAMP, LLM-GROP)",
+    "source_version": "as cited in 2307.04738v1",
+    "solves": "symbolic/geometric feasibility with LLM plans",
+    "remaining": "single robot"
+   }
+  ],
+  "residue": "Dialog is necessary only when information is asymmetric; coordination quality on tasks with tight workspace overlap; real multi-robot execution not shown.",
+  "stakes": "Reusable zero-shot coordination across embodiments with interpretable communication.",
+  "method_response": "Dialog + validator-in-the-loop + LLM-informed RRT.",
+  "remaining_gap": "Open-loop execution, oracle perception, no real multi-robot results, no dialog-vs-nondialog LLM baseline with matched information.",
+  "evidence_ids": [
+   "R021",
+   "R022",
+   "R004",
+   "R018",
+   "R019",
+   "R028"
+  ],
+  "unresolved": "Concurrent LLM multi-agent works not locally pinned; novelty search not performed."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "good",
+    "tactic_steps_checked": [
+     "1 name the unreliable sub-problem vs sound solver: met (LLM does semantics/allocation; IK, collision checks and RRT own geometry)",
+     "2 typed checkable artifact: met (parsed sub-task plan with fixed grammar and waypoints)",
+     "3 close loop with solver verdicts mid-construction: met (validator reasons appended to prompts)",
+     "4 ablate the verification feedback: met (Dialog w/o Feedback, with doubled episode budget)",
+     "5 cost accounting: partial (re-plan counts reported; no tokens/latency)"
+    ],
+    "success_failure_checks": [
+     "success: typed externally verifiable handoff: met",
+     "success: obtainable (not privileged) feedback signal: met in sim, oracle state caveat",
+     "failure: hand-tailored to narrow benchmark: partial (own benchmark, prompts per task; real-world task new)",
+     "failure: cost unmeasured: applies",
+     "failure: only marginal over unified end-to-end baseline: applies (oracle Central Plan is better on 4/6 tasks)"
+    ],
+    "evidence_ids": [
+     "R008",
+     "R009",
+     "R010",
+     "R005",
+     "R007",
+     "R004"
+    ],
+    "reason": "LLM dialog produces a typed plan that is checked by IK/collision validators and a motion planner with failure reasons returned to the LLM; this is the C25 loop (artifact -> solver verdict -> in-place correction)."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "RS primary found with a good fit.",
+  "executes_pattern": true,
+  "resolves_problem": "partial: feedback loop demonstrably helps; 'high success across all tasks' not met (0.44, 0.65)"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "multi_robot_llm_coordination",
+    "sub": "R03",
+    "version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+    "fit": "good",
+    "operation_match": "Per-robot LLM agents negotiate subtasks; plan checked against capability, IK and collision feedback; only the failed round is re-discussed.",
+    "difference": "Allocation is by free dialog, validators are geometric rather than precondition/conflict rule validators; no event-triggered replanning.",
+    "condition_checks": [
+     {
+      "condition_id": "multi_robot_llm_coordination:S1",
+      "status": "met",
+      "note": "Without feedback success drops on 5/6 tasks (e.g. Make Sandwich 0.80 -> 0.35) at doubled episode budget.",
+      "evidence_ids": [
+       "R005",
+       "R007",
+       "R003"
+      ]
+     },
+     {
+      "condition_id": "multi_robot_llm_coordination:S2",
+      "status": "partial",
+      "note": "Re-plan counts and steps reported next to success; no tokens or latency.",
+      "evidence_ids": [
+       "R002",
+       "R020"
+      ]
+     },
+     {
+      "condition_id": "multi_robot_llm_coordination:F2",
+      "status": "partial",
+      "note": "Validators are ablated jointly (feedback on/off), not individually.",
+      "evidence_ids": [
+       "R005"
+      ]
+     },
+     {
+      "condition_id": "multi_robot_llm_coordination:F3",
+      "status": "met",
+      "note": "Own benchmark, one LLM, 20 runs.",
+      "evidence_ids": [
+       "R027",
+       "R002"
+      ]
+     },
+     {
+      "condition_id": "multi_robot_llm_coordination:F5",
+      "status": "met",
+      "note": "Simulator state is oracle.",
+      "evidence_ids": [
+       "R018"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "R003",
+     "R005",
+     "R008"
+    ]
+   },
+   {
+    "main": "external_verification_control",
+    "sub": "K201",
+    "version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+    "fit": "good",
+    "operation_match": "Each model proposal is a request validated outside the model (parse, task constraints, IK, collision) and rejected with structured reasons.",
+    "difference": "Applied to multi-agent joint plans in sim; checker uses oracle simulator geometry.",
+    "condition_checks": [
+     {
+      "condition_id": "external_verification_control:S1",
+      "status": "met",
+      "note": "Cheap automatic checks exist; feedback ablation lowers success.",
+      "evidence_ids": [
+       "R005",
+       "R010"
+      ]
+     },
+     {
+      "condition_id": "external_verification_control:F1",
+      "status": "partial",
+      "note": "Checker only validates feasibility, not task correctness: wrong claims of completion pass (Alice case).",
+      "evidence_ids": [
+       "R024"
+      ]
+     },
+     {
+      "condition_id": "external_verification_control:F3",
+      "status": "met",
+      "note": "Validation chain not ablated step by step.",
+      "evidence_ids": [
+       "R005"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "R008",
+     "R010",
+     "R024"
+    ]
+   }
+  ],
+  "unassigned": [
+   "LLM-proposed 3D waypoints as intermediate goals for RRT (no card; single case).",
+   "RoCoBench-Text QA dataset (evaluation of LLM agent reasoning, no card)."
+  ],
+  "revision_proposals": [
+   "None applied; note that R03 sources do not include 2023 dialog-style systems."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "multi_robot_llm_coordination",
+    "sub": "R03"
+   },
+   "operation_correspondence": "Typed sub-task plan per robot (artifact) routed to feasibility validators and motion planner; validator verdicts re-enter the LLM dialog.",
+   "necessary_conditions": "Capabilities writable in text; shared state observable.",
+   "differences": "R03 validators are precondition/conflict rules; here IK/collision geometry.",
+   "evidence_ids": [
+    "R008",
+    "R010",
+    "R005"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K201"
+   },
+   "operation_correspondence": "Pre-execution gate on model proposals with structured rejection feedback.",
+   "necessary_conditions": "Cheap checker as proxy for success.",
+   "differences": "Checker is feasibility, not success.",
+   "evidence_ids": [
+    "R009",
+    "R010",
+    "R011"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E01"
+   ],
+   "applies_when": "claim that a harness (rather than the model) raises success",
+   "applicable": true,
+   "status": "met",
+   "reason": "GPT-4 fixed; compared with a centralized oracle loop organization on the same 20 runs per task.",
+   "evidence_ids": [
+    "R004",
+    "R027",
+    "R002"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E02"
+   ],
+   "applies_when": "claim that a specific component causes the gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "History and feedback removed one at a time (feedback with doubled budget); validation steps and dialog protocol are not individually toggled; history effect mixed.",
+   "evidence_ids": [
+    "R005",
+    "R006",
+    "R007"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E03"
+   ],
+   "applies_when": "claim a harness component helps in general",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Only GPT-4 used for the harness comparison; backbones compared only on RoCoBench-Text.",
+   "evidence_ids": [
+    "R027"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E04"
+   ],
+   "applies_when": "success-rate comparison between harnesses",
+   "applicable": true,
+   "status": "partial",
+   "reason": "20 runs per task with standard errors; no paired tests; steps/re-plans reported without spread; Pack Grocery SEs smaller than binomial SE for 20 runs (success may be partial credit; undefined).",
+   "evidence_ids": [
+    "R002",
+    "R003"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E05"
+   ],
+   "applies_when": "claim a harness is practical",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Re-plan attempts and steps reported; no calls/tokens/latency/dollars, cost listed as limitation.",
+   "evidence_ids": [
+    "R002",
+    "R020"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E08"
+   ],
+   "applies_when": "benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Oracle-state assumption disclosed; tasks designed by the authors and prompt-development overlap and GPT-4 contamination not discussed.",
+   "evidence_ids": [
+    "R018",
+    "R027"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E16"
+   ],
+   "applies_when": "navigation/manipulation agent's success claim",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Qualitative failure analysis (false completion claims, open-loop knocks) but no categorized counts.",
+   "evidence_ids": [
+    "R024",
+    "R019"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E19"
+   ],
+   "applies_when": "transfer to a physical robot",
+   "applicable": true,
+   "status": "partial",
+   "reason": "10 runs per setup with counts, but only one robot plus human, human-corrected variants, and success judge undefined.",
+   "evidence_ids": [
+    "R014",
+    "R015",
+    "R016",
+    "R028"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E22"
+   ],
+   "applies_when": "comparison between harnesses at matched interaction budget",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Same round budget for dialog vs central plan; no-feedback variant gets double budget (disclosed); LLM call counts differ unreported.",
+   "evidence_ids": [
+    "R007",
+    "R025"
+   ],
+   "score_item": "E.cost"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "RoCo achieves high success rates across all tasks in RoCoBench.",
+   "setting": "Six MuJoCo tabletop tasks with oracle state; GPT-4.",
+   "baseline_control": "Central Plan oracle; Dialog w/o history; Dialog w/o feedback.",
+   "selection_vs_test": "Benchmark built by the authors; no held-out split.",
+   "result_denominator": "20 runs per task: 0.44, 0.75, 0.95, 0.80, 0.93, 0.65.",
+   "evidence_ids": [
+    "R001",
+    "R002",
+    "R003",
+    "R004"
+   ],
+   "counterevidence": [
+    "R003",
+    "R004"
+   ],
+   "allowed_conclusion": "Success >= 0.75 on four of six tasks and 0.44/0.65 on Pack Grocery/Move Rope; comparable to an information-rich oracle on some tasks."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Environment-feedback re-planning improves plans.",
+   "setting": "Same tasks.",
+   "baseline_control": "Dialog w/o Feedback with doubled episode budget.",
+   "selection_vs_test": "same",
+   "result_denominator": "Success equal or higher with feedback on 6/6 tasks, e.g. 0.80 vs 0.35 (Make Sandwich).",
+   "evidence_ids": [
+    "R005",
+    "R007",
+    "R008"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Within RoCoBench with oracle validators, the feedback loop is load-bearing."
+  },
+  {
+   "claim_id": "C3",
+   "text": "LLM-proposed waypoints speed up multi-arm motion planning.",
+   "setting": "Pack Grocery and Move Rope snapshots, 300 s budget.",
+   "baseline_control": "Linear and hard-coded waypoints.",
+   "selection_vs_test": "same",
+   "result_denominator": "Figure only.",
+   "evidence_ids": [
+    "R013"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Faster placing plans; no benefit for picking; numbers unavailable in text."
+  },
+  {
+   "claim_id": "C4",
+   "text": "RoCo adapts to task variations and works with a human collaborator on a real robot.",
+   "setting": "Make Sandwich variations (qualitative); real UR5E + human sorting blocks.",
+   "baseline_control": "none",
+   "selection_vs_test": "Real task chosen by the authors.",
+   "result_denominator": "9/10, 8/10 with oracle human; 7/10, 6/10 imperfect human.",
+   "evidence_ids": [
+    "R014",
+    "R015",
+    "R016",
+    "R017",
+    "R023"
+   ],
+   "counterevidence": [
+    "R017"
+   ],
+   "allowed_conclusion": "A single LLM agent can collaborate with a human on one real sorting task at 60-90% over 10 runs per setup; no real multi-robot result."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop simulator success with 20 runs per task plus real-robot counts; real task was authored for this paper, uses a human collaborator and a single robot, and the simulation uses oracle state, so transfer is not granted.",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "With oracle simulator state and GPT-4, multi-agent dialog with a validator feedback loop completes four of six authored multi-robot tabletop tasks at >= 0.75 success and the feedback loop is load-bearing; a single-robot-plus-human real demonstration succeeds in 6-9 of 10 runs per setup.",
+  "cannot_claim": "High success on all six tasks, necessity of dialog over a centralized planner, real multi-robot collaboration, closed-loop execution robustness, cost viability.",
+  "unresolved": [
+   "Numeric K, M, T",
+   "Pack Grocery success definition vs reported SE",
+   "Fig 4 numbers",
+   "Prompt development overlap"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Real, sourced gap against single-robot LLM planners with named neighbors, but nearest concurrent multi-agent LLM work is not compared and dialog necessity versus an information-rich central LLM planner is left unresolved.",
+   "evidence_ids": [
+    "R021",
+    "R022",
+    "R004"
+   ],
+   "counterevidence_ids": [
+    "R004"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Dialog + typed plan + geometric validators + RRT is a coherent answer to asymmetric information and motion-planning blowup; the added value of the dialog over a central LLM plan is not established (oracle wins 4/6).",
+   "evidence_ids": [
+    "R008",
+    "R012",
+    "R004",
+    "R026"
+   ],
+   "counterevidence_ids": [
+    "R004"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Prompt components, protocol, validation order and algorithm are reconstructable; max re-plans, dialog length and round limits are symbols only; oracle perception and open-loop execution bound validity and are disclosed.",
+   "evidence_ids": [
+    "R008",
+    "R009",
+    "R011",
+    "R030",
+    "R031",
+    "R018",
+    "R019"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Simulator-judged success with 20 runs per task, steps and re-plans per method, and real-world counts; but oracle state, undefined success judge in the real runs, Pack Grocery SEs inconsistent with binary success over 20 runs, and Fig 4 data in figures only.",
+    "evidence_ids": [
+     "R002",
+     "R003",
+     "R014",
+     "R015",
+     "R016",
+     "R018"
+    ],
+    "counterevidence_ids": [
+     "R017"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Central/oracle, no-history and no-feedback variants with GPT-4 fixed show the feedback loop is load-bearing; confounds remain (no-feedback gets doubled budget, validators not ablated individually, dialog vs central not information-matched, single backbone).",
+    "evidence_ids": [
+     "R004",
+     "R005",
+     "R006",
+     "R007",
+     "R027"
+    ],
+    "counterevidence_ids": [
+     "R004",
+     "R006"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "All six tasks are authored for the method and no development/test separation is stated; only the real-world task and qualitative Make Sandwich variations lie outside; GPT-4 contamination is not addressed.",
+    "evidence_ids": [
+     "R001",
+     "R023",
+     "R028"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Repeated 20-run trials with standard errors for success, but steps/re-plans lack spread, no paired tests, failures only qualitatively analyzed, and one SE pattern is unexplained.",
+    "evidence_ids": [
+     "R002",
+     "R003",
+     "R024"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Re-plan attempts and step counts allow a rough LLM-call inference and the waypoint experiment states a 300 s planning budget, but no token/latency/dollar data and the baseline budgets are not matched.",
+    "evidence_ids": [
+     "R002",
+     "R007",
+     "R020",
+     "R013"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete body, appendices and PDF supplement read; all eight ratings resolved.",
+ "evidence": [
+  {
+   "evidence_id": "R001",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Abstract",
+   "quote": "it achieves high success rates across all tasks in RoCoBench and adapts to variations in task semantics",
+   "support_explanation": "Author headline claim; Table 2 shows 0.44 on Pack Grocery and 0.65 on Move Rope.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R002",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Table 2 caption",
+   "quote": "over 20 runs per task, the average number of steps in successful runs",
+   "support_explanation": "Evaluation denominator: 20 runs per task per method.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R003",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Table 2 (column order Pack Grocery, Arrange Cabinet, Sweep Floor, Make Sandwich, Sort Cubes, Move Rope)",
+   "quote": "Dialog (ours) Success 0.44 ± 0.06 0.75 ± 0.10 0.95 ± 0.05 0.80 ± 0.08 0.93 ± 0.06 0.65 ± 0.11",
+   "support_explanation": "RoCo dialog success per task; two of six tasks are below 0.7.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R004",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Table 2",
+   "quote": "Central Plan (oracle) Success 0.82 ± 0.06 0.90 ± 0.07 1.00 ± 0.00 0.96 ± 0.04 0.70 ± 0.10 0.50 ± 0.11",
+   "support_explanation": "Oracle centralized planner with full information beats dialog on 4 of 6 tasks, loses on Sort Cubes and Move Rope.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R005",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Table 2",
+   "quote": "Dialog w/o Feedback Success 0.35 ± 0.10 0.70 ± 0.10 0.95 ± 0.05 0.35 ± 0.11 0.53 ± 0.13 0.45 ± 0.11",
+   "support_explanation": "One-at-a-time removal of environment feedback; success lower or equal on every task.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R006",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Table 2",
+   "quote": "Dialog w/o History Success 0.48 ± 0.11 1.00 ± 0.00 0.00 ± 0.00 0.33 ± 0.12 0.73 ± 0.11 0.65 ± 0.11",
+   "support_explanation": "History ablation: mixed (better on Pack Grocery, Arrange Cabinet, Move Rope tie; collapses on Sweep Floor, Make Sandwich).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R007",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.1 Experiment Setup",
+   "quote": "To offset the lack of re-plan rounds, each episode is given twice the budget of episode length.",
+   "support_explanation": "Feedback ablation receives double episode budget (disclosed asymmetry).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R008",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 3.2",
+   "quote": "If any of the checks fail, the feedback is appended to each agent’s prompt and another round of dialog begins.",
+   "support_explanation": "Validator feedback loop into the prompt.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R009",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 3.2",
+   "quote": "Text Parsing ensures the plan follows desired format and contains all required keywords",
+   "support_explanation": "First validation step (parse); followed by task constraints, IK, collision, waypoints.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R010",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 3.2",
+   "quote": "IK checks whether each robot arm’s target pose is feasible via inverse kinematics",
+   "support_explanation": "External feasibility check before execution.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R011",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 3.2",
+   "quote": "The agents are allowed to re-plan until reaching a maximum number of attempts, after which the current round ends without any execution and the next round begins.",
+   "support_explanation": "Selection/rejection rule; numeric K, M and T are not reported in the text.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R012",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 3.1",
+   "quote": "this is allowed only if each agent has responded at least once in the current dialog round",
+   "support_explanation": "Dialog termination protocol.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R013",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.2",
+   "quote": "LLM-proposed waypoints show no clear benefits for picking sub-tasks, but significantly accelerate planning for placing",
+   "support_explanation": "Waypoint contribution is partial; evidence in Fig 4 only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R014",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.4",
+   "quote": "We evaluate 10 runs for each setup, see Table 3 for results.",
+   "support_explanation": "Real-world denominators: 10 runs per setup.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R015",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.4 Table 3",
+   "quote": "Human Correction Success 9/10 8/10",
+   "support_explanation": "Real-world with an oracle human correcting detections and robot responses.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R016",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.4 Table 3",
+   "quote": "Imperfect Human Success 7/10 6/10",
+   "support_explanation": "Real-world without human correction.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R017",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.4",
+   "quote": "task performance is primarily bottle-necked by incorrect object detection from OWL-ViT",
+   "support_explanation": "Real-world failure source.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R018",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 7 Limitation",
+   "quote": "RoCo assumes perception (e.g., object detection, pose estimation and collision-checking) is accurate.",
+   "support_explanation": "Simulation relies on oracle state.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R019",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 7 Limitation",
+   "quote": "The motion trajectories from our planner are executed by robots in an open-loop fashion",
+   "support_explanation": "Execution is open loop.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R020",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 7 Limitation",
+   "quote": "which can be cost expensive",
+   "support_explanation": "Self-acknowledged LLM query cost; no numbers.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R021",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 8 Related Work",
+   "quote": "While prior work uses single-robot setups and single-thread LLM planning, we consider multi-robot settings",
+   "support_explanation": "Author gap relative to LLM-for-robotics prior work.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R022",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 1",
+   "quote": "traditional multi-robot systems typically require task-specific engineering, hence compromise generalization",
+   "support_explanation": "Author gap statement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R023",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.3",
+   "quote": "We showcase 3 main variation categories, all using Make Sandwich task in RoCoBench.",
+   "support_explanation": "Zero-shot adaptation shown qualitatively on one task, no counts.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R024",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "App 12.1",
+   "quote": "one agent (Alice) wrongfully decided the task is complete, and other agents repeat this wrong claim",
+   "support_explanation": "Qualitative failure analysis (error propagation across agents).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R025",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.1",
+   "quote": "which is given full environment observation, information on all robots",
+   "support_explanation": "Central Plan is an oracle with full information; not information-matched with dialog agents.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R026",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.1 Results",
+   "quote": "Particularly in Sort Cubes task, agents are able to find a strategy to help each other through dialog",
+   "support_explanation": "Evidence of dialog value only on tasks where the oracle fails.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R027",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.1",
+   "quote": "We use GPT-4 [ 1 ] for all our main results.",
+   "support_explanation": "Single backbone for the harness comparison.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R028",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 5.4",
+   "quote": "We validate RoCo in a real world setup, where a robot arm collaborates with a human to complete a sorting blocks task",
+   "support_explanation": "Real-world task is single robot plus human, not the multi-robot setting.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R029",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 3.3 Toy example",
+   "quote": "using on average 2.73 attempts",
+   "support_explanation": "3D grid toy: 30 runs, mean 2.73 attempts (86.7% success), limited as grid grows.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R030",
+   "material_id": "M1",
+   "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef",
+   "locator": "Sec 11 Algorithm 1",
+   "quote": "max number of re-plans K , max number of dialog per round M",
+   "support_explanation": "Budget symbols in Algorithm 1; no concrete values stated.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "R031",
+   "material_id": "M2",
+   "material_sha256": "330085371f0ded694f7f3e0787d2e590f8e58ff261e833a55dbdfc753a9083b5",
+   "locator": "PDF text (appendix-supplement), Sec 10.2-10.7 and Sec 11",
+   "quote": "Observation Space 1) locations cabinet door handles; 2) each robot’s reachable objects, unaware of",
+   "support_explanation": "PDF copy confirms appendix content; no extra tables or numbers beyond the html text were found (checked Sections 10-14).",
+   "kind": "author_report"
+  }
+ ],
+ "score": {
+  "raw": 70.0,
+  "display": 70.0,
+  "lower": 70.0,
+  "upper": 70.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}

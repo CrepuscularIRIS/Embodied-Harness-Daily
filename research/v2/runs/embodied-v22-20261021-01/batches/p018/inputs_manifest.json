@@ -1,0 +1,48 @@
+{
+ "batch_id": "p018",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2411.05755",
+   "paper_id": "2411.05755",
+   "version": "2411.05755v1",
+   "title": "End-to-End Navigation with Vision Language Models: Transforming Spatial Reasoning into Question-Answering",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2411.05755.txt",
+   "material_sha256": "1787459fd5301564cfab56a916e6f431d28dc9c7e4ffb898870e1813880da837"
+  },
+  {
+   "paper_key": "2411.16425",
+   "paper_id": "2411.16425",
+   "version": "2411.16425v2",
+   "title": "TopV-Nav: Unlocking the Top-View Spatial Reasoning Potential of MLLM for Zero-shot Object Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2411.16425.txt",
+   "material_sha256": "9df26cec9673ba3b2ed1891a87de00f53d1e18c6b692cea3257249bcdd1077ba"
+  },
+  {
+   "paper_key": "2411.17735",
+   "paper_id": "2411.17735",
+   "version": "2411.17735v5",
+   "title": "3D-Mem: 3D Scene Memory for Embodied Exploration and Reasoning",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2411.17735.txt",
+   "material_sha256": "a4a5bd2b48304e8080a82143f7d77c5f3c899e5f99cf4064933fa81276cf31fd"
+  },
+  {
+   "paper_key": "2412.01250",
+   "paper_id": "2412.01250",
+   "version": "2412.01250v3",
+   "title": "Collaborative Instance Object Navigation: Leveraging Uncertainty-Awareness to Minimize Human-Agent Dialogues",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2412.01250.txt",
+   "material_sha256": "2c03b72eceedeb3fb9c3ae7b2ede9ecc71e482debe3003f06d494203291a97bd"
+  },
+  {
+   "paper_key": "2412.04453",
+   "paper_id": "2412.04453",
+   "version": "2412.04453v2",
+   "title": "NaVILA: Legged Robot Vision-Language-Action Model for Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2412.04453.txt",
+   "material_sha256": "c0703d6f5930a5f375be4d78cb06654cf0fe3be6f78efaaa20fec0b778c04de2"
+  }
+ ],
+ "input_hash": "48a97d41b2b39a6716a9f5c4c5d1a62113ab91a098429a4d012effb56db975d7"
+}

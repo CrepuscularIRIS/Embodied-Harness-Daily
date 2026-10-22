@@ -1,0 +1,973 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p005",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2307.02485",
+  "paper_id": "2307.02485",
+  "title": "Building Cooperative Embodied Agents Modularly with Large Language Models",
+  "version": "2307.02485v2",
+  "claim_type": "system_method",
+  "central_claim": "CoELA, a cognitive-inspired modular LLM framework (perception, memory, communication, planning, execution), lets decentralized embodied agents plan, communicate and cooperate on long-horizon multi-objective tasks with costly communication; CoELA driven by GPT-4 surpasses strong planning-based baselines (more than 40% efficiency improvement) and shows emergent effective communication; a LoRA-tuned open LM (CoLLAMA) achieves promising performance; natural-language communication earns more human trust.",
+  "claim_type_note": "Paper also formalizes the setting and two environments and runs a user study; self-described central contribution is the CoELA framework (anchors v2 precedent 3)."
+ },
+ "provenance": {
+  "input_hash": "6ada20ee8469fdb754ac03c2e1662a77e7841a64631f74bf69943a6a1bc81674",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + anchors v2 (production)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "domain_cards_hash_detail": {
+   "taxonomy_json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "overview_md": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf",
+   "conditions_json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+  },
+  "domain_cards_version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+  "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+  "expectations_version": "embodied-agent-harness/v1 profile/expectations.json E01-E22 (all source_strength=common_practice)",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "session_id_reason": "worker subagent cannot read its own session id; no receipt available inside the run",
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T03:00:12Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; seat=son55; blind to Sol seat/aggregate/other batches. Material M1 sha256 matches inputs_manifest.json (checked with sha256sum equivalent)."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/abs/2307.02485v2",
+   "local_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2307.02485.txt",
+   "sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "sections_read": [
+    "Abstract",
+    "1 Introduction",
+    "2 Related Work",
+    "3 Problem",
+    "4 Method",
+    "5 Experiments",
+    "6 Conclusion",
+    "Appendix A-F (framework, environments, baselines, CoLLAMA, human study, template communication, prompts)"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "figure_only_content": "Fig 4a-c (human-experiment steps, Likert ratings, module ablation steps) numeric values are not in the text; judgments using them rely on the prose."
+  }
+ ],
+ "scope_check": {
+  "in_scope": true,
+  "reason": "GPT-4 (and tuned LLaMA-2) planner/communicator inside a perception-memory-execution harness controlling simulated embodied agents; A class."
+ },
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "Per-agent decision loop: Communication LLM drafts a message, Planning LLM picks one entry of a state-dependent Action List (including 'send message'), harness executor performs it.",
+   "information": "Egocentric RGB-D -> fine-tuned Mask-RCNN -> semantic map/text state (task progress, self and other states), last K actions and D dialogues, received messages; partial observability; oracle-perception variant reported separately.",
+   "operation": "Retrieve memory -> template to text -> LLM message generation 'in mind' -> LLM multiple-choice planning with zero-shot CoT -> high-level plan.",
+   "output": "High-level plan index (go to room, explore, grasp, put, transport, send message).",
+   "conditions": "Two decentralized agents (possibly human), broadcast noise-free messages that cost a step, 3000 frames (TDW-MAT) or 250 steps (C-WAH).",
+   "feedback": "Next observation and incoming messages; no external checker of the chosen plan beyond list enumeration.",
+   "selection_rule": "LLM chooses among enumerated options; no consensus/validator/rejection rule.",
+   "persistence": "Within-episode semantic map, task progress and bounded action/dialogue history; Procedural memory never updated.",
+   "later_use": "Re-injected into the next prompt of the same episode only.",
+   "claimed_effect": "TR 0.71 (CoELA+CoELA) vs 0.61 (RHP+RHP) and 0.43 (RHP alone); C-WAH 57 vs 75 steps (symbolic obs), 92 vs 103 (visual obs).",
+   "failure_boundary": "No 3D spatial info, unaware of low-level execution, counting/reasoning slips; communication gives no significant gain between AI agents.",
+   "evidence_ids": [
+    "E001",
+    "E015",
+    "E017",
+    "E018",
+    "E019",
+    "E007",
+    "E004"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "Hard-coded perception/execution modules around the LLM (Mask-RCNN semantic mapping, A*-based procedural execution).",
+   "information": "LLM sees only text; executor holds environment-specific procedures; perception supervised with GT masks from the simulator on training scenes.",
+   "operation": "Execution module expands each high-level plan into primitive actions (A* navigation + rule-based interaction).",
+   "output": "Primitive actions (move 0.5 m, turn, grasp, put, drop, send message).",
+   "conditions": "Procedural knowledge rewritten per environment.",
+   "feedback": "Environment state after each primitive.",
+   "selection_rule": "Deterministic procedures.",
+   "persistence": "not_applicable: static hand-written procedures.",
+   "later_use": "not_applicable",
+   "claimed_effect": "Removing the Execution module: trials 'struggle to finish any task'; removing Memory: steps nearly double.",
+   "failure_boundary": "Reliability of executor assumed; no failure rates of the executor or perception propagated.",
+   "evidence_ids": [
+    "E009",
+    "E008",
+    "E016",
+    "E014"
+   ]
+  },
+  {
+   "sig_id": "S3",
+   "object": "Open LM planner (LLaMA-2-13b-chat) tuned with LoRA on CoELA trajectories (CoLLAMA) to pilot the same harness.",
+   "information": "Teacher: GPT-4 CoELA run in TDW-MAT training episodes; student sees the same prompts.",
+   "operation": "Collect 2k trajectories from 10 training episodes, manually keep 572 with good communication/reasoning, LoRA fine-tune (30 epochs).",
+   "output": "Student planner/communicator weights.",
+   "conditions": "TDW-MAT only; no C-WAH student.",
+   "feedback": "Human filtering.",
+   "selection_rule": "Manual quality filter (not success-based).",
+   "persistence": "LoRA weights.",
+   "later_use": "Replaces GPT-4 in the test-set rollouts.",
+   "claimed_effect": "CoLLAMA 0.70 TR vs LLaMA-2 0.53 vs GPT-4 0.71 (single run).",
+   "failure_boundary": "Single environment, offline teacher-visited states only, one run.",
+   "evidence_ids": [
+    "E010",
+    "E011"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Cooperative embodied agents under decentralized control, raw sensory observations, costly natural-language communication and long-horizon multi-objective tasks; prior platforms neglect communication or use non-linguistic channels, and it is unclear whether LLMs can do distributed embodied cooperation.",
+  "checked_gap": "The problem definition (costly-communication multi-agent cooperation with raw observations) is concrete and sourced. The gap the method most needs to close -- that language communication improves AI-AI cooperation -- is not borne out by the paper's own ablation (no significant drop without communication).",
+  "lineage": [
+   "Watch-And-Help / VirtualHome-Social (Puig et al. 2021) -> MCTS hierarchical planner (strongest baseline)",
+   "ThreeDWorld Transport Challenge (Gan et al. 2022) -> rule-based hierarchical planner",
+   "LLM planners: Huang et al. 2022a/b (zero-shot, Inner Monologue), Song et al. 2022 (few-shot), SayCan -> single-agent only"
+  ],
+  "closest_adjacent": [
+   {
+    "name": "Puig et al. 2021 MHP baseline",
+    "source_version": "as cited in 2307.02485v2; not independently fixed locally",
+    "solves": "cooperation with intent inference, no free-form language",
+    "remaining": "template communication only"
+   },
+   {
+    "name": "Inner Monologue / SayCan / Song et al. 2022",
+    "source_version": "as cited in 2307.02485v2",
+    "solves": "single-agent LLM planning with feedback",
+    "remaining": "no decentralized multi-agent costly communication"
+   }
+  ],
+  "residue": "Whether LLM-generated messages help other AI agents; 3D spatial reasoning; low-level reasoning; unstable counting/state reasoning.",
+  "stakes": "Cooperation with humans and other agents in household tasks; user study shows trust effect.",
+  "method_response": "Five-module cognitive architecture; LLM used for message generation and plan selection; hand-written perception/execution.",
+  "remaining_gap": "Communication utility among AI agents, spatial grounding, low-level awareness, variance and cost evidence.",
+  "evidence_ids": [
+   "E020",
+   "E021",
+   "E007",
+   "E019",
+   "E026"
+  ],
+  "unresolved": "No local pinned copy of closest concurrent LLM multi-agent work; an empty search does not establish novelty."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     "1 name unreliable sub-problem vs solver: met (LLM unreliable at low-level control; A* executor owns it; ablation fails without executor)",
+     "2 typed/checkable artifact at the boundary: partial (enumerated Action List consumed by executor, but no machine check of LLM choice)",
+     "3 close loop with solver-verifiable output: unmet (no verifier output fed back; only next observation)",
+     "4 ablate the load-bearing step: partial (execution and memory removed; no verifier to ablate)",
+     "5 account for cost: unmet (no tokens/latency)"
+    ],
+    "success_failure_checks": [
+     "success: boundary drawn at seam: met",
+     "success: typed verifiable handoff: partial",
+     "failure: assembly of off-the-shelf parts: partly (Mask-RCNN+GPT-4 prompts+A*), but memory/execution shown load-bearing",
+     "failure: cost of delegation unmeasured: applies",
+     "failure: marginal gain over unified baseline: not testable (no unified LLM baseline)"
+    ],
+    "evidence_ids": [
+     "E015",
+     "E016",
+     "E009",
+     "E008",
+     "E004"
+    ],
+    "reason": "The LLM is confined to message/plan selection while perception and execution are delegated to non-LLM components through text state and an enumerated action list; C25 is only partly matched because the handoff artifact is not externally verified and no verifier feedback loop exists."
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "RS primary found; fit partial.",
+  "executes_pattern": true,
+  "resolves_problem": "partial: small-N simulation gains over hand-designed teams; AI-AI communication benefit not shown"
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+    "fit": "partial",
+    "operation_match": "Model output restricted to an enumerated semantic action list executed by a deterministic A* executor.",
+    "difference": "List is rebuilt every state (closer to R07 candidate lists) and includes a send-message entry; no frozen-VLA or interpreter.",
+    "condition_checks": [
+     {
+      "condition_id": "observe_act_interface:S4",
+      "status": "met",
+      "note": "Semantic units executed by a reliable deterministic executor.",
+      "evidence_ids": [
+       "E015",
+       "E016"
+      ]
+     },
+     {
+      "condition_id": "observe_act_interface:F5",
+      "status": "partial",
+      "note": "GPT-3.5 vs GPT-4 changes steps; tool value across backbones not isolated.",
+      "evidence_ids": [
+       "E023"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E015",
+     "E016"
+    ]
+   },
+   {
+    "main": "multi_robot_llm_coordination",
+    "sub": "R03",
+    "version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+    "fit": "partial",
+    "operation_match": "Per-agent LLMs coordinate through natural-language messages.",
+    "difference": "No allocator, feasibility/conflict validator or repair step; coordination emerges from chat.",
+    "condition_checks": [
+     {
+      "condition_id": "multi_robot_llm_coordination:S1",
+      "status": "unmet",
+      "note": "No feasibility/conflict feedback exists to ablate.",
+      "evidence_ids": [
+       "E015"
+      ]
+     },
+     {
+      "condition_id": "multi_robot_llm_coordination:S2",
+      "status": "unmet",
+      "note": "No coordination cost next to success.",
+      "evidence_ids": [
+       "E004"
+      ]
+     },
+     {
+      "condition_id": "multi_robot_llm_coordination:F3",
+      "status": "met",
+      "note": "Own extended environments, 24/10 episodes, one CoELA run.",
+      "evidence_ids": [
+       "E002",
+       "E003",
+       "E004"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E007",
+     "E004"
+    ]
+   },
+   {
+    "main": "offline_harness_distillation",
+    "sub": "K501",
+    "version": "embodied-agent-harness/v1 + board-induced R01-R07 (patterns/overview.md sha256 2bc4cdeb322e2c8e)",
+    "fit": "partial",
+    "operation_match": "SFT of an open LM on filtered teacher (GPT-4 CoELA) turns so it pilots the same harness.",
+    "difference": "Filter is manual communication/reasoning quality (572/2000), not success; no end-to-end student row; one environment.",
+    "condition_checks": [
+     {
+      "condition_id": "offline_harness_distillation:S1",
+      "status": "partial",
+      "note": "Teacher, untrained student, tuned student in the same harness on TDW-MAT only.",
+      "evidence_ids": [
+       "E011"
+      ]
+     },
+     {
+      "condition_id": "offline_harness_distillation:S2",
+      "status": "partial",
+      "note": "572 filtered samples (hundreds) but not success-filtered.",
+      "evidence_ids": [
+       "E010"
+      ]
+     },
+     {
+      "condition_id": "offline_harness_distillation:F2",
+      "status": "met",
+      "note": "Only teacher-visited states supervised.",
+      "evidence_ids": [
+       "E010"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "E010",
+     "E011"
+    ]
+   }
+  ],
+  "unassigned": [
+   "Bounded within-episode memory plus semantic map (K301-like) only partially matched; not claimed as a card.",
+   "Human-agent cooperation user study (no card)."
+  ],
+  "revision_proposals": [
+   "Clarify whether R03 covers peer-to-peer LLM chat without an allocator/validator (CoELA-style); currently only a weak match. No change applied."
+  ]
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "LLM selects a semantic plan from an enumerated list that a deterministic executor realizes (artifact = list entry).",
+   "necessary_conditions": "Reliable executor and enumerable plans; not C25's solver-verification loop.",
+   "differences": "No verifier, so only the 'delegation' half of C25 is present.",
+   "evidence_ids": [
+    "E015",
+    "E016"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "multi_robot_llm_coordination",
+    "sub": "R03"
+   },
+   "operation_correspondence": "Task split between two LLM agents by chat; coordination is delegated to the LLMs, execution to procedures.",
+   "necessary_conditions": "R03 needs allocation plus feasibility/conflict repair; absent here.",
+   "differences": "Weak match.",
+   "evidence_ids": [
+    "E007"
+   ]
+  },
+  {
+   "rs_main": null,
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "offline_harness_distillation",
+    "sub": "K501"
+   },
+   "operation_correspondence": "SFT component classified at the domain layer only; no RS card selected for it.",
+   "necessary_conditions": "Teacher success filter missing.",
+   "differences": "Manual filter.",
+   "evidence_ids": [
+    "E010"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E01"
+   ],
+   "applies_when": "claim that a harness (rather than the model) raises success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "GPT-4 modular agent compared with non-LLM planners; module ablations with GPT-4 fixed exist but no alternative LLM harness on the same episodes.",
+   "evidence_ids": [
+    "E004",
+    "E008"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E02"
+   ],
+   "applies_when": "claim that a specific component causes the gain",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Memory, communication and execution removed one at a time, but figure-only numbers and the communication ablation does not support its claimed value for AI-AI.",
+   "evidence_ids": [
+    "E008",
+    "E009",
+    "E007"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E03"
+   ],
+   "applies_when": "claim a component/tool helps in general",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Planner backbones GPT-4, GPT-3.5, LLaMA-2, CoLLAMA compared, but no component effect measured under two backbones.",
+   "evidence_ids": [
+    "E023",
+    "E011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E04"
+   ],
+   "applies_when": "any success-rate comparison between harnesses/models",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "CoELA evaluated once on 24/10 episodes; no CI or paired statistics; only a t-test on trust ratings.",
+   "evidence_ids": [
+    "E004",
+    "E006",
+    "E013"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E05"
+   ],
+   "applies_when": "claim a harness is better or more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No calls, tokens, latency or dollars; cost only mentioned as the reason for single runs.",
+   "evidence_ids": [
+    "E004"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E08"
+   ],
+   "applies_when": "benchmark claim by a frontier-model harness",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No statement on whether test episodes/prompts overlapped development, and no GPT-4 contamination caveat; MAT baseline given oracle inputs.",
+   "evidence_ids": [
+    "E022",
+    "E002"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E09",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E09"
+   ],
+   "applies_when": "student distilled from frontier-harness trajectories approaches the teacher",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Teacher, untrained and tuned student in the same harness on TDW-MAT; no end-to-end student baseline; no C-WAH student.",
+   "evidence_ids": [
+    "E011"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E10",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E10"
+   ],
+   "applies_when": "student trained on filtered teacher trajectories",
+   "applicable": true,
+   "status": "partial",
+   "reason": "2k collected, 572 kept after manual filtering; criterion is communication/reasoning quality, no teacher success rate.",
+   "evidence_ids": [
+    "E010"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E16"
+   ],
+   "applies_when": "navigation or manipulation agent's success claim",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Two qualitative failure cases (Fig 5); no breakdown of failure categories or stop errors.",
+   "evidence_ids": [
+    "E019",
+    "E026"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    ".forge/domains/embodied-agent-harness-v1/profile/expectations.json#E19"
+   ],
+   "applies_when": "transfer to a physical robot",
+   "applicable": false,
+   "status": "not_applicable",
+   "reason": "Simulation with humanoid avatars only; no real-robot claim.",
+   "evidence_ids": [
+    "E027"
+   ],
+   "score_item": "E.holdout"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "CoELA (GPT-4) outperforms strong planning-based baselines (>40% efficiency improvement).",
+   "setting": "TDW-MAT 24 test episodes; C-WAH 10 test episodes; two agents.",
+   "baseline_control": "RHP/MHP hand-designed planners alone and in pairs; MAT given oracle inputs.",
+   "selection_vs_test": "Test episodes drawn from held-out floorplans for trained parts; prompt development set not disclosed.",
+   "result_denominator": "TR 0.71 (CoELA+CoELA) vs 0.61 (RHP+RHP) vs 0.43 (RHP alone); steps 57 vs 75 (MHP+MHP) vs 111 (MHP alone); CoELA 1 run, baselines 5 runs.",
+   "evidence_ids": [
+    "E001",
+    "E004",
+    "E006",
+    "E002",
+    "E003"
+   ],
+   "counterevidence": [
+    "E005",
+    "E022"
+   ],
+   "allowed_conclusion": "The >40% figure is cooperation EI relative to the solo baseline; versus the best cooperating baseline team the gain is about 16% relative TR / 24% fewer steps, from single runs on 24/10 episodes."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Emergent effective communication improves cooperation; natural-language communication earns human trust.",
+   "setting": "Qualitative cases (Fig 3); ablation Fig 4c; 8 humans, 80 trials on C-WAH.",
+   "baseline_control": "CoELA w/o communication; MHP with template language.",
+   "selection_vs_test": "same 10 C-WAH tasks.",
+   "result_denominator": "Trust 6.3 vs 4.7, p=0.0003; no significant AI-AI drop without communication.",
+   "evidence_ids": [
+    "E012",
+    "E013"
+   ],
+   "counterevidence": [
+    "E007"
+   ],
+   "allowed_conclusion": "Natural-language communication raises human-rated trust in C-WAH; its performance value among AI agents is not shown."
+  },
+  {
+   "claim_id": "C3",
+   "text": "A fine-tuned open LM (CoLLAMA) reaches competitive performance.",
+   "setting": "TDW-MAT test set, one run.",
+   "baseline_control": "GPT-4 and LLaMA-2 in the same harness.",
+   "selection_vs_test": "Training from 10 training episodes; test on held-out floorplans.",
+   "result_denominator": "0.70 vs 0.71 vs 0.53 (single run).",
+   "evidence_ids": [
+    "E010",
+    "E011"
+   ],
+   "counterevidence": [
+    "E004"
+   ],
+   "allowed_conclusion": "On one benchmark, a LoRA-tuned 13B model approaches GPT-4 within noise-unknown single-run differences."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop simulator-judged success in two environments; human trials; no real robot and no environment unused by design (transfer not met).",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "In two simulators and on small single-run test sets, an LLM-driven modular agent cooperating with itself or a rule-based partner completes more sub-goals/with fewer steps than the corresponding hand-designed teams; removing memory or the executor hurts; humans trust the language-communicating agent more; a LoRA-tuned 13B model approaches GPT-4 on TDW-MAT.",
+  "cannot_claim": "That communication helps AI-AI cooperation, that the >40% figure is over the best baseline team, any robustness estimate, any cost advantage.",
+  "unresolved": [
+   "K and D memory window sizes",
+   "Fig 4 numeric values",
+   "Prompt development vs test overlap",
+   "No author-independent replication (author-reported only)"
+  ]
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Concrete, sourced problem definition and environments with named baselines, but the premise that language communication is the missing ingredient is not borne out by the paper's own AI-AI ablation and the nearest LLM-agent neighbors are only discussed, not compared.",
+   "evidence_ids": [
+    "E020",
+    "E021",
+    "E007"
+   ],
+   "counterevidence_ids": [
+    "E007"
+   ],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Modules are justified (LLM weak at low-level control, ablation confirms) and the multiple-choice Action List is a sensible interface, but the communication module's contribution is unproven for AI-AI and several assumptions (reliable executor, perception, bounded window sizes) are thin.",
+   "evidence_ids": [
+    "E015",
+    "E009",
+    "E016",
+    "E017"
+   ],
+   "counterevidence_ids": [
+    "E007"
+   ],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Information flow, prompt components and action space are reconstructable from the appendices; K/D, sampling seeds and executor rules are missing and no verifier/consensus exists; limitations are stated (3D spatial, low-level, reasoning).",
+   "evidence_ids": [
+    "E015",
+    "E017",
+    "E024",
+    "E019",
+    "E026"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Simulator-computed TR/steps are trustworthy, but CoELA is one run on 24/10 episodes, no success rates or failure handling for unfinished episodes are given, perception-oracle and privileged-MAT variants mix, and the anchors v2 cap applies to single-run results.",
+    "evidence_ids": [
+     "E002",
+     "E003",
+     "E004",
+     "E005"
+    ],
+    "counterevidence_ids": [
+     "E005"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "One-at-a-time module ablations (memory, execution, backbone) exist but numbers are figure-only; headline comparison is against structurally different hand-designed planners; communication ablation contradicts the claimed value.",
+    "evidence_ids": [
+     "E008",
+     "E009",
+     "E023",
+     "E007"
+    ],
+    "counterevidence_ids": [
+     "E007",
+     "E005"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Trained parts (Mask-RCNN, CoLLAMA) use training floorplans and the test set is separate, but the prompt/design development set is undisclosed, both environments were designed for, and GPT-4 contamination is unaddressed.",
+    "evidence_ids": [
+     "E002",
+     "E010",
+     "E014"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "CoELA single run, no variance, no CIs; only a t-test on human ratings; two qualitative failure examples and no failure decomposition.",
+    "evidence_ids": [
+     "E004",
+     "E006",
+     "E013"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Cost is mentioned only as the reason for single runs; communication step cost is counted in episode time but no calls/tokens/latency/dollars; no matched LLM-call budget for baselines.",
+    "evidence_ids": [
+     "E004",
+     "E025"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "status_reason": "Complete html-full body plus appendices read; all eight ratings resolved; score computed mechanically.",
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 1 Introduction, para 4",
+   "quote": "CoELA driven by GPT-4 can outperform strong planning-based baselines by achieving more than 40% efficiency improvements and exhibiting emergent efficient communication",
+   "support_explanation": "Author headline claim; EI in the tables is measured against the solo baseline, not against the best cooperating baseline team.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.1 TDW-MAT",
+   "quote": "making a test set of 24 episodes",
+   "support_explanation": "TDW-MAT denominator: 24 test episodes.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.1 C-WAH",
+   "quote": "to construct a test set of 10 episodes",
+   "support_explanation": "C-WAH denominator: 10 test episodes.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Table 1 caption",
+   "quote": "over 5 runs for RHP and 1 run for CoELA due to cost constraints",
+   "support_explanation": "CoELA is evaluated in a single run while the rule-based baseline is averaged over 5 runs; no variance reported.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Table 1 caption",
+   "quote": "*MAT uses central observation and oracle perception.",
+   "support_explanation": "The learned MARL baseline is given central observation and oracle perception (privileged), so it is not a matched baseline.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Table 2 caption",
+   "quote": "over 5 runs for MHP and 1 run for CoELA due to cost constraints",
+   "support_explanation": "Same single-run asymmetry on C-WAH.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.4 'Is the communication effective?'",
+   "quote": "We did not observe a significant performance drop when disabling communication among AI agents",
+   "support_explanation": "Counter-evidence to the 'effective communication' claim for AI-AI cooperation; numbers only in Fig 4c.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.4 'Is the Memory Module and Execution Module effective?'",
+   "quote": "the steps needed to finish the task for the agent with no Memory Module nearly double",
+   "support_explanation": "One-at-a-time memory ablation (figure-only numbers).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.4",
+   "quote": "However, this slows down the inference process largely and all our trials perform poorly and struggle to finish any task.",
+   "support_explanation": "Execution-module ablation: LLM making low-level control fails; supports the planner/executor split.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App C.3",
+   "quote": "manually filtered 572 high-quality data with effective communication behavior and good reasoning trace towards collaborative decision-making",
+   "support_explanation": "CoLLAMA training data: 572 manually filtered samples from 2k GPT-4 CoELA trajectories of 10 training episodes; filter is quality of communication/reasoning, not task success.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.3.1 'CoLLAMA is in competence with GPT-4'",
+   "quote": "our fine-tuned CoLLAMA can gain a competitive performance of 0.70 TR and even surpass GPT-4 on the subtask of Stuff",
+   "support_explanation": "CoLLAMA (LoRA-tuned LLaMA-2-13b) 0.70 TR vs GPT-4 0.71; single run, TDW-MAT only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.3.2",
+   "quote": "We recruited 8 human subjects to perform the experiments under four scenarios",
+   "support_explanation": "Human study scale: 8 subjects.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.3.2",
+   "quote": "trust score of 6.3 v.s. 4.7 for CoELA v.s CoELA w/o communication, p=0.0003 over the t-test",
+   "support_explanation": "Human trust benefit of natural-language communication; subjective 7-point Likert, C-WAH only.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App A.1",
+   "quote": "The fine-tuned model achieves 81.4% mAP@50 in the test set.",
+   "support_explanation": "Perception module (Mask-RCNN fine-tuned on TDW GT masks) quality; only perception metric reported.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App A.4 Action List",
+   "quote": "We compile all available actions regarding the current state into an Action List for the LLMs to select from.",
+   "support_explanation": "Planning is multiple choice over a state-dependent list of enumerated high-level plans (incl. send_message).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App A.5",
+   "quote": "When facing a new environment with a different action space, only the procedural knowledge needs to be rewritten for CoELA to work.",
+   "support_explanation": "Executor (A*) is hand-written per environment; planner/executor split.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App A.2",
+   "quote": "Empirically, we only keep the last K actions and D dialogues for storage efficiency.",
+   "support_explanation": "Episodic memory is a bounded window; K and D values are not given.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App A.2",
+   "quote": "In our current implementation, the Procedural Memory is never updated except for fine-tuning the model parameters",
+   "support_explanation": "No cross-episode retention in the harness itself; retained-improvement fields not applicable.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.5",
+   "quote": "CoELA did not incorporate the spatial information of objects and rooms into consideration",
+   "support_explanation": "Self-reported limitation: no 3D spatial reasoning in the prompt.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 1 Introduction para 1",
+   "quote": "To date, it still remains unclear whether LLMs have such abilities necessary for distributed embodied multi-agent cooperation.",
+   "support_explanation": "Author gap statement.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 2 Related Work",
+   "quote": "these platforms either neglects communication",
+   "support_explanation": "Author characterization of prior multi-agent platforms (neglect or non-linguistic channels).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.2 MAT",
+   "quote": "we make the compromise to feed the oracle semantic map and the agent states as observation",
+   "support_explanation": "MAT baseline receives privileged inputs.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.4",
+   "quote": "when we replace GPT-4 with GPT-3.5 to drive CoELA , the agents would need more steps to finish the task",
+   "support_explanation": "Backbone ablation on the planner/communicator (figure-only numbers).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.2 Implementation",
+   "quote": "temperature 0.7, top-p 1, and max tokens 256",
+   "support_explanation": "Sampling hyperparameters; no seeds or repeated-sample protocol for CoELA.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.1",
+   "quote": "instantiate the horizon h with 3000 frames",
+   "support_explanation": "Horizon budget shared by all methods in TDW-MAT (250 steps in C-WAH).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "Sec 5.5",
+   "quote": "Lack of effective reasoning on low-level actions.",
+   "support_explanation": "Self-reported limitation (abstracted high-level plans hide low-level execution).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M1",
+   "material_sha256": "6ca035d9acd1a5f04ee910bc00f6622eac728420bdcf45d3190dcd9097682071",
+   "locator": "App B.1",
+   "quote": "we use the latest replicant humanoid provided by the TDW platform as an embodiment",
+   "support_explanation": "Embodiment is a simulated humanoid avatar (not a physical robot); sim-only evidence.",
+   "kind": "author_report"
+  }
+ ],
+ "score": {
+  "raw": 61.25,
+  "display": 61.2,
+  "lower": 61.25,
+  "upper": 61.25,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ }
+}

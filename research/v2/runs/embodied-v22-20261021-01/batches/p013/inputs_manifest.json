@@ -1,0 +1,48 @@
+{
+ "batch_id": "p013",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2404.14285",
+   "paper_id": "2404.14285",
+   "version": "2404.14285v3",
+   "title": "LLM-Personalize: Aligning LLM Planners with Human Preferences via Reinforced Self-Training for Housekeeping Robots",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2404.14285.txt",
+   "material_sha256": "6e4814b401df7e1bf33dd52bda4ce455fd5dcc7bb3569c942633282ffacc376b"
+  },
+  {
+   "paper_key": "2404.19065",
+   "paper_id": "2404.19065",
+   "version": "2404.19065v1",
+   "title": "HELPER-X: A Unified Instructable Embodied Agent to Tackle Four Interactive Vision-Language Domains with Memory-Augmented Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2404.19065.txt",
+   "material_sha256": "f6e4a46b11c10f96d1e10d80db6d6af0242c8d449b4d78ff3e174546716d8924"
+  },
+  {
+   "paper_key": "2405.08216",
+   "paper_id": "2405.08216",
+   "version": "2405.08216v1",
+   "title": "Toward Automated Programming for Robotic Assembly Using ChatGPT",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2405.08216.txt",
+   "material_sha256": "9cad040654cfc54ee653fb00fc22d676cf861c7934178fa3d211c53253578596"
+  },
+  {
+   "paper_key": "2405.10620",
+   "paper_id": "2405.10620",
+   "version": "2405.10620v2",
+   "title": "MC-GPT: Empowering Vision-and-Language Navigation with Memory Map and Reasoning Chains",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2405.10620.txt",
+   "material_sha256": "f3e129577b4cbda37fbc17b5637e10f3cc083c8a58006521f5f6c80850bbc622"
+  },
+  {
+   "paper_key": "2405.15019",
+   "paper_id": "2405.15019",
+   "version": "2405.15019v2",
+   "title": "Agentic Skill Discovery",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2405.15019.txt",
+   "material_sha256": "97c05cc826dc48b6ab2f7f9fffbcfbc5e45fe8b28ff053aca5fbe5bdaff08ba3"
+  }
+ ],
+ "input_hash": "607512d462d1d011112a3ce26779de3b5abb155bb0ba300137cef503ab1350a6"
+}

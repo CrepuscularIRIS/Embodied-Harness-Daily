@@ -1,0 +1,13 @@
+{
+ "round_id": "p001-a2-finalize",
+ "batch_id": "p001",
+ "aggregate_attempt": "a2",
+ "ts": "2026-10-21T22:49:21",
+ "papers": {
+  "2209.07753": {
+   "status": "accepted_final",
+   "raw": 67.5
+  }
+ },
+ "problems": []
+}

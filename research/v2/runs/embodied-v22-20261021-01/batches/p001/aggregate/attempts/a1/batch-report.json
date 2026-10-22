@@ -1,0 +1,413 @@
+{
+ "schema_version": "radar-review-aggregate-batch-report-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a1",
+ "role": "opus_aggregate",
+ "phase": "production",
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+ "session_id": null,
+ "receipt_ref": null,
+ "timestamp": "2026-10-22T02:27:56.060173+00:00",
+ "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+ "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+ "score_qualification": "production-under-anchors-v2 (rubric not frozen; not a ranking, index entry or Reel selection until controller validation)",
+ "counts": {
+  "assigned": 5,
+  "accepted_final": 4,
+  "needs_fulltext": 1,
+  "needs_evidence": 0,
+  "needs_revision": 0,
+  "out_of_scope": 0,
+  "scored": 4,
+  "blocked": 1,
+  "outside_taxonomy": 0,
+  "outside_taxonomy_ratio_over_identified": "0/4",
+  "domain_unassigned": 1,
+  "total_resolutions": 51,
+  "total_shared_error_corrections": 2,
+  "total_unresolved": 0
+ },
+ "papers": [
+  {
+   "paper_key": "2201.07207",
+   "version": "2201.07207v2",
+   "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents",
+   "aggregate_status": "accepted_final",
+   "record_status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "offline",
+   "claim_support": "scoped",
+   "rs_primary": "adapt_via_conditioning",
+   "rs_subs": [
+    "rs:C03"
+   ],
+   "domain_matches": [
+    "K104"
+   ],
+   "domain_unassigned": false,
+   "score_raw": 65.0,
+   "score_display": 65.0,
+   "score_lower": 65.0,
+   "score_upper": 65.0,
+   "coverage": 1.0,
+   "seat_scores": {
+    "sol": 65.0,
+    "son55": 68.75
+   },
+   "mechanical_diffs": 3,
+   "resolutions": 9,
+   "shared_error_corrections": 0,
+   "unresolved": 0,
+   "resolution_summary": [
+    "rs_pattern.supporting / rs_pattern.sub_ids: sol -> {\"supporting\": [], \"sub_ids\": [\"rs:C03\"]}",
+    "ratings.E.measurement: sol -> 2",
+    "domain_pattern.matches: sol -> [\"K104\"]",
+    "pattern_mapping: revised -> \"C03<->K104 (translated actions as conditioning) and C03<->unassigned (retrieval",
+    "expectations.E01.status: son55 -> \"partial\"",
+    "expectations.E05.status: son55 -> \"unmet\"",
+    "expectations.E08.status: sol -> \"partial\"",
+    "expectations (single-seat items E04, E19, rs:adapt_via_conditioning:*): revised -> \"all adopted\"",
+    "assessment.central_claim wording: same_supported_fact -> \"sol wording kept as author claim; son55 wording preserved in paper.central_clai"
+   ],
+   "final_record_hash": "eadabb760b2f18752e0f9b6c17bf4cefa5c863ca034b184500df9870c89fa10c",
+   "file_sha256": "de93062efab6b6b735899861ed1d5a8858739e802228c0289e542832dcabb10a",
+   "input_seat_hashes": {
+    "sol": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2201.07207.json",
+     "sha256": "3ffab3de222332cb178e54da9168ab8ea3e847a9b3283b4d5b6976ec8c540b55"
+    },
+    "son55": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2201.07207.json",
+     "sha256": "5af1eda18fd4bf5b7c61613a67bc307c217052831df86f8eddcc29fdbafcd8cb"
+    }
+   },
+   "checks": {
+    "errors": [],
+    "final_record_hash_verified": true,
+    "quotes_literal": true,
+    "seat_integrity": {
+     "same_version": true,
+     "same_material_sha": true,
+     "material_sha_matches_manifest": true,
+     "same_input_hash": true,
+     "both_seats_present": true,
+     "seat_fields_correct": true,
+     "blind_contamination_observed": false
+    }
+   }
+  },
+  {
+   "paper_key": "2204.01691",
+   "version": "2204.01691v2",
+   "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+   "aggregate_status": "accepted_final",
+   "record_status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_subs": [
+    "rs:C25"
+   ],
+   "domain_matches": [
+    "K104"
+   ],
+   "domain_unassigned": false,
+   "score_raw": 67.5,
+   "score_display": 67.5,
+   "score_lower": 67.5,
+   "score_upper": 67.5,
+   "coverage": 1.0,
+   "seat_scores": {
+    "sol": 62.5,
+    "son55": 73.75
+   },
+   "mechanical_diffs": 7,
+   "resolutions": 13,
+   "shared_error_corrections": 1,
+   "unresolved": 0,
+   "resolution_summary": [
+    "rs_pattern.sub_ids: son55 -> [\"rs:C25\"]",
+    "ratings.G: son55 -> 4",
+    "ratings.X: sol -> 3",
+    "ratings.E.causality: sol -> 2",
+    "ratings.E.statistics: son55 -> 2",
+    "ratings.E.cost: sol -> 2",
+    "domain_pattern.matches: sol -> [\"K104\"]",
+    "pattern_mapping: revised -> \"C25<->K104\"",
+    "expectations.E02.status: sol -> \"partial\"",
+    "expectations.E03.status: son55 -> \"partial\"",
+    "expectations.E05.status: sol -> \"partial\"",
+    "expectations.E22.status: sol -> \"partial\"",
+    "expectations (single-seat items E04, E19, rs:decompose_and_delegate:*): revised -> \"all adopted\""
+   ],
+   "final_record_hash": "36458162eda2b3b8260c332188389d495a8a7d2d5811150b0abd3a6260f3bad9",
+   "file_sha256": "928091d86be2952ba0a6f55e9cae814dd5e90d6e5936cdf3ecfc6825d035b92c",
+   "input_seat_hashes": {
+    "sol": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2204.01691.json",
+     "sha256": "e5079f51cde09d6e8745e861d559cff9ed5841fce4c4cf28cbf95c2c1824ddf8"
+    },
+    "son55": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2204.01691.json",
+     "sha256": "289e4420eb33efc28e61f1e4a8cdc5de26a58a27f267061ab5dad28da5314be6"
+    }
+   },
+   "checks": {
+    "errors": [],
+    "final_record_hash_verified": true,
+    "quotes_literal": true,
+    "seat_integrity": {
+     "same_version": true,
+     "same_material_sha": true,
+     "material_sha_matches_manifest": true,
+     "same_input_hash": true,
+     "both_seats_present": true,
+     "seat_fields_correct": true,
+     "blind_contamination_observed": false
+    }
+   }
+  },
+  {
+   "paper_key": "2207.04429",
+   "version": "2207.04429v2",
+   "title": "LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action",
+   "aggregate_status": "accepted_final",
+   "record_status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_subs": [
+    "rs:C25"
+   ],
+   "domain_matches": [],
+   "domain_unassigned": true,
+   "score_raw": 63.75,
+   "score_display": 63.8,
+   "score_lower": 63.75,
+   "score_upper": 63.75,
+   "coverage": 1.0,
+   "seat_scores": {
+    "sol": 68.75,
+    "son55": 62.5
+   },
+   "mechanical_diffs": 4,
+   "resolutions": 10,
+   "shared_error_corrections": 0,
+   "unresolved": 0,
+   "resolution_summary": [
+    "rs_pattern.supporting / rs_pattern.sub_ids: sol -> {\"supporting\": [], \"sub_ids\": [\"rs:C25\"]}",
+    "ratings.M: son55 -> 3",
+    "ratings.E.cost: sol -> 1",
+    "domain_pattern: sol -> \"unassigned\"",
+    "pattern_mapping: sol -> \"C25<->unassigned\"",
+    "claims / assessment number source (Table 1 vs narrative 85%): revised -> \"Net success 16/20 (0.8 in each environment); planning success 17/20 (0.85); 1 d",
+    "expectations.E02.status: sol -> \"partial\"",
+    "expectations.E05.status: son55 -> \"unmet\"",
+    "expectations.E08.status: sol -> \"partial\"",
+    "expectations (single-seat items E01, E03, E16, rs:*): revised -> \"all adopted; rs added_cost set to unmet\""
+   ],
+   "final_record_hash": "a62c9fcfcc4bf7d23aed510d11dabe19ec4142a53eb7e33739944a145edae690",
+   "file_sha256": "f521e3d3ca99d9830e48f7067e4eb20faf8494dedd528980d32bb34b284dc132",
+   "input_seat_hashes": {
+    "sol": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2207.04429.json",
+     "sha256": "44e204adfdef405cc0bca27c30a81d786e73d2e4d93929c78072ef31f4c71c7e"
+    },
+    "son55": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2207.04429.json",
+     "sha256": "e501f1edc6630c7dd17bd5705ef95b5be39a31ac1fba794956c66c36991ab342"
+    }
+   },
+   "checks": {
+    "errors": [],
+    "final_record_hash_verified": true,
+    "quotes_literal": true,
+    "seat_integrity": {
+     "same_version": true,
+     "same_material_sha": true,
+     "material_sha_matches_manifest": true,
+     "same_input_hash": true,
+     "both_seats_present": true,
+     "seat_fields_correct": true,
+     "blind_contamination_observed": false
+    }
+   }
+  },
+  {
+   "paper_key": "2207.05608",
+   "version": "2207.05608v1",
+   "title": "Inner Monologue: Embodied Reasoning through Planning with Language Models",
+   "aggregate_status": "accepted_final",
+   "record_status": "reviewed",
+   "claim_type": "system_method",
+   "evidence_level": "online",
+   "claim_support": "scoped",
+   "rs_primary": "decompose_and_delegate",
+   "rs_subs": [
+    "rs:C25"
+   ],
+   "domain_matches": [
+    "K202",
+    "K109",
+    "K104"
+   ],
+   "domain_unassigned": false,
+   "score_raw": 70.0,
+   "score_display": 70.0,
+   "score_lower": 70.0,
+   "score_upper": 70.0,
+   "coverage": 1.0,
+   "seat_scores": {
+    "sol": 70.0,
+    "son55": 66.25
+   },
+   "mechanical_diffs": 5,
+   "resolutions": 14,
+   "shared_error_corrections": 1,
+   "unresolved": 0,
+   "resolution_summary": [
+    "rs_pattern.primary: son55 -> \"decompose_and_delegate\"",
+    "rs_pattern.sub_ids: son55 -> [\"rs:C25\"]",
+    "ratings.E.statistics: sol -> 2",
+    "ratings.E.cost: sol -> 2",
+    "domain_pattern.matches: revised -> [\"K202\", \"K109\", \"K104\"]",
+    "pattern_mapping: revised -> \"C25<->K202, K109, K104\"",
+    "expectations.E03.status: son55 -> \"unmet\"",
+    "expectations.E04.status: son55 -> \"unmet\"",
+    "expectations.E05.status: son55 -> \"unmet\"",
+    "expectations.E08.status: sol -> \"partial\"",
+    "expectations.E22.status: sol -> \"partial\"",
+    "expectations (rs items): revised -> \"rs:decompose_and_delegate:added_cost unmet; component_isolation partial\"",
+    "claims.counterevidence (CLIPort+oracle on seen tasks): revised -> \"exceeds all IM variants on 3 of 4 seen tasks; IM wins pick-and-place\"",
+    "claims.counterevidence (noise protocol, Scene+CoT): sol -> \"kept\""
+   ],
+   "final_record_hash": "1c7fc37012a20148c1da5cb4f657411c473d8bc13c0704be6561b7e4bc53ef3b",
+   "file_sha256": "56169bd050c81f3932f646c601d05af133bedb84ea727cae681b5bbd3eab5569",
+   "input_seat_hashes": {
+    "sol": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2207.05608.json",
+     "sha256": "895f6d57ea922322cbcf745735e330253d1936e81cacd1d577bd2879b17187ef"
+    },
+    "son55": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2207.05608.json",
+     "sha256": "6f06b6620c14ac87cd6bb95e73024a9d40325278fed75892e3a537d66789c905"
+    }
+   },
+   "checks": {
+    "errors": [],
+    "final_record_hash_verified": true,
+    "quotes_literal": true,
+    "seat_integrity": {
+     "same_version": true,
+     "same_material_sha": false,
+     "material_sha_matches_manifest": true,
+     "same_input_hash": true,
+     "both_seats_present": true,
+     "seat_fields_correct": true,
+     "blind_contamination_observed": false
+    }
+   }
+  },
+  {
+   "paper_key": "2209.07753",
+   "version": "2209.07753v4",
+   "title": "Code as Policies: Language Model Programs for Embodied Control",
+   "aggregate_status": "needs_fulltext",
+   "record_status": "needs_fulltext",
+   "claim_type": "system_method",
+   "evidence_level": null,
+   "claim_support": "unresolved",
+   "rs_primary": null,
+   "rs_subs": [],
+   "domain_matches": [],
+   "domain_unassigned": null,
+   "score_raw": null,
+   "score_display": null,
+   "score_lower": 0.0,
+   "score_upper": 100.0,
+   "coverage": 0.0,
+   "seat_scores": {
+    "sol": null,
+    "son55": null
+   },
+   "mechanical_diffs": 4,
+   "resolutions": 5,
+   "shared_error_corrections": 0,
+   "unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: sol -> null",
+    "rs_pattern.primary: sol -> null",
+    "rs_pattern.outside_taxonomy: sol -> null",
+    "rs_pattern.sub_ids: sol -> []",
+    "status / ratings (all eight unknown) / score: same_supported_fact -> \"needs_fulltext; unknown x8; raw null; L=0, U=100, coverage=0\""
+   ],
+   "final_record_hash": "3c687a425fe37718afee0f4b6f0cc26aa4cc73ea5539cf38062a134523f2f6b4",
+   "file_sha256": "81dcf099d7904f932e799b0331390c7579ea581ea321fabcbf5f054b63eb6977",
+   "input_seat_hashes": {
+    "sol": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2209.07753.json",
+     "sha256": "55d9571c53969e3c642e1a49f40a9f3d159aa3a858727b6a6552291fcca1a1e5"
+    },
+    "son55": {
+     "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2209.07753.json",
+     "sha256": "df954965590bfd842584dcb583ef86bc3f8777096d93d0389af4ed604fabc209"
+    }
+   },
+   "checks": {
+    "errors": [],
+    "final_record_hash_verified": true,
+    "quotes_literal": true,
+    "seat_integrity": {
+     "same_version": true,
+     "same_material_sha": true,
+     "material_sha_matches_manifest": true,
+     "same_input_hash": true,
+     "both_seats_present": true,
+     "seat_fields_correct": true,
+     "blind_contamination_observed": false
+    }
+   }
+  }
+ ],
+ "verification": {
+  "all_records_passed": true,
+  "checks": [
+   "Seat set equals inputs_manifest (5 IDs, versions, material sha256 re-hashed and matched); both seats share input_hash 9942a3c5...",
+   "Rubric/protocol/RS manifest/PARENTS/taxonomy/conditions/card sha256 recomputed and equal to seat bindings",
+   "Every evidence quote is a literal substring of the batch material named by its sha256 (seat and aggregate evidence)",
+   "No dangling evidence_ids/counterevidence_ids",
+   "rs sub-cards carry rs: prefix and legal PARENTS.tsv parent; <=2 supporting; domain namespace embodied, <=3 matches, ids in taxonomy.json",
+   "Eight ratings: integer 0-4 when resolved, null when unknown; score recomputed deterministically (raw authoritative, display=python round(raw,1))",
+   "Every resolution has reason and evidence ids; no unresolved resolution in accepted_final records",
+   "final_record_hash = SHA-256 of UTF-8 sort_keys compact ensure_ascii=False JSON without the field; re-read from disk and re-verified",
+   "Files written via temp file + os.replace; only this aggregate attempt directory written; seat originals untouched"
+  ],
+  "limits": "Structural/arithmetic checks plus aggregate re-reading of core evidence; this is a two-seat-informed aggregation, not a third blind review or human gold, and does not reproduce any paper's results."
+ },
+ "blockers": [
+  {
+   "paper_key": "2209.07753",
+   "type": "needs_fulltext",
+   "detail": "Fixed material is main text only; Appendices A-M (prompts/responses, C code-vs-NL, D/E benchmarks, F controllers, H/I/J domain prompts, K simulated tasks/success criteria/splits, L/M) and references absent.",
+   "remedy": "Controller: extract https://arxiv.org/pdf/2209.07753v4 with appendices into research/fulltext/review-runs/embodied-v22-20261021-01/materials/ (new file, gitignored), pin its sha256 in a new input manifest, open new sol/son55 attempts (e.g. a2) and a new aggregate attempt superseding this record. son55's main_text_only_provisional values are kept under provisional_reference only and must not be indexed."
+  }
+ ],
+ "advisories": [
+  {
+   "type": "seat_provenance",
+   "detail": "son55 self-reports model_type 'haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)', consistent with AGENTS.md (Sonnet 5.5 seat). The user-level claude-kimi CLAUDE.md table lists the haiku overlay as glm-5.3-flash. Not probed (per instructions); controller should confirm from its own dispatch records that the son55 seat ran on Sonnet 5.5 before indexing."
+  },
+  {
+   "type": "card_revision_proposals",
+   "detail": "Pending, no card edited: soft multiplicative gating variant beside K201 (2204.01691, son55); frozen LLM-landmark + VLM node scoring + DP graph routing case note (2207.04429)."
+  },
+  {
+   "type": "number_source",
+   "detail": "2207.04429 Table 1 rowspan displacement resolved in that record's number_source_resolution; authoritative: net 16/20, planning 17/20, 1 disengagement."
+  }
+ ]
+}

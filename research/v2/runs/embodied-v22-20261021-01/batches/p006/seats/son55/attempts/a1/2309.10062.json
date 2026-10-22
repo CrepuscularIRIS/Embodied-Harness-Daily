@@ -1,0 +1,827 @@
+{
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p006",
+ "attempt_id": "a1",
+ "seat": "son55",
+ "paper": {
+  "paper_key": "2309.10062",
+  "paper_id": "2309.10062",
+  "title": "SMART-LLM: Smart Multi-Agent Robot Task Planning using Large Language Models",
+  "version": "2309.10062v2",
+  "claim_type": "system_method",
+  "central_claim": "SMART-LLM 用 Pythonic 少样本提示让 LLM 依次完成任务分解、协同组队和技能分配，把高层指令转成可执行的多机器人计划；在新建的 AI2-THOR 36 任务基准与真机上得到有希望的结果，并可泛化到新环境、新机器人类型和新任务。"
+ },
+ "provenance": {
+  "input_hash": "682d488acfee84cba361bc0fc1f9b301936e28dff782dff94fbc993c9550e37d",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "domain_cards_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "expectations_hash": "c56f6e7b8d069ac7abe210131983b9dcce557cb475a75987601616a6af63ccdc",
+  "model_type": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)",
+  "actual_model": "claude-sonnet-5-5[1m]",
+  "session_id": null,
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T02:54:30Z",
+  "notes": "anchors_version=v2 (3ececdd11cc3d144); phase=production; session_id/receipt_ref not self-obtainable by worker (null); expectations_hash = sha256 of concatenated patterns/main/*.md (expectations embedded there, no standalone file); domain_cards_hash = sha256(research/patterns/taxonomy.json); patterns/overview.md sha256=2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf."
+ },
+ "materials": [
+  {
+   "material_id": "M-2309.10062",
+   "url": "https://arxiv.org/pdf/2309.10062v2",
+   "sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "sections_read": [
+    "Abstract",
+    "I Introduction",
+    "II Related Works",
+    "III Problem Formulation",
+    "IV Methodology (A-D)",
+    "V Experiments (A-D)",
+    "VI Results (A-B, Tables I-III)",
+    "VII Conclusions"
+   ],
+   "complete": true,
+   "missing_sections": []
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "E001",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "Abstract",
+   "quote": "executing a series of stages, including task decomposition, coalition formation, and task allocation, all guided by programmatic LLM prompts within the few-shot prompting paradigm",
+   "support_explanation": "中心主张：三阶段、Pythonic few-shot 提示的多机器人任务规划框架。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E002",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§II",
+   "quote": "requiring extensive task-specific demonstration data for model training [ 24 ]",
+   "support_explanation": "最近邻[24]：LSTM 方法需要大量任务演示数据。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E003",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§II",
+   "quote": "These approaches involve equipping individual agents with their own LLMs to improve interactions and boost their collaborative skills.",
+   "support_explanation": "最近邻：每个机器人配一个 LLM 的多智能体方法。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E004",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§III",
+   "quote": "We assume that the given instruction I can be successfully executed in the environment E .",
+   "support_explanation": "假设指令可执行。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E005",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§III",
+   "quote": "are either pre-implemented in the system or that there are available API calls to execute these skills",
+   "support_explanation": "技能作为预实现 API 提供。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E006",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§IV",
+   "quote": "Our approach employs Pythonic prompts to guide the LLM in generating code for task decomposition and allocation.",
+   "support_explanation": "核心操作：Pythonic 提示生成可执行代码。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E007",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§IV",
+   "quote": "Details regarding robot skills and object properties were encoded as Python dictionaries",
+   "support_explanation": "机器人技能与物体属性（含环境对象清单）以字典给出，等同提供 GT 环境信息。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E008",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§IV-D",
+   "quote": "The LLM generates task plans for multi-robot teams through task allocation, which are then executed by an interpreter with either a virtual or physical team of robots.",
+   "support_explanation": "输出代码由解释器直接执行，无执行前验证或回退环节。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E009",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§V-A",
+   "quote": "The dataset encompasses 36 high-level instructions that articulate tasks and corresponding AI2-THOR floor plans",
+   "support_explanation": "基准 36 个指令。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E010",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§V-A",
+   "quote": "The dataset comprises 6 tasks categorized as elemental tasks, 8 tasks as simple tasks, 14 tasks as compound tasks, and 8 tasks as complex tasks.",
+   "support_explanation": "类别分母 6/8/14/8。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E011",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§V-D",
+   "quote": "which we compare to the achieved states post-execution to assess task success",
+   "support_explanation": "成功由最终符号状态与 GT 对比判定。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E012",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§V-D",
+   "quote": "SR is success rate and is 1 when both GCR and RU are 1 , else it is 0 .",
+   "support_explanation": "SR 要求目标状态与机器人利用率同时满分（顺序执行即判失败）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E013",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A Table I",
+   "quote": "SMART-LLM (GPT-4) 1.00 1.00 1.00 1.00 1.00 0.62 1.00 1.00 0.62 1.00 0.69 0.76 0.85 0.92 1.00 0.71 0.85 0.92 1.00 0.97",
+   "support_explanation": "GPT-4 各类别 SR/TCR/GCR/RU/Exe；SR 1.00/0.62/0.69/0.71。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E014",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A Table I",
+   "quote": "Decomp (ours) + Rand 1.00 1.00 1.00 1.00 1.00 0.37 0.62 0.62 0.37 0.60 0.08 0.16 0.25 0.41 0.37 0.00 0.00 0.15 0.85 0.38",
+   "support_explanation": "随机分配基线（GPT-4 分解）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E015",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A Table I",
+   "quote": "Decomp (ours) + Rule [ 40 ] 1.00 1.00 1.00 1.00 1.00 0.62 1.00 1.00 0.62 1.00 0.57 0.57 0.65 0.81 0.74 0.14 0.14 0.35 0.85 0.54",
+   "support_explanation": "规则分配基线：简单类与 SMART-LLM 持平。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E016",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§V-B",
+   "quote": "Both baseline methods utilize GPT-4 to perform the task decomposition.",
+   "support_explanation": "基线均复用本文分解，因此对比只隔离分配阶段。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E017",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§V-B",
+   "quote": "the example prompts were distinct from the tasks in the dataset and were based on different AI2-THOR floorplans not included in the dataset",
+   "support_explanation": "示例提示与评测任务/平面图分离。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E018",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A",
+   "quote": "To assess this variability, we conducted 5 separate runs, each on a randomly selected task from every category within our dataset.",
+   "support_explanation": "方差检验仅 5 次、每类一个随机任务。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E019",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A",
+   "quote": "in the case of complex scenarios, we encountered inconsistency, leading to occasional failures in robot task allocation",
+   "support_explanation": "复杂类不稳定（Table II complex SR 0.48±0.40，对比 Table I 0.71）。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E020",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A Table III",
+   "quote": "Ours 0.75 0.90 0.94 0.88 0.99 No Comments 0.48 0.65 0.73 0.75 0.78 No Summary 0.61 0.74 0.80 0.78 0.81 No Comm. & Summ. 0.41 0.61 0.66 0.59 0.69 No Coalition 0.60 0.68 0.75 0.85 0.82",
+   "support_explanation": "消融：去注释/摘要/协同阶段均降低 SR；运行数未说明。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E021",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A",
+   "quote": "Notably, our approach utilizing the GPT-4 and Claude-3 backbones exhibited the capacity to discern this situation and refrained from generating any task allocation plan.",
+   "support_explanation": "不可行任务：GPT-4/Claude-3 拒绝生成，GPT-3.5/Llama2 误分配；定性。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E022",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A",
+   "quote": "Interestingly, Lllam 2, with only 70B parameters compared to trillions in other models, performs equally well.",
+   "support_explanation": "跨后端结果：Llama2 与大模型相近。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E023",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A",
+   "quote": "However, the token limitations of certain LLMs hinder this optimization.",
+   "support_explanation": "提示长度受 token 限制；无成本数据。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E024",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-B",
+   "quote": "When tested across various tasks, our method correctly generated task plans and allocated an appropriate number of robots.",
+   "support_explanation": "真机：仅定性，无试验计数。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E025",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VII",
+   "quote": "our approach exhibits remarkable adaptability, allowing it to seamlessly generalize to new and unexplored environments, robot types, and task scenarios",
+   "support_explanation": "作者的泛化主张。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E026",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VII",
+   "quote": "In the future, we aim to enhance our work by implementing dynamic task allocation among robots",
+   "support_explanation": "当前无动态重分配/修复。",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "E027",
+   "material_id": "M-2309.10062",
+   "material_sha256": "26913655789771b7afb17568f1af25231292ce9ad52afe36a8f5eabff27bb3ec",
+   "locator": "§VI-A",
+   "quote": "Rule-based allocation demonstrates satisfactory performance for compound tasks requiring the identification of robots with the appropriate skills.",
+   "support_explanation": "规则基线在技能匹配型复合任务上可用，限制 LLM 分配的增益声明。",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "多机器人任务规划器：冻结 LLM（GPT-4/3.5/Llama-2-70B/Claude-3）经三段 Pythonic few-shot 提示依次做任务分解、协同(coalition)策略、任务分配",
+   "information": "输入=指令+机器人技能字典+环境对象清单(含属性)；示例=5 个分解、3 个协同、4 个分配（来自不在评测集的平面图）；无执行反馈",
+   "operation": "阶段1生成子任务与动作序列；阶段2生成协同策略(单机/多机/受限技能需组队)；阶段3输出含线程并行的分配代码",
+   "output": "可由解释器直接执行的分配代码",
+   "conditions": "假设指令可执行、技能为预实现 API；技能约束需在字典中写明",
+   "feedback": "无执行后反馈与修复；失败只在评测时由最终状态检出",
+   "selection_rule": "无采样选择；单次生成",
+   "persistence": "无（每任务重新生成）",
+   "later_use": "N/A（示例提示固定）",
+   "claimed_effect": "36 任务 AI2-THOR：GPT-4 SR 1.00/0.62/0.69/0.71；优于随机与规则分配基线",
+   "failure_boundary": "排序与组队错误、复杂类不稳定(SR 0.48±0.40)、GPT-3.5 弱、顺序执行拉低 RU/SR；无真机计数",
+   "evidence_ids": [
+    "E001",
+    "E004",
+    "E005",
+    "E006",
+    "E007",
+    "E008",
+    "E013",
+    "E019"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "评测资源：36 指令基准，含 GT 终态与 GT 机器人转换次数",
+   "information": "GT 符号目标条件",
+   "operation": "SR/TCR/GCR/RU/Exe 五指标",
+   "output": "类别平均",
+   "conditions": "AI2-THOR 确定性仿真",
+   "feedback": "N/A",
+   "selection_rule": "N/A",
+   "persistence": "N/A",
+   "later_use": "N/A",
+   "claimed_effect": "可比较多机器人规划方法",
+   "failure_boundary": "分母与表值不一致(见 claims)",
+   "evidence_ids": [
+    "E009",
+    "E010",
+    "E011",
+    "E012"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "传统多机器人规划依赖固定算法，难适应多样任务；已有 LLM 方法要么不覆盖全部四个规划步骤、要么需大量演示数据、要么只面向特定任务；多智能体 LLM 工作侧重协作而非任务计划。",
+  "checked_gap": "文中近邻定位（自动化四级、[24]、每机器人一 LLM 的多智能体工作）具体，但与任何 LLM 近邻均无定量对比（只比随机/规则分配）；\"覆盖全部四阶段\"的差异是结构性的、残余瓶颈（排序/组队/不稳定）才是真正问题。",
+  "lineage_closest_adjacent": {
+   "lineage": "SayCan/Code-as-Policies 类 LLM 规划 → 单机器人任务计划 → 多机器人分解+分配；与 [24]（LSTM+自然语言，四阶段）和多智能体 LLM 协作工作平行",
+   "closest": [
+    "[24] LSTM 四阶段自动化 (原文未固定)",
+    "[36-38] 每机器人一 LLM 的协作工作 (原文未固定)"
+   ],
+   "source_version": "转述自 2309.10062v2 §II；未取得近邻原文"
+  },
+  "residue": "异构机器人技能受限时的协同组队与时序并行；LLM 在复杂任务上的不稳定。",
+  "stakes": "多机器人家务/搜救/仓储中的任务可迁移性。",
+  "method_response": "分阶段 few-shot 提示，把协同策略作为显式中间推理；代码形式输出便于执行。",
+  "remaining_gap": "无反馈修复；对象清单为 GT；复杂类不稳定；与 LLM 近邻、端到端单提示基线无对比；真机无计数。",
+  "evidence_ids": [
+   "E002",
+   "E003",
+   "E007",
+   "E019",
+   "E024",
+   "E026"
+  ],
+  "unresolved": [
+   "与已有 LLM 多机器人规划工作的对比",
+   "基准表值与分母不一致"
+  ]
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [
+   "adapt_via_conditioning"
+  ],
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": null,
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": "原卡定义：单体任务→子任务分解→路由到最合适的\"求解者\"(机器人组合)，经结构化中间产物(Python 代码、协同策略)——命中。C25 要求中间产物被 sound 机制检查并闭环(step 3)；本文代码直接执行，无验证/回灌，step4 承重机制消融只部分(去协同)，step5 成本未报，故不选 C25。",
+    "success_failure_checks": "success：typed 产物(partial：代码但无外部校验)；接缝清楚(met)；单一承重机制消融(partial：去协同/注释)。failure：成本未测(命中)；对单基准手工调提示(部分命中：示例均来自 AI2-THOR)；仅 marginal 胜于规则基线(命中：简单类持平)。",
+    "evidence_ids": [
+     "E006",
+     "E008",
+     "E013",
+     "E015",
+     "E020"
+    ],
+    "reason": "实际执行分解+分配，但路由终点是机器人而非 solver，且无验证闭环。"
+   },
+   {
+    "main_id": "adapt_via_conditioning",
+    "sub_id": null,
+    "role": "supporting",
+    "fit": "weak-moderate",
+    "tactic_steps_checked": "全部三阶段靠固定 few-shot 示例条件化冻结 LLM、无参数更新——命中原卡定义；无上游统一格式训练、类别留出(示例与评测平面图分离算部分留出)、与更简单条件化基线对比缺失。",
+    "success_failure_checks": "success：留出整类任务(partial：示例平面图不在评测集，但任务类别相同)；failure：单基准手工提示(命中)。",
+    "evidence_ids": [
+     "E001",
+     "E017"
+    ],
+    "reason": "作为实现手段的辅助匹配。"
+   }
+  ],
+  "outside_taxonomy": false,
+  "reason": "主操作为分解+分配的结构化委托。",
+  "executes_pattern": {
+   "value": "partial",
+   "reason": "执行分解与委托，缺验证闭环和完整承重消融。"
+  },
+  "resolves_problem": {
+   "value": "unresolved",
+   "reason": "复杂任务 SR 约 0.5-0.7 且不稳定，基准对比仅含弱基线；不主张问题已被关闭。"
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "multi_robot_llm_coordination",
+    "sub": "R03",
+    "version": "radar-patterns-2026-10-21 (R03 board-induced)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "item": "LLM 分解并把子任务分配给异构机器人",
+      "status": "met",
+      "note": "中央单 LLM 三阶段分配"
+     },
+     {
+      "item": "可行性/冲突检查与局部修复(核心 success condition)",
+      "status": "unmet",
+      "note": "无执行器反馈或验证器；协同阶段是 LLM 内部推理，不是外部检查"
+     },
+     {
+      "item": "协调成本与成功率并报(success condition)",
+      "status": "unmet",
+      "note": "无 token/调用/时延"
+     },
+     {
+      "item": "共享状态为 GT(failure mode)",
+      "status": "met",
+      "note": "对象清单与属性直接给出；未测感知/通信误差"
+     },
+     {
+      "item": "自有小基准、证据薄(failure mode)",
+      "status": "met",
+      "note": "36 任务自建基准，多数为单次"
+     }
+    ],
+    "evidence_ids": [
+     "E006",
+     "E007",
+     "E008",
+     "E010",
+     "E026"
+    ]
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "multi_robot_llm_coordination",
+    "sub": "R03"
+   },
+   "operation_correspondence": "原卡\"分解并路由到合适求解者\"对应 R03\"LLM 把子任务分配给异构机器人\"：分配目标为具备技能的机器人或组队，中间产物为 Python 分配代码。",
+   "necessary_conditions_and_differences": "R03 还要求对分配做可行性/冲突检查并局部重规划；本文无该环，因此只执行 R03 的分配半边。",
+   "evidence_ids": [
+    "E006",
+    "E008",
+    "E026"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "profile/expectations.json (embedded in patterns/main/multi_robot_llm_coordination.md)",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/multi_robot_llm_coordination.md#E01"
+   ],
+   "applies_when": "主张 harness 提升",
+   "applicable": true,
+   "status": "partial",
+   "reason": "同一 GPT-4 分解下比较随机/规则/LLM 分配；缺另一 LLM 多机器人规划方法或单提示端到端基线。",
+   "evidence_ids": [
+    "E014",
+    "E015",
+    "E016"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/multi_robot_llm_coordination.md#E02"
+   ],
+   "applies_when": "主张具体组件造成提升",
+   "applicable": true,
+   "status": "met",
+   "reason": "注释、摘要、协同阶段逐项切除（Table III），但运行数未说明，且\"无协同\"受示例构成混杂(作者自陈)。",
+   "evidence_ids": [
+    "E020"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E03",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/multi_robot_llm_coordination.md#E03"
+   ],
+   "applies_when": "主张组件普遍有效",
+   "applicable": true,
+   "status": "met",
+   "reason": "GPT-4/GPT-3.5/Llama-2/Claude-3 四后端。",
+   "evidence_ids": [
+    "E013",
+    "E022"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/multi_robot_llm_coordination.md#E04"
+   ],
+   "applies_when": "成功率对比",
+   "applicable": true,
+   "status": "partial",
+   "reason": "仅 5 次运行、每类一个随机任务给出均值±标准差；主表无方差。",
+   "evidence_ids": [
+    "E018",
+    "E019"
+   ],
+   "score_item": "E.statistics"
+  },
+  {
+   "id": "E05",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/multi_robot_llm_coordination.md#E05"
+   ],
+   "applies_when": "主张更好/更实用",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "全文无 token/调用数/时延/美元成本（完整查找 Sec V-VII）。",
+   "evidence_ids": [
+    "E023"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#E08"
+   ],
+   "applies_when": "开发重叠/污染",
+   "applicable": true,
+   "status": "partial",
+   "reason": "示例与评测任务/平面图分离；但未说明提示是否用评测集迭代调整。",
+   "evidence_ids": [
+    "E017"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E19",
+   "version": "same",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/multi_robot_llm_coordination.md#E19"
+   ],
+   "applies_when": "真机主张",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "真机为定性演示，无试验数与成功率。",
+   "evidence_ids": [
+    "E024"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "rs:decompose_and_delegate#RE-cost",
+   "version": "ResearchStudio 15+31",
+   "source_strength": "both (Oral/Reject induced)",
+   "source_refs": [
+    "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md"
+   ],
+   "applies_when": "分解/委托型方法",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "三段调用的成本与时延未量化。",
+   "evidence_ids": [
+    "E023"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "rs:decompose_and_delegate#RE-unified-baseline",
+   "version": "ResearchStudio 15+31",
+   "source_strength": "both (Oral/Reject induced)",
+   "source_refs": [
+    "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md"
+   ],
+   "applies_when": "分解/委托型方法",
+   "applicable": true,
+   "status": "partial",
+   "reason": "规则分配在简单类持平，说明部分增益可被简单方法取代；未与统一单提示基线比较。",
+   "evidence_ids": [
+    "E015",
+    "E027"
+   ],
+   "score_item": "E.causality"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "GPT-4 的 SMART-LLM 在 36 任务基准上分类别 SR 1.00/0.62/0.69/0.71，并优于随机与规则分配",
+   "setting": "AI2-THOR 确定性仿真，1-4 台异构机器人，GT 对象清单",
+   "baseline_control": "同一 GPT-4 分解+随机/规则分配",
+   "selection_vs_test": "示例提示取自不含于基准的平面图；是否在评测任务上调过提示未说明",
+   "result_denominator": "类别分母 6/8/14/8；但表值（如 0.69、0.71、0.14）不是对应整数计数的比值，运行次数/平均方式未说明",
+   "evidence_ids": [
+    "E010",
+    "E012",
+    "E013",
+    "E014",
+    "E015",
+    "E016",
+    "E017"
+   ],
+   "counterevidence": "简单类规则分配持平；SR 因顺序执行被判失败（TCR 1.00 vs SR 0.62）；表间不一致（Table II complex 0.48 vs Table I 0.71）",
+   "allowed_conclusion": "在作者自建仿真基准上，LLM 分配优于随机，并在组队约束类任务上优于规则分配；表值分母不可复核"
+  },
+  {
+   "claim_id": "C2",
+   "text": "方法对 LLM 后端不敏感（GPT-3.5/Llama-2/Claude-3 亦可）",
+   "setting": "同上",
+   "baseline_control": "后端互换",
+   "selection_vs_test": "同上",
+   "result_denominator": "同上",
+   "evidence_ids": [
+    "E013",
+    "E022"
+   ],
+   "counterevidence": "GPT-3.5 在复杂类 SR 0.14",
+   "allowed_conclusion": "scoped：Llama-2/Claude-3 近似 GPT-4，GPT-3.5 明显弱"
+  },
+  {
+   "claim_id": "C3",
+   "text": "去注释/摘要/协同阶段会降低成功率",
+   "setting": "GPT-4，基准总体",
+   "baseline_control": "自身消融",
+   "selection_vs_test": "同上",
+   "result_denominator": "运行数未说明",
+   "evidence_ids": [
+    "E020"
+   ],
+   "counterevidence": "\"无协同\"下降受示例构成混杂",
+   "allowed_conclusion": "scoped：提示组件有贡献，运行数与方差缺失"
+  },
+  {
+   "claim_id": "C4",
+   "text": "可泛化到新环境、新机器人类型和新任务（含真机）",
+   "setting": "无人机/地面机器人覆盖与拍照任务",
+   "baseline_control": "无",
+   "selection_vs_test": "真机沿用仿真提示",
+   "result_denominator": "无计数",
+   "evidence_ids": [
+    "E024",
+    "E025"
+   ],
+   "counterevidence": "无数据",
+   "allowed_conclusion": "unsupported：只有定性演示"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "claim_support": "scoped",
+  "strongest_supported_claim": "在作者自建的 36 任务 AI2-THOR 仿真基准上，三段 Pythonic few-shot 提示的 LLM 分解+分配在组队约束任务上优于随机与规则分配基线（同一 GPT-4 分解），复杂类约 0.5-0.7 成功率且不稳定；后端对比与消融表明提示组件与较强 LLM 有贡献；真机与泛化主张无计数证据。",
+  "unresolved": [
+   "表值分母与重复运行方式",
+   "LLM 近邻方法对比",
+   "执行反馈修复"
+  ],
+  "note": "作者结果，非我们复现。"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 2,
+   "reason": "有真实局限（固定算法难迁移、已有方法不覆盖全部四阶段或需演示数据），近邻文字定位具体；但与 LLM 近邻无任何定量对比，残余问题（复杂类不稳定）才是核心却未专门剖析。",
+   "evidence_ids": [
+    "E002",
+    "E003",
+    "E019"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "三阶段分解→协同策略→分配的逻辑与异构技能约束对齐，消融支持各阶段提示价值；假设（指令可执行、对象清单已知、技能 API 已有）明确。扣分：协同阶段是 LLM 自推理而非可检验的外部约束。",
+   "evidence_ids": [
+    "E004",
+    "E005",
+    "E006",
+    "E020"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "提示结构（5/3/4 示例、字典表示、线程并行）、输出形式与执行路径清楚；失败边界（不可行任务、排序、GPT-3.5）有讨论。扣分：无反馈/修复环，提示全文在外部网站，表值计算不透明。",
+   "evidence_ids": [
+    "E006",
+    "E007",
+    "E008",
+    "E019",
+    "E021",
+    "E026"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "终态符号判定+GT 转换数的 SR/TCR/GCR/RU/Exe 定义明确、环境判定；但表值与 6/8/14/8 分母不吻合（运行方式未说明）、表间不一致、SR 受 RU 惩罚顺序执行、真机无计数。",
+    "evidence_ids": [
+     "E010",
+     "E011",
+     "E012",
+     "E013",
+     "E024"
+    ],
+    "counterevidence_ids": [
+     "E019"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "同 GPT-4 分解下对比随机/规则分配，并有组件消融和多后端；缺 LLM 近邻方法与单提示基线，规则基线在简单类持平，\"无协同\"受示例混杂。",
+    "evidence_ids": [
+     "E014",
+     "E015",
+     "E016",
+     "E020",
+     "E027"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "示例取自不在基准中的平面图，评测任务对提示\"unseen\"，是明确的开发/评测分离；但基准由同组自建、提示迭代过程未说明，真机泛化无计数。",
+    "evidence_ids": [
+     "E017",
+     "E024"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "有 5 次运行均值±标准差（仅每类一个随机任务），暴露复杂类 0.48±0.40 的不稳定；失败有定性归因；主表无方差。",
+    "evidence_ids": [
+     "E018",
+     "E019"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "not_reported",
+    "rating": 0,
+    "reason": "完整查找 Sec V-VII 与 Table I-III：未报告 token、调用数、时延或美元成本，仅提及 token 上限限制示例数。",
+    "evidence_ids": [
+     "E023"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": [
+     "Sec V Experiments (A-D)",
+     "Sec VI Results (A-B)",
+     "Table I-III",
+     "Sec VII Conclusions",
+     "全文无附录引用"
+    ]
+   }
+  }
+ },
+ "status": {
+  "value": "reviewed",
+  "reason": "全文完整（方法、实验、消融、结论；无附录引用）；八项均已判定。"
+ },
+ "score": {
+  "raw": 60.0,
+  "display": 60.0,
+  "lower": 60.0,
+  "upper": 60.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+ },
+ "schema_version": "radar-review-v2.2"
+}

@@ -1,0 +1,294 @@
+{
+ "schema_version": "radar-review-batch-report-v2.2",
+ "record_type": "aggregate_batch_report",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p002",
+ "attempt_id": "a1",
+ "seat": "opus55",
+ "phase": "production",
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m])",
+ "session_id": null,
+ "receipt_ref": null,
+ "designation": "production-under-anchors-v2; rubric draft_uncalibrated; not for formal ranking/Reel until user confirmation",
+ "input_hash": "2b0190dafe2244e68da9e68a9434358ea9f4f6e9750509ab7d6fbb98b9e68638",
+ "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+ "conflicts_json_sha256": "b6639bdca29d5af753dfe4a8984c6e38421244a9fd68b614c7ddc4a3ddaaf757",
+ "seat_batch_report_hashes": {
+  "sol": "21d5ee5add26ba236ec011ac8c9e0605d6dd00da25456a10f9c0b2ce7ada5c86",
+  "son55": "19ccf678e95f607e0d203467cedd1f37b87179fd2417b7f2ce179fc901acb240"
+ },
+ "assigned": 5,
+ "aggregated": 5,
+ "accepted_final": 5,
+ "needs_revision": 0,
+ "needs_evidence": 0,
+ "needs_fulltext": 0,
+ "out_of_scope": 0,
+ "papers": [
+  {
+   "paper_key": "2209.11302",
+   "version": "2209.11302v1",
+   "aggregate_status": "accepted_final",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "score_raw": 61.25,
+   "score_display": 61.2,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 0
+   },
+   "seat_raw": {
+    "sol": 65.0,
+    "son55": 61.25
+   },
+   "n_rating_item_diffs": 2,
+   "n_resolutions": 9,
+   "n_shared_error_corrections": 2,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "assessment.evidence_level: sol -> \"online\"",
+    "rs_pattern.primary: sol -> \"decompose_and_delegate\"",
+    "rs_pattern.supporting / sub_ids: revised -> {\"primary\": \"decompose_and_delegate/rs:C25\", \"supporting\": \"adapt_via_conditioning/sub null\"}",
+    "domain_pattern.matches: revised -> [\"K105\", \"K104\"]",
+    "ratings.E.causality: son55 -> 2",
+    "ratings.E.statistics: son55 -> 2",
+    "expectations.E01.status: son55 -> \"partial\"",
+    "expectations.E08.status: sol -> \"partial\"",
+    "score.display: revised -> 61.2"
+   ],
+   "rs_primary": "decompose_and_delegate",
+   "domain_subs": [
+    "K105",
+    "K104"
+   ],
+   "final_record_hash": "79488aa28298063ed8afd62f0e2e771b2bed9592248ce59669eb1de5a14169cf",
+   "input_seat_hashes": {
+    "sol": "33186461bd57a2ebed67c737cc1bcef16920c31274b11594b17c035ee64f538d",
+    "son55": "9ef91f6798edafb7386db177408cd98f3bd253bbf40e9082b9daa4b8b6ea4192"
+   },
+   "checks": "passed: quotes exact in fixed material, refs resolve, RS parentage, domain parentage/namespace/<=3, ratings 0-4 no unknown, not_reported rule, resolution fields, every rating diff resolved, score recomputed, hash re-verified after write"
+  },
+  {
+   "paper_key": "2212.04088",
+   "version": "2212.04088v3",
+   "aggregate_status": "accepted_final",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "score_raw": 68.75,
+   "score_display": 68.8,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 3,
+    "E.statistics": 1,
+    "E.cost": 3
+   },
+   "seat_raw": {
+    "sol": 68.75,
+    "son55": 76.25
+   },
+   "n_rating_item_diffs": 4,
+   "n_resolutions": 7,
+   "n_shared_error_corrections": 2,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "ratings.G: sol -> 3",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.statistics: son55 -> 1",
+    "ratings.E.cost: son55 -> 3",
+    "claims / Table 2 linearisation: same_supported_fact -> \"'–' prefixes denote removal: full 40.59; without kNN 17.48; without logit biases 38.10; without both 13.43 (LOOCV HLP accuracy only)\"",
+    "expectations.E04.status: son55 -> \"unmet\"",
+    "score.display: revised -> 68.8"
+   ],
+   "rs_primary": "adapt_via_conditioning",
+   "domain_subs": [
+    "K104",
+    "K202"
+   ],
+   "final_record_hash": "b4bc9b123a29c1ab07cda35a1f5c9fe5ab2bb2c993b60b5bab0a627b908e73c5",
+   "input_seat_hashes": {
+    "sol": "6081a8242db8d8c0d8789b91b96834b83858fff1932aefff9f7572cfc60bf928",
+    "son55": "726fd4c9d84a3d0a237420e7372fee266c6f378b63ab2b932553248778d5fed0"
+   },
+   "checks": "passed: quotes exact in fixed material, refs resolve, RS parentage, domain parentage/namespace/<=3, ratings 0-4 no unknown, not_reported rule, resolution fields, every rating diff resolved, score recomputed, hash re-verified after write"
+  },
+  {
+   "paper_key": "2302.01560",
+   "version": "2302.01560v3",
+   "aggregate_status": "accepted_final",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "score_raw": 66.25,
+   "score_display": 66.2,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 3,
+    "E.holdout": 2,
+    "E.statistics": 2,
+    "E.cost": 2
+   },
+   "seat_raw": {
+    "sol": 61.25,
+    "son55": 73.75
+   },
+   "n_rating_item_diffs": 6,
+   "n_resolutions": 10,
+   "n_shared_error_corrections": 2,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "ratings.G: sol -> 3",
+    "ratings.E.measurement: sol -> 2",
+    "ratings.E.causality: son55 -> 3",
+    "ratings.E.holdout: son55 -> 2",
+    "ratings.E.statistics: son55 -> 2",
+    "ratings.E.cost: son55 -> 2",
+    "domain_pattern.matches: revised -> [\"K202\", \"K104\"]",
+    "assessment.claim_support / scope of headline: same_supported_fact -> \"scoped, with sub-claims 'robustly accomplish 70+ tasks' and 'almost identical across LLMs' recorded as contradicted by the paper's own tables\"",
+    "expectations.E05.status: son55 -> \"unmet\"",
+    "score.display: revised -> 66.2"
+   ],
+   "rs_primary": "decompose_and_delegate",
+   "domain_subs": [
+    "K202",
+    "K104"
+   ],
+   "final_record_hash": "724572c84fc3e5de37e53706aa6da79e60e8caa8bb0d80002156fa89cbc9290f",
+   "input_seat_hashes": {
+    "sol": "9720373259cfa632484894582016b1df04dd7719c6d370301ff6f222c5136f0b",
+    "son55": "b857a84e41e13b79a51d92faa6ce0d37155744a742fe8b00b4e2540e7096ccd7"
+   },
+   "checks": "passed: quotes exact in fixed material, refs resolve, RS parentage, domain parentage/namespace/<=3, ratings 0-4 no unknown, not_reported rule, resolution fields, every rating diff resolved, score recomputed, hash re-verified after write"
+  },
+  {
+   "paper_key": "2303.03480",
+   "version": "2303.03480v2",
+   "aggregate_status": "accepted_final",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "online",
+   "score_raw": 45.0,
+   "score_display": 45.0,
+   "ratings": {
+    "G": 2,
+    "M": 2,
+    "X": 2,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 1,
+    "E.statistics": 1,
+    "E.cost": 1
+   },
+   "seat_raw": {
+    "sol": 60.0,
+    "son55": 43.75
+   },
+   "n_rating_item_diffs": 4,
+   "n_resolutions": 10,
+   "n_shared_error_corrections": 1,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "ratings.G: son55 -> 2",
+    "ratings.M: son55 -> 2",
+    "ratings.X: son55 -> 2",
+    "ratings.E.cost: revised -> 1",
+    "rs_pattern.primary: sol -> \"adapt_via_conditioning\"",
+    "rs_pattern.sub_ids: same_supported_fact -> {\"primary_sub\": null, \"supporting\": \"decompose_and_delegate/sub null\"}",
+    "domain_pattern.matches: revised -> [\"K104\", \"K109\", \"K202\"]",
+    "expectations.E05.status: son55 -> \"unmet\"",
+    "expectations.E06.status: revised -> \"partial\"",
+    "score.display: revised -> 45.0"
+   ],
+   "rs_primary": "adapt_via_conditioning",
+   "domain_subs": [
+    "K104",
+    "K109",
+    "K202"
+   ],
+   "final_record_hash": "c6c7223d19362cdc998708e6b23ffdd920e5297ac695a336554d807cc4269151",
+   "input_seat_hashes": {
+    "sol": "c4f936661c85f9abb6bd63885125d64274179200c5ae2d6456d2b3275a05f12b",
+    "son55": "f96516c0b2af943abe697078d96deadea09c4a057aa67e535b60fd929c649d99"
+   },
+   "checks": "passed: quotes exact in fixed material, refs resolve, RS parentage, domain parentage/namespace/<=3, ratings 0-4 no unknown, not_reported rule, resolution fields, every rating diff resolved, score recomputed, hash re-verified after write"
+  },
+  {
+   "paper_key": "2304.11477",
+   "version": "2304.11477v3",
+   "aggregate_status": "accepted_final",
+   "claim_type": "system_method",
+   "claim_support": "scoped",
+   "evidence_level": "offline",
+   "score_raw": 62.5,
+   "score_display": 62.5,
+   "ratings": {
+    "G": 3,
+    "M": 3,
+    "X": 3,
+    "E.measurement": 2,
+    "E.causality": 2,
+    "E.holdout": 2,
+    "E.statistics": 1,
+    "E.cost": 2
+   },
+   "seat_raw": {
+    "sol": 62.5,
+    "son55": 61.25
+   },
+   "n_rating_item_diffs": 1,
+   "n_resolutions": 8,
+   "n_shared_error_corrections": 1,
+   "n_unresolved": 0,
+   "resolution_summary": [
+    "status / scope (out_of_scope?): same_supported_fact -> \"in_scope; evidence_level offline\"",
+    "assessment.claim_support (optimal for most): same_supported_fact -> \"scoped; sub-claim 'optimal for most problems' unsupported by Table I (64/140 confirmed optimal); 'correct for most' supported (97/140) conditional on an expert domain file and one example\"",
+    "rs_pattern.sub_ids: revised -> {\"primary\": \"decompose_and_delegate/rs:C25 (partial)\", \"supporting\": \"adapt_via_conditioning/sub null\"}",
+    "ratings.E.cost: sol -> 2",
+    "expectations.E04.status: son55 -> \"unmet\"",
+    "expectations.E05.status: son55 -> \"unmet\"",
+    "expectations.E08.status: son55 -> \"unmet\"",
+    "score.display: revised -> 62.5"
+   ],
+   "rs_primary": "decompose_and_delegate",
+   "domain_subs": [
+    "R01"
+   ],
+   "final_record_hash": "4cc69271f145652767baf8bbbd91801cf14528791aeedf53ad28238b85c03326",
+   "input_seat_hashes": {
+    "sol": "d34502b567c5d2c7e3a95eaec66c99ba36133eb598da61c44ad4763e7aa2f721",
+    "son55": "df3999e544eff1fbac601fbf0f6b393ebac2bd03901098f9a142c7d7e77801a2"
+   },
+   "checks": "passed: quotes exact in fixed material, refs resolve, RS parentage, domain parentage/namespace/<=3, ratings 0-4 no unknown, not_reported rule, resolution fields, every rating diff resolved, score recomputed, hash re-verified after write"
+  }
+ ],
+ "integrity": {
+  "seat_set_equals_manifest": true,
+  "same_version_material_input_hash_both_seats": true,
+  "seat_dispatch_matches_run_manifest": "sol=sonnet type (gpt-6.1-sol), son55=haiku type (claude-sonnet-5-5[1m]) per run manifest model_types; recorded by seats, not probed",
+  "both_seats_completed_15_31_identification": true,
+  "contamination": false
+ },
+ "rounding_note": "Final display = python round(raw,1) (banker's rounding on exact .x5 halves: 61.25->61.2, 66.25->66.2); son55 used round-half-up. Raw is authoritative for any threshold.",
+ "interpretation_flags_for_controller": [
+  "EVIDENCE transfer clause vs standard benchmark held-out splits (2212.04088 ALFRED unseen; 2209.11302 VH Env-1/2): Opus treated a benchmark's own held-out split as online and required a shift beyond the benchmark protocol for transfer; both seats implicitly agreed. Please confirm; evidence_level is unscored.",
+  "2303.03480 E.cost placed at 1 (neither seat's value) by anchor reasoning; documented in its resolution."
+ ],
+ "pending_revision_proposals": "Domain-card proposals from seats retained as pending in each record (K201/K105 boundary; failure-explanation replan sub-pattern; LLM-over-detected-labels search prior; R01 wording). None applied.",
+ "outside_taxonomy_ratio": 0.0,
+ "blockers": []
+}

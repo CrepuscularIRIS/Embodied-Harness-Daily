@@ -1,0 +1,1293 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "record_type": "aggregate_final",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p004",
+ "attempt_id": "a1",
+ "seat": "opus55",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2306.17840",
+  "paper_id": "2306.17840",
+  "title": "Statler: State-Maintaining Language Models for Embodied Reasoning",
+  "version": "2306.17840v4",
+  "claim_type": "system_method",
+  "central_claim": "Prompting LLMs as world-state reader and writer so an explicit state estimate is maintained and conditions each action significantly outperforms Code-as-Policies on robot planning tasks and may scale to long-horizon tasks.",
+  "scope_decision": "in_scope: prompted LLM reader/writer harness over Code-as-Policies primitives controlling a simulated and a real UR5 tabletop arm."
+ },
+ "preliminary_judgment": "Written after reading the fixed text, before opening this paper's seat records: system_method. 3 sim domains x 20 author-designed episodes with hard history queries, step success judged against gold code, CaP 0 episodes vs Statler 0.40-0.55; temporal-query split; 10 real UR5 episodes 40% vs 20%; ablations w/o state/Unified/Auto (Auto wins 2/3). LLM for experiments unnamed; prompts partly elided with repository pointer. Expected online (real counts), scoped, holdout 2, cost weak.",
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 9, characters 870-1287",
+   "quote": "In particular, Statler utilizes a pair of prompted LLMs: instructed by a few demonstrations, the world-state reader takes as input the user query, reads the estimated world state, and generates an executable action (e.g, a code snippet); instructed by another set of demonstrations, the world-state writer updates the world state estimate based on the action. This mechanism resembles how a domain-specific formal lang",
+   "support_explanation": "Two prompted roles consume an estimated state and action/query, not guaranteed ground-truth state updates.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 15, characters 4368-4541",
+   "quote": "When the state needs to be updated, the generated code will contain an update_wm function that triggers the world-state writer with the query specified in its argument. In Pr",
+   "support_explanation": "update_wm is an executable handoff to a writer; state updates are generated rather than verified by an exact dynamics solver.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 12, characters 1213-1410",
+   "quote": "We evaluate these methods with a range of K ; for each K and each method, we feed 30 demonstrations with various numbers of swaps to the model, and repeat the experiment 100 times. Figure 2 visualiz",
+   "support_explanation": "Shell-game experiment repeats100 per K/method with30 demonstrations; narrower than robot-task repetition.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 18, characters 4454-4941",
+   "quote": "TABLE I : Episode success rates and individual step success rates (in parentheses) for each sequential task. † indicates that the context limit was often exceeded. Pick & Place Disinfection Weight CaP 0.00 (0.54) 0.00 (0.68) 0.00 (0.84) CaP+CoT 0.25 (0.76) 0.00 (0.20) † 0.30 (0.88) Statler (ours) \\bm{0.50} \\bm{(0.88)} \\bm{0.40} \\bm{(0.82)} \\bm{0.55} \\bm{(0.93)} Table I reports the episode success rates of each method along with the the success rate for individual steps. An episode is",
+   "support_explanation": "Main simulation episode/step comparison, including CoT context-overflow caveat.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 18, characters 6976-7167",
+   "quote": "when calculating accuracy we only consider the sequence of steps until the model fails to generate the correct code, which explains the mismatch in the denominators. We see that both models ac",
+   "support_explanation": "Stop-at-first-wrong-code induces unequal step denominators and survivor bias; rates are conditional prefixes, not paired full-episode step accuracy.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 18, characters 10191-10580",
+   "quote": "We evaluate the performance of Statler vs. CaP in the real robot domain using 10 episodes. Statler achieves episode and step (in parentheses) success rate of 40% (70\\%) , where 67\\% of the failure cases are due to LLM reasoning while others are caused by either perception or manipulation issues. The success rate for CaP is 20% (46\\%) , where LLM reasoning accounts for 88\\% of failures. I",
+   "support_explanation": "Physical10-episode comparison and reasoning-versus-perception/manipulation failures; small but counted closed-loop results.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 18, characters 12449-12905",
+   "quote": "TABLE III : Ablation episode (individual step) success rates. Pick & Place Disinfection Weight Statler w/o State 0.00 (0.54) 0.00 (0.68) 0.00 (0.84) Statler-Unified 0.40 (0.85) 0.35 (0.79) 0.50 (0.92) Statler-Auto \\bm{0.75} \\bm{(0.88)} \\bm{0.45} \\bm{(0.82)} 0.40 (0.90) Statler (ours) 0.50 (0.88) 0.40 (0.82) \\bm{0.55} \\bm{(0.93)} Table III compares the performance of Statler to the three variations in terms of both their full-episode completion rates (us",
+   "support_explanation": "Auto writer without in-context update examples outperforms standard on two of three domains; preserve counterevidence to universal separate-example superiority.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 18, characters 12904-13129",
+   "quote": "using 20 episodes for each domain) as well their individual step success rates. Without maintaining the world-state, Statler w/o State fails to complete any episodes (recall that an episode is considered to be a failure if the",
+   "support_explanation": "Simulation denominator20/domain and episode fails at first incorrect query response.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 36, characters 6383-6504",
+   "quote": "To avoid getting cluttered, many lines are omitted (denoted with “omitted”). Please check our repository for full version.",
+   "support_explanation": "Deliberate prompt omission means exact execution-critical exemplars cannot be recovered from this fixed material.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 39, characters 1-289",
+   "quote": "We manually looked into examples that Statler fails. Although providing insights on when and why the model fails would be helpful, we find that in many cases it is not trivial to interpret the model’s mistakes. In this section, we show three episodes (one per each domain) that the model f",
+   "support_explanation": "Failure analysis is qualitative and explicitly acknowledges interpretability limits.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "sol:E011",
+   "origin": "sol",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "line 18, characters 5849-6015",
+   "quote": "we explicitly chose queries that were challenging for LLM-based models, which partially accounts for why our model’s scores show room for improvement. TABLE II : Succe",
+   "support_explanation": "Authors chose challenging queries, so evaluation corpus selection is not an independent broad task-distribution audit.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Abstract",
+   "quote": "we propose Statler, a framework in which large language models are prompted to maintain an estimate of the world state, which are often unobservable, and track its transition as new actions are taken",
+   "support_explanation": "Author central claim.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Abstract",
+   "quote": "Additionally, it has the potential advantage of scaling up to more challenging long-horizon planning tasks.",
+   "support_explanation": "Scaling claim is a potential, not tested beyond 16 steps.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec I",
+   "quote": "However, existing methods are model-free: they use LLMs as policy functions that generate future actions only conditioned on previous actions and observations.",
+   "support_explanation": "Author gap.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec I",
+   "quote": "In multistep reasoning and planning, an LLM has to implicitly maintain the world state in its internal representation, which has been demonstrated to be difficult in previous work",
+   "support_explanation": "Motivation for explicit state.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec I",
+   "quote": "the world-state reader takes as input the user query, reads the estimated world state, and generates an executable action",
+   "support_explanation": "Reader role.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec I",
+   "quote": "the world-state writer updates the world state estimate based on the action",
+   "support_explanation": "Writer role.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec III",
+   "quote": "Whenever the writer updates the state representation, we store it in external memory and refer to it as the current state.",
+   "support_explanation": "Persistence of state across steps in external memory.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Fig 4 caption",
+   "quote": "the translucent sphere around a block represents its dirtiness (this is not visible to the robot)",
+   "support_explanation": "Hidden-state tasks: info only via user utterances.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV",
+   "quote": "consider 20 evaluation episodes each of which consists of 5 – 16 consecutive steps of user queries",
+   "support_explanation": "Sim denominators: 20 episodes per domain.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-A",
+   "quote": "It should be noted we explicitly chose queries that were challenging for LLM-based models",
+   "support_explanation": "Selection of hard queries.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-A",
+   "quote": "An episode is considered to be a failure if a model fails to respond to one of the user queries in the episode.",
+   "support_explanation": "Success definition; checker not described beyond gold code.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-A",
+   "quote": "We ensure that the demonstrations (i.e., in-context examples) given to each of the models are equivalent.",
+   "support_explanation": "Demonstration parity across methods.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Table I",
+   "quote": "CaP 0.00 (0.54) 0.00 (0.68) 0.00 (0.84)",
+   "support_explanation": "CaP episode (step) success: zero episodes completed.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Table I",
+   "quote": "CaP+CoT 0.25 (0.76) 0.00 (0.20) † 0.30 (0.88)",
+   "support_explanation": "CoT baseline; context limit exceeded in disinfection.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Table I caption",
+   "quote": "† indicates that the context limit was often exceeded",
+   "support_explanation": "CoT baseline degraded by context limit, not a clean comparison.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-A",
+   "quote": "We note that, when calculating accuracy we only consider the sequence of steps until the model fails to generate the correct code, which explains the mismatch in the denominators.",
+   "support_explanation": "Table II denominators differ between methods (prefix until first failure).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-B",
+   "quote": "We evaluate the performance of Statler vs. CaP in the real robot domain using 10 episodes.",
+   "support_explanation": "Real robot denominator: 10 episodes.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-B",
+   "quote": "where 67\\% of the failure cases are due to LLM reasoning while others are caused by either perception or manipulation issues",
+   "support_explanation": "Failure attribution on real robot.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-C",
+   "quote": "it is plausible that the performance gains that we achieve by dividing our reader and writer may be attributed in part to this sensitivity",
+   "support_explanation": "Authors flag prompt-sensitivity confound for reader/writer split.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-C",
+   "quote": "Interestingly, Statler-Auto performs noticeably better than Statler and Statler-Unified",
+   "support_explanation": "Variant without writer examples performs well on two domains.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Table III",
+   "quote": "Statler w/o State 0.00 (0.54) 0.00 (0.68) 0.00 (0.84)",
+   "support_explanation": "Ablation equals CaP.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec IV-A",
+   "quote": "it hallucinates block conditions (e.g., clean or dirty) or locations when the cleanliness of the block is never explicitly described",
+   "support_explanation": "Writer hallucination failure mode.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "origin": "son55",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Sec II",
+   "quote": "We present three separate cases of using LLMs to play this game using GPT-3 (precisely, text-davinci-003).",
+   "support_explanation": "Only the motivating example names the LLM; the experiments section does not.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "origin": "agg",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Appendix B; local text line 33",
+   "quote": "Python snippet under [Gold Code] shows the “correct” code the model is expected to generate.",
+   "support_explanation": "Simulation success is judged against gold code, not simulator end state.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "origin": "agg",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Section IV; local text line 18",
+   "quote": "In this domain, the robot is asked to stack objects and cover objects with different colored cups.",
+   "support_explanation": "Real-robot domain differs from the simulated ones.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "origin": "agg",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Section IV opening; local text line 18",
+   "quote": "We evaluate the capabilities of Statler alongside state-of-the-art LLM models on three tabletop manipulation domains",
+   "support_explanation": "Experiments section never names the LLM used (only Section II names text-davinci-003).",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E004",
+   "origin": "agg",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Appendix A; local text line 30",
+   "quote": "Shengjie Lin led the real robot experiments with regards to task design, prompt development, perception integration, and evaluation execution.",
+   "support_explanation": "Real-domain prompts/tasks developed by the authors for the method: no transfer credit.",
+   "kind": "author_report"
+  },
+  {
+   "evidence_id": "agg:E005",
+   "origin": "agg",
+   "material_id": "M1",
+   "material_sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "locator": "Section III, Prompt 5 caption; local text line 15",
+   "quote": "Prompt 5: World-state writer.",
+   "support_explanation": "One complete writer update example (state before, query, state after) is printed; the per-domain writer demonstrations are elided.",
+   "kind": "author_report"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "S1",
+   "object": "LLM-estimated textual world state (JSON-like comment block) held in external memory and prepended to each reader call",
+   "information": "User utterances and the model's own actions only; simulator-hidden properties (dirtiness, weight) reach the model only through utterances; no ground-truth state",
+   "operation": "reader LLM writes code (put_first_on_second, say, update_wm) conditioned on state+query; writer LLM rewrites the state after each action",
+   "output": "executable code and updated state estimate",
+   "conditions": "few-shot reader/writer prompts per domain; short episodes (5-16 steps)",
+   "feedback": "state carried forward; no external verification of the state",
+   "selection_rule_data": "none (single generation per step)",
+   "persistence": "state stored in external memory within an episode",
+   "later_use": "next reader/writer call in the same episode",
+   "claimed_effect": "episode success 0.40-0.55 vs 0.00 for CaP; temporal-query accuracy 55-83% vs 0-31%",
+   "failure_boundary": "writer hallucination, ambiguous terms, prompt sensitivity, context growth",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E007",
+    "son55:E008",
+    "son55:E022",
+    "son55:E019"
+   ]
+  },
+  {
+   "sig_id": "S2",
+   "object": "reader/writer split vs unified or instruction-only writer (ablations)",
+   "information": "same",
+   "operation": "Statler-Unified single LLM, Statler-Auto writer with natural-language instruction only",
+   "output": "episode success rates",
+   "conditions": "20 episodes per domain",
+   "feedback": "none",
+   "selection_rule_data": "none",
+   "persistence": "same as S1",
+   "later_use": "same",
+   "claimed_effect": "separate reader/writer gives consistently higher episode success than unified",
+   "failure_boundary": "Statler-Auto beats Statler on two domains; prompt sensitivity",
+   "evidence_ids": [
+    "son55:E019",
+    "son55:E020",
+    "son55:E021"
+   ]
+  }
+ ],
+ "gap": {
+  "author_gap": "Model-free LLM planners must track world state implicitly; temporal/history-dependent queries and unobservable state fail, and the problem grows with horizon.",
+  "checked_gap": "Supported by the paper's own diagnostic: near-perfect non-temporal vs 0-31% temporal query accuracy for CaP (Table II). Nearest neighbours are CaP and CaP+CoT (run) and scratchpad/state-tracking work (cited, not fetched).",
+  "lineage_closest_adjacent": [
+   {
+    "name": "Code as Policies (CaP)",
+    "source": "cited in paper text; baseline reimplemented with equivalent demonstrations",
+    "version_status": "unpinned",
+    "solved": "hierarchical code generation over primitives",
+    "unsolved": "reasoning over history/hidden state"
+   },
+   {
+    "name": "Chain-of-Thought with deduced intermediate states (CaP+CoT)",
+    "source": "baseline in paper",
+    "version_status": "in-paper",
+    "solved": "intermediate state reasoning",
+    "unsolved": "context blow-up, redundant reasoning"
+   },
+   {
+    "name": "Nye et al. scratchpads (ref 60)",
+    "source": "cited in paper text (not fetched)",
+    "version_status": "unpinned",
+    "solved": "step-by-step intermediate outputs for algorithmic reasoning",
+    "unsolved": "persistent robot world state"
+   }
+  ],
+  "residue": "Long-horizon (>16 steps) behavior, richer state, perception-grounded state updates, hallucinated state estimates.",
+  "stakes": "Episode success of CaP is 0/20 in all three domains despite 54-84% step success: the history-dependent queries kill whole episodes.",
+  "method_response": "Explicit LLM-maintained state with separate reader and writer prompts.",
+  "remaining_gap": "Scaling claim untested; state-writer reliability; no non-LLM state estimator or oracle-state upper bound.",
+  "evidence_ids": [
+   "son55:E003",
+   "son55:E004",
+   "son55:E013",
+   "son55:E016",
+   "son55:E002"
+  ],
+  "unresolved": [
+   "No oracle-state upper bound to show how much of the gap is state tracking vs reader reasoning.",
+   "Closest neighbours beyond CaP/CoT not run."
+  ]
+ },
+ "rs_pattern": {
+  "primary": null,
+  "supporting": [],
+  "matches": [],
+  "outside_taxonomy": true,
+  "reason": "Operation: LLM-written textual world-state estimate persisted in external memory and re-read by a code-writing LLM each step (reader/writer split). Candidates read: decompose_and_delegate/C25 (rejected: no sound external solver and no verification closure over the state artifact; both roles are prompted LLMs, so the 'route to the best-suited solver' step is absent), adapt_via_conditioning/C03 (rejected: few-shot prompts are a means, not the task-family adaptation claim), heterogeneous_decomposition/C04 (rejected: partitions a task, not a heterogeneous resource). No original card defines 'maintain a latent state estimate in-context'.",
+  "executes_pattern": {
+   "value": "not_applicable",
+   "reason": "outside taxonomy"
+  },
+  "resolves_problem": {
+   "value": "partial",
+   "reason": "Closes the temporal-query gap in 20 short episodes per domain with one LLM; long-horizon scaling not shown."
+  },
+  "aggregate_note": "son55's outside_taxonomy adopted. sol's adapt_via_conditioning (main only) rejected: in-context demonstrations condition both Statler and its CaP control equally, so conditioning is not the operation the paper adds; the added operation (LLM-maintained latent state estimate re-read each step) has no original card."
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main_id": "harness_memory_skill_reuse",
+    "sub_id": "K301",
+    "version": "b06ea2025a11cfbbc9ca15c4bae026ba74db1a420e9f51a5635aef850d147f1c",
+    "fit": "partial (weak)",
+    "condition_checks": [
+     {
+      "condition_id": "harness_memory_skill_reuse.S2",
+      "kind": "S",
+      "status": "met",
+      "note": "Memory variants compared with the LLM and episodes fixed (CaP, CaP+CoT, Unified, Auto)."
+     },
+     {
+      "condition_id": "harness_memory_skill_reuse.F3",
+      "kind": "F",
+      "status": "absent",
+      "note": "Ablations are one-at-a-time, but single run only"
+     },
+     {
+      "condition_id": "harness_memory_skill_reuse.F4",
+      "kind": "F",
+      "status": "present",
+      "note": "Stored state can mislead: writer hallucinations propagate (Appendix D-B)"
+     },
+     {
+      "condition_id": "harness_memory_skill_reuse.F2",
+      "kind": "F",
+      "status": "present",
+      "note": "Partially observable tasks tested, but only short synthetic episodes"
+     }
+    ],
+    "evidence_ids": [
+     "son55:E007",
+     "son55:E022",
+     "son55:E019",
+     "son55:E021"
+    ],
+    "reason": "Rebuilds each call from a compact structured state in place of full history, within episode. K301's bounded window plus retrieval is absent; the state is LLM-written rather than harness-built.",
+    "main": "harness_memory_skill_reuse",
+    "sub": "K301",
+    "aggregate_note": "Kept as nearest card: each call is rebuilt from a compact within-episode state instead of raw history; K301's harness-built selection and retrieval are absent (sol's rejection reason recorded as the fit limit)."
+   },
+   {
+    "main_id": "planner_composes_code_and_policies",
+    "sub_id": "K105",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105",
+    "version": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "condition": "Code over fixed tabletop primitives",
+      "status": "met",
+      "evidence_ids": [
+       "sol:E001",
+       "sol:E002",
+       "sol:E004"
+      ]
+     },
+     {
+      "condition": "Persistent context/state assists composition",
+      "status": "met",
+      "evidence_ids": [
+       "sol:E001",
+       "sol:E002"
+      ]
+     },
+     {
+      "condition": "Check actual outcomes before trusting state",
+      "status": "partial",
+      "reason": "Real perception exists but predicted semantic state can drift; no general action-success reconciliation loop.",
+      "evidence_ids": [
+       "sol:E006",
+       "sol:E010"
+      ]
+     },
+     {
+      "condition": "Matched interaction budget",
+      "status": "unmet",
+      "reason": "CaP+CoT context overflow and extra writer calls not cost-normalized.",
+      "evidence_ids": [
+       "sol:E004"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E001",
+     "sol:E002",
+     "sol:E004",
+     "sol:E006",
+     "sol:E010"
+    ],
+    "aggregate_note": "Inherited Code-as-Policies executor layer, not the contribution."
+   }
+  ],
+  "unassigned": [
+   {
+    "operation": "LLM-as-state-writer: language model rewrites a symbolic world model after each action and a second prompt reads it",
+    "nearest_cards": [
+     "K301 (context from compact map/graph)",
+     "K105 (CaP-style code over primitives, used as the base)"
+    ],
+    "reason": "No card for LLM-estimated latent world state."
+   }
+  ],
+  "revision_proposals": [
+   {
+    "kind": "candidate_case",
+    "title": "Maintain an LLM-written world-state estimate with reader/writer split",
+    "support": "single paper (2306.17840)",
+    "parent_hint": "harness_memory_skill_reuse"
+   },
+   {
+    "status": "proposal_only_no_card_change",
+    "operation": "Within-episode explicit recurrent world-state estimate updated by a prompted writer and consumed by a code reader",
+    "reason": "Current memory subcards require retrieval, across-episode notes, skill mining or replay; none exactly captures this estimated-state writer. Existing K105 is a partial executor mapping, not evidence the memory gap is already covered."
+   }
+  ],
+  "aggregate_note": "Both seats independently propose a single-paper case for an LLM-written state estimate; proposal only, no card change."
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": null,
+   "rs_sub": null,
+   "domain_namespace": "embodied",
+   "domain_main": "harness_memory_skill_reuse",
+   "domain_sub": "K301",
+   "operation_correspondence": "Compact within-episode state substitutes for raw history in each model call.",
+   "necessary_conditions_and_differences": "K301 builds the compact map by the harness and retrieves older items; Statler's state is LLM-written, has no retrieval, and may drift.",
+   "evidence_ids": [
+    "son55:E007",
+    "son55:E005",
+    "son55:E022"
+   ]
+  },
+  {
+   "rs_main": null,
+   "rs_sub": null,
+   "domain": {
+    "namespace": "embodied",
+    "main": "planner_composes_code_and_policies",
+    "sub": "K105"
+   },
+   "operation_correspondence": "Conditioned frozen reader emits executable primitive composition; JSON state carries the context that reader code and writer update.",
+   "necessary_conditions_and_differences": "K105 captures code execution, not the main new state-update design. K301 rejected: no bounded recent-window plus older-history retrieval; K302 rejected: no across-episode notes. No frozen VLA tool or retained skill library is implied.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E002",
+    "sol:E004",
+    "sol:E006",
+    "sol:E010"
+   ],
+   "aggregate_note": "RS layer outside_taxonomy; domain K105 correspondence from sol retained."
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a harness raises embodied success",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Fixed model and equal demonstrations against CaP and CaP+CoT; LLM identity for the experiments is not stated; CoT baseline hampered by context limit.",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E013",
+    "son55:E014",
+    "son55:E015",
+    "son55:E023"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a component causes the improvement",
+   "applicable": true,
+   "status": "partial",
+   "reason": "No-state, Unified and Auto variants toggled individually, but Auto beats the proposed two-role design on 2/3 domains, so the two-role claim is not established; state maintenance itself is.",
+   "evidence_ids": [
+    "son55:E021",
+    "son55:E019",
+    "son55:E020"
+   ],
+   "score_item": "E.causality",
+   "aggregate_note": "status revised in aggregation (sol value)"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a component helps in general",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "One LLM; effect under a weaker/stronger backbone not shown.",
+   "evidence_ids": [
+    "son55:E023"
+   ],
+   "score_item": "E.causality"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "any success-rate comparison on a fixed subset",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Counts reported (20 episodes/domain, Table II numerators/denominators, 10 real) with real-robot failure attribution; no variance/CI or repeated runs.",
+   "evidence_ids": [
+    "son55:E009",
+    "son55:E013"
+   ],
+   "score_item": "E.statistics",
+   "aggregate_note": "status revised in aggregation (sol value)"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim that a harness is better or more practical",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Two LLM calls per step plus longer state prompts are not costed; only context-limit remark.",
+   "evidence_ids": [
+    "son55:E015"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a benchmark claim with development overlap risk",
+   "applicable": true,
+   "status": "unknown",
+   "reason": "Episodes designed by authors with queries chosen to be hard; overlap between prompt demonstrations and episodes not stated.",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E009"
+   ],
+   "score_item": "E.holdout"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "an embodied agent's success claim",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Temporal vs non-temporal split (Table II) and real-robot failure attribution; no per-failure endpoint taxonomy.",
+   "evidence_ids": [
+    "son55:E016",
+    "son55:E018",
+    "son55:E022"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a claim of transfer to a physical robot",
+   "applicable": true,
+   "status": "partial",
+   "reason": "10 real episodes with success rates 40% vs 20%; one task family; tasks and prompts developed by authors.",
+   "evidence_ids": [
+    "son55:E017",
+    "son55:E018"
+   ],
+   "score_item": "E.measurement"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1",
+   "source_strength": "common_practice",
+   "source_refs": [
+    "patterns/main/observe_act_interface.md#Reviewer expectations",
+    "patterns/main/external_verification_control.md#Reviewer expectations"
+   ],
+   "applies_when": "a comparison between harnesses at matched budget",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Equal demonstrations, but Statler uses two prompted calls per step and CoT hits context limits.",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E015"
+   ],
+   "score_item": "E.cost"
+  },
+  {
+   "id": "E17",
+   "version": "fixed domain main cards 2026-10-21",
+   "source_strength": "common_practice; reading-derived, not actual review",
+   "source_refs": [
+    "patterns/main/harness_memory_skill_reuse.md#reviewer-expectations"
+   ],
+   "applies_when": "Experience memory improves future performance",
+   "applicable": true,
+   "status": "partial",
+   "reason": "This is within-episode state, not iterative memory mining. Prompt examples/evaluation separation and structural unseen-task independence incompletely documented.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E009",
+    "sol:E011"
+   ],
+   "score_item": "E.holdout",
+   "aggregate_note": "added from sol (son55 did not list it)"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C1",
+   "text": "Maintaining an explicit LLM-estimated world state significantly outperforms CaP and CaP+CoT on tabletop tasks needing reasoning over history.",
+   "setting": "PyBullet tabletop (pick-and-place, disinfection, relative weight), 20 episodes of 5-16 queries each",
+   "baseline_control": "CaP, CaP+CoT with equivalent demonstrations; Statler w/o State equals CaP",
+   "selection_vs_test": "prompts designed per domain; queries chosen to be challenging; overlap not stated",
+   "result_denominator": "Episode success 0.50/0.40/0.55 (steps 0.88/0.82/0.93) vs CaP 0/0/0; CaP+CoT 0.25/0.00/0.30; n=20 per cell",
+   "evidence_ids": [
+    "son55:E013",
+    "son55:E014",
+    "son55:E021",
+    "son55:E009"
+   ],
+   "counterevidence": [
+    "E015",
+    "E010"
+   ],
+   "allowed_conclusion": "Large gain over CaP on authors' hard history-dependent episodes; CoT comparison confounded by context limit."
+  },
+  {
+   "claim_id": "C2",
+   "text": "Temporal queries: Statler 83/65/55% vs CaP 31/5/0%.",
+   "setting": "same",
+   "baseline_control": "CaP",
+   "selection_vs_test": "same",
+   "result_denominator": "Table II counts, e.g. CaP 9/29 vs Statler 48/58 on pick-and-place; denominators differ because only the prefix before first failure is scored",
+   "evidence_ids": [
+    "son55:E016"
+   ],
+   "counterevidence": [
+    "E016"
+   ],
+   "allowed_conclusion": "Directionally supported; accuracy not computed on matched query sets."
+  },
+  {
+   "claim_id": "C3",
+   "text": "Real robot: Statler beats CaP.",
+   "setting": "UR5, MDETR segmentation, stacking/cover tasks, 10 episodes",
+   "baseline_control": "CaP",
+   "selection_vs_test": "tasks designed with prompt development by authors",
+   "result_denominator": "40% (step 70%) vs 20% (step 46%), n=10",
+   "evidence_ids": [
+    "son55:E017",
+    "son55:E018"
+   ],
+   "counterevidence": [],
+   "allowed_conclusion": "Small n; direction consistent with simulation."
+  },
+  {
+   "claim_id": "C4",
+   "text": "Reader/writer split is better than unified.",
+   "setting": "ablation",
+   "baseline_control": "Statler-Unified, Statler-Auto",
+   "selection_vs_test": "same",
+   "result_denominator": "20 episodes per domain, single run",
+   "evidence_ids": [
+    "son55:E019"
+   ],
+   "counterevidence": [
+    "E020",
+    "E019"
+   ],
+   "allowed_conclusion": "Weak: authors themselves attribute part to prompt sensitivity and Auto wins on two domains."
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Online on the strength of 10 counted real-robot episodes with success rates; simulated results are gold-code correctness. Not transfer: the real domain's tasks and prompts were developed with the method.",
+  "claim_support": "scoped",
+  "author_claim_preserved": "Prompting LLMs as world-state reader and writer so an explicit state estimate is maintained and conditions each action significantly outperforms Code-as-Policies on robot planning tasks and may scale to long-horizon tasks.",
+  "strongest_supported_claim": "On 20 author-designed history-dependent episodes per simulated domain (scored against gold code) and 10 real UR5 episodes, an LLM-written world-state estimate consulted by a code-writing reader completes 40-55% (sim) / 40% (real) of episodes where Code-as-Policies completes 0% / 20%; the gain comes from maintaining state, not specifically from the reader/writer split.",
+  "cannot_be_claimed": "Scaling to longer-horizon tasks (untested beyond 16 steps); superiority of the two-role design over a single or instruction-only writer; reliability of the written state; results for a named or different LLM.",
+  "unresolved": [],
+  "reproduction_note": "Author-reported; repository not run.",
+  "retained": "not_applicable: within-episode state, no cross-task retained improvement"
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3. Bottleneck diagnosed with data (CaP completes 0/20 episodes per domain while solving 54-84% of steps; temporal queries 0-31% vs ~100% non-temporal); nearest baselines (CaP, CaP+CoT) run; residual (long horizon, reliable state) stated but not bounded.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E004",
+    "son55:E013",
+    "sol:E004"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Both seats 3. Explicit-state rationale (model-based RL / latent-variable imputation) with distinguishable predictions (temporal vs non-temporal accuracy, CoT context growth); key assumption that the writer tracks state reliably is shown to fail at times and there is no oracle-state test.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E022",
+    "sol:E002"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Resolved to 3 (son55 value; sol unknown) with corrected reason: prompts are NOT fully shown - Appendix C elides state lines and the writer's per-domain demonstrations (sol:E009, agg:E005). The reader/writer protocol, JSON state schema, update_wm trigger and one complete writer update are printed (agg:E005, son55:E007), so the operation chain and information permissions are reconstructable. X is capped at 3 by paper-level gaps that the elided prompts would not fill: the LLM used in the experiments is never named (agg:E003, son55:E023) and the success checker is described only as gold code (agg:E001). Bounded: full prompts could not move X to 4, and the printed protocol already supports 3.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E007",
+    "agg:E005",
+    "agg:E001"
+   ],
+   "counterevidence_ids": [
+    "sol:E009",
+    "agg:E003",
+    "son55:E023"
+   ],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2. Episode/step success with counts (20 per domain, 10 real) and an episode-failure rule, but simulated steps are scored against gold code (agg:E001) rather than simulator end state, Table II scores survivor prefixes with unmatched denominators, the hard queries were chosen by the authors, and real step denominators are not given.",
+    "evidence_ids": [
+     "son55:E009",
+     "son55:E011",
+     "son55:E017",
+     "agg:E001"
+    ],
+    "counterevidence_ids": [
+     "son55:E016",
+     "sol:E005",
+     "sol:E011"
+    ],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Resolved toward son55 (sol 2). Same demonstrations across CaP, CaP+CoT, w/o State, Unified and Auto isolate the state-maintenance factor; Unified and Auto also beat CaP, so the gain is attributable to maintaining state rather than to the particular two-role prompt. Unseparated: extra writer call per step, CoT handicapped by context overflow in one domain, one unnamed LLM, and the reader/writer split itself (Auto wins 2/3) - which narrows the sub-claim, not the central one. Not 4.",
+    "evidence_ids": [
+     "son55:E012",
+     "son55:E013",
+     "son55:E021",
+     "sol:E007",
+     "son55:E020"
+    ],
+    "counterevidence_ids": [
+     "son55:E015",
+     "son55:E019",
+     "sol:E004"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Resolved toward son55 (sol 1). Demonstrations and evaluation episodes come from the same author-built domains with no stated split and hand-picked hard queries (anchor 2 overlap). The real UR5 domain (cups covering objects, MDETR perception) is a different setup where the advantage persists (40% vs 20%), but its prompts were developed by the authors for it (agg:E004), so not 3.",
+    "evidence_ids": [
+     "son55:E009",
+     "son55:E010",
+     "son55:E017",
+     "agg:E002",
+     "agg:E004"
+    ],
+    "counterevidence_ids": [
+     "sol:E011"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Both seats 2. Trial counts (episodes, Table II numerators/denominators, 10 real) and partial failure decomposition (real failures 67% vs 88% LLM-reasoning; Appendix D), single run, no variance/CI; differences of 0.05-0.10 are one or two episodes.",
+    "evidence_ids": [
+     "son55:E009",
+     "son55:E016",
+     "son55:E018",
+     "sol:E010"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 1,
+    "reason": "Resolved toward son55 (sol not_reported 0). Cost-relevant facts are reported - demonstration parity across methods, CoT's context-limit failures - and the call structure is inferable (reader plus writer per step vs one call for CaP), but no tokens, latency or matched-budget control. Some budget information exists, so not not_reported; below anchor 2 because the extra writer calls are neither counted nor priced.",
+    "evidence_ids": [
+     "son55:E012",
+     "son55:E015",
+     "sol:E002"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "resolutions": [
+  {
+   "field_path": "status / aggregate disposition",
+   "sol_value": "needs_evidence",
+   "son55_value": "reviewed",
+   "decision": "son55",
+   "final_value": "reviewed / accepted_final",
+   "reason": "Controller confirmed PDF = HTML: the elision is the authors', not our material's. Anchors precedent 5 needs a load-bearing elided item whose band cannot be bounded. The elided lines are repeated JSON state annotations and further writer demonstrations whose schema, trigger and one full update are printed; no scoring item's band depends on their exact text (X capped at 3 by the unnamed LLM and gold-code checker regardless; E.causality's treatment-vs-control difference - state annotations plus a writer call - is visible). Bounded => score.",
+   "evidence_ids": [
+    "sol:E009",
+    "agg:E005",
+    "agg:E003",
+    "son55:E012"
+   ],
+   "score_impact": "score emitted (65.0) instead of null"
+  },
+  {
+   "field_path": "ratings.X",
+   "sol_value": null,
+   "son55_value": 3,
+   "decision": "revised",
+   "final_value": 3,
+   "reason": "Value from son55, reason corrected (son55 wrongly said prompts are fully shown).",
+   "evidence_ids": [
+    "sol:E009",
+    "agg:E005",
+    "agg:E003"
+   ],
+   "score_impact": "+15.0 raw vs sol lower bound"
+  },
+  {
+   "field_path": "ratings.E.causality",
+   "sol_value": 2,
+   "son55_value": 3,
+   "decision": "son55",
+   "final_value": 3,
+   "reason": "State factor isolated with equal demonstrations; Unified/Auto variants also beat CaP, so sol's two-role concern narrows a sub-claim only.",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E021",
+    "sol:E007"
+   ],
+   "score_impact": "+2.5 raw vs sol"
+  },
+  {
+   "field_path": "ratings.E.holdout",
+   "sol_value": 1,
+   "son55_value": 2,
+   "decision": "son55",
+   "final_value": 2,
+   "reason": "Same-domain overlap plus selected queries is anchor 2; the different real setup with retained gain prevents going lower; prompts authored for it prevent 3.",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E017",
+    "agg:E004"
+   ],
+   "score_impact": "+2.5 raw vs sol"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 0,
+   "son55_value": 1,
+   "decision": "son55",
+   "final_value": 1,
+   "reason": "Demonstration parity and context-limit effects are reported cost-relevant facts; not_reported requires absence after search.",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E015"
+   ],
+   "score_impact": "+1.25 raw vs sol"
+  },
+  {
+   "field_path": "rs_pattern.primary / outside_taxonomy",
+   "sol_value": "adapt_via_conditioning (main only, sub null)",
+   "son55_value": "null / outside_taxonomy=true",
+   "decision": "son55",
+   "final_value": "null / outside_taxonomy=true",
+   "reason": "Conditioning is common to treatment and control; the added operation (latent state estimate written by an LLM and re-read) matches no original main card; son55 recorded rejections of C25, C03, C04.",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E012"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "K105"
+   ],
+   "son55_value": [
+    "K301"
+   ],
+   "decision": "revised",
+   "final_value": [
+    "K301",
+    "K105"
+   ],
+   "reason": "K301 (nearest for the state-as-context contribution, weak fit) plus K105 (inherited CaP executor); both seats' single-paper case proposals kept, no card change.",
+   "evidence_ids": [
+    "son55:E007",
+    "sol:E001"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "assessment.evidence_level",
+   "sol_value": "online",
+   "son55_value": "online",
+   "decision": "revised",
+   "final_value": "online",
+   "reason": "Agreed label kept, basis corrected: simulated results are code correctness against gold code (offline-type); online rests on the 10 counted real-robot episodes. Not transfer: real-domain prompts and tasks were developed with the method (EVIDENCE rule 2).",
+   "evidence_ids": [
+    "agg:E001",
+    "son55:E017",
+    "agg:E004"
+   ],
+   "score_impact": "none (label not scored)"
+  },
+  {
+   "field_path": "expectations.E02/E04/E22 status",
+   "sol_value": {
+    "E02": "partial",
+    "E04": "partial",
+    "E22": "unmet"
+   },
+   "son55_value": {
+    "E02": "met",
+    "E04": "unmet",
+    "E22": "partial"
+   },
+   "decision": "revised",
+   "final_value": {
+    "E02": "partial",
+    "E04": "partial",
+    "E22": "partial"
+   },
+   "reason": "E02: Auto beats the two-role design on 2/3 domains (sol). E04: counts exist without variance (sol). E22: demonstration parity stated, extra calls unpriced (son55).",
+   "evidence_ids": [
+    "son55:E020",
+    "son55:E009",
+    "son55:E012"
+   ],
+   "score_impact": "consistent with Ec=3, Es=2, Ecost=1"
+  },
+  {
+   "field_path": "expectations (set)",
+   "sol_value": "E17 (no E08/E16)",
+   "son55_value": "E08 unknown, E16 partial (no E17)",
+   "decision": "revised",
+   "final_value": "union; E08 kept as son55 listed it",
+   "reason": "One-seat omissions; E17 (sol) records that within-episode state is not cross-episode memory.",
+   "evidence_ids": [],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "score.raw",
+   "sol_value": null,
+   "son55_value": 65.0,
+   "decision": "revised",
+   "final_value": 65.0,
+   "reason": "Recomputed from final ratings G3 M3 X3 Em2 Ec3 Eh2 Es2 Ecost1.",
+   "evidence_ids": [],
+   "score_impact": "final 65.0 (display 65.0)"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "field_path": "assessment.evidence_level_reason / claims (simulation setting)",
+   "seats_value": "Both seats describe the simulated results as closed-loop execution judged in simulation ('programs execute in simulation'; 'closed-loop tabletop execution in simulation').",
+   "correction": "Simulated step/episode success is scored against gold code (Appendix B; 'until the model fails to generate the correct code'), and the world state is LLM-maintained rather than read back from the simulator; these numbers are code-correctness evidence. The online label rests on the 10 counted UR5 episodes only.",
+   "evidence_ids": [
+    "agg:E001",
+    "sol:E005",
+    "son55:E017"
+   ],
+   "score_impact": "none (E.measurement 2 unchanged; label unchanged)",
+   "type": "shared_mischaracterization"
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "status": "reviewed",
+ "status_reason": "Complete fixed text read; author-elided prompt lines judged bounded (no scoring band depends on them); all differences resolved; one shared mischaracterization corrected without score impact.",
+ "provenance": {
+  "input_hash": "62c71ee30d00fbd8b32f833b62dbd15e6ad9979a417096b150a0681c29c0fa93",
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated; anchors v2",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_taxonomy_hash": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+  "batch_contract_hash": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+  "aggregate_prompt_hash": "c4af2c4869dcef132bc676ae032425e7b7b76302bf4c5c4863e6fa219e491ed4",
+  "conflicts_json_sha256": "85dc4b78780db04fa5a896e69f5a0a2467c11e5b40d1d2808875e0ee69ef6d75",
+  "seat_input_hashes_match": true,
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "timestamp": "2026-10-22",
+  "anchoring_disclosure": "conflicts.json (listing both seats' raw scores and item diffs) was opened before the papers were read; for each paper the fixed text was then read in full and a preliminary evidence judgment formed before that paper's seat records were opened. Aggregate review with two seat inputs, not a third blind review or human gold."
+ },
+ "materials": [
+  {
+   "material_id": "M1",
+   "url": "https://arxiv.org/html/2306.17840v4",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2306.17840.txt",
+   "sha256": "6861f3f35aeb3a8de859ec080713c86182007c9c23dd4ddb0d94c826ba590105",
+   "sections_read": [
+    "Abstract",
+    "Sections I-VI",
+    "Appendix A-D incl. Prompts 4-14"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "note": "Appendix C elides state lines in Prompt 11 and per-domain writer demonstrations, pointing to the repository (identical in PDF per controller). Author elision, bounded per resolution 1."
+  }
+ ],
+ "input_seat_hashes": {
+  "sol": "8d54ea51dcb9edc2203463697ddb7492c62c1e2556154f98c1929bd5ef665f1c",
+  "son55": "80574b8ebd70c034d84fab2c272460312ac4a0b2f105ec9c38f604a4fc407e2b"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session_id": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_session_note": "Subagent cannot read its own session id or receipt; none fabricated, no probing.",
+ "score": {
+  "raw": 65.0,
+  "display": 65.0,
+  "lower": 65.0,
+  "upper": 65.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ecost)/4; display=python round(raw,1); raw is authoritative",
+  "designation": "production-under-anchors-v2"
+ },
+ "final_record_hash": "42dc8c01be01b6224e42a75910dbb5100e876c088a207873e349f55224604349"
+}

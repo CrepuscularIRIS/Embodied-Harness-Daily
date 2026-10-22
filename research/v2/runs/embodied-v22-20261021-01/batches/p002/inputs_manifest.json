@@ -1,0 +1,48 @@
+{
+ "batch_id": "p002",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2209.11302",
+   "paper_id": "2209.11302",
+   "version": "2209.11302v1",
+   "title": "ProgPrompt: Generating Situated Robot Task Plans using Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2209.11302.txt",
+   "material_sha256": "ec7b9710d6e6f33e31dfbd393404b5f6bc23b280c4893103268079af61f06ebb"
+  },
+  {
+   "paper_key": "2212.04088",
+   "paper_id": "2212.04088",
+   "version": "2212.04088v3",
+   "title": "LLM-Planner: Few-Shot Grounded Planning for Embodied Agents with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2212.04088.txt",
+   "material_sha256": "82aab32f3f823e2ebc9cf2a053662a8f85a262058ead28636fcfa860a4e4cd47"
+  },
+  {
+   "paper_key": "2302.01560",
+   "paper_id": "2302.01560",
+   "version": "2302.01560v3",
+   "title": "Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2302.01560.txt",
+   "material_sha256": "3913437d317df3c4436e08218c0f5c390cb2ba34aa4b5b3404a27154be67dfe2"
+  },
+  {
+   "paper_key": "2303.03480",
+   "paper_id": "2303.03480",
+   "version": "2303.03480v2",
+   "title": "Can an Embodied Agent Find Your \"Cat-shaped Mug\"? LLM-Guided Exploration for Zero-Shot Object Navigation",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2303.03480.txt",
+   "material_sha256": "839c64d91a8c446f595484dc61331baa5be61cbcda7f6b77de8e48df5a0d3f30"
+  },
+  {
+   "paper_key": "2304.11477",
+   "paper_id": "2304.11477",
+   "version": "2304.11477v3",
+   "title": "LLM+P: Empowering Large Language Models with Optimal Planning Proficiency",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2304.11477.txt",
+   "material_sha256": "17f3a27d6122b24f75c1b5ab4b818fc7cc39d1dfb68ed46bb5e0f4a8aee08dab"
+  }
+ ],
+ "input_hash": "2b0190dafe2244e68da9e68a9434358ea9f4f6e9750509ab7d6fbb98b9e68638"
+}

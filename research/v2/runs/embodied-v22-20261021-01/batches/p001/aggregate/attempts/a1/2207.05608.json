@@ -1,0 +1,1875 @@
+{
+ "schema_version": "radar-review-v2.2",
+ "run_id": "embodied-v22-20261021-01",
+ "batch_id": "p001",
+ "attempt_id": "a1",
+ "seat": "aggregate",
+ "record_role": "opus_aggregate_final",
+ "phase": "production",
+ "paper": {
+  "paper_key": "2207.05608",
+  "paper_id": "2207.05608",
+  "title": "Inner Monologue: Embodied Reasoning through Planning with Language Models",
+  "version": "2207.05608v1",
+  "claim_type": "system_method",
+  "central_claim": "Closed-loop natural-language feedback from success detection, scene description and human interaction enables pretrained LLM planners to reason, retry and replan for complex embodied tasks, significantly improving high-level instruction completion across simulated tabletop, real tabletop and real kitchen mobile manipulation, including disturbances and emergent interactive behaviors.",
+  "central_claim_son55_wording": "Feeding language-form environment feedback (success detection, passive object/scene description, active human/VQA answers) back into a frozen LLM planner over pretrained skills lets it retry, replan or ask, significantly improving instruction completion in simulated and real tabletop rearrangement and real kitchen mobile manipulation, especially under disturbances."
+ },
+ "provenance": {
+  "input_hash": "9942a3c5fe8b2e12d83bf2fb60bee68cafaa041dcc982913a2ed26a8f10591d0",
+  "seat_input_hashes_equal": true,
+  "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated (G15/M20/X20/E45; E 15/10/10/5/5)",
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+  "rs_parents_hash": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+  "domain_cards_hash": "0f9e90179cca637227f34fd72bb78de4365c82b39430b93e0e9775de2e55cc42",
+  "domain_cards_binding_sol": {
+   "algorithm": "SHA256 of UTF-8 sort_keys=true compact ensure_ascii=false JSON mapping relative card paths to file SHA256",
+   "files": {
+    "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+    "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+    "patterns/main/llm_symbolic_solver_planning.md": "60842ca4ec433ab2f89911f2c0650cc35de7915e8e4ae8ee964ea962dd562405",
+    "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50",
+    "patterns/sub/K201.md": "3dafdc60d02fa55bf2a0729c9782bc2fde7f43cce6eb818bdab12068be4b21b6",
+    "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d",
+    "patterns/sub/R01.md": "979ff011adba61a4f9957ed3d7d4a04f18ce6cee0c292aabda266741e1643127"
+   },
+   "taxonomy_sha256": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "conditions_sha256": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1"
+  },
+  "domain_cards_hash_son55": {
+   "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+   "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+   "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+  },
+  "expectations_hash": "f2b30256da73535ceb775213a0fd83d61196d05d58689d31c0f963419a474ba1",
+  "expectations_hash_note": "sol computed a binding over expectation lines embedded in cards; son55 recorded null (no standalone expectations file). Same card files; not a material difference.",
+  "protocol_hashes": {
+   "pattern_protocol": "69b09e03e7f27de3bb3790aeb16876b7ff50c0495f64777ef2a2e27a598443c8",
+   "batch_contract": "aa2f1555b3c811e2fb052926e8350d64b60379297d16544145f294368aaddda5",
+   "worksheet": "b0ca3ac92a458c934894aee62c88d6de8ab53901047326e0c8abdfd1a0d3219e",
+   "evidence": "612b7df7eec04add15b47c9316206fee7f572d824a03143fb82bdfcc5aab3ce2",
+   "evidence_schema": "b7dd7fa66ce5d3eb4a87e13f65fdb7d9ac69b9a268bb84474049274f9f65b8cb",
+   "rs_parents": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b"
+  },
+  "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+  "model_type": "fable type (overlay ANTHROPIC_DEFAULT_FABLE_MODEL=claude-opus-5-5[1m], Opus 5.5)",
+  "actual_model": "claude-opus-5-5[1m]",
+  "session_id": null,
+  "session_id_reason": "aggregate subagent cannot read its own session id; no receipt available to the worker",
+  "receipt_ref": null,
+  "timestamp": "2026-10-22T02:27:56.060173+00:00",
+  "phase": "production",
+  "score_qualification": "production-under-anchors-v2",
+  "seat_model_types": {
+   "sol": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+   "son55": "haiku type (overlay claude-sonnet-5-5[1m], Sonnet 5.5)"
+  },
+  "notes": "anchors v2 binding (3ececdd11cc3d144); production-under-anchors-v2; rubric not frozen; not a ranking or Reel authorization. Domain card K109 added by aggregate (sha recorded in domain_pattern)."
+ },
+ "input_seat_hashes": {
+  "sol": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/sol/attempts/a1/2207.05608.json",
+   "sha256": "895f6d57ea922322cbcf745735e330253d1936e81cacd1d577bd2879b17187ef"
+  },
+  "son55": {
+   "path": "research/v2/runs/embodied-v22-20261021-01/batches/p001/seats/son55/attempts/a1/2207.05608.json",
+   "sha256": "6f06b6620c14ac87cd6bb95e73024a9d40325278fed75892e3a537d66789c905"
+  }
+ },
+ "seat_integrity": {
+  "same_version": true,
+  "same_material_sha": false,
+  "material_sha_matches_manifest": true,
+  "same_input_hash": true,
+  "both_seats_present": true,
+  "seat_fields_correct": true,
+  "blind_contamination_observed": false
+ },
+ "materials": [
+  {
+   "material_id": "sol:M001",
+   "paper_id": "2207.05608",
+   "version": "2207.05608v1",
+   "url": "https://arxiv.org/html/2207.05608v1",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2207.05608.txt",
+   "sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "sections_read": [
+    "Abstract",
+    "Sections1–6",
+    "AppendicesA–D"
+   ],
+   "complete": true,
+   "missing_sections": []
+  },
+  {
+   "material_id": "sol:M002",
+   "paper_id": "2204.01691",
+   "version": "2204.01691v2",
+   "url": "https://arxiv.org/html/2204.01691v2",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2204.01691.txt",
+   "sha256": "9dbf3652350942188f1b32e9458872e0716cb0e683ae64010e9b19ecfe9a39af",
+   "sections_read": [
+    "Abstract",
+    "Sections1–8",
+    "AppendicesA–E"
+   ],
+   "complete": true,
+   "missing_sections": []
+  },
+  {
+   "material_id": "son55:M1",
+   "url": "https://arxiv.org/pdf/2207.05608v1",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2207.05608.txt",
+   "sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "sections_read": [
+    "Abstract",
+    "1-6 main text",
+    "Appendix A-D incl. prompts"
+   ],
+   "complete": true,
+   "missing_sections": []
+  },
+  {
+   "material_id": "M-2207.05608",
+   "paper_id": "2207.05608",
+   "version": "2207.05608v1",
+   "url": "https://arxiv.org/abs/2207.05608v1",
+   "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2207.05608.txt",
+   "sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "sections_read": [
+    "Abstract",
+    "Sections 1-6",
+    "Appendices A-D"
+   ],
+   "complete": true,
+   "missing_sections": [],
+   "note": "aggregate read of the same fixed material used by both seats"
+  }
+ ],
+ "evidence": [
+  {
+   "evidence_id": "sol:E001",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Abstract; local text L6",
+   "quote": "closed-loop language feedback significantly improves high-level instruction completion on three domains",
+   "support_explanation": "Preserves the central claim across three implementations.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E002",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section4.1/Table1; local text L18",
+   "quote": "averaged across 50 episodes in Ravens-based environment with test-time disturbances.",
+   "support_explanation": "Repeated simulated episodes with disturbances.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E003",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Table2; local text L18",
+   "quote": "Finish 3-block stacking 20% 40% 40% 100% Sort fruits from bottles 20% 50% 40% 80% Total 20% 45% 40% 90%",
+   "support_explanation": "Real tabletop feedback comparison,10runs/task and complementary channels.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E004",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Table3; local text L18",
+   "quote": "Total 30.8% 48.7% 60.4%",
+   "support_explanation": "Kitchen baseline/success/combined feedback outcomes, with120total evaluations.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E005",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section5; local text L21",
+   "quote": "we assume access to oracle scene descriptors in the form of human observers or scripted systems",
+   "support_explanation": "Simulation/kitchen privilege explicit; cannot substitute automatic perception evidence.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E006",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section5; local text L21",
+   "quote": "False negative predictions from the success detector lead to additional retry attempts, while false positive predictions add adversarial partial observability",
+   "support_explanation": "Detector errors create planning failures.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E007",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "AppendixA.1; local text L27",
+   "quote": "the demonstrations cover all objects because the focus of this work is not on generalization across object instances but on novel long-horizon behaviors.",
+   "support_explanation": "Unseen behaviors do not imply unseen object instances.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E008",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "AppendixA.3; local text L27",
+   "quote": "The scripted navigation policies utilize a ground-truth map",
+   "support_explanation": "Kitchen navigation uses privileged state substrate.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E009",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "AppendixA.2; local text L27",
+   "quote": "the samples are capped at 1.5\\sigma",
+   "support_explanation": "Appendix1.5cm/0.7cm noise cap1.5sigma differs from main4mm cap2sigma; unresolved.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E010",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section4.3; local text L18",
+   "quote": "the LLM predictions in isolation are never given any closed-loop feedback.",
+   "support_explanation": "SayCan residual is no explicit outcome feedback to the high-level model, not absent low-level visual control.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E011",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section4.1; local text L18",
+   "quote": "we similarly set the maximum number of steps to be k for practical considerations. We use k=15",
+   "support_explanation": "Shared simulation cap, not complete actual cost.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E012",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section4.4; local text L18",
+   "quote": "they are of varying levels of consistency when no similar examples have been provided in the prompt",
+   "support_explanation": "Emergence evidence is qualitative and consistency-limited.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E013",
+   "material_id": "sol:M002",
+   "material_sha256": "9dbf3652350942188f1b32e9458872e0716cb0e683ae64010e9b19ecfe9a39af",
+   "locator": "SayCanv2 Section5; local text L21",
+   "quote": "Overall, 65% of the errors were LLM failures and 35% were affordance failures.",
+   "support_explanation": "Direct primary-neighbor source documents prior harness failure residual.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E014",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "AppendixB.1; local text L30",
+   "quote": "a binary reward function is defined for each task using ground-truth state of the objects.",
+   "support_explanation": "Simulation task outcome uses environment-ground-truth reward, distinct from feedback estimates.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E015",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section4.3; local text L18",
+   "quote": "We evaluate methods on 120 evaluations over three task families",
+   "support_explanation": "Kitchen has8instructions/3families, not fully broken out by task/condition denominator.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E016",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section4.2; local text L18",
+   "quote": "the system does not require any model finetuning to perform pick and place tasks with new objects.",
+   "support_explanation": "Automated MDETR/tabletop variant must be distinguished from human-object kitchen variant.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E017",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "quote": "“Put the blocks in their matching bowls” 0.0% 0.0% 56.0% 70.0% 82.0% Unseen Tasks “Put the blocks on mismatched bowls” 0.0% 0.0% 62.0% 76.0% 86.0% “Stack all the blocks on the [x] corner/side” 0.0% 0.0% 0.0% 4.0% 6.0%",
+   "locator": "Table1; local text L18",
+   "support_explanation": "Ordered columns CLIPort/CLIPort+oracle/Object/Object+Success/Object+Scene; substantial gains coexist with only6% on difficult unseen stacking.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "sol:E018",
+   "material_id": "sol:M001",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "quote": "standard deviation \\sigma{=}4\\text{mm} clipped at 2\\sigma",
+   "locator": "Section4.2; local text L18",
+   "support_explanation": "Main physical perturbation differs from AppendixA.2: do not choose a preferred magnitude.",
+   "kind": "author_report",
+   "source_seat": "sol"
+  },
+  {
+   "evidence_id": "son55:E001",
+   "material_id": "son55:M1",
+   "locator": "Abstract",
+   "quote": "We find that closed-loop language feedback significantly improves high-level instruction completion on three domains",
+   "support_explanation": "central claim",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E002",
+   "material_id": "son55:M1",
+   "locator": "2 Related Work",
+   "quote": "However, both approaches effectively produce the plan while assuming that each proposed step is executed successfully by the agent.",
+   "support_explanation": "gap: SayCan/Huang plans are open-loop w.r.t. execution outcome",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E003",
+   "material_id": "son55:M1",
+   "locator": "3.2",
+   "quote": "by continually injecting information from the various sources of feedback into the LLM planning language prompts as the robot interacts with the environment",
+   "support_explanation": "mechanism: textual feedback appended to the planner prompt",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E004",
+   "material_id": "son55:M1",
+   "locator": "3.3",
+   "quote": "Engineered success detectors can operate on ground-truth state in simulation, while learned success detectors can be trained on real examples of successes and failures in the real world",
+   "support_explanation": "feedback channel privilege differs by domain",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E005",
+   "material_id": "son55:M1",
+   "locator": "4.1 Table 1",
+   "quote": "Table 1: Success rates for various methods, averaged across 50 episodes in Ravens-based environment with test-time disturbances.",
+   "support_explanation": "sim evaluation: 50 episodes per task cell",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E006",
+   "material_id": "son55:M1",
+   "locator": "4.1 Table 1",
+   "quote": "0.0% 0.0% 56.0% 70.0% 82.0%",
+   "support_explanation": "unseen-style task 'matching bowls' row: CLIPort 0, CLIPort+oracle 0, LLM+Object 56, +Success 70, +Scene 82 (column order inferred from header)",
+   "kind": "our_inference",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E007",
+   "material_id": "son55:M1",
+   "locator": "4.1 Table 1",
+   "quote": "32.0% 94.0% 52.0% 46.0% 56.0%",
+   "support_explanation": "seen task 'Put all blocks in the [x] bowl': CLIPort+oracle 94 beats every Inner Monologue variant (46-56)",
+   "kind": "our_inference",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E008",
+   "material_id": "son55:M1",
+   "locator": "4.1 Table 1",
+   "quote": "2.0% 32.0% 4.0% 10.0% 26.0%",
+   "support_explanation": "seen task 'Stack all the blocks': CLIPort+oracle 32 exceeds Inner Monologue variants (4-26)",
+   "kind": "our_inference",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E009",
+   "material_id": "son55:M1",
+   "locator": "5 Limitations",
+   "quote": "we assume access to oracle scene descriptors in the form of human observers or scripted systems to provide textual description back to the LLM planner",
+   "support_explanation": "feedback sources are oracle/human in sim and kitchen",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E010",
+   "material_id": "son55:M1",
+   "locator": "4.2 Table 2",
+   "quote": "Total 20% 45% 40% 90%",
+   "support_explanation": "real tabletop total over two tasks x 10 runs: open-loop object 20, IM Object 45, IM Success 40, IM Object+Success 90 (columns inferred from header)",
+   "kind": "our_inference",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E011",
+   "material_id": "son55:M1",
+   "locator": "4.2",
+   "quote": "we artificially inject Gaussian noise into the policy actions",
+   "support_explanation": "failures are induced rather than natural",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E012",
+   "material_id": "son55:M1",
+   "locator": "4.3 Table 3",
+   "quote": "Total 30.8% 48.7% 60.4%",
+   "support_explanation": "kitchen: SayCan 30.8, +Success 48.7, +Object+Success 60.4",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E013",
+   "material_id": "son55:M1",
+   "locator": "4.3",
+   "quote": "we add adversarial disturbances during control policy executions that cause skill policy rollouts to fail",
+   "support_explanation": "disturbance protocol",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E014",
+   "material_id": "son55:M1",
+   "locator": "4.3",
+   "quote": "Without any LLM-informed feedback SayCan has success rate close to 0%",
+   "support_explanation": "baseline cannot retry; large relative effect under forced failure",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E015",
+   "material_id": "son55:M1",
+   "locator": "Appendix A.3",
+   "quote": "We use human-provided object recognition to provide feedback about the presence of objects visible to the robot camera.",
+   "support_explanation": "kitchen Object feedback is human-provided",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E016",
+   "material_id": "son55:M1",
+   "locator": "Appendix A.1",
+   "quote": "The success detector is built using heuristics based on ground-truth object poses",
+   "support_explanation": "sim success detector uses simulator ground truth",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E017",
+   "material_id": "son55:M1",
+   "locator": "Appendix B.1",
+   "quote": "To allow for automatic evaluations, a binary reward function is defined for each task using ground-truth state of the objects.",
+   "support_explanation": "sim outcome from ground truth, 50 episodes",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E018",
+   "material_id": "son55:M1",
+   "locator": "5 Limitations",
+   "quote": "False negative predictions from the success detector lead to additional retry attempts, while false positive predictions add adversarial partial observability to the environment.",
+   "support_explanation": "named failure modes",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E019",
+   "material_id": "son55:M1",
+   "locator": "5 Limitations",
+   "quote": "In some instances, we found that the LLM planners ignored the environment feedback and still proposed policy skills involving objects not present in the scene.",
+   "support_explanation": "planner may ignore feedback",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E020",
+   "material_id": "son55:M1",
+   "locator": "Appendix A.3 Table 5",
+   "quote": "ViLD has strong overall accuracy, but still fails to detect objects 28.0% of the time.",
+   "support_explanation": "automated object recognition measured on 10 episodes only",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E021",
+   "material_id": "son55:M1",
+   "locator": "4.1",
+   "quote": "We evaluate each method on four seen tasks and four unseen tasks, where seen tasks may be used for training",
+   "support_explanation": "seen/unseen split for sim; seen tasks used as few-shot prompts",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E022",
+   "material_id": "son55:M1",
+   "locator": "5 Limitations",
+   "quote": "The performance of low-level control policies limits not only overall high-level instruction completion performance",
+   "support_explanation": "residue: skill bottleneck",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E023",
+   "material_id": "son55:M1",
+   "locator": "4.1",
+   "quote": "we report CLIPort evaluations with oracle termination (i.e., repeat until oracle indicates task completion) and fixed-step termination",
+   "support_explanation": "baseline is a different, trained policy with oracle help",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E024",
+   "material_id": "son55:M1",
+   "locator": "4.4",
+   "quote": "we observe that they are of varying levels of consistency when no similar examples have been provided in the prompt",
+   "support_explanation": "emergent behaviors are anecdotal",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E025",
+   "material_id": "son55:M1",
+   "locator": "4.2",
+   "quote": "as well as an open-loop variant that only runs object recognition once at the beginning of the task",
+   "support_explanation": "open-loop one-shot description baseline (Socratic-style)",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E026",
+   "material_id": "son55:M1",
+   "locator": "Appendix A Table 4",
+   "quote": "Success Feedback Ground truth + heuristics MDETR + heuristics Finetuned CLIP",
+   "support_explanation": "success detector source per domain: GT, MDETR heuristics, fine-tuned CLIP",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E027",
+   "material_id": "son55:M1",
+   "locator": "4.3",
+   "quote": "We implement Inner Monologue in a robotic system using the kitchen environment and task definitions described in SayCan [ 21 ] .",
+   "support_explanation": "same kitchen/tasks/skills as SayCan baseline",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E028",
+   "material_id": "son55:M1",
+   "locator": "2 Related Work",
+   "quote": "Socratic Models [ 19 ] combines several foundation models (e.g., GPT-3 [ 9 ] , ViLD [ 77 ] ) and language-conditioned policies",
+   "support_explanation": "closest open-loop language-interface neighbor",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "son55:E029",
+   "material_id": "son55:M1",
+   "locator": "4.3",
+   "quote": "We evaluate methods on 120 evaluations over three task families",
+   "support_explanation": "kitchen denominator; per-cell n not stated (percentages imply ~6-9)",
+   "kind": "author_report",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "source_seat": "son55"
+  },
+  {
+   "evidence_id": "agg:E001",
+   "material_id": "M-2207.05608",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section 4.1, Table 1 (seen task row)",
+   "quote": "“Pick and place” 24.0% 74.0% 80.0% 90.0% 94.0%",
+   "support_explanation": "On the seen pick-and-place task every Inner Monologue variant beats CLIPort+oracle (94 vs 74).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E002",
+   "material_id": "M-2207.05608",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section 4.1, Table 1 (seen task row)",
+   "quote": "“Put all the blocks on the [x] corner/side” 2.0% 32.0% 30.0% 28.0% 30.0%",
+   "support_explanation": "On this seen task CLIPort+oracle (32) slightly exceeds all Inner Monologue variants (30/28/30).",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  },
+  {
+   "evidence_id": "agg:E003",
+   "material_id": "M-2207.05608",
+   "material_sha256": "4c1f9a44f383b7ab1379492c8e0a00ac9deee05b8e548b8166be37638a10b000",
+   "locator": "Section 4.1",
+   "quote": "we find that adding chain-of-thought [ 10 , 12 , 13 ] can improve the consistency between inferred goals and achieved goals",
+   "support_explanation": "The best simulated variant (Object + Scene) also adds chain-of-thought, bundling a reasoning change with the feedback channel.",
+   "kind": "author_report",
+   "source_seat": "aggregate"
+  }
+ ],
+ "signatures": [
+  {
+   "sig_id": "sol:S01",
+   "object": "Open-loop high-level plan versus iterative feedback-conditioned planning",
+   "information": "Instruction, skill history and textual success/object/scene feedback; frozen InstructGPT1.3B orPaLM540B. Sim uses ground truth, kitchen human object labels, real tabletop MDETR.",
+   "operation": "After skill termination append feedback, ask next skill/retry/subgoal until done/cap.",
+   "output": "Closed-loop skill sequence with retries and replanning.",
+   "conditions": "An executable skill vocabulary and sufficiently accurate obtainable feedback.",
+   "feedback": "Success labels, objects and achieved subgoals; quality/privilege differ by domain.",
+   "selection_rule/data": "Autoregressive next skill, SayCan grounding where applicable; simulated cap15; no accepted persistent parameter/harness change.",
+   "persistence": "Static harness design and per-episode context; no accepted cross-task optimizer change is claimed.",
+   "later_use": "Fixed components are reused on tasks; within-episode context is read by subsequent planner calls. This is not measured retained self-improvement.",
+   "claimed_effect": "Improve task completion after low-level disturbances.",
+   "failure_boundary": "False successes, ignored feedback and control limits defeat retries; oracle/human results do not establish autonomous perception. Difficult unseen stacking reaches only6% even with scene feedback.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E005",
+    "sol:E006",
+    "sol:E008",
+    "sol:E010",
+    "sol:E011",
+    "sol:E016",
+    "sol:E017"
+   ]
+  },
+  {
+   "sig_id": "sol:S02",
+   "object": "Unobserved completion versus detector-generated text",
+   "information": "Sim poses; real tabletop boxes plus calibrated RGB-D; kitchen before/after images and skill text with trained CLIP encoders.",
+   "operation": "Convert achieved/success state to language; kitchen binary foresight plus hindsight skill disambiguation reduces false positives.",
+   "output": "Planner-readable success/failure and scene description.",
+   "conditions": "Threshold/detector output must track actual outcomes.",
+   "feedback": "Ground-truth/heuristic/learned outputs, not an infallible proof.",
+   "selection_rule/data": "Threshold success and kitchen hindsight argmax match; simulation scene+CoT changes information and reasoning.",
+   "persistence": "Static harness design and per-episode context; no accepted cross-task optimizer change is claimed.",
+   "later_use": "Fixed components are reused on tasks; within-episode context is read by subsequent planner calls. This is not measured retained self-improvement.",
+   "claimed_effect": "Recover from failed skills rather than assuming success.",
+   "failure_boundary": "Detector errors and human labels confound general autonomy; physical noise protocol is internally inconsistent.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E004",
+    "sol:E005",
+    "sol:E006",
+    "sol:E009",
+    "sol:E014"
+   ]
+  },
+  {
+   "sig_id": "son55:S1",
+   "object": "Planner prompt as a growing dialogue of [robot action, feedback] over a pretrained skill library",
+   "information": "instruction + after each skill: success flag, object list, task-progress sub-goals; privileges vary: simulator ground truth (sim), MDETR + box heuristics (real tabletop), fine-tuned CLIP success detector + human object list (kitchen)",
+   "operation": "append feedback text after each skill; planner (InstructGPT 1.3B or PaLM 540B) emits next skill, retries, replans or stops",
+   "output": "executed skill sequence with retry/replan",
+   "conditions": "feedback expressible in text; skills callable by language; detector quality adequate",
+   "feedback": "per-step success detection and scene description",
+   "selection_rule": "LLM next-token choice (kitchen adds SayCan affordance weighting)",
+   "selection_data": "few-shot prompts of 2-12 episodes per domain",
+   "persistence": "prompt history within the episode only",
+   "later_use": "none across tasks",
+   "claimed_effect": "sim 56/70/82 vs open-loop; real tabletop 20->90%; kitchen 30.8->60.4%",
+   "failure_boundary": "success-detector false negatives/positives, planner ignoring feedback, skill capability",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E004",
+    "son55:E006",
+    "son55:E010",
+    "son55:E012",
+    "son55:E018",
+    "son55:E019",
+    "son55:E022"
+   ]
+  },
+  {
+   "sig_id": "son55:S2",
+   "object": "Active scene description (ask-the-human option)",
+   "information": "after each step the LLM chooses 'continue' or 'ask'; answers are human-written in the case study",
+   "operation": "LLM-generated question appended with the human reply",
+   "output": "adapted plan",
+   "conditions": "a human available",
+   "feedback": "unstructured human answer",
+   "selection_rule": "LLM choice",
+   "selection_data": "prompt only",
+   "persistence": "within episode",
+   "later_use": "none",
+   "claimed_effect": "qualitative: goal switching, clarification",
+   "failure_boundary": "inconsistency without similar prompt examples (E024)",
+   "evidence_ids": [
+    "son55:E024",
+    "son55:E029"
+   ]
+  }
+ ],
+ "retention_trace": {
+  "applicable": false,
+  "reason": "no harness change is selected or persisted across tasks; only within-episode prompt history"
+ },
+ "gap": {
+  "author_gap": "LLM skill planners need explicit environmental feedback to react to failed actions, changed scenes and human goals.",
+  "checked_gap": "Fixed SayCan directly documents language/affordance failures; Inner Monologue exposes outcomes/state to the high-level model. Feedback variants under disturbances improve measured tasks.",
+  "lineage/closest_adjacent": [
+   {
+    "source": "2204.01691v2,M002,sha2569dbf3652350942188f1b32e9458872e0716cb0e683ae64010e9b19ecfe9a39af",
+    "method": "SayCan usefulness×affordance skill selection.",
+    "source_verification": "Direct full fixed-source read; low-level policies remain closed-loop even without explicit high-level success text."
+   },
+   {
+    "source": "2207.05608v1 Sections2–4/AppendixA,M001",
+    "method": "CLIPort/Transporter primitives,MDETR and conditioned language planning.",
+    "source_verification": "Other component predecessors author-described; independent original source versions absent. Fixed snapshots do not establish exact historical priority."
+   }
+  ],
+  "residue": "Appending selected skill labels does not tell the model whether execution succeeded or the state changed.",
+  "stakes": "A low-level failure can destroy a long plan; extra reasoning cannot exceed skill/feedback fidelity.",
+  "method_response": "Expose success, objects and achieved subgoals as language at each decision.",
+  "remaining_gap": "Fully automatic reliable scenes, calibrated detector uncertainty, matched budgets and construction-unseen deployment remain unestablished.",
+  "evidence_ids": [
+   "sol:E003",
+   "sol:E004",
+   "sol:E005",
+   "sol:E006",
+   "sol:E010",
+   "sol:E013"
+  ],
+  "unresolved": [
+   "Main/appendix physical disturbance magnitudes differ.",
+   "Kitchen per-instruction denominators and automatic-object executed replacement incomplete."
+  ],
+  "son55_lineage": {
+   "ancestors": [
+    "TAMP and hierarchical RL",
+    "LLM planners (Huang et al., SayCan)",
+    "Socratic Models"
+   ],
+   "closest_adjacent": [
+    {
+     "item": "SayCan",
+     "source": "pinned 2204.01691v2; used here as the kitchen baseline (E027)",
+     "note": "value-function grounding only, no execution feedback"
+    },
+    {
+     "item": "Socratic Models",
+     "source": "2207.05608v1 Sec 2 (E028)",
+     "note": "language interface but object descriptions given once (open loop)"
+    }
+   ],
+   "method_note": "local texts only; no external search"
+  },
+  "aggregate_note": "Seats agree on the gap; son55 adds Socratic Models as the open-loop description neighbour."
+ },
+ "rs_pattern": {
+  "primary": "decompose_and_delegate",
+  "supporting": [],
+  "outside_taxonomy": false,
+  "matches": [
+   {
+    "main_id": "decompose_and_delegate",
+    "sub_id": "rs:C25",
+    "role": "primary",
+    "fit": "partial",
+    "tactic_steps_checked": [
+     {
+      "condition": "son55 C25 steps 1-5",
+      "status": "partial",
+      "reason": "step1 boundary: executed (LLM plans; skills execute; detectors verify); step2 typed artifact: partial (bracketed [success:], [scene:] text fields); step3 close loop with verifiable output applied during construction: executed (retry/replan after each step); step4 ablate verification step: executed (Object vs +Success vs +Scene, open-loop baseline); step5 cost accounting and privileged-signal disclosure: partial (privilege disclosed in Limitations; no cost)",
+      "evidence_ids": [
+       "son55:E003",
+       "son55:E006",
+       "son55:E010",
+       "son55:E018"
+      ]
+     }
+    ],
+    "success_failure_checks": [
+     "feedback driven by signals the system can obtain: partial (oracle/human in places)",
+     "single load-bearing mechanism isolated: partial",
+     "detector false positives/negatives: observed",
+     "no cost reporting: failure present"
+    ],
+    "evidence_ids": [
+     "son55:E003",
+     "son55:E010",
+     "son55:E018",
+     "sol:E003",
+     "sol:E004"
+    ],
+    "reason": "The distinctive operation is an interleaved plan/act trace whose steps are closed by external verdicts (success detectors, scene descriptions) and corrected in place (retry/replan) during construction: C25's 'interleaved reason-act/tool-call trace' closed with execution results. Checkers are heuristic, learned or human rather than sound solvers, and cost is unaccounted, so fit is partial."
+   }
+  ],
+  "rejected_candidates": [
+   {
+    "main_id": "adapt_via_conditioning",
+    "proposed_by": "sol (primary, sub null)",
+    "reason": "Few-shot prompting of a frozen model is shared by every paper in this batch and is not this paper's contribution; sol itself found C03 inapplicable. The feedback text is the verifier channel of the C25 loop, not a task-conditioning schema or reference substrate. Not retained as supporting because no distinct operation needs it.",
+    "evidence_ids": [
+     "sol:E001",
+     "sol:E010"
+    ]
+   }
+  ],
+  "reason": "Planner (frozen LLM) delegates execution to skills and verification/perception to detectors and humans; their verdicts are fed back each step.",
+  "executes_pattern": {
+   "status": "partial",
+   "reason": "Verifier-closed loop applied during planning and ablated by channel; detectors partly privileged/human and unpriced.",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E009",
+    "son55:E016"
+   ]
+  },
+  "resolves_problem": {
+   "status": "partial",
+   "reason": "Retry/replan under forced failure demonstrated (kitchen SayCan 30.8% -> 48.7% Success-only -> 60.4%), but with oracle/human channels in places and small, unequal cells.",
+   "evidence_ids": [
+    "sol:E004",
+    "son55:E014",
+    "son55:E015"
+   ]
+  }
+ },
+ "domain_pattern": {
+  "namespace": "embodied",
+  "matches": [
+   {
+    "main": "external_verification_control",
+    "sub": "K202",
+    "version": "embodied-agent-harness/v1 (2026-10-21 snapshot)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "id": "external_verification_control.S4",
+      "polarity": "success",
+      "status": "partial",
+      "note": "a success detector hands control back to the planner after each skill; detector accuracy is not reported for the learned kitchen detector",
+      "evidence_ids": [
+       "son55:E026",
+       "son55:E014"
+      ]
+     },
+     {
+      "id": "external_verification_control.F2",
+      "polarity": "failure",
+      "status": "met",
+      "note": "sim detector reads ground-truth poses, kitchen object feedback is human, FP/FN named but unmeasured",
+      "evidence_ids": [
+       "son55:E016",
+       "son55:E015",
+       "son55:E018"
+      ]
+     },
+     {
+      "condition": "K202 completion and hand-back",
+      "status": "partial",
+      "reason": "Feedback after skill completion, not a controlled monitor-duration versus fixed-horizon hand-back study.",
+      "evidence_ids": [
+       "sol:E006",
+       "sol:E010"
+      ]
+     },
+     {
+      "condition": "F2 detector errors and privilege",
+      "status": "met",
+      "reason": "Oracle/human assumptions and detector errors explicit.",
+      "evidence_ids": [
+       "sol:E005",
+       "sol:E006"
+      ]
+     },
+     {
+      "condition": "F5 executor fidelity",
+      "status": "partial",
+      "reason": "High-level reasoning remains limited by low-level failures.",
+      "evidence_ids": [
+       "sol:E006"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E003",
+     "son55:E014",
+     "son55:E026",
+     "sol:E006"
+    ],
+    "reason": "A success detector fires after each skill and control returns to the planner to advance, retry or replan; skills terminate themselves (atomic calls), so the monitor is a per-step verdict rather than a stagnation monitor; the kitchen learned detector has no reported accuracy.",
+    "card_hashes": {
+     "patterns/main/external_verification_control.md": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+     "patterns/sub/K202.md": "a3c23b941d19d8082a6736a06cc712738a628e3acb2e0825cb7aca4ac7d7503d"
+    }
+   },
+   {
+    "main": "observe_act_interface",
+    "sub": "K109",
+    "version": "embodied-agent-harness/v1 (2026-10-21 snapshot)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "id": "observe_act_interface.S6",
+      "polarity": "success",
+      "status": "unmet",
+      "note": "text feedback is not compared with raw-image input",
+      "evidence_ids": [
+       "son55:E004"
+      ]
+     },
+     {
+      "id": "observe_act_interface.F6",
+      "polarity": "failure",
+      "status": "met",
+      "note": "gain may be carried by privileged/human converters; no converter-model ablation",
+      "evidence_ids": [
+       "son55:E009",
+       "son55:E015",
+       "son55:E020"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "son55:E004",
+     "son55:E015",
+     "son55:E020",
+     "son55:E026"
+    ],
+    "reason": "Separate perception models (MDETR on the real tabletop; fine-tuned CLIP success detector in the kitchen) turn images into text for the planner; in sim and for kitchen objects the converter is ground truth or a human (privileged variant noted by K109); no raw-image or converter ablation.",
+    "card_hashes": {
+     "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "patterns/sub/K109.md": "dea4052b3e5c60709cd0ddbef317afc34cdd68b54f5b72757c13cd2d3828274d"
+    }
+   },
+   {
+    "main": "observe_act_interface",
+    "sub": "K104",
+    "version": "embodied-agent-harness/v1 (2026-10-21 snapshot)",
+    "fit": "partial",
+    "condition_checks": [
+     {
+      "condition": "Semantic skill executor",
+      "status": "met",
+      "reason": "LLM emits skills executed by tabletop/mobile policies.",
+      "evidence_ids": [
+       "sol:E003",
+       "sol:E010"
+      ]
+     },
+     {
+      "condition": "S1 channel isolation",
+      "status": "partial",
+      "reason": "Tabletop channels isolated; scene+CoT and cross-system changes remain bundled.",
+      "evidence_ids": [
+       "sol:E002",
+       "sol:E003"
+      ]
+     },
+     {
+      "condition": "F6 privilege",
+      "status": "met",
+      "reason": "Risk is present and disclosed: sim ground truth and human kitchen objects.",
+      "evidence_ids": [
+       "sol:E005",
+       "sol:E007",
+       "sol:E008"
+      ]
+     },
+     {
+      "condition": "F1 false completion",
+      "status": "partial",
+      "reason": "Detector errors identified; complete endpoint confusion audit incomplete.",
+      "evidence_ids": [
+       "sol:E006"
+      ]
+     }
+    ],
+    "evidence_ids": [
+     "sol:E003",
+     "sol:E010"
+    ],
+    "reason": "Planner emits skills from a fixed language-labelled vocabulary executed by pick-place primitives or SayCan policies (inherited interface, not the contribution).",
+    "card_hashes": {
+     "patterns/main/observe_act_interface.md": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "patterns/sub/K104.md": "3b9eecacaf17cbd621ffedf4ee01983a115e14899c27cfaa3d0a8bb6e37fcd50"
+    }
+   }
+  ],
+  "rejected_candidates": [
+   {
+    "main": "observe_act_interface",
+    "sub": "K108",
+    "proposed_by": "son55 (fit weak)",
+    "reason": "The optional 'ask' call is a qualitative case study with no rates; cap of 3 domain cards is used for operations with quantitative evidence.",
+    "evidence_ids": [
+     "son55:E029",
+     "son55:E024"
+    ]
+   }
+  ],
+  "unassigned": false,
+  "revision_proposals": []
+ },
+ "pattern_mapping": [
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "external_verification_control",
+    "sub": "K202"
+   },
+   "operation_correspondence": "Detector verdict after each skill closes the C25 loop; planner advances, retries or replans (K202 hand-back).",
+   "necessary_conditions_and_differences": "K202 assumes a completion signal computable at deployment; sim detector is ground truth, kitchen detector unaudited.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E014",
+    "son55:E016"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K109"
+   },
+   "operation_correspondence": "Perception models produce text artifacts that are appended to the planner trace.",
+   "necessary_conditions_and_differences": "Converters partly human/ground truth; no raw-image control.",
+   "evidence_ids": [
+    "son55:E015",
+    "son55:E020",
+    "son55:E026"
+   ]
+  },
+  {
+   "rs_main": "decompose_and_delegate",
+   "rs_sub": "rs:C25",
+   "domain": {
+    "namespace": "embodied",
+    "main": "observe_act_interface",
+    "sub": "K104"
+   },
+   "operation_correspondence": "Typed skill call delegated to executors.",
+   "necessary_conditions_and_differences": "Interface inherited from prior systems; executor fidelity bounds results.",
+   "evidence_ids": [
+    "sol:E003",
+    "son55:E022"
+   ]
+  }
+ ],
+ "expectations": [
+  {
+   "id": "E01",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/observe_act_interface.md",
+     "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "embedded_text": "- **E01 (ablation, common_practice).** Hold the frontier backbone fixed and compare the proposed harness with at least one alternative harness or loop organization on the same episodes. For zero-shot VLN-CE the alternative is a rerun of a published zero-shot harness or workflow (2606.10577#s4, 2609.15195#s4) with the same model; for coding agents, a second deployable harness. — _applies when_ a claim that a harness (rather than the model) raises embodied or agentic success."
+    }
+   ],
+   "applies_when": "Feedback harness attribution.",
+   "applicable": true,
+   "status": "met",
+   "reason": "Same-domain fixed-planner variants and same-kitchen SayCan baseline.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E004",
+    "sol:E010",
+    "son55:E027"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "same_supported_fact"
+  },
+  {
+   "id": "E02",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/observe_act_interface.md",
+     "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "embedded_text": "- **E02 (ablation, common_practice).** Attribute a gain to a harness component only through one-at-a-time toggles (leave-one-out or single add) with the backbone fixed. A cumulative stack (A, then +B, then +C) or a bundle-level comparison does not separate components or their interactions. — _applies when_ a claim that a specific harness component (depth tool, memory, verifier, skill library, plugin, feedback channel) causes the improvement."
+    }
+   ],
+   "applies_when": "Feedback component gain.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Channels toggled in sim and real tabletop, but Scene+CoT is bundled and kitchen Object is human.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E003",
+    "sol:E005",
+    "agg:E003"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "same_supported_fact"
+  },
+  {
+   "id": "E03",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/observe_act_interface.md",
+     "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "embedded_text": "- **E03 (ablation, common_practice).** Report the harness or tool effect under at least two backbones of different strength. Several read papers find that tools and imposed structure help weak models and are neutral or harmful for strong ones. A gain measured on the teacher therefore does not predict the gain for a compact student. — _applies when_ a claim that a harness component or tool helps in general, or that a teacher-measured tool value will carry to a student."
+    }
+   ],
+   "applies_when": "Backbone-general tool value.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Different LLMs per domain (InstructGPT 1.3B, PaLM 540B) with no backbone swap within a domain; cross-domain differences confound backbone with skills/feedback.",
+   "evidence_ids": [
+    "sol:E001",
+    "sol:E003",
+    "sol:E004"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "son55"
+  },
+  {
+   "id": "E04",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/external_verification_control.md",
+     "sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+     "embedded_text": "- **E04 (reproducibility, common_practice).** Report run-to-run variance and use paired task-level statistics: repeated runs per setting, bootstrap or permutation CIs over tasks, and sign tests on discordant episodes. A single run on a 100-episode subset is treated as descriptive. In the read single-run papers, differences of a few points sit within noise. — _applies when_ any success-rate comparison between harnesses, models or training recipes on a fixed task subset."
+    }
+   ],
+   "applies_when": "Fixed-task success comparison.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Episode/run counts exist, but no run-to-run variance, CIs or paired statistics, which is what E04 requires.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E003",
+    "sol:E015"
+   ],
+   "score_item": [
+    "E.statistics"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "son55"
+  },
+  {
+   "id": "E05",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/observe_act_interface.md",
+     "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "embedded_text": "- **E05 (metric, common_practice).** Report cost alongside success: model calls, input and output tokens, wall-clock or per-call latency, and USD per episode or per solved task, including failed trials. Harnesses with similar pass rates can differ about 40x in tokens per solved task. — _applies when_ a claim that a harness, interface or distilled student is better or more practical than an alternative."
+    }
+   ],
+   "applies_when": "Practical feedback harness.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "No calls/tokens/latency/USD or human-feedback cost reported.",
+   "evidence_ids": [
+    "sol:E007",
+    "sol:E008",
+    "sol:E011"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "son55"
+  },
+  {
+   "id": "E08",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/observe_act_interface.md",
+     "sha256": "f9ddd385eaf008b2f13633a7280de965516a98319208023b050b53683fea77c7",
+     "embedded_text": "- **E08 (reproducibility, common_practice).** State contamination and development-overlap caveats. Frontier 'zero-shot' describes how the model was used, not what it was trained on. Disclose whether the evaluation tasks were used during harness development, and whether ablations ran under a privileged action space that is not comparable to the benchmark protocol. — _applies when_ a benchmark claim by a frontier-model harness, or ablations run under non-standard execution."
+    }
+   ],
+   "applies_when": "Generalization/autonomous interpretation.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Seen tasks as prompts and oracle/scripted/human feedback are disclosed (Sec 4.1, Sec 5); no construction-unseen split.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E007",
+    "sol:E008",
+    "son55:E021",
+    "son55:E009"
+   ],
+   "score_item": [
+    "E.holdout"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "sol"
+  },
+  {
+   "id": "E16",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/external_verification_control.md",
+     "sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+     "embedded_text": "- **E16 (metric, common_practice).** Break failures down by endpoint as well as SR: never reached vs reached but wrong stop (the OSR-SR gap), false completion declarations, stuck or no-progress runs, and per-task repeat patterns. Stopping is the dominant residual failure in the read navigation papers. — _applies when_ an embodied navigation or manipulation agent's success claim, especially one that adds a stop or completion check."
+    }
+   ],
+   "applies_when": "Completion feedback.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Failure causes described and plotted (Fig. 4 not in text); detector FP/FN discussed; no per-endpoint counts in text.",
+   "evidence_ids": [
+    "sol:E006",
+    "sol:E015"
+   ],
+   "score_item": [
+    "E.measurement",
+    "E.statistics"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "same_supported_fact"
+  },
+  {
+   "id": "E19",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/external_verification_control.md",
+     "sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+     "embedded_text": "- **E19 (other, common_practice).** Real-robot claims need trial counts and success rates per task. Qualitative demonstrations, or success judged by a human operator without counts, do not support transfer claims. — _applies when_ a claim that a harness or harness-distilled student transfers to a physical robot or aerial vehicle."
+    }
+   ],
+   "applies_when": "Real-robot claims.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Real tabletop: 2 tasks x 10 runs; kitchen: family rates without per-cell n (and unequal per-method totals).",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E015"
+   ],
+   "score_item": [
+    "E.measurement"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "same_supported_fact"
+  },
+  {
+   "id": "E22",
+   "version": "embodied-agent-harness/v1; embedded main-card snapshot2026-10-21",
+   "source_strength": "common_practice; induced from reported practice/limitations, not a review of this paper",
+   "source_refs": [
+    {
+     "path": "patterns/main/external_verification_control.md",
+     "sha256": "1788b4bae136a9b7690de345d2d513c52ee49662b4610e2249e4bd77c277d121",
+     "embedded_text": "- **E22 (reproducibility, common_practice).** Compare interfaces and harnesses at a matched interaction budget: the same caps on LLM calls, turns, wall-clock time and GPU. Disclose any asymmetry, such as uncapped turns or extra compute for tool runs, because budget endings drive many success differences. — _applies when_ a comparison between harnesses, interfaces or tool bundles with the model fixed."
+    }
+   ],
+   "applies_when": "Feedback versus open-loop comparison.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Simulation shares a 15-step cap across Inner Monologue and fixed-step CLIPort; extra information channels and kitchen budgets are not matched or stated.",
+   "evidence_ids": [
+    "sol:E005",
+    "sol:E011"
+   ],
+   "score_item": [
+    "E.cost",
+    "E.causality"
+   ],
+   "source_seat": "sol",
+   "aggregate_decision": "sol"
+  },
+  {
+   "id": "rs:decompose_and_delegate:added_cost",
+   "version": "ResearchStudio15+31 frozen RS_MANIFEST sha256=3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+   "source_strength": "corpus-derived original ResearchStudio review expectation; transferred check, not an actual review of this paper",
+   "source_refs": [
+    {
+     "path": "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md",
+     "sha256": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+     "embedded_text": "- **Report the cost of the added structure — token and API budget, number of model or solver calls, and solver latency — rather than only end-task accuracy.** _(source: both)_"
+    }
+   ],
+   "applies_when": "A delegated pipeline (planner + external verifiers/skills) is claimed to change embodied task performance.",
+   "applicable": true,
+   "status": "unmet",
+   "reason": "Extra planner calls, detector inference and human feedback per step are not counted.",
+   "evidence_ids": [
+    "sol:E011",
+    "son55:E003"
+   ],
+   "score_item": [
+    "E.cost"
+   ],
+   "aggregate_decision": "revised (primary changed to decompose_and_delegate; sol's adapt_via_conditioning items replaced)"
+  },
+  {
+   "id": "rs:decompose_and_delegate:component_isolation",
+   "version": "ResearchStudio15+31 frozen RS_MANIFEST sha256=3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+   "source_strength": "corpus-derived original ResearchStudio review expectation; transferred check, not an actual review of this paper",
+   "source_refs": [
+    {
+     "path": "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md",
+     "sha256": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+     "embedded_text": "- **Provide ablations that isolate each component's marginal contribution, and especially show the claimed load-bearing step is what drives the gains rather than extra data or compute.** _(source: both)_"
+    }
+   ],
+   "applies_when": "A delegated pipeline (planner + external verifiers/skills) is claimed to change embodied task performance.",
+   "applicable": true,
+   "status": "partial",
+   "reason": "Per-channel toggles in sim/tabletop and Success-only in the kitchen; Scene+CoT bundle and human Object feedback not isolated; no budget-matched control.",
+   "evidence_ids": [
+    "sol:E003",
+    "sol:E004",
+    "agg:E003"
+   ],
+   "score_item": [
+    "E.causality"
+   ],
+   "aggregate_decision": "revised (primary changed to decompose_and_delegate; sol's adapt_via_conditioning items replaced)"
+  }
+ ],
+ "claims": [
+  {
+   "claim_id": "C01",
+   "text": "Closed-loop natural-language feedback from success detection, scene description and human interaction enables pretrained LLM planners to reason, retry and replan for complex embodied tasks, significantly improving high-level instruction completion across simulated tabletop, real tabletop and real kitchen mobile manipulation, including disturbances and emergent interactive behaviors.",
+   "setting": "Sim InstructGPT1.3B+scripted feedback; real tabletop InstructGPT1.3B+MDETR/heuristic; kitchen PaLM540B+SayCan+human objects.",
+   "baseline/control": "Sim Object/Object+Success/Object+Scene/CLIPort; tabletop open-loop/Object/Success/combined; kitchen SayCan/success/combined.",
+   "selection_vs_test": "4seen/4unseen sim behaviors with all-object primitive training; real tasks/scene substrate developed locally. No construction-unseen site split.",
+   "result/denominator": "50sim episodes/task,cap15;10real tabletop runs/task,combined100%stacking/80%sorting,mean90% vsopen-loop20%; kitchen120evaluations,30.8→48.7→60.4%. Simulation matching bowls Object56→+Success70→+Scene82%,mismatched62→76→86%; difficult unseen corner stacking0→4→6%. These are not uniform success improvements on every task.",
+   "evidence_ids": [
+    "sol:E002",
+    "sol:E003",
+    "sol:E004",
+    "sol:E005",
+    "sol:E007",
+    "sol:E011",
+    "sol:E015",
+    "sol:E017",
+    "sol:E018",
+    "son55:E007",
+    "son55:E008",
+    "agg:E001",
+    "agg:E002",
+    "agg:E003",
+    "son55:E029"
+   ],
+   "counterevidence": "Scene variant bundles chain-of-thought; oracle/human privilege in sim and kitchen Object; kitchen totals imply unequal per-method denominators and no CIs; real-tabletop noise protocol inconsistent between Sec 4.2 and Appendix A.2. CLIPort with a termination oracle exceeds every Inner Monologue variant on 3 of 4 seen simulated tasks (stack 32 vs <=26; corner/side 32 vs <=30; [x] bowl 94 vs <=56), while Inner Monologue wins pick-and-place (94 vs 74) and all unseen tasks.",
+   "allowed_conclusion": "Textual feedback improves measured robustness, with automated tabletop distinct from assisted kitchen; not fully autonomous general mobile manipulation or clean transfer."
+  },
+  {
+   "claim_id": "C02",
+   "text": "Emergent multilingual, goal-switching and interactive reasoning behaviors.",
+   "setting": "Qualitative prompted cases.",
+   "baseline/control": "No systematic matched rate baseline.",
+   "selection_vs_test": "Selected examples, not held-out capability testing.",
+   "result/denominator": "Examples shown; authors admit varying consistency.",
+   "evidence_ids": [
+    "sol:E012"
+   ],
+   "counterevidence": "Anecdotes do not establish reliability or retained improvement.",
+   "allowed_conclusion": "Illustrative existence, not calibrated general capability."
+  },
+  {
+   "claim_id": "son55:C1",
+   "text": "feedback improves completion in simulated tabletop rearrangement, including unseen tasks",
+   "setting": "Ravens-based sim, 8 tasks x 50 episodes, noise injected",
+   "baseline_control": "CLIPort (+oracle termination), LLM with one-shot Object listing",
+   "selection_vs_test": "seen tasks serve as prompts; feedback derived from ground truth",
+   "result": "e.g. matching bowls 56 -> 70 -> 82; stacking on corners about 0-6 for all",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E006",
+    "son55:E021",
+    "agg:E001",
+    "agg:E002"
+   ],
+   "counterevidence": [
+    "CLIPort+oracle exceeds all IM variants on 3 of 4 seen tasks (94 vs 46-56 on [x] bowl; 32 vs 4-26 on stacking; 32 vs 28-30 on corner/side) but loses on pick-and-place (74 vs 80-94) (aggregate correction of 'every ... on seen tasks').",
+    "Success feedback lowers some cells (52->46)",
+    "feedback is oracle (E009, E016)"
+   ],
+   "allowed_conclusion": "with oracle feedback, closed-loop language feedback helps on long-horizon matching tasks and generalizes to unseen instructions; not uniformly better than a trained policy with a termination oracle"
+  },
+  {
+   "claim_id": "son55:C2",
+   "text": "closed-loop detection and description lets a real tabletop robot recover",
+   "setting": "UR5e, 2 tasks x 10 runs, injected action noise",
+   "baseline_control": "open-loop one-shot object recognition",
+   "selection_vs_test": "prompt tasks match evaluation tasks",
+   "result": "total 20 -> 45/40 -> 90%",
+   "evidence_ids": [
+    "son55:E010",
+    "son55:E011",
+    "son55:E025"
+   ],
+   "counterevidence": [
+    "20 runs total",
+    "success criterion for the evaluated task not defined in text"
+   ],
+   "allowed_conclusion": "on two toy tasks with induced noise, combined feedback helps"
+  },
+  {
+   "claim_id": "son55:C3",
+   "text": "feedback improves a real mobile-manipulator kitchen agent over SayCan, especially under disturbances",
+   "setting": "120 evaluations, 3 task families, with/without adversarial disturbance",
+   "baseline_control": "SayCan with the same LLM and skills",
+   "selection_vs_test": "same kitchen as SayCan",
+   "result": "30.8 -> 48.7 -> 60.4% total; with disturbances SayCan 0-12.5%",
+   "evidence_ids": [
+    "son55:E012",
+    "son55:E013",
+    "son55:E014",
+    "son55:E027",
+    "son55:E029"
+   ],
+   "counterevidence": [
+    "human-provided object feedback",
+    "cell sizes small and unstated"
+   ],
+   "allowed_conclusion": "retry/replan with detector or human feedback outperforms SayCan on these forced-failure tasks"
+  }
+ ],
+ "assessment": {
+  "evidence_level": "online",
+  "evidence_level_reason": "Closed-loop sim (ground-truth reward) and real-robot runs with counts; sim feedback privileged, kitchen object feedback human, prompts overlap seen tasks; separate per-domain harnesses (not one harness transferred). Not transfer (EVIDENCE rule 2; anchors precedent 1).",
+  "claim_support": "scoped",
+  "author_claim_kept": "Closed-loop natural-language feedback from success detection, scene description and human interaction enables pretrained LLM planners to reason, retry and replan for complex embodied tasks, significantly improving high-level instruction completion across simulated tabletop, real tabletop and real kitchen mobile manipulation, including disturbances and emergent interactive behaviors.",
+  "strongest_supported_claim": "With textual success/scene feedback (ground-truth in sim, MDETR heuristics on a real tabletop, a learned detector plus human object labels in a real kitchen), a frozen LLM planner over pretrained skills recovers from induced failures better than the same planner without feedback (real tabletop 20% -> 90% over 2x10 runs; kitchen 30.8% -> 48.7% with learned success detection alone -> 60.4% with human object feedback). It does not uniformly beat a trained policy with a termination oracle on seen simulated tasks; emergent behaviours are anecdotal.",
+  "unresolved": [
+   "Gain with fully automated feedback in every domain",
+   "Kitchen per-cell denominators and variance",
+   "Online kitchen success-detector accuracy",
+   "LLM-call and human-feedback cost"
+  ],
+  "reproduction": "Author-reported only; nothing run by us."
+ },
+ "ratings": {
+  "G": {
+   "status": "resolved",
+   "rating": 4,
+   "reason": "Specific, falsifiable gap: prior LLM planners (Huang et al., SayCan) assume each step succeeds; the closest neighbour (SayCan) is the same-kitchen baseline and an open-loop Socratic-style description is a tabletop control; residue stated (oracle feedback, skill bottleneck). Both seats agree.",
+   "evidence_ids": [
+    "sol:E010",
+    "sol:E013",
+    "son55:E002",
+    "son55:E014",
+    "son55:E025",
+    "son55:E028"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "M": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Turning success/scene outputs into text directly targets silent step failure and occluded objects, with tested complementarity; reliance on the LLM actually using feedback is empirical (it sometimes ignores it), and detector reliability/privilege are assumptions. Both seats agree.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E010",
+    "son55:E019",
+    "sol:E005",
+    "sol:E006"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "X": {
+   "status": "resolved",
+   "rating": 3,
+   "reason": "Three instantiations documented (Table 4, Appendix A/D) with detectors, thresholds and prompts; failure modes explicit. Per-domain differences, privileged/human channels and an internal inconsistency in the real-tabletop noise protocol (Sec 4.2 sigma=4 mm clipped at 2 sigma vs Appendix A.2 1.5 cm / 0.7 cm capped at 1.5 sigma) limit exact reconstruction. Both seats agree on 3.",
+   "evidence_ids": [
+    "son55:E004",
+    "son55:E016",
+    "son55:E018",
+    "son55:E026",
+    "sol:E009",
+    "sol:E018"
+   ],
+   "counterevidence_ids": [],
+   "search_scope": []
+  },
+  "E": {
+   "measurement": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Simulation outcomes come from ground-truth reward over 50 episodes per task; real tabletop gives 10 runs per task but no stated success criterion; kitchen per-cell denominators are unstated and the pooled totals imply unequal per-method counts (see shared correction); judge of kitchen success unspecified. Anchors v2: criterion undefined or partial denominators -> 2. Both seats agree.",
+    "evidence_ids": [
+     "sol:E002",
+     "sol:E014",
+     "son55:E005",
+     "son55:E010",
+     "son55:E012",
+     "son55:E029",
+     "sol:E004"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "causality": {
+    "status": "resolved",
+    "rating": 3,
+    "reason": "Same-planner channel toggles (sim, real tabletop), open-loop description control and the same-kitchen SayCan baseline support attribution, and the non-privileged kitchen Success-only variant (learned detector) and fully automated real tabletop isolate gains without oracle channels. Remaining alternatives: Scene+CoT bundle, privileged GT/human channels in sim/kitchen-Object, CLIPort+oracle winning 3 of 4 seen tasks. Both seats agree on 3.",
+    "evidence_ids": [
+     "son55:E012",
+     "son55:E025",
+     "son55:E027",
+     "sol:E003"
+    ],
+    "counterevidence_ids": [
+     "son55:E007",
+     "son55:E008",
+     "son55:E016",
+     "agg:E002",
+     "agg:E003"
+    ],
+    "search_scope": []
+   },
+   "holdout": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Seen/unseen task split in simulation with gains on unseen tasks, but feedback and scoring both read simulator ground truth (privileged, anchors precedent 1), primitives trained on all objects, prompts include evaluation-style tasks, real tasks developed locally. Both seats agree.",
+    "evidence_ids": [
+     "son55:E021",
+     "son55:E016",
+     "son55:E017",
+     "sol:E007"
+    ],
+    "counterevidence_ids": [
+     "son55:E009"
+    ],
+    "search_scope": []
+   },
+   "statistics": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "Repeated trials with stated counts in two of three domains (50 episodes/task sim, 10 runs/task real tabletop) and qualitative failure-cause analysis; no variance/CI, kitchen cell sizes unstated. Anchors v2: trial counts without variance -> 1-2; repetition plus failure analysis places it at 2 (cf. SayCan, single-trial with decomposition, also 2).",
+    "evidence_ids": [
+     "sol:E002",
+     "son55:E005",
+     "son55:E010",
+     "son55:E029",
+     "sol:E006"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   },
+   "cost": {
+    "status": "resolved",
+    "rating": 2,
+    "reason": "No token/latency/USD figures, but the call budget is inferable (one planner call per step, shared cap k=15 for Inner Monologue and fixed-step CLIPort in simulation) while privileged ground-truth/human feedback channels are unpriced: the anchor-2 example. Not 'not_reported', because the step cap and per-step call structure are reported.",
+    "evidence_ids": [
+     "sol:E011",
+     "sol:E007",
+     "sol:E008",
+     "son55:E015"
+    ],
+    "counterevidence_ids": [],
+    "search_scope": []
+   }
+  }
+ },
+ "status": "reviewed",
+ "reason": "Complete fixed package (main text + Appendices A-D) checked by both seats and the aggregate; all eight ratings resolved under anchors v2.",
+ "score": {
+  "raw": 70.0,
+  "display": 70.0,
+  "lower": 70.0,
+  "upper": 70.0,
+  "coverage": 1.0,
+  "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+  "formula": "S=(15G+20M+20X+15Em+10Ec+10Eh+5Es+5Ek)/4; display=python round(raw,1); raw authoritative",
+  "qualification": "production-under-anchors-v2"
+ },
+ "aggregate_model": "claude-opus-5-5[1m]",
+ "aggregate_session": null,
+ "aggregate_receipt_ref": null,
+ "aggregate_review": {
+  "initial_evidence_judgment": "Read before seat totals: a case study of closed-loop textual feedback across three separately built domains. Online evidence (sim GT reward; real tabletop 10 runs/task; kitchen 120 evaluations with unclear cells). Privileged channels: sim feedback is ground truth and kitchen object feedback is human; the best sim variant adds chain-of-thought; CLIPort+oracle wins most seen sim tasks; the kitchen learned success detector has no reported accuracy. The automated real tabletop and kitchen Success-only variant give non-privileged support. Expect scoped support, online, holdout 2.",
+  "core_checks": {
+   "central_claim_support": "scoped",
+   "retained_online_transfer_labels": "online only",
+   "strongest_result": "real tabletop 20% -> 90% (2x10 runs, automated MDETR feedback)",
+   "key_control": "per-channel toggles; open-loop description; SayCan same kitchen",
+   "failure_denominator": "50/task sim; 10/task real tabletop; kitchen cells unstated, unequal per method",
+   "selection_vs_test": "seen tasks used as prompts; feedback privileged in sim"
+  },
+  "seat_integrity_notes": "Same version/material/input hash; both seats completed 15+31 identification with legal parents. sol cites one SayCan passage (sol:E013) bound to the SayCan material hash; verified literal."
+ },
+ "resolutions": [
+  {
+   "field_path": "rs_pattern.primary",
+   "sol_value": "adapt_via_conditioning",
+   "son55_value": "decompose_and_delegate",
+   "decision": "son55",
+   "final_value": "decompose_and_delegate",
+   "reason": "The paper's operation is a verifier-closed interleaved plan/act loop with in-place correction (C25), not task conditioning; generic few-shot prompting is not distinctive and sol found C03 inapplicable.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E018",
+    "sol:E010"
+   ],
+   "score_impact": "none (non-scoring field)"
+  },
+  {
+   "field_path": "rs_pattern.sub_ids",
+   "sol_value": [
+    null
+   ],
+   "son55_value": [
+    "rs:C25"
+   ],
+   "decision": "son55",
+   "final_value": [
+    "rs:C25"
+   ],
+   "reason": "Follows primary; C25 tactic (interleaved trace closed by execution verdicts, applied during construction, ablated by channel) is partially executed.",
+   "evidence_ids": [
+    "son55:E003",
+    "son55:E006",
+    "son55:E010"
+   ],
+   "score_impact": "none (non-scoring field)"
+  },
+  {
+   "field_path": "ratings.E.statistics",
+   "sol_value": 2,
+   "son55_value": 1,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Repeated trials with stated counts (50/task sim, 10/task real) and qualitative failure analysis; anchors v2 <=1 band requires no repetition and no failure decomposition. Consistent with SayCan's 2 (single trial but decomposed failures).",
+   "evidence_ids": [
+    "sol:E002",
+    "son55:E010",
+    "sol:E006"
+   ],
+   "score_impact": "+1.25 vs son55; 0 vs sol (final raw 70.0)"
+  },
+  {
+   "field_path": "ratings.E.cost",
+   "sol_value": 2,
+   "son55_value": 0,
+   "decision": "sol",
+   "final_value": 2,
+   "reason": "Not 'not_reported': the paper states a 15-step cap shared with the fixed-step baseline and one planner call per step, so call budgets are inferable; privileged GT/human channels unpriced. Anchor-2 example applies.",
+   "evidence_ids": [
+    "sol:E011",
+    "son55:E015"
+   ],
+   "score_impact": "+2.5 vs son55; 0 vs sol"
+  },
+  {
+   "field_path": "domain_pattern.matches",
+   "sol_value": [
+    "K104",
+    "K202"
+   ],
+   "son55_value": [
+    "K202",
+    "K109",
+    "K108"
+   ],
+   "decision": "revised",
+   "final_value": [
+    "K202",
+    "K109",
+    "K104"
+   ],
+   "reason": "K202 agreed; K109 adopted (MDETR/CLIP converters turn images into planner text, with privileged variants); K104 kept for the skill vocabulary; K108 dropped (qualitative case study only).",
+   "evidence_ids": [
+    "son55:E026",
+    "son55:E020",
+    "sol:E003",
+    "son55:E029"
+   ],
+   "score_impact": "none (non-scoring field)"
+  },
+  {
+   "field_path": "pattern_mapping",
+   "sol_value": "adapt_via_conditioning(null)<->K104/K202",
+   "son55_value": "C25<->K202/K109",
+   "decision": "revised",
+   "final_value": "C25<->K202, K109, K104",
+   "reason": "Follows rs and domain decisions.",
+   "evidence_ids": [
+    "son55:E003",
+    "sol:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E03.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No within-domain backbone comparison.",
+   "evidence_ids": [
+    "son55:E026"
+   ],
+   "score_impact": "none (expectation)"
+  },
+  {
+   "field_path": "expectations.E04.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "E04 requires variance/paired statistics; counts alone do not meet it (counts are credited in E.statistics=2).",
+   "evidence_ids": [
+    "son55:E005",
+    "son55:E010"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E05.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "son55",
+   "final_value": "unmet",
+   "reason": "No cost metrics reported; budget inferability is credited in E.cost, not as reporting.",
+   "evidence_ids": [
+    "sol:E011"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E08.status",
+   "sol_value": "partial",
+   "son55_value": "unmet",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "Overlap and privilege are disclosed in Sec 4.1 and Sec 5, which E08 asks for; no construction-unseen split.",
+   "evidence_ids": [
+    "son55:E021",
+    "son55:E009"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations.E22.status",
+   "sol_value": "partial",
+   "son55_value": "unknown",
+   "decision": "sol",
+   "final_value": "partial",
+   "reason": "Simulation budget cap is stated and shared; kitchen budgets not.",
+   "evidence_ids": [
+    "sol:E011"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "expectations (rs items)",
+   "sol_value": "rs:adapt_via_conditioning:isolation/overlap partial",
+   "son55_value": "absent",
+   "decision": "revised",
+   "final_value": "rs:decompose_and_delegate:added_cost unmet; component_isolation partial",
+   "reason": "Primary card changed; expectations transferred from the decompose_and_delegate card.",
+   "evidence_ids": [
+    "sol:E011",
+    "agg:E003"
+   ],
+   "score_impact": "none"
+  },
+  {
+   "field_path": "claims.counterevidence (CLIPort+oracle on seen tasks)",
+   "sol_value": "not mentioned",
+   "son55_value": "CLIPort+oracle beats every IM variant on seen tasks",
+   "decision": "revised",
+   "final_value": "exceeds all IM variants on 3 of 4 seen tasks; IM wins pick-and-place",
+   "reason": "Table 1 rows checked: stack 32 vs 26 max, corner/side 32 vs 30 max, [x] bowl 94 vs 56 max, pick-and-place 74 vs 94.",
+   "evidence_ids": [
+    "agg:E001",
+    "agg:E002",
+    "son55:E007",
+    "son55:E008"
+   ],
+   "score_impact": "none (supports causality=3 counterevidence)"
+  },
+  {
+   "field_path": "claims.counterevidence (noise protocol, Scene+CoT)",
+   "sol_value": "noise inconsistency and Scene+CoT noted",
+   "son55_value": "not noted",
+   "decision": "sol",
+   "final_value": "kept",
+   "reason": "Both verified literally in the material (Sec 4.2 vs Appendix A.2; Sec 4.1 CoT).",
+   "evidence_ids": [
+    "sol:E009",
+    "sol:E018",
+    "agg:E003"
+   ],
+   "score_impact": "none (X and causality reasons)"
+  }
+ ],
+ "shared_error_corrections": [
+  {
+   "id": "SEC-2207.05608-1",
+   "field_path": "claims (kitchen denominators) / ratings.E.measurement reason",
+   "shared_value": "Both seats treat '120 evaluations' as the kitchen denominator (sol: '120 evaluations, 30.8->48.7->60.4%'; son55: 'cell sizes about 6-9').",
+   "correction": "If the 120 evaluations were split evenly (40 per method), every total would be a multiple of 2.5%; none of 30.8/48.7/60.4 is. 48.7% is only consistent with n=39 (<=60) and 60.4% with n=48 or 53, so per-method evaluation counts differ and the pooled totals are not equal-denominator comparisons. Our arithmetic inference from the reported percentages.",
+   "evidence_ids": [
+    "sol:E004",
+    "son55:E012",
+    "son55:E029"
+   ],
+   "score_impact": "None beyond existing E.measurement=2 / E.statistics=2; recorded in claims and assessment.unresolved."
+  }
+ ],
+ "aggregate_status": "accepted_final",
+ "aggregate_status_reason": "All substantive differences resolved from the fixed text; no unresolved scoring or core-claim dispute.",
+ "final_record_hash": "1c7fc37012a20148c1da5cb4f657411c473d8bc13c0704be6561b7e4bc53ef3b"
+}

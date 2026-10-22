@@ -1,0 +1,1025 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p005",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2307.04738",
+    "paper_id": "2307.04738",
+    "title": "RoCo: Dialectic Multi-Robot Collaboration with Large Language Models",
+    "version": "2307.04738v1",
+    "claim_type": "system_method",
+    "central_claim": "Pretrained LLM role dialogue with environment-feedback repair produces coordinated multi-robot subtask plans and optional 3D waypoints that support successful collaborative tasks and accelerate centralized motion planning, with zero-shot semantic flexibility and human-robot applicability; RoCoBench and text reasoning data are accompanying resources, not substitutes for the system claim."
+  },
+  "materials": [
+    {
+      "sections_read": [
+        "Abstract",
+        "1–9 main text",
+        "10 RoCoBench all six task specifications",
+        "11 Prompting and Algorithm1",
+        "12.1–12.2 failures and hardware setup",
+        "13.1–13.2 toy planning",
+        "14.1–14.5 text dataset"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "limitations": "Prompt examples include explicitly redacted fields; main loop, typed outputs, ordered checks, pseudoalgorithm and hardware prompt are present. No absent appendix is inferred.",
+      "material_id": "M1",
+      "url": "https://arxiv.org/abs/2307.04738v1",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2307.04738.txt",
+      "sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "locator": "§1, line9",
+      "quote": "as the configuration space grows with the number of robots, finding collision-free motion plans becomes exponentially difficult",
+      "support_explanation": "Two-level bottleneck: high-level role coordination and joint-space motion complexity.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "locator": "§3.2, line15",
+      "quote": "If any of the checks fail, the feedback is appended to each agent’s prompt and another round of dialog begins.",
+      "support_explanation": "Construction-time verifier→prompt→repair closure is explicit, distinct from pure dialogue.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "locator": "§3.2, line15",
+      "quote": "The validations are conducted in the following order",
+      "support_explanation": "Parser, task constraints, IK, collision and optional waypoint checks establish conditional mechanical gate sequence.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "locator": "§3.2, line15",
+      "quote": "after which the current round ends without any execution and the next round begins",
+      "support_explanation": "Rejected plans are not executed; exhaustion bounded by rounds, not guaranteed success.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "locator": "§2, line12",
+      "quote": "execute in open-loop",
+      "support_explanation": "Motion trajectory execution itself lacks low-level closed-loop correction despite environment-round replanning.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "locator": "§5.1, line21",
+      "quote": "full environment observation, information on all robots’ capabilities and the same plan feedback",
+      "support_explanation": "Central Plan is an intentionally privileged same-GPT-4 oracle baseline; not an equal-information test of dialogue superiority.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "locator": "§5.1, line21",
+      "quote": "each episode is given twice the budget of episode length",
+      "support_explanation": "No-feedback baseline receives extra environment rounds; not matched total queries/retries or equivalent compute.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "locator": "Table2 caption, line21",
+      "quote": "over 20 runs per task",
+      "support_explanation": "Repeated task evaluation covers six tasks; uncertainty terms present, exact numerator/error convention not supplied here.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "locator": "Table2 caption, line21",
+      "quote": "the average number of steps in successful runs",
+      "support_explanation": "Step efficiency is conditional on success; cannot ignore failed episodes or call it unconditional cost.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "locator": "Table2, line21",
+      "quote": "0.44 ± 0.06 0.75 ± 0.10 0.95 ± 0.05 0.80 ± 0.08 0.93 ± 0.06 0.65 ± 0.11",
+      "support_explanation": "Dialog success rates for grocery/cabinet/sweep/sandwich/cubes/rope; not universally high or better than the oracle.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M1",
+      "locator": "Table2, line21",
+      "quote": "0.82 ± 0.06 0.90 ± 0.07 1.00 ± 0.00 0.96 ± 0.04 0.70 ± 0.10 0.50 ± 0.11",
+      "support_explanation": "Central oracle wins on four tasks, dialogue on cubes/rope; preserve mixed outcome.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E012",
+      "material_id": "M1",
+      "locator": "§5.2, line21",
+      "quote": "a maximum of 300 second planning time budget",
+      "support_explanation": "Waypoint study fixes motion-planning cap on sampled one-step snapshots.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E013",
+      "material_id": "M1",
+      "locator": "§5.2, line21",
+      "quote": "LLM-proposed waypoints show no clear benefits for picking sub-tasks",
+      "support_explanation": "Motion acceleration is scoped to placing, not universal picking/planning improvement.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E014",
+      "material_id": "M1",
+      "locator": "§5.4, line21",
+      "quote": "We evaluate 10 runs for each setup",
+      "support_explanation": "Four real human-UR5 sorting setups have explicit denominators, unlike qualitative semantic-variation examples.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E015",
+      "material_id": "M1",
+      "locator": "Table3, line21",
+      "quote": "9/10 8/10",
+      "support_explanation": "Hardware with human oracle correction: object-init9/10 and order8/10.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E016",
+      "material_id": "M1",
+      "locator": "Table3, line21",
+      "quote": "7/10 6/10",
+      "support_explanation": "Imperfect human/no error feedback:7/10 and6/10. These are distinct contracts, not pooled autonomous-robot success.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E017",
+      "material_id": "M1",
+      "locator": "§7, line27",
+      "quote": "RoCo assumes perception (e.g., object detection, pose estimation and collision-checking) is accurate.",
+      "support_explanation": "Simulation oracle assumption and real perception failure boundary disclosed.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E018",
+      "material_id": "M1",
+      "locator": "§7, line27",
+      "quote": "Response delay from LLM querying is not desirable for tasks that are dynamic or speed sensitive.",
+      "support_explanation": "Reported limitation on actual query cost/latency, not measured complete cost.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E019",
+      "material_id": "M1",
+      "locator": "Appendix12.1, line42",
+      "quote": "other agents repeat this wrong claim and choose to wait for multiple rounds while the task is, in fact, not finished.",
+      "support_explanation": "Dialogue agreement can propagate false completion; consensus is not independent task truth.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E020",
+      "material_id": "M1",
+      "locator": "Appendix11, line39",
+      "quote": "feedback buffer F",
+      "support_explanation": "Pseudoalgorithm separates round history from rejected-plan feedback; no durable cross-task policy edit.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E021",
+      "material_id": "M1",
+      "locator": "§3.3, line15",
+      "quote": "86.7\\% success rate over 30 runs, using on average 2.73 attempts",
+      "support_explanation": "Toy coordinate path generation uses feedback and up to5 tries; not robot transfer evidence.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E022",
+      "material_id": "M1",
+      "locator": "§8, line30",
+      "quote": "Text2Motion",
+      "support_explanation": "Relevant named TAMP/LLM predecessor, source is author related work; predecessor original unavailable.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E023",
+      "material_id": "M1",
+      "locator": "§5.3, line21",
+      "quote": "We showcase 3 main variation categories",
+      "support_explanation": "Object initialization, task recipe and reach constraints showcased qualitatively, not a counted construction-unseen benchmark.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E024",
+      "material_id": "M1",
+      "locator": "§3.3, line15",
+      "quote": "an RRT-based multi-arm motion planner that jointly plans across all robot arms",
+      "support_explanation": "Gate-valid task-space targets feed IK/RRT; LLM itself does not guarantee motion feasibility.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E025",
+      "material_id": "M1",
+      "locator": "Appendix12.1, line42",
+      "quote": "small errors in a motion trajectory could lead to unexpected errors",
+      "support_explanation": "Physical execution can invalidate the checked planned trajectory.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    },
+    {
+      "evidence_id": "E026",
+      "material_id": "M1",
+      "locator": "§5.4, line21",
+      "quote": "an oracle human that corrects mistakes in the OWL-ViT-guided scene descriptions and the robot’s responses",
+      "support_explanation": "Human privilege explicitly changes input/correction quality and must not be credited wholly to model.",
+      "kind": "author_report",
+      "material_sha256": "0cd5462383e0fa6c5772c76b7a2a3b91a38f6cbf6a8f4a77f4ef2a24cd0dc6ef"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Two/three tabletop manipulators with heterogeneous reach/grippers and individual observations",
+      "information": "Task-specific manually verbalized simulator state/capabilities; role-local observations; accumulated dialogue. Hardware OWL-ViT RGB-D plus human, with correction/no-correction protocols separate.",
+      "operation": "Role-conditioned GPT-4 agents discuss; last speaker emits typed per-agent subtask plan; parser→task/agent constraints→IK→collision→optional waypoint validation; failure reasons trigger another dialogue within bounded retries; accepted plan feeds joint IK/RRT; execute and refresh round.",
+      "output": "Validated subtask/waypoints plus centralized arm joint trajectories.",
+      "conditions": "Accurate geometric observations/checks, task-specific parser/skills, bounded retries/rounds, mostly static scenes.",
+      "feedback": "External gate verdicts and failure reasons before execution; next-round observations after execution.",
+      "selection_rule": "First proposal passing ordered checks; discard invalid proposals and execute none on retry exhaustion.",
+      "data": "RoCoBench simulation observations and constraints; prompts; human descriptions for hardware.",
+      "persistence": "Within-episode history H and per-round feedback F; no new persistent skills/harness code.",
+      "later_use": "Later rounds condition on history and environment state; no claimed cross-task retained update.",
+      "claimed_effect": "Coordinate feasible collaborative subgoals and repair invalid plans.",
+      "failure_boundary": "Oracle perception, dialogue factual cascades, no physical execution-level monitoring, cost grows with agent responses and replans.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E005",
+        "E017",
+        "E019",
+        "E020",
+        "E024",
+        "E026"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Joint-space multi-arm RRT search",
+      "information": "LLM receives gripper start/goal/obstacle geometry and semantic task; motion solver receives IK-goal sequence.",
+      "operation": "LLM optionally proposes spaced 3D task-space waypoints; IK/collision gate validates them; RRT uses intermediate goals instead of purely linear or hard-coded top-down routes.",
+      "output": "Collision-checked planned arm trajectories.",
+      "conditions": "Waypoint solvability and collision checking accurate; geometric relevance; task-specific manipulation primitive execution.",
+      "feedback": "IK/collision/spacing invalidity returned during construction.",
+      "selection_rule": "Only valid waypoint paths accepted within retry budget.",
+      "data": "Pack Grocery/Move Rope one-step pick/place snapshots.",
+      "persistence": "Accepted path temporary; no retained learning of planner.",
+      "later_use": "Execute selected trajectory; replan after environment round, not continuous correction.",
+      "claimed_effect": "Faster motion planning on obstructed placing.",
+      "failure_boundary": "No clear picking benefit, large toy grids degrade, computation cap excludes complete LLM overhead.",
+      "evidence_ids": [
+        "E003",
+        "E005",
+        "E012",
+        "E013",
+        "E021",
+        "E024"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Generic task-specific multi-robot pipelines struggle to combine role/capability allocation, semantic changes and high-dimensional collision-free motion.",
+    "checked_gap": "Specific coordination/geometry responsibilities and feedback pathway are operationally stated; results expose both gains and failures. Frozen text supports existence of bottleneck, but independent survey/novelty closure is unavailable.",
+    "lineage": [
+      {
+        "source": "2307.04738v1 §8",
+        "version": "v1",
+        "neighbor": "SayCan, Inner Monologue, Text2Motion, AutoTAMP, LLM-GROP, code-policy work",
+        "verification": "Author account only; originals absent from fixed materials."
+      },
+      {
+        "source": "2307.02485v2 §4/Appendix A (fixed batch)",
+        "version": "v2",
+        "neighbor": "CoELA",
+        "verification": "Independently read state-conditioned cooperation plus classical executor; RoCo specifically adds ordered external geometric repair and joint-arm motion."
+      }
+    ],
+    "closest_adjacent": "LLM-plus-TAMP verification and multi-agent dialogue; central same-model full-state planner is the in-paper strong comparator.",
+    "residue": "Structured multi-agent proposals must respect heterogeneous roles and geometric feasibility before motion execution; this is not solved by unverified role chat.",
+    "stakes": "Incorrect reach/coordination causes task failure; naive joint search and many LLM exchanges are costly.",
+    "method_response": "Typed per-agent plan plus ordered external validation and feedback, then joint-space RRT using optional waypoints.",
+    "remaining_gap": "Mostly oracle/static scenes; open-loop physical errors invisible at semantic layer; central oracle often stronger; no counted unseen task-set or latency-normalized superiority.",
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E006",
+      "E010",
+      "E011",
+      "E013",
+      "E017",
+      "E018",
+      "E019",
+      "E022"
+    ],
+    "unresolved": [
+      "Original predecessor methods/versions not independently read, so no closed historical novelty conclusion.",
+      "Development exposure to benchmark tasks and actual system-wide costs unknown."
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [
+      "adapt_via_conditioning"
+    ],
+    "outside_taxonomy": false,
+    "reason": "Model emits checkable per-agent plan/waypoints and uses external-verifier feedback mid-construction before IK/RRT execution; task adaptation changes context rather than model weights.",
+    "executes_pattern": "Yes: explicit machine-checkable artifact, reject/repair and solver delegation.",
+    "resolves_problem": "Partial task/placing improvement under ideal-state and bounded settings; not complete general robust multi-robot coordination.",
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong",
+        "tactic_steps_checked": [
+          {
+            "step": 1,
+            "status": "met",
+            "reason": "Semantic role/task reasoning separated from exact IK/collision/pathfinding."
+          },
+          {
+            "step": 2,
+            "status": "met",
+            "reason": "Per-agent structured plan and numeric waypoint artifact mechanically parsed/checked."
+          },
+          {
+            "step": 3,
+            "status": "met",
+            "reason": "Check failures enter all agents prompts for bounded repair before any action."
+          },
+          {
+            "step": 4,
+            "status": "partial",
+            "reason": "Same GPT-4 no-feedback control supports repair but twice episode horizon and unequal call costs complicate isolation."
+          },
+          {
+            "step": 5,
+            "status": "partial",
+            "reason": "6 robot tasks and real counted trials; complete solver/model overhead not priced."
+          }
+        ],
+        "success_checks": [
+          "Named external checker, bounded rejects, explicit geometric permissions."
+        ],
+        "failure_checks": [
+          "Checker validates proxy feasibility, not completion; oracle state and unpriced solver/LLM calls."
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E004",
+          "E007",
+          "E017",
+          "E019",
+          "E024"
+        ],
+        "reason": "Exact rs:C25 construction-time mechanical feedback criterion is satisfied; downstream runtime remains fallible."
+      },
+      {
+        "main_id": "adapt_via_conditioning",
+        "sub_id": null,
+        "role": "supporting",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          {
+            "step": "Shared role/task prompt schema",
+            "status": "met",
+            "reason": "Capabilities/observations/history/feedback change task context without policy tuning."
+          },
+          {
+            "step": "C03 broad substrate + held-out categories",
+            "status": "unmet",
+            "reason": "Qualitative semantic variation, not a separately trained schema interpreter or category-excluded benchmark."
+          }
+        ],
+        "success_checks": [
+          "Task recipe/role changes do not require parameter updates."
+        ],
+        "failure_checks": [
+          "C03 generalization evidence not established by ordinary zero-shot prompting."
+        ],
+        "evidence_ids": [
+          "E020",
+          "E023"
+        ],
+        "reason": "Main-level conditioning supported; null child avoids confusing in-context replanning with C03 substrate-transfer tactic."
+      }
+    ]
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "multi_robot_llm_coordination",
+        "sub": "R03",
+        "version": "2026-10-21 frozen cards",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "id": "S1",
+            "status": "partial",
+            "reason": "Feedback ablation positive on many tasks, no-feedback has extra rounds."
+          },
+          {
+            "id": "S3",
+            "status": "partial",
+            "reason": "Counted human-robot trials exist, but no systematic dynamic event-transfer test."
+          },
+          {
+            "id": "S4",
+            "status": "partial",
+            "reason": "Two/three agents, asymmetric roles/overlap varied; larger-team scaling untested."
+          },
+          {
+            "id": "F2",
+            "status": "present",
+            "reason": "Role dialog/geometry gate/capability descriptions share responsibility; central oracle often wins."
+          },
+          {
+            "id": "F5",
+            "status": "present",
+            "reason": "Simulator symbolic/geometry oracle."
+          }
+        ],
+        "evidence_ids": [
+          "E006",
+          "E007",
+          "E008",
+          "E010",
+          "E011",
+          "E014",
+          "E017"
+        ]
+      },
+      {
+        "main": "external_verification_control",
+        "sub": "K201",
+        "version": "2026-10-21 frozen cards",
+        "fit": "strong",
+        "condition_checks": [
+          {
+            "id": "S1",
+            "status": "met",
+            "reason": "Mechanical parser/constraint/IK/collision gate before execution."
+          },
+          {
+            "id": "F1",
+            "status": "present",
+            "reason": "Feasible plan not guaranteed task completion; factual false-completion cascades survive."
+          },
+          {
+            "id": "F2",
+            "status": "present",
+            "reason": "Oracle geometry and human correction optional."
+          },
+          {
+            "id": "F5",
+            "status": "present",
+            "reason": "Open-loop physical execution can diverge from validated plan."
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E003",
+          "E005",
+          "E019",
+          "E025",
+          "E026"
+        ]
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain_namespace": "embodied",
+      "domain_main": "external_verification_control",
+      "domain_sub": "K201",
+      "operation_correspondence": "Typed candidate plan → external ordered verdict → failure reason → another role dialogue → accept for IK/RRT.",
+      "necessary_conditions_and_differences": "Gate correctness conditional on perceived state; kinematic validity is not semantic truth or physical execution success.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E017",
+        "E019"
+      ]
+    },
+    {
+      "rs_main": "adapt_via_conditioning",
+      "rs_sub": null,
+      "domain_namespace": "embodied",
+      "domain_main": "multi_robot_llm_coordination",
+      "domain_sub": "R03",
+      "operation_correspondence": "Role/capability-conditioned agents divide work and repair plans using context feedback.",
+      "necessary_conditions_and_differences": "Local/asymmetric observations are provided by task-specific functions; no demonstrated arbitrary team scaling or C03 category holdout.",
+      "evidence_ids": [
+        "E006",
+        "E020",
+        "E023"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Dialogue or feedback claimed to improve collaborative planning.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Same GPT-4 central planner and ablations exist; central has more information, and all budgets not matched.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E010",
+        "E011"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "History/feedback/waypoints credited separately.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "History/feedback and path alternatives tested. Feedback ablation changes episode horizon; parser/IK/collision effects not independently isolated.",
+      "evidence_ids": [
+        "E002",
+        "E007",
+        "E012",
+        "E013"
+      ],
+      "score_item": [
+        "M",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Generality of LLM coordination asserted.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Multiple backbones only evaluated on text QA, not all embodied tasks; primary embodied comparisons use GPT-4.",
+      "evidence_ids": [
+        "E008",
+        "E020"
+      ],
+      "score_item": [
+        "E.holdout",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Success and efficiency claims need repeated trials.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "20 runs/task and error terms; hardware10/setup. Mean step cost conditional on success, error convention and per-failure counts incomplete.",
+      "evidence_ids": [
+        "E008",
+        "E009",
+        "E014",
+        "E015",
+        "E016"
+      ],
+      "score_item": [
+        "E.measurement",
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Efficiency/cost and motion acceleration claimed.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Replan/steps and300-second motion cap known; LLM queries/cost/latency and failed attempts not fully accounted.",
+      "evidence_ids": [
+        "E007",
+        "E009",
+        "E012",
+        "E018"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E08",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Generalization beyond ideal simulation suggested.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Oracle perception and human-correction privilege disclosed; no construction-exposure audit and no counted independent new-task-set benchmark.",
+      "evidence_ids": [
+        "E017",
+        "E023",
+        "E026"
+      ],
+      "score_item": [
+        "X",
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E16",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Completion or collision validity used in embodied task loop.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "False completion/execution errors described, but no calibrated false-positive/false-negative or task-level failure-rate breakdown.",
+      "evidence_ids": [
+        "E019",
+        "E025"
+      ],
+      "score_item": [
+        "X",
+        "E.measurement",
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E18",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/external_verification_control.md#Reviewer expectations"
+      ],
+      "applies_when": "Pre-execution gate claimed useful.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Gate order, reject rule, retry bounds and no-feedback comparison available; total accepted/rejected breakdown per checker and full ungated safety/control experiment absent.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E007"
+      ],
+      "score_item": [
+        "X",
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Real human-robot success claimed.",
+      "applicable": true,
+      "status": "met",
+      "reason": "Object-init and ordered-task trials have10 each for oracle and imperfect human; preserve four separate rates and correction assumptions.",
+      "evidence_ids": [
+        "E014",
+        "E015",
+        "E016",
+        "E026"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "domain-card snapshot 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/multi_robot_llm_coordination.md#Reviewer expectations"
+      ],
+      "applies_when": "Efficiency comparison across dialogue and central planning.",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Environment horizons and motion cap specified, but unequal no-feedback horizon, per-agent calls, and extra oracle information prevent full resource equality.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E012",
+        "E018"
+      ],
+      "score_item": [
+        "E.cost",
+        "E.causality"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Dialogue + feedback supports coordinated multi-robot performance on RoCoBench.",
+      "setting": "Six MuJoCo tabletop tasks,2–3 robots, varied roles/asymmetric observations and workspace overlap.",
+      "baseline_control": "Same GPT-4 Central Plan full-state oracle; Dialog without history; Dialog without feedback.",
+      "budgets": "20 runs/task; bounded rounds/replans; no-feedback twice episode horizon, not all-calls equal.",
+      "selection_vs_test": "Tasks co-designed as benchmark; same six tasks for main comparisons, not independent construction holdout.",
+      "result_denominator": "Dialog success .44/.75/.95/.80/.93/.65 with error terms; oracle .82/.90/1/.96/.70/.50; step means successful runs only.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E008",
+        "E009",
+        "E010",
+        "E011"
+      ],
+      "counterevidence": [
+        "Oracle stronger four/six tasks; no-history cabinet1.00 vs full.75; no-feedback sweep.95 equals full.95."
+      ],
+      "alternative_explanations": [
+        "Validator/role constraints, information asymmetry and extra retry budget rather than dialogue alone."
+      ],
+      "allowed_conclusion": "Feedback/history useful on several tasks; no universal dialogue superiority or high success on every task."
+    },
+    {
+      "claim_id": "C2",
+      "text": "LLM-proposed 3D waypoints accelerate multi-arm motion planning.",
+      "setting": "Grocery/rope isolated pick/place snapshots with high workspace overlap.",
+      "baseline_control": "Linear interpolation and hard-coded top-down waypoints, same motion planner.",
+      "budgets": "Maximum300 seconds motion planning; complete LLM generation and repair latency not included in demonstrated speedup.",
+      "selection_vs_test": "Own task snapshots; no independent unseen geometry suite established.",
+      "result_denominator": "Figure4 planning sample/time comparison; toy separate30 runs with5 tries and86.7% success.",
+      "evidence_ids": [
+        "E012",
+        "E013",
+        "E021",
+        "E024"
+      ],
+      "counterevidence": [
+        "No clear benefit for picking; larger toy grids/obstacle density degrade."
+      ],
+      "alternative_explanations": [
+        "Task-specific placement geometry and valid-target filtering."
+      ],
+      "allowed_conclusion": "Useful placing priors under checked geometry; not universally faster end-to-end autonomous planning."
+    },
+    {
+      "claim_id": "C3",
+      "text": "RoCo adapts to semantic variations and real human-robot collaboration.",
+      "setting": "Qualitative sandwich recipe/reach/init changes; real UR5+human block sorting using OWL-ViT.",
+      "baseline_control": "Human oracle correction versus imperfect human without correction; no alternative real-robot harness.",
+      "budgets": "10 runs for each of4 real setups.",
+      "selection_vs_test": "Real tabletop/hardware setup separate from simulator but harness/perception/prompts adapted there; construction-unseen status not documented.",
+      "result_denominator": "9/10 and8/10 corrected,7/10 and6/10 uncorrected; successful-step averages5.3/5.5/5.6/5.2.",
+      "evidence_ids": [
+        "E014",
+        "E015",
+        "E016",
+        "E017",
+        "E023",
+        "E026"
+      ],
+      "counterevidence": [
+        "Perception is dominant real bottleneck and humans correct agent/scene errors in stronger condition."
+      ],
+      "alternative_explanations": [
+        "Human supervision and task-specific description/skill design."
+      ],
+      "allowed_conclusion": "Counted hardware human-robot feasibility; qualitative adaptability, not robust no-privilege autonomous transfer."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "evidence_level_reason": "Counted closed-loop simulator tasks plus40 real human-robot trials. Real setup uses adapted prompts/perception and task, not demonstrated construction-unseen sim-to-real transfer of fixed harness; no automatic transfer upgrade.",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Typed role-dialogue plans repaired by external feasibility checks support multi-arm tasks; checked waypoint priors help placing, and counted human-assisted real sorting is feasible. The oracle is often stronger and physical robustness remains limited.",
+    "unresolved": [
+      "Independent novelty versus original TAMP neighbors; benchmark-development overlap; exact error-bar convention/success numerators; fully cost-normalized and autonomous-real controls."
+    ],
+    "reproduction": "None; no paper code executed."
+  },
+  "ratings": {
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Clearly separates role/capability coordination from joint geometry, with concrete constraints and predecessor families. Independent originals and broader nearest-neighbor closure unavailable.",
+      "evidence_ids": [
+        "E001",
+        "E022"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Typed plans, ordered mechanical repair and solver-waypoint handoff directly address bottlenecks; scope limited by accurate perception and open-loop control; general dialogue superiority not implied.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E024"
+      ],
+      "counterevidence_ids": [
+        "E005",
+        "E017"
+      ],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Ordered accept/reject, bounded retries, history and IK/RRT chain are reconstructable with explicit information privilege and failure boundaries; some prompts redacted and execution-error recovery/checker audit incomplete.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E004",
+        "E020",
+        "E024"
+      ],
+      "counterevidence_ids": [
+        "E005",
+        "E019",
+        "E025"
+      ],
+      "search_scope": []
+    },
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Task-grounded success across6 tasks and10-run hardware denominators, including human-correction separation; not single-run. No independent real verifier calibration/complete success numerators and outcome-conditional efficiency prevent4.",
+        "evidence_ids": [
+          "E008",
+          "E014",
+          "E015",
+          "E016",
+          "E026"
+        ],
+        "counterevidence_ids": [
+          "E009",
+          "E017",
+          "E019"
+        ],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Same-backbone feedback/history interventions and same-planner waypoint alternatives substantially test proposed mechanisms; unequal no-feedback horizon and oracle information leave nontrivial confounding, and mixed effects retained.",
+        "evidence_ids": [
+          "E006",
+          "E007",
+          "E012"
+        ],
+        "counterevidence_ids": [
+          "E011",
+          "E013"
+        ],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Variations and real setup show breadth, but main six tasks co-designed, variations qualitative and no verified construction-unseen task/body protocol.",
+        "evidence_ids": [
+          "E014",
+          "E023"
+        ],
+        "counterevidence_ids": [
+          "E017",
+          "E026"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "20-run task error bars and explicit hardware denominators are substantial; error definition, exact aggregated numerators/seed treatment and quantitative failure decomposition not supplied. Successful-only step means hide failure cost.",
+        "evidence_ids": [
+          "E008",
+          "E014",
+          "E015",
+          "E016"
+        ],
+        "counterevidence_ids": [
+          "E009",
+          "E019",
+          "E025"
+        ],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Motion-planning cap, environment steps and replans make partial budgets visible; whole dialog query/token/USD/wall-clock costs and rejected attempts not priced.",
+        "evidence_ids": [
+          "E007",
+          "E009",
+          "E012"
+        ],
+        "counterevidence_ids": [
+          "E018"
+        ],
+        "search_scope": []
+      }
+    }
+  },
+  "status": "reviewed",
+  "reason": "Complete fixed text including all appendices read; preserve external gate vs task truth, oracle-state privilege, open-loop trajectory limitation and mixed baseline outcomes. No original predecessor fulltexts were available for independent historical novelty closure.",
+  "provenance": {
+    "input_hash": "6ada20ee8469fdb754ac03c2e1662a77e7841a64631f74bf69943a6a1bc81674",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated + anchors v2 (3ececdd11cc3d144)",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": {
+      "taxonomy": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e",
+      "conditions": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "overview": "2bc4cdeb322e2c8ed96598feb5c4867b858f48b6bf9efa0eb29943735d84cdcf"
+    },
+    "expectations_hash": "db5ce019a8741274e2e71a284a59f3457cf2dfc5454fcc4bf98d34b6e76b24c7",
+    "model_type": "sonnet type (overlay gpt-6.1-sol, 6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "session_id": null,
+    "receipt_ref": null,
+    "timestamp": "2026-10-22T03:00:18.609797+00:00",
+    "notes": [
+      "phase=production; anchors_version=v2 (3ececdd11cc3d144); independent sol initial review, no other-seat/aggregate outputs read.",
+      "Model identity from existing session context; no probing or reconfiguration. Session ID/receipt unavailable in task-local supplied metadata; null is not a missing scientific-evidence blocker.",
+      "expectations_hash 由总控提供，内容未读; exact hash checked locally only. Expectation substance comes from authorized embedded domain main cards, not unread private profile.",
+      "Offline fixed materials only. All empirical results below are author reports; no paper code run and no reproduction claimed."
+    ]
+  },
+  "score": {
+    "raw": 70.0,
+    "display": 70.0,
+    "lower": 70.0,
+    "upper": 70.0,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  }
+}

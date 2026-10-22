@@ -1,0 +1,48 @@
+{
+ "batch_id": "p003",
+ "run_id": "embodied-v22-20261021-01",
+ "phase": "production",
+ "papers": [
+  {
+   "paper_key": "2305.11176",
+   "paper_id": "2305.11176",
+   "version": "2305.11176v3",
+   "title": "Instruct2Act: Mapping Multi-modality Instructions to Robotic Actions with Large Language Model",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.11176.txt",
+   "material_sha256": "e737d50b541960a3a3531aa0489a80bdff93460e5eb50fa21c25d1c218d120b8"
+  },
+  {
+   "paper_key": "2305.15695",
+   "paper_id": "2305.15695",
+   "version": "2305.15695v2",
+   "title": "Asking Before Acting: Gather Information in Embodied Decision Making with Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.15695.txt",
+   "material_sha256": "f05ff00ce72aab7a294be6b7baef004fe136646ad9d19068bd2620336125917d"
+  },
+  {
+   "paper_key": "2305.16291",
+   "paper_id": "2305.16291",
+   "version": "2305.16291v2",
+   "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.16291.txt",
+   "material_sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41"
+  },
+  {
+   "paper_key": "2305.16986",
+   "paper_id": "2305.16986",
+   "version": "2305.16986v3",
+   "title": "NavGPT: Explicit Reasoning in Vision-and-Language Navigation with Large Language Models",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.16986.txt",
+   "material_sha256": "66bae655b0dae26704ec6d99482c4e3776aa84643b2cd04de0230f5444149484"
+  },
+  {
+   "paper_key": "2306.08647",
+   "paper_id": "2306.08647",
+   "version": "2306.08647v2",
+   "title": "Language to Rewards for Robotic Skill Synthesis",
+   "material_path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2306.08647.txt",
+   "material_sha256": "9a631cee3e069056cdfda5190eae5bb8f48fbf9343ad484bbb30e5b7855958cc"
+  }
+ ],
+ "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56"
+}

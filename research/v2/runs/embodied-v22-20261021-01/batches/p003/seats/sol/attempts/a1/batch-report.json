@@ -1,0 +1,97 @@
+{
+  "schema_version": "radar-batch-report-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p003",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+  "assigned": 5,
+  "reviewed": 5,
+  "needs_fulltext": 0,
+  "needs_evidence": 0,
+  "out_of_scope": 0,
+  "outside_taxonomy": 0,
+  "outside_taxonomy_ratio": 0.0,
+  "domain_unassigned_papers": [
+    "2306.08647"
+  ],
+  "schema_errors": 0,
+  "model_type": "sonnet",
+  "actual_model": "gpt-6.1-sol",
+  "actual_model_basis": "Assigned runtime identity; no model probing/reconfiguration",
+  "session_id": null,
+  "receipt_ref": null,
+  "session_unavailable_reason": "No independently available subagent session/receipt supplied; not fabricated",
+  "supersedes": null,
+  "score_regime": "production-under-anchors-v2",
+  "formally_frozen": false,
+  "downstream_restriction": "Not formal ranking/Reel before further user confirmation",
+  "validation": {
+    "papers_checked": 5,
+    "method": "Attempt-local deterministic checks against BATCH_CONTRACT; not a general official validator or independent scientific audit",
+    "exact_manifest_coverage": true,
+    "identities_materials_assets_hashes": true,
+    "continuous_quotes": true,
+    "reference_integrity": true,
+    "original_parent_ids": true,
+    "domain_namespace": true,
+    "required_nested_fields": true,
+    "ratings_score_bounds_coverage": true,
+    "shared_two_seat_checker_executed": false,
+    "temporary_json_files": [],
+    "audit_status": "pending independent aggregate review",
+    "local_validator_note": "Initial extra checker assertion expected taxonomy.main to be a mapping; corrected checker to set of listed id fields. No review change required."
+  },
+  "papers": [
+    {
+      "paper_key": "2305.11176",
+      "version": "2305.11176v3",
+      "status": "reviewed",
+      "record_path": "/home/lingxufeng/embodied-harness-radar/research/v2/runs/embodied-v22-20261021-01/batches/p003/seats/sol/attempts/a1/2305.11176.json",
+      "record_sha256": "d564ed098ebe3efcda0793a9e5861f36bc02b2eccd9bad7438d09b374dc3279d",
+      "summary": "Simulation multimodal code/API manipulation supported; baseline matching, physical transfer and costs limited."
+    },
+    {
+      "paper_key": "2305.15695",
+      "version": "2305.15695v2",
+      "status": "reviewed",
+      "record_path": "/home/lingxufeng/embodied-harness-radar/research/v2/runs/embodied-v22-20261021-01/batches/p003/seats/sol/attempts/a1/2305.15695.json",
+      "record_sha256": "4b57a6dd723ff21d98b890310c8b74d0716ee1658f0699698632341cd514af0e",
+      "summary": "Ask/act benefits oracle-enabled simulation; privileged information and human physical execution bound claims."
+    },
+    {
+      "paper_key": "2305.16291",
+      "version": "2305.16291v2",
+      "status": "reviewed",
+      "record_path": "/home/lingxufeng/embodied-harness-radar/research/v2/runs/embodied-v22-20261021-01/batches/p003/seats/sol/attempts/a1/2305.16291.json",
+      "record_sha256": "a1676fe72088ce4c11359c3e03828b26e7b3438606e17c80bc83d0cca5260803",
+      "summary": "Minecraft curriculum/code-memory/repair and limited new-world reuse supported; symbolic state and unaudited verifier constrain generality."
+    },
+    {
+      "paper_key": "2305.16986",
+      "version": "2305.16986v3",
+      "status": "reviewed",
+      "record_path": "/home/lingxufeng/embodied-harness-radar/research/v2/runs/embodied-v22-20261021-01/batches/p003/seats/sol/attempts/a1/2305.16986.json",
+      "record_sha256": "5ff7dbdeb5ef99331eda3b0f10f259807395b7b4b0c996f689c3629146d7d45c",
+      "summary": "Graph VLN supported; main783/GPT4 versus ablation216/GPT3.5 separated, repeats and costs absent."
+    },
+    {
+      "paper_key": "2306.08647",
+      "version": "2306.08647v2",
+      "status": "reviewed",
+      "record_path": "/home/lingxufeng/embodied-harness-radar/research/v2/runs/embodied-v22-20261021-01/batches/p003/seats/sol/attempts/a1/2306.08647.json",
+      "record_sha256": "4d27ce8fbd1a21b08bba30a5dacc635fb266a5018e05acb0ee10e2bf20b61358",
+      "summary": "Reward/MPC synthesis supported; best-code coverage not first-try SR; physical denominators absent and domain mapping unassigned."
+    }
+  ],
+  "blockers": [],
+  "nonblocking_limits": [
+    "No external neighbor-version/novelty search; paper-local lineage explicitly qualified.",
+    "Figure-only values/traces not invented; extraction limits recorded.",
+    "Voyager included as3D embodied simulation, not physical robotics.",
+    "Original taxonomy matched all5; reward/MPC remains unassigned in embodied-domain taxonomy.",
+    "Proprietary-model contamination/development overlap not independently verifiable."
+  ],
+  "blindness": "No other-seat/aggregate/old-score/outcome records read. Attempt to recover own Voyager tool invocation inspected only matching own tool-use input and recovered0 entries; no other conclusions accessed.",
+  "boundary_compliance": "Only own attempt written; no network search, paper code, git or shared-state operations; source text treated as data."
+}

@@ -33,6 +33,17 @@ def main(n=5):
     if not cand:
         print("NO-CANDIDATES"); return 1
     papers = cand[:n]
+    MAT = f"research/fulltext/review-runs/{RUN}/materials"
+    for q in papers:
+        fp = f"{MAT}/{q['paper_key']}.txt"
+        if not (os.path.exists(fp) and open(fp, encoding='utf-8', errors='ignore').read(24).startswith("FULLTEXT: html-full")):
+            print(f"MATERIAL-MISSING {q['paper_key']}"); return 1
+        import hashlib as _h
+        q["material_path"] = fp
+        h = _h.sha256()
+        with open(fp,'rb') as f:
+            for c in iter(lambda: f.read(1<<16), b''): h.update(c)
+        q["material_hash"] = h.hexdigest()
     # batch id: p001, p002 ...
     nums = [int(b[1:]) for b in os.listdir(f"{BASE}/batches") if b.startswith("p") and b[1:].isdigit()]
     bid = f"p{max(nums, default=0)+1:03d}"
@@ -41,7 +52,7 @@ def main(n=5):
     os.makedirs(f"{d}/aggregate/attempts/a1", exist_ok=True)
     m = {"batch_id": bid, "run_id": RUN, "phase": "production",
          "papers": [{"paper_key":q["paper_key"],"paper_id":q["paper_id"],"version":q["version"],
-                     "title":q["title"],"material_path":f"research/fulltext/{q['paper_key']}.txt",
+                     "title":q["title"],"material_path":q["material_path"],
                      "material_sha256":q["material_hash"]} for q in papers]}
     m["input_hash"] = hashlib.sha256(json.dumps(m,ensure_ascii=False,sort_keys=True).encode()).hexdigest()
     with open(f"{d}/inputs_manifest.json","w") as f: json.dump(m,f,ensure_ascii=False,indent=1)

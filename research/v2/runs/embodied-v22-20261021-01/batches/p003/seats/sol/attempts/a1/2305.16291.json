@@ -1,0 +1,846 @@
+{
+  "schema_version": "radar-review-v2.2",
+  "run_id": "embodied-v22-20261021-01",
+  "batch_id": "p003",
+  "attempt_id": "a1",
+  "seat": "sol",
+  "paper": {
+    "paper_key": "2305.16291",
+    "paper_id": "2305.16291",
+    "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+    "version": "2305.16291v2",
+    "claim_type": "system_method",
+    "central_claim": "Voyager autonomously explores Minecraft, continually acquires compositional executable skills without weight updates, substantially improves exploration and tech-tree efficiency over adapted LLM agents, and reuses learned skills on novel tasks in a new world."
+  },
+  "provenance": {
+    "input_hash": "b8c4d2f518aa35ee11b7311aa4d0e4af11239448855a647438235c2015150b56",
+    "rubric_version": "SCORE_SPEC v2.2 draft_uncalibrated（初始权重 G15/M20/X20/E45，E子项15/10/10/5/5）",
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51",
+    "rs_manifest_hash": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+    "domain_cards_hash": "fb0b31c4389ea91a90ae4119d96975e559d1b7d46af8e1edee5e0f731b9b8a92",
+    "expectations_hash": "cc0b426a4270c094afe3f1fa150b4e90cbf21fd63dde1fc7bdea2c0510565c21",
+    "asset_hash_scheme": "SHA256(canonical JSON relative-path -> SHA256(file bytes), sort_keys UTF8 ensure_ascii=false compact)",
+    "domain_card_assets": {
+      "patterns/main/harness_memory_skill_reuse.md": "0e8b68f52d7861b3c4493d0432260c83707f46e9968c22e615ef506a1597351f",
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825",
+      "patterns/sub/K105.md": "5e8cbcc6df247e2ffd421d1e15069cf633648f756bf07272a2508a002e7b3f9b",
+      "patterns/sub/K303.md": "a9a6717e9131a1f795998f520bf9308cdee21d9f856730764f0c98aef19a44c4",
+      "research/patterns/conditions.json": "2ca1e76481d3468d1c0020eb81e4eb42a4bd4e814df0d0b187ee316e8825cfa1",
+      "research/patterns/taxonomy.json": "daf38e579a46689d2f8da6291bb3f79fb050bb1c1383dad4c704353f32ec9e0e"
+    },
+    "expectation_assets": {
+      "patterns/main/harness_memory_skill_reuse.md": "0e8b68f52d7861b3c4493d0432260c83707f46e9968c22e615ef506a1597351f",
+      "patterns/main/planner_composes_code_and_policies.md": "c950ce868ceb18e67259d84935d02849927b8e3ef83f6e9ce15ec662b9fad825"
+    },
+    "rs_assets": {
+      "research/reference/researchstudio-15-31/MANIFEST.tsv": "3fc06b621b26f2ea87aa273ee34e2a80308fd09102f1530056428662b0971e32",
+      "research/reference/researchstudio-15-31/PARENTS.tsv": "aa8c4eabb1641c4acb72c887046b116495365134f27d2021d2e3b46e91db543b",
+      "research/reference/researchstudio-15-31/ideation-patterns/adapt_via_conditioning.md": "b5aac2a729f2c46ae2a7a593823115fec9749da30477c6aeb75a2c36325f085b",
+      "research/reference/researchstudio-15-31/ideation-patterns/decompose_and_delegate.md": "504a0f168dd1f8fb5e725f1a2d404b172d0967be6f3d91f9d32801067dbaa0cd",
+      "research/reference/researchstudio-15-31/ideation-sub-patterns/C03.md": "8c69e090645656f141b869a7701f6f611917395f2abf6578eced99520dea6da9",
+      "research/reference/researchstudio-15-31/ideation-sub-patterns/C25.md": "ced46168bbcc6ab1aeaf9a242b47631d6076097bd8758c08560c3faa888da4ff"
+    },
+    "expectations_note": "Expectations are embedded in fixed main cards; no standalone expectations asset. Historical reviewer expectations are source-derived checks, not evidence of this paper's review outcome.",
+    "model_type": "sonnet",
+    "model_type_description": "sonnet type overlay gpt-6.1-sol (6.1 Sol)",
+    "actual_model": "gpt-6.1-sol",
+    "actual_model_basis": "Assigned runtime identity; no model probing or reconfiguration.",
+    "session_id": null,
+    "receipt_ref": null,
+    "session_receipt_unavailable_reason": "No independently available subagent session ID/receipt in assigned runtime; not fabricated or probed.",
+    "timestamp": "2026-10-22T02:33:17.214770+00:00",
+    "phase": "production",
+    "anchors_version": "v2",
+    "anchors_sha256": "3ececdd11cc3d14469939731c6290ee42c423e8bf840ba8a8295c1cb58aedb73",
+    "score_regime": "production-under-anchors-v2",
+    "formally_frozen": false,
+    "downstream_restriction": "Not for formal ranking/Reel before further user confirmation.",
+    "blindness": "Only assigned manifest/materials, fixed rules/cards and designated anchors read; no other-seat, aggregate, old scores or outcome labels read."
+  },
+  "materials": [
+    {
+      "material_id": "M1",
+      "url": "https://arxiv.org/html/2305.16291v2",
+      "version": "2305.16291v2",
+      "path": "research/fulltext/review-runs/embodied-v22-20261021-01/materials/2305.16291.txt",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sections_read": [
+        "Abstract/introduction/related work",
+        "Sec2 curriculum, skill library and iterative prompting",
+        "Sec3 setup, exploration, tech tree, new tasks, six ablations",
+        "Limitations/conclusion",
+        "Full Appendices A/B: prompts, code API, baselines, retrieval, model variation and human feedback"
+      ],
+      "complete": true,
+      "missing_sections": [],
+      "extraction_limits": "Full supplied text including appendices read. No external videos, code, or linked pages retrieved.",
+      "completeness_basis": "Methods, experimental protocol/results, limitations and end of supplied appendices inspected; completeness is text-material completeness, not independent verification of figures or software."
+    }
+  ],
+  "evidence": [
+    {
+      "evidence_id": "E001",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Sec2; extracted-text L9; character 6103",
+      "quote": "self-verification module confirms the task completion",
+      "support_explanation": "LLM semantic verification gates acceptance; independent calibration not supplied.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E002",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Sec2; extracted-text L9; character 6173",
+      "quote": "we commit the program to the skill library",
+      "support_explanation": "Actual persistent executable memory, not a proposal.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E003",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Sec3; extracted-text L15; character 17131",
+      "quote": "discovering 63 unique items within 160 prompting iterations",
+      "support_explanation": "Acquisition count within explicit prompting budget.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E004",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Table2; extracted-text L15; character 21184",
+      "quote": "Fractions indicate the number of successful trials out of three total attempts.",
+      "support_explanation": "New tasks3 attempts each; full and no-library baselines included.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E005",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Table2; extracted-text L15; character 21320",
+      "quote": "maximal prompting iterations (50)",
+      "support_explanation": "Failed attempts included; iteration is cost proxy only.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E006",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Appendix B; extracted-text L36; character 79054",
+      "quote": "three rounds of code refinement (equivalent to four rounds of code generation)",
+      "support_explanation": "Bounded execution-feedback repair.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E007",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Appendix B retrieval; extracted-text L36; character 87607",
+      "quote": "309 samples in total",
+      "support_explanation": "Relevance audit sample count; not verifier correctness.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E008",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Appendix B retrieval; extracted-text L36; character 87696",
+      "quote": "96.5% suggests our retrieval process is reliable",
+      "support_explanation": "Top5 relevance96.5±0.3, not downstream physical validity.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E009",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Appendix B; extracted-text L36; character 88038",
+      "quote": "all of Voyager’s experiments are conducted with gpt-4-0314",
+      "support_explanation": "Main model fixed;0613 snapshot test not independent weak/strong generality.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E010",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Abstract; extracted-text L6; character 597",
+      "quote": "environment feedback, execution errors, and self-verification for program improvement",
+      "support_explanation": "Distinct feedback channels used in code repair.",
+      "kind": "author_report"
+    },
+    {
+      "evidence_id": "E011",
+      "material_id": "M1",
+      "material_hash": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "sha256": "c669c0895f8ca22e33b4537e1d7ee22043bc6747c76b5e4c73c0c785c5ca0d41",
+      "locator": "2305.16291v2; Limitations; extracted-text L18; character 26388",
+      "quote": "The GPT-4 API incurs significant costs.",
+      "support_explanation": "Authors report15-times GPT3.5 price; no full run bill.",
+      "kind": "author_report"
+    }
+  ],
+  "signatures": [
+    {
+      "sig_id": "S1",
+      "object": "Curriculum, code generation, execution and admission",
+      "information": "GPT4 receives inventory, nearby blocks/entities, biome/time/health/position and Mineflayer high-level APIs; privileged symbolic state, not vision/low-level control.",
+      "operation": "Curriculum proposes task; emit and execute JavaScript; repair from environment/runtime/verification returns, at most4 generations then defer.",
+      "output": "Executed task code and feedback.",
+      "conditions": "Reliable high-level executor/state, useful curriculum and accurate verifier.",
+      "feedback": "Runtime errors, environment state and LLM self-verification; last is not independently calibrated.",
+      "selection_rule": "Self-verifier confirms task then admits program.",
+      "selection_data": "Same exploration world/task stream grows skills; random curriculum uses101 Voyager-discovered-item pool.",
+      "persistence": "Accepted code/descriptions and embedding index, frozen weights.",
+      "later_use": "Retrieve/combine functions in later tasks.",
+      "claimed_effect": "Faster and broader acquisition.",
+      "failure_boundary": "High-level symbolic Minecraft, inventory retention on death/recycling conveniences, verifier error and GPT4 cost.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E006",
+        "E010",
+        "E011"
+      ]
+    },
+    {
+      "sig_id": "S2",
+      "object": "Library-conditioned new-world reuse",
+      "information": "Top5 embedding-retrieved code plus task description; ada002 index.",
+      "operation": "Retrieve accepted code and prompt frozen GPT4 to compose it.",
+      "output": "Task-specific reusable program.",
+      "conditions": "Relevant correct skills and mining/evaluation separation.",
+      "feedback": "309-sample relevance audit and closed-loop3-attempt task tests.",
+      "selection_rule": "Reuse exploration library; no weight training or separate global harness optimization.",
+      "selection_data": "Inventory reset/new world;4 claimed unseen target tasks but same recipe/prerequisite domain.",
+      "persistence": "Cross-task/world code library.",
+      "later_use": "Four new tasks,max50 iterations; also AutoGPT+library.",
+      "claimed_effect": "Improved efficiency/some success, not necessity: no-library3/3 on3 targets,2/3 diamond.",
+      "failure_boundary": "Tiny4×3 test; no novel embodiment, verifier truth audit or independent development split.",
+      "evidence_ids": [
+        "E002",
+        "E004",
+        "E005",
+        "E007",
+        "E008"
+      ]
+    }
+  ],
+  "gap": {
+    "author_gap": "Prior agents lack self-directed curriculum, retained compositional skills and execution-grounded repair for lifelong learning.",
+    "checked_gap": "Concrete three-part deficit tested in one symbolic3D domain; broad lifelong embodiment exceeds evidence.",
+    "lineage": [
+      {
+        "method": "ReAct, Reflexion, AutoGPT; MineDojo/Mineflayer",
+        "source": "Assigned v2 related work/setup/Appendix B",
+        "version": "Original adjacent sources not supplied",
+        "relationship": "Reasoning/reflection/decomposition/tool-use agents adapted by authors to common Minecraft APIs."
+      }
+    ],
+    "closest_adjacent": [
+      {
+        "method": "AutoGPT",
+        "solved": "Task decomposition and code/tool use",
+        "residual": "Automatic curriculum and executable persistent skill memory",
+        "source_version": "Author adaptation in assigned v2"
+      },
+      {
+        "method": "Reflexion",
+        "solved": "Feedback-based verbal reflection",
+        "residual": "Retained operational code and curriculum",
+        "source_version": "Author adaptation in assigned v2"
+      }
+    ],
+    "residue": "Task selection and reusable executable capital, not just additional reasoning.",
+    "stakes": "Repeated prerequisite regeneration and stalled exploration.",
+    "method_response": "Curriculum, successful-code library and iterative feedback.",
+    "remaining_gap": "Admission soundness, broad disjoint transfer and actual budget equality.",
+    "unresolved": [
+      "No external novelty/adjacent-version audit; mining/development contamination not independently checked."
+    ],
+    "evidence_ids": [
+      "E001",
+      "E002",
+      "E003",
+      "E006",
+      "E010"
+    ]
+  },
+  "rs_pattern": {
+    "primary": "decompose_and_delegate",
+    "supporting": [
+      "adapt_via_conditioning"
+    ],
+    "matches": [
+      {
+        "main_id": "decompose_and_delegate",
+        "sub_id": "rs:C25",
+        "role": "primary",
+        "fit": "strong operational; verification partial",
+        "tactic_steps_checked": [
+          "Select structured task; emit code over specialist APIs.",
+          "Execute and capture errors/state.",
+          "Revise up to4 generations.",
+          "Self-verifier gates admission; semantic truth not calibrated.",
+          "Six component/model ablations and prompting-iteration budget."
+        ],
+        "success_failure_checks": [
+          {
+            "id": "RS-S artifact",
+            "status": "met",
+            "reason": "Executable persistent code.",
+            "evidence_ids": [
+              "E002",
+              "E006"
+            ]
+          },
+          {
+            "id": "RS-S verified construction",
+            "status": "partial",
+            "reason": "Runtime feedback genuine; semantic verifier unaudited.",
+            "evidence_ids": [
+              "E001",
+              "E010"
+            ]
+          },
+          {
+            "id": "RS-F cost",
+            "status": "partial",
+            "reason": "Iteration accounting, expensive API, no full bill.",
+            "evidence_ids": [
+              "E003",
+              "E011"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E006",
+          "E010"
+        ],
+        "reason": "Code delegates actions and feedback refines artifact; executing pattern does not establish sound semantic validation."
+      },
+      {
+        "main_id": "adapt_via_conditioning",
+        "sub_id": "rs:C03",
+        "role": "supporting",
+        "fit": "partial",
+        "tactic_steps_checked": [
+          "Build skill/description substrate.",
+          "Retrieve top5 into frozen model.",
+          "Audit309 relevance samples.",
+          "New world and4 unseen tasks; shared prerequisites.",
+          "No-library baseline strong; matched irrelevant/length control absent."
+        ],
+        "success_failure_checks": [
+          {
+            "id": "RS-S fixed weights",
+            "status": "met",
+            "reason": "Adaptation through memory/context.",
+            "evidence_ids": [
+              "E002",
+              "E009"
+            ]
+          },
+          {
+            "id": "RS-S holdout",
+            "status": "partial",
+            "reason": "4 tasks×3 attempts in same simulator.",
+            "evidence_ids": [
+              "E004",
+              "E005"
+            ]
+          },
+          {
+            "id": "RS-F substrate quality",
+            "status": "partial",
+            "reason": "Retrieval relevance measured, admission correctness not.",
+            "evidence_ids": [
+              "E001",
+              "E007",
+              "E008"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E002",
+          "E004",
+          "E007",
+          "E008",
+          "E009"
+        ],
+        "reason": "Executable substrate is conditioning capital; limited category-shift/generalized reference-schema evidence."
+      }
+    ],
+    "outside_taxonomy": false,
+    "reason": "Original decomposition primary and frozen-model conditioning supporting; no RL or weight learning inferred.",
+    "executes_pattern": true,
+    "resolves_problem": false
+  },
+  "domain_pattern": {
+    "namespace": "embodied",
+    "matches": [
+      {
+        "main": "planner_composes_code_and_policies",
+        "sub": "K105",
+        "fit": "partial",
+        "reason": "Executable API composition/repair fits; high-level symbolic Minecraft differs from calibrated physical primitives.",
+        "condition_checks": [
+          {
+            "id": "S1 interface",
+            "status": "met",
+            "reason": "Bounded code repair from returns.",
+            "evidence_ids": [
+              "E006",
+              "E010"
+            ]
+          },
+          {
+            "id": "F verifier",
+            "status": "unresolved",
+            "reason": "No independent semantic verifier audit.",
+            "evidence_ids": [
+              "E001"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E006",
+          "E010"
+        ],
+        "namespace": "embodied",
+        "version": "embodied-agent-harness/v1 + board-induced 2026-10-21"
+      },
+      {
+        "main": "harness_memory_skill_reuse",
+        "sub": "K303",
+        "fit": "partial",
+        "reason": "Success-mined reusable code fits; continuously growing self-verified library differs from frozen reviewed K303.",
+        "condition_checks": [
+          {
+            "id": "S4 intervention",
+            "status": "met",
+            "reason": "Library removal and AutoGPT+library; relevance audit.",
+            "evidence_ids": [
+              "E002",
+              "E007"
+            ]
+          },
+          {
+            "id": "F1 overlap",
+            "status": "partial",
+            "reason": "Exploration acquisition not heldout; new-world test limited.",
+            "evidence_ids": [
+              "E003",
+              "E004"
+            ]
+          }
+        ],
+        "evidence_ids": [
+          "E001",
+          "E002",
+          "E004",
+          "E008"
+        ],
+        "namespace": "embodied",
+        "version": "embodied-agent-harness/v1 + board-induced 2026-10-21"
+      }
+    ],
+    "unassigned": [],
+    "revision_proposals": []
+  },
+  "pattern_mapping": [
+    {
+      "rs_main": "decompose_and_delegate",
+      "rs_sub": "rs:C25",
+      "domain_namespace": "embodied",
+      "domain_main": "planner_composes_code_and_policies",
+      "domain_sub": "K105",
+      "operation_correspondence": "Generate/execute/repair code over motor APIs.",
+      "necessary_conditions_and_differences": "Privileged state/high-level executor; semantic verification uncalibrated.",
+      "evidence_ids": [
+        "E001",
+        "E006",
+        "E010"
+      ]
+    },
+    {
+      "rs_main": "adapt_via_conditioning",
+      "rs_sub": "rs:C03",
+      "domain_namespace": "embodied",
+      "domain_main": "harness_memory_skill_reuse",
+      "domain_sub": "K303",
+      "operation_correspondence": "Success admission and retrieval into frozen model.",
+      "necessary_conditions_and_differences": "Growing vs frozen reviewed library; small within-domain heldout test.",
+      "evidence_ids": [
+        "E002",
+        "E004",
+        "E008"
+      ]
+    }
+  ],
+  "expectations": [
+    {
+      "id": "E01",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Same-model alternative",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Common APIs and model but author adaptations differ in task organization.",
+      "evidence_ids": [
+        "E003",
+        "E009"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E02",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/harness_memory_skill_reuse.md#Reviewer expectations"
+      ],
+      "requirement": "Single-component toggles",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "met",
+      "reason": "Six module/model ablations; not all interactions tested.",
+      "evidence_ids": [
+        "E010"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E03",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/harness_memory_skill_reuse.md#Reviewer expectations"
+      ],
+      "requirement": "Weak/strong model component effects",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "GPT3.5 swap and GPT4 snapshot test, not all factor crossings.",
+      "evidence_ids": [
+        "E009"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E04",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/harness_memory_skill_reuse.md#Reviewer expectations"
+      ],
+      "requirement": "Repeated/paired uncertainty",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Three attempts and tech-tree dispersion; no paired CI on4 targets.",
+      "evidence_ids": [
+        "E004"
+      ],
+      "score_item": [
+        "E.statistics"
+      ]
+    },
+    {
+      "id": "E05",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Full cost",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Prompt caps/iteration curves and price caveat, not full bill.",
+      "evidence_ids": [
+        "E003",
+        "E005",
+        "E011"
+      ],
+      "score_item": [
+        "E.cost"
+      ]
+    },
+    {
+      "id": "E07",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Modern frozen-VLA comparison",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No physical VLA superiority claim; future benchmark irrelevant.",
+      "evidence_ids": [
+        "E003"
+      ],
+      "score_item": [
+        "E.causality"
+      ]
+    },
+    {
+      "id": "E17",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/harness_memory_skill_reuse.md#Reviewer expectations"
+      ],
+      "requirement": "Mining-disjoint holdout",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "New world4 targets, shared domain and tiny test.",
+      "evidence_ids": [
+        "E004",
+        "E005"
+      ],
+      "score_item": [
+        "E.holdout"
+      ]
+    },
+    {
+      "id": "E19",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Physical denominators",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": false,
+      "status": "not_applicable",
+      "reason": "No physical robot study.",
+      "evidence_ids": [
+        "E003"
+      ],
+      "score_item": [
+        "E.measurement"
+      ]
+    },
+    {
+      "id": "E22",
+      "version": "fixed cards 2026-10-21",
+      "source_strength": "common_practice",
+      "source_refs": [
+        "patterns/main/planner_composes_code_and_policies.md#Reviewer expectations"
+      ],
+      "requirement": "Matched full budgets",
+      "applies_when": "Corresponding harness/library claim",
+      "applicable": true,
+      "status": "partial",
+      "reason": "Iteration/API/repair described; total calls and wall-time not fully matched.",
+      "evidence_ids": [
+        "E005",
+        "E006"
+      ],
+      "score_item": [
+        "E.cost",
+        "E.causality"
+      ]
+    }
+  ],
+  "claims": [
+    {
+      "claim_id": "C1",
+      "text": "Exploration and tech-tree advantage",
+      "setting": "Minecraft symbolic Mineflayer APIs",
+      "baseline_control": "Author-adapted ReAct/Reflexion/AutoGPT; six component/model ablations.",
+      "selection_vs_test": "Exploration stream builds library; curve is acquisition, not heldout generalization.",
+      "result_denominator": "63 items/160 prompting iterations;3 tech-tree trials; wood6±2,stone11±2,iron21±7 all3/3; diamond102 only1/3. No-library iron29±11,diamond0/3.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E003",
+        "E006",
+        "E010"
+      ],
+      "counterevidence": [
+        "High-level symbolic state, retained inventory/recyclable tools; random curriculum pool derived from discovered items.",
+        "LLM verifier uncalibrated."
+      ],
+      "allowed_conclusion": "Strong acquisition in this simulator, not pixel-control/physical robotics superiority."
+    },
+    {
+      "claim_id": "C2",
+      "text": "New-world unseen-task skill reuse",
+      "setting": "Inventory cleared/world reset;4 targets",
+      "baseline_control": "Full/no-library; library supplied AutoGPT.",
+      "selection_vs_test": "Exploration-derived library; new targets share recipes/prerequisites.",
+      "result_denominator": "4×3 attempts,max50 iterations;full all3/3;no-library diamond2/3,other3/3;AutoGPT+library1/3,1/3,0/3,2/3.",
+      "evidence_ids": [
+        "E002",
+        "E004",
+        "E005",
+        "E007",
+        "E008"
+      ],
+      "counterevidence": [
+        "No-library already solves most; efficiency not same as success.",
+        "Tiny sample and privileged symbolic state."
+      ],
+      "allowed_conclusion": "Operational within-domain reuse; not transfer-grade under anchors v2."
+    }
+  ],
+  "assessment": {
+    "evidence_level": "online",
+    "claim_support": "scoped",
+    "strongest_supported_claim": "Curriculum, code memory and repair substantially aid acquisition and limited new-world reuse in high-level symbolic Minecraft. Broad lifelong robot competence and sound semantic admission remain open.",
+    "unresolved": [
+      "Self-verifier calibration",
+      "Independent development/mining split",
+      "Physical control transfer"
+    ]
+  },
+  "ratings": {
+    "E": {
+      "measurement": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Inventory counts and3-trial task fractions explicit; unaudited semantic self-verification caps broader completion evidence.",
+        "evidence_ids": [
+          "E003",
+          "E004"
+        ],
+        "counterevidence_ids": [
+          "E001"
+        ],
+        "search_scope": []
+      },
+      "causality": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Six removals/model swap and library-to-AutoGPT support mechanism; interactions, task/curriculum and compute differences remain.",
+        "evidence_ids": [
+          "E002",
+          "E006",
+          "E010"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "holdout": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Four new-world targets provide limited separation; shared recipes/privileged state prevent transfer inference.",
+        "evidence_ids": [
+          "E004",
+          "E005"
+        ],
+        "counterevidence_ids": [
+          "E001"
+        ],
+        "search_scope": []
+      },
+      "statistics": {
+        "status": "resolved",
+        "rating": 3,
+        "reason": "Three-trial tech-tree dispersion and309-sample retrieval audit; tiny4-task holdout/no paired CI prevent4.",
+        "evidence_ids": [
+          "E004",
+          "E007",
+          "E008"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      },
+      "cost": {
+        "status": "resolved",
+        "rating": 2,
+        "reason": "Explicit iteration/repair caps, efficiency and API-price limitation; no actual token/time/dollar failure-inclusive ledger.",
+        "evidence_ids": [
+          "E003",
+          "E005",
+          "E006",
+          "E011"
+        ],
+        "counterevidence_ids": [],
+        "search_scope": []
+      }
+    },
+    "G": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Concrete curriculum/retention/repair gaps; original neighbor versions not independently verified.",
+      "evidence_ids": [
+        "E002",
+        "E003",
+        "E010"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "M": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Three operations directly respond to bottleneck; uncalibrated admission and privileged executor limit comprehensive explanation.",
+      "evidence_ids": [
+        "E001",
+        "E002",
+        "E010"
+      ],
+      "counterevidence_ids": [],
+      "search_scope": []
+    },
+    "X": {
+      "status": "resolved",
+      "rating": 3,
+      "reason": "Prompts/APIs/repair caps, retrieved persistent artifacts and audit reconstructable; semantic validity and safety unestablished.",
+      "evidence_ids": [
+        "E006",
+        "E007",
+        "E008"
+      ],
+      "counterevidence_ids": [
+        "E001"
+      ],
+      "search_scope": []
+    }
+  },
+  "score": {
+    "raw": 67.5,
+    "display": 67.5,
+    "lower": 67.5,
+    "upper": 67.5,
+    "coverage": 1.0,
+    "rubric_hash": "0b0192c8fc72f53487508f053e5b9e8fd2fd20a25f3fcf636dc48f969e683d51"
+  },
+  "status": "reviewed",
+  "reason": "Simulation embodiment included, not GUI/nonembodied coding; scores only high-level Minecraft evidence.",
+  "scope": {
+    "in_scope": true,
+    "category": "A",
+    "reason": "Closed-loop LLM navigation/manipulation/crafting of a3D embodied entity via motor APIs; does not establish physical robotics."
+  },
+  "audit_status": "pending",
+  "audit_note": "Independent initial seat review; source-quote/identity/hash/parent/arithmetic checks passed, not aggregate acceptance or reproduction."
+}
