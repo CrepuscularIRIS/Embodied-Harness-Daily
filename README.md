@@ -35,6 +35,12 @@
 [动态选题](docs/REEL_SELECTION.md)：先过最低分，再控制篇数，默认一期最多 9 篇；不足可少做，调阈值不改原分数。
 只有入选论文交给 ResearchStudio Reel 做画报，展示只包含成品 QA 通过的精选。
 
+## claude-kimi / Claude Code 批量评分
+
+先复制 [启动指令](docs/agents/START_CC.md)；[总控提示词](docs/agents/LOCAL_SCORING_PROMPT.md)可直接交给 claude-kimi（Claude Code）：每批默认5篇、每轮并行2批，6.1 Sol＋Sonnet 5.5 独立初评，Opus 5.5 逐篇聚合，轮次验收后继续，最后由总控提交。
+每篇必做 [原15+31识别与领域映射](research/PATTERN_PROTOCOL.md)；固定原卡已随仓库提供，不能混用原卡与领域卡 ID。
+[GLM 5.3 Reel 提示词](docs/agents/REEL_PROMPT.md)只处理入选名单。model type 已配置，直接沿用；本次只写文档，未启动批次，评分规则仍待校准。
+
 ## 当前工作边界
 
 Grok 找候选并写 inbox → 本地核对来源/去重/入库 → Claude Code 读完整材料、做小样本校准 →

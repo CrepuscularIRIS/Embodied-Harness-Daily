@@ -1,8 +1,17 @@
-# ResearchStudio Reel：Embodied Harness 高分精选画报
+# GLM 5.3 / ResearchStudio Reel：Embodied Harness 高分精选画报
 
 输入必须是当前有效 selection snapshot，见 docs/REEL_SELECTION.md；**先评分、过阈值并入选，才制作**。
 默认一期最多 9 篇，允许更少或为空。不从全量 corpus、旧分数或旧 Reel 自选题，不为所有论文先做海报。
 rubric 未冻结、audit 未通过或没有有效 selection 时，报告缺少的输入，不开始制作。
+
+
+## 指定模型与分工
+
+本提示词交给 **GLM 5.3** 执行，claude-kimi 总控负责派发与最终提交。GLM 对应的 model type 已经配置好，直接使用，不再配置或探测模型。
+每个 worker 处理一篇入选论文，默认并行 2 篇；每篇新上下文与独立工作目录。你不是唯一写入者，只改被分配的 reel/<paper-id>/ 与本篇工作包，不覆盖其他人的改动，不操作 git。
+模型不可用就报告该篇未开始，不阻止已验收评分提交，也不静默换模型。不要把未入选论文做成画报来填满配额。
+先完成同一篇的资产、叙述、海报、实渲染 QA，再领取下一篇；记录实际 model/session、来源和 selection hash。若当前工具不能查看渲染图，不得将视觉 QA 标为通过。
+总控在当前期全部制作完成或明确停止后，检查事实/来源映射、图片、可编辑源、QA与文件范围，做独立的 Reel 提交。不能只看 GLM 写了“通过”。
 
 ## 每篇先固定事实和内容
 

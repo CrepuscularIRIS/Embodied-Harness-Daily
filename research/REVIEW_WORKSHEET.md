@@ -1,4 +1,4 @@
-# 逐篇阅读与评分工作表 v2.1
+# 逐篇阅读与评分工作表 v2.2
 
 状态：待校准模板，不含真实论文评分。事实提取与评价分开保存，按 SCORE_SPEC 使用。
 只填实际读到的内容；不能为了字段完整补写事实。每个事实/判断均绑定 evidence ID。
@@ -34,7 +34,8 @@ rubric、卡片和 expectations 的版本/hash；输入包/输出包 hash；supe
 
 ## 3. 模式执行和审稿期望
 
-选择 0–3 张最相关卡（或 outside_taxonomy）：稳定 ID/版本、匹配的操作/信息/条件、真正执行了什么。
+先按 PATTERN_PROTOCOL 完成原15+31层：primary/supporting/子卡（核父类）、tactic/步骤执行、无匹配理由；再记录领域 namespace 与映射。
+选择 0–3 张最相关领域卡（或 unassigned）：稳定 ID/版本、匹配的操作/信息/条件、真正执行了什么。
 每条适用 success condition / failure mode 记录 met / partial / unmet / unknown / challenged_with_evidence，并附引用。
 “看起来属于该模式”与“执行充分并带来效果”分别回答。没有观察到 failure 不记为避免失败。
 列具体 reviewer expectations：ID、来源/强度、applies_when、本篇是否适用、证据、回答、映射的 G/M/X/E 项。

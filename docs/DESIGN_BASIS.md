@@ -3,12 +3,18 @@
 2026-10-21 修订。保留已完成的卡片和原始资料，替代当日初版过于简化的七维评分草案。
 本次核查的是本地 ResearchStudio 源码、Open Scientist 0.3.0 规范及本仓库历史设计；尚未定位网页端所指的 Astra 对话，不把本稿冒充那段原设计。
 
+## 当前执行约定（v2.2）
+
+用户明确指定原15+31方法卡为三个项目共同识别层，见 [PATTERN_PROTOCOL](../research/PATTERN_PROTOCOL.md) 和 [原卡副本](../research/reference/researchstudio-15-31/README.md)。
+6.1 Sol＋Sonnet 5.5 独立初评，Opus 5.5 逐篇聚合；GLM 5.3 负责入选论文的 Reel。批次/轮次/恢复/提交见 [总控提示词](agents/LOCAL_SCORING_PROMPT.md)。
+这是对上版可选原卡/未指定模型方案的修订；不改变全文证据要求，也不复活旧分数或旧 scorer。
+
 ## 采用哪些设计
 
 | 来源 | 采用的内容 | 在本项目的位置 |
 |---|---|---|
 | IdeaSpark `bottleneck_identify.txt` | 方法谱系、最近邻、frontier residual、具体瓶颈及其代价 | 逐篇 gap identify；先确定问题，再评方法，不用“没人把 X 用到 Y”代替 gap |
-| IdeaSpark `pattern-summary-rubric.md` | 按实际执行操作匹配模式；允许 outside_taxonomy；区别执行模式与解决问题 | 既有 Harness 卡的条件检查，不强套原 15+31 分类 |
+| IdeaSpark `pattern-summary-rubric.md` | 按实际执行操作匹配模式；允许 outside_taxonomy；区别执行模式与解决问题 | 每篇必须进行原15+31识别，再映射领域卡；无适配按原规则如实记录 |
 | IdeaQuality | 问题位置、方法质量、problem-fit | 完成论文的 G/M/X 分析；其 idea 阶段原总分不直接移植 |
 | Open Scientist `domain/read` | 固定版本全文、operation signature、信息可见性、条件与反证；提取阶段不评分 | 每篇的证据事实层 |
 | Open Scientist `domain/cards` | 按操作＋信息＋条件聚合，保留 counterexamples 与 unassigned | Harness 版模式卡逆向归纳；已有卡继续使用，缺口才增修 |
