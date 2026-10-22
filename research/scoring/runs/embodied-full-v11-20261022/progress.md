@@ -1,8 +1,30 @@
-# progress — embodied-full-v11-20261022（滚动更新）
+# progress — embodied-full-v11-20261022
 
-L1 已完成 225/489（8/20 批）。累计：
-- tiers: {'P2': 100, 'P3': 117, 'None': 7, 'P1': 1}
-- next_action: {'to_l2': 223, 'exclude': 1, 'park': 1}
-- families: {'F0': 124, 'F1': 45, 'F2': 80, 'F3': 95, 'F4': 25, 'F5': 26}
+## L1（489/489，完成）
 
-已完成批：f01-f08（各 25 篇核对 0 错误）。在途：f09-f13。待派：f14-f20。
+20 批 × 25 + fixmat-01（34 篇材料修复重评，旧行已清理）。枚举/封顶/ID 覆盖 0 错误。
+- tiers：P3×303 / P2×170 / P1×4 / null×12；next：to_l2×482 / park×4 / exclude×3
+- families：F0×233 / F3×205 / F2×166 / F1×113 / F4×76 / F5×58
+- 材料缺陷：34 篇 l1 切分漏引言（数字编号 "## 1 Introduction"），修复重评后 P3 由少计上移
+
+## L2（114/114，完成；6 批）
+
+队列 = to_l2×97（high 优先截断）+ 漏检抽查×10（种子 20261023）+ pilot 遗留×7。
+- 枚举/封顶/supersedes 0 错误；subcard_checks 463 项：holds 175 / partial 230 / unknown 36 / NA 13 / **fails 8** / challenged_with_evidence 1
+- L2 最终 tier：P3×102 / P2×8 / P1×1 / null×3；next：to_l3×88 / to_l2×16（pending_experiment 或 pending_material）/ park×10
+- **漏检抽查改判：2/10**（2501.11858、2602.15875，均 P2→P3 上移；方向与试点一致——L1 对材料受限论文偏保守）
+- 相对 L1 改判共 12 篇（上移 11、待实验降级转 park 若干），L2 无推翻性问题判断
+
+## 候选池（SELECTION 输入）
+
+- **P3 confirmed to_l3：88 篇**（candidates-l3.json）
+- 待补清单：needs_material×3（2509.01106、2511.00917、2505.23266 等 pending_material/high）+ pending_experiment×16
+- audit 改判单列：2501.11858（P2→P3）、2602.15875（P2→P3）
+
+## 增量：inbox 新论文
+
+- Grok 三批 +25 已 ingest（corpus 1376 行）；全文材料抓取中，随后补 L1/L2（见 run.md 增量批）
+
+## 用量（subagent tokens）
+
+L1 全量 ≈ 2.9M（20 批 + fixmat）；L2 ≈ 0.8M（6 批）；pilot 已单列。
