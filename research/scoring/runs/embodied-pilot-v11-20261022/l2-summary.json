@@ -1,0 +1,35 @@
+{
+ "l2_records": 5,
+ "tier_changes": [
+  [
+   "2505.07815",
+   "P2",
+   "P3"
+  ],
+  [
+   "2412.04453",
+   "P2",
+   "P3"
+  ]
+ ],
+ "audit": [
+  "2509.01106",
+  "2310.10021",
+  "2412.04453"
+ ],
+ "audit_changed": [
+  [
+   "2412.04453",
+   "P2",
+   "P3"
+  ]
+ ],
+ "subcard_verdicts": {
+  "holds": 5,
+  "partial": 19,
+  "fails": 0,
+  "unknown": 8,
+  "NA": 3,
+  "challenged_with_evidence": 0
+ }
+}

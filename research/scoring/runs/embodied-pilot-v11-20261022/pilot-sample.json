@@ -1,0 +1,82 @@
+[
+ {
+  "paper_id": "2311.10678",
+  "title": "Distilling and Retrieving Generalizable Knowledge for Robot Manipulation via Language Corrections",
+  "group": "蒸馏/教师(F4)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2311.10678-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "e7295f81f8264184e3f2458bdd6333dff270f00781bfa685d0ad8a9020628d5d"
+ },
+ {
+  "paper_id": "2505.07815",
+  "title": "Imagine, Verify, Execute: Memory-guided Agentic Exploration with Vision-Language Models",
+  "group": "验证/STOP(F2)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2505.07815-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "9ff792dfb705c522a55ee5ce5a7d40ccb34b3004890ffe6012ee17bf947f8904"
+ },
+ {
+  "paper_id": "2311.13373",
+  "title": "Large Language Model as a Policy Teacher for Training Reinforcement Learning Agents",
+  "group": "harness RL(F1)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2311.13373-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "bd953eb521002a03b8bbadf4781c5d2ea387f3232417baabc46e661a55be16de"
+ },
+ {
+  "paper_id": "2310.10021",
+  "title": "Bootstrap Your Own Skills: Learning to Solve New Tasks with Large Language Model Guidance",
+  "group": "记忆/技能(F5)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2310.10021-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "9df447387c8ece49c6e56ed0dfcea96076ca6530d33808b669067e1824c500ad"
+ },
+ {
+  "paper_id": "2307.04738",
+  "title": "RoCo: Dialectic Multi-Robot Collaboration with Large Language Models",
+  "group": "多机器人(F1)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2307.04738-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "0f2e4afaf25ef8f7ddb78f881be04d6a954a9e86561372e39fee18f5d4fae15a"
+ },
+ {
+  "paper_id": "2311.11183",
+  "title": "Deploying and Evaluating LLMs to Program Service Mobile Robots",
+  "group": "评测/审计(F0/F1,诊断)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2311.11183-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "f49e4c3baa74fe18f65cc517fd43abd9031069cbefba25ee1687f5166b50c08d"
+ },
+ {
+  "paper_id": "2412.04453",
+  "title": "NaVILA: Legged Robot Vision-Language-Action Model for Navigation",
+  "group": "vertical_port候选",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2412.04453-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "eca7a7565e12e2285fc86ee6fd76873c677db7ea080bd2d28057a5623ad82a4b"
+ },
+ {
+  "paper_id": "2610.15572",
+  "title": "Look Before You Move: Agent-Interface-Aligned Supervision for Open-World Mobile Manipulation",
+  "group": "K505单一来源卡(自我比较检查)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2610.15572-l1.txt",
+  "material": "abstract_intro",
+  "sha256": "b0a33f525a2383c379026b54b9a2ee7cae44769ef451046a4b1d2892bcefcbf1"
+ },
+ {
+  "paper_id": "2509.01106",
+  "title": "Robix: A Unified Model for Robot Interaction, Reasoning and Planning",
+  "group": "abstract-only(needs_material)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2509.01106-l1.txt",
+  "material": "abstract",
+  "sha256": "2d3913f98668da7890762d53fbeba412b401eeaed682046252d44c62dd9109ca"
+ },
+ {
+  "paper_id": "2511.00917",
+  "title": "Maestro: Orchestrating Robotics Modules with Vision-Language Models for Zero-Shot Generalist Robots",
+  "group": "abstract-only(needs_material)",
+  "l1_material": "research/scoring/runs/embodied-pilot-v11-20261022/materials/2511.00917-l1.txt",
+  "material": "abstract",
+  "sha256": "52e41aa6b06aa7cb6692b0c1f45ffa2cb8364e138a9a78ec6fa4e410efe7948d"
+ }
+]
