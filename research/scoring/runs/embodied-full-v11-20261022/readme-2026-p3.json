@@ -1,0 +1,499 @@
+[
+ {
+  "paper_id": "2601.11063",
+  "title": "EmboTeam: Grounding LLM Reasoning into Reactive Behavior Trees via PDDL for Embodied Multi",
+  "cards": [
+   "main/llm_symbolic_solver_planning",
+   "main/multi_robot_llm_coordination"
+  ],
+  "families": [
+   "F0",
+   "F1"
+  ],
+  "q3": "capability",
+  "problem": "异构多机器人面对长程任务依赖和动态团队规模时，如何把自然语言目标转为可同步、可反应的执行结构。",
+  "tier": "P3 ✓",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2601.15486",
+  "title": "An LLM-Agnostic, MAVLink-Based Drone Command and Control Interface and Agentic Harness Usi",
+  "cards": [
+   "main/external_verification_control",
+   "main/observe_act_interface",
+   "main/harness_effect_evaluation"
+  ],
+  "families": [
+   "F2",
+   "F1"
+  ],
+  "q3": "judgment",
+  "problem": "让不可信LLM经通用工具控制无人机时，如何在持续飞行中保持独立安全边界，并让任务状态的报告与实际持有者一致。",
+  "tier": "P3 ✓",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.15875",
+  "title": "Fly0: Persistent Metric Anchoring for Zero-Shot Aerial Vision-Language Navigation",
+  "cards": [
+   "main/observe_act_interface"
+  ],
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "problem": "零样本无人机VLN如何把低频、带不确定性的语言定位变成目标离开视野后仍可用于高频安全控制的度量目标？",
+  "tier": "P3 ✓",
+  "code": "https://github.com/xuzhenxing1/Fly0",
+  "reel": true
+ },
+ {
+  "paper_id": "2609.34412",
+  "title": "From Language to Task Maps: Compiling Semantic Relations While Preserving Task-Relevant Fr",
+  "cards": [
+   "main/observe_act_interface"
+  ],
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "problem": "把定性操作关系直接展开为完整位姿会约束任务未指定的自由度，造成连续控制目标之间的人为冲突。",
+  "tier": "P3 ✓",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2610.15572",
+  "title": "Look Before You Move: Agent-Interface-Aligned Supervision for Open-World Mobile Manipulati",
+  "cards": [
+   "main/privileged_teacher_supervision"
+  ],
+  "families": [
+   "F4",
+   "F3"
+  ],
+  "q3": "capability",
+  "problem": "开放世界移动操作的学生只能依据部署可见观测选择高层技能时，如何避免最短路轨迹后标注只教前进、不教保持可见性和失目标恢复的监督缺口？",
+  "tier": "P3 ✓",
+  "code": "—",
+  "reel": true
+ },
+ {
+  "paper_id": "2610.22496",
+  "title": "Scaling Online Exploration for Robot Agents",
+  "cards": [
+   "main/code_policy_trial_revision",
+   "main/harness_memory_skill_reuse"
+  ],
+  "families": [
+   "F3",
+   "F0"
+  ],
+  "q3": "capability",
+  "problem": "在有标定RGB-D、底层控制器和有限探索预算时，机器人能否将在线试错编译成可在未见布局独立执行的感知—规划—控制程序？",
+  "tier": "P3 ✓",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2610.25114",
+  "title": "Compile Once, Run Cheap: Frozen, Portable Skills for Embodied Agents, and What Recursive S",
+  "cards": [
+   "main/code_policy_trial_revision",
+   "main/harness_memory_skill_reuse",
+   "main/harness_effect_evaluation"
+  ],
+  "families": [
+   "F1",
+   "F3"
+  ],
+  "q3": "judgment",
+  "problem": "离线代码技能能否在冻结后独立或由廉价异族模型执行，迭代优势究竟来自反馈、版本继承还是尝试选择？",
+  "tier": "P3 ✓",
+  "code": "—",
+  "reel": true
+ },
+ {
+  "paper_id": "2610.27350",
+  "title": "Refuses When Asked, Complies When Acting: A Runtime Safety Check for Robot Control Loops",
+  "cards": [
+   "main/external_verification_control",
+   "main/harness_effect_evaluation"
+  ],
+  "families": [
+   "F2",
+   "F1"
+  ],
+  "q3": "judgment",
+  "problem": "同一模型面对相同明确有害指令和首帧时，机器人动作循环的拒绝行为是否与显式行动前安全问询分离？",
+  "tier": "P3 ✓",
+  "code": "https://github.com/Arnav-Gr0ver/Refuses-When-Asked-Complies-When-Acting.",
+  "reel": true
+ },
+ {
+  "paper_id": "2601.20334",
+  "title": "Demonstration-Free Robotic Control via LLM Agents",
+  "cards": [
+   "main/observe_act_interface",
+   "main/code_policy_trial_revision"
+  ],
+  "families": [
+   "F3",
+   "F4"
+  ],
+  "q3": "judgment",
+  "problem": "在可读取特权环境状态的操作仿真中，未经机器人专用修改的通用软件agent能否无需演示和微调完成以任务级推理为主的控制。",
+  "tier": "P3 (L1)",
+  "code": "https://github.com/robiemusketeer/faea-sim",
+  "reel": false
+ },
+ {
+  "paper_id": "2601.20831",
+  "title": "MemCtrl: Using MLLMs as Active Memory Controllers on Embodied Agents",
+  "cards": [
+   "main/harness_memory_skill_reuse"
+  ],
+  "families": [
+   "F5",
+   "F3"
+  ],
+  "q3": "capability",
+  "problem": "小型具身MLLM在在线存储和计算受限时，如何主动保留、更新或丢弃经历而非依赖全量历史检索。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.04157",
+  "title": "A Modern System Recipe for Situated Embodied Human-Robot Conversation with Real-Time Multi",
+  "cards": [
+   "main/observe_act_interface"
+  ],
+  "families": [
+   "F0",
+   "F4"
+  ],
+  "q3": "capability",
+  "problem": "机器人实时对话时，如何把连续语音生成与主动转头、寻找物体和请求新视觉信息交错，以维持共享注意。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.04315",
+  "title": "GeneralVLA: Generalizable Vision-Language-Action Models with Knowledge-Guided Trajectory P",
+  "cards": [
+   "main/planner_composes_code_and_policies",
+   "main/observe_act_interface",
+   "main/harness_memory_skill_reuse"
+  ],
+  "families": [
+   "F3",
+   "F0"
+  ],
+  "q3": "capability",
+  "problem": "无需真机演示时，如何把基础模型语义知识转成满足几何约束的3D操作轨迹，并生成可训练学生的数据。",
+  "tier": "P3 (L1)",
+  "code": "https://github.com/AIGeeksGroup/GeneralVLA.",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.12281",
+  "title": "Scaling Verification Can Be More Effective than Scaling Policy Learning for Vision-Languag",
+  "cards": [
+   "main/sample_verify_select",
+   "main/harness_effect_evaluation"
+  ],
+  "families": [
+   "F2",
+   "F1"
+  ],
+  "q3": "judgment",
+  "problem": "VLA动作与语言意图不一致时，固定数据条件下，扩大指令改写和动作采样并验证选择能否比扩大策略学习更有效。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.12405",
+  "title": "Self-Refining Vision Language Model for Robotic Failure Detection and Reasoning",
+  "cards": [
+   "main/external_verification_control"
+  ],
+  "families": [
+   "F2",
+   "F3"
+  ],
+  "q3": "capability",
+  "problem": "在大量二元失败标签而少量语言解释标签的机器人视频条件下，如何检测并解释未预定义的失败？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.13081",
+  "title": "Agentic AI for Robot Control: Flexible but still Fragile",
+  "cards": [
+   "main/observe_act_interface",
+   "main/external_verification_control"
+  ],
+  "families": [
+   "F3",
+   "F2"
+  ],
+  "q3": "judgment",
+  "problem": "已提供技能工具、语义状态和恢复循环的LLM机器人控制，为何在真实部分可观测执行中仍会出现提示敏感、随机次优和指令错误。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.13193",
+  "title": "Steerable Vision-Language-Action Policies for Embodied Reasoning and Hierarchical Control",
+  "cards": [
+   "main/trained_vlm_vla_hierarchy",
+   "main/planner_composes_code_and_policies"
+  ],
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "problem": "高层VLM已经知道应抓哪里或怎样移动时，如何扩展低层VLA可理解的命令粒度，使推理能真正控制行为。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.19983",
+  "title": "Contextual Safety Reasoning and Grounding for Open-World Robots",
+  "cards": [
+   "main/external_verification_control"
+  ],
+  "families": [
+   "F2",
+   "F4"
+  ],
+  "q3": "capability",
+  "problem": "无预给地图和安全规格时，机器人如何从视觉在线推断情境安全规则、空间grounding并在感知不确定性下执行约束？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.20323",
+  "title": "PhysMem: Scaling Test-Time Memory for Embodied Physical Reasoning",
+  "cards": [
+   "main/harness_memory_skill_reuse"
+  ],
+  "families": [
+   "F3",
+   "F5"
+  ],
+  "q3": "judgment",
+  "problem": "冻结 VLM 的部署期物理经验如何经过可检验抽象再复用，避免条件改变后直接检索经验造成反复错误？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2602.21198",
+  "title": "Learning from Trials and Errors: Reflective Test-Time Planning for Embodied LLMs",
+  "cards": [
+   "main/sample_verify_select"
+  ],
+  "families": [
+   "F2",
+   "F5"
+  ],
+  "q3": "capability",
+  "problem": "具身代理如何在单次长程部署中利用执行后与事后反思同时纠正动作策略和内部评估器，减少重复失败及局部反馈的错配归因？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.03148",
+  "title": "From Language to Action: Can LLM-Based Agents Be Used for Embodied Robot Cognition?",
+  "cards": [
+   "main/external_verification_control",
+   "main/harness_memory_skill_reuse"
+  ],
+  "families": [
+   "F2",
+   "F1"
+  ],
+  "q3": "judgment",
+  "problem": "工具、工作记忆和情节记忆包裹的 LLM，能否在模拟家庭移动操作任务中可靠规划、恢复并判断完成？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.04466",
+  "title": "Act-Observe-Rewrite: Multimodal Coding Agents as In-Context Policy Learners for Robot Mani",
+  "cards": [
+   "main/code_policy_trial_revision"
+  ],
+  "families": [
+   "F0",
+   "F1"
+  ],
+  "q3": "capability",
+  "problem": "无示范、无梯度和人工奖励的连续机械臂操作中，多模态编码代理能否根据失败诊断直接重写完整低层控制器而非仅选技能？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.10682",
+  "title": "OnFly: Onboard Zero-Shot Aerial Vision-Language Navigation toward Safety and Efficiency",
+  "cards": [
+   "main/external_verification_control",
+   "main/observe_act_interface"
+  ],
+  "families": [
+   "F2",
+   "F0"
+  ],
+  "q3": "capability",
+  "problem": "完全机载零样本无人机VLN如何同时满足高频目标生成、低频长程监控与安全轨迹执行，避免单流决策和记忆覆盖导致失败？",
+  "tier": "P3 (L1)",
+  "code": "https://github.com/Robotics-STAR-Lab/OnFly",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.11558",
+  "title": "RoboClaw: An Agentic Framework for Scalable Long-Horizon Robotic Tasks",
+  "cards": [
+   "main/planner_composes_code_and_policies",
+   "main/external_verification_control"
+  ],
+  "families": [
+   "F0",
+   "F3"
+  ],
+  "q3": "capability",
+  "problem": "真实长程操作中，如何让同一VLM控制器贯穿自复位采集、策略学习与技能执行，减少人工重置和采集部署语义错配？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.11975",
+  "title": "HomeSafe-Bench: Evaluating Vision-Language Models on Unsafe Action Detection for Embodied ",
+  "cards": [
+   "main/external_verification_control"
+  ],
+  "families": [
+   "F2"
+  ],
+  "q3": "capability",
+  "problem": "如何独立评估并低延迟地检测家庭具身 agent 视频中的动态危险动作，而不把检测能力混进规划成功率？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.13528",
+  "title": "Learning Actionable Manipulation Recovery via Counterfactual Failure Synthesis",
+  "cards": [
+   "main/external_verification_control",
+   "main/learner_state_teacher_correction"
+  ],
+  "families": [
+   "F3",
+   "F2"
+  ],
+  "q3": "capability",
+  "problem": "如何从成功真机演示合成有效的失败—纠正配对，使视觉失败解释能转化为可执行的操作恢复轨迹？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.18520",
+  "title": "Robotic Agentic Platform for Intelligent Electric Vehicle Disassembly",
+  "cards": [
+   "main/observe_act_interface"
+  ],
+  "families": [
+   "F1",
+   "F2"
+  ],
+  "q3": "judgment",
+  "problem": "边缘硬件上LLM控制真实拆卸平台时，开放ROS服务自动发现为何不能像结构化工具接口一样可靠完成所需机器人动作？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.22435",
+  "title": "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation",
+  "cards": [
+   "main/harness_effect_evaluation",
+   "main/observe_act_interface"
+  ],
+  "families": [
+   "F1",
+   "F5"
+  ],
+  "q3": "judgment",
+  "problem": "代码控制机械臂的成功究竟来自编码模型能力还是人工高层原语，减少设计者脚手架后增加交互计算能补回多少能力？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2603.26997",
+  "title": "ROSClaw: An OpenClaw ROS 2 Framework for Agentic Robot Control and Interaction",
+  "cards": [
+   "main/observe_act_interface",
+   "main/harness_effect_evaluation"
+  ],
+  "families": [
+   "F1",
+   "F3"
+  ],
+  "q3": "judgment",
+  "problem": "在不同模型和 ROS 机器人之间保持执行、安全与日志接口不变，才能辨别物理行为差异来自模型还是 executive 层。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2604.02318",
+  "title": "Stop Wandering: Efficient Vision-Language Navigation via Metacognitive Reasoning",
+  "cards": [
+   "main/harness_memory_skill_reuse",
+   "main/external_verification_control"
+  ],
+  "families": [
+   "F0"
+  ],
+  "q3": "capability",
+  "problem": "训练自由 VLN 在空间歧义下局部振荡和反复访问，如何以进展监测与反思打破死循环而减少模型查询。",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ },
+ {
+  "paper_id": "2604.05226",
+  "title": "RoboPlayground: Democratizing Robotic Evaluation through Structured Physical Domains",
+  "cards": [
+   "main/harness_effect_evaluation",
+   "main/llm_symbolic_solver_planning"
+  ],
+  "families": [
+   "F3",
+   "F2"
+  ],
+  "q3": "judgment",
+  "problem": "如何让非专家通过语言可复现地改变操作任务约束和成功定义，以发现固定测试集隐藏的策略失败？",
+  "tier": "P3 (L1)",
+  "code": "—",
+  "reel": false
+ }
+]
