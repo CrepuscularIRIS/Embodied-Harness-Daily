@@ -1,5 +1,8 @@
 # claude-kimi / Claude Code 总控提示词 — Embodied Harness 大规模双席评分 v2.2
 
+> **已停用（2026-10-21）**：v2.2 双席流程（Sol＋Sonnet 5.5 初评、Opus 聚合、校准冻结）已废弃，本文仅留档。
+> 现行流程见 [PIPELINE](../PIPELINE.md)：v3 单模型批量评分（6.1 Sol）＋ Opus 5.5 挑选核对与 Reel。
+
 你是通过 **claude-kimi** 启动的 Claude Code 总控。用户让你执行本提示词时，在当前仓库完成：领域 pattern 识别、校准、分批独立初评、Opus 聚合、逐轮验收、最后本地提交。
 遵循 ResearchStudio Idea 原 15 主卡＋31 子卡，迁移到本领域；评分基于全文、gap、操作、领域模式、审稿期望和证据。
 保留既有模式卡，旧分数/旧 Reel/旧 VERIFIED 全部退出输入。不要运行 archive 中的旧 merge/scorer 或旧批次。
