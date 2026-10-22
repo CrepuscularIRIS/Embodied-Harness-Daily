@@ -1,0 +1,6091 @@
+{
+ "run": "embodied-full-v11-20261022",
+ "rule_version": "problem-core-v1.1",
+ "selection_id": "selection-002",
+ "selector": "Opus 5.5 精选席（内部 Subagent）",
+ "date": "2026-10-22",
+ "pool": {
+  "file": "candidates-s002-pool.json",
+  "size": 327,
+  "note": "327篇全为P3/confirmed（L2第二波后to_l3共336，扣s001已选9）；其中L1=P2、L2上移P3者56篇（progress记第二波上移67篇，其余未进to_l3或非confirmed）。"
+ },
+ "selected": [
+  {
+   "paper_id": "2306.15724",
+   "title": "REFLECT: Summarizing Robot Experiences for Failure Explanation and Correction",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "失败解释→纠正",
+   "reason": "固定GPT-4在100个注入失败上，完整层次经验摘要纠正率79.1/80.7%，去掉解释仅41.9/56.1%，直接说明“先定位致因再纠正”是可测的独立瓶颈，而非只判成败。",
+   "reel_focus": "问题：只看终态或平铺叙述会漏掉早期致因，LLM能否从多模态执行历史定位失败并给出可执行纠正；结果：执行/规划失败纠正79.1%/80.7%，无解释41.9%/56.1%，去渐进摘要60.5%/64.9%。版式宜做“事件→子目标层次摘要→定位致因→纠正计划”的时间轴；须注明模拟用真值对象状态、真实30段只报解释/定位无闭环纠正分母。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2309.09919",
+   "title": "Plug in the Safety Chip: Enforcing Constraints for LLM-driven Robot Agents",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "形式约束门控",
+   "reason": "同一GPT-4规划器下，提示里写禁令安全率仅56%，可执行LTL自动机门控升至100%且成功率98%，把“语言服从”换成“动作级剪枝”的对照清楚。",
+   "reel_focus": "问题：自然语言时序禁令如何变成执行前可检查、又不阻断可完成任务的约束；结果：FourRoom/MobileManip安全率基础38/30、NL约束56/56、未验证chip84/94、专家验证chip100/100（SR98/98），Spot两任务chip安全100%。版式宜做“语言禁令 vs 自动机剪枝”四档阶梯条；必须标注依赖专家验证翻译、完美命题标签与转移模型，不能写成真实系统无条件安全。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2409.01652",
+   "title": "ReKep: Spatio-Temporal Reasoning of Relational Keypoint Constraints for Robotic Manipulation",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "new_bottleneck",
+   "mechanism_type": "约束生成+优化求解",
+   "reason": "同7个真机任务上VoxPoser/自动ReKep/人工标注约束为10.0/44.3/68.6%，既测到自动生成关键点约束的真实能力，也给出人工上界，问题与差距同时清楚。",
+   "reel_focus": "问题：能否从RGB-D与语言自动产生可由优化器执行的时空关键点约束，而不逐任务手写；结果：7任务×10次平均10.0/44.3/68.6%，3种扰动各10次6.7/26.7/46.7%。版式宜做“关键点+约束代码→优化器”管线与三档成功率条；须突出44.3%绝对值与人工版差距，主要失败为跟踪、缺关键点和VLM引用错误，服装实验73.8%是条件成功率。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2603.26666",
+   "title": "VLA-OPD: Bridging Offline SFT and Online RL for Vision-Language-Action Models via On-Policy Distillation",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/on_policy_distillation_objectives"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "在线蒸馏目标",
+   "reason": "on-policy蒸馏目标卡唯一候选：同batch对照中forward-KL成功率早期跌逾50%、硬CE熵坍缩而reverse-KL稳定，直接回答“在学生自身状态上用什么目标蒸馏VLA”。",
+   "reel_focus": "问题：在学生访问状态上蒸馏VLA时如何避免熵膨胀/坍缩并保留预训练能力；结果：LIBERO一轨迹学生48.9→87.4（+GRPO 93.4），RoboTwin四任务45.2→71.1（教师74.0），并比较OPD与离线SFT遗忘。版式宜做三种目标的训练曲线/熵对比；须注明精细消融集中于一任务，需白盒教师logits与相容tokenizer，不推广到黑盒API。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2501.11858",
+   "title": "EmbodiedEval: Evaluate Multimodal LLMs as Embodied Agents",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "单体MLLM闭环评测",
+   "reason": "同一观测/动作空间下人类97.26%对GPT-4o 25.00%、交互动作有效率96.81%对9.56%，并有固定模型加历史图像反而退化的干预，直接挑战“静态图文能力≈具身能力”。",
+   "reel_focus": "问题：静态感知能力能否代表闭环交互能力；结果：GPT-4o总成功25.00% vs 人类97.26%，交互动作有效率9.56% vs 96.81%，固定Gemini-Flash增加历史图像除spatial QA外下降。版式宜做“人 vs 模型”同接口对照与“历史越多越差”折线；须注明327/328测试数差异、无重复置信区间，失败分类为描述性。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2307.01928",
+   "title": "Robots That Ask For Help: Uncertainty Alignment for Large Language Model Planners",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "不确定性校准求助",
+   "reason": "s001已列为求助槽下期首选；以共形预测校准“何时求助”，在相近规划成功率下比Simple Set基线少求助（规划0.87时帮助率0.67 vs 0.81），问题与保证边界都清楚。",
+   "reel_focus": "问题：歧义指令下如何校准LLM规划器何时求助，在保证成功覆盖率的同时减少人类帮助；结果：移动操作目标覆盖0.85、规划0.87、任务0.76，帮助率0.67；Simple Set同规划0.87需帮助0.81。版式宜做“预测集大小→是否求助”示意与帮助率对比；须注明保证只在校准/测试同分布与人类忠实回答假设下成立，不是任务必然成功或物理安全保证。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2506.06677",
+   "title": "RoboCerebra: A Large-scale Benchmark for Long-horizon Robotic Manipulation Evaluation",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "分层归因诊断",
+   "reason": "固定微调OpenVLA并对齐子目标切换，GPT-4o规划16.04%、盲视觉15.10%、GT-plan 25.16%，直接显示高层观察/规划指标与闭环成功脱节、低层仍是硬约束。",
+   "reel_focus": "问题：长程任务里观察、记忆、规划失败与低层执行失误如何区分；结果：600 rollouts中GPT-4o 16.04%、blind 15.10%、GT-plan 25.16%，SFT Qwen观察判断66.83%但成功仅9.33%。版式宜做“看见/不看见/给真计划”三柱对比与“观察分高≠成功”散点；须注明GT-plan仍低说明固定执行器不等于完全隔离推理，anchor切换不测自主停止。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2512.02002",
+   "title": "LLM-Driven Corrective Robot Operation Code Generation with Static Text-Based Simulation",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "反馈来源替代",
+   "reason": "同20个规则化任务三次重复，静态LLM文本模拟反馈与动态模拟语义反馈均93.3%成功，直接检验“修码环必须运行专用动态模拟器”这一配置依赖。",
+   "reel_focus": "问题：有明确运动API与执行规则时，静态文本模拟能否替代动态模拟反馈保留纠码效果；结果：PX4/o4-mini两者均93.3%，代码评估91.7% vs 92.1%，去规则/示例退化；真机UAV/地面车各8任务约87.5–91.7%。版式宜做“动态仿真环 vs 文本模拟环”并列流程与持平条；须注明限规则化轨迹任务与受控API，配置/时延节省未充分量化，不等价物理世界模型或安全认证。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  },
+  {
+   "paper_id": "2609.35318",
+   "title": "DexAgent: An Agentic Human2Sim2Robot Framework for Dexterous Manipulation with Self-Evolving Tool Library",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "q1_basis": "measured_own",
+   "q2_open": "open_failure",
+   "mechanism_type": "人视频→示范数据生成",
+   "reason": "单次人类视频经可检验的重建、接触/轨迹优化与扩增生成示范，11类真机任务每任务10次平均63.6%对最强数据基线18.2%，把绳、抽屉、多物体任务带进视觉闭环策略范围。",
+   "reel_focus": "问题：人手轨迹直接重定向难覆盖接触拓扑，如何把单次人类视频转成可学的灵巧操作示范；结果：11任务×10次真实闭环平均63.6% vs 18.2%，抽屉80%、绳50%。版式宜做“人视频→重建→接触优化→扩增→学生策略”四阶段流水；须区分Table III单次重放覆盖与Table IV重复成功率，增强与轨迹生成贡献尚未隔离。",
+   "fulltext_check": "pending（制作环节由Opus读原文核对后才可制作）"
+  }
+ ],
+ "dedup": [
+  {
+   "paper_id": "2407.20242",
+   "title": "BadRobot: Jailbreaking Embodied LLM Agents in the Physical World",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.27350",
+   "reason": "s001已判同题：同问“文本对齐能否延伸到动作安全”；本篇跨平台权限/终点不一，2610.27350以同模型同首帧对照更直接隔离问题。"
+  },
+  {
+   "paper_id": "2410.13691",
+   "title": "Jailbreaking LLM-Controlled Robots",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.27350",
+   "reason": "s001已判同题：同问“文本对齐能否延伸到动作安全”；本篇跨平台权限/终点不一，2610.27350以同模型同首帧对照更直接隔离问题。"
+  },
+  {
+   "paper_id": "2402.04210",
+   "title": "Task Success is not Enough: Investigating the Use of Video-Language Models as Behavior Critics for Catching Undesirable Agent Behaviors",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2411.04549",
+   "reason": "s001已判同题：同问“VLM批评/进度信号能否当验证器”；本篇主证据依赖人工完美grounding上界，GVL有同模型去捷径对照更直接。"
+  },
+  {
+   "paper_id": "2610.22496",
+   "title": "Scaling Online Exploration for Robot Agents",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.25114",
+   "reason": "s001已判同题：同卡同题（在线试错编译为可复用程序）；本篇缺同信息同预算的继承/反馈消融且含人工介入，归因不如2610.25114直接。"
+  },
+  {
+   "paper_id": "2305.16291",
+   "title": "Voyager: An Open-Ended Embodied Agent with Large Language Models",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.25114",
+   "reason": "s001已判同题：技能库自主累积/复用同题组；2610.25114明确拆分收益来源并测冻结复用，问题更清楚。"
+  },
+  {
+   "paper_id": "2405.15019",
+   "title": "Agentic Skill Discovery",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.25114",
+   "reason": "s001已判同题：技能库自主累积/复用同题组；2610.25114明确拆分收益来源并测冻结复用，问题更清楚。"
+  },
+  {
+   "paper_id": "2509.24160",
+   "title": "Memory Transfer Planning: LLM-driven Context-Aware Code Adaptation for Robot Manipulation",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.25114",
+   "reason": "s001已判同题：技能库自主累积/复用同题组；2610.25114明确拆分收益来源并测冻结复用，问题更清楚。"
+  },
+  {
+   "paper_id": "2506.15635",
+   "title": "FindingDory: A Benchmark to Evaluate Memory in Embodied Agents",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2510.20328",
+   "reason": "s001已判同题：同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2409.13682",
+   "title": "ReMEmbR: Building and Reasoning Over Long-Horizon Spatio-Temporal Memory for Robot Navigation",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2510.20328",
+   "reason": "s001已判同题：同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2411.17735",
+   "title": "3D-Mem: 3D Scene Memory for Embodied Exploration and Reasoning",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2510.20328",
+   "reason": "s001已判同题：同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2306.17840",
+   "title": "Statler: State-Maintaining Language Models for Embodied Reasoning",
+   "families": [
+    "F4",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2510.20328",
+   "reason": "s001已判同题：同卡“行动所需历史记忆”同题组；FindingDory缺无/乱序历史对照，其余为特定表示方法，MemER固定低层真机对照最直接。"
+  },
+  {
+   "paper_id": "2504.13059",
+   "title": "RoboTwin: Dual-Arm Robot Benchmark with Generative Digital Twins",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.15572",
+   "reason": "s001已判同题：privileged_teacher_supervision同卡；均为教师数据生成规模/鲁棒性，未像2610.15572那样等量数据只换教师策略。2504.13059另有later_work 2506.18088（同系列扩展），二者均未入选。"
+  },
+  {
+   "paper_id": "2506.18088",
+   "title": "RoboTwin 2.0: A Scalable Data Generator and Benchmark with Strong Domain Randomization for Robust Bimanual Robotic Manipulation",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.15572",
+   "reason": "s001已判同题：privileged_teacher_supervision同卡；均为教师数据生成规模/鲁棒性，未像2610.15572那样等量数据只换教师策略。2504.13059另有later_work 2506.18088（同系列扩展），二者均未入选。"
+  },
+  {
+   "paper_id": "2406.18915",
+   "title": "Manipulate-Anything: Automating Real-World Robots using Vision-Language Models",
+   "families": [
+    "F4",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/privileged_teacher_supervision",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.15572",
+   "reason": "s001已判同题：privileged_teacher_supervision同卡；均为教师数据生成规模/鲁棒性，未像2610.15572那样等量数据只换教师策略。2504.13059另有later_work 2506.18088（同系列扩展），二者均未入选。"
+  },
+  {
+   "paper_id": "2403.12482",
+   "title": "Embodied LLM Agents Learn to Cooperate in Organized Teams",
+   "families": [
+    "F5",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2411.00081",
+   "reason": "s001已判同题：同问“多智能体协作/通信是否真带来效率”；2403.12482 GPT-4结构收益p=.20，Robotouille/ELHPlan为单一设置，PARTNR受控维度最全、证据最直接。"
+  },
+  {
+   "paper_id": "2502.05227",
+   "title": "Robotouille: An Asynchronous Planning Benchmark for LLM Agents",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2411.00081",
+   "reason": "s001已判同题：同问“多智能体协作/通信是否真带来效率”；2403.12482 GPT-4结构收益p=.20，Robotouille/ELHPlan为单一设置，PARTNR受控维度最全、证据最直接。"
+  },
+  {
+   "paper_id": "2509.24230",
+   "title": "ELHPlan: Efficient Long-Horizon Task Planning for Multi-Agent Collaboration",
+   "families": [
+    "F5",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2411.00081",
+   "reason": "s001已判同题：同问“多智能体协作/通信是否真带来效率”；2403.12482 GPT-4结构收益p=.20，Robotouille/ELHPlan为单一设置，PARTNR受控维度最全、证据最直接。"
+  },
+  {
+   "paper_id": "2509.22653",
+   "title": "See, Point, Fly: A Learning-Free VLM Framework for Universal Unmanned Aerial Navigation",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2602.15875",
+   "reason": "s001已判同题：UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2505.05622",
+   "title": "CityNavAgent: Aerial Vision-and-Language Navigation with Hierarchical Semantic Planning and Global Memory",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2602.15875",
+   "reason": "s001已判同题：UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2505.08765",
+   "title": "Towards Autonomous UAV Visual Object Search in City Space: Benchmark and Agentic Methodology",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2602.15875",
+   "reason": "s001已判同题：UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2508.00288",
+   "title": "UAV-ON: A Benchmark for Open-World Object Goal Navigation with Aerial Agents",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2602.15875",
+   "reason": "s001已判同题：UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2410.07087",
+   "title": "Towards Realistic UAV Vision-Language Navigation: Platform, Benchmark, and Methodology",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2602.15875",
+   "reason": "s001已判同题：UAV零样本导航/航空VLN同题组；Fly0固定其余栈只换目标接口，隔离最直接。2509.22653与其问题最近（文本3D动作→视觉grounding）。"
+  },
+  {
+   "paper_id": "2602.12281",
+   "title": "Scaling Verification Can Be More Effective than Scaling Policy Learning for Vision-Language-Action Alignment",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/sample_verify_select",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2506.17811",
+   "reason": "同问“可部署验证器能否从多个候选中选出更好动作”；与s001 RoboMonkey同卡同题，且PolaRiS绝对成功率仍低（3.8→13.1%）。"
+  },
+  {
+   "paper_id": "2603.17312",
+   "title": "Recurrent Reasoning with Vision-Language Models for Estimating Long-Horizon Embodied Task Progress",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2411.04549",
+   "reason": "同问“VLM进度估计能否作可用信号”；本篇为流式效率版本，进度真值为等权插值，GVL的去捷径对照更直接。"
+  },
+  {
+   "paper_id": "2610.26848",
+   "title": "Where is Physical RSI capability from? An Observational Scaling Law of LLM-as-policy",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2610.25114",
+   "reason": "同问“反复尝试增益是否来自保留经验/冻结产物能否迁移”；与s001自我改进归因篇问题重合。"
+  },
+  {
+   "paper_id": "2607.29600",
+   "title": "HAM-VLN: Harnessing Hierarchical Agentic Memory for Zero-Shot Vision-and-Language Navigation",
+   "families": [
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "同题去重（s001已选）",
+   "kept_by": "2510.20328",
+   "reason": "同问“要记什么而非记更多历史”（导航版）；s001 MemER已占该问题，本篇每基准100集子集。"
+  },
+  {
+   "paper_id": "2410.00371",
+   "title": "AHA: A Vision-Language-Model for Detecting and Reasoning Over Failures in Robotic Manipulation",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重",
+   "kept_by": "2306.15724",
+   "reason": "同问“失败判断如何从二元标签变成可用于纠正的原因反馈”；REFLECT以去解释消融直接量到纠正率差，AHA主要是检测/推理准确率。"
+  },
+  {
+   "paper_id": "2409.19471",
+   "title": "SELP: Generating Safe and Efficient Task Plans for Robot Agents with Large Language Models",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重",
+   "kept_by": "2309.09919",
+   "reason": "同问“自然语言时序要求→LTL约束计划”；Safety Chip给出未验证/专家验证门控分档与真机对照，SELP限有限任务约束满足率。"
+  },
+  {
+   "paper_id": "2305.15695",
+   "title": "Asking Before Acting: Gather Information in Embodied Decision Making with Language Models",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重",
+   "kept_by": "2307.01928",
+   "reason": "同属“何时/如何向人求助或询问”题组；KnowNo有覆盖率保证与帮助率对照，证据最完整（s001已记为该槽首选）。"
+  },
+  {
+   "paper_id": "2310.07968",
+   "title": "Think, Act, and Ask: Open-World Interactive Personalized Robot Navigation",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重",
+   "kept_by": "2307.01928",
+   "reason": "同属“何时/如何向人求助或询问”题组；KnowNo有覆盖率保证与帮助率对照，证据最完整（s001已记为该槽首选）。"
+  },
+  {
+   "paper_id": "2412.01250",
+   "title": "Collaborative Instance Object Navigation: Leveraging Uncertainty-Awareness to Minimize Human-Agent Dialogues",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重",
+   "kept_by": "2307.01928",
+   "reason": "同属“何时/如何向人求助或询问”题组；KnowNo有覆盖率保证与帮助率对照，证据最完整（s001已记为该槽首选）。"
+  },
+  {
+   "paper_id": "2307.05973",
+   "title": "VoxPoser: Composable 3D Value Maps for Robotic Manipulation with Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "同题去重",
+   "kept_by": "2409.01652",
+   "reason": "同问“语言→空间约束/价值图→优化器合成运动”；ReKep在同任务直接对照VoxPoser（10.0 vs 44.3）并给出人工约束上界，差距更清楚。"
+  },
+  {
+   "paper_id": "2610.00854",
+   "title": "Are Frontier VLM Agents Ready to Be Robot Generalists? An Empirical Study with the Embodied Agent Arena",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "同题去重",
+   "kept_by": "2501.11858",
+   "reason": "同问“局部/静态能力能否转成完整具身目标达成”；EmbodiedEval有同接口人类上限与固定模型历史干预，对照更直接。"
+  },
+  {
+   "paper_id": "2201.07207",
+   "title": "Language Models as Zero-Shot Planners: Extracting Actionable Knowledge for Embodied Agents",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2204.01691",
+   "title": "Do As I Can, Not As I Say: Grounding Language in Robotic Affordances",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2207.04429",
+   "title": "LM-Nav: Robotic Navigation with Large Pre-Trained Models of Language, Vision, and Action",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2207.05608",
+   "title": "Inner Monologue: Embodied Reasoning through Planning with Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2209.07753",
+   "title": "Code as Policies: Language Model Programs for Embodied Control",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2209.11302",
+   "title": "ProgPrompt: Generating Situated Robot Task Plans using Large Language Models",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2212.04088",
+   "title": "LLM-Planner: Few-Shot Grounded Planning for Embodied Agents with Large Language Models",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2302.01560",
+   "title": "Describe, Explain, Plan and Select: Interactive Planning with Large Language Models Enables Open-World Multi-Task Agents",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2303.03480",
+   "title": "Can an Embodied Agent Find Your \"Cat-shaped Mug\"? LLM-Guided Exploration for Zero-Shot Object Navigation",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2304.11477",
+   "title": "LLM+P: Empowering Large Language Models with Optimal Planning Proficiency",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2306.08647",
+   "title": "Language to Rewards for Robotic Skill Synthesis",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2307.00329",
+   "title": "DoReMi: Grounding Language Model by Detecting and Recovering from Plan-Execution Misalignment",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2307.02485",
+   "title": "Building Cooperative Embodied Agents Modularly with Large Language Models",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2307.04738",
+   "title": "RoCo: Dialectic Multi-Robot Collaboration with Large Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2309.04077",
+   "title": "SayNav: Grounding Large Language Models for Dynamic Planning to Navigation in New Environments",
+   "families": [
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2309.09969",
+   "title": "Prompt a Robot to Walk with Large Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2309.10062",
+   "title": "SMART-LLM: Smart Multi-Agent Robot Task Planning using Large Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2309.10103",
+   "title": "Reasoning about the Unseen for Efficient Outdoor Object Navigation",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2309.16650",
+   "title": "ConceptGraphs: Open-Vocabulary 3D Scene Graphs for Perception and Planning",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2310.10021",
+   "title": "Bootstrap Your Own Skills: Learning to Solve New Tasks with Large Language Model Guidance",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2310.17555",
+   "title": "Interactive Robot Learning from Verbal Correction",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2311.10678",
+   "title": "Distilling and Retrieving Generalizable Knowledge for Robot Manipulation via Language Corrections",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2311.11183",
+   "title": "Deploying and Evaluating LLMs to Program Service Mobile Robots",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2401.12202",
+   "title": "OK-Robot: What Really Matters in Integrating Open-Knowledge Models for Robotics",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2401.12963",
+   "title": "AutoRT: Embodied Foundation Models for Large Scale Orchestration of Robotic Agents",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2402.08178",
+   "title": "LoTa-Bench: Benchmarking Language-oriented Task Planners for Embodied Agents",
+   "families": [
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2402.14623",
+   "title": "RoboScript: Code Generation for Free-Form Manipulation Tasks across Real and Simulation",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码正确≠执行成功的分层计分；与RoboCerebra同为“高层指标≠闭环成功”诊断，本期截断。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2404.04619",
+   "title": "Do We Really Need a Complex Agent System? Distill Embodied Agent into a Single Model",
+   "families": [
+    "F4",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "离线harness蒸馏族；本期蒸馏位由VLA-OPD（在线目标）占用。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2404.06413",
+   "title": "Foundation Models to the Rescue: Deadlock Resolution in Connected Multi-Robot Systems",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2404.06645",
+   "title": "GenCHiP: Generating Robot Policy Code for High-Precision and Contact-Rich Manipulation Tasks",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2404.14285",
+   "title": "LLM-Personalize: Aligning LLM Planners with Human Preferences via Reinforced Self-Training for Housekeeping Robots",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "教师引导稀疏RL族；s001已有LLM教师RL篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2404.19065",
+   "title": "HELPER-X: A Unified Instructable Embodied Agent to Tackle Four Interactive Vision-Language Domains with Memory-Augmented Language Models",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2406.14596",
+   "title": "VLM Agents Generate Their Own Memories: Distilling Experience into Embodied Programs of Thought",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2406.18746",
+   "title": "Lifelong Robot Library Learning: Bootstrapping Composable and Generalizable Skills for Embodied Control with Language Models",
+   "families": [
+    "F5",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2407.10031",
+   "title": "LLaMAR: Long-Horizon Planning for Multi-Agent Robots in Partially Observable Environments",
+   "families": [
+    "F4",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2409.10906",
+   "title": "Multi-Floor Zero-Shot Object Navigation Policy",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2409.15146",
+   "title": "COHERENT: Collaboration of Heterogeneous Multi-Robot System with Large Language Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2410.06237",
+   "title": "BUMBLE: Unifying Reasoning and Acting with Vision-Language Models for Building-wide Mobile Manipulation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2410.06473",
+   "title": "GRAPPA: Generalizing and Adapting Robot Policies via Online Agentic Guidance",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2410.07166",
+   "title": "Embodied Agent Interface: Benchmarking LLMs for Embodied Decision Making",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2410.22662",
+   "title": "EMOS: Embodiment-aware Heterogeneous Multi-robot Operating System with LLM Agents",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2412.04453",
+   "title": "NaVILA: Legged Robot Vision-Language-Action Model for Navigation",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2412.04455",
+   "title": "Code-as-Monitor: Constraint-aware Visual Programming for Reactive and Proactive Robotic Failure Detection",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2412.13178",
+   "title": "SafeAgentBench: A Benchmark for Safe Task Planning of Embodied LLM Agents",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2412.18194",
+   "title": "VLABench: A Large-Scale Benchmark for Language-Conditioned Robotics Manipulation with Long-Horizon Reasoning Tasks",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2501.04268",
+   "title": "Robotic Programmer: Video Instructed Policy Code Generation for Robotic Manipulation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2502.09560",
+   "title": "EmbodiedBench: Comprehensive Benchmarking Multi-modal Large Language Models for Vision-Driven Embodied Agents",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2502.16707",
+   "title": "Reflective Planning: Vision-Language Models for Multi-Stage Long-Horizon Robotic Manipulation",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/sample_verify_select"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "采样—验证—选择族；s001已有RoboMonkey。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2502.19135",
+   "title": "Combining Large Language Models and Symbolic Reasoning for Multi-Robot Temporal Planning through Explainable Knowledge Bases",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2502.19417",
+   "title": "Hi Robot: Open-Ended Instruction Following with Hierarchical Vision-Language-Action Models",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.01700",
+   "title": "Code-as-Symbolic-Planner: Foundation Model-Based Robot Planning via Symbolic Code Generation",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.07885",
+   "title": "Safety Guardrails for LLM-Enabled Robots",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.08663",
+   "title": "Generating Robot Constitutions & Benchmarks for Semantic Safety",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.10069",
+   "title": "SmartWay: Enhanced Waypoint Prediction and Backtracking for Zero-Shot Vision-and-Language Navigation",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.12533",
+   "title": "Being-0: A Humanoid Robotic Agent with Vision-Language Models and Modular Skills",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.16408",
+   "title": "RoboFactory: Exploring Embodied Agent Collaboration with Compositional Constraints",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.18666",
+   "title": "AgentSpec: Customizable Runtime Enforcement for Safe and Reliable LLM Agents",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2503.22122",
+   "title": "REMAC: Self-Reflective and Self-Evolving Multi-Agent Collaboration for Long-Horizon Robot Manipulation",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2504.09532",
+   "title": "Humanoid Agent via Embodied Chain-of-Action Reasoning with Multimodal Foundation Models for Zero-Shot Loco-Manipulation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2504.09587",
+   "title": "GeoNav: Empowering MLLMs with dual-scale geospatial reasoning for language-goal aerial navigation",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2504.14588",
+   "title": "Phoenix: A Motion-based Self-Reflection Framework for Fine-grained Robotic Action Correction",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2505.13948",
+   "title": "Memory-Centric Embodied Question Answering",
+   "families": [
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2505.22050",
+   "title": "Reinforced Reasoning for Embodied Planning",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_native_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness原生RL族；s001 RL槽已占，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2505.23450",
+   "title": "Agentic Robot: A Brain-Inspired Framework for Vision-Language-Action Models in Embodied Agents",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2506.04217",
+   "title": "OWMM-Agent: Open World Mobile Manipulation With Multi-modal Agentic Data Synthesis",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/privileged_teacher_supervision",
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2506.09937",
+   "title": "SAFE: Multitask Failure Detection for Vision-Language-Action Models",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2506.16402",
+   "title": "IS-Bench: Evaluating Interactive Safety of VLM-Driven Embodied Agents in Daily Household Tasks",
+   "families": [
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2506.17462",
+   "title": "General-Purpose Robotic Navigation via LVLM-Orchestrated Perception, Reasoning, and Acting",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2506.23127",
+   "title": "Unleashing Embodied Task Planning Ability in LLMs via Reinforcement Learning",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_native_rl",
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "仅完成奖励的多轮RL无需SFT；RL类型s001已有教师引导RL，下期原生RL槽备选。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2507.00833",
+   "title": "HumanoidGen: Data Generation for Bimanual Dexterous Manipulation via LLM Reasoning",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/privileged_teacher_supervision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2507.01485",
+   "title": "BioMARS: A Multi-Agent Robotic System for Autonomous Biological Experiments",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2508.01415",
+   "title": "RoboMemory: A Brain-inspired Multi-memory Agentic Framework for Interactive Environmental Learning in Physical Embodied Systems",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2509.16072",
+   "title": "I-FailSense: Towards General Robotic Failure Detection with Vision-Language Models",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2509.18597",
+   "title": "Robotic Ultra-Long-Horizon Manipulation Skills via Human-guided Lifelong Code Generation",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2510.03342",
+   "title": "Gemini Robotics 1.5: Pushing the Frontier of Generalist Robots with Advanced Embodied Reasoning, Thinking, and Motion Transfer",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2510.12693",
+   "title": "ERA: Transforming VLMs into Embodied Agents via Embodied Prior Learning and Online Reinforcement Learning",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/offline_harness_distillation",
+    "main/harness_native_rl",
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "离线harness蒸馏族；本期蒸馏位由VLA-OPD（在线目标）占用。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2510.21302",
+   "title": "Towards Reliable Code-as-Policies: A Neuro-Symbolic Framework for Embodied Task Planning",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2510.25548",
+   "title": "Using VLM Reasoning to Constrain Task and Motion Planning",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2511.19033",
+   "title": "ReEXplore: Improving MLLMs for Embodied Exploration with Contextualized Retrospective Experience Replay",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2601.11063",
+   "title": "EmboTeam: Grounding LLM Reasoning into Reactive Behavior Trees via PDDL for Embodied Multi-Robot Collaboration",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2601.15486",
+   "title": "An LLM-Agnostic, MAVLink-Based Drone Command and Control Interface and Agentic Harness Using the Model Context Protocol",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2601.20334",
+   "title": "Demonstration-Free Robotic Control via LLM Agents",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.01662",
+   "title": "PLanAR: Planning-Language-Grounded Agentic Reasoning for Robot Manipulation",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.04157",
+   "title": "A Modern System Recipe for Situated Embodied Human-Robot Conversation with Real-Time Multimodal LLMs and Tool-Calling",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.04315",
+   "title": "GeneralVLA: Generalizable Vision-Language-Action Models with Knowledge-Guided Trajectory Planning",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.12405",
+   "title": "Self-Refining Vision Language Model for Robotic Failure Detection and Reasoning",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.13193",
+   "title": "Steerable Vision-Language-Action Policies for Embodied Reasoning and Hierarchical Control",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.19983",
+   "title": "Contextual Safety Reasoning and Grounding for Open-World Robots",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.20323",
+   "title": "PhysMem: Scaling Test-Time Memory for Embodied Physical Reasoning",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2602.21198",
+   "title": "Learning from Trials and Errors: Reflective Test-Time Planning for Embodied LLMs",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/sample_verify_select"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "采样—验证—选择族；s001已有RoboMonkey。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.02623",
+   "title": "Uni-Skill: Building Self-Evolving Skill Repository for Generalizable Robotic Manipulation",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.10682",
+   "title": "OnFly: Onboard Zero-Shot Aerial Vision-Language Navigation toward Safety and Efficiency",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.13528",
+   "title": "Learning Actionable Manipulation Recovery via Counterfactual Failure Synthesis",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.18520",
+   "title": "Robotic Agentic Platform for Intelligent Electric Vehicle Disassembly",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.19137",
+   "title": "GSMem: 3D Gaussian Splatting as Persistent Spatial Memory for Zero-Shot Embodied Exploration and Reasoning",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.22435",
+   "title": "CaP-X: A Framework for Benchmarking and Improving Coding Agents for Robot Manipulation",
+   "families": [
+    "F1",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2603.26997",
+   "title": "ROSClaw: An OpenClaw ROS 2 Framework for Agentic Robot Control and Interaction",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2604.02318",
+   "title": "Stop Wandering: Efficient Vision-Language Navigation via Metacognitive Reasoning",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2604.05226",
+   "title": "RoboPlayground: Democratizing Robotic Evaluation through Structured Physical Domains",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2604.07395",
+   "title": "A Physical Agentic Loop for Language-Guided Grasping with Execution-State Monitoring",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2604.22591",
+   "title": "RedVLA: Physical Red Teaming for Vision-Language-Action Models",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2604.26988",
+   "title": "Robot Planning and Situation Handling with Active Perception",
+   "families": [
+    "F4",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.01371",
+   "title": "ESARBench: A Benchmark for Agentic UAV Embodied Search and Rescue",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.07594",
+   "title": "MemCompiler: Compile, Don't Inject -- State-Conditioned Memory for Embodied Agents",
+   "families": [
+    "F5",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.09423",
+   "title": "SimWorld Studio: Automatic Environment Generation with Evolving Coding Agent for Embodied Agent Learning",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.10332",
+   "title": "EmbodiSkill: Skill-Aware Reflection for Self-Evolving Embodied Agents",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.10921",
+   "title": "RoboMemArena: A Comprehensive and Challenging Robotic Memory Benchmark",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.12920",
+   "title": "Embodied Multi-Agent Coordination by Aligning World Models Through Dialogue",
+   "families": [
+    "F5",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.13119",
+   "title": "Towards Long-horizon Embodied Agents with Tool-Aligned Vision-Language-Action Models",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.18727",
+   "title": "DexHoldem: An Agentic Robotics Benchmark for Dexterous Manipulation in Texas Hold'em",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.18746",
+   "title": "ESI-Bench: Towards Embodied Spatial Intelligence that Closes the Perception-Action Loop",
+   "families": [
+    "F4",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.26637",
+   "title": "Enabling Extensible Embodied Capabilities with Tools",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2605.30326",
+   "title": "RoboWits: Unexpected Challenges for Robotic Creative Problem Solving",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.07723",
+   "title": "VoLo: A Physical Orchestrator for Open-Vocabulary Long-Horizon Manipulation",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.08610",
+   "title": "HARBOR: A Harness Framework for Agentic Robot Reinforcement Learning",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.09630",
+   "title": "ReCoVLA: VLM-Guided Reward Compilation for Failure Recovery in Vision-Language-Action Policies",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/teacher_seeded_sparse_rl",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "教师引导稀疏RL族；s001已有LLM教师RL篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.10267",
+   "title": "What Matters in Orchestrating Robot Policies: A Systematic Study of Hierarchical VLA Agents",
+   "families": [
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_effect_evaluation",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "分层vs平面策略的受控设计研究（Best 83.8% vs Flat 43.3%）；与RoboCerebra同属分层归因，本期截断。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2606.10577",
+   "title": "AgenticNav: Zero-Shot Vision-and-Language Navigation as a Tool-Calling Harness",
+   "families": [
+    "F1",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.12299",
+   "title": "Learning What to Say to Your VLA: Mostly Harmless Vision Language Action Model Steering",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy",
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.14674",
+   "title": "AgentSpec: Understanding Embodied Agent Scaffolds Through Controlled Composition",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.16458",
+   "title": "RHO: Your Coding Agent is Secretly a Roboticist",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.18363",
+   "title": "Guava: Distilling Frontier VLMs into a Compact Agent through a Robotic Manipulation Harness",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/offline_harness_distillation",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "离线harness蒸馏族；本期蒸馏位由VLA-OPD（在线目标）占用。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.18847",
+   "title": "WorldLines: Benchmarking and Modeling Long-Horizon Stateful Embodied Agents",
+   "families": [
+    "F4",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.19419",
+   "title": "Playful Agentic Robot Learning",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.25206",
+   "title": "RAVEN: Long-Horizon Reasoning & Navigation with a Visuo-Spatio-Temporal Memory",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2606.27871",
+   "title": "LocalNav: Distilling Frontier VLMs and Embodied RL for On-Device Object Goal Navigation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/offline_harness_distillation",
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "离线harness蒸馏族；本期蒸馏位由VLA-OPD（在线目标）占用。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.00218",
+   "title": "EgoSafetyBench: A Diagnostic Egocentric Video Benchmark for Evaluating Embodied VLMs as Runtime Safety Guards",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.00272",
+   "title": "ASPIRE: Agentic /Skills Discovery for Robotics",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.05369",
+   "title": "GaP: A Graph-as-Policy Multi-Agent Self-Learning Harness For Variational Automation Tasks",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.05377",
+   "title": "Cortex: A Bidirectionally Aligned Embodied Agent Framework for Long-horizon Manipulation",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "训练式分层VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.06256",
+   "title": "Diagnosing Semantic Handoff Failures in Agent-Orchestrated Vision-Language-Action Skill Composition",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "技能交接诊断（同checkpoint干净快照vs组合终态，串联进度19.5%）问题极清楚；本期分层槽给了RoboCerebra，下期交接槽首选，与2607.18060同题需二选一。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2607.06990",
+   "title": "A Closed-Loop Multi-Agent Framework for Robust Multi-Robot Manipulation",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.08448",
+   "title": "Harness VLA: Steering Frozen VLAs into Reliable Manipulation Primitives via Memory-Guided Agents",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.11119",
+   "title": "VIA: Visual Interface Agent for Robot Control",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.13049",
+   "title": "SPINE: Bridging the Cyber-Physical Gap with Agentic AI",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.13653",
+   "title": "Exploratory, Communicative, and Deployable: Vision-Driven Embodied Agents for Open-World Mobile Manipulation",
+   "families": [
+    "F4",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/privileged_teacher_supervision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.14047",
+   "title": "Zero2Skill: Bootstrapping Robot Skills through Autonomous Data Collection, Training, and Deployment",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.17213",
+   "title": "Retriever: Composing the Perception-Reasoning-Action Loop for Long-Horizon Manipulation",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.18060",
+   "title": "RoboHarness: Memory-Driven Orchestration of Heterogeneous Robot Policies for Long-Horizon Planning",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "异构策略交接（MemoryBridge）与2607.06256同题；下期交接槽与其二选一。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2607.19190",
+   "title": "Agentic Real2Sim: Physics-based World Modeling with Vision-Language Agents",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "Agentic Real2Sim（录像→MuJoCo孪生，sim-real r=.92）；与2609.13082同属评测基础设施，下期备选。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2607.22014",
+   "title": "Zero-Shot Mission-Level Evaluation for Aerial MLLM Agents",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.22999",
+   "title": "WCM: World-Cognition Model for Generalizable Human-Robot Interaction",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/trained_vlm_vla_hierarchy",
+    "main/learner_state_teacher_correction"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "在线人机交互/语言教学（去interaction-sensing 69→0%）；本期人机交互位给KnowNo，下期备选。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2607.23532",
+   "title": "Mission-Level Runtime Assurance for LLM-Assisted ISR Swarms over a Verification-Aware Fabric",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.23784",
+   "title": "A Few Words Go a Long Way: Language Guided Robot Policy Synthesis",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.26148",
+   "title": "Embodied Agents Take Control: Minimal-Interface Zero-Shot Agents Rival Industrial-Scale Policies in Vision-and-Language Navigation",
+   "families": [
+    "F1",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.26809",
+   "title": "Practice Makes Policies: Bootstrapping and Consolidating Robotic Capabilities from Zero Human Demonstrations",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/offline_harness_distillation",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "离线harness蒸馏族；本期蒸馏位由VLA-OPD（在线目标）占用。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.27180",
+   "title": "HumanCLAW: Can Vision-Language Models Act Through a Body?",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2607.27599",
+   "title": "World Action Planner: Generalizable Robot Decision-Making with Action-Conditioned World Models",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/sample_verify_select",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "采样—验证—选择族；s001已有RoboMonkey。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.03924",
+   "title": "ETA: A New Agentic Paradigm for Embodied Tasks",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.04933",
+   "title": "Mimir: A Neuro-Symbolic Memory System with Dynamic Grounding for Embodied Agents in Interactive Environments",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.05715",
+   "title": "Hijacking Robots with a Piece of Paper: A Systematic Study of Physical Prompt Injection in VLM-Controlled Robots",
+   "families": [
+    "F4",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "纸面文字物理提示注入（ASR至29.4%、中性纸条0%）；与s001安全诊断类型同质，下期安全槽备选。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2608.07555",
+   "title": "You Don't Need To Stay in The Loop: An Agentic Robotics Loop for Robot-Policy Improvement",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.09410",
+   "title": "Skills in Weights, Memory in Code: Hybrid Learning for Memory-Dependent Robot Manipulation",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.09516",
+   "title": "HarnessWAM: Bridging Prediction and Deliberation in World Action Models",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.11246",
+   "title": "Towards the Harness of Embodied Agents",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.11350",
+   "title": "Self-Evolving Embodied Agents via Skill-Harness Evolution",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.14822",
+   "title": "Imagining Recovery: Inference-Time Counterfactual Realignment for Vision-Language-Action Models",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.16590",
+   "title": "Zetta $ζ$: An Efficient Closed-Loop Embodied Harness for Self-Evolving Physical Intelligence",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.16889",
+   "title": "Don't Drop the BATON: Long-Horizon Robot Manipulation via Agentic Subtask Exploration and Transition-aware Memory",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.16978",
+   "title": "VLCP: Vision Language Control Policy Closed-Loop Code Replanning for Robot Manipulation",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.17209",
+   "title": "Teach and Grow: An Agent-Centered Architecture for General Robot Learning",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.17386",
+   "title": "MANIGUARD: A Benchmark and Data Suite for Specification-Grounded Safety Evaluation and Improvement of Robotic Manipulation",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.22657",
+   "title": "Physical Agentic AI: An Architecture for Orchestrating a Robot Crew with LLMs",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.28266",
+   "title": "CoCoBench: A Cooperative Coordination Benchmark for Embodied Multi-Agent Task Planning",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.28300",
+   "title": "MaCoPlanner: LLM-Assisted Manual-Compiled Task Planning with Proactive Safety Verification for Robotic Industrial Panel Operation",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.29537",
+   "title": "AGM: Achievement-Grounded Memory for Closed-Loop Agents with Frozen VLA Policies",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2608.30396",
+   "title": "Scaffolding Foundation Models into Physical-World Agents Pushes the Frontier of Long-Horizon Navigation",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.01404",
+   "title": "Evaluating Multimodal LLMs as Generalist Vision-Language-Action Agents for Drone Control: Commanding, Approaching, Tracking and Searching",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.02653",
+   "title": "HINT: Human-Intent Inception for Long-Horizon Robot Manipulation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.03611",
+   "title": "FailBench: How Reliable are VLMs at Judging Robot Task Success?",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/sample_verify_select"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.05178",
+   "title": "LIBERO-RECOVER: Beyond Task Success Towards Failure Recovery in Robotic Manipulation Models",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.05927",
+   "title": "GIF: Agentic Generation of Interactive and Functional Object Compositions for Robot Learning",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/sample_verify_select",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "采样—验证—选择族；s001已有RoboMonkey。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.06508",
+   "title": "VLA-Corrector: Stage-Aware Observable State Understanding for Prompt-Based Closed-Loop Recovery of Vision-Language-Action Policies",
+   "families": [
+    "F4",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.08292",
+   "title": "EvoNav-Bench: Benchmarking Lifelong Navigation in Evolving Environments",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.08402",
+   "title": "Towards Embodied Air-Ground Cooperative Object Search: Benchmark, Dataset and Agentic Method",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.08444",
+   "title": "Safe Task Planning with Long-Term Graph Memory for Embodied Agents",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.10522",
+   "title": "Show-Harness: Just a VLM Agent Can Play Robots",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "固定其余部件只换动作名/约定（任意符号1/20），对照很干净；但与s001 Fly0同属动作接口类型，避免同质，下期接口槽备选（与2609.34412比较）。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2609.11308",
+   "title": "2AM: Grounding Agent-Side Memory as Guidance for Steerable Action Models in Long-Horizon Manipulation",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.12285",
+   "title": "AnchorVLN: Geometry-Anchored Vision-Language Grounding Reasoning for Open-Vocabulary Navigation",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.12541",
+   "title": "Agent as Policy for Robotic Manipulation",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.13082",
+   "title": "Embodied-BenchForge: A Closed-Loop Agentic Workflow for Embodied Benchmark Construction",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测产物有效性（仅末端检查有效率10.4% vs 过程QC 93.7%）是新类型；本期评测槽给EmbodiedEval，下期评测基础设施槽首选。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2609.15195",
+   "title": "HarnessVLN: Unifying Training-Free Embodied Navigation through an Agent Harness",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.15976",
+   "title": "MessyMem: Learning-from-Doing Memory for Mobile Manipulation",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.18520",
+   "title": "AeroWeaver: An Embodied-Agent Harness for Weaving Aerial Skills into Distributed, Adaptive Swarm Execution",
+   "families": [
+    "F4",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.18869",
+   "title": "KINO: A Keyframe Interface for VLM Planning and Whole-Body Control in Humanoid Loco-Manipulation",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.19138",
+   "title": "In-Context Robot Learning with VLM Agents",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.19315",
+   "title": "GAVEL: Graph World Models for Verified and Efficient Long-Horizon LLM Task Planning",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/llm_symbolic_solver_planning",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.19554",
+   "title": "VABench: Measuring Embodied Spatial Intelligence through Visual Demonstrations, Active Perception, and Metric Control",
+   "families": [
+    "F4",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.19906",
+   "title": "Learning and Transferring Closed-Loop Robot Software",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.20116",
+   "title": "How Far Can GPT-6-Astra Go? Evaluating Capabilities in Zero-Shot Vision-and-Language Navigation",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.20791",
+   "title": "StageGuard: Learning Stage Transitions for Long-Horizon Robot Tasks via Agentic Distillation",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.20822",
+   "title": "Coding Agents with Harness for Safe Robot Control",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.21650",
+   "title": "SynthDemo-RL: Breaking the Zero-Reward Barrier in VLA Adaptation with LLM-Guided Synthetic Demonstrations",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/teacher_seeded_sparse_rl",
+    "main/privileged_teacher_supervision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "教师引导稀疏RL族；s001已有LLM教师RL篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.22966",
+   "title": "Transferring the Intelligence of VLMs to Robotic Control",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.23133",
+   "title": "AquaCap: A Training-Free Underwater Embodied Agent with Code-as-Policy",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.23578",
+   "title": "AR-WAM: A Visual-Conditioned Agent-Ready World Action Model for Robotic Manipulation",
+   "families": [
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.23841",
+   "title": "Structured World-State Reasoning for Agentic Robotic Search",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.23997",
+   "title": "RoboTalk: Learning Multi-Robot Communication and Coordination from Multimodal Demonstrations",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.24124",
+   "title": "ActiveArena: Benchmarking and Understanding Active Perception in Robotic Manipulation",
+   "families": [
+    "F5",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.24170",
+   "title": "An Unexpected Robot Policy: Early Evaluations of GPT-6 Astra on RoboDojo and Beyond",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.24563",
+   "title": "ARSTAG: An Agentic Real2Sim2Real System for Task-Specific Robot Data Generation",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "特权教师/数据生成族；本期由DexAgent代表，s001另有教师标注策略篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.26313",
+   "title": "SafeLoop: Risk-Aware Rollback for Vision-Language-Action Manipulation",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.27308",
+   "title": "EmbodiedSWE: Coding Agents for Long Horizon Dexterous Robotics",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/privileged_teacher_supervision",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.27526",
+   "title": "NavProbe: Evidence-Grounded Reasoning with Active Memory Retrieval for Zero-Shot Navigation",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.27720",
+   "title": "CoRelNav: Collaborative Relational Navigation for Multi-Robot Spatially Constrained Semantic Navigation",
+   "families": [
+    "F0",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.28236",
+   "title": "EmbodiedMemory-Bench: Benchmarking Embodied Memory for Long-Horizon Embodied Tasks",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.28247",
+   "title": "Controlling Collectives of AI Agents in Reasoning Space with Spatial Transformers",
+   "families": [
+    "F5",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/multi_robot_llm_coordination",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "多机器人协调族；s001已有PARTNR，本期未留多智能体槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.28530",
+   "title": "Know Your Body: A Harness for Direct and Self-Improving Robot Control with VLMs",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.28798",
+   "title": "OCC4M: Object-Centric 4D Memory for Spatiotemporal Reasoning in Long-Horizon Manipulation",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.29166",
+   "title": "HarnessPAI: An Evolving Harness for Physical AI",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.29204",
+   "title": "AdaHVLA: Adaptive Harnesses for Long-Horizon Vision-Language-Action Execution",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.29389",
+   "title": "Robo-Harness K1: Harnessing Robot-Use Agents via Perception Augmentation",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.29394",
+   "title": "RACaP: Agentic Reasoning, Acting, and Coding as Policies for Evolvable Robot Learning",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.29861",
+   "title": "GPT-6-Astra Lights Up Embodied Navigation: Evaluation in Zero-Shot Vision-and-Language Navigation in Continuous Environments",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.29964",
+   "title": "World Action Agent: Harnessing VLMs for Robot Manipulation via World Action Rehearsal",
+   "families": [
+    "F4",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.30233",
+   "title": "Coding Agents for Generalized Task and Motion Planning Problems",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.30249",
+   "title": "RAPID: Robot Agentic Programming from Demonstrations",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.31112",
+   "title": "DualManip: Agentic Dynamic Manipulation via Dual-Path Semantic Reasoning and Geometric Adaptation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.31760",
+   "title": "What Stops Recursive Self-Improvement in Robotics? Lessons from 123 Rounds of Agentic Skill Discovery",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/harness_effect_evaluation",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.32069",
+   "title": "Find Something You Can't Do: Agentic Real-World Reinforcement Learning for Self-Improving VLA Models",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/teacher_seeded_sparse_rl",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "教师引导稀疏RL族；s001已有LLM教师RL篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.32416",
+   "title": "RE-0: Verified Recursive Improvement of Embodied Code-as-Policy Agents through Local On-Policy Distillation",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/learner_state_teacher_correction"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.32698",
+   "title": "SEES: A Self-Evolving Embodied System via Failure-Guided VLA Policy Adaptation",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/teacher_seeded_sparse_rl",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "教师引导稀疏RL族；s001已有LLM教师RL篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.32801",
+   "title": "PlanGuard: A Guardrail for Multi-Step Plan Safety in Embodied Agents",
+   "families": [
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.33007",
+   "title": "CAPEX: Efficiently Distilling Foundation Model Behavior into Deployable Robot Policies through Experience-Adaptive Reasoning",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.33378",
+   "title": "Recursive Harness Distillation across Agents for Robot Manipulation",
+   "families": [
+    "F3",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.33807",
+   "title": "CodeActionBench: Evaluating Agentic Code-as-Policy for Embodied Manipulation",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.34261",
+   "title": "RoboICL: Embodied In-Context Learning with GPT-6 Astra",
+   "families": [
+    "F5",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.34356",
+   "title": "Predictive Semantic Safety: From Visual Physical Reasoning to Safety-Critical Control",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.34412",
+   "title": "From Language to Task Maps: Compiling Semantic Relations While Preserving Task-Relevant Freedom",
+   "families": [
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.34484",
+   "title": "ARS: Agentic Reward System for Robot Learning",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.35432",
+   "title": "Self-Evolving Coding Agents: From Digital Programs to Physical-World Intelligence",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.35575",
+   "title": "F4R: Failure-Driven Recognition, Reconstruction, Refinement, and Redeployment for Continual Robot Self-Improvement",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction",
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.35690",
+   "title": "Agent Priors-guided Policy Learning",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.36595",
+   "title": "Simple Agentic Memory for Generalist Robot Policies",
+   "families": [
+    "F5",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.37359",
+   "title": "Encore: Few-Shot Agentic Discovery of Manipulation Strategies",
+   "families": [
+    "F4",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.38078",
+   "title": "MotorMind: Scaffolding General Vision Language Models for Zero-Shot Robot Manipulation",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.38178",
+   "title": "Skill-Space Shooting for Autonomous Robot Policy Improvement",
+   "families": [
+    "F3",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.38905",
+   "title": "EmbodiRSI: Recursive Self-Improvement for Data-Efficient Robot Adaptation",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction",
+    "main/offline_harness_distillation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.39018",
+   "title": "Make Code as Policy Great Again: Frontier Agents Write, Call, and Evolve Robot Tools",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.39304",
+   "title": "Scale and Selection: What Makes Automatic Harness Evolution Work for Visual-Interface Robot Agents",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.39507",
+   "title": "LIBERO-Agent: Evaluating General-Purpose Agents for Direct Embodied Manipulation",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2609.40306",
+   "title": "DynaHarness: A Dynamic Physical Harness for Self-Evolving Robot Agents",
+   "families": [
+    "F1",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.01178",
+   "title": "Recova: Agent-Guided Failure Recovery for Autonomous Robotic Manipulation",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.01569",
+   "title": "Managing Context and Communication in Distributed Agentic UAV Swarms",
+   "families": [
+    "F5",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/multi_robot_llm_coordination"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.01939",
+   "title": "Fewer Tokens, Better Action: GPT-6 Astra Robot Agents with 14% Higher Success Rate but 65% Fewer Tokens",
+   "families": [
+    "F1",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.02204",
+   "title": "Reconstruct, Practice, Go Real: Guided Self-Improvement for Embodied Agents",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.07594",
+   "title": "BiGym 2.0: Benchmarking Learned and Agent-Developed Policies for Humanoid Household Manipulation",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/code_policy_trial_revision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.08995",
+   "title": "PhysEvo: Astra Can Act, Let It",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.09228",
+   "title": "Co-Evolving Robot Orchestrators and Policies through Deployment",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.10388",
+   "title": "RoboQuest: Generalist Physical Agents that Search, Inspect and Test",
+   "families": [
+    "F4",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.10409",
+   "title": "RobotWorld: Benchmarking Multimodal Agents for Robot Use Across Diverse Tasks and Embodiments",
+   "families": [
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.10479",
+   "title": "Agentic RSR: Real-to-Sim-to-Real through Scene Reconstruction and Execution-Grounded Robot Policies",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.10498",
+   "title": "EmbodiedRSI: Active Continual Robot Learning Through Hypothesis-Guided Co-Evolution",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "假设驱动的交互预算分配（同50 episode 27.1% vs 72.9%）；与s001自我改进归因同族，下期备选。",
+   "next_candidate": true
+  },
+  {
+   "paper_id": "2610.10787",
+   "title": "NavGPT-3: Harnessing Context in a Hierarchical Navigation Runtime",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.12126",
+   "title": "SuperNav: An Agentic Navigation System for Any Task in Any Scene",
+   "families": [
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.12369",
+   "title": "Embodied Turing Machines: Stateful Code for Robot Recursive Self-Improvement",
+   "families": [
+    "F1",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.12424",
+   "title": "RoboRSI: Stable, efficient, and reusable robot self-evolution in complex real-world environments",
+   "families": [
+    "F0",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": true,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.12549",
+   "title": "Fly-by-Code: Embodied Coding Agents for Aerial Manipulation with Active Visual and Physical Feedback",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/code_policy_trial_revision",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "代码策略试错修订族；本期以2512.02002（反馈来源替代）代表，s001另有自我改进归因篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.13862",
+   "title": "BT-Agent: Deploying Onboard Robot Agents with Behavior Trees and Multi-Fidelity Evaluation",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.14977",
+   "title": "EnactOpt: Diagnosis-Guided Harness Evolution for Embodied Agents",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_self_optimization",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness自优化/自改进族；与s001自我改进归因同族，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.17593",
+   "title": "Training Generalist Navigation Policies via Action Self-Distillation",
+   "families": [
+    "F4",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/privileged_teacher_supervision"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "特权教师/数据生成族；本期由DexAgent代表，s001另有教师标注策略篇。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.18352",
+   "title": "Let the Mind Conceive, Let the Hand Achieve: Following Multimodal Instructions for Long-Horizon Robotic Manipulation",
+   "families": [
+    "F3",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.18867",
+   "title": "EmbodiedEvo: Self-Evolving Coding Agent For Physical Intelligence",
+   "families": [
+    "F3",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.18874",
+   "title": "ChunkAct: Action Chunking for Agentic Robotics",
+   "families": [
+    "F5",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.19600",
+   "title": "Cracking Mobile Manipulation: From Failure Diagnosis to Agentic Robot System",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.19677",
+   "title": "ACRO: Actor-Critic Rollout Orchestration",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.20474",
+   "title": "AdaRSI: On-Demand Recursive Self-Improvement for Embodied Agents",
+   "families": [
+    "F1",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.21450",
+   "title": "X-Fly: Learning to Reach and Stop in Full-Chunk Aerial Vision-Language Navigation",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/learner_state_teacher_correction",
+    "main/teacher_seeded_sparse_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "学习者状态纠正/自适应族；本期未留该槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.21453",
+   "title": "CarryOn: A Dual-Loop Harness for Personalized and Reliable Robot Assistance",
+   "families": [
+    "F2",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.22471",
+   "title": "Has GPT-6-Astra Achieved Embodied Intelligence?",
+   "families": [
+    "F3",
+    "F4"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.23479",
+   "title": "HexaShell: A Thin Harness for Exploring the Limits of VLM Agents as Robot Coding Agents",
+   "families": [
+    "F4",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_self_optimization"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.25930",
+   "title": "TESS: LLM-guided Translation, Exploration, Simulation, and Search for Embodied Task Planning",
+   "families": [
+    "F4",
+    "F0"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/llm_symbolic_solver_planning"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "LLM+符号/优化求解族；本期由ReKep代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.27003",
+   "title": "Replan for Error Recovery: Training Embodied VLMs through Verifiable Interaction with Action-Grouped Turn-GSPO",
+   "families": [
+    "F2",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_native_rl"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.27613",
+   "title": "Embodied Task Agents Can Perform Fine Manipulation through Tactile In-Context Learning",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/observe_act_interface",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.27618",
+   "title": "JARVIS: From Visual Manuals to Autonomous Robotic Assembly",
+   "families": [
+    "F0",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.27917",
+   "title": "EventSync: Event-Driven Memory Updates for History-Dependent Manipulation",
+   "families": [
+    "F2",
+    "F5"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.28259",
+   "title": "Large Multimodal Models for Direct Robot Control: GPT-6 as a Beginning",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/observe_act_interface",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "观察—动作接口族；s001已有Fly0接口篇，本期仅以ReKep（约束生成）间接覆盖，其余截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.28381",
+   "title": "CAPSafe: A Benchmark for Contextual Action and Plan Safety Reasoning in Embodied Agents",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/external_verification_control",
+    "main/harness_effect_evaluation"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.28476",
+   "title": "CLOSER: Evidence-Aware Active Visual Verification for Embodied Object-Goal Navigation",
+   "families": [
+    "F2",
+    "F4"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "验证/门控/恢复族；本期已入选失败解释（REFLECT）、形式约束门控与校准求助三种不同问题，其余按类型多样性截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.28589",
+   "title": "AgenticRoboRL: Bringing Coding-Agent Post-Training to Agentic Robotics",
+   "families": [
+    "F1",
+    "F3"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_native_rl",
+    "main/planner_composes_code_and_policies"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "harness原生RL族；s001 RL槽已占，本期截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.29329",
+   "title": "Plan First, Act Later: Streaming Reasoning for Executable Memory in Robot Control",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/harness_memory_skill_reuse",
+    "main/trained_vlm_vla_hierarchy"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "记忆/技能复用族；s001已选MemER与冻结技能篇，本期不再开记忆槽。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.30043",
+   "title": "TARSphere: A Robot-Oriented Full-Stack Framework for Long-Horizon Embodied Agents in Evolving Physical and Social Environments",
+   "families": [
+    "F0",
+    "F2"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.30051",
+   "title": "From Reasoning to Action: Benchmarking Frontier AI Models on LIBERO-10 Robot Manipulation Tasks",
+   "families": [
+    "F1",
+    "F5"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/observe_act_interface"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.30108",
+   "title": "Multimodal Embodied Agents: A Unified Capability-centric Perspective from Computer-Use to Robot-Use",
+   "families": [
+    "F2",
+    "F0"
+   ],
+   "q3": "judgment",
+   "cards": [
+    "main/harness_effect_evaluation",
+    "main/external_verification_control"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "评测/诊断族；本期已入选EmbodiedEval与RoboCerebra两篇诊断，按诊断集中规则截断。",
+   "next_candidate": false
+  },
+  {
+   "paper_id": "2610.30136",
+   "title": "Agentic World Action Models",
+   "families": [
+    "F0",
+    "F1"
+   ],
+   "q3": "capability",
+   "cards": [
+    "main/planner_composes_code_and_policies",
+    "main/harness_memory_skill_reuse"
+   ],
+   "problem_tier": "P3",
+   "wave2_upgrade_P2toP3": false,
+   "kind": "多样性截断",
+   "kept_by": null,
+   "reason": "规划器组合技能/VLA族；本期分层问题由RoboCerebra代表。",
+   "next_candidate": false
+  }
+ ],
+ "counts": {
+  "selected": 9,
+  "same_topic_dedup": 33,
+  "same_topic_dedup_vs_s002": 7,
+  "same_topic_dedup_vs_s001": 26,
+  "diversity_truncated": 285,
+  "wave2_upgrade_selected": 8
+ },
+ "diversity_note": "9篇对应9种机制类型，均不与s001九类重复：失败解释→纠正、形式约束门控、约束生成+优化求解、在线蒸馏目标、单体MLLM闭环评测、不确定性校准求助、分层归因诊断、反馈来源替代、人视频→示范数据生成。问题族F0–F5全覆盖（F0×5、F2×5、F4×3、F1/F3/F5各1）；q3为capability 6、judgment 3（s001为judgment 5，合计两期12:6→各9）。诊断/评测类2篇（2501.11858、2506.06677）。external_verification_control主卡3篇，但分属失败解释、时序约束门控、求助校准三个不同问题；其余主卡各≤1。8/9篇为L2第二波P2→P3上移篇。",
+ "editing_reasons": [
+  "候选池327篇全为P3 confirmed；不按数值排序，先按主卡+problem_statement聚同题组，组内保留问题最清楚、对照最直接的一篇。",
+  "与s001的去重：s001已记“同题去重”的22篇仍归入其入选篇；新增4篇（2602.12281、2603.17312、2610.26848、2607.29600）与s001入选篇同问，记为同题去重（s001已选）。",
+  "按用户要求优先取L2第二波P2→P3上移篇（池内56篇）：入选8篇来自上移篇；唯一非上移入选2307.01928，是s001明确留给下期的求助槽首选，按承诺补位。",
+  "类型避让：s001已覆盖安全诊断/验证信号/自我改进归因/记忆/特权监督/采样验证/教师RL/多智能体评测/动作接口；本期在这些类型上的强候选（2608.05715、2602.12281、2610.10498、2607.29600、2609.10522等）记多样性截断或同题去重，并在next_candidate标注下期备选。",
+  "Safety Chip虽同属安全议题，但机制为形式化动作剪枝而非诊断，与s001 2610.27350不同类型；EmbodiedEval为单体闭环评测，与s001 PARTNR多智能体评测问题不同，且s001已列其为评测槽备选。",
+  "ReKep与VoxPoser同题二选一：ReKep同任务直接对照VoxPoser并给人工约束上界，差距可量化；VoxPoser记同题去重。",
+  "分层诊断槽选RoboCerebra（含blind与GT-plan对照，F1归因）而非2607.06256技能交接诊断：后者问题同样清楚，但本期诊断类已2篇，留作下期交接槽首选。",
+  "later_work：9篇入选均无later_work记录。",
+  "入选篇原文核对尚未进行；按SELECTION.md最终制作条件，制作前须读完整原文及必要附录，若发现L2错误则暂停并写correction退回Sol单篇修订。"
+ ]
+}
