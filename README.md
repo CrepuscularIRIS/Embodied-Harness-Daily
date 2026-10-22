@@ -3,308 +3,152 @@
 **A daily radar for embodied agent harnesses**: the loop of interfaces, tools, verifiers, memory and training signals that wraps a frontier LLM/VLM so it can drive a robot arm, a mobile manipulator, a navigator, a drone or a humanoid.
 （具身智能体 harness 雷达：追踪“模型经由什么 harness 控制什么本体”的一手研究。）
 
-Core question: *through which harness does the model control which embodiment, how is closed-loop success judged, and does the gain come from the harness, the policy, or privileged information / extra compute?* Scope and evidence levels: [EVIDENCE](docs/EVIDENCE.md).
+**Core question:** *through which harness does the model control which embodiment, how is closed-loop success judged, and does the gain come from the harness, the policy, or privileged information / extra compute?* Scope: [EVIDENCE](docs/EVIDENCE.md).
+（核心问题：模型经由哪种 harness 控制哪种本体？闭环成功如何判定？收益来自 harness、策略，还是特权信息／额外算力？）
 
-> Current run: `embodied-full-v11-20261022` · rules `problem-core-v1.1` · 514 papers screened at L1, 121 checked at L2, 91 P3-confirmed candidates, 9 posters in Reel s001. The ratings rank reading priority. They are not peer review and do not endorse any venue.
-> （档位是“值不值得读”的判断，不是审稿结论。）
+**This season / 本季漏斗:** `514 screened at L1 → 121 checked at L2 → 91 P3-confirmed → 9 posters` · run `embodied-full-v11-20261022` · rules `problem-core-v1.1`
 
-## Featured Reel — Issue s001
+- **Pattern cards, reverse-engineered.** 17 main / 58 sub cards induced from full-text readings of this corpus, each condition cited to its source paper.（逆向卡片：从本语料全文逆向归纳，条件逐条锚定来源论文。）
+- **Problem-first, two-layer rating of the whole corpus.** Every paper gets the four problem questions at L1; candidates get sub-card condition checks at L2.（全语料两层“问题优先”评价 problem-core-v1.1。）
+- **A Reel every issue.** Opus 5.5 checks each pick against its full text and builds one poster per mechanism.（每期 Reel：全文核对后按机制做海报。）
 
-Nine papers, nine mechanism types, **9 distinct layouts**. Each poster was checked against the paper's full text by Opus 5.5 and passed visual QA. Where a poster narrows a claim, the change is logged with numbers mapped to sections and tables in `reel/<id>/SOURCE.md` (3 places this issue). Selection log: [selection-001](research/scoring/runs/embodied-full-v11-20261022/selections/selection-001.md) · [Reel index](reel/README.md).
+<sub><i>embodied AI · VLA · LLM agents · robot manipulation · vision-language navigation · drones · humanoids · test-time scaling · agent harness · arXiv daily · 具身智能 · 每日论文雷达</i></sub>
 
-<table rowspacing="0">
+## Featured Reel — Issue s001（本期海报墙）
+
+Nine papers, nine mechanism types, each poster checked against the paper's full text. Claim narrowings are logged in `reel/<id>/SOURCE.md`. Selection log: [selection-001](research/scoring/runs/embodied-full-v11-20261022/selections/selection-001.md) · [Reel index](reel/README.md).
+（九篇九种机制；海报与全文逐项核对，收窄之处记在 SOURCE.md。）
+
+<table>
 <tr>
-<td width="33%" align="center" valign="top">
-<a href="reel/2610.27350/poster.png"><img src="reel/2610.27350/poster.png" width="260" alt="2610.27350 poster"></a><br>
+<td width="33%" align="center" valign="top"><a href="reel/2610.27350/poster.png"><img src="reel/2610.27350/poster.png" width="260" alt="2610.27350 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2610.27350">2610.27350</a> · Safety diagnosis</b><br>
-Same model, same first frame: 15/15 refusals when asked vs 0/15 in the action loop.<br>
-同一输入、两条通道：问答会拒绝，动作循环不拒绝。<br>
-<sub>layout: side-by-side contrast</sub>
-</td>
-<td width="33%" align="center" valign="top">
-<a href="reel/2411.04549/poster.png"><img src="reel/2411.04549/poster.png" width="260" alt="2411.04549 poster"></a><br>
+Same model, same first frame: 15/15 refusals when asked vs 0/15 in the action loop.<br>同一输入、两条通道：问答会拒绝，动作循环不拒绝。</td>
+<td width="33%" align="center" valign="top"><a href="reel/2411.04549/poster.png"><img src="reel/2411.04549/poster.png" width="260" alt="2411.04549 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2411.04549">2411.04549</a> · Verification signal</b><br>
-Is a VLM progress score measuring progress, or echoing temporal order? Shuffle the frames.<br>
-进度分数到底在测什么。<br>
-<sub>layout: ablation contrast</sub>
-</td>
-<td width="33%" align="center" valign="top">
-<a href="reel/2610.25114/poster.png"><img src="reel/2610.25114/poster.png" width="260" alt="2610.25114 poster"></a><br>
+Is a VLM progress score measuring progress, or echoing temporal order? Shuffle the frames.<br>打乱帧序，看进度分数到底在测什么。</td>
+<td width="33%" align="center" valign="top"><a href="reel/2610.25114/poster.png"><img src="reel/2610.25114/poster.png" width="260" alt="2610.25114 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2610.25114">2610.25114</a> · Self-improvement attribution</b><br>
-Gain split into feedback / inheritance / selection; frozen skills run under cheap cross-family callers.<br>
-自我改进收益拆解。<br>
-<sub>layout: gain decomposition</sub>
-</td>
+Gain split into feedback / inheritance / selection; frozen skills run under cheap cross-family callers.<br>自我改进收益拆解，冻结技能交给廉价异族模型。</td>
 </tr>
 <tr>
-<td width="33%" align="center" valign="top">
-<a href="reel/2510.20328/poster.png"><img src="reel/2510.20328/poster.png" width="260" alt="2510.20328 poster"></a><br>
+<td width="33%" align="center" valign="top"><a href="reel/2510.20328/poster.png"><img src="reel/2510.20328/poster.png" width="260" alt="2510.20328 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2510.20328">2510.20328</a> · Memory</b><br>
-MemER: what matters is *what* to remember, not how much.<br>
-该记什么，而非记更多。<br>
-<sub>layout: condition matrix</sub>
-</td>
-<td width="33%" align="center" valign="top">
-<a href="reel/2610.15572/poster.png"><img src="reel/2610.15572/poster.png" width="260" alt="2610.15572 poster"></a><br>
+MemER: what matters is <i>what</i> to remember, not how much.<br>该记什么，而非记更多。</td>
+<td width="33%" align="center" valign="top"><a href="reel/2610.15572/poster.png"><img src="reel/2610.15572/poster.png" width="260" alt="2610.15572 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2610.15572">2610.15572</a> · Privileged supervision</b><br>
-Equal data; only the teacher's labelling policy changes: 46.3 → 65.5 → 69.6%.<br>
-等量数据只换教师标注策略。<br>
-<sub>layout: progressive ladder</sub>
-</td>
-<td width="33%" align="center" valign="top">
-<a href="reel/2506.17811/poster.png"><img src="reel/2506.17811/poster.png" width="260" alt="2506.17811 poster"></a><br>
+Equal data; only the teacher's labelling policy changes: 46.3 → 65.5 → 69.6%.<br>等量数据，只换教师标注策略。</td>
+<td width="33%" align="center" valign="top"><a href="reel/2506.17811/poster.png"><img src="reel/2506.17811/poster.png" width="260" alt="2506.17811 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2506.17811">2506.17811</a> · Test-time sample–verify</b><br>
-RoboMonkey: a verifier without an oracle turns samples into closed-loop gains, at what latency?<br>
-采样—打分—选择及其时延。<br>
-<sub>layout: pipeline</sub>
-</td>
+RoboMonkey: a verifier without an oracle turns samples into closed-loop gains, at what latency?<br>采样—打分—选择及其时延代价。</td>
 </tr>
 <tr>
-<td width="33%" align="center" valign="top">
-<a href="reel/2311.13373/poster.png"><img src="reel/2311.13373/poster.png" width="260" alt="2311.13373 poster"></a><br>
+<td width="33%" align="center" valign="top"><a href="reel/2311.13373/poster.png"><img src="reel/2311.13373/poster.png" width="260" alt="2311.13373 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2311.13373">2311.13373</a> · RL with a teacher</b><br>
-A fallible LLM teacher speeds up a small RL student, which then outgrows it (0.77 vs 0.52).<br>
-会犯错的教师与超越教师的学生。<br>
-<sub>layout: stage curve</sub>
-</td>
-<td width="33%" align="center" valign="top">
-<a href="reel/2411.00081/poster.png"><img src="reel/2411.00081/poster.png" width="260" alt="2411.00081 poster"></a><br>
+A fallible LLM teacher speeds up a small RL student, which then outgrows it (0.77 vs 0.52).<br>会犯错的教师与超越教师的学生。</td>
+<td width="33%" align="center" valign="top"><a href="reel/2411.00081/poster.png"><img src="reel/2411.00081/poster.png" width="260" alt="2411.00081 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2411.00081">2411.00081</a> · Multi-agent evaluation</b><br>
-PARTNR: an LLM partner made humans *slower* (3046 → 4267 steps).<br>
-人机合作的反直觉结果。<br>
-<sub>layout: grid + bars</sub>
-</td>
-<td width="33%" align="center" valign="top">
-<a href="reel/2602.15875/poster.png"><img src="reel/2602.15875/poster.png" width="260" alt="2602.15875 poster"></a><br>
+PARTNR: an LLM partner made humans <i>slower</i> (3046 → 4267 steps).<br>人机合作的反直觉结果：伙伴反而拖慢人类。</td>
+<td width="33%" align="center" valign="top"><a href="reel/2602.15875/poster.png"><img src="reel/2602.15875/poster.png" width="260" alt="2602.15875 poster"></a><br>
 <b><a href="https://arxiv.org/abs/2602.15875">2602.15875</a> · Action interface</b><br>
-Fly0: fix everything, swap only the goal interface. SR 62.1 → 70.4, false-lock 0.16 → 0.05.<br>
-只换目标接口。<br>
-<sub>layout: layered stack</sub>
-</td>
+Fly0: fix everything, swap only the goal interface. SR 62.1 → 70.4, false-lock 0.16 → 0.05.<br>其余不变，只换目标接口。</td>
 </tr>
 </table>
 
-## High-Score Papers (2026)
+## High-Score Papers (2026)（高分论文）
 
-The table lists the 30 papers from 2026 that this run rated P3. **8 of them (✓)** are 2026 papers from the 91 P3-confirmed L3 candidates; L2 confirmed both the problem and the method fit. **The other 22 are P3 (L1)**: P3 from the abstract-and-introduction screen only. They have not reached L2 and remain unconfirmed. The 91 candidates are those confirmed through L2; most of the 514 screened papers never reached L2. Rows are not ranked. The question column keeps Sol's original `problem_statement`, in Chinese.
-**How to read the score.** The number is a *display view of the tier*, not a separate rating: **95/92** = P3 confirmed at L2 (full-text check; 92 when the change is a research `judgment` rather than a new `capability`), **85/82** = P3 from the L1 first screen only (abstract + introduction; not yet L2-confirmed). Higher = more worth reading. Rows within the same score are not ranked.
-（**分数只是档位的数字视图，不是另一套评分**：95/92 = P3 且经 L2 全文核对确认；85/82 = 仅 L1 初筛（摘要＋引言）判 P3，尚未核对。同分之间不排名。）
-
-**What is an Idea Card?** An *idea card* (pattern card) is a recurring research operation reverse-engineered from this corpus — each records the operational signature, the field belief it runs into, and its failure conditions (see [Card-Based Research](#card-based-research抽卡式科研) below). The table shows which card(s) a paper actually executes; hover-free short glosses are inline.
-（Idea Card＝从本语料逆向归纳的 pattern 卡：操作签名＋认知障碍＋失败条件。表中列出该论文实际执行了哪些卡，卡名下附中文一句话。）
+17 rows: the 9 Reel papers (any year) plus 8 papers from 2026 (4 L2-confirmed, 4 L1-only chosen to widen card coverage). Source: [readme-2026-p3.json](research/scoring/runs/embodied-full-v11-20261022/readme-2026-p3.json) and [l2-merged.json](research/scoring/runs/embodied-full-v11-20261022/l2-merged.json).
+**Score = a numeric view of the tier, not a separate rating.** **95** = P3 confirmed at L2, change type `capability`; **92** = P3 confirmed at L2, change type field `judgment`; **85 / 82** = P3 from the L1 screen only (abstract + introduction, capability / judgment), not yet confirmed. Rows with the same score are not ranked.
+（分数只是档位的数字视图：95＝L2 确认的 P3·能力；92＝L2 确认的 P3·领域判断；85/82＝仅 L1 初筛判 P3（能力／判断），尚未核对。同分不排名。）
+The Good Question gives an English rendering, then Sol's original `problem_statement` in Chinese (trimmed near 60 characters).（英文为转写，中文为 Sol 原句。）
 
 | Paper | Score · Tier | Idea Cards（pattern 卡） | The Good Question | Links |
 |---|---|---|---|---|
-| [EmboTeam: Grounding LLM Reasoning into…](https://arxiv.org/abs/2601.11063) `2601.11063` | **95** · P3 ✓ | [`llm_symbolic_solver_planning`](patterns/main/llm_symbolic_solver_planning.md)<br><sub>LLM形式模型+求解器规划</sub><br>[`multi_robot_llm_coordination`](patterns/main/multi_robot_llm_coordination.md)<br><sub>多机器人LLM协调</sub> | 异构多机器人面对长程任务依赖和动态团队规模时，如何把自然语言目标转为可同步、可反应的执行结构。 | [arXiv](https://arxiv.org/abs/2601.11063) · code — |
-| [An LLM-Agnostic, MAVLink-Based Drone…](https://arxiv.org/abs/2601.15486) `2601.15486` | **92** · P3 ✓ | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | 让不可信LLM经通用工具控制无人机时，如何在持续飞行中保持独立安全边界，并让任务状态的报告与实际持有者一致。 | [arXiv](https://arxiv.org/abs/2601.15486) · code — |
-| [Fly0: Persistent Metric Anchoring for…](https://arxiv.org/abs/2602.15875) `2602.15875` | **95** · P3 ✓ | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | 零样本无人机VLN如何把低频、带不确定性的语言定位变成目标离开视野后仍可用于高频安全控制的度量目标？ | [arXiv](https://arxiv.org/abs/2602.15875) · [code](https://github.com/xuzhenxing1/Fly0) · [poster](reel/2602.15875/poster.png) |
-| [From Language to Task Maps: Compiling…](https://arxiv.org/abs/2609.34412) `2609.34412` | **95** · P3 ✓ | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | 把定性操作关系直接展开为完整位姿会约束任务未指定的自由度，造成连续控制目标之间的人为冲突。 | [arXiv](https://arxiv.org/abs/2609.34412) · code — |
-| [Look Before You Move:…](https://arxiv.org/abs/2610.15572) `2610.15572` | **95** · P3 ✓ | [`privileged_teacher_supervision`](patterns/main/privileged_teacher_supervision.md)<br><sub>特权教师监督</sub> | 开放世界移动操作的学生只能依据部署可见观测选择高层技能时，如何避免最短路轨迹后标注只教前进、不教保持可见性和失目标恢复的监督缺口？ | [arXiv](https://arxiv.org/abs/2610.15572) · code — · [poster](reel/2610.15572/poster.png) |
-| [Scaling Online Exploration for Robot…](https://arxiv.org/abs/2610.22496) `2610.22496` | **95** · P3 ✓ | [`code_policy_trial_revision`](patterns/main/code_policy_trial_revision.md)<br><sub>代码策略试错重写</sub><br>[`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub> | 在有标定RGB-D、底层控制器和有限探索预算时，机器人能否将在线试错编译成可在未见布局独立执行的感知—规划—控制程序？ | [arXiv](https://arxiv.org/abs/2610.22496) · code — |
-| [Compile Once, Run Cheap: Frozen,…](https://arxiv.org/abs/2610.25114) `2610.25114` | **92** · P3 ✓ | [`code_policy_trial_revision`](patterns/main/code_policy_trial_revision.md)<br><sub>代码策略试错重写</sub><br>[`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | 离线代码技能能否在冻结后独立或由廉价异族模型执行，迭代优势究竟来自反馈、版本继承还是尝试选择？ | [arXiv](https://arxiv.org/abs/2610.25114) · code — · [poster](reel/2610.25114/poster.png) |
-| [Refuses When Asked, Complies When…](https://arxiv.org/abs/2610.27350) `2610.27350` | **92** · P3 ✓ | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | 同一模型面对相同明确有害指令和首帧时，机器人动作循环的拒绝行为是否与显式行动前安全问询分离？ | [arXiv](https://arxiv.org/abs/2610.27350) · [code](https://github.com/Arnav-Gr0ver/Refuses-When-Asked-Complies-When-Acting) · [poster](reel/2610.27350/poster.png) |
-| [Demonstration-Free Robotic Control via…](https://arxiv.org/abs/2601.20334) `2601.20334` | **82** · P3 (L1) | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub><br>[`code_policy_trial_revision`](patterns/main/code_policy_trial_revision.md)<br><sub>代码策略试错重写</sub> | 在可读取特权环境状态的操作仿真中，未经机器人专用修改的通用软件agent能否无需演示和微调完成以任务级推理为主的控制。 | [arXiv](https://arxiv.org/abs/2601.20334) · [code](https://github.com/robiemusketeer/faea-sim) |
-| [MemCtrl: Using MLLMs as Active Memory…](https://arxiv.org/abs/2601.20831) `2601.20831` | **85** · P3 (L1) | [`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub> | 小型具身MLLM在在线存储和计算受限时，如何主动保留、更新或丢弃经历而非依赖全量历史检索。 | [arXiv](https://arxiv.org/abs/2601.20831) · code — |
-| [A Modern System Recipe for Situated…](https://arxiv.org/abs/2602.04157) `2602.04157` | **85** · P3 (L1) | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | 机器人实时对话时，如何把连续语音生成与主动转头、寻找物体和请求新视觉信息交错，以维持共享注意。 | [arXiv](https://arxiv.org/abs/2602.04157) · code — |
-| [GeneralVLA: Generalizable…](https://arxiv.org/abs/2602.04315) `2602.04315` | **85** · P3 (L1) | [`planner_composes_code_and_policies`](patterns/main/planner_composes_code_and_policies.md)<br><sub>规划器组合代码与冻结VLA</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub><br>[`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub> | 无需真机演示时，如何把基础模型语义知识转成满足几何约束的3D操作轨迹，并生成可训练学生的数据。 | [arXiv](https://arxiv.org/abs/2602.04315) · [code](https://github.com/AIGeeksGroup/GeneralVLA) |
-| [Scaling Verification Can Be More…](https://arxiv.org/abs/2602.12281) `2602.12281` | **82** · P3 (L1) | [`sample_verify_select`](patterns/main/sample_verify_select.md)<br><sub>采样-验证-选择</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | VLA动作与语言意图不一致时，固定数据条件下，扩大指令改写和动作采样并验证选择能否比扩大策略学习更有效。 | [arXiv](https://arxiv.org/abs/2602.12281) · code — |
-| [Self-Refining Vision Language Model for…](https://arxiv.org/abs/2602.12405) `2602.12405` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub> | 在大量二元失败标签而少量语言解释标签的机器人视频条件下，如何检测并解释未预定义的失败？ | [arXiv](https://arxiv.org/abs/2602.12405) · code — |
-| [Agentic AI for Robot Control: Flexible…](https://arxiv.org/abs/2602.13081) `2602.13081` | **82** · P3 (L1) | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub><br>[`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub> | 已提供技能工具、语义状态和恢复循环的LLM机器人控制，为何在真实部分可观测执行中仍会出现提示敏感、随机次优和指令错误。 | [arXiv](https://arxiv.org/abs/2602.13081) · code — |
-| [Steerable Vision-Language-Action…](https://arxiv.org/abs/2602.13193) `2602.13193` | **85** · P3 (L1) | [`trained_vlm_vla_hierarchy`](patterns/main/trained_vlm_vla_hierarchy.md)<br><sub>高层VLM-低层VLA层级</sub><br>[`planner_composes_code_and_policies`](patterns/main/planner_composes_code_and_policies.md)<br><sub>规划器组合代码与冻结VLA</sub> | 高层VLM已经知道应抓哪里或怎样移动时，如何扩展低层VLA可理解的命令粒度，使推理能真正控制行为。 | [arXiv](https://arxiv.org/abs/2602.13193) · code — |
-| [Contextual Safety Reasoning and…](https://arxiv.org/abs/2602.19983) `2602.19983` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub> | 无预给地图和安全规格时，机器人如何从视觉在线推断情境安全规则、空间grounding并在感知不确定性下执行约束？ | [arXiv](https://arxiv.org/abs/2602.19983) · code — |
-| [PhysMem: Scaling Test-Time Memory for…](https://arxiv.org/abs/2602.20323) `2602.20323` | **82** · P3 (L1) | [`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub> | 冻结 VLM 的部署期物理经验如何经过可检验抽象再复用，避免条件改变后直接检索经验造成反复错误？ | [arXiv](https://arxiv.org/abs/2602.20323) · code — |
-| [Learning from Trials and Errors:…](https://arxiv.org/abs/2602.21198) `2602.21198` | **85** · P3 (L1) | [`sample_verify_select`](patterns/main/sample_verify_select.md)<br><sub>采样-验证-选择</sub> | 具身代理如何在单次长程部署中利用执行后与事后反思同时纠正动作策略和内部评估器，减少重复失败及局部反馈的错配归因？ | [arXiv](https://arxiv.org/abs/2602.21198) · code — |
-| [From Language to Action: Can LLM-Based…](https://arxiv.org/abs/2603.03148) `2603.03148` | **82** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub> | 工具、工作记忆和情节记忆包裹的 LLM，能否在模拟家庭移动操作任务中可靠规划、恢复并判断完成？ | [arXiv](https://arxiv.org/abs/2603.03148) · code — |
-| [Act-Observe-Rewrite: Multimodal Coding…](https://arxiv.org/abs/2603.04466) `2603.04466` | **85** · P3 (L1) | [`code_policy_trial_revision`](patterns/main/code_policy_trial_revision.md)<br><sub>代码策略试错重写</sub> | 无示范、无梯度和人工奖励的连续机械臂操作中，多模态编码代理能否根据失败诊断直接重写完整低层控制器而非仅选技能？ | [arXiv](https://arxiv.org/abs/2603.04466) · code — |
-| [OnFly: Onboard Zero-Shot Aerial…](https://arxiv.org/abs/2603.10682) `2603.10682` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | 完全机载零样本无人机VLN如何同时满足高频目标生成、低频长程监控与安全轨迹执行，避免单流决策和记忆覆盖导致失败？ | [arXiv](https://arxiv.org/abs/2603.10682) · [code](https://github.com/Robotics-STAR-Lab/OnFly) |
-| [RoboClaw: An Agentic Framework for…](https://arxiv.org/abs/2603.11558) `2603.11558` | **85** · P3 (L1) | [`planner_composes_code_and_policies`](patterns/main/planner_composes_code_and_policies.md)<br><sub>规划器组合代码与冻结VLA</sub><br>[`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub> | 真实长程操作中，如何让同一VLM控制器贯穿自复位采集、策略学习与技能执行，减少人工重置和采集部署语义错配？ | [arXiv](https://arxiv.org/abs/2603.11558) · code — |
-| [HomeSafe-Bench: Evaluating…](https://arxiv.org/abs/2603.11975) `2603.11975` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub> | 如何独立评估并低延迟地检测家庭具身 agent 视频中的动态危险动作，而不把检测能力混进规划成功率？ | [arXiv](https://arxiv.org/abs/2603.11975) · code — |
-| [Learning Actionable Manipulation…](https://arxiv.org/abs/2603.13528) `2603.13528` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`learner_state_teacher_correction`](patterns/main/learner_state_teacher_correction.md)<br><sub>学生状态教师纠正</sub> | 如何从成功真机演示合成有效的失败—纠正配对，使视觉失败解释能转化为可执行的操作恢复轨迹？ | [arXiv](https://arxiv.org/abs/2603.13528) · code — |
-| [Robotic Agentic Platform for…](https://arxiv.org/abs/2603.18520) `2603.18520` | **82** · P3 (L1) | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | 边缘硬件上LLM控制真实拆卸平台时，开放ROS服务自动发现为何不能像结构化工具接口一样可靠完成所需机器人动作？ | [arXiv](https://arxiv.org/abs/2603.18520) · code — |
-| [CaP-X: A Framework for Benchmarking and…](https://arxiv.org/abs/2603.22435) `2603.22435` | **82** · P3 (L1) | [`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | 代码控制机械臂的成功究竟来自编码模型能力还是人工高层原语，减少设计者脚手架后增加交互计算能补回多少能力？ | [arXiv](https://arxiv.org/abs/2603.22435) · code — |
-| [ROSClaw: An OpenClaw ROS 2 Framework…](https://arxiv.org/abs/2603.26997) `2603.26997` | **82** · P3 (L1) | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | 在不同模型和 ROS 机器人之间保持执行、安全与日志接口不变，才能辨别物理行为差异来自模型还是 executive 层。 | [arXiv](https://arxiv.org/abs/2603.26997) · code — |
-| [Stop Wandering: Efficient…](https://arxiv.org/abs/2604.02318) `2604.02318` | **85** · P3 (L1) | [`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub><br>[`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub> | 训练自由 VLN 在空间歧义下局部振荡和反复访问，如何以进展监测与反思打破死循环而减少模型查询。 | [arXiv](https://arxiv.org/abs/2604.02318) · code — |
-| [RoboPlayground: Democratizing Robotic…](https://arxiv.org/abs/2604.05226) `2604.05226` | **82** · P3 (L1) | [`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub><br>[`llm_symbolic_solver_planning`](patterns/main/llm_symbolic_solver_planning.md)<br><sub>LLM形式模型+求解器规划</sub> | 如何让非专家通过语言可复现地改变操作任务约束和成功定义，以发现固定测试集隐藏的策略失败？ | [arXiv](https://arxiv.org/abs/2604.05226) · code — |
+| [MemER](https://arxiv.org/abs/2510.20328) `2510.20328` | **95** · P3 ✓ | [`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub><br>[`trained_vlm_vla_hierarchy`](patterns/main/trained_vlm_vla_hierarchy.md)<br><sub>高层VLM-低层VLA层级</sub> | In real-robot tasks that depend on minutes of history, how can key visual events be kept for a high-level policy under limited compute and context, instead of piling up every observation?<br><sub>在依赖数分钟历史的真机操作中，如何在有限计算和上下文下保留关键视觉事件并供高层策略调用，而不是堆积全部观测。</sub> | [arXiv](https://arxiv.org/abs/2510.20328) · [project](https://jen-pan.github.io/memer/) · [poster](reel/2510.20328/poster.png) |
+| [LLM as a Policy Teacher for RL Agents](https://arxiv.org/abs/2311.13373) `2311.13373` | **95** · P3 ✓ | [`teacher_seeded_sparse_rl`](patterns/main/teacher_seeded_sparse_rl.md)<br><sub>教师引导的稀疏奖励RL</sub><br>[`on_policy_distillation_objectives`](patterns/main/on_policy_distillation_objectives.md)<br><sub>在策略蒸馏信号</sub> | In embodied sequential tasks such as MiniGrid and Habitat, how can a fallible, costly LLM teacher help a small RL student explore less, while the student finally leaves and surpasses it?<br><sub>在 MiniGrid 和 Habitat 等具身序贯任务中，如何用会犯错且部署昂贵的 LLM 教师帮助小型 RL 学生减少探索…</sub> | [arXiv](https://arxiv.org/abs/2311.13373) · code — · [poster](reel/2311.13373/poster.png) |
+| [EmboTeam](https://arxiv.org/abs/2601.11063) `2601.11063` | **95** · P3 ✓ | [`llm_symbolic_solver_planning`](patterns/main/llm_symbolic_solver_planning.md)<br><sub>LLM形式模型+求解器规划</sub><br>[`multi_robot_llm_coordination`](patterns/main/multi_robot_llm_coordination.md)<br><sub>多机器人LLM协调</sub> | For heterogeneous multi-robot teams with long-horizon task dependencies and changing team size, how can a language goal become a synchronizable, reactive execution structure?<br><sub>异构多机器人面对长程任务依赖和动态团队规模时，如何把自然语言目标转为可同步、可反应的执行结构。</sub> | [arXiv](https://arxiv.org/abs/2601.11063) · code — |
+| [Fly0](https://arxiv.org/abs/2602.15875) `2602.15875` | **95** · P3 ✓ | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | For zero-shot drone VLN, how can low-rate, uncertain language grounding become a metric goal still usable for high-rate safe control after the target leaves view?<br><sub>零样本无人机VLN如何把低频、带不确定性的语言定位变成目标离开视野后仍可用于高频安全控制的度量目标？</sub> | [arXiv](https://arxiv.org/abs/2602.15875) · [code](https://github.com/xuzhenxing1/Fly0) · [poster](reel/2602.15875/poster.png) |
+| [From Language to Task Maps](https://arxiv.org/abs/2609.34412) `2609.34412` | **95** · P3 ✓ | [`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | Expanding qualitative manipulation relations straight into full poses constrains degrees of freedom the task leaves free, creating artificial conflicts between continuous control objectives.<br><sub>把定性操作关系直接展开为完整位姿会约束任务未指定的自由度，造成连续控制目标之间的人为冲突。</sub> | [arXiv](https://arxiv.org/abs/2609.34412) · code — |
+| [Look Before You Move](https://arxiv.org/abs/2610.15572) `2610.15572` | **95** · P3 ✓ | [`privileged_teacher_supervision`](patterns/main/privileged_teacher_supervision.md)<br><sub>特权教师监督</sub> | When the student picks high-level skills from deployment-visible observations only, how to avoid shortest-path hindsight labels that teach moving forward but not keeping the target visible or recovering it?<br><sub>开放世界移动操作的学生只能依据部署可见观测选择高层技能时，如何避免最短路轨迹后标注只教前进、不教保持可见性和失目标恢复的监督缺口？</sub> | [arXiv](https://arxiv.org/abs/2610.15572) · code — · [poster](reel/2610.15572/poster.png) |
+| [Scaling Online Exploration for Robot Agents](https://arxiv.org/abs/2610.22496) `2610.22496` | **95** · P3 ✓ | [`code_policy_trial_revision`](patterns/main/code_policy_trial_revision.md)<br><sub>代码策略试错重写</sub><br>[`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub> | With calibrated RGB-D, low-level controllers and a limited exploration budget, can a robot compile online trial-and-error into a perception–planning–control program that runs alone in unseen layouts?<br><sub>在有标定RGB-D、底层控制器和有限探索预算时，机器人能否将在线试错编译成可在未见布局独立执行的感知—规划—控制程序？</sub> | [arXiv](https://arxiv.org/abs/2610.22496) · code — |
+| [PARTNR](https://arxiv.org/abs/2411.00081) `2411.00081` | **92** · P3 ✓ | [`multi_robot_llm_coordination`](patterns/main/multi_robot_llm_coordination.md)<br><sub>多机器人LLM协调</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | In simulated household tasks with spatial, temporal and heterogeneous-skill constraints, can an LLM partner collaborate and recover, rather than adding to the human's workload through perception, skill or coordination errors?<br><sub>在受空间、时序及异构技能约束的模拟家庭任务中，LLM伙伴能否有效协作与恢复，而非以感知、技能或协调错误增加人类工作负担？</sub> | [arXiv](https://arxiv.org/abs/2411.00081) · code — · [poster](reel/2411.00081/poster.png) |
+| [VLMs are In-Context Value Learners](https://arxiv.org/abs/2411.04549) `2411.04549` | **92** · P3 ✓ | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | When a frozen VLM predicts task progress from robot video, how can the shortcut of outputting values monotone in input frame order be found and removed, keeping a signal useful for success, failure and policy learning?<br><sub>冻结VLM从机器人视频预测任务进度时，如何识别并消除按输入时间顺序输出单调值的捷径，而保留对成功、失败及策略学习有用的信号？</sub> | [arXiv](https://arxiv.org/abs/2411.04549) · [project](https://generative-value-learning.github.io/) · [poster](reel/2411.04549/poster.png) |
+| [RoboMonkey](https://arxiv.org/abs/2506.17811) `2506.17811` | **92** · P3 ✓ | [`sample_verify_select`](patterns/main/sample_verify_select.md)<br><sub>采样-验证-选择</sub> | At deployment, can the potentially good actions among repeated VLA samples become real closed-loop gains without an oracle action verifier?<br><sub>部署时能否将 VLA 多次采样的潜在好动作转化为真实闭环收益，而不依赖 oracle 动作验证器？</sub> | [arXiv](https://arxiv.org/abs/2506.17811) · code — · [poster](reel/2506.17811/poster.png) |
+| [MAVLink Drone Agentic Harness](https://arxiv.org/abs/2601.15486) `2601.15486` | **92** · P3 ✓ | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | When an untrusted LLM flies a drone through generic tools, how can an independent safety boundary hold through sustained flight, and reported task state match its actual holder?<br><sub>让不可信LLM经通用工具控制无人机时，如何在持续飞行中保持独立安全边界，并让任务状态的报告与实际持有者一致。</sub> | [arXiv](https://arxiv.org/abs/2601.15486) · code — |
+| [Compile Once, Run Cheap](https://arxiv.org/abs/2610.25114) `2610.25114` | **92** · P3 ✓ | [`code_policy_trial_revision`](patterns/main/code_policy_trial_revision.md)<br><sub>代码策略试错重写</sub><br>[`harness_memory_skill_reuse`](patterns/main/harness_memory_skill_reuse.md)<br><sub>冻结权重下的记忆技能复用</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | Can offline code skills, once frozen, run alone or under a cheap cross-family model, and does the iterative edge come from feedback, version inheritance or selection among attempts?<br><sub>离线代码技能能否在冻结后独立或由廉价异族模型执行，迭代优势究竟来自反馈、版本继承还是尝试选择？</sub> | [arXiv](https://arxiv.org/abs/2610.25114) · code — · [poster](reel/2610.25114/poster.png) |
+| [Refuses When Asked, Complies When Acting](https://arxiv.org/abs/2610.27350) `2610.27350` | **92** · P3 ✓ | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | With the same model, the same explicit harmful instruction and the same first frame, is refusal in the robot action loop decoupled from an explicit pre-action safety query?<br><sub>同一模型面对相同明确有害指令和首帧时，机器人动作循环的拒绝行为是否与显式行动前安全问询分离？</sub> | [arXiv](https://arxiv.org/abs/2610.27350) · [code](https://github.com/Arnav-Gr0ver/Refuses-When-Asked-Complies-When-Acting) · [poster](reel/2610.27350/poster.png) |
+| [Steerable VLA Policies](https://arxiv.org/abs/2602.13193) `2602.13193` | **85** · P3 (L1) | [`trained_vlm_vla_hierarchy`](patterns/main/trained_vlm_vla_hierarchy.md)<br><sub>高层VLM-低层VLA层级</sub><br>[`planner_composes_code_and_policies`](patterns/main/planner_composes_code_and_policies.md)<br><sub>规划器组合代码与冻结VLA</sub> | When a high-level VLM already knows where to grasp or how to move, how can the command granularity a low-level VLA understands be widened so reasoning truly controls behavior?<br><sub>高层VLM已经知道应抓哪里或怎样移动时，如何扩展低层VLA可理解的命令粒度，使推理能真正控制行为。</sub> | [arXiv](https://arxiv.org/abs/2602.13193) · code — |
+| [OnFly](https://arxiv.org/abs/2603.10682) `2603.10682` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`observe_act_interface`](patterns/main/observe_act_interface.md)<br><sub>冻结模型的观测/动作接口</sub> | How can fully onboard zero-shot drone VLN meet high-rate goal generation, low-rate long-horizon monitoring and safe trajectory execution at once, avoiding single-stream decisions and memory overwrites?<br><sub>完全机载零样本无人机VLN如何同时满足高频目标生成、低频长程监控与安全轨迹执行，避免单流决策和记忆覆盖导致失败？</sub> | [arXiv](https://arxiv.org/abs/2603.10682) · [code](https://github.com/Robotics-STAR-Lab/OnFly) |
+| [Counterfactual Failure Synthesis](https://arxiv.org/abs/2603.13528) `2603.13528` | **85** · P3 (L1) | [`external_verification_control`](patterns/main/external_verification_control.md)<br><sub>外部验证与执行门控</sub><br>[`learner_state_teacher_correction`](patterns/main/learner_state_teacher_correction.md)<br><sub>学生状态教师纠正</sub> | How can valid failure–correction pairs be synthesized from successful real-robot demos, so visual failure explanations turn into executable recovery trajectories?<br><sub>如何从成功真机演示合成有效的失败—纠正配对，使视觉失败解释能转化为可执行的操作恢复轨迹？</sub> | [arXiv](https://arxiv.org/abs/2603.13528) · code — |
+| [Scaling Verification > Scaling Policy Learning](https://arxiv.org/abs/2602.12281) `2602.12281` | **82** · P3 (L1) | [`sample_verify_select`](patterns/main/sample_verify_select.md)<br><sub>采样-验证-选择</sub><br>[`harness_effect_evaluation`](patterns/main/harness_effect_evaluation.md)<br><sub>harness 效果隔离评测</sub> | When VLA actions disagree with the language intent, with data fixed, can scaling instruction rephrasing and action sampling plus verify-and-select beat scaling policy learning?<br><sub>VLA动作与语言意图不一致时，固定数据条件下，扩大指令改写和动作采样并验证选择能否比扩大策略学习更有效。</sub> | [arXiv](https://arxiv.org/abs/2602.12281) · code — |
 
-## Card-Based Research（抽卡式科研）
-
-**Drawing cards for research.** We take the field's recurring research operations and turn them into **pattern cards** that can be searched. Each card records:
-
-- an **operational signature**: what the method actually does, step by step;
-- **cognitive barriers**: the beliefs the field holds that the operation runs into;
-- **failure modes and success conditions**: properties you can check in a paper's text, each with citations;
-- **reviewer expectations**: what the papers that were read do or concede (E01–E22).
-
-There are three uses. Draw a card for a new paper: which operation does it really perform, and which conditions does it guarantee? Draw cards for a new idea: combine operations from different cards, or take a barrier on a card and challenge it. The cards also serve as the yardstick when papers are rated: questions are organised into the problem families **F1 attribution · F2 signal trust · F3 transfer boundary · F4 information access · F5 monotonicity assumption** (+ F0 other).
-
-> 抽卡式科研：把领域里反复出现的研究操作逆向成可检索的卡片（操作签名＋认知障碍＋失败模式＋审稿期望）。读新论文时“抽卡”识别它真正做了什么、保证了哪些条件；构思新 idea 时组合不同卡的操作，或挑战卡上记录的共识与障碍（F1–F5 问题族）。
-
-**The cards come from this corpus, not from a preset taxonomy.** We read papers in full and worked backwards from them. 51 sub-cards (K101–K805) come from 50 full-text readings in the frozen Open Scientist domain `embodied-agent-harness/v1`. 7 sub-cards (R01–R07) were induced from the wave-1 board's weak fits: 60 of the first 105 assigned papers, each read in full. Every condition carries an `arXiv#signature` citation to its source paper. The card version is **fixed for this run**: we never edit a card to fit a paper. Details: [patterns/overview](patterns/overview.md) · [anti-patterns](patterns/anti-patterns.md).
-（17 张主卡、58 张子卡全部由本语料论文逆向归纳，每张卡锚定来源论文；本 run 内卡片版本固定。）
-
-## Pattern Cards — 17 main / 58 sub
-
-| Main card | Name | Operational signature (short) | Problem families | Subs |
-|---|---|---|---|---|
-| [observe_act_interface](patterns/main/observe_act_interface.md) | Design the Frozen Model's Observation and Action Interface | model observes on request and emits a primitive, semantic, pixel or pose target; the harness grounds it and returns receipts | F1, F5 | 9 |
-| [planner_composes_code_and_policies](patterns/main/planner_composes_code_and_policies.md) | Let a Frontier Planner Compose Code, Learned Tools and Frozen VLAs | planner writes code cells or typed calls to primitives, learned tools and frozen VLAs; branches and replans | F1, F5 | 3 |
-| [external_verification_control](patterns/main/external_verification_control.md) | Gate, Monitor and Diagnose Actions Outside the Model | external checker gates each proposal; success or stagnation monitors hand control back; diagnose or backtrack | F2 | 4 |
-| [harness_memory_skill_reuse](patterns/main/harness_memory_skill_reuse.md) | Build Context, Notes and Skills with the Weights Frozen | bounded context plus retrieval; notes, skill libraries and replay cards carried across episodes | F5 | 4 |
-| [harness_self_optimization](patterns/main/harness_self_optimization.md) | Revise the Harness Itself from Execution Traces | optimizer reads traces and edits the harness; same-model evaluation and an acceptance gate | F1, F3 | 3 |
-| [offline_harness_distillation](patterns/main/offline_harness_distillation.md) | Distil Success-Filtered Teacher Harness Trajectories into a Compact Student | SFT a compact VLM on success-filtered teacher turns so it pilots the same or a reduced harness | F1 | 3 |
-| [privileged_teacher_supervision](patterns/main/privileged_teacher_supervision.md) | Generate Supervision with a Privileged Teacher the Student Cannot See | a teacher with privileged simulator state produces success-checked targets; the student sees only cameras | F3, F4 | 3 |
-| [learner_state_teacher_correction](patterns/main/learner_state_teacher_correction.md) | Correct, Review or Relabel at Learner-Induced States | teacher repairs, replaces or relabels at the states the student visits; admission check before training | F2, F5 | 5 |
-| [on_policy_distillation_objectives](patterns/main/on_policy_distillation_objectives.md) | Distil On-Policy with Logit, Privileged-Self, Agreement or Harness-Contrast Signals | at student states, the signal is teacher logits, a privileged self, agreement, or a with- vs without-harness contrast | F4 | 6 |
-| [harness_native_rl](patterns/main/harness_native_rl.md) | Train the Policy Through, or Aligned with, the Deployment Harness | capture calls from the unmodified harness at a proxy; outcome reward; group-relative update | F1 | 4 |
-| [teacher_seeded_sparse_rl](patterns/main/teacher_seeded_sparse_rl.md) | Make Sparse-Success Embodied RL Learnable | teacher-data init, rollout-only hints or a privileged dense reward, so that sparse RL can learn | F1 | 4 |
-| [harness_effect_evaluation](patterns/main/harness_effect_evaluation.md) | Separate the Harness Effect from the Model Effect | cross models × harnesses on fixed tasks; paired statistics; failure endpoints; reconcile cost | F1 | 5 |
-| [llm_symbolic_solver_planning](patterns/main/llm_symbolic_solver_planning.md) | Let a Solver Plan from an LLM-Written Formal Model | LLM writes PDDL, a KB or constraints; a classical solver plans, validates or prunes | F1, F5 | 1 |
-| [trained_vlm_vla_hierarchy](patterns/main/trained_vlm_vla_hierarchy.md) | Train the High-Level VLM That Commands a Low-Level Policy | fine-tune the high-level VLM that issues commands to a trained low-level VLA | F1, F5 | 1 |
-| [multi_robot_llm_coordination](patterns/main/multi_robot_llm_coordination.md) | Allocate and Repair Multi-Robot Plans with LLM Agents | LLM allocators split the task across robots and repair allocations from feasibility and conflict checks | F1, F5 | 1 |
-| [code_policy_trial_revision](patterns/main/code_policy_trial_revision.md) | Write the Policy as Code and Rewrite It from Trial Diagnostics | LLM writes the controller program, rewrites it from trial diagnostics, and deploys it without a model in the loop | F1, F3 | 1 |
-| [sample_verify_select](patterns/main/sample_verify_select.md) | Sample Candidate Actions and Let a Verifier Choose | sample N candidate actions; a verifier or reflector picks the one to execute | F2, F5 | 1 |
-
-Problem families follow [PROBLEM_MAP](research/scoring/PROBLEM_MAP.md). The K-series digit is the card's *domain* family (1 = interface … 8 = evaluation), which is a different scheme from the problem families F0–F5.
-
-<details>
-<summary><b>All 58 sub-cards</b> (click to expand)</summary>
-
-**K1xx · Interface and composition (10)**
-
-- [K101](patterns/sub/K101.md) Let a frozen frontier MLLM steer primitive actions through a minimal observe/step tool pair
-- [K102](patterns/sub/K102.md) Keep dense geometry inside harness tools and return numeric receipts to the model on request
-- [K103](patterns/sub/K103.md) Model proposes a visual target; harness back-projects, checks feasibility and executes or asks to reselect
-- [K104](patterns/sub/K104.md) Restrict the model to a discrete semantic action vocabulary executed by a deterministic or frozen low-level executor
-- [K105](patterns/sub/K105.md) Have the frozen planner write code cells that compose perception, geometry and motion primitives
-- [K106](patterns/sub/K106.md) Train a compact policy to be invoked by a planner through a typed call
-- [K107](patterns/sub/K107.md) Wrap a frozen VLA as a planner-controlled primitive and inspect before committing
-- [K108](patterns/sub/K108.md) Offer extra tools as optional calls beside primitive actions and let the model choose
-- [K109](patterns/sub/K109.md) Insert a separate VLM that turns images into text for the planner
-- [K110](patterns/sub/K110.md) Replace raw shell interaction with compact LM-oriented commands (agent-computer interface)
-
-**K2xx · Verification and control (4)**
-
-- [K201](patterns/sub/K201.md) Treat each model proposal as a request and gate it with an external checker before execution
-- [K202](patterns/sub/K202.md) Run the executor until a completion or stagnation monitor fires, then hand control back to the planner
-- [K203](patterns/sub/K203.md) After a scored attempt, let the agent write and run a diagnostic program before resetting
-- [K204](patterns/sub/K204.md) Give the coding-agent solver checkpoint/backtrack and parameter-search tools over full simulator state
-
-**K3xx · Memory and skills (4)**
-
-- [K301](patterns/sub/K301.md) Rebuild each call's context from a bounded within-episode selection with retrieval for the rest
-- [K302](patterns/sub/K302.md) Summarize repeated-task experience into notes injected into later episodes
-- [K303](patterns/sub/K303.md) Mine, consolidate and review a reusable skill library from successful executions or demonstrations
-- [K304](patterns/sub/K304.md) Compile a successful harness trajectory into a planner-free replay card
-
-**K4xx · Harness self-optimization (3)**
-
-- [K401](patterns/sub/K401.md) With the model frozen, let an optimizer agent revise the harness from raw traces and keep improvements
-- [K402](patterns/sub/K402.md) Teacher revises a text playbook from comparing its own and a light agent's runs; accept when the light agent matches the teacher
-- [K403](patterns/sub/K403.md) Alternate RL on the student with harness revisions accepted only when they help the current checkpoint
-
-**K5xx · Offline distillation and privileged supervision (6)**
-
-- [K501](patterns/sub/K501.md) SFT a compact VLM on success-filtered frontier-teacher turns so it pilots the identical harness
-- [K502](patterns/sub/K502.md) Train the student on teacher data while the student's interface lacks part of the teacher's harness
-- [K503](patterns/sub/K503.md) Use a frontier LLM with privileged simulator state to iterate a program teacher until it succeeds
-- [K504](patterns/sub/K504.md) Branch successful teacher runs from saved simulator checkpoints to add recovery and diversity, keeping only verified branches
-- [K505](patterns/sub/K505.md) A privileged rule teacher acts step by step in the student's skill vocabulary, with templated state reasoning
-- [K506](patterns/sub/K506.md) Instead of cloning a privileged expert, estimate its missing state inputs and run it frozen
-
-**K6xx · On-policy correction and distillation (11)**
-
-- [K601](patterns/sub/K601.md) Repair the student's failed episode from its earliest harmful step and admit only validated corrections
-- [K602](patterns/sub/K602.md) A frontier harnessing agent reviews every student proposal and replaces unsound ones with corrections valid in the minimal harness
-- [K603](patterns/sub/K603.md) Query the teacher only at learner states flagged by a gate
-- [K604](patterns/sub/K604.md) Relabel learner-visited states with a privileged expert, when dynamics allow
-- [K605](patterns/sub/K605.md) On-policy distillation from a white-box teacher's token logits at student-visited states
-- [K606](patterns/sub/K606.md) Score the student's own tokens with a privileged-context copy of itself and add the divergence to RL
-- [K607](patterns/sub/K607.md) Train one model jointly under privileged and deployment-context views, deploying only the plain view
-- [K608](patterns/sub/K608.md) Sample target actions from a model copy given privileged context, then verify or match
-- [K609](patterns/sub/K609.md) Reward student candidates by semantic agreement with black-box teacher actions at the same state
-- [K610](patterns/sub/K610.md) Prefer the teacher's harness-conditioned action over its harness-stripped action at student states
-- [K611](patterns/sub/K611.md) Start student RL from states produced by teacher-student interaction
-
-**K7xx · RL in the harness (8)**
-
-- [K701](patterns/sub/K701.md) Train the policy through an unmodified harness by capturing its model calls at an API proxy
-- [K702](patterns/sub/K702.md) Assemble captured harness calls into training rows by prefix rules and keep credit at rollout level
-- [K703](patterns/sub/K703.md) Curate a trainable task band and harden the sandbox against reward leakage
-- [K704](patterns/sub/K704.md) RL a small coder/planner model directly inside an embodied code harness on sparse success
-- [K705](patterns/sub/K705.md) Fork the simulator at each decision step, score completions with a privileged dense reward, continue from the best
-- [K706](patterns/sub/K706.md) Train the policy under the same context-construction rules it will be deployed with
-- [K707](patterns/sub/K707.md) Inject teacher-written skill hints into RL rollouts only, removed at evaluation
-- [K708](patterns/sub/K708.md) Initialize from teacher-derived data so every task has nonzero success before sparse-reward RL
-
-**K8xx · Evaluation methodology (5)**
-
-- [K801](patterns/sub/K801.md) Cross frozen models with harnesses on fixed tasks and report harness variance with paired statistics
-- [K802](patterns/sub/K802.md) Hold the model fixed and toggle one harness component or layer at a time
-- [K803](patterns/sub/K803.md) Swap the model under a fixed embodied harness and the harness under a fixed model on the same episodes
-- [K804](patterns/sub/K804.md) Decompose outcomes into failure categories, endpoints and per-task repeat patterns
-- [K805](patterns/sub/K805.md) Re-price runs from raw per-turn usage and reconcile against billed spend
-
-**R0x · Board-induced, 2026-10-21 (7; R04 and R07 sit under the interface main)**
-
-- [R01](patterns/sub/R01.md) Have the LLM write a formal planning model and let a classical solver compute, check or prune the plan
-- [R02](patterns/sub/R02.md) Fine-tune the high-level VLM that issues language or motion commands to a trained low-level policy
-- [R03](patterns/sub/R03.md) Let LLM agents allocate subtasks across robots and repair the allocation from feasibility, conflict or event feedback
-- [R04](patterns/sub/R04.md) Expose the robot software stack to the model as protocol-level tools (ROS connectors, MCP servers, policy start/switch calls)
-- [R05](patterns/sub/R05.md) Write the controller as code and rewrite it between trials from execution diagnostics
-- [R06](patterns/sub/R06.md) Sample several candidate actions and execute the one a verifier scores highest
-- [R07](patterns/sub/R07.md) Harness turns geometry into a short candidate list or written advice; the model only chooses
-
-</details>
-
-## Pipeline（流程）
+## Pipeline and Models（流程与模型）
 
 ```mermaid
 flowchart LR
   A[Grok bot<br>inbox/] --> B[ingest<br>corpus.jsonl] --> C[full-material cache] --> D[L1 screen<br>6.1 Sol] --> E[L2 check<br>6.1 Sol] --> F[L3 selection<br>Opus 5.5] --> G[Reel<br>Opus 5.5]
 ```
 
-1. **Retrieve.** A Grok bot searches arXiv, HF Papers and official lab pages. It writes only to `inbox/` and keeps only candidates it has verified against a primary source. It does not score, and caps each run at 12 `ready` candidates. → [GROK_PROMPT](docs/agents/GROK_PROMPT.md) · [inbox](inbox/README.md)（只收一手证据候选）
-2. **Ingest.** Candidates are deduplicated by version-stripped ID, DOI and title, then written to `research/corpus.jsonl`. → [ingest.py](research/ingest.py)
-3. **Cache full material.** The uncropped arXiv HTML/PDF is cached once and kept local; we never re-download for a full rerun. → [fetch_fulltext.py](research/fetch_fulltext.py)
-4. **L1 screen.** 6.1 Sol subagents get the abstract and introduction, sliced by script. They answer the four questions and assign a tier. → [SOL_BATCH_PROMPT](research/scoring/SOL_BATCH_PROMPT.md)（初筛：四问＋档位）
-5. **L2 check.** Sol reads the method and main-experiment sections with locators, confirms Q1 and Q4, and runs the sub-card condition checks. A further random 10% goes to a missed-paper audit. → [PROBLEM_CORE §5–6](research/scoring/PROBLEM_CORE.md)（核对＋子卡条件检查＋漏检抽查）
-6. **L3 select.** Opus 5.5 deduplicates papers that pose the same problem, then selects for diversity of mechanism type. At most 9 are chosen; there is no numeric ranking. → [SELECTION](research/scoring/SELECTION.md)
-7. **Reel.** Opus 5.5 checks each selected paper against its full text, builds a poster around that paper's mechanism, and runs visual QA on the rendered result. Only papers that pass are marked ready. → [OPUS_REEL_PROMPT](research/scoring/OPUS_REEL_PROMPT.md) · [reel](reel/README.md)
+1. **Retrieve.** A Grok bot searches arXiv, HF Papers and lab pages, writes only verified primary-source candidates to `inbox/`, and never scores. → [GROK_PROMPT](docs/agents/GROK_PROMPT.md)（只收一手证据候选，不评分）
+2. **Ingest and cache.** Dedupe by version-stripped ID, DOI and title into `research/corpus.jsonl`; cache the uncropped full text once, locally. → [ingest.py](research/ingest.py) · [fetch_fulltext.py](research/fetch_fulltext.py)（去重入库，全文本地缓存一次）
+3. **L1 screen (6.1 Sol).** Abstract + introduction; the four problem questions and a tier for every paper. → [SOL_BATCH_PROMPT](research/scoring/SOL_BATCH_PROMPT.md)（全量初筛：四问＋档位）
+4. **L2 check (6.1 Sol).** Method and main-experiment sections with locators; confirm Q1/Q4, run sub-card condition checks, plus a random missed-paper audit. → [PROBLEM_CORE](research/scoring/PROBLEM_CORE.md)（全文核对＋子卡条件检查＋漏检抽查）
+5. **L3 select + Reel (Opus 5.5).** Deduplicate same-problem papers, pick ≤9 for mechanism diversity (no numeric ranking), verify each against full text, build posters, run visual QA. → [SELECTION](research/scoring/SELECTION.md) · [OPUS_REEL_PROMPT](research/scoring/OPUS_REEL_PROMPT.md)（同题去重、按机制多样性选题、全文核对出海报）
 
-Run record: [run.md](research/scoring/runs/embodied-full-v11-20261022/run.md) · [progress.md](research/scoring/runs/embodied-full-v11-20261022/progress.md). Maintenance notes: [PIPELINE](docs/PIPELINE.md) · [MAINTAINING](docs/MAINTAINING.md).
+| Stage this season（本季） | Count | Source |
+|---|---|---|
+| L1 screened | 514 (489 full run + 25 inbox increment) | [progress.md](research/scoring/runs/embodied-full-v11-20261022/progress.md) |
+| L2 checked | 121 (114 + 7) | progress.md · l2-merged.json |
+| Missed-paper audit | 12 audited, 3 revised up (P2→P3) | progress.md（全量 10 改 2 + 增量 2 改 1） |
+| P3-confirmed candidates (to_l3) | 91 | [candidates-l3.json](research/scoring/runs/embodied-full-v11-20261022/candidates-l3.json) |
+| Reel s001 posters | 9 | [reel/](reel/README.md) |
 
-## Scoring: problem-core-v1.1（问题优先）
+**problem-core-v1.1, two layers, never added together.** The problem layer asks four questions (does the problem exist · is it open · what changes if solved · does the method target it); the execution layer runs condition checks drawn from the sub-cards (`holds / partial / fails / unknown / NA`) and reports coverage only. Code links, venue, citations and card-match counts are never counted.
+（两层分开记录、不相加：问题层四问（成立／开放／改变什么／对准）＋执行层子卡条件检查；不计代码、会议、引用与卡匹配数。）
 
-**We judge whether the question is good before we judge whether the execution is good.** （先判问题好不好，再判执行好不好。）
+## Pattern Cards — 17 main / 58 sub（抽卡式科研）
 
-- **Layer 1 (problem), four questions:**
-  - **Q1 Does the problem exist?** The basis must be measured, proven, a counterexample or a constraint conflict; an assertion is not enough.
-  - **Q2 Is it open?** Compared only against work released *before* this paper, on the same problem under the same conditions.
-  - **Q3 What changes if it is solved?** A `capability` or a field `judgment`.
-  - **Q4 Does the method target the problem?**
-- **Layer 2 (execution):** checks drawn from the sub-cards (*Operation / When it works / When it fails / Counterexamples*). Each check is marked `holds / partial / fails / unknown / NA / challenged_with_evidence`, and we report coverage only. No score is computed. Not following a card's steps does **not** count as `fails`.
-- **Separate fields:** `problem_tier` (P0–P3) is kept apart from `evidence_status` (`confirmed / pending_*`), `priority` and `next_action`. **P3** means: real basis + open (barrier / failure / new bottleneck) + capability or judgment. An L1 P3 is provisional until L2 confirms Q4 = `fits`. Missing material yields `null`, never P0.
-- **Funnel and budget:** L1 covers every paper. L2 takes at most 20% of the L1 count (high, then medium priority), plus a fixed 10% random audit drawn from P0/P1, F0, `needs_material` and `park`. In this run the audit moved 3 papers up from P2 to P3 (2 of them confirmed).
-- **Never counted:** code links, venue, acceptance, citations, authors, writing style, and how many cards a paper matches.
+**Drawing cards for research.** We turn the field's recurring research operations into searchable **pattern cards**: an operational signature, the field beliefs it runs into (cognitive barriers), failure modes and success conditions checkable in a paper's text, and reviewer expectations. Draw a card for a new paper to see which operation it really performs and which conditions it guarantees; draw cards for a new idea to combine operations or challenge a recorded barrier. The cards come from this corpus, not a preset taxonomy, and are fixed for the run: we never edit a card to fit a paper.
+（抽卡式科研：把领域里反复出现的研究操作逆向成可检索卡片（操作签名＋认知障碍＋失败模式＋审稿期望）。读论文时“抽卡”看它真正做了什么、保证了哪些条件；构思时组合不同卡的操作，或挑战卡上的障碍。卡片源自本语料，本 run 内版本固定。）
 
-> 两层分开记录、不相加：问题层四问（成立／开放／改变什么／对准）＋执行层子卡条件检查。档位 P0–P3 与证据状态分离；L1 全量、L2 ≤20% 外加 10% 漏检抽查。
+| Card | Mechanism（机制） | Problem families | Subs |
+|---|---|---|---|
+| [observe_act_interface](patterns/main/observe_act_interface.md) | Design what the frozen model observes and how its outputs are grounded into actions.<br><sub>冻结模型的观测/动作接口</sub> | F1, F5 | [K101](patterns/sub/K101.md) [K102](patterns/sub/K102.md) [K103](patterns/sub/K103.md) [K104](patterns/sub/K104.md) [K108](patterns/sub/K108.md) [K109](patterns/sub/K109.md) [K110](patterns/sub/K110.md) [R04](patterns/sub/R04.md) [R07](patterns/sub/R07.md) |
+| [planner_composes_code_and_policies](patterns/main/planner_composes_code_and_policies.md) | A frontier planner writes code or typed calls over primitives, learned tools and frozen VLAs.<br><sub>规划器组合代码与冻结VLA</sub> | F1, F5 | [K105](patterns/sub/K105.md) [K106](patterns/sub/K106.md) [K107](patterns/sub/K107.md) |
+| [external_verification_control](patterns/main/external_verification_control.md) | Gate, monitor and diagnose actions with checkers outside the model.<br><sub>外部验证与执行门控</sub> | F2 | [K201](patterns/sub/K201.md) [K202](patterns/sub/K202.md) [K203](patterns/sub/K203.md) [K204](patterns/sub/K204.md) |
+| [harness_memory_skill_reuse](patterns/main/harness_memory_skill_reuse.md) | Build context, notes and skill libraries with the weights frozen.<br><sub>冻结权重下的记忆技能复用</sub> | F5 | [K301](patterns/sub/K301.md) [K302](patterns/sub/K302.md) [K303](patterns/sub/K303.md) [K304](patterns/sub/K304.md) |
+| [harness_self_optimization](patterns/main/harness_self_optimization.md) | An optimizer reads execution traces and revises the harness itself.<br><sub>从执行轨迹改写 harness</sub> | F1, F3 | [K401](patterns/sub/K401.md) [K402](patterns/sub/K402.md) [K403](patterns/sub/K403.md) |
+| [offline_harness_distillation](patterns/main/offline_harness_distillation.md) | SFT a compact student on success-filtered teacher harness trajectories.<br><sub>成功轨迹离线蒸馏小模型</sub> | F1 | [K501](patterns/sub/K501.md) [K502](patterns/sub/K502.md) [K504](patterns/sub/K504.md) |
+| [privileged_teacher_supervision](patterns/main/privileged_teacher_supervision.md) | A teacher with privileged state the student cannot see generates supervision.<br><sub>特权教师监督</sub> | F3, F4 | [K503](patterns/sub/K503.md) [K505](patterns/sub/K505.md) [K506](patterns/sub/K506.md) |
+| [learner_state_teacher_correction](patterns/main/learner_state_teacher_correction.md) | Correct, review or relabel at the states the student actually visits.<br><sub>学生状态教师纠正</sub> | F2, F5 | [K601](patterns/sub/K601.md) [K602](patterns/sub/K602.md) [K603](patterns/sub/K603.md) [K604](patterns/sub/K604.md) [K611](patterns/sub/K611.md) |
+| [on_policy_distillation_objectives](patterns/main/on_policy_distillation_objectives.md) | Distil on-policy from logits, a privileged self, agreement or a harness contrast.<br><sub>在策略蒸馏信号</sub> | F4 | [K605](patterns/sub/K605.md) [K606](patterns/sub/K606.md) [K607](patterns/sub/K607.md) [K608](patterns/sub/K608.md) [K609](patterns/sub/K609.md) [K610](patterns/sub/K610.md) |
+| [harness_native_rl](patterns/main/harness_native_rl.md) | Train the policy through, or aligned with, the deployment harness.<br><sub>在部署 harness 内做 RL</sub> | F1 | [K701](patterns/sub/K701.md) [K702](patterns/sub/K702.md) [K703](patterns/sub/K703.md) [K706](patterns/sub/K706.md) |
+| [teacher_seeded_sparse_rl](patterns/main/teacher_seeded_sparse_rl.md) | Use teacher data, rollout-only hints or privileged reward so sparse RL can learn.<br><sub>教师引导的稀疏奖励RL</sub> | F1 | [K704](patterns/sub/K704.md) [K705](patterns/sub/K705.md) [K707](patterns/sub/K707.md) [K708](patterns/sub/K708.md) |
+| [harness_effect_evaluation](patterns/main/harness_effect_evaluation.md) | Cross models × harnesses on fixed tasks to separate harness effect from model effect.<br><sub>harness 效果隔离评测</sub> | F1 | [K801](patterns/sub/K801.md) [K802](patterns/sub/K802.md) [K803](patterns/sub/K803.md) [K804](patterns/sub/K804.md) [K805](patterns/sub/K805.md) |
+| [llm_symbolic_solver_planning](patterns/main/llm_symbolic_solver_planning.md) | The LLM writes a formal model; a classical solver plans, validates or prunes.<br><sub>LLM形式模型+求解器规划</sub> | F1, F5 | [R01](patterns/sub/R01.md) |
+| [trained_vlm_vla_hierarchy](patterns/main/trained_vlm_vla_hierarchy.md) | Fine-tune the high-level VLM that commands a trained low-level policy.<br><sub>高层VLM-低层VLA层级</sub> | F1, F5 | [R02](patterns/sub/R02.md) |
+| [multi_robot_llm_coordination](patterns/main/multi_robot_llm_coordination.md) | LLM agents allocate tasks across robots and repair plans from conflict checks.<br><sub>多机器人LLM协调</sub> | F1, F5 | [R03](patterns/sub/R03.md) |
+| [code_policy_trial_revision](patterns/main/code_policy_trial_revision.md) | Write the controller as code; rewrite it from trial diagnostics; deploy model-free.<br><sub>代码策略试错重写</sub> | F1, F3 | [R05](patterns/sub/R05.md) |
+| [sample_verify_select](patterns/main/sample_verify_select.md) | Sample N candidate actions; a verifier picks the one to execute.<br><sub>采样-验证-选择</sub> | F2, F5 | [R06](patterns/sub/R06.md) |
+
+**58 sub-cards** in [patterns/sub/](patterns/sub/): K1xx interface 10 · K2xx verification 4 · K3xx memory 4 · K4xx self-optimization 3 · K5xx offline/privileged 6 · K6xx on-policy 11 · K7xx RL 8 · K8xx evaluation 5 · R0x board-induced 7. K101–K805 come from 50 full-text readings in the Open Scientist domain `embodied-agent-harness/v1`; R01–R07 from the wave-1 board's weak fits. See [overview](patterns/overview.md) · [anti-patterns](patterns/anti-patterns.md).（K 系首位数字是领域族，与问题族 F0–F5 是两套编号。）
+**Problem families**（问题族, [PROBLEM_MAP](research/scoring/PROBLEM_MAP.md)): F1 attribution 归因 · F2 signal trust 信号可信 · F3 transfer boundary 迁移边界 · F4 information access 信息权限 · F5 monotonicity assumption 单调性假设 · F0 other 其他.
 
 ## Start here（从这里开始）
 
 | What | Where |
 |---|---|
-| Rules | [PROBLEM_CORE](research/scoring/PROBLEM_CORE.md) · [PROBLEM_MAP](research/scoring/PROBLEM_MAP.md) · [scoring index](research/scoring/README.md) · [EVIDENCE](docs/EVIDENCE.md) |
-| Pattern cards | [overview](patterns/overview.md) · [main/](patterns/main/) · [sub/](patterns/sub/) · [anti-patterns](patterns/anti-patterns.md) · [PATTERN_INDEX](research/scoring/PATTERN_INDEX.md) |
-| This run | [run.md](research/scoring/runs/embodied-full-v11-20261022/run.md) · [progress](research/scoring/runs/embodied-full-v11-20261022/progress.md) · [selection-001](research/scoring/runs/embodied-full-v11-20261022/selections/selection-001.md) |
-| Reel | [reel/README](reel/README.md) · [SELECTION](research/scoring/SELECTION.md) · [OPUS_REEL_PROMPT](research/scoring/OPUS_REEL_PROMPT.md) |
-| Agents | [Grok prompt](docs/agents/GROK_PROMPT.md) · [Sol batch prompt](research/scoring/SOL_BATCH_PROMPT.md) · [CC start](docs/agents/START_CC.md) |
-| Candidates | [inbox](inbox/README.md) |
-| Maintenance | [AGENTS](AGENTS.md) · [MAINTAINING](docs/MAINTAINING.md) · [PIPELINE](docs/PIPELINE.md) · [2026-10-22 reset](docs/RESET_2026-10-22.md) |
+| Rules 规则 | [PROBLEM_CORE](research/scoring/PROBLEM_CORE.md) · [PROBLEM_MAP](research/scoring/PROBLEM_MAP.md) · [scoring index](research/scoring/README.md) · [EVIDENCE](docs/EVIDENCE.md) |
+| Cards 卡片 | [overview](patterns/overview.md) · [main/](patterns/main/) · [sub/](patterns/sub/) · [anti-patterns](patterns/anti-patterns.md) · [PATTERN_INDEX](research/scoring/PATTERN_INDEX.md) |
+| This run 本次 run | [run.md](research/scoring/runs/embodied-full-v11-20261022/run.md) · [progress](research/scoring/runs/embodied-full-v11-20261022/progress.md) · [selection-001](research/scoring/runs/embodied-full-v11-20261022/selections/selection-001.md) |
+| Reel 海报 | [reel/README](reel/README.md) · [SELECTION](research/scoring/SELECTION.md) · [OPUS_REEL_PROMPT](research/scoring/OPUS_REEL_PROMPT.md) |
+| Agents 智能体 | [Grok prompt](docs/agents/GROK_PROMPT.md) · [Sol batch prompt](research/scoring/SOL_BATCH_PROMPT.md) · [CC start](docs/agents/START_CC.md) · [inbox](inbox/README.md) |
+| Maintenance 维护 | [AGENTS](AGENTS.md) · [MAINTAINING](docs/MAINTAINING.md) · [PIPELINE](docs/PIPELINE.md) · [2026-10-22 reset](docs/RESET_2026-10-22.md) |
 
-`make check` validates local structure only. Passing structural checks, existing citations and correct arithmetic does not mean any result has been scientifically validated or reproduced.
+`make check` validates local structure only; passing structure, citation and arithmetic checks is not scientific validation or reproduction.（结构校验通过不等于科学验证或复现。）
 
 ---
 
-**Run** `embodied-full-v11-20261022` · **rules** `problem-core-v1.1` · cards fixed for this run. Tiers are judgments about reading priority, made by model readers (6.1 Sol at L1/L2, Opus 5.5 at L3/Reel). They are not peer review, venue endorsements or reproductions. Full texts, keys and private logs stay local.
+Tiers are reading-priority judgments made by model readers (6.1 Sol at L1/L2, Opus 5.5 at L3/Reel). They are not peer review, venue endorsements or reproductions. Full texts, keys and private logs stay local.（档位是“值不值得读”的判断，不是审稿结论。）
 
-**License:** MIT ([LICENSE](LICENSE)). Base pipeline cloned from [CUA Radar](https://github.com/CrepuscularIRIS/cua-architecture-radar), itself cloned from [HarnessRSI Daily](https://github.com/CrepuscularIRIS/HarnessRSI-Daily), built on [yang3kc/daily_arxiv_digest](https://github.com/yang3kc/daily_arxiv_digest) (MIT). Domain cards were induced with Open Scientist (domain build `embodied-agent-harness` v1). ResearchStudio Idea 15+31 is kept as a method source under its original license.
+**License:** MIT ([LICENSE](LICENSE)). **Lineage:** base pipeline cloned from [CUA Radar](https://github.com/CrepuscularIRIS/cua-architecture-radar) → [HarnessRSI Daily](https://github.com/CrepuscularIRIS/HarnessRSI-Daily) → [yang3kc/daily_arxiv_digest](https://github.com/yang3kc/daily_arxiv_digest) (MIT). Domain cards induced with Open Scientist (domain build `embodied-agent-harness` v1). ResearchStudio Idea 15+31 is kept as a method source under its original license.
