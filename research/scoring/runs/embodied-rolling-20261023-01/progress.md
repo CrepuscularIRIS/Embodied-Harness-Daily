@@ -39,3 +39,9 @@
 - L2：inc-l2-03 13/13 完成（本班 8 + 遗留 5）。**4 篇 P3/confirmed/to_l3**（31841/32348/32941/30587）；32208/32633 P3/pending_material（缺附录章节）；30478/31427/31613/32554/32776 pending_experiment（含 31613 Table IV 0.72 vs 0.78 数字冲突）；32559/30606 P2/park。子卡 69 项：holds 18 / partial 40 / fails 4 / unknown 4 / NA 3。
 - 漏检抽查：欠账未清（13×10%=1.3→1，本批未含抽查名额，下班补抽）。
 - 下一步：池内 confirmed P3 = 25376 + 本班 4 = 5 篇 ≥3 → 明早每日 Opus 班首次选题。
+
+## 2026-10-27 08:43 每日 Opus 判断（第三期选题 + C003-1 落档）
+
+- 新增 confirmed P3：5 篇 ≥3 → 首次选题。终选 3 篇（25376 TILDE / 31841 FORCA / 32941 Backtrack），3 张画报首轮渲染均不过、一轮修复后全过；30587 同题去重落选、32348 列下期第一备选。见 selections/selection-003.md。
+- Correction C003-1（30587 云请求比例 50% vs Table I 24.4% 不相容）已退回 Sol 修订：inc-l2-03-rev1-30587.jsonl → P3/pending_material/to_l2（q4=partial）；接受并给出 §IV-A/Algorithm 1/§IV-D 定位。原记录保留。
+- to_l3 池：32348（第一备选）。
