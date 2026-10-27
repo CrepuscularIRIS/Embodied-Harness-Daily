@@ -45,3 +45,11 @@
 - 新增 confirmed P3：5 篇 ≥3 → 首次选题。终选 3 篇（25376 TILDE / 31841 FORCA / 32941 Backtrack），3 张画报首轮渲染均不过、一轮修复后全过；30587 同题去重落选、32348 列下期第一备选。见 selections/selection-003.md。
 - Correction C003-1（30587 云请求比例 50% vs Table I 24.4% 不相容）已退回 Sol 修订：inc-l2-03-rev1-30587.jsonl → P3/pending_material/to_l2（q4=partial）；接受并给出 §IV-A/Algorithm 1/§IV-D 定位。原记录保留。
 - to_l3 池：32348（第一备选）。
+
+## 2026-10-27 12:17 巡检班
+
+- 新增：12 篇（inbox/2026-10-27-0000 → queue/2026-10-27-0517，corpus 1394→1406，材料 12/12 abstract_intro）。
+- L1：inc-l1-04 12/12 完成（assessed 11 / oos 1；P3×9 / P2×2 / null×1）。
+- L2：inc-l2-04 12/12（本班 to_l2 11 + 漏检抽查 33044，seed=46）。**8 篇 P3/confirmed/to_l3**（34370/34108/33487/33446/35817/34649/33718/34151）；35051/34527 P3/pending_experiment（34527 缺 §6 主要结果且 sim/real 预算不匹配）；35687 P2/park。抽查 33044 维持排除（无环境动作闭环，不属收录范围），改判 0/1。子卡 89 项：holds 37 / partial 42 / unknown 8 / fails 1 / NA 1。
+- 漏检抽查：欠账 1 已补抽（0/1 无改判）；本班新增欠账 1.2 → 累计 ~1.2 待后续班次。
+- to_l3 池：上期备选 32348 + 本班 8 = 9 篇 ≥3 → 明早 Opus 班选题（第四期）。
