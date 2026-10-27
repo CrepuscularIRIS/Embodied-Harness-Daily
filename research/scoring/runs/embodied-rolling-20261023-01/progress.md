@@ -53,3 +53,9 @@
 - L2：inc-l2-04 12/12（本班 to_l2 11 + 漏检抽查 33044，seed=46）。**8 篇 P3/confirmed/to_l3**（34370/34108/33487/33446/35817/34649/33718/34151）；35051/34527 P3/pending_experiment（34527 缺 §6 主要结果且 sim/real 预算不匹配）；35687 P2/park。抽查 33044 维持排除（无环境动作闭环，不属收录范围），改判 0/1。子卡 89 项：holds 37 / partial 42 / unknown 8 / fails 1 / NA 1。
 - 漏检抽查：欠账 1 已补抽（0/1 无改判）；本班新增欠账 1.2 → 累计 ~1.2 待后续班次。
 - to_l3 池：上期备选 32348 + 本班 8 = 9 篇 ≥3 → 明早 Opus 班选题（第四期）。
+
+## 2026-10-28 08:43 每日 Opus 判断（第四期选题 + C004-1 落档）
+
+- 新增 confirmed P3：9 篇 ≥3 → 第四期选题。终选 3 篇（35817 ZAP 仿真→真机单因子对照 / 34370 ThinkLocoManip 首张腿足移动操作 / 32348 LogLook 上期备选转正），3 张全过 QA（2 张经授权加修一轮，历史在 QA.md）；ReSight 列下期第一备选。见 selections/selection-004.md。累计 24 张。
+- Correction C004-1（34151：Q2 应为 vertical_port——迁移 Xu[10] 日志攻击诊断）已退回 Sol 修订：inc-l2-04-rev1-34151.jsonl → **P1/confirmed/park**（q2=vertical_port；接受，§1/§5 定位）。原记录保留。
+- to_l3 池：33487 ReSight（第一备选）。
