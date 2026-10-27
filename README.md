@@ -6,7 +6,7 @@
 **Core question:** *through which harness does the model control which embodiment, how is closed-loop success judged, and does the gain come from the harness, the policy, or privileged information / extra compute?* Scope: [EVIDENCE](docs/EVIDENCE.md).
 （核心问题：模型经由哪种 harness 控制哪种本体？闭环成功如何判定？收益来自 harness、策略，还是特权信息／额外算力？）
 
-**This season / 本季漏斗:** `514 screened at L1 → 516 checked at L2 (full-corpus check, budget cap lifted) → 336 P3-confirmed candidates → 18 posters` · run `embodied-full-v11-20261022` · rolling run `embodied-rolling-20261023-01`: 5 P3-confirmed → +3 posters · **21 posters** · rules `problem-core-v1.1`
+**This season / 本季漏斗:** `514 screened at L1 → 516 checked at L2 (full-corpus check, budget cap lifted) → 336 P3-confirmed candidates → 18 posters` · run `embodied-full-v11-20261022` · rolling run `embodied-rolling-20261023-01`: 5 P3-confirmed → +3 posters; 9 P3-confirmed → +3 posters · **24 posters** · rules `problem-core-v1.1`
 
 - **Pattern cards, reverse-engineered.** 17 main / 58 sub cards induced from full-text readings of this corpus, each condition cited to its source paper.（逆向卡片：从本语料全文逆向归纳，条件逐条锚定来源论文。）
 - **Problem-first, two-layer rating of the whole corpus.** Every paper gets the four problem questions at L1; this season L2 sub-card condition checks covered the full corpus (516 records).（全语料两层“问题优先”评价 problem-core-v1.1。）
