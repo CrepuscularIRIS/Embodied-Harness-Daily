@@ -59,3 +59,11 @@
 - 新增 confirmed P3：9 篇 ≥3 → 第四期选题。终选 3 篇（35817 ZAP 仿真→真机单因子对照 / 34370 ThinkLocoManip 首张腿足移动操作 / 32348 LogLook 上期备选转正），3 张全过 QA（2 张经授权加修一轮，历史在 QA.md）；ReSight 列下期第一备选。见 selections/selection-004.md。累计 24 张。
 - Correction C004-1（34151：Q2 应为 vertical_port——迁移 Xu[10] 日志攻击诊断）已退回 Sol 修订：inc-l2-04-rev1-34151.jsonl → **P1/confirmed/park**（q2=vertical_port；接受，§1/§5 定位）。原记录保留。
 - to_l3 池：33487 ReSight（第一备选）。
+
+## 2026-10-28 06:17 巡检班
+
+- 新增：8 篇（inbox/2026-10-28-0600 → queue/2026-10-28-1051，corpus 1406→1414；收集 +12 中 4 篇已收录）。
+- L1：inc-l1-05 8/8 完成（assessed 7 / oos 1；P3×6 / P2×1）。
+- L2：inc-l2-05 8/8（本班 to_l2 7 + 欠账抽查 37547，seed=47）。**6 篇 P3/confirmed/to_l3**（36533/36143/37196/36852/37533/37378）；36013 P3/pending_material（缓存缺 §4.3–4.4 与附录）。抽查 37547 维持排除（冻结 ACT 人类引导后训练，无 LLM/VLM harness），改判 0/1。子卡 32 项：holds 9 / partial 15 / unknown 3 / fails 1 / NA 4。
+- 漏检抽查：欠账 1 已补抽（0/1）；本班新增 0.8 → 累计 ~0.8。
+- to_l3 池：33487（第一备选）+ 本班 6 = 7 篇 ≥3 → 今晨 Opus 班第五期选题。
