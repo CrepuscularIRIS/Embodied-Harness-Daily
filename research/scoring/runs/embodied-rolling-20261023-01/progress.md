@@ -73,3 +73,7 @@
 - 新增 confirmed P3：7 篇 ≥3 → 第五期选题。终选 3 篇（36533 RoboAuto / 37196 Best-of-N 上界=运气测量 / 37533 双手时序归因），3 张各重做一次后全过 QA；37378 列下期第一备选；ReSight 上期顾虑仍成立（真机段运动禁用）。见 selections/selection-005.md。累计 27 张。
 - Correction C005-1（36852 收录范围）已退回 Sol 修订：inc-l2-05-rev1-36852.jsonl → **out_of_scope/exclude**（接受：冻结 URMA 步行策略 + Fourier/岭回归诊断，无 LLM/VLM，不满足 EVIDENCE.md B 类；与 37547 判定对齐）。原记录保留。
 - to_l3 池：37378（第一备选）。待补材料：36013（§4.3–4.4 与附录 9–10）。
+
+## 2026-10-29 08:43 每日 Opus 判断
+
+- selection-005 后新增 confirmed P3：1 篇（37378 备选）<3 → 跳过。36013 待补材料（§4.3–4.4 与附录）。
