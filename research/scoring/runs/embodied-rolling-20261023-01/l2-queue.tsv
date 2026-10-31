@@ -1,0 +1,14 @@
+paper_id	priority	tier	families	material	fulltext_path	audit_sample	l1_batch
+2610.39446	medium	P2	F0,F3	abstract_intro	research/fulltext/2610.39446.txt	False	inc-l1-06
+2610.39319	medium	P2	F2	abstract_intro	research/fulltext/2610.39319.txt	False	inc-l1-06
+2610.38744	high	P3	F0,F2	abstract_intro	research/fulltext/2610.38744.txt	False	inc-l1-06
+2610.38388	high	P3	F0,F3	abstract	research/fulltext/2610.38388.txt	False	inc-l1-06
+2610.40016	high	P3	F2,F0	abstract_intro	research/fulltext/2610.40016.txt	False	inc-l1-06
+2610.39775	high	P3	F2,F3	abstract_intro	research/fulltext/2610.39775.txt	False	inc-l1-06
+2610.40248	high	P3	F0,F1	abstract_intro	research/fulltext/2610.40248.txt	False	inc-l1-06
+2610.39180	medium	P2	F3,F2	abstract	research/fulltext/2610.39180.txt	False	inc-l1-06
+2610.38318	high	P3	F3,F1	abstract_intro	research/fulltext/2610.38318.txt	False	inc-l1-06
+2610.38027	medium	P2	F0,F4	abstract_intro	research/fulltext/2610.38027.txt	False	inc-l1-06
+2610.38266	medium	P2	F1,F3	abstract_intro	research/fulltext/2610.38266.txt	False	inc-l1-06
+2610.38405	high	P3	F4,F1	abstract	research/fulltext/2610.38405.txt	False	inc-l1-06
+2610.31013	medium	P2	F0	abstract_intro	research/fulltext/2610.31013.txt	True	backlog
