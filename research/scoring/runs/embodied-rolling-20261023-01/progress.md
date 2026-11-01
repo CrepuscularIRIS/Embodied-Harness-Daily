@@ -89,3 +89,7 @@
 ## 2026-10-31 08:43 每日 Opus 判断（第六期选题）
 
 - selection-005 后新增 confirmed P3：6 篇 ≥3 → 第六期选题。终选 3 篇（40016 LOGIV / 39775 Teaching a Tree to Recover / 37378 VLA-Stem 上期备选），各重做一次后过视觉 QA；39319、38744 与 LOGIV 同题去重，38318 主卡已饱和。无 correction。见 selections/selection-006.md。累计 30 张。
+
+## 2026-11-01 08:43 每日 Opus 判断
+
+- selection-006 后新增 confirmed P3：0 篇 <3 → 跳过（6 篇 pending_material 留队待补）。周末 arXiv 停更无新增。
