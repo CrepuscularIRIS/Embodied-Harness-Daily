@@ -97,3 +97,11 @@
 ## 2026-11-02 08:43 每日 Opus 判断
 
 - selection-006 后新增 confirmed P3：0 篇 <3 → 跳过。隔夜收集 +12 待 12:17 巡检班入库评分；6 篇 pending_material 仍留队。
+
+## 2026-11-02 12:17 巡检班
+
+- 新增：12 篇（inbox/2026-11-02-0815，ingest.py 入库→queue/2026-11-02-1750，材料 12/12）。
+- L1：inc-l1-07 12/12（assessed 11，out_of_scope 1：41275 纯 VLA；to_l2 11 = high 9 / medium 2）。
+- L2：inc-l2-07 12/12（本班 to_l2 11 + 补抽 31518；遗留 high 0）。改判 2 篇 P2→P3（41868、31518）。**6 篇 P3/confirmed/to_l3**（40799/41216/41844/42053/41044/41857）；4 篇 pending_material 留队（41320/41383/41688/42141——BioAgent 缺 LLM/VLM 闭环证据、LEXP/RoboArchitect 缺经验流协议）；41868 P3/pending_experiment。**补抽 31518 改判 P2→P3/pending_experiment（漏检 1，待材料）**。
+- 漏检抽查：seed=20261102，名额 1（预算 11×10%）+欠账 1.0 补抽，池 1 抽中 31518；改判 1。余欠账 ~0。
+- to_l3 池：0 + 本班 6 = 6 篇 ≥3 → 明晨 Opus 班可做 selection。

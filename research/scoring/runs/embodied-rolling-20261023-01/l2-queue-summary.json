@@ -1,11 +1,12 @@
 {
  "budget_declaration": "new to_l2 all + backlog high<=5 (2026-10-27 incremental)",
- "budget": 12,
- "audit_n": 1,
- "audit_pool_size": 2,
+ "budget": 11,
+ "audit_current": 1,
+ "audit_debt_used": 1,
+ "audit_pool_size": 1,
  "audit_ids": [
-  "2610.31013"
+  "2610.31518"
  ],
- "seed": 20261031,
- "queued": 13
+ "seed": 20261102,
+ "queued": 12
 }
