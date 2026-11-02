@@ -93,3 +93,7 @@
 ## 2026-11-01 08:43 每日 Opus 判断
 
 - selection-006 后新增 confirmed P3：0 篇 <3 → 跳过（6 篇 pending_material 留队待补）。周末 arXiv 停更无新增。
+
+## 2026-11-02 08:43 每日 Opus 判断
+
+- selection-006 后新增 confirmed P3：0 篇 <3 → 跳过。隔夜收集 +12 待 12:17 巡检班入库评分；6 篇 pending_material 仍留队。
