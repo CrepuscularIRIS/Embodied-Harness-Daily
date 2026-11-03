@@ -109,3 +109,7 @@
 ## 2026-11-03 08:43 每日 Opus 判断（第七期选题，补跑）
 
 - selection-006 后新增 confirmed P3：6 篇 ≥3 → 第七期选题。终选 3 篇（41857 SimuGuard / 41844 SketchMate / 41216 TinyAstral），各重做一次后过视觉 QA；40799（与 ZAP 同题）、42053（监控类已 5 张）去重落选，41044 列下期第一备选。无 correction（41857 无 LLM/VLM 在环，按 B 类评测方法收录，理由见其 SOURCE.md）。见 selections/selection-007.md。累计 33 张。
+
+## 2026-11-04 08:43 每日 Opus 判断
+
+- selection-007 后新增 confirmed P3：0 篇 <3 → 跳过（41044 为下期第一备选）。收集端自 11-02 晨无新产出；4 篇 pending_material 仍留队。
