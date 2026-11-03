@@ -105,3 +105,7 @@
 - L2：inc-l2-07 12/12（本班 to_l2 11 + 补抽 31518；遗留 high 0）。改判 2 篇 P2→P3（41868、31518）。**6 篇 P3/confirmed/to_l3**（40799/41216/41844/42053/41044/41857）；4 篇 pending_material 留队（41320/41383/41688/42141——BioAgent 缺 LLM/VLM 闭环证据、LEXP/RoboArchitect 缺经验流协议）；41868 P3/pending_experiment。**补抽 31518 改判 P2→P3/pending_experiment（漏检 1，待材料）**。
 - 漏检抽查：seed=20261102，名额 1（预算 11×10%）+欠账 1.0 补抽，池 1 抽中 31518；改判 1。余欠账 ~0。
 - to_l3 池：0 + 本班 6 = 6 篇 ≥3 → 明晨 Opus 班可做 selection。
+
+## 2026-11-03 08:43 每日 Opus 判断（第七期选题，补跑）
+
+- selection-006 后新增 confirmed P3：6 篇 ≥3 → 第七期选题。终选 3 篇（41857 SimuGuard / 41844 SketchMate / 41216 TinyAstral），各重做一次后过视觉 QA；40799（与 ZAP 同题）、42053（监控类已 5 张）去重落选，41044 列下期第一备选。无 correction（41857 无 LLM/VLM 在环，按 B 类评测方法收录，理由见其 SOURCE.md）。见 selections/selection-007.md。累计 33 张。
