@@ -128,3 +128,11 @@
 - Correction C008-1（00344 SPARK critic precision 不可测、收益主要来自重看）落档：q4→partial、pending_experiment、to_l2 留队，P3/high 保留。
 - Correction C008-2（04226 DiMuRe 801 例开发集挑选、恢复在偏移组有害）落档：**维持 P3/confirmed/to_l3**——全 891 例净增 15.71pp 成立，展示口径收窄为"整体净收益，不含无害性"；下期候选。
 - 更正：上条巡检记录中第 7 篇 to_l3 应为 2611.00344（03850 实为 P2/park，笔误）。
+
+## 2026-11-06 06:17 巡检班
+
+- 新增：12 篇（inbox/2026-11-05-0919，ingest.py 入库→queue/2026-11-05-1751，材料 12/12）。
+- L1：inc-l1-09 12/12（assessed 11，out_of_scope 1；to_l2 11）。
+- L2：inc-l2-09 11/11（to_l2 全部）。改判 1 篇 P2→P3（06881）。**8 篇 P3/confirmed/to_l3**（06863/06768/06881/06475/06434/06653/05567/06453——逐篇以批次记录为准）；06654 pending_material（缺方法后半与 §5，LLM/VLM 链路未确认）；06184 pending_experiment；00405 P2/park。
+- 漏检抽查：名额 1（预算 11×10%）但池 0 → 欠账 ~2.2+1.1→~3.3 滚存。seed=20261108。
+- to_l3 池：0 + 8 = 8 篇 ≥3 → 今日 Opus 班达标。
