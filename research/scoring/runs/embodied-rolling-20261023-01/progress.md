@@ -144,3 +144,11 @@
 ## 2026-11-08 每日 Opus 判断（第十期选题）
 
 - selection-009 后无新增 confirmed，按前期备选池 3 篇执行。终选 2 篇（05567 MESA B 类评测基准，harness 仅侧栏对比 / 02391 Late Autumn 无 LLM planner 的 coding-agent 调优），各重做一次后过视觉 QA；04226 与 LOGIV 同卡且 LLM 归因不可分，维持落选（池清空）。无 correction（C008-2 修订记录核对无误）。隔夜收集 +13 待 12:17 巡检班。见 selections/selection-010.md。累计 41 张。
+
+## 2026-11-08 12:17 巡检班
+
+- 新增：13 篇（inbox/2026-11-06-0919，ingest.py 入库→queue/2026-11-06-1750，材料 13/13）。
+- L1：inc-l1-10 13/13（全 assessed，to_l2 13）。
+- L2：inc-l2-10 13/13（to_l2 全部；遗留 high 0）。Q1 改判 1 篇（07825 asserted→measured_own）。**11 篇 P3/confirmed/to_l3**；08462 P3/pending_material（缺 §III-C 后半及 III-D）；另 1 篇 park。2610.41970 首版核实 2026-10-30。
+- 漏检抽查：名额 1（预算 13×10%）但池 0 → 欠账 ~3.3+1.3→~4.6 滚存。seed=20261109。
+- to_l3 池：0 + 11 = 11 篇 ≥3 → 明晨 Opus 班达标。
