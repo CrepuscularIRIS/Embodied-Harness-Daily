@@ -140,3 +140,7 @@
 ## 2026-11-07 每日 Opus 判断（第九期选题）
 
 - selection-008 后新增 confirmed P3：8 篇 ≥3 → 第九期选题。终选 3 篇（06863 重试反馈归因 / 06434 EviSeek 证据优先主动问答 / 06453 失败边界评测 B 类），各重做一次后过视觉 QA；无 correction（06863 附录补齐 L2 疑问：swap 测试无 fallback 例）。06768 与 RSI 仓独立得出一致落选判断；05567 列下期第一备选（04226/02391 亦为池外备选）。见 selections/selection-009.md。累计 39 张。
+
+## 2026-11-08 每日 Opus 判断（第十期选题）
+
+- selection-009 后无新增 confirmed，按前期备选池 3 篇执行。终选 2 篇（05567 MESA B 类评测基准，harness 仅侧栏对比 / 02391 Late Autumn 无 LLM planner 的 coding-agent 调优），各重做一次后过视觉 QA；04226 与 LOGIV 同卡且 LLM 归因不可分，维持落选（池清空）。无 correction（C008-2 修订记录核对无误）。隔夜收集 +13 待 12:17 巡检班。见 selections/selection-010.md。累计 41 张。
