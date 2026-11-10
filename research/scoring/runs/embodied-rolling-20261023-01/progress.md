@@ -174,3 +174,10 @@
 ## 2026-11-12 每日 Opus 判断（第十二期选题）
 
 - selection-011 后新增 confirmed P3：5 篇 + 备选 08425 ≥3 → 第十二期选题。终选 3 篇（08914 HomeLoop 误干预基准 / 09030 对象系-世界系反馈受控研究——与 RSI 仓独立核对制作 / 08425 VLA-Tug 校准弃权边界，备选转正），各重做一次后过视觉 QA；08895/08698/09355 与既有画报重叠落选。无 correction（三处附录发现均在 Sol 已标缺口内，收窄记入 SOURCE.md）。见 selections/selection-012.md。累计 46 张。
+
+## 2026-11-12 18:17 巡检班
+
+- 新增：12 篇（inbox/2026-11-10-0914，ingest.py 入库→queue/2026-11-10-1750，材料 12/12）。
+- L1：inc-l1-12 12/12（to_l2 10，out_of_scope 2）。L2：inc-l2-12 10/10。**7 篇 P3/confirmed/to_l3**；12885 pending_material（仅摘要）；10510 pending_experiment（TEST 参与模型选择）；1 篇 confirmed/park。
+- 漏检抽查：名额 1（预算 10×10%）但池 0 → 欠账 ~0.6+1→~1.6 滚存。seed=20261115。
+- to_l3 池：+7。
