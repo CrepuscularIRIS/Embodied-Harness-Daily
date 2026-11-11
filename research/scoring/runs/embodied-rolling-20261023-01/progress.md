@@ -181,3 +181,7 @@
 - L1：inc-l1-12 12/12（to_l2 10，out_of_scope 2）。L2：inc-l2-12 10/10。**7 篇 P3/confirmed/to_l3**；12885 pending_material（仅摘要）；10510 pending_experiment（TEST 参与模型选择）；1 篇 confirmed/park。
 - 漏检抽查：名额 1（预算 10×10%）但池 0 → 欠账 ~0.6+1→~1.6 滚存。seed=20261115。
 - to_l3 池：+7。
+
+## 2026-11-13 每日 Opus 判断（第十三期选题）
+
+- selection-012 后新增 confirmed P3：7 篇 ≥3 → 第十三期选题。终选 2 篇（12177 Embodied First Exam 特权状态差距 / 12409 可达性标注双手规划），各重做一次后过视觉 QA；第 3 席按证据标准空缺。11688 同族去重、11509 记忆槽饱和（RSI 已制）、10748 边界归 RSI 卡。无 correction（12177 同跑 28/30 计数差异、12409 Table III 校验器逐次正确率均记 SOURCE.md 收窄）。见 selections/selection-013.md。累计 48 张。
