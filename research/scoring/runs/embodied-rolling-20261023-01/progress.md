@@ -192,3 +192,7 @@
 - L1：inc-l1-13 7/7（to_l2 6，out_of_scope 1）。L2：inc-l2-13 6/6。改判 1 篇 P2→P3（12983）。**3 篇 P3/confirmed/to_l3**；13161 pending_material（仅摘要）；13034、12958 pending_experiment（缺归因对照）。
 - 漏检抽查：名额 1（预算 6×10%）但池 0 → 欠账 ~1.6+0.6→~2.2 滚存。seed=20261116。
 - to_l3 池：+3。
+
+## 2026-11-14 每日 Opus 判断（第十四期选题）
+
+- selection-013 后新增 confirmed P3：3 篇 ≥3 → 第十四期选题。终选 2 篇（13039 Robo-MLT 步进指针 / 14115 LEASH 安全层），各重做一次后过视觉 QA；12983 证据不足以支撑画报（Sol 已标注大部分缺口，不改档）。无 correction（14115 的 3312/143 与表 3 计入 gate 变体后吻合；13039 恢复触发器置信区间重叠已记 SOURCE.md）。见 selections/selection-014.md。累计 50 张。
