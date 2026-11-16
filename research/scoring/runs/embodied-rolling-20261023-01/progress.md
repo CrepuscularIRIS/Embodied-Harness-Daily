@@ -218,3 +218,9 @@
 ## 2026-11-18 08:43 每日 Opus 判断
 
 - selection-015 后新增 confirmed P3：0 篇 <3 → 跳过（15651 仍 QA-fail 留存本地）。隔夜收集 +11 待 12:17 巡检班。
+
+## 2026-11-18 12:17 巡检班
+
+- 新增：11 篇（inbox/2026-11-16-0846，ingest.py 入库（arXiv 限流 4 分钟退避成功）→queue/2026-11-16-1758，材料 11/11）。
+- L1：inc-l1-15 11/11（全 assessed，to_l2 11，needs_material 1：17598）。L2：inc-l2-15 11/11。改判 4 篇 P2→P3（17394/18026/18176/18298）。**6 篇 P3/confirmed/to_l3**（逐篇见批次）；17598 pending_material（X-Nav 高层 planner 未确认 LLM/VLM 在环）、18346 pending_material（SR>GR 与指标定义矛盾）、17549/18026/18359 pending_experiment。
+- to_l3 池：+6。

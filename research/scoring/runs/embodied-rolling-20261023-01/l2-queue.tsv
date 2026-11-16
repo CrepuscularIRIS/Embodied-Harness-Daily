@@ -1,12 +1,12 @@
 paper_id	priority	tier	families	material	fulltext_path	audit_sample	l1_batch
-2611.15093	high	P3	F3,F4	abstract_intro	research/fulltext/2611.15093.txt	False	inc-l1-14
-2611.15317	high	P3	F1,F0	abstract_intro	research/fulltext/2611.15317.txt	False	inc-l1-14
-2611.15651	high	P3	F2,F4	abstract_intro	research/fulltext/2611.15651.txt	False	inc-l1-14
-2611.15964	high	P3	F2,F4	abstract_intro	research/fulltext/2611.15964.txt	False	inc-l1-14
-2611.16009	high	P3	F1,F5	abstract_intro	research/fulltext/2611.16009.txt	False	inc-l1-14
-2611.16246	high	P3	F4,F3	abstract_intro	research/fulltext/2611.16246.txt	False	inc-l1-14
-2611.16487	medium		F0,F2	abstract_intro	research/fulltext/2611.16487.txt	False	inc-l1-14
-2611.16632	high	P3	F4,F0	abstract_intro	research/fulltext/2611.16632.txt	False	inc-l1-14
-2611.16671	high	P3	F1,F2	abstract_intro	research/fulltext/2611.16671.txt	False	inc-l1-14
-2611.16872	high	P3	F0,F3	abstract_intro	research/fulltext/2611.16872.txt	False	inc-l1-14
-2611.14834	none	P2	F2,F0	abstract_intro	research/fulltext/2611.14834.txt	True	inc-l1-14
+2611.17394	medium	P2	F2,F4	abstract_intro	research/fulltext/2611.17394.txt	False	inc-l1-15
+2611.17549	medium	P2	F0,F2	abstract_intro	research/fulltext/2611.17549.txt	False	inc-l1-15
+2611.17566	high	P3	F2,F4	abstract_intro	research/fulltext/2611.17566.txt	False	inc-l1-15
+2611.17598	high	P3	F3,F4	abstract_intro	research/fulltext/2611.17598.txt	False	inc-l1-15
+2611.18026	medium	P2	F2,F3	abstract_intro	research/fulltext/2611.18026.txt	False	inc-l1-15
+2611.18123	high	P3	F2,F1	abstract_intro	research/fulltext/2611.18123.txt	False	inc-l1-15
+2611.18176	medium	P2	F1,F2	abstract_intro	research/fulltext/2611.18176.txt	False	inc-l1-15
+2611.18298	medium	P2	F3,F1	abstract_intro	research/fulltext/2611.18298.txt	False	inc-l1-15
+2611.18346	high	P3	F3,F2	abstract_intro	research/fulltext/2611.18346.txt	False	inc-l1-15
+2611.18359	medium	P2	F1,F0	abstract_intro	research/fulltext/2611.18359.txt	False	inc-l1-15
+2611.18562	high	P3	F3,F1	abstract_intro	research/fulltext/2611.18562.txt	False	inc-l1-15
