@@ -224,3 +224,7 @@
 - 新增：11 篇（inbox/2026-11-16-0846，ingest.py 入库（arXiv 限流 4 分钟退避成功）→queue/2026-11-16-1758，材料 11/11）。
 - L1：inc-l1-15 11/11（全 assessed，to_l2 11，needs_material 1：17598）。L2：inc-l2-15 11/11。改判 4 篇 P2→P3（17394/18026/18176/18298）。**6 篇 P3/confirmed/to_l3**（逐篇见批次）；17598 pending_material（X-Nav 高层 planner 未确认 LLM/VLM 在环）、18346 pending_material（SR>GR 与指标定义矛盾）、17549/18026/18359 pending_experiment。
 - to_l3 池：+6。
+
+## 2026-11-19 执行方式变更记录
+
+- 用户指示：Opus 5.5 停用，日班 selection/Reel 改由 6.1 Sol 执行（2026-11-19 起）。Embodied selection-016 原派发因网关 ECONNREFUSED 失败（无部分输出），改派 model=sonnet 重跑。
