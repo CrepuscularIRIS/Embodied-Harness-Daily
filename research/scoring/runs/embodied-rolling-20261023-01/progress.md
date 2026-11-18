@@ -238,3 +238,9 @@
 - 新增：7 篇（inbox/2026-11-17-0849，ingest.py 入库→queue/2026-11-17-1800，材料 7/7）。
 - L1：inc-l1-16 7/7（全 assessed，to_l2 7）。L2：inc-l2-16 7/7。改判 2 篇 P2→P3（20676/19081）。**5 篇 P3/confirmed/to_l3**（逐篇见批次）；20676 pending_material（缺 §VI 恢复机制）、19274 pending_experiment（缺链接干预独立对照）留队。
 - to_l3 池：+5。
+
+## 2026-11-18 18:17 patrol (glm-5.3)
+- Digest 74b83d0 (+8 candidates): ingest 8 → L1 inc-l1-17 (7 assessed, 0 OOS; 2611.23070 listed twice in raw but deduped by unique arxiv id)
+- L1→L2: 7 to_l2 → L2 inc-l2-17 (7/7): 4 P3/confirmed/to_l3 (22138 RoboTeam 结构无差异感知瓶颈主导、22295 相似度≠效用、22761 配置层攻击、23070 PAIR 家务机器人 VLA 0% 任务成功)；22132 P2/pending_method/to_l2 材料补核；21958 P3/pending_material/to_l2 真机数据待补
+- 抽查: seed 20261118 → 2611.22291 复核维持 P2/park
+- 池 to_l3 +4 → 2+4 = 6（19081、19952、22138、22295、22761、23070）
