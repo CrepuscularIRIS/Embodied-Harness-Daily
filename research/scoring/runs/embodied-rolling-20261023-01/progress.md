@@ -232,3 +232,9 @@
 ## 2026-11-20 每日 Sol 判断（第十六期选题，Sol 执行）
 
 - selection-015 后新增 confirmed P3：6 篇 ≥3 → 第十六期选题（6.1 Sol 执行，Opus 5.5 已停用）。终选 3 篇（17566/18298/18562），**三张均在唯一一次重做后视觉 QA 仍不过（图注/文字越界），按规范 0 发布**，ready 维持 51；失败稿仅存本地待用户决定。无 correction。见 selections/selection-016.md。
+
+## 2026-11-20 00:17 巡检班
+
+- 新增：7 篇（inbox/2026-11-17-0849，ingest.py 入库→queue/2026-11-17-1800，材料 7/7）。
+- L1：inc-l1-16 7/7（全 assessed，to_l2 7）。L2：inc-l2-16 7/7。改判 2 篇 P2→P3（20676/19081）。**5 篇 P3/confirmed/to_l3**（逐篇见批次）；20676 pending_material（缺 §VI 恢复机制）、19274 pending_experiment（缺链接干预独立对照）留队。
+- to_l3 池：+5。
