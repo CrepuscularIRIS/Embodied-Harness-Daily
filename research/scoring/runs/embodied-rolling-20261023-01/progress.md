@@ -228,3 +228,7 @@
 ## 2026-11-19 执行方式变更记录
 
 - 用户指示：Opus 5.5 停用，日班 selection/Reel 改由 6.1 Sol 执行（2026-11-19 起）。Embodied selection-016 原派发因网关 ECONNREFUSED 失败（无部分输出），改派 model=sonnet 重跑。
+
+## 2026-11-20 每日 Sol 判断（第十六期选题，Sol 执行）
+
+- selection-015 后新增 confirmed P3：6 篇 ≥3 → 第十六期选题（6.1 Sol 执行，Opus 5.5 已停用）。终选 3 篇（17566/18298/18562），**三张均在唯一一次重做后视觉 QA 仍不过（图注/文字越界），按规范 0 发布**，ready 维持 51；失败稿仅存本地待用户决定。无 correction。见 selections/selection-016.md。
