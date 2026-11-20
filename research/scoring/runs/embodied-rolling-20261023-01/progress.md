@@ -249,3 +249,9 @@
 - 查新：refs/lists pins 三仓差分均 none；无新 inbox。
 - 补做：2611.22584 InteractVLA L1+L2（18:17 班 prompt 传输损坏漏做）→ L1 inc-l1-18（assessed/high/to_l2，P3 pending_method）→ L2 inc-l2-18（P3/confirmed/to_l3；K107 卡 challenged_with_evidence，几何引导在语言编辑失效处生效；2 partial：骨干单一、RSI 分离协议未披露）。
 - 池 to_l3 +1 → 7（19081、19952、22138、22295、22584、22761、23070）。
+
+## 2026-11-20 12:17 patrol (glm-5.3)
+- Digest f2a4319 (+12 candidates): ingest 12 → L1 inc-l1-19 (10 to_l2, 1 park ROAM P2/pending_material, 1 OOS JARVIS exclude)
+- L2 inc-l2-19: 5 P3/confirmed/to_l3 (25179 SimAudit checker审计, 26196 EmbodyAgent 后训练栈, 26376 UniCraft 跨体契约, 26414 ZeroVLN 升档, 26613 AgentRoboCritic 动作级归因); 5 P2/confirmed/park
+- 抽查 seed 20261120 → 2611.25005 复核维持 P2/park (audit_sample)
+- 池 to_l3 (7d) = 10 - 3 已发布 + 5 = 12
