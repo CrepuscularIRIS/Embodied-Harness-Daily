@@ -255,3 +255,14 @@
 - L2 inc-l2-19: 5 P3/confirmed/to_l3 (25179 SimAudit checker审计, 26196 EmbodyAgent 后训练栈, 26376 UniCraft 跨体契约, 26414 ZeroVLN 升档, 26613 AgentRoboCritic 动作级归因); 5 P2/confirmed/park
 - 抽查 seed 20261120 → 2611.25005 复核维持 P2/park (audit_sample)
 - 池 to_l3 (7d) = 10 - 3 已发布 + 5 = 12
+
+## 2026-11-28 补班（会话 11-23～11-28 中断；执行模型 glm-5.4[1m]）
+
+- 入库 29 篇（inbox/2026-11-19-0850 未入库部分 5 + 11-24-0904 13 + 11-26-0912 11；另有 3 条旧文更新 update_of 跳过），corpus 1560→1589，queue/2026-11-28-1416；L1 材料 27 abstract_intro + 2 abstract。
+- refs/lists 查新：差分脚本 id 过滤正则自 11-19 起写错恒为空，本班修正后重算，无未入库 id。
+- L1 inc-l1-20（29 篇：to_l2 27 / park 1 / exclude 1——2611.34914 无 LLM/VLM harness 在环）。
+- L2 inc-l2-20（15）/ 21（13）：to_l3 14、park 10、to_l2 4。L2 推翻 L1：2611.31201、2611.33144、2611.34675 P2→P3。
+- 补材料复核 inc-l2-22（2611.31201、2611.34778，读未截断全文 research/fulltext/<pid>.full.txt）：均转 P3/confirmed/to_l3。
+- 本班 L2 终态（28 篇）：to_l3 16、park 10、to_l2 2（2611.29377、2611.30111 无 HTML 版仅摘要）。
+- 漏检抽查：seed 20261128，名额 2，池 1，抽中 2611.34115（维持 P1/vertical_port，无漏检）；欠账 1 滚存。
+- 当日池 to_l3（7 天窗口）= 16；老积压 44。
